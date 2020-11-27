@@ -1,48 +1,45 @@
 { configs, pkgs, ... }:
 
 {
-	# Allow the installation of unfree software.
-	nixpkgs.config.allowUnfree = true;
-	
-	environment.systemPackages = with pkgs; [
-		# general utils
-		curl neovim gotop git gnupg nodejs ranger fzf ripgrep tree usbutils
-		killall pass p7zip unzip unrar
+  # Allow the installation of unfree software.
+  nixpkgs.config.allowUnfree = true;
 
-		# terminal emulators
-		alacritty 
+  environment.systemPackages = with pkgs; [
+    # general utils
+    gotop git gnupg nodejs fzf ripgrep tree usbutils
+    killall pass
 
-		# browsers
-		firefox qutebrowser
+    # archive tools
+    p7zip unzip unrar
 
-		# night light
-		redshift
+    # terminal emulators
+    alacritty st
 
-		# themes
-		plata-theme capitaine-cursors kdeFrameworks.breeze-icons
+    # editors
+    neovim
 
-		# games
-		lutris steam
+    # file manager
+    ranger
 
-		# music and media
-		mpd mpdris2 ncmpcpp mpv youtube-dl playerctl mps-youtube ffmpeg pavucontrol
+    # browsers
+    firefox
 
-		# messaging
-		tdesktop discord discord-rpc zoom-us
+    # night light
+    redshift
 
-		# integrations
-		syncthing kdeApplications.kdeconnect-kde
+    # themes
+    capitaine-cursors kdeFrameworks.breeze-icons
 
-		# IMEs
-		ibus ibus-engines.anthy
+    # music and media
+    mpd mpdris2 ncmpcpp mpv youtube-dl playerctl mps-youtube ffmpeg pavucontrol
 
-		# wine
-		wineWowPackages.staging wineWowPackages.fonts winetricks
-	];
-	
-	# programs configuration
-	programs.gnupg.agent = {
-		enable = true;
-		enableSSHSupport = true;
-	};
+    # file transfer
+    syncthing curl wget rsync
+  ];
+
+  # programs configuration
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 }

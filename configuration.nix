@@ -1,38 +1,38 @@
 { config, pkgs, ... }:
 
 {
-	imports =
-		[
-			# the default for the machine
-			/etc/nixos/hardware-configuration.nix
+  imports =
+    [
+      # the default for the machine
+      /etc/nixos/hardware-configuration.nix
 
-			# in case you use Xorg
-			./xorg.nix
+      # in case you use Xorg
+      ./xorg.nix
 
-			# bootloader config
-			./bootloader.nix
+      # bootloader config
+      ./bootloader.nix
 
-			# networking
-			./network.nix
+      # networking
+      ./network.nix
 
-			# packages to install system-wide
-			./packages.nix
+      # packages to install system-wide
+      ./packages.nix
 
-			# in case you play osu! and want low latency
-			./osu.nix
+      # in case you play osu! and want low latency
+      ./osu.nix
 
-			# user accounts
-			./users.nix
+      # user accounts
+      ./users.nix
 
-			# configure shells and console
-			./shell.nix
+      # configure shells and console
+      ./shell.nix
 
-			# fonts
-			./fonts.nix
-		];
-	
-	# hostname
-	networking.hostName = "nixpc";
+      # fonts
+      ./fonts.nix
+    ];
+  
+  # hostname
+  networking.hostName = "nixpc";
 
   # timezone
   time.timeZone = "Europe/Bucharest";
@@ -44,25 +44,19 @@
       keyMap = "ro";
   };
 
-	# enable 32-bit OpenGL
-	hardware.opengl.driSupport32Bit = true;
+  # enable 32-bit OpenGL
+  hardware.opengl.driSupport32Bit = true;
 
-	# security and limits
-	security.pam.loginLimits = [
-		{ domain = "@audio"; item = "nice"; type = "-"; value = "-20"; }
-		{ domain = "@audio"; item = "rtpio"; type = "-"; value = "99"; }
-	];
+  # enable sound
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
 
-	# enable sound
-	hardware.pulseaudio.enable = true;
-	hardware.pulseaudio.support32Bit = true;
+  # services
+  services.openssh.enable = true;
 
-	# services
-	services.openssh.enable = true;
+  # system version
+  system.stateVersion = "20.09";
 
-	# system version
-	system.stateVersion = "20.09";
-
-	# allow system to auto-upgrade
-	system.autoUpgrade.enable = true;
+  # allow system to auto-upgrade
+  system.autoUpgrade.enable = true;
 }

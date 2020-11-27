@@ -1,11 +1,11 @@
 { configs, pkgs, ... }:
 
 {
-	users.users.mihai = {
-		isNormalUser = true;
-		shell = pkgs.zsh;
+  users.users.mihai = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
 
-		# enable the use of sudo and Realtime Pulseaudio
-		extraGroups = [ "wheel" "audio" ];
-	};
+    # enable the use of sudo and Realtime Pulseaudio
+    extraGroups = [ "wheel" "audio" ];
+  };
 }
