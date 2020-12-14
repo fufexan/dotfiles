@@ -1,0 +1,1 @@
+hardware-configuration.nix

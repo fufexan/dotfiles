@@ -5,12 +5,14 @@
   environment.systemPackages = with pkgs; [
     # gui utils
     feh flameshot polybarFull rofi rofi-emoji
+    picom
 
     # cli utils
     xclip xorg.xkill
   ];
 
   # keyboard configuration
+  # adds colemak_dh variant to us and ro layouts
   nixpkgs.config = {
     packageOverrides = super: rec {
       xorg = super.xorg // rec {
@@ -138,7 +140,15 @@
           xkeyboard_config = xorg.xkeyboardconfig_rolf;
         };
       };
-
+      
+      #bspwm = super.bspwm.overrideAttrs (old: {
+      #  src = fetchFromGitHub {
+      #    owner = "dylanaraps";
+      #    repo = "bspwm";
+      #    rev = "dbb8ca50aab303a62983ec76acfc3d0b8808c5e0";
+      #    sha256 = "0000000000000000000000000000000000000000000000000000";
+      #  };
+      #});
     }; # packageOverrides
   };
 
@@ -147,7 +157,6 @@
     enable = true;
 
     # keyboard config
-    # default layout
     layout = "ro"; # same as us, but with a few new letters when using AltGr
 
     videoDrivers = [ "nvidia" ];
@@ -157,6 +166,7 @@
       lightdm.enable = true;
       defaultSession = "none+bspwm";
     };
+
     windowManager.bspwm.enable = true;
 
     # disable mouse acceleration
@@ -166,5 +176,4 @@
       accelSpeed = "0";
     };
   };
-
 }

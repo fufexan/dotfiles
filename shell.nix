@@ -15,12 +15,16 @@
       "APPEND_HISTORY"
       "AUTO_CD"
       "GLOB_COMPLETE"
-      "HIST_FIND_NO_DUPS"
       "HIST_IGNORE_DUPS"
-      "INC_APPEND_HISTORY"
       "NO_CASE_GLOB"
-      "SHARE_HISTORY"
     ];
     histFile = "$HOME/.cache/.histfile";
   };
+
+  # configure console
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "ro";
+  };
+
 }

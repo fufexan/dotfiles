@@ -1,19 +1,18 @@
 { configs, pkgs, ... }:
 
 {
-  # Allow the installation of unfree software.
+  # allow the installation of unfree software.
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     # general utils
-    gotop git gnupg nodejs fzf ripgrep tree usbutils
-    killall pass
+    gotop git gnupg nodejs fzf ripgrep tree usbutils pass
 
     # archive tools
     p7zip unzip unrar
 
     # terminal emulators
-    alacritty st
+    alacritty
 
     # editors
     neovim
@@ -35,6 +34,9 @@
 
     # file transfer
     syncthing curl wget rsync
+
+    # Wayland
+    #hikari grim slurp waybar wl-clipboard
   ];
 
   # programs configuration
@@ -42,4 +44,7 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # enable configuration of gaming mice
+  services.ratbagd.enable = true;
 }
