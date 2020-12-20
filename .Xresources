@@ -1,0 +1,37 @@
+! neon colorscheme
+! special
+*.foreground:   #f8f8f8
+*.background:   #171717
+*.cursorColor:  #f8f8f8
+
+! black
+*.color0:       #171717
+*.color8:       #38252c
+
+! red
+*.color1:       #d81765
+*.color9:       #ff0000
+
+! green
+*.color2:       #97d01a
+*.color10:      #76b639
+
+! yellow
+*.color3:       #ffa800
+*.color11:      #e1a126
+
+! blue
+*.color4:       #16b1fb
+*.color12:      #289cd5
+
+! magenta
+*.color5:       #ff2491
+*.color13:      #ff2491
+
+! cyan
+*.color6:       #0fdcb6
+*.color14:      #0a9b81
+
+! white
+*.color7:       #ebebeb
+*.color15:      #f8f8f8

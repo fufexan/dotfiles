@@ -1,0 +1,56 @@
+configuration {
+  theme:            "colorschemes/default.rasi";
+  show-icons:       true;
+  icon-theme:       "Papirus";
+  cycle:            true;
+  hide-scrollbar:   true;
+  disable-history:  false;
+  combi-modi:       "drun,run";
+  modi:             "combi";
+  display-drun:     "";
+  columns:          1;
+}
+
+* {
+  font:             "Roboto 19";
+  text-color:       @foreground;
+}
+
+window {
+  background-color: @background;
+  width:            35%;
+  padding:          1em;
+  border-radius:    25px;
+  children:         [inputbar, listview];
+}
+
+listview {
+  background-color: #0000;
+}
+
+inputbar {
+  margin:           10px;
+  background-color: #0000;
+  children:         [entry];
+}
+
+entry {
+  background-color: #0000;
+}
+
+element-icon {
+    size:             32px ;
+}
+
+element {
+  background-color: #0000;
+  border-radius:    25px;
+  padding:          5px;
+}
+
+element.selected {
+  background-color: @accent;
+  text-color:       @background-light;
+}
+
+/* vim:ft=css

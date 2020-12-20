@@ -1,0 +1,68 @@
+#! /bin/sh
+
+#
+# bspwm config
+#
+
+# set the desktops on each monitor
+bspc monitor HDMI-0 -d 一 二 三 四 五
+if [ -x ~/.local/bin/multihead.sh ]; then
+	~/.local/bin/multihead.sh
+	bspc monitor DVI-D-0 -d 六 七 八 九 十
+fi
+
+# rule which programs go where
+bspc rule -a csgo_linux64 		desktop='^2'
+bspc rule -a 'Wine:osu!.exe'	desktop='^3'
+bspc rule -a Pavucontrol 		desktop='^4'
+#bspc rule -a discord 			desktop='^5'
+
+#
+# bspwm configs
+#
+
+bspc config border_width			2			# border width of windows
+bspc config window_gap				8			# gap between windows, in px
+bspc config normal_border_color		"#6407FA"	# border color of all non-active windows
+bspc config active_border_color		"#8908FA"	# border color of active window (on other monitor)
+bspc config focused_border_color	"#FA07F6"	# border color of focused window (on current monitor)
+bspc config presel_feedback_color	"#FA07CD"	# preselection color
+
+bspc config single_monocle		  	true  		# if only 1 window on a desktop, enter monocle
+bspc config split_ratio           	0.5			# how screen space is allocated between 2 windows
+bspc config borderless_monocle  	true		# in monocle mode windows don't apply borders
+bspc config gapless_monocle       	true		# in monocle mode windows occupy all the screen space
+
+#
+# autostart
+#
+
+# set keyboard
+setxkbmap ro colemak_dh -option "caps:escape" &
+
+# set theme and start themed programs
+#theme.sh
+zsh ~/.local/bin/polybar.sh &
+feh --bg-fill --random ~/Pictures/wallpapers/winter/dark &
+
+# compositor
+picom --experimental-backends -b &
+
+# start blue light filter
+redshift -l 46:23 &
+
+# set mouse cursor theme
+xsetroot -cursor_name left_ptr &
+
+# start mpd and its MPRIS daemon
+mpd &
+mpDris2 >/dev/null &
+
+# start KDEConnect
+kdeconnect-indicator >/dev/null 2>&1 &
+
+# ibus (Japanese input)
+ibus-daemon &
+
+# Syncthing
+syncthing -no-browser &
