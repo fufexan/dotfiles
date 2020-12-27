@@ -5,7 +5,7 @@
 
   background-color: @background;
   text-color: @foreground;
-  font: "feather 24";
+  font: "Feather 24";
 }
 
 window {
@@ -33,7 +33,7 @@ listview {
 element {
   border-radius:  50px;
   background-color: #0000;
-  font:           @icon-font;
+  font:           @font;
   padding:        @element-padding;
 }
 

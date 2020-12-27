@@ -22,4 +22,4 @@
 #--embed-thumbnail
 
 # save all music in the following folder and format
--o '~/music/untagged/%(artist)s - %(title)s.%(ext)s'
+-o '~/Music/untagged/%(artist)s - %(title)s.%(ext)s'

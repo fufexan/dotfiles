@@ -1,2 +1,5 @@
 .config/nvim/plugged
 .config/ranger/plugins
+.config/mpd/database
+.config/ncmpcpp/error.log
+.config/nvim/.netrwhist

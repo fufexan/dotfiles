@@ -12,7 +12,7 @@ configuration {
 }
 
 * {
-  font:             "Roboto 19";
+  font:             "Roboto 18";
   text-color:       @foreground;
 }
 
@@ -39,7 +39,7 @@ entry {
 }
 
 element-icon {
-    size:             32px ;
+  size:             32px ;
 }
 
 element {
@@ -50,7 +50,7 @@ element {
 
 element.selected {
   background-color: @accent;
-  text-color:       @background-light;
+  text-color:       @on;
 }
 
 /* vim:ft=css

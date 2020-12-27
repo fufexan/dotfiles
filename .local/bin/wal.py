@@ -1,5 +1,9 @@
-#!/usr/bin/python
-"""Simple script for wal api."""
+#!/usr/bin/env python
+
+# Simple script for wal api
+# NOTE: I no longer use this script, as I have moved to NixOS and Python's
+# harder to set up. Also I see not much benefit from using this python script
+# rather than the newer shell script I've written.
 
 from datetime import datetime
 import pywal
@@ -56,4 +60,3 @@ def main():
     os.system("ln -sf ~/.cache/wal/rofi-colors-" + color + ".rasi ~/.config/rofi/colorschemes/default.rasi")
 
 main()
-"""

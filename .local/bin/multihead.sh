@@ -22,7 +22,8 @@ connected=$(xrandr -q | grep -w connected | wc -l)
 [ $connected -eq 2 ] && old=$(xrandr -q | grep -w connected | grep -v primary | awk '{print $1;}')
 
 add() {
-  xrandr --output $1 --auto --pos 1920x405 --right-of $default
+  xrandr --output $1 --auto --right-of $default
+  xrandr --output $1 --pos 1920x400
 }
 
 remove() {

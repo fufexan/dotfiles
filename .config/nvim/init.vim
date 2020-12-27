@@ -1,26 +1,26 @@
 " ===== vim-plug section =====
 " initialise plugins
-call plug#begin('$HOME/.config/nvim/plugged')
+"call plug#begin('$HOME/.config/nvim/plugged')
 " list plugs
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ying17zi/vim-live-latex-preview'
-Plug 'etdev/vim-hexcolor'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'ying17zi/vim-live-latex-preview'
+"Plug 'etdev/vim-hexcolor'
 
 " end plugin initialisation
-call plug#end()
+"call plug#end()
 
 " CoC extensions
-let g:coc_global_extensions = [
-  \ 'coc-pairs',
-  \ 'coc-emmet',
-  \ 'coc-html',
-  \ 'coc-css',
-  \ 'coc-highlight',
-  \ 'coc-lists',
-  \ 'coc-tsserver',
-  \ 'coc-prettier',
-  \ 'coc-syntax',
-  \ ]
+"let g:coc_global_extensions = [
+"  \ 'coc-pairs',
+"  \ 'coc-emmet',
+"  \ 'coc-html',
+"  \ 'coc-css',
+"  \ 'coc-highlight',
+"  \ 'coc-lists',
+"  \ 'coc-tsserver',
+"  \ 'coc-prettier',
+"  \ 'coc-syntax',
+"  \ ]
 
 "
 " CoC settings
@@ -50,32 +50,31 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+"if has('nvim')
+"  inoremap <silent><expr> <c-space> coc#refresh()
+"else
+"  inoremap <silent><expr> <c-@> coc#refresh()
+"endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() #"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"nmap <silent> [g <Plug>(coc-diagnostic-prev)
+"nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 "
 " My own settings
@@ -162,9 +161,9 @@ set statusline+=\
 " plugin configs
 "
 " prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"vmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
 " augroups
 aug indents

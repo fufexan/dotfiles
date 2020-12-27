@@ -26,8 +26,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 2
-    y: 2
+    x: 0
+    y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -113,7 +113,7 @@ font:
     style: Italic
 
   # Point size
-  size: 10.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -142,7 +142,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: false
+  use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -151,7 +151,7 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x261d45'
+    background: '0x222222'
     foreground: '0xffffff'
 
     # Bright and dim foreground colors
@@ -171,26 +171,26 @@ colors:
   #  cursor: '0xffffff'
 
   # Normal colors
-  normal:
-    black:   '0x100b17'
-    red:     '0xff1865'
-    green:   '0x00dd71'
-    yellow:  '0xff9100'
-    blue:    '0x0061b9'
-    magenta: '0x5b25a3'
-    cyan:    '0x00a8d6'
-    white:   '0xa0a0a0'
+  #normal:
+  #  black:   '0x100b17'
+  #  red:     '0xff1865'
+  #  green:   '0x00dd71'
+  #  yellow:  '0xff9100'
+  #  blue:    '0x0061b9'
+  #  magenta: '0x5b25a3'
+  #  cyan:    '0x00a8d6'
+  #  white:   '0xa0a0a0'
 
-  # Bright colors
-  bright:
-    black:   '0x979393'
-    red:     '0xff004c'
-    green:   '0x00ff6a'
-    yellow:  '0xffff00'
-    blue:    '0x00acff'
-    magenta: '0x9f5fff'
-    cyan:    '0x00ccdd'
-    white:   '0xffffff'
+  ## Bright colors
+  #bright:
+  #  black:   '0x979393'
+  #  red:     '0xff004c'
+  #  green:   '0x00ff6a'
+  #  yellow:  '0xffff00'
+  #  blue:    '0x00acff'
+  #  magenta: '0x9f5fff'
+  #  cyan:    '0x00ccdd'
+  #  white:   '0xffffff'
 
   # Dim colors
   #
@@ -246,7 +246,7 @@ bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.75
+background_opacity: 0.7
 
 # Mouse bindings
 #
