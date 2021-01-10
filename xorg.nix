@@ -4,11 +4,16 @@
   # install packages specific to X
   environment.systemPackages = with pkgs; [
     # gui utils
-    feh flameshot polybarFull rofi rofi-emoji
-    picom
+    feh maim polybarFull rofi rofi-emoji picom
+
+    # notifications
+    dunst
 
     # cli utils
-    xclip xorg.xkill
+    xclip xorg.xkill xdotool
+
+    # also install sxhkd for bspwm
+    sxhkd
   ];
 
   # keyboard configuration
@@ -28,7 +33,7 @@
 
                 +// fufexan's <fufexan@protonmail.com> personal implementation of Colemak Mod-DH
                 +// Took inspiration and help from:
-                +//   https://github.com/DreymaR/BigBagKbdTrixXKB
+                +//  https://github.com/DreymaR/BigBagKbdTrixXKB
                 +//  https://colemak.academy
                 +
                 +partial alphanumeric_keys
@@ -91,7 +96,7 @@
                 +            <name>colemak_dh</name>
                 +            <description>English (Colemak Mod-DH)</description>
                 +          </configItem>
-                +      </variant>
+                +        </variant>
                 +        <variant>
                 +          <configItem>
                              <name>dvorak</name>
@@ -140,15 +145,6 @@
           xkeyboard_config = xorg.xkeyboardconfig_rolf;
         };
       };
-      
-      #bspwm = super.bspwm.overrideAttrs (old: {
-      #  src = fetchFromGitHub {
-      #    owner = "dylanaraps";
-      #    repo = "bspwm";
-      #    rev = "dbb8ca50aab303a62983ec76acfc3d0b8808c5e0";
-      #    sha256 = "0000000000000000000000000000000000000000000000000000";
-      #  };
-      #});
     }; # packageOverrides
   };
 
@@ -163,7 +159,6 @@
 
     # display manager setup
     displayManager = {
-      lightdm.enable = true;
       defaultSession = "none+bspwm";
     };
 

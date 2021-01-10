@@ -18,10 +18,12 @@
         resample-method = "speex-float-0";
 
         default-fragments = 2;
+        # increase by 2 if your audio is distorted ↓
         default-fragment-size-msec = 4;
     };
 
     # default.pa
+    # sets to interrupt mode instead of timed scheduling
     configFile = pkgs.runCommand "default.pa" {} ''
         sed 's/module-udev-detect$/module-udev-detect tsched=0/' \
         ${pkgs.pulseaudio}/etc/pulse/default.pa > $out

@@ -10,10 +10,13 @@
       ./bootloader.nix
 
       # droidcam
-      ./droidcam.nix
+      #./droidcam.nix
 
       # fonts
       ./fonts.nix
+
+      # neovim configuration
+      ./neovim.nix
 
       # networking
       ./network.nix
@@ -24,6 +27,9 @@
 
       # packages to install system-wide
       ./packages.nix
+      
+      # service configration
+      ./services.nix
 
       # configure shells and console
       ./shell.nix
@@ -34,15 +40,19 @@
       # in case you use Xorg
       ./xorg.nix
     ];
-  
-  # hostname
-  networking.hostName = "nixpc";
+ 
+  # kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # timezone
   time.timeZone = "Europe/Bucharest";
 
-  # internatiolisation
+  # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
+  i18n.inputMethod = {
+    enabled = "ibus";
+    ibus.engines = [ pkgs.ibus-engines.anthy ];
+  };
 
   # disable firewall
   networking.firewall.enable = false;
@@ -52,15 +62,9 @@
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
-  # enable nvidia modesetting
-  #hardware.nvidia.modesetting.enable = true;
-
   # enable sound
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
-
-  # services
-  services.openssh.enable = true;
 
   # system version
   system.stateVersion = "20.09";

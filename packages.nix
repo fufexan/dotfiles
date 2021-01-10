@@ -6,37 +6,67 @@
 
   environment.systemPackages = with pkgs; [
     # general utils
-    gotop git gnupg nodejs fzf ripgrep tree usbutils pass
+    htop gotop
+    git gnupg pinentry
+    fzf ripgrep
+    file tree usbutils ueberzug
+    pass
+    nix-index
 
     # archive tools
     p7zip unzip unrar
 
-    # terminal emulators
-    alacritty
+    # audio control
+    pavucontrol
 
-    # editors
-    neovim
-
-    # file manager
-    ranger
-
-    # browsers
+    # browser
     firefox
+
+    # C/C++ development
+    gcc gdb gnumake
+
+    # document viewers and editors
+    zathura libreoffice
+
+    # file managers
+    ranger lf
+
+    # file transfer and download
+    curl rsync wget youtube-dl
+
+    # games
+    lutris steam steam-run appimage-run
+
+    # LaTeX
+    texlive.combined.scheme-basic
+
+    # media transcoding
+    ffmpeg
+
+    # messaging
+    tdesktop discord
+
+    # mouse configuration
+    piper
+
+    # music and video
+    mpd mpdris2 ncmpcpp
+    mpv playerctl
 
     # night light
     redshift
+    
+    # phone sync
+    kdeconnect
+
+    # terminal emulator
+    alacritty
 
     # themes
     capitaine-cursors kdeFrameworks.breeze-icons
-
-    # music and media
-    mpd mpdris2 ncmpcpp mpv youtube-dl playerctl mps-youtube ffmpeg pavucontrol
-
-    # file transfer
-    syncthing curl wget rsync
-
-    # Wayland
-    #hikari grim slurp waybar wl-clipboard
+    gnome-themes-extra gtk-engine-murrine
+    qgnomeplatform lxappearance
+    pywal
   ];
 
   # programs configuration
@@ -44,7 +74,4 @@
     enable = true;
     enableSSHSupport = true;
   };
-
-  # enable configuration of gaming mice
-  services.ratbagd.enable = true;
 }

@@ -8,6 +8,7 @@
 
       # normal fonts
       noto-fonts
+      noto-fonts-emoji
       liberation_ttf_v1
       source-han-sans
       source-han-serif

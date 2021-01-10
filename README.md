@@ -4,19 +4,20 @@ Following a recent transition from Void Linux to NixOS, I have baked a few
 configs in this repository. The config is modular, so you can comment out
 modules to fit your needs.
 
-I'm planning on slimming it down as I move more of my packages to Home Manager
-(repo to come soon™).
+I'm planning on moving more of the configuration to Home Manager, which will be
+integrated here.
 
 ## Components
 
 As of now, it includes configurations for:
 
 - Bootloader - customize the bootloader
-- Droidcam - uses NUR, but will be rewritten as a Nix Overlay
 - Fonts - configure fonts
+- Neovim - manage plugins and configuration
 - Network - define hostname, firewall rules, network services
 - Pulse - Pulseaudio changes to make it realtime
 - Packages - a list of packages to install and also programs with configs
+- Services - manage services
 - Shell - define the global shell and its options, and console configs
 - Users - define the users and their groups
 - Xorg - default DM/DE/WM and keyboard config
