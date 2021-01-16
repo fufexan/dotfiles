@@ -5,7 +5,6 @@
     isNormalUser = true;
     shell = pkgs.zsh;
 
-    # enable the use of sudo and Realtime Pulseaudio
-    extraGroups = [ "wheel" "audio" ];
+    extraGroups = [ "wheel" "audio" "libvirtd" "adbusers" ];
   };
 }

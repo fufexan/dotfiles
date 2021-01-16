@@ -9,11 +9,11 @@
       # bootloader config
       ./bootloader.nix
 
-      # droidcam
-      #./droidcam.nix
-
       # fonts
       ./fonts.nix
+
+      # kernel
+      ./kernel.nix
 
       # neovim configuration
       ./neovim.nix
@@ -23,7 +23,8 @@
 
       # in case you want low latency on your Pulseaudio setup
       # mostly applicable to producers and osu! players
-      ./pulse.nix
+      # NOTE: not needed anymore if you use PipeWire
+      #./pulse.nix
 
       # packages to install system-wide
       ./packages.nix
@@ -40,9 +41,6 @@
       # in case you use Xorg
       ./xorg.nix
     ];
- 
-  # kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # timezone
   time.timeZone = "Europe/Bucharest";
@@ -54,21 +52,30 @@
     ibus.engines = [ pkgs.ibus-engines.anthy ];
   };
 
-  # disable firewall
-  networking.firewall.enable = false;
-
   # enable open source drivers
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
 
-  # enable sound
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+  # enable sound throuth PipeWire
+  services.pipewire = {
+    enable = true;
+    socketActivation = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+    pulse.enable = true;
+  };
+
+  # enable realtime capabilities to user processes
+  security.rtkit.enable = true;
 
   # system version
-  system.stateVersion = "20.09";
+  system.stateVersion = "unstable";
 
   # allow system to auto-upgrade
   system.autoUpgrade.enable = true;
+
+  # enable libvirt
+  virtualisation.libvirtd.enable = true;
 }

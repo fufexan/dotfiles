@@ -4,8 +4,8 @@
   # if you're an osu! player or a music producer/DJ, you definitely value low latency
   # this config sets your Pulseaudio to realtime with the best settings
   hardware.pulseaudio = {
-    # assuming you already enabled pulseaudio elsewhere
-    # for convenience of others that may not need this config
+    enable = true;
+    support32Bit = true;
 
     # daemon.conf
     daemon.config = {

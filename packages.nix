@@ -74,4 +74,7 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  # enable ADB
+  programs.adb.enable = true;
 }
