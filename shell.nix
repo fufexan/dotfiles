@@ -12,10 +12,11 @@
     # zsh options
     enableGlobalCompInit = true;
     setOptions = [
-      "APPEND_HISTORY"
       "AUTO_CD"
       "GLOB_COMPLETE"
-      "HIST_IGNORE_DUPS"
+      "HIST_IGNORE_ALL_DUPS"
+      "HIST_REDUCE_BLANKS"
+      "INC_APPEND_HISTORY"
       "NO_CASE_GLOB"
     ];
     histFile = "$HOME/.cache/.histfile";
