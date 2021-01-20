@@ -6,6 +6,9 @@
       # the default for the machine
       /etc/nixos/hardware-configuration.nix
 
+      # Home Manager
+      #<home-manager/nixos>
+
       # bootloader config
       ./bootloader.nix
 
@@ -42,11 +45,16 @@
       ./xorg.nix
     ];
 
+  # enable tmpfs
+  boot.tmpOnTmpfs = true;
+
   # timezone
   time.timeZone = "Europe/Bucharest";
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
+
+  # IBus IME
   i18n.inputMethod = {
     enabled = "ibus";
     ibus.engines = [ pkgs.ibus-engines.anthy ];
@@ -74,7 +82,7 @@
   system.stateVersion = "unstable";
 
   # allow system to auto-upgrade
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
 
   # enable libvirt
   virtualisation.libvirtd.enable = true;

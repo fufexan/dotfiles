@@ -39,6 +39,35 @@
   # usb stick automount, cifs browsing, etc
   services.gvfs.enable = true;
 
+  # samba public share
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    extraConfig = ''
+      workgroup = WORKGROUP
+      server string = mihai
+      netbios name = mihai
+      hosts allow = 10.0.0.0/24 192.168.122.0/24 localhost
+      hosts deny = 0.0.0.0/0
+      use sendfile = yes
+      guest account = nobody
+      map to guest = bad user
+    '';
+    shares = {
+      public = {
+        path = "/home/mihai/Public";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0755";
+      };
+    };
+  };
+
+  services.samba-wsdd.enable = true;
+
+  # user services
+
   # enable IBus on graphical session startup
   systemd.user.services.ibus-daemon = {
     enable = true;

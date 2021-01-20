@@ -35,7 +35,7 @@
     curl rsync wget youtube-dl
 
     # games
-    lutris steam steam-run appimage-run
+    lutris steam steam-run
 
     # LaTeX
     texlive.combined.scheme-basic
