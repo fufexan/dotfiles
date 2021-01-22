@@ -9,4 +9,7 @@
 
   # make modules available to modprobe
   boot.extraModulePackages = [ pkgs.linuxPackages_zen.v4l2loopback ];
+
+  # browser fix on Intel CPUs
+  boot.kernelParams = [ "intel_pstate=active" ];
 }

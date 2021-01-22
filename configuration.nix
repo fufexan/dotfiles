@@ -60,10 +60,16 @@
     ibus.engines = [ pkgs.ibus-engines.anthy ];
   };
 
-  # enable open source drivers
+  # enable OpenGL
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   hardware.opengl.driSupport32Bit = true;
+
+  # update Intel ucode
+  hardware.cpu.intel.updateMicrocode = true;
+
+  # auto optiomise the nix store
+  nix.optimise.automatic = true;
 
   # enable sound throuth PipeWire
   services.pipewire = {
@@ -78,11 +84,14 @@
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
+  # allow users in `wheel` to use sudo without prompting for password
+  security.sudo.wheelNeedsPassword = false;
+
   # system version
   system.stateVersion = "unstable";
 
   # allow system to auto-upgrade
-  system.autoUpgrade.enable = false;
+  system.autoUpgrade.enable = true;
 
   # enable libvirt
   virtualisation.libvirtd.enable = true;
