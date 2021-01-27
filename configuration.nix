@@ -27,7 +27,7 @@
       # in case you want low latency on your Pulseaudio setup
       # mostly applicable to producers and osu! players
       # NOTE: not needed anymore if you use PipeWire
-      #./pulse.nix
+      ./pulse.nix
 
       # packages to install system-wide
       ./packages.nix
@@ -72,14 +72,14 @@
   nix.optimise.automatic = true;
 
   # enable sound throuth PipeWire
-  services.pipewire = {
-    enable = true;
-    socketActivation = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    jack.enable = true;
-    pulse.enable = true;
-  };
+  #services.pipewire = {
+  #  enable = true;
+  #  socketActivation = true;
+  #  alsa.enable = true;
+  #  alsa.support32Bit = true;
+  #  jack.enable = true;
+  #  pulse.enable = true;
+  #};
 
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
@@ -88,7 +88,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # system version
-  system.stateVersion = "unstable";
+  system.stateVersion = "20.09";
 
   # allow system to auto-upgrade
   system.autoUpgrade.enable = true;

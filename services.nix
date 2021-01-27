@@ -64,7 +64,8 @@
     };
   };
 
-  services.samba-wsdd.enable = true;
+  # to be used on 21.03
+  #services.samba-wsdd.enable = true;
 
   # user services
 
