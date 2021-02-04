@@ -6,9 +6,6 @@
       # the default for the machine
       /etc/nixos/hardware-configuration.nix
 
-      # bootloader config
-      ./bootloader.nix
-
       # fonts
       ./fonts.nix
 
@@ -38,6 +35,16 @@
       # in case you use Xorg
       ./xorg.nix
     ];
+
+  # bootloader
+  boot.loader = {
+    # installer can modify efi vars
+    efi.canTouchEfiVariables = true;
+
+    # systemd-boot
+    systemd-boot.enable = true;
+    systemd-boot.consoleMode = "max";
+  };
 
   # enable tmpfs
   boot.tmpOnTmpfs = true;
