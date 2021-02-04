@@ -61,9 +61,18 @@
   };
 
   # enable OpenGL
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    # support hardware accelerated encoding/decoding
+    extraPackages = with pkgs; [
+      vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vaapiIntel libvdpau-va-gl vaapiVdpau
+    ];
+  };
 
   # update Intel ucode
   hardware.cpu.intel.updateMicrocode = true;
