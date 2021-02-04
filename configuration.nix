@@ -12,9 +12,6 @@
       # neovim configuration
       ./neovim.nix
 
-      # networking
-      ./network.nix
-
       # in case you want low latency on your Pulseaudio setup
       # mostly applicable to producers and osu! players
       # NOTE: not needed anymore if you use PipeWire
@@ -25,12 +22,6 @@
       
       # service configration
       ./services.nix
-
-      # configure shells and console
-      ./shell.nix
-
-      # user accounts
-      ./users.nix
 
       # in case you use Xorg
       ./xorg.nix
@@ -47,23 +38,20 @@
 
   # bootloader
   boot.loader = {
-    # installer can modify efi vars
     efi.canTouchEfiVariables = true;
-
-    # systemd-boot
     systemd-boot.enable = true;
     systemd-boot.consoleMode = "max";
   };
 
-  # enable tmpfs
   boot.tmpOnTmpfs = true;
 
-  # timezone
-  time.timeZone = "Europe/Bucharest";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "ro";
+  };
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
-  # IBus IME
   i18n.inputMethod = {
     enabled = "ibus";
     ibus.engines = [ pkgs.ibus-engines.anthy ];
@@ -83,20 +71,16 @@
     ];
   };
 
-  # update Intel ucode
   hardware.cpu.intel.updateMicrocode = true;
 
   # network
-  # enable DHCP
   networking = {
     hostName = "nixpc";
     useDHCP = false;
     interfaces.enp3s0.useDHCP = true;
   };
-  # disable firewall
   networking.firewall.enable = false;
 
-  # auto optiomise the nix store
   nix.optimise.automatic = true;
 
   # enable sound throuth PipeWire
@@ -109,10 +93,30 @@
   #  pulse.enable = true;
   #};
 
+  programs.zsh = {
+    enable = true;
+
+    # plugins
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    # options
+    enableGlobalCompInit = true;
+    setOptions = [
+      "AUTO_CD"
+      "GLOB_COMPLETE"
+      "HIST_IGNORE_ALL_DUPS"
+      "HIST_REDUCE_BLANKS"
+      "INC_APPEND_HISTORY"
+      "NO_CASE_GLOB"
+    ];
+    histFile = "$HOME/.cache/.histfile";
+  };
+
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
-  # allow users in `wheel` to use doas without prompting for password
+  # allow users in group `wheel` to use doas without prompting for password
   security.doas = {
     enable = true;
     wheelNeedsPassword = false;
@@ -125,11 +129,17 @@
   # disable sudo
   security.sudo.enable = false;
 
-  # system version
   system.stateVersion = "20.09";
   # allow system to auto-upgrade
   system.autoUpgrade.enable = true;
 
-  # enable libvirt
+  time.timeZone = "Europe/Bucharest";
+
+  users.users.mihai = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [ "wheel" "audio" "libvirtd" "adbusers" ];
+  };
+
   virtualisation.libvirtd.enable = true;
 }

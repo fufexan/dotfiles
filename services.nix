@@ -30,7 +30,6 @@
     publish.domain = true;
   };
 
-  # enable printing
   services.printing = {
     enable = true;
     drivers = [ pkgs.fxlinuxprint ];
@@ -78,21 +77,6 @@
     ];
     description = "IBus daemon";
     script = "${pkgs.ibus-with-plugins}/bin/ibus-daemon";
-    serviceConfig = {
-      Restart = "always";
-      StandardOutput = "syslog";
-    };
-  };
-
-  # enable phone-computer integration
-  systemd.user.services.kdeconnect = {
-    enable = true;
-    wantedBy = [
-      "multi-user.target"
-      "graphical-session.target"
-    ];
-    description = "KDEConnect daemon";
-    script = "${pkgs.kdeconnect}/bin/kdeconnect-indicator";
     serviceConfig = {
       Restart = "always";
       StandardOutput = "syslog";
