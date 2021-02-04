@@ -36,6 +36,15 @@
       ./xorg.nix
     ];
 
+  # kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # modules to load
+  boot.kernelModules = [ "v4l2loopback" ];
+  # make modules available to modprobe
+  boot.extraModulePackages = [ pkgs.linuxPackages_zen.v4l2loopback ];
+  # browser fix on Intel CPUs
+  boot.kernelParams = [ "intel_pstate=active" ];
+
   # bootloader
   boot.loader = {
     # installer can modify efi vars
@@ -54,7 +63,6 @@
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
-
   # IBus IME
   i18n.inputMethod = {
     enabled = "ibus";
@@ -78,21 +86,15 @@
   # update Intel ucode
   hardware.cpu.intel.updateMicrocode = true;
 
-  #
-  # kernel
-  #
-
-  # kernel to use
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  # modules to load
-  boot.kernelModules = [ "v4l2loopback" ];
-
-  # make modules available to modprobe
-  boot.extraModulePackages = [ pkgs.linuxPackages_zen.v4l2loopback ];
-
-  # browser fix on Intel CPUs
-  boot.kernelParams = [ "intel_pstate=active" ];
+  # network
+  # enable DHCP
+  networking = {
+    hostName = "nixpc";
+    useDHCP = false;
+    interfaces.enp3s0.useDHCP = true;
+  };
+  # disable firewall
+  networking.firewall.enable = false;
 
   # auto optiomise the nix store
   nix.optimise.automatic = true;
@@ -120,13 +122,11 @@
       keepEnv = true;
     }];
   };
-
   # disable sudo
   security.sudo.enable = false;
 
   # system version
   system.stateVersion = "20.09";
-
   # allow system to auto-upgrade
   system.autoUpgrade.enable = true;
 
