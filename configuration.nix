@@ -6,17 +6,11 @@
       # the default for the machine
       /etc/nixos/hardware-configuration.nix
 
-      # Home Manager
-      #<home-manager/nixos>
-
       # bootloader config
       ./bootloader.nix
 
       # fonts
       ./fonts.nix
-
-      # kernel
-      ./kernel.nix
 
       # neovim configuration
       ./neovim.nix
@@ -60,7 +54,7 @@
     ibus.engines = [ pkgs.ibus-engines.anthy ];
   };
 
-  # enable OpenGL
+  # OpenGL
   hardware.opengl = {
     enable = true;
     driSupport = true;
@@ -76,6 +70,22 @@
 
   # update Intel ucode
   hardware.cpu.intel.updateMicrocode = true;
+
+  #
+  # kernel
+  #
+
+  # kernel to use
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  # modules to load
+  boot.kernelModules = [ "v4l2loopback" ];
+
+  # make modules available to modprobe
+  boot.extraModulePackages = [ pkgs.linuxPackages_zen.v4l2loopback ];
+
+  # browser fix on Intel CPUs
+  boot.kernelParams = [ "intel_pstate=active" ];
 
   # auto optiomise the nix store
   nix.optimise.automatic = true;
@@ -97,6 +107,11 @@
   security.doas = {
     enable = true;
     wheelNeedsPassword = false;
+    # keep environment when running as root
+    extraRules = [{
+      groups = [ "wheel" ];
+      keepEnv = true;
+    }];
   };
 
   # disable sudo
