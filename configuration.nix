@@ -93,8 +93,14 @@
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
-  # allow users in `wheel` to use sudo without prompting for password
-  security.sudo.wheelNeedsPassword = false;
+  # allow users in `wheel` to use doas without prompting for password
+  security.doas = {
+    enable = true;
+    wheelNeedsPassword = false;
+  };
+
+  # disable sudo
+  security.sudo.enable = false;
 
   # system version
   system.stateVersion = "20.09";
