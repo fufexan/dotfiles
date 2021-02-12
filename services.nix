@@ -5,12 +5,12 @@
   services.ratbagd.enable = true;
 
   # file sync, transfer and secure shell
-  services.syncthing = {
-    enable = true;
-    user = "mihai";
-    dataDir = "/home/mihai/Sync";
-    configDir = "/home/mihai/.config/syncthing";
-  };
+  #services.syncthing = {
+  #  enable = true;
+  #  user = "mihai";
+  #  dataDir = "/home/mihai/Sync";
+  #  configDir = "/home/mihai/.config/syncthing";
+  #};
   services.transmission = {
     enable = true;
     group = "users";
@@ -30,13 +30,12 @@
     publish.domain = true;
   };
 
+  services.geoclue2.enable = true;
+
   services.printing = {
     enable = true;
     drivers = [ pkgs.fxlinuxprint ];
   };
-
-  # usb stick automount, cifs browsing, etc
-  services.gvfs.enable = true;
 
   # samba public share
   services.samba = {
@@ -63,23 +62,6 @@
     };
   };
 
-  # to be used on 21.03
-  #services.samba-wsdd.enable = true;
-
-  # user services
-
-  # enable IBus on graphical session startup
-  systemd.user.services.ibus-daemon = {
-    enable = true;
-    wantedBy = [
-      "multi-user.target"
-      "graphical-session.target"
-    ];
-    description = "IBus daemon";
-    script = "${pkgs.ibus-with-plugins}/bin/ibus-daemon";
-    serviceConfig = {
-      Restart = "always";
-      StandardOutput = "syslog";
-    };
-  };
+  # allow Windows clients to see samba
+  services.samba-wsdd.enable = true;
 }
