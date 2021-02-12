@@ -82,7 +82,13 @@
   };
   networking.firewall.enable = false;
 
-  nix.optimise.automatic = true;
+  nix = {
+    optimise.automatic = true;
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
