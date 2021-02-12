@@ -12,13 +12,17 @@
       # neovim configuration
       ./neovim.nix
 
+      # packages to install system-wide
+      ./packages.nix
+
+      # enable sound through PipeWire using tdeo's patch
+      # https://gist.github.com/tadeokondrak/e14d20500ad724f7a61ce606adb14980
+      ./pipewire.nix
+
       # in case you want low latency on your Pulseaudio setup
       # mostly applicable to producers and osu! players
       # NOTE: not needed anymore if you use PipeWire
-      ./pulse.nix
-
-      # packages to install system-wide
-      ./packages.nix
+      #./pulse.nix
       
       # service configration
       ./services.nix
@@ -32,7 +36,7 @@
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
   # make modules available to modprobe
-  boot.extraModulePackages = [ pkgs.linuxPackages_zen.v4l2loopback ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   # browser fix on Intel CPUs
   boot.kernelParams = [ "intel_pstate=active" ];
 
@@ -43,8 +47,6 @@
     systemd-boot.consoleMode = "max";
   };
 
-  boot.tmpOnTmpfs = true;
-
   console = {
     font = "Lat2-Terminus16";
     keyMap = "ro";
@@ -52,10 +54,9 @@
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = [ pkgs.ibus-engines.anthy ];
-  };
+  #i18n.inputMethod = {
+  #  enabled = "uim";
+  #};
 
   # OpenGL
   hardware.opengl = {
@@ -83,47 +84,17 @@
 
   nix.optimise.automatic = true;
 
-  # enable sound throuth PipeWire
-  #services.pipewire = {
-  #  enable = true;
-  #  socketActivation = true;
-  #  alsa.enable = true;
-  #  alsa.support32Bit = true;
-  #  jack.enable = true;
-  #  pulse.enable = true;
-  #};
-
-  programs.zsh = {
-    enable = true;
-
-    # plugins
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-
-    # options
-    enableGlobalCompInit = true;
-    setOptions = [
-      "AUTO_CD"
-      "GLOB_COMPLETE"
-      "HIST_IGNORE_ALL_DUPS"
-      "HIST_REDUCE_BLANKS"
-      "INC_APPEND_HISTORY"
-      "NO_CASE_GLOB"
-    ];
-    histFile = "$HOME/.cache/.histfile";
-  };
-
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
   # allow users in group `wheel` to use doas without prompting for password
   security.doas = {
     enable = true;
-    wheelNeedsPassword = false;
     # keep environment when running as root
     extraRules = [{
       groups = [ "wheel" ];
       keepEnv = true;
+      noPass = true;
     }];
   };
   # disable sudo
