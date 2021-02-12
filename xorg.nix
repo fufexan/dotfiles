@@ -5,10 +5,8 @@
   environment.systemPackages = with pkgs; [
     # gui utils
     feh maim polybarFull rofi rofi-emoji picom
-
     # notifications
     dunst
-
     # cli utils
     xclip xorg.xkill xdotool
   ];
@@ -37,7 +35,6 @@
           bash ${kbdTricks}/install-dreymar-xmod.sh -nsoc $out/etc/X11 ${mods}
         '';
       });
-
       # now configure the other packages to use the XKB files from the overriden
       # derivation instead of the official one
       xorgserver = super.xorg.xorgserver.overrideAttrs (old: {
@@ -46,7 +43,6 @@
           "--with-xkb-path=${xkeyboardconfig_colemak_mods}/share/X11/xkb"
         ];
       });
-
       setxkbmap = super.xorg.setxkbmap.overrideAttrs (old: {
         postInstall =
           ''
@@ -54,13 +50,10 @@
             ln -sfn ${xkeyboardconfig_colemak_mods}/etc/X11 $out/share/X11
           '';
       });
-
       xkbcomp = super.xorg.xkbcomp.overrideAttrs (old: {
         configureFlags = "--with-xkb-config-root=${xkeyboardconfig_colemak_mods}/share/X11/xkb";
       });
-
     }; # xorg
-
     # in order for our patches to work, this also needs to be reconfigured
     xkbvalidate = super.xkbvalidate.override {
       libxkbcommon = super.libxkbcommon.override {
@@ -107,7 +100,7 @@
         greeters.gtk = {
           cursorTheme.name = "Capitaine Cursors";
           cursorTheme.package = pkgs.capitaine-cursors;
-          theme.name = "Orchis-purple-dark-compact";
+          theme.name = "Orchis-red-dark-compact";
           #theme.package = pkgs.orchis;
         };
       };
@@ -118,8 +111,8 @@
     # disable mouse acceleration
     libinput = {
       enable = true;
-      accelProfile = "flat";
-      accelSpeed = "0";
+      mouse.accelProfile = "flat";
+      mouse.accelSpeed = "0";
     };
   };
 }
