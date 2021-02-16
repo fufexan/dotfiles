@@ -10,6 +10,7 @@ As of now, it includes configurations for:
 
 - Fonts - configure fonts
 - Neovim - manage plugins and configuration
+- PipeWire - replace Pulseaudio, JACK and ALSA
 - Pulse - Pulseaudio changes to make it realtime
 - Packages - a list of packages to install and also programs with configs
 - Services - manage services
