@@ -55,9 +55,9 @@ in
       library.name.system = support/libspa-support
       context.data-loop.library.name.system = support/libspa-support
       default.clock.rate = 48000
-      #default.clock.quantum = 256
+      default.clock.quantum = 256
       default.clock.min-quantum = 64
-      default.clock.max-quantum = 8192
+      default.clock.max-quantum = 256
     }
     spa-libs = {
       audio.convert* = audioconvert/libspa-audioconvert
@@ -122,8 +122,8 @@ in
       {
         # TODO: split into two sections, one for card and one for sinks/sources
         matches = [
-          { api.alsa.card.name = "HDA Intel PCH" }
-          { alsa.card_name = "HDA Intel PCH" }
+          { api.alsa.card.name = "HyperX Virtual Surround Sound" }
+          { alsa.card_name = "HyperX Virtual Surround Sound" }
         ]
         actions = {
           update-props = {
