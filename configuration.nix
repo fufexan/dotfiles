@@ -32,7 +32,7 @@
     ];
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
   # make modules available to modprobe
@@ -99,6 +99,8 @@
   };
   # disable sudo
   security.sudo.enable = false;
+
+  services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   system.stateVersion = "20.09";
   # allow system to auto-upgrade
