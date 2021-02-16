@@ -4,7 +4,7 @@
   imports =
     [
       # the default for the machine
-      /etc/nixos/hardware-configuration.nix
+      ./hardware-configuration.nix
 
       # fonts
       ./fonts.nix
