@@ -4,9 +4,7 @@
   # install packages specific to X
   environment.systemPackages = with pkgs; [
     # gui utils
-    feh maim polybarFull rofi rofi-emoji picom
-    # notifications
-    dunst
+    maim
     # cli utils
     xclip xorg.xkill xdotool
   ];
@@ -23,12 +21,12 @@
         kbdTricks = pkgs.fetchFromGitHub {
           owner = "DreymaR";
           repo = "BigBagKbdTrixXKB";
-          rev = "5e4a6765459f98c7b976cee1d6f412f68e3ee3c9";
-          sha256 = "06n7g29d4m5vf8bbn2limn9xzrb3zpgymkr9lbkaf7vyh3a8mpxj";
+          rev = "f2dd703c5b66aa9fe5d64b982b7fb5cd45a424de";
+          sha256 = "165n68ry3fyag4p6w03hzsbzpws8x3hqqb5prkvbmx5ds21c5l5c";
         };
 
         # specify your desired mods
-        mods = "5caw ro ks";
+        mods = "4caw ro ks";
 
         # actual installation of the mods
         postFixup = ''
@@ -37,12 +35,6 @@
       });
       # now configure the other packages to use the XKB files from the overriden
       # derivation instead of the official one
-      xorgserver = super.xorg.xorgserver.overrideAttrs (old: {
-        configureFlags = old.configureFlags ++ [
-          "--with-xkb-bin-directory=${xkbcomp}/bin"
-          "--with-xkb-path=${xkeyboardconfig_colemak_mods}/share/X11/xkb"
-        ];
-      });
       setxkbmap = super.xorg.setxkbmap.overrideAttrs (old: {
         postInstall =
           ''
@@ -52,6 +44,12 @@
       });
       xkbcomp = super.xorg.xkbcomp.overrideAttrs (old: {
         configureFlags = "--with-xkb-config-root=${xkeyboardconfig_colemak_mods}/share/X11/xkb";
+      });
+      xorgserver = super.xorg.xorgserver.overrideAttrs (old: {
+        configureFlags = old.configureFlags ++ [
+          "--with-xkb-bin-directory=${xkbcomp}/bin"
+          "--with-xkb-path=${xkeyboardconfig_colemak_mods}/share/X11/xkb"
+        ];
       });
     }; # xorg
     # in order for our patches to work, this also needs to be reconfigured
