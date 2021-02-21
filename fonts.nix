@@ -10,19 +10,13 @@
       noto-fonts
       noto-fonts-emoji
       liberation_ttf_v1
-      source-han-sans
-      source-han-serif
 
       # bitmap fonts
       gohufont
       tewi-font
 
       # nerdfonts
-      (nerdfonts.override {
-        fonts = [
-        "FiraCode"
-        "Mononoki"];
-      })
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
     # use fonts specified by user rather than default ones
