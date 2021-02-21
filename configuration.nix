@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -86,8 +86,24 @@
     optimise.automatic = true;
     package = pkgs.nixFlakes;
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes ca-references
+      flake-registry = /etc/nix/registry.json
     '';
+    registry = {
+      self.flake = inputs.self;
+      nixpkgs = {
+        from = {
+          id = "nixpkgs";
+          type = "indirect";
+        };
+        to = {
+          owner = "NixOS";
+          repo = "nixpkgs";
+          rev = inputs.nixpkgs.rev;
+          type = "github";
+        };
+      };
+    };
   };
 
   # enable realtime capabilities to user processes
