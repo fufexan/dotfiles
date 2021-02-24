@@ -8,6 +8,7 @@
 
       # normal fonts
       noto-fonts
+      noto-fonts-cjk
       noto-fonts-emoji
       liberation_ttf_v1
 
@@ -16,7 +17,7 @@
       tewi-font
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
     ];
 
     # use fonts specified by user rather than default ones

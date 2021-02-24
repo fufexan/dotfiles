@@ -64,4 +64,7 @@
 
   # allow Windows clients to see samba
   services.samba-wsdd.enable = true;
+
+  # Tailscale VPN alternative
+  services.tailscale.enable = true;
 }

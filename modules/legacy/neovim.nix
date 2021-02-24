@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  # moved to Home Manager
   environment.variables = { EDITOR = "nvim"; };
   environment.systemPackages = with pkgs; [
     (neovim.override {

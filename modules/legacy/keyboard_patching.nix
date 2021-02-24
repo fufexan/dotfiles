@@ -1,13 +1,25 @@
-{ configs, pkgs, ... }:
-
 {
-  # install packages specific to X
-  environment.systemPackages = with pkgs; [
-    # gui utils
-    maim
-    # cli utils
-    xclip xorg.xkill xdotool
-  ];
+  # DEPRECATED
+  # this stopped working for reasons unknown to me
+  # I have stopped using it, as I can set the layout physically, through my
+  # keyboard macro system. I may come back and resolve this in the future
+
+  # Q: What do you mean with "it doesn't work"?
+  # A: setxkbmap gives `Error loading new keyboard description` each time it
+  # is run, even though it worked before.
+  # I have tried finding the cause of this, but all I got was that aside
+  # from hash differences, the files in `xkeyboard-config` are exactly the
+  # same, and the only thing that changed in `setxkbmap` is the hash name of
+  # the xkeyboard-config XKB files location (obviously).
+  # I noticed the change happened after I changed the repo owner from
+  # fufexan to DreymaR (after he merged my fork). There shouldn't be any
+  # difference in behaviour, yet it is.
+  # If you want to test for yourself, change owner and repo:
+  # previously working: owner = "fufexan"; rev = "872b1891fd3d8b43e1e0fee6a1a0ef6ccda99e49";
+  # current, not working: owner = "DreymaR"; rev = "f2dd703c5b66aa9fe5d64b982b7fb5cd45a424de";
+  # calculate the sha256 with `nix-prefetch-url`.
+
+  # if you have any more questions, feel free to message me.
 
   # keyboard configuration
   # configures with Colemak mods that you specify
@@ -60,57 +72,30 @@
     };
   }; # packageOverrides
 
-  # configure X
-  services.xserver = {
-    enable = true;
+  # second approach to adding DreymaR's mods
 
-    # wanted to add DreymaR's patched xkb files the official way, but it doesn't
-    # really work. help is welcome
-    #extraLayouts = {
-    #  colemak = {
-    #    description = "DreymaR's Colemak mods";
-    #    languages = [ "eng" ];
-    #    symbolsFile = /etc/nixos/xkb/symbols/colemak;
-    #    typesFile = /etc/nixos/xkb/types/level5;
-    #    geometryFile = /etc/nixos/xkb/geometry/pc;
-    #    keycodesFile = /etc/nixos/xkb/keycodes/evdev;
-    #  };
-    #  ro = {
-    #    description = "Romanian modded with Colemak";
-    #    languages = [ "rum" ];
-    #    symbolsFile = /etc/nixos/xkb/symbols/ro;
-    #  };
-    #};
+  # wanted to add DreymaR's patched xkb files the official way, but it doesn't
+  # really work. help is welcome
+  #services.xserver = {
+  #  extraLayouts = {
+  #    colemak = {
+  #      description = "DreymaR's Colemak mods";
+  #      languages = [ "eng" ];
+  #      symbolsFile = ./xkb/symbols/colemak;
+  #      typesFile = ./xkb/types/level5;
+  #      geometryFile = ./xkb/geometry/pc;
+  #      keycodesFile = ./xkb/keycodes/evdev;
+  #    };
+  #    ro = {
+  #      description = "Romanian modded with Colemak";
+  #      languages = [ "rum" ];
+  #      symbolsFile = ./xkb/symbols/ro;
+  #    };
+  #  };
 
-    # keyboard config
-    layout = "ro";
-    xkbModel = "pc105aw-sl";
-    xkbOptions = "misc:cmk_curl_dh";
-    xkbVariant = "cmk_ed_ks";
-
-    videoDrivers = [ "nvidia" ];
-
-    # display manager setup
-    displayManager = {
-      defaultSession = "none+bspwm";
-      lightdm = {
-        background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
-        greeters.gtk = {
-          cursorTheme.name = "Capitaine Cursors";
-          cursorTheme.package = pkgs.capitaine-cursors;
-          theme.name = "Orchis-red-dark-compact";
-          #theme.package = pkgs.orchis;
-        };
-      };
-    };
-
-    windowManager.bspwm.enable = true;
-
-    # disable mouse acceleration
-    libinput = {
-      enable = true;
-      mouse.accelProfile = "flat";
-      mouse.accelSpeed = "0";
-    };
-  };
+  #  layout = "ro";
+  #  xkbModel = "pc105aw-sl";
+  #  xkbOptions = "misc:cmk_dh";
+  #  xkbVariant = "cmk_ed_ks";
+  #};
 }

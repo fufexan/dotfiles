@@ -1,36 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
-      # the default for the machine
-      ./hardware-configuration.nix
-
-      # fonts
-      ./fonts.nix
-
-      # neovim configuration
-      ./neovim.nix
-
-      # packages to install system-wide
-      ./packages.nix
-
-      # enable sound through PipeWire using tdeo's patch
-      # https://gist.github.com/tadeokondrak/e14d20500ad724f7a61ce606adb14980
-      ./pipewire.nix
-
-      # in case you want low latency on your Pulseaudio setup
-      # mostly applicable to producers and osu! players
-      # NOTE: not needed anymore if you use PipeWire
-      #./pulse.nix
-      
-      # service configration
-      ./services.nix
-
-      # in case you use Xorg
-      ./xorg.nix
-    ];
-
+  imports = [ ./modules ];
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load
@@ -54,9 +25,11 @@
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
-  #i18n.inputMethod = {
-  #  enabled = "uim";
-  #};
+  # Japanese input using fcitx
+  i18n.inputMethod = {
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [ anthy mozc ];
+  };
 
   # OpenGL
   hardware.opengl = {
@@ -84,11 +57,13 @@
 
   nix = {
     optimise.automatic = true;
+    # enable flakes
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
       flake-registry = /etc/nix/registry.json
     '';
+    # pin nixpkgs to the commit the system was built from
     registry = {
       self.flake = inputs.self;
       nixpkgs = {
@@ -106,6 +81,14 @@
     };
   };
 
+  # pipewire
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    jack.enable = true;
+  };
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
@@ -133,7 +116,7 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "audio" "libvirtd" "adbusers" ];
+    extraGroups = [ "wheel" "libvirtd" "adbusers" ];
   };
 
   virtualisation.libvirtd.enable = true;

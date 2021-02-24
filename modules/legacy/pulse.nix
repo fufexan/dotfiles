@@ -3,6 +3,9 @@
 {
   # if you're an osu! player or a music producer/DJ, you definitely value low latency
   # this config sets your Pulseaudio to realtime with the best settings
+  # NOTE: I recommend changing your audio backend to PipeWire. It provides
+  # much better latency for much less CPU usage, while being compatible with
+  # ALSA, JACK and Pulseaudio applications.
   hardware.pulseaudio = {
     enable = true;
     support32Bit = true;
