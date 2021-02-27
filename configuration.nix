@@ -4,8 +4,18 @@
   imports = [ ./modules ];
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPatches = [
+    {
+      name = "snd-usb-audio-patch";
+      patch = ./modules/linux591-snd-usb-audio.patch;
+    }
+  ];
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
+  # configure modules loaded by modprobe
+  boot.extraModprobeConfig = ''
+    options snd-usb-audio max_packs=1 max_packs_hs=1 max_urbs=12 sync_urbs=4 max_queue=18
+  '';
   # make modules available to modprobe
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   # browser fix on Intel CPUs
@@ -22,6 +32,9 @@
     font = "Lat2-Terminus16";
     keyMap = "ro";
   };
+
+  # enable zsh autocompletion for system packages (systemd, etc)
+  environments.pathsToLink = [ "/share/zsh" ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
@@ -80,6 +93,11 @@
       };
     };
   };
+
+  # enable programs
+  programs.adb.enable = true;
+  programs.less.enable = true;
+  programs.steam.enable = true;
 
   # pipewire
   services.pipewire = {

@@ -1,0 +1,244 @@
+diff --git a/sound/usb/card.c b/sound/usb/card.c
+index 696e788c5..6fac687fa 100644
+--- a/sound/usb/card.c
++++ b/sound/usb/card.c
+@@ -68,6 +68,11 @@ static bool enable[SNDRV_CARDS] = SNDRV_DEFAULT_ENABLE_PNP;/* Enable this card *
+ /* Vendor/product IDs for this card */
+ static int vid[SNDRV_CARDS] = { [0 ... (SNDRV_CARDS-1)] = -1 };
+ static int pid[SNDRV_CARDS] = { [0 ... (SNDRV_CARDS-1)] = -1 };
++static int max_packs = 6;	/* per URB */
++static int max_packs_hs = 6 * 8;	/* in high speed mode */
++static int max_urbs = 12;
++static int sync_urbs = 4;	/* always four urbs for sync */
++static int max_queue = 18;	/* try not to exceed this queue length, in ms */
+ static int device_setup[SNDRV_CARDS]; /* device parameter for this card */
+ static bool ignore_ctl_error;
+ static bool autoclock = true;
+@@ -87,6 +92,16 @@ module_param_array(vid, int, NULL, 0444);
+ MODULE_PARM_DESC(vid, "Vendor ID for the USB audio device.");
+ module_param_array(pid, int, NULL, 0444);
+ MODULE_PARM_DESC(pid, "Product ID for the USB audio device.");
++module_param(max_packs, int, 0644);
++MODULE_PARM_DESC(max_packs, "Max. number of packets per URB in low speed mode");
++module_param(max_packs_hs, int, 0644);
++MODULE_PARM_DESC(max_packs_hs, "Max. number of packets per URB in high speed mode");
++module_param(max_urbs, int, 0644);
++MODULE_PARM_DESC(max_urbs, "Max. number of URBs");
++module_param(sync_urbs, int, 0644);
++MODULE_PARM_DESC(sync_urbs, "Number of URBs for sync");
++module_param(max_queue, int, 0644);
++MODULE_PARM_DESC(max_queue, "Try not to exceed this queue length, in ms");
+ module_param_array(device_setup, int, NULL, 0444);
+ MODULE_PARM_DESC(device_setup, "Specific device setup (if needed).");
+ module_param(ignore_ctl_error, bool, 0444);
+@@ -479,6 +494,16 @@ static int snd_usb_audio_create(struct usb_interface *intf,
+ 	chip->dev = dev;
+ 	chip->card = card;
+ 	chip->setup = device_setup[idx];
++	chip->max_packs = min(max(1, max_packs), MAX_PACKS_LIMIT);
++	dev_info(&dev->dev, "snd-usb-audio: max_packs: %d\n", chip->max_packs);
++	chip->max_packs_hs = min(max(1, max_packs_hs), MAX_PACKS_LIMIT);
++	dev_info(&dev->dev, "snd-usb-audio: max_packs_hs: %d\n", chip->max_packs_hs);
++	chip->max_urbs = min(max(1, max_urbs), MAX_URBS_LIMIT);
++	dev_info(&dev->dev, "snd-usb-audio: max_urbs: %d\n", chip->max_urbs);
++	chip->sync_urbs = min(max(1, sync_urbs), MAX_URBS_LIMIT);
++	dev_info(&dev->dev, "snd-usb-audio: sync_urbs: %d\n", chip->sync_urbs);
++	chip->max_queue = max(1, max_queue);
++	dev_info(&dev->dev, "snd-usb-audio: max_queue: %d\n", chip->max_queue);
+ 	chip->autoclock = autoclock;
+ 	atomic_set(&chip->active, 1); /* avoid autopm during probing */
+ 	atomic_set(&chip->usage_count, 0);
+diff --git a/sound/usb/card.h b/sound/usb/card.h
+index 5351d7183..09f02a1ec 100644
+--- a/sound/usb/card.h
++++ b/sound/usb/card.h
+@@ -3,11 +3,8 @@
+ #define __USBAUDIO_CARD_H
+ 
+ #define MAX_NR_RATES	1024
+-#define MAX_PACKS	6		/* per URB */
+-#define MAX_PACKS_HS	(MAX_PACKS * 8)	/* in high speed mode */
+-#define MAX_URBS	12
+-#define SYNC_URBS	4	/* always four urbs for sync */
+-#define MAX_QUEUE	18	/* try not to exceed this queue length, in ms */
++#define MAX_PACKS_LIMIT	64
++#define MAX_URBS_LIMIT	32
+ 
+ struct audioformat {
+ 	struct list_head list;
+@@ -47,7 +44,7 @@ struct snd_urb_ctx {
+ 	struct snd_usb_endpoint *ep;
+ 	int index;	/* index for urb array */
+ 	int packets;	/* number of packets per urb */
+-	int packet_size[MAX_PACKS_HS]; /* size of packets for next submission */
++	int packet_size[MAX_PACKS_LIMIT];	/* size of packets for next submission */
+ 	struct list_head ready_list;
+ };
+ 
+@@ -68,12 +65,12 @@ struct snd_usb_endpoint {
+ 	struct snd_usb_endpoint *sync_master;
+ 	struct snd_usb_endpoint *sync_slave;
+ 
+-	struct snd_urb_ctx urb[MAX_URBS];
++	struct snd_urb_ctx urb[MAX_URBS_LIMIT];
+ 
+ 	struct snd_usb_packet_info {
+-		uint32_t packet_size[MAX_PACKS_HS];
++		uint32_t packet_size[MAX_PACKS_LIMIT];
+ 		int packets;
+-	} next_packet[MAX_URBS];
++	} next_packet[MAX_URBS_LIMIT];
+ 	int next_packet_read_pos, next_packet_write_pos;
+ 	struct list_head ready_playback_urbs;
+ 
+diff --git a/sound/usb/endpoint.c b/sound/usb/endpoint.c
+index 5fbc8dd2f..98ef42e79 100644
+--- a/sound/usb/endpoint.c
++++ b/sound/usb/endpoint.c
+@@ -343,7 +343,7 @@ static void queue_pending_output_urbs(struct snd_usb_endpoint *ep)
+ 		if (ep->next_packet_read_pos != ep->next_packet_write_pos) {
+ 			packet = ep->next_packet + ep->next_packet_read_pos;
+ 			ep->next_packet_read_pos++;
+-			ep->next_packet_read_pos %= MAX_URBS;
++			ep->next_packet_read_pos %= ep->chip->max_urbs;
+ 
+ 			/* take URB out of FIFO */
+ 			if (!list_empty(&ep->ready_playback_urbs)) {
+@@ -615,7 +615,7 @@ static void release_urbs(struct snd_usb_endpoint *ep, int force)
+ 	for (i = 0; i < ep->nurbs; i++)
+ 		release_urb_ctx(&ep->urb[i]);
+ 
+-	usb_free_coherent(ep->chip->dev, SYNC_URBS * 4,
++	usb_free_coherent(ep->chip->dev, ep->chip->sync_urbs * 4,
+ 			  ep->syncbuf, ep->sync_dma);
+ 
+ 	ep->syncbuf = NULL;
+@@ -709,10 +709,10 @@ static bool check_ep_params(struct snd_usb_endpoint *ep,
+ 
+ 	if (snd_usb_get_speed(ep->chip->dev) != USB_SPEED_FULL) {
+ 		packs_per_ms = 8 >> ep->datainterval;
+-		max_packs_per_urb = MAX_PACKS_HS;
++		max_packs_per_urb = ep->chip->max_packs_hs;
+ 	} else {
+ 		packs_per_ms = 1;
+-		max_packs_per_urb = MAX_PACKS;
++		max_packs_per_urb = ep->chip->max_packs;
+ 	}
+ 	if (sync_ep && !snd_usb_endpoint_implicit_feedback_sink(ep))
+ 		max_packs_per_urb = min(max_packs_per_urb,
+@@ -749,13 +749,13 @@ static bool check_ep_params(struct snd_usb_endpoint *ep,
+ 		urb_packs = min(max_packs_per_urb, urb_packs);
+ 		while (urb_packs > 1 && urb_packs * maxsize >= period_bytes)
+ 			urb_packs >>= 1;
+-		ret = ret && (ep->nurbs == MAX_URBS);
++		ret = ret && (ep->nurbs == ep->chip->max_urbs);
+ 
+ 	/*
+ 	 * Playback endpoints without implicit sync are adjusted so that
+ 	 * a period fits as evenly as possible in the smallest number of
+ 	 * URBs.  The total number of URBs is adjusted to the size of the
+-	 * ALSA buffer, subject to the MAX_URBS and MAX_QUEUE limits.
++	 * ALSA buffer, subject to the ep->chip->max_urbs and ep->chip->max_queue limits.
+ 	 */
+ 	} else {
+ 		/* determine how small a packet can be */
+@@ -780,8 +780,8 @@ static bool check_ep_params(struct snd_usb_endpoint *ep,
+ 			DIV_ROUND_UP(frames_per_period, urbs_per_period));
+ 
+ 		/* try to use enough URBs to contain an entire ALSA buffer */
+-		max_urbs = min((unsigned) MAX_URBS,
+-				MAX_QUEUE * packs_per_ms / urb_packs);
++		max_urbs = min((unsigned) ep->chip->max_urbs,
++				ep->chip->max_queue * packs_per_ms / urb_packs);
+ 		ret = ret && (ep->nurbs == min(max_urbs,
+ 				urbs_per_period * periods_per_buffer));
+ 	}
+@@ -880,10 +880,10 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
+ 
+ 	if (snd_usb_get_speed(ep->chip->dev) != USB_SPEED_FULL) {
+ 		packs_per_ms = 8 >> ep->datainterval;
+-		max_packs_per_urb = MAX_PACKS_HS;
++		max_packs_per_urb = ep->chip->max_packs_hs;
+ 	} else {
+ 		packs_per_ms = 1;
+-		max_packs_per_urb = MAX_PACKS;
++		max_packs_per_urb = ep->chip->max_packs;
+ 	}
+ 	if (sync_ep && !snd_usb_endpoint_implicit_feedback_sink(ep))
+ 		max_packs_per_urb = min(max_packs_per_urb,
+@@ -919,13 +919,13 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
+ 		urb_packs = min(max_packs_per_urb, urb_packs);
+ 		while (urb_packs > 1 && urb_packs * maxsize >= period_bytes)
+ 			urb_packs >>= 1;
+-		ep->nurbs = MAX_URBS;
++		ep->nurbs = ep->chip->max_urbs;
+ 
+ 	/*
+ 	 * Playback endpoints without implicit sync are adjusted so that
+ 	 * a period fits as evenly as possible in the smallest number of
+ 	 * URBs.  The total number of URBs is adjusted to the size of the
+-	 * ALSA buffer, subject to the MAX_URBS and MAX_QUEUE limits.
++	 * ALSA buffer, subject to the max_urbs and max_queue limits.
+ 	 */
+ 	} else {
+ 		/* determine how small a packet can be */
+@@ -950,8 +950,8 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep,
+ 					urbs_per_period);
+ 
+ 		/* try to use enough URBs to contain an entire ALSA buffer */
+-		max_urbs = min((unsigned) MAX_URBS,
+-				MAX_QUEUE * packs_per_ms / urb_packs);
++		max_urbs = min((unsigned int) ep->chip->max_urbs,
++				ep->chip->max_queue * packs_per_ms / urb_packs);
+ 		ep->nurbs = min(max_urbs, urbs_per_period * periods_per_buffer);
+ 	}
+ 
+@@ -996,12 +996,12 @@ static int sync_ep_set_params(struct snd_usb_endpoint *ep)
+ {
+ 	int i;
+ 
+-	ep->syncbuf = usb_alloc_coherent(ep->chip->dev, SYNC_URBS * 4,
++	ep->syncbuf = usb_alloc_coherent(ep->chip->dev, ep->chip->sync_urbs * 4,
+ 					 GFP_KERNEL, &ep->sync_dma);
+ 	if (!ep->syncbuf)
+ 		return -ENOMEM;
+ 
+-	for (i = 0; i < SYNC_URBS; i++) {
++	for (i = 0; i < ep->chip->sync_urbs; i++) {
+ 		struct snd_urb_ctx *u = &ep->urb[i];
+ 		u->index = i;
+ 		u->ep = ep;
+@@ -1020,7 +1020,7 @@ static int sync_ep_set_params(struct snd_usb_endpoint *ep)
+ 		u->urb->complete = snd_complete_urb;
+ 	}
+ 
+-	ep->nurbs = SYNC_URBS;
++	ep->nurbs = ep->chip->sync_urbs;
+ 
+ 	return 0;
+ 
+@@ -1353,7 +1353,7 @@ void snd_usb_handle_sync_urb(struct snd_usb_endpoint *ep,
+ 		}
+ 
+ 		ep->next_packet_write_pos++;
+-		ep->next_packet_write_pos %= MAX_URBS;
++		ep->next_packet_write_pos %= ep->chip->max_urbs;
+ 		spin_unlock_irqrestore(&ep->lock, flags);
+ 		queue_pending_output_urbs(ep);
+ 
+diff --git a/sound/usb/usbaudio.h b/sound/usb/usbaudio.h
+index 6839915a0..56933a418 100644
+--- a/sound/usb/usbaudio.h
++++ b/sound/usb/usbaudio.h
+@@ -52,6 +52,11 @@ struct snd_usb_audio {
+ 	struct list_head mixer_list;	/* list of mixer interfaces */
+ 
+ 	int setup;			/* from the 'device_setup' module param */
++	int max_packs;			/* from the 'max_packs' module param */
++	int max_packs_hs;		/* from the 'max_packs_hs' module param */
++	int max_urbs;			/* from the 'max_urbs' module param */
++	int sync_urbs;			/* from the 'sync_urbs' module param */
++	int max_queue;			/* from the 'max_queue' module param */
+ 	bool autoclock;			/* from the 'autoclock' module param */
+ 	bool keep_iface;		/* keep interface/altset after closing
+ 					 * or parameter change
