@@ -43,9 +43,13 @@
   # install user packages 
   home.packages = with pkgs; [
     # archives
-    p7zip unrar
+    p7zip
+    unrar
     # audio
-    audacity carla pavucontrol pulsemixer
+    audacity
+    carla
+    pavucontrol
+    pulsemixer
     # documents
     libreoffice
     # file converters
@@ -53,11 +57,17 @@
     # file downloaders
     youtube-dl
     # file managers
-    ranger xfce.thunar
+    ranger
+    xfce.thunar
     # games
-    lutris osu-lazer
+    lutris
+    osu-lazer
     # messaging
-    discord element-desktop mumble tdesktop zoom-us
+    discord
+    element-desktop
+    mumble
+    tdesktop
+    zoom-us
     # music
     spotify
     # nix tools
@@ -65,13 +75,24 @@
     # torrents
     transmission-remote-gtk
     # video
-    droidcam jellyfin-mpv-shim vlc
+    droidcam
+    jellyfin-mpv-shim
+    vlc
 
     # misc
-    discord-rpc freerdp piper scrcpy
-    htop gotop
-    exa file glxinfo usbutils ueberzug
-    gnome3.zenity xdragon
+    discord-rpc
+    freerdp
+    piper
+    scrcpy
+    htop
+    gotop
+    exa
+    file
+    glxinfo
+    usbutils
+    ueberzug
+    gnome3.zenity
+    xdragon
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
@@ -118,24 +139,24 @@
           foreground = "0xfdf0ed";
         };
         normal = {
-          black   = "0x232530";
-          red     = "0xe95678";
-          green   = "0x29d398";
-          yellow  = "0xfab795";
-          blue    = "0x26bbd9";
+          black = "0x232530";
+          red = "0xe95678";
+          green = "0x29d398";
+          yellow = "0xfab795";
+          blue = "0x26bbd9";
           magenta = "0xee64ae";
-          cyan    = "0x59e3e3";
-          white   = "0xfadad1";
+          cyan = "0x59e3e3";
+          white = "0xfadad1";
         };
         bright = {
-          black   = "0x2e303e";
-          red     = "0xec6a88";
-          green   = "0x3fdaa4";
-          yellow  = "0xfbc3a7";
-          blue    = "0x3fc6de";
+          black = "0x2e303e";
+          red = "0xec6a88";
+          green = "0x3fdaa4";
+          yellow = "0xfbc3a7";
+          blue = "0x3fc6de";
           magenta = "0xf075b7";
-          cyan    = "0x6be6e6";
-          white   = "0xfdf0ed";
+          cyan = "0x6be6e6";
+          white = "0xfdf0ed";
         };
       };
       background_opacity = 0.7;
@@ -146,26 +167,28 @@
     enable = true;
     profiles.home = {
       fingerprint = {
-        DVI-D-0 = "00ffffffffffff00410cafc06d37000005170103802917782abe05a156529d270c5054bd4b00818081c0010101010101010101010101662156aa51001e30468f33009ae61000001e000000ff00554b3031333035303134313839000000fc005068696c697073203139365634000000fd00384c1e530e000a20202020202000ba";
-        HDMI-0  = "00ffffffffffff0009d1ea78455400000b1e010380301b782eb065a656539d280c5054a56b80d1c081c081008180a9c0b30001010101023a801871382d40582c4500dc0c1100001e000000ff0045334c30373535303031390a20000000fd00324c1e5311000a202020202020000000fc0042656e5120424c323238330a200193020322f14f901f05140413031207161501061102230907078301000065030c001000023a801871382d40582c4500dc0c1100001e011d8018711c1620582c2500dc0c1100009e011d007251d01e206e285500dc0c1100001e8c0ad08a20e02d10103e9600dc0c1100001800000000000000000000000000000000000000000081";
+        DVI-D-0 =
+          "00ffffffffffff00410cafc06d37000005170103802917782abe05a156529d270c5054bd4b00818081c0010101010101010101010101662156aa51001e30468f33009ae61000001e000000ff00554b3031333035303134313839000000fc005068696c697073203139365634000000fd00384c1e530e000a20202020202000ba";
+        HDMI-0 =
+          "00ffffffffffff0009d1ea78455400000b1e010380301b782eb065a656539d280c5054a56b80d1c081c081008180a9c0b30001010101023a801871382d40582c4500dc0c1100001e000000ff0045334c30373535303031390a20000000fd00324c1e5311000a202020202020000000fc0042656e5120424c323238330a200193020322f14f901f05140413031207161501061102230907078301000065030c001000023a801871382d40582c4500dc0c1100001e011d8018711c1620582c2500dc0c1100009e011d007251d01e206e285500dc0c1100001e8c0ad08a20e02d10103e9600dc0c1100001800000000000000000000000000000000000000000081";
       };
       config = {
         HDMI-0 = {
-          enable   = true;
-          crtc     = 1;
-          gamma    = "1.099:1.0:0.909";
-          mode     = "1920x1080";
+          enable = true;
+          crtc = 1;
+          gamma = "1.099:1.0:0.909";
+          mode = "1920x1080";
           position = "0x0";
-          rate     = "60.00";
-          primary  = true;
+          rate = "60.00";
+          primary = true;
         };
         DVI-D-0 = {
-          enable   = true;
-          crtc     = 0;
-          gamma    = "1.099:1.0:0.909";
-          mode     = "1366x768";
+          enable = true;
+          crtc = 0;
+          gamma = "1.099:1.0:0.909";
+          mode = "1366x768";
           position = "1920x312";
-          rate     = "59.79";
+          rate = "59.79";
         };
       };
       hooks.postswitch = "systemctl --user restart random-background.service";
@@ -189,10 +212,8 @@
     enable = true;
     enableZshIntegration = true;
     defaultCommand = "rg --files --hidden";
-    changeDirWidgetOptions = [
-      "--preview 'tree -C -L 3 -a {} | head -200'"
-      "--exact"
-    ];
+    changeDirWidgetOptions =
+      [ "--preview 'tree -C -L 3 -a {} | head -200'" "--exact" ];
   };
   programs.gh = {
     enable = true;
@@ -210,9 +231,7 @@
   };
   programs.gpg = {
     enable = true;
-    settings = {
-      homedir = "~/.local/share/gnupg";
-    };
+    settings = { homedir = "~/.local/share/gnupg"; };
   };
   programs.mpv = {
     enable = true;
@@ -222,9 +241,7 @@
   programs.ncmpcpp = {
     enable = true;
     package = pkgs.ncmpcpp.override { visualizerSupport = true; };
-    settings = {
-       ncmpcpp_directory = "~/.local/share/ncmpcpp";
-    };
+    settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
   };
   programs.neomutt = {
     enable = false;
@@ -233,8 +250,14 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-        vim-nix coc-nvim coc-pairs coc-prettier coc-snippets coc-highlight
-        latex-live-preview vimsence
+      vim-nix
+      coc-nvim
+      coc-pairs
+      coc-prettier
+      coc-snippets
+      coc-highlight
+      latex-live-preview
+      vimsence
     ];
     extraConfig = builtins.readFile ./config/init.vim;
     vimAlias = true;
@@ -244,9 +267,7 @@
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
-    settings = {
-      PASSWORD_STORE_DIR = "$HOME/.local/share/password-store";
-    };
+    settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
   };
   programs.rofi = {
     enable = true;
@@ -270,10 +291,10 @@
     enable = true;
     options = {
       recolor = true;
-      recolor-darkcolor  = "#FDF0ED";
+      recolor-darkcolor = "#FDF0ED";
       recolor-lightcolor = "rgba(0,0,0,0)";
       default-bg = "rgba(0,0,0,0.7)";
-      default-fg  = "#FDF0ED";
+      default-fg = "#FDF0ED";
     };
   };
   programs.zsh = {
@@ -357,9 +378,7 @@
       l = "exa -l";
       la = "exa -la";
     };
-    shellGlobalAliases = {
-      exa = "exa --icons --git";
-    };
+    shellGlobalAliases = { exa = "exa --icons --git"; };
   };
 
   # services
@@ -383,7 +402,9 @@
         icon_position = "left";
         max_icon_size = 64;
         font = "Noto Sans 10";
-        format = "<b>%s</b> | %a\n%b";
+        format = ''
+          <b>%s</b> | %a
+          %b'';
         separator_color = "auto";
         markup = "full";
         alignment = "center";
@@ -395,22 +416,20 @@
         show_indicators = false;
       };
 
-      fullscreen_delay_everything = {
-        fullscreen = "delay";
-      };
+      fullscreen_delay_everything = { fullscreen = "delay"; };
       urgency_critical = {
-        background  = "#16161c";
-        foreground  = "#fdf0ed";
+        background = "#16161c";
+        foreground = "#fdf0ed";
         frame_color = "#e95678";
       };
       urgency_low = {
-        background  = "#16161c";
-        foreground  = "#fdf0ed";
+        background = "#16161c";
+        foreground = "#fdf0ed";
         frame_color = "#29d398";
       };
       urgency_normal = {
-        background  = "#16161c";
-        foreground  = "#fdf0ed";
+        background = "#16161c";
+        foreground = "#fdf0ed";
         frame_color = "#fab795";
       };
     };
@@ -489,12 +508,13 @@
     config = ./config/polybar;
     script = ''
       polybar main &
-      [ $(xrandr -q | grep -w connected | grep -v primary | wc -l) -ge 1 ] && polybar external &
+      polybar external &
     '';
   };
   services.random-background = {
     enable = true;
-    imageDirectory = "${config.home.homeDirectory}/Pictures/wallpapers/artworks";
+    imageDirectory =
+      "${config.home.homeDirectory}/Pictures/wallpapers/artworks";
   };
   services.redshift = {
     enable = true;
@@ -522,12 +542,15 @@
       "super + g" = "bspc node -s biggest";
       # state/flags
       # set the window state
-      "super + {t,shift + t,s,f}" = "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
+      "super + {t,shift + t,s,f}" =
+        "bspc node -t {tiled,pseudo_tiled,floating,fullscreen}";
       # set the node flags
-      "super + ctrl + {m,x,y,z}" = "bspc node -g {marked,locked,sticky,private}";
+      "super + ctrl + {m,x,y,z}" =
+        "bspc node -g {marked,locked,sticky,private}";
       # focus/swap
       # focus the node in the given direction
-      "super + {_,shift + }{h,j,k,l}" = "bspc node -{f,s} {west,south,north,east}";
+      "super + {_,shift + }{h,j,k,l}" =
+        "bspc node -{f,s} {west,south,north,east}";
       # focus the next/previous node in the current desktop
       "super + {_,shift + }c" = "bspc node -f {next,prev}.local";
       # focus the next/previous desktop in the current monitor
@@ -543,15 +566,18 @@
       # cancel the preselection for the focused node
       "super + ctrl + space" = "bspc node -p cancel";
       # cancel the preselection for the focused desktop
-      "super + ctrl + shift + space" = "bspc query -N -d | xargs -I id -n 1 bspc
-      node id -p cancel";
+      "super + ctrl + shift + space" = ''
+        bspc query -N -d | xargs -I id -n 1 bspc
+              node id -p cancel'';
       # move/resize
       # expand a window by moving one of its side outward
-      "super + alt + {h,j,k,l}" = "bspc node -z {left -20 0,bottom 0 20,top 0
-      -20,right 20 0}";
+      "super + alt + {h,j,k,l}" = ''
+        bspc node -z {left -20 0,bottom 0 20,top 0
+              -20,right 20 0}'';
       # contract a window by moving one of its side inward
-      "super + alt + shift + {h,j,k,l}" = "bspc node -z {right -20 0,top 0
-      20,bottom 0 -20,left 20 0}";
+      "super + alt + shift + {h,j,k,l}" = ''
+        bspc node -z {right -20 0,top 0
+              20,bottom 0 -20,left 20 0}'';
       # move a floating window
       "super + {Left,Down,Up,Right}" = "bspc node -v {-20 0,0 20,0 -20,20 0}";
       # rotate window layout clockwise 90 degrees
@@ -622,17 +648,17 @@
       };
       settings = {
         border_width = 2;
-        window_gap   = 8;
+        window_gap = 8;
 
-        active_border_color   = "#e95678";
-        focused_border_color  = "#16161c";
-        normal_border_color   = "#fab795";
+        active_border_color = "#e95678";
+        focused_border_color = "#16161c";
+        normal_border_color = "#fab795";
         presel_feedback_color = "#29d398";
 
-        split_ratio        = 0.5;
+        split_ratio = 0.5;
         borderless_monocle = true;
-        gapless_monocle    = true;
-        single_monocle     = true;
+        gapless_monocle = true;
+        single_monocle = true;
       };
     };
   };

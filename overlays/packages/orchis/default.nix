@@ -1,23 +1,22 @@
 { lib, stdenv, fetchFromGitHub, gtk3, gnome-themes-extra, gtk-engine-murrine
-, sassc
-, accentColor ? "default" }:
+, sassc, accentColor ? "default" }:
 
 stdenv.mkDerivation rec {
   pname = "orchis";
-  version = "2021-01-22";
+  version = "2021-02-28";
 
   src = fetchFromGitHub {
     repo = "Orchis-theme";
     owner = "vinceliuice";
     rev = version;
-    sha256 = "1m0wilvrscg2xnkp6a90j0iccxd8ywvfpza1345sc6xmml9gvjzc";
+    sha256 = "sha256-HmC2e34n1eThFGgw9OzSgp5VFJOylyozpXgk9SO84+I=";
   };
 
   nativeBuildInputs = [ gtk3 sassc ];
 
-  buildInputs = [ gnome-themes-extra sassc ];
+  buildInputs = [ gnome-themes-extra ];
 
-  propagatedUserEnvPkgs = [ gtk-engine-murrine sassc ];
+  propagatedUserEnvPkgs = [ gtk-engine-murrine ];
 
   dontPatch = true;
   dontConfigure = true;
@@ -25,7 +24,6 @@ stdenv.mkDerivation rec {
 
   preInstall = ''
     mkdir -p $out/share/themes
-    bash parse-sass.sh
   '';
 
   installPhase = ''
@@ -35,7 +33,8 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "A Material Design theme for GNOME/GTK based desktop environments.";
+    description =
+      "A Material Design theme for GNOME/GTK based desktop environments.";
     homepage = "https://github.com/vinceliuice/Orchis-theme";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;

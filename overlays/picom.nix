@@ -1,5 +1,4 @@
-self: super:
-{
+self: super: {
   picom = super.picom.overrideAttrs (old: {
     src = super.fetchFromGitHub {
       owner = "tryone144";
