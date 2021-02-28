@@ -11,6 +11,9 @@
   # various services
   services = import ./services.nix;
 
+  # low latency for usb soundcards
+  snd_usb_audio = ./snd_usb_audio.nix;
+
   # X session configuration
   xorg = import ./xorg.nix;
 

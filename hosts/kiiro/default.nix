@@ -6,12 +6,6 @@
 
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
-  boot.kernelPatches = [
-    {
-      name = "snd-usb-audio-patch";
-      patch = ../modules/linux591-snd-usb-audio.patch;
-    }
-  ];
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
   # configure modules loaded by modprobe
@@ -27,29 +21,24 @@
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
-    systemd-boot.consoleMode = "max";
   };
-
-  environment.systemPackages = with pkgs; [ virt-manager ];
 
   # Japanese input using fcitx
   i18n.inputMethod = {
     enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [ anthy mozc ];
+    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
 
-  # network
   networking = {
     hostName = "kiiro";
     interfaces.enp3s0.useDHCP = true;
   };
   networking.firewall.enable = false;
 
-  # enable programs
   programs.adb.enable = true;
   programs.steam.enable = true;
 
-  # pipewire
+  # sound
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -58,7 +47,9 @@
     jack.enable = true;
   };
 
+  # use dconf in Home Manager
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
   virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [ virt-manager ];
 }

@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
   console = {
@@ -42,21 +42,21 @@
       flake-registry = /etc/nix/registry.json
     '';
     # pin nixpkgs to the commit the system was built from
-    registry = {
-      self.flake = inputs.self;
-      nixpkgs = {
-        from = {
-          id = "nixpkgs";
-          type = "indirect";
-        };
-        to = {
-          owner = "NixOS";
-          repo = "nixpkgs";
-          rev = inputs.nixpkgs.rev;
-          type = "github";
-        };
-      };
-    };
+    #registry = {
+    #  self.flake = inputs.self;
+    #  nixpkgs = {
+    #    from = {
+    #      id = "nixpkgs";
+    #      type = "indirect";
+    #    };
+    #    to = {
+    #      owner = "NixOS";
+    #      repo = "nixpkgs";
+    #      rev = inputs.nixpkgs.rev;
+    #      type = "github";
+    #    };
+    #  };
+    #};
   };
 
   # allow proprietary packages (including drivers)
@@ -89,6 +89,7 @@
 
   users.users.mihai = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "libvirtd" "adbusers" ];
   };
 }
