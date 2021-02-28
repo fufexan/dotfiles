@@ -1,26 +1,19 @@
 {
-  description = "Introduction to Nix Flakes";
+  description = "Advancing with Nix Flakes";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager = {
-      url = github:nix-community/home-manager;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    # latest pipewire
+
     pipewire = {
       url = "git+https://gitlab.freedesktop.org/pipewire/pipewire";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, pipewire, ... }@inputs: {
-    nixosConfigurations.nixpc = nixpkgs.lib.nixosSystem {
-      # extraArgs passes whatever's in the set to the modules
-      extraArgs = { inherit inputs; };
-      system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
-    };
+  outputs = { self, nixpkgs, pipewire, ... }@inputs: {
+    # group modules here for easier passing
+    nixosModules = import ./modules;
+    # load configs from folder instead of declaring them here
+    nixosConfigurations = import ./hosts inputs;
   };
 }
