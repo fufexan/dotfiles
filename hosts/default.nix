@@ -7,6 +7,10 @@ let
     nixpkgs.lib.nixosSystem ({
       extraArgs = inputs;
       system    = "x86_64-linux";
+      modules = [
+        (./. + "/${name}")
+        nixpkgs.nixosModules.notDetected
+      ] ++ modules;
     });
 in
 {

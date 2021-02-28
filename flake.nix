@@ -13,6 +13,7 @@
   outputs = { self, nixpkgs, pipewire, ... }@inputs: {
     # group modules here for easier passing
     nixosModules = import ./modules;
+
     # load configs from folder instead of declaring them here
     nixosConfigurations = import ./hosts inputs;
   };

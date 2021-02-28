@@ -2,15 +2,13 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports = [ ./modules ];
-
   console = {
     font = "Lat2-Terminus16";
     keyMap = "ro";
   };
 
   # enable zsh autocompletion for system packages (systemd, etc)
-  environments.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
@@ -60,6 +58,9 @@
       };
     };
   };
+
+  # allow proprietary packages (including drivers)
+  nixpkgs.config.allowUnfree = true;
 
   # enable programs
   programs.less.enable = true;
