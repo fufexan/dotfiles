@@ -1,0 +1,5 @@
+@import "general.rasi"
+
+#window {
+  height: 44.5%;
+}

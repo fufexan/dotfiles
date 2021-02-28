@@ -1,0 +1,67 @@
+* {
+  /* 1920x1080 */
+  element-padding: 20px 0px 10px -29px;
+
+  background-color: @background;
+  text-color: @foreground;
+  font: "Feather 24";
+}
+
+window {
+  width:          4.5%;
+  anchor:         east;
+  location:       east;
+  x-offset:       -1%;
+  y-offset:       0%;
+  border-radius:  50px;
+  padding:        6px;
+  children:       [inputbar, horibox];
+}
+
+horibox {
+  background-color: #0000;
+  children:       [listview];
+}
+
+listview {
+  layout:         vertical;
+  spacing:        6px;
+  lines:          3;
+}
+
+element {
+  border-radius:  50px;
+  background-color: #0000;
+  font:           @font;
+  padding:        @element-padding;
+}
+
+element.selected {
+  background-color: @accent;
+  text-color:     @foreground;
+}
+
+inputbar {
+  enabled:        false;
+}
+
+element.selected.urgent,
+element.selected.active,
+element.urgent,
+element.active {
+  text-color:     @foreground;
+}
+element.selected.urgent,
+element.selected.active {
+  background-color: @accent;
+}
+
+element.active {
+  background-color: @on;
+}
+
+element.urgent {
+  background-color: @off;
+}
+
+/* vim: ft=css

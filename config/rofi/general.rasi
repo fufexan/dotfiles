@@ -1,0 +1,60 @@
+configuration {
+  theme:            "colors.rasi";
+  show-icons:       true;
+  cycle:            true;
+  hide-scrollbar:   true;
+  disable-history:  false;
+  combi-modi:       "drun,run";
+  modi:             "combi,drun,run";
+  display-drun:     "";
+  columns:          1;
+}
+
+* {
+  font:             "Roboto 18";
+  text-color:       @foreground;
+	accent:           #6D8FB3;
+	background:       #16161CAC;
+	foreground:       #FDF0ED;
+	on:               #D89077;
+	off:              #716699;
+}
+
+window {
+  background-color: @background;
+  width:            35%;
+  padding:          1em;
+  border-radius:    25px;
+  children:         [inputbar, listview];
+}
+
+listview {
+  background-color: #0000;
+}
+
+inputbar {
+  margin:           10px;
+  background-color: #0000;
+  children:         [entry];
+}
+
+entry {
+  background-color: #0000;
+}
+
+element-icon {
+  size:             32px ;
+}
+
+element {
+  background-color: #0000;
+  border-radius:    25px;
+  padding:          5px;
+}
+
+element.selected {
+  background-color: @accent;
+  text-color:       @foreground;
+}
+
+/* vim:ft=css
