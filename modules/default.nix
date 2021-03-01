@@ -6,7 +6,7 @@
   fonts = import ./fonts.nix;
 
   # sound configuration
-  #pipewire = import ./pipewire.nix;
+  pipewire = import ./pipewire.nix;
 
   # various services
   services = import ./services.nix;
