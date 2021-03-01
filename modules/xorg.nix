@@ -18,19 +18,7 @@
 
     videoDrivers = [ "nvidia" ];
 
-    # display manager setup
-    displayManager = {
-      defaultSession = "none+bspwm";
-      lightdm = {
-        background = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath;
-        greeters.gtk = {
-          cursorTheme.name = "Capitaine Cursors";
-          cursorTheme.package = pkgs.capitaine-cursors;
-          theme.name = "Orchis-dark-compact";
-          #theme.package = pkgs.orchis;
-        };
-      };
-    };
+    displayManager.sddm.enable = true;
 
     windowManager.bspwm.enable = true;
 
