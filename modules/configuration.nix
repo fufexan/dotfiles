@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs, ... }:
 
 {
   console = {
@@ -44,6 +44,7 @@
       flake-registry = /etc/nix/registry.json
     '';
     # pin nixpkgs to the commit the system was built from
+    registry.nixpkgs.flake = nixpkgs;
     #registry = {
     #  self.flake = inputs.self;
     #  nixpkgs = {
