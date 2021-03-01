@@ -66,6 +66,11 @@
 
   # enable programs
   programs.less.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
 
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
