@@ -8,10 +8,6 @@
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
-  # configure modules loaded by modprobe
-  boot.extraModprobeConfig = ''
-    options snd-usb-audio max_packs=1 max_packs_hs=1 max_urbs=12 sync_urbs=4 max_queue=18
-  '';
   # make modules available to modprobe
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   # browser fix on Intel CPUs
