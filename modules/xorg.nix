@@ -1,4 +1,4 @@
-{ configs, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # install packages specific to X
@@ -26,7 +26,7 @@
         greeters.gtk = {
           cursorTheme.name = "Capitaine Cursors";
           cursorTheme.package = pkgs.capitaine-cursors;
-          theme.name = "Orchis-red-dark-compact";
+          theme.name = "Orchis-dark-compact";
           #theme.package = pkgs.orchis;
         };
       };

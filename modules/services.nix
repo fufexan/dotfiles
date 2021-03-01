@@ -1,16 +1,10 @@
-{ pkgs, configs, ... }:
+{ config, pkgs, ... }:
 
 {
-  # configuration of gaming mice
+  # mouse configuration (usually gaming ones)
   services.ratbagd.enable = true;
 
-  # file sync, transfer and secure shell
-  #services.syncthing = {
-  #  enable = true;
-  #  user = "mihai";
-  #  dataDir = "/home/mihai/Sync";
-  #  configDir = "/home/mihai/.config/syncthing";
-  #};
+  # torrent daemon
   services.transmission = {
     enable = true;
     group = "users";
@@ -30,6 +24,7 @@
     publish.domain = true;
   };
 
+  # enable location services
   services.geoclue2.enable = true;
 
   services.printing = {
