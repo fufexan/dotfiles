@@ -2,7 +2,7 @@
   description = "Advancing with Nix Flakes";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
 
     pipewire = {
       url = "git+https://gitlab.freedesktop.org/pipewire/pipewire";
