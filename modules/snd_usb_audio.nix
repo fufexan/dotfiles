@@ -1,8 +1,8 @@
 {
   boot.kernelPatches = [
     {
-      name = "snd-usb-audio-patch";
-      patch = ./patches/linux591-snd-usb-audio.patch;
+      name = "snd-usb-audio_low-latency";
+      patch = ./patches/linux5.11-snd-usb-audio.patch;
     }
   ];
   boot.extraModprobeConfig = ''
