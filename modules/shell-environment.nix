@@ -94,6 +94,7 @@
       ip = "ip --color";
       l = "exa -l";
       la = "exa -la";
+      md = "mkdir -p";
     };
     shellGlobalAliases = { exa = "exa --icons --git"; };
   };
