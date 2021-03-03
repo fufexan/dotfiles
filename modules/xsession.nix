@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 # most of X configuration
 
@@ -128,13 +128,15 @@
 
   services.sxhkd = {
     enable = true;
-    keybindings = {
+    keybindings = let rofiScripts = "~/.local/bin/rofi"; in {
       # start terminal
       "super + Return" = "alacritty";
       # application launcher
       "super + @space" = "rofi -show combi";
       # reload sxhkd
       "super + Escape" = "pkill -USR1 -x sxhkd";
+      # pause/resume notifications
+      "super + ctrl + Escape" = "dunstctl set-paused toggle";
       # bspwm hotkeys
       # quit bspwm normally
       "super + alt + Escape" = "bspc quit";
@@ -172,40 +174,44 @@
       # cancel the preselection for the focused node
       "super + ctrl + space" = "bspc node -p cancel";
       # cancel the preselection for the focused desktop
-      "super + ctrl + shift + space" = "bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel";
+      "super + ctrl + shift + space" =
+        "bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel";
       # move/resize
       # expand a window by moving one of its side outward
-      "super + alt + {h,j,k,l}" = "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
+      "super + alt + {h,j,k,l}" =
+        "bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}";
       # contract a window by moving one of its side inward
-      "super + alt + shift + {h,j,k,l}" = "bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}";
+      "super + alt + shift + {h,j,k,l}" =
+        "bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}";
       # move a floating window
       "super + {Left,Down,Up,Right}" = "bspc node -v {-20 0,0 20,0 -20,20 0}";
       # rotate window layout clockwise 90 degrees
       "super + r" = "bspc node @parent -R 90";
       # increase/decrease borders/gaps
-      #"super + shift + {b,g} + {Up,Down}" = ".config/sxhkd/bspwm_rice.sh {b,g} {+,-}";
+      "super + shift + {b,g} + {Up,Down}" =
+        ".config/sxhkd/bspwm_rice.sh {b,g} {+,-}";
       #	programs
       # screenshot curren monitor
       "super + Print" = "~/.local/bin/maim_monitor.sh";
       # screenshot menu
-      "Print" = "~/.local/bin/rofi/screenshot.sh";
+      "Print" = "${rofiScripts}/screenshot.sh";
       # backlight menu
-      "super + b" = "~/.local/bin/rofi/backlight.sh";
+      "super + b" = "${rofiScripts}/backlight.sh";
       # powermenu
-      "super + p" = "~/.local/bin/rofi/powermenu.sh";
+      "super + p" = "${rofiScripts}/powermenu.sh";
       # volume menu
-      "super + v" = "~/.local/bin/rofi/volume.sh";
+      "super + v" = "${rofiScripts}/volume.sh";
+      # mpd menu
+      "super + shift + m" = "${rofiScripts}/mpd.sh";
       # emoji launcher
       "super + e" = "rofi -show emoji";
       # rofi pass
       "super + i" = "rofi-pass";
-      # music controls (mpris)
-      # mpd menu
-      "super + shift + m" = "~/.local/bin/rofi/mpd.sh";
+      # audio controls
       # play/pause
       "{Pause,XF86AudioPlay}" = "playerctl play-pause";
       # next/prev song
-      "super + shift + {Right,Left}" = "layerctl {next,previous}";
+      "super + shift + {Right,Left}" = "playerctl {next,previous}";
       # toggle repeat/shuffle
       "super + alt + {r,z}" = "playerctl {loop,shuffle}";
       # volume up/down
