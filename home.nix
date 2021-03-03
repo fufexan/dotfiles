@@ -1,6 +1,15 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    # files to link in ~
+    ./modules/files.nix
+    # shell management
+    ./modules/shell-environment.nix
+    # X config
+    ./modules/xsession.nix
+  ];
+
   # let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.username = "mihai";
@@ -16,19 +25,18 @@
     audacity
     carla
     pavucontrol
+    playerctl
     pulsemixer
     # documents
-    libreoffice
+    #libreoffice
     # file converters
     ffmpeg
     # file downloaders
     youtube-dl
     # file managers
     ranger
-    xfce.thunar
     # games
     lutris
-    osu-lazer
     # messaging
     discord
     element-desktop
@@ -46,18 +54,19 @@
     jellyfin-mpv-shim
     vlc
     # misc
-    discord-rpc
-    freerdp
-    piper
-    scrcpy
-    htop
+    discord-rpc # RPC interfacing lib
+    dunst # for dunstctl
+    freerdp # for MS Office
+    piper # configure mouse
+    scrcpy # mirror Android screen
+    htop # system monitor
     gotop
-    exa
-    file
-    glxinfo
+    exa # ls alternative with colors & icons
+    file # info about files
+    glxinfo # info about OpenGL
     usbutils
-    ueberzug
-    xdragon
+    ueberzug # image display in terminals
+    xdragon # file drag n drop
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
@@ -266,6 +275,7 @@
     network.startWhenNeeded = true;
   };
   services.mpdris2.enable = true;
+  services.playerctld.enable = true;
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
