@@ -56,16 +56,17 @@
     # misc
     discord-rpc # RPC interfacing lib
     dunst # for dunstctl
-    freerdp # for MS Office
-    piper # configure mouse
-    scrcpy # mirror Android screen
-    htop # system monitor
-    gotop
     exa # ls alternative with colors & icons
     file # info about files
+    freerdp # for MS Office
     glxinfo # info about OpenGL
-    usbutils
+    gotop
+    htop # system monitor
+    piper # configure mouse
+    ripgrep # better grep
+    scrcpy # mirror Android screen
     ueberzug # image display in terminals
+    usbutils
     xdragon # file drag n drop
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];

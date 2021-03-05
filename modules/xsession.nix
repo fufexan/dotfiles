@@ -94,7 +94,7 @@
     blur = true;
     blurExclude = [
       "class_g = 'slop'"
-      "class_g = 'firefox'"
+      "class_g = 'Firefox'"
     ];
     experimentalBackends = true;
     extraOptions = ''
@@ -187,9 +187,9 @@
       "super + {Left,Down,Up,Right}" = "bspc node -v {-20 0,0 20,0 -20,20 0}";
       # rotate window layout clockwise 90 degrees
       "super + r" = "bspc node @parent -R 90";
-      # increase/decrease borders/gaps
-      "super + shift + {b,g} + {Up,Down}" =
-        ".config/sxhkd/bspwm_rice.sh {b,g} {+,-}";
+      # increase/decrease borders
+      "super + {_, ctrl + } {equal,minus}" =
+        "~/.local/bin/dynamic_bspwm.sh {b,g} {+,-}";
       #	programs
       # screenshot curren monitor
       "super + Print" = "~/.local/bin/maim_monitor.sh";
@@ -207,6 +207,8 @@
       "super + e" = "rofi -show emoji";
       # rofi pass
       "super + i" = "rofi-pass";
+      # window switcher
+      "alt + Tab" = "rofi -show window";
       # audio controls
       # play/pause
       "{Pause,XF86AudioPlay}" = "playerctl play-pause";
@@ -232,7 +234,6 @@
     preferStatusNotifierItems = true;
     windowManager.bspwm = {
       enable = true;
-      extraConfig = "unset __NIXOS_SET_ENVIRONMENT_DONE";
       monitors = {
         HDMI-0 = [ "一" "二" "三" "四" "五" ];
         DVI-D-0 = [ "六" "七" "八" "九" "十" ];
