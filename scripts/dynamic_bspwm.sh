@@ -22,10 +22,10 @@ case $1 in
 		gaps=$(bspc config window_gap)
 		case $2 in
 			+)
-				gaps=`expr $gaps + 1`
+				gaps=`expr $gaps + 2`
 				;;
 			-)
-				gaps=`expr $gaps - 1`
+				gaps=`expr $gaps - 2`
 				;;
 			*)
 				echo $gaps
