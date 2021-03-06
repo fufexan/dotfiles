@@ -3,6 +3,7 @@
 # most of X configuration
 
 {
+  # programs
   # manage monitor configurations
   programs.autorandr = {
     enable = true;
@@ -35,8 +36,24 @@
       hooks.postswitch = "systemctl --user restart random-background polybar";
     };
   };
+  programs.feh.enable = true;
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+    pass = {
+      enable = true;
+      extraConfig = ''
+        URL_field='url';
+        USERNAME_field='user';
+        AUTOTYPE_field='autotype';
+      '';
+      stores = [ "$HOME/.local/share/password-store" ];
+    };
+    theme = ../config/rofi/general.rasi;
+  };
 
   # notification daemon
+  services.caffeine.enable = true;
   services.dunst = {
     enable = true;
     iconTheme = {
@@ -85,7 +102,7 @@
       };
     };
   };
-
+  services.flameshot.enable = true;
   services.picom = {
     enable = true;
     blur = true;
@@ -122,7 +139,27 @@
       xrender-sync-fence = true;
     '';
   };
-
+  services.polybar = {
+    enable = true;
+    package = pkgs.polybar.override {
+      mpdSupport = true;
+      pulseSupport = true;
+    };
+    config = ../config/polybar;
+    script = ''
+      polybar main &
+      polybar external &
+    '';
+  };
+  services.random-background = {
+    enable = true;
+    imageDirectory =
+      "${config.home.homeDirectory}/Pictures/wallpapers/artworks";
+  };
+  services.redshift = {
+    enable = true;
+    provider = "geoclue2";
+  };
   services.sxhkd = {
     enable = true;
     keybindings = let rofiScripts = "~/.local/bin/rofi"; in {
