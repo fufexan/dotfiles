@@ -3,6 +3,15 @@
 # most of X configuration
 
 {
+  # X specific programs
+  home.packages = with pkgs; [
+    maim
+    xclip
+    xdotool
+    xorg.xkill
+    xdragon # file drag n drop
+  ];
+
   # programs
   # manage monitor configurations
   programs.autorandr = {

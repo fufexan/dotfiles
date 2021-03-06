@@ -40,7 +40,6 @@
     piper # configure mouse
     scrcpy # mirror Android screen
     ueberzug # image display in terminals
-    xdragon # file drag n drop
   ];
 
   # accounts
