@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # mouse configuration (usually gaming ones)
@@ -62,4 +62,5 @@
 
   # Tailscale VPN alternative
   services.tailscale.enable = true;
+  services.udisks2.enable = true;
 }

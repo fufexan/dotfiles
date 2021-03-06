@@ -1,14 +1,4 @@
-{ config, pkgs, ... }:
-
 {
-  # install packages specific to X
-  environment.systemPackages = with pkgs; [
-    # gui utils
-    maim
-    # cli utils
-    xclip xorg.xkill xdotool
-  ];
-
   # configure X
   services.xserver = {
     enable = true;
