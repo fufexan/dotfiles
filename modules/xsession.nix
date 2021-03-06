@@ -67,7 +67,7 @@
         font = "Noto Sans 11";
         format = "<b>%s</b>\\n%b";
         frame_width = 2;
-        geometry = "350x5-4+32";
+        geometry = "400x5-4+32";
         horizontal_padding = 8;
         icon_position = "left";
         indicate_hidden = "yes";
