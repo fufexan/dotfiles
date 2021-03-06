@@ -45,31 +45,28 @@
     };
     settings = {
       global = {
-        follow = "mouse";
-        geometry = "350x5-4+32";
-        indicate_hidden = "yes";
-        shrink = "yes";
-        separator_height = 1;
-        padding = 8;
-        horizontal_padding = 8;
-        frame_width = 2;
-        icon_position = "left";
-        max_icon_size = 64;
-        font = "Noto Sans 10";
-        format = ''
-          <b>%s</b> | %a
-          %b'';
-        separator_color = "auto";
-        markup = "full";
         alignment = "center";
-        vertical_alignment = "center";
-        word_wrap = "yes";
+        follow = "mouse";
+        font = "Noto Sans 11";
+        format = "<b>%s</b>\\n%b";
+        frame_width = 2;
+        geometry = "350x5-4+32";
+        horizontal_padding = 8;
+        icon_position = "left";
+        indicate_hidden = "yes";
+        markup = "yes";
+        max_icon_size = 96;
         mouse_left_click = "do_action";
         mouse_middle_click = "close_all";
         mouse_right_click = "close_current";
+        padding = 8;
+        plain_text = "no";
+        separator_color = "auto";
+        separator_height = 1;
         show_indicators = false;
+        shrink = "no";
+        word_wrap = "yes";
       };
-
       fullscreen_delay_everything = { fullscreen = "delay"; };
       urgency_critical = {
         background = "#16161c";
