@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ config, pkgs, nixpkgs, ... }:
+{ self, config, pkgs, nixpkgs, ... }@inputs:
 
 {
   console = {
@@ -44,22 +44,22 @@
       flake-registry = /etc/nix/registry.json
     '';
     # pin nixpkgs to the commit the system was built from
-    registry.nixpkgs.flake = nixpkgs;
-    #registry = {
-    #  self.flake = inputs.self;
-    #  nixpkgs = {
-    #    from = {
-    #      id = "nixpkgs";
-    #      type = "indirect";
-    #    };
-    #    to = {
-    #      owner = "NixOS";
-    #      repo = "nixpkgs";
-    #      rev = inputs.nixpkgs.rev;
-    #      type = "github";
-    #    };
-    #  };
-    #};
+    #registry.nixpkgs.flake = nixpkgs;
+    registry = {
+      self.flake = inputs.self;
+      nixpkgs = {
+        from = {
+          id = "nixpkgs";
+          type = "indirect";
+        };
+        to = {
+          owner = "NixOS";
+          repo = "nixpkgs";
+          rev = inputs.nixpkgs.rev;
+          type = "github";
+        };
+      };
+    };
   };
 
   # allow proprietary packages (including drivers)

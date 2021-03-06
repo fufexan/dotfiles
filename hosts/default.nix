@@ -18,6 +18,6 @@ in
     configuration services
   ]);
   kiiro  = mkSystem "kiiro"  nixpkgs (with self.nixosModules; [
-    configuration fonts services snd_usb_audio xorg
+    configuration fonts pipewire services snd_usb_audio xorg
   ]);
 }

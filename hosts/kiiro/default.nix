@@ -34,15 +34,6 @@
   programs.adb.enable = true;
   programs.steam.enable = true;
 
-  # sound
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    jack.enable = true;
-  };
-
   # use dconf in Home Manager
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 

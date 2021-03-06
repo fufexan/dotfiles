@@ -3,14 +3,9 @@
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-
-    pipewire = {
-      url = "git+https://gitlab.freedesktop.org/pipewire/pipewire";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, pipewire, ... }@inputs: {
+  outputs = { self, nixpkgs, ... }@inputs: {
     # group modules here for easier passing
     nixosModules = import ./modules;
 
