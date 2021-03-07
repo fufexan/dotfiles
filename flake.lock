@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1614897662,
-        "narHash": "sha256-f09q9hZhqHg9KNjeMuGk0iZ9lgBwR89vuGWJv0M3Adc=",
+        "lastModified": 1614815769,
+        "narHash": "sha256-Rdy37Ioof5FlMlc+YC9PniSIJW/EsdImG+wZPP5VWvo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b012ecaae7a273a9b09adbf608f7bf44374b8869",
+        "rev": "d496205cf22c3079461d868ea3198d42ded59287",
         "type": "github"
       },
       "original": {
@@ -16,9 +16,43 @@
         "type": "github"
       }
     },
+    "nixpkgs-pipewire": {
+      "locked": {
+        "lastModified": 1614897662,
+        "narHash": "sha256-f09q9hZhqHg9KNjeMuGk0iZ9lgBwR89vuGWJv0M3Adc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b012ecaae7a273a9b09adbf608f7bf44374b8869",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b012ecaae7a273a9b09adbf608f7bf44374b8869",
+        "type": "github"
+      }
+    },
+    "pipewire": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615062678,
+        "narHash": "sha256-7aTBeeL2TZYNJkYEeXT0xmX9QR1bIl3y5fCw38VgQ7g=",
+        "ref": "master",
+        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
+        "revCount": 5758,
+        "type": "git",
+        "url": "https://gitlab.freedesktop.org/pipewire/pipewire"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.freedesktop.org/pipewire/pipewire"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-pipewire": "nixpkgs-pipewire",
+        "pipewire": "pipewire"
       }
     }
   },
