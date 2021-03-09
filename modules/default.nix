@@ -2,6 +2,9 @@
   # main config, shared between hosts
   configuration = import ./configuration.nix;
 
+  # enable flakes where this is imported
+  flakes = import ./flakes.nix;
+
   # graphical session fonts
   fonts = import ./fonts.nix;
 

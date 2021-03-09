@@ -36,38 +36,13 @@
     ];
   };
 
-  hardware.cpu.intel.updateMicrocode = true;
+  # cpu microcode, wlan drivers, etc
+  hardware.enableAllFirmware = true;
 
   # disable global DHCP
   networking.useDHCP = false;
 
-  # use flakes and flake registry
-  nix = {
-    autoOptimiseStore = true;
-    # enable flakes
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes ca-references
-      flake-registry = /etc/nix/registry.json
-    '';
-    # pin nixpkgs to the commit the system was built from
-    #registry.nixpkgs.flake = nixpkgs;
-    registry = {
-      self.flake = inputs.self;
-      nixpkgs = {
-        from = {
-          id = "nixpkgs";
-          type = "indirect";
-        };
-        to = {
-          owner = "NixOS";
-          repo = "nixpkgs";
-          rev = inputs.nixpkgs.rev;
-          type = "github";
-        };
-      };
-    };
-  };
+  nix.autoOptimiseStore = true;
 
   # allow proprietary packages (including drivers)
   nixpkgs.config.allowUnfree = true;

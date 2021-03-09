@@ -8,17 +8,26 @@ let
       extraArgs = inputs;
       system    = "x86_64-linux";
       modules = [
-        (./. + "/${name}")
-        agenix.nixosModules.age
-        nixpkgs.nixosModules.notDetected
-      ] ++ modules;
+        (./. + "/${name}") # add local dir modules
+        agenix.nixosModules.age # add agenix modules
+        nixpkgs.nixosModules.notDetected # add nixos hardware
+      ] ++ modules; # add modules defined elsewhere (in flake.nix)
     });
 in
 {
   homesv = mkSystem "homesv" nixpkgs (with self.nixosModules; [
-    configuration services agenix.nixosModules.age
+    configuration
+    flakes
+    services 
+    agenix.nixosModules.age
   ]);
   kiiro  = mkSystem "kiiro"  nixpkgs (with self.nixosModules; [
-    configuration fonts pipewire services snd_usb_audio xorg
+    configuration
+    flakes
+    fonts
+    pipewire
+    services
+    snd_usb_audio
+    xorg
   ]);
 }
