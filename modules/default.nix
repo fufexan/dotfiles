@@ -6,7 +6,10 @@
   fonts = import ./fonts.nix;
 
   # sound configuration
+  # NixOS module
   pipewire = import ./pipewire.nix;
+  # tdeo's version
+  pipewire-unstable = import ./pipewire-unstable.nix;
 
   # various services
   services = import ./services.nix;

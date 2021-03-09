@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ self, config, pkgs, nixpkgs, ... }@inputs:
+{ self, config, pkgs, nixpkgs, agenix, ... }@inputs:
 
 {
   console = {
@@ -10,7 +10,9 @@
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
   # required in order to build flakes
-  environment.systemPackages = with pkgs; [ coreutils git gnutar ];
+  environment.systemPackages = with pkgs; [ coreutils git gnutar ] ++ [
+    agenix.defaultPackage.x86_64-linux
+  ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
@@ -22,10 +24,15 @@
     driSupport32Bit = true;
     # support hardware accelerated encoding/decoding
     extraPackages = with pkgs; [
-      vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl
+      vaapiIntel
+      libvdpau-va-gl
+      vaapiVdpau
+      intel-ocl
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiIntel libvdpau-va-gl vaapiVdpau
+      vaapiIntel
+      libvdpau-va-gl
+      vaapiVdpau
     ];
   };
 

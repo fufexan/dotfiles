@@ -1,34 +1,54 @@
 {
   "nodes": {
+    "agenix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1614636489,
+        "narHash": "sha256-VntWWhlx4zvGJVdQet9dTOiC2bBvW1xzDQ9ug1eQ8IQ=",
+        "owner": "ryantm",
+        "repo": "agenix",
+        "rev": "9eb981eeb552e0856cb562b7643b311933a0e992",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryantm",
+        "repo": "agenix",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1600209923,
+        "narHash": "sha256-zoOWauTliFEjI++esk6Jzk7QO5EKpddWXQm9yQK24iM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cd06d3c1df6879c9e41cb2c33113df10566c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1614815769,
-        "narHash": "sha256-Rdy37Ioof5FlMlc+YC9PniSIJW/EsdImG+wZPP5VWvo=",
+        "lastModified": 1614989413,
+        "narHash": "sha256-g503bGSdVhLu2cKR5sHG8XetLFrVUzAL3+mrnQJpmdY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d496205cf22c3079461d868ea3198d42ded59287",
+        "rev": "102eb68ceecbbd32ab1906a53ef5a7269dc9794a",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-pipewire": {
-      "locked": {
-        "lastModified": 1614897662,
-        "narHash": "sha256-f09q9hZhqHg9KNjeMuGk0iZ9lgBwR89vuGWJv0M3Adc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b012ecaae7a273a9b09adbf608f7bf44374b8869",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b012ecaae7a273a9b09adbf608f7bf44374b8869",
         "type": "github"
       }
     },
@@ -50,8 +70,8 @@
     },
     "root": {
       "inputs": {
+        "agenix": "agenix",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-pipewire": "nixpkgs-pipewire",
         "pipewire": "pipewire"
       }
     }

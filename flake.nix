@@ -2,17 +2,22 @@
   description = "Advancing with Nix Flakes";
 
   inputs = {
+    # flakes
     nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
-    nixpkgs-pipewire.url =
-      github:NixOS/nixpkgs/b012ecaae7a273a9b09adbf608f7bf44374b8869;
+    # secrets management
+    agenix = {
+      url = github:ryantm/agenix;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # miscellaneous
     pipewire = {
       url = "git+https://gitlab.freedesktop.org/pipewire/pipewire";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-pipewire, pipewire, ... }@inputs: {
+  outputs = { self, nixpkgs, pipewire, agenix, ... }@inputs: {
     # group modules here for easier passing
     nixosModules = import ./modules;
 
