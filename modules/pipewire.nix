@@ -13,8 +13,7 @@
           # Properties for the DSP configuration.
           default.clock.rate        = 48000;
           default.clock.quantum     = 256;
-          default.clock.min-quantum = 32;
-          default.clock.max-quantum = 8192;
+          default.clock.min-quantum = 16;
         };
       };
       pipewire-pulse = {
