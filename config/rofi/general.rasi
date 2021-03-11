@@ -1,60 +1,103 @@
 configuration {
-  theme:            "colors.rasi";
-  show-icons:       true;
-  cycle:            true;
-  hide-scrollbar:   true;
-  disable-history:  false;
-  combi-modi:       "drun,run";
-  modi:             "combi,drun,run";
-  display-drun:     "";
-  columns:          1;
+  font:                 "Roboto 14";
+  show-icons:           true;
+  icon-theme:           "Papirus";
+  display-drun:         "";
+  display-combi:        "";
+  drun-display-format:  "{name}";
+  disable-history:      false;
+  fullscreen:           false;
+  combi-modi:           "drun,run";
 }
 
 * {
-  font:             "Roboto 18";
-  text-color:       @foreground;
-	accent:           #6D8FB3;
-	background:       #16161CAC;
-	foreground:       #FDF0ED;
-	on:               #D89077;
-	off:              #716699;
+  accent:     #fab795;
+  background: #16161C;
+  foreground: #FDF0ED;
+  on:         #29d398;
+  off:        #e95678;  
 }
 
 window {
-  background-color: @background;
-  width:            35%;
-  padding:          1em;
-  border-radius:    25px;
-  children:         [inputbar, listview];
+  transparency:     "real";
+  background-color: #0000;
+  border:           2px;
+  border-color:     @accent;
+  height:           53%;
+  width:            50%;
+  location:         center;
+}
+
+prompt {
+  enabled:            false;
+}
+
+entry {
+  background-color:   #0000;
+  text-color:         @foreground;
+  placeholder-color:  #666;
+  expand:             true;
+  horizontal-align:   0;
+  placeholder:       "Search...";
+  blink:              true;
+}
+
+inputbar {
+  children:         [ prompt, entry ];
+  background-color: #0000;
+  text-color:       @foreground;
+  expand:           false;
 }
 
 listview {
   background-color: #0000;
+  columns:          5;
+  spacing:          1%;
+  cycle:            true;
+  dynamic:          true;
+  layout:           vertical;
 }
 
-inputbar {
-  margin:           10px;
+mainbox {
   background-color: #0000;
-  children:         [entry];
-}
-
-entry {
-  background-color: #0000;
-}
-
-element-icon {
-  size:             32px ;
+  border:           3% 0% 0% 0%;
+  children:         [ inputbar, listview ];
+  spacing:          2%;
+  padding:          1em;
 }
 
 element {
   background-color: #0000;
-  border-radius:    25px;
-  padding:          5px;
-}
-
-element.selected {
-  background-color: @accent;
   text-color:       @foreground;
+  orientation:      vertical;
+  border-radius:    0%;
+  padding:          2% 0% 2% 0%;
 }
 
+element-icon {
+  size:             64px;
+}
+
+element-text {
+  expand:           true;
+  horizontal-align: 0.5;
+  vertical-align:   0.5;
+}
+
+element selected {
+  background-color: @accent;
+  text-color:       @background;
+  border:           0% 0.2% 0.3% 0%;
+  border-color:     @on;
+}
+
+element selected.urgent {
+  background-color: @off;
+  text-color:       @background;
+}
+
+element selected.active {
+  background-color: @on;
+  color:            @foreground;
+}
 /* vim:ft=css

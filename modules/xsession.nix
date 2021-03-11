@@ -49,16 +49,15 @@
   programs.rofi = {
     enable = true;
     package = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-    pass = {
-      enable = true;
-      extraConfig = ''
-        URL_field='url';
-        USERNAME_field='user';
-        AUTOTYPE_field='autotype';
-      '';
-      stores = [ "$HOME/.local/share/password-store" ];
-    };
     theme = ../config/rofi/general.rasi;
+  };
+  programs.rofi.pass = {
+    enable = true;
+    extraConfig = ''
+      URL_field='url';
+      USERNAME_field='user';
+    '';
+    stores = [ "$HOME/.local/share/password-store" ];
   };
 
   # notification daemon
