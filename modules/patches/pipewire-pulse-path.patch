@@ -1,0 +1,29 @@
+diff --git a/meson_options.txt b/meson_options.txt
+index ce364d93..3d801f45 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -163,3 +163,9 @@ option('sndfile',
+        description: 'Enable code that depends on libsndfile',
+        type: 'feature',
+        value: 'auto')
++option('pipewire_pulse_prefix',
++       type : 'string',
++       description : 'Install directory for pipewire-pulse')
++option('pipewire_media_session_prefix',
++       type : 'string',
++       description : 'Install directory for pipewire-media-session')
+diff --git a/src/daemon/systemd/user/meson.build b/src/daemon/systemd/user/meson.build
+index 0a5e5042..b84940d1 100644
+--- a/src/daemon/systemd/user/meson.build
++++ b/src/daemon/systemd/user/meson.build
+@@ -9,8 +9,8 @@ install_data(
+ 
+ systemd_config = configuration_data()
+ systemd_config.set('PW_BINARY', join_paths(pipewire_bindir, 'pipewire'))
+-systemd_config.set('PW_PULSE_BINARY', join_paths(pipewire_bindir, 'pipewire-pulse'))
+-systemd_config.set('PW_MEDIA_SESSION_BINARY', join_paths(pipewire_bindir, 'pipewire-media-session'))
++systemd_config.set('PW_PULSE_BINARY', join_paths(get_option('pipewire_pulse_prefix'), 'bin', 'pipewire-pulse'))
++systemd_config.set('PW_MEDIA_SESSION_BINARY', join_paths(get_option('pipewire_media_session_prefix'), 'bin', 'pipewire-media-session'))
+ 
+ configure_file(input : 'pipewire.service.in',
+                output : 'pipewire.service',

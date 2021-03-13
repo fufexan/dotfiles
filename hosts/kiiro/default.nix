@@ -19,6 +19,9 @@
     systemd-boot.enable = true;
   };
 
+  # enable Nvidia KMS (for Wayland and less screen tearing on Xorg)
+  hardware.nvidia.modesetting.enable = true;
+
   # Japanese input using fcitx
   i18n.inputMethod = {
     enabled = "fcitx";

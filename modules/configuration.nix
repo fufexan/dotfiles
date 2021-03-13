@@ -36,9 +36,6 @@
     ];
   };
 
-  # cpu microcode, wlan drivers, etc
-  hardware.enableAllFirmware = true;
-
   # disable global DHCP
   networking.useDHCP = false;
 
@@ -46,6 +43,7 @@
 
   # allow proprietary packages (including drivers)
   nixpkgs.config.allowUnfree = true;
+
 
   # enable programs
   programs.less.enable = true;

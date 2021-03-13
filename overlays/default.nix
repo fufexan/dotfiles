@@ -1,3 +1,3 @@
-final: prev: rec {
+final: prev: {
   wlroots = prev.callPackage ./wlroots.nix { };
 }
