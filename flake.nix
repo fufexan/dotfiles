@@ -21,6 +21,10 @@
     # group modules here for easier passing
     nixosModules = import ./modules;
 
+    # not sure where to import overlays so I do it everywhere
+    nixpkgs.overlays = import ./overlays;
+    overlays = import ./overlays;
+
     # load configs from folder instead of declaring them here
     nixosConfigurations = import ./hosts inputs;
   };

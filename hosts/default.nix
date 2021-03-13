@@ -28,6 +28,7 @@ in
     pipewire
     services
     snd_usb_audio
+    wayland
     xorg
   ]);
 }

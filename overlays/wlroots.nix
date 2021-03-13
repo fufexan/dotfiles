@@ -1,10 +1,10 @@
-final: prev: {
-  wlroots = prev.wlroots.overrideAttrs (old: {
+{
+  wlroots.overrideAttrs (old: {
     src = {
       owner = "danvd";
       repo = "wlroots-eglstreams";
-      rev = master;
-      sha256 = "0000000000000000000000000000000000000000000000000000";
+      rev = "5e570dc6f5d5d4c9f65c21c3994d0b9ab14e9752";
+      sha256 = "0frgd9kqps40qj10bd6sim813v0kwsfy046ja53kbzash3pp78pq";
     };
   });
 }

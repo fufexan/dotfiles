@@ -20,6 +20,9 @@
   # low latency for usb soundcards
   snd_usb_audio = ./snd_usb_audio.nix;
 
+  # Wayland configuration
+  wayland = import ./wayland.nix;
+
   # X session configuration
   xorg = import ./xorg.nix;
 
