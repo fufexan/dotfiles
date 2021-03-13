@@ -17,7 +17,7 @@
       tewi-font
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
     ];
 
     # use fonts specified by user rather than default ones
