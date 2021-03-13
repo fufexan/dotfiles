@@ -3,6 +3,8 @@
 # enable flakes
 
 {
+  environment.systemPackages = with pkgs; [ coreutils git gnutar ];
+
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''

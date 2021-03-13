@@ -12,8 +12,6 @@
 
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
-  # required in order to build flakes
-  environment.systemPackages = with pkgs; [ coreutils git gnutar ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
@@ -44,7 +42,6 @@
 
   # allow proprietary packages (including drivers)
   nixpkgs.config.allowUnfree = true;
-
 
   # enable programs
   programs.less.enable = true;
