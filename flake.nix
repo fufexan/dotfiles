@@ -22,67 +22,56 @@
   };
 
   outputs = { self, utils, nixpkgs, agenix, ... }@inputs:
-    let
-      pkgs = self.pkgs.nixpkgs;
-    in
-    utils.lib.systemFlake{
-      inherit self inputs;
+  let
+    pkgs = self.pkgs.nixpkgs;
+  in
+  utils.lib.systemFlake{
+    inherit self inputs;
 
-      pkgs.nixpkgs.input = nixpkgs;
+    channels.nixpkgs.input = nixpkgs;
 
-      # group modules here for easier passing
-      nixosModules = import ./modules;
+    # group modules here for easier passing
+    nixosModules = import ./modules;
 
-      pkgsConfig = {
-        allowUnfree = true;
-      };
-
-      nixosProfiles = {
-
-        homesv.modules = with self.nixosModules; [
-          (import ./hosts/homesv)
-          configuration
-          flakes
-          services
-        ];
-
-        kiiro.modules = with self.nixosModules; [
-          (import ./hosts/kiiro)
-          configuration
-          flakes
-          fonts
-          pipewire
-          services
-          snd_usb_audio
-          wayland
-          xorg
-        ];
-      };
-
-      overlay = import ./overlays;
-
-      sharedOverlays = [
-        self.overlay
-        (final: prev: with prev; {
-          inherit (inputs) wlroots-src;
-
-          #wlroots = prev.wlroots.overrideAttrs (old: {
-          #  src = prev.fetchFromGitHub {
-          #    owner = "danvd";
-          #    repo = "wlroots-eglstreams";
-          #    rev = "5e570dc6f5d5d4c9f65c21c3994d0b9ab14e9752";
-          #    sha256 = "sha256-QgMeU7yJ5Nfi0mw2GeMX/IBjr5RBmmnn4NKellSpEHU=";
-          #  };
-          #});
-        })
-      ];
-
-      sharedModules = [
-        agenix.nixosModules.age # add agenix modules
-        nixpkgs.nixosModules.notDetected # add nixos hardware
-        { nix = utils.lib.nixDefaultsFromInputs inputs; }
-      ];
-
+    channelsConfig = {
+      allowUnfree = true;
     };
-}
 
+    nixosProfiles = {
+      homesv.modules = with self.nixosModules; [
+        (import ./hosts/homesv)
+        configuration
+        flakes
+        services
+      ];
+
+      kiiro.modules = with self.nixosModules; [
+        (import ./hosts/kiiro)
+        configuration
+        flakes
+        fonts
+        pipewire
+        services
+        snd_usb_audio
+        wayland
+        xorg
+      ];
+    };
+
+    sharedOverlays = [
+      (final: prev: with prev; {
+        inherit (inputs) wlroots-src;
+
+        #wlroots = prev.wlroots.overrideAttrs (old: {
+        #  src = wlroots-src
+        #});
+      })
+    ];
+
+    sharedModules = [
+      agenix.nixosModules.age # add agenix module
+      nixpkgs.nixosModules.notDetected # add nixos hardware
+      { nix = utils.lib.nixDefaultsFromInputs inputs; }
+    ];
+  };
+}
