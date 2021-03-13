@@ -1,4 +1,4 @@
-{ pkgs, nixpkgs, ... }:
+{ pkgs, inputs, ... }:
 
 # enable flakes
 
@@ -8,10 +8,10 @@
     # enable flakes
     package = pkgs.nixFlakes;
     extraOptions = ''
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command ca-references
       flake-registry = /etc/nix/registry.json
     '';
     # pin nixpkgs to the commit the system was built from
-    registry.nixpkgs.flake = nixpkgs;
+    #registry.nixpkgs.flake = nixpkgs;
   };
 }

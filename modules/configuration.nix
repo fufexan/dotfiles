@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ self, config, pkgs, nixpkgs, agenix, ... }@inputs:
+{ self, config, pkgs, nixpkgs, ... }@inputs:
 
 {
   console = {
@@ -10,9 +10,7 @@
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
   # required in order to build flakes
-  environment.systemPackages = with pkgs; [ coreutils git gnutar ] ++ [
-    agenix.defaultPackage.x86_64-linux
-  ];
+  environment.systemPackages = with pkgs; [ coreutils git gnutar ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";

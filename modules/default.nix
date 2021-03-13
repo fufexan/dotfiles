@@ -12,7 +12,7 @@
   # NixOS module
   pipewire = import ./pipewire.nix;
   # tdeo's version
-  pipewire-unstable = import ./pipewire-unstable.nix;
+  #pipewire-unstable = import ./pipewire-unstable.nix;
 
   # various services
   services = import ./services.nix;
@@ -30,3 +30,4 @@
   # if you need any of the legacy modules, include them here
   # e.g: keyboard_patching = import ./legacy/keyboard_patching.nix
 }
+

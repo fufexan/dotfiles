@@ -47,32 +47,48 @@
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
+        "rev": "29b0d4d0b600f8f5dd0b86e3362a33d4181938f9",
         "type": "github"
-      }
-    },
-    "pipewire": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1615062678,
-        "narHash": "sha256-7aTBeeL2TZYNJkYEeXT0xmX9QR1bIl3y5fCw38VgQ7g=",
-        "ref": "master",
-        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
-        "revCount": 5758,
-        "type": "git",
-        "url": "https://gitlab.freedesktop.org/pipewire/pipewire"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://gitlab.freedesktop.org/pipewire/pipewire"
       }
     },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "nixpkgs": "nixpkgs",
-        "pipewire": "pipewire"
+        "utils": "utils",
+        "wlroots-src": "wlroots-src"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1615645951,
+        "narHash": "sha256-TuvV12bqiCNKQeXk42YaGTC5axQ2MHE3x9riRVH7Uj8=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "ae5bd884e64caa3a71c93e034f412bf8485240fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
+    "wlroots-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615630660,
+        "narHash": "sha256-QgMeU7yJ5Nfi0mw2GeMX/IBjr5RBmmnn4NKellSpEHU=",
+        "owner": "danvd",
+        "repo": "wlroots-eglstreams",
+        "rev": "5e570dc6f5d5d4c9f65c21c3994d0b9ab14e9752",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danvd",
+        "repo": "wlroots-eglstreams",
+        "type": "github"
       }
     }
   },

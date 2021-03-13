@@ -30,20 +30,4 @@ let
     });
 in
 {
-  homesv = mkSystem "homesv" nixpkgs (with self.nixosModules; [
-    configuration
-    flakes
-    services 
-    agenix.nixosModules.age
-  ]);
-  kiiro  = mkSystem "kiiro"  nixpkgs (with self.nixosModules; [
-    configuration
-    flakes
-    fonts
-    pipewire
-    services
-    snd_usb_audio
-    wayland
-    xorg
-  ]);
 }
