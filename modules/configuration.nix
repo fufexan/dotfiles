@@ -2,6 +2,9 @@
 { self, config, pkgs, nixpkgs, ... }@inputs:
 
 {
+  # speed fix for Intel CPUs
+  boot.kernelParams = [ "intel_pstate=active" ];
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "ro";

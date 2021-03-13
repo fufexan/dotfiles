@@ -10,8 +10,6 @@
   boot.kernelModules = [ "v4l2loopback" ];
   # make modules available to modprobe
   boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-  # browser fix on Intel CPUs
-  boot.kernelParams = [ "intel_pstate=active" ];
 
   # bootloader
   boot.loader = {
