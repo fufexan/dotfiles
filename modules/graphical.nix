@@ -11,6 +11,7 @@
     # X config
     ./xsession.nix
   ];
+
   # install programs
   home.packages = with pkgs; [
     # audio
@@ -23,6 +24,7 @@
     # messaging
     discord
     element-desktop
+    lightcord
     mumble
     tdesktop
     zoom-us
@@ -109,40 +111,58 @@
       live_config_reload = true;
     };
   };
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacs27;
   };
+
   programs.firefox = {
     enable = true;
     profiles.mihai.name = "mihai";
   };
+
   programs.mpv = {
     enable = true;
     defaultProfiles = [ "gpu-hq" ];
     scripts = [ pkgs.mpvScripts.mpris ];
   };
+
   programs.ncmpcpp = {
     enable = true;
     package = pkgs.ncmpcpp.override { visualizerSupport = true; };
     settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
   };
+
   programs.neomutt = {
     enable = false;
     checkStatsInterval = 60;
   };
-  # add more plugins
-  # NOTE: disabled until I know how to fix it; dm if you know a fix
+
+  # add more plugins on top of ./minimal.nix ones
   programs.neovim.plugins = (with pkgs.vimPlugins; [
     coc-prettier
     coc-snippets
     latex-live-preview
     vimsence
   ]);
+
+  programs.newsboat = {
+    enable = true;
+    autoReload = true;
+    urls = [
+      {
+        title = "Drew DeVault's Blog";
+        url = "https://drewdevault.com/blog/index.xml";
+      }
+    ];
+  };
+
   programs.texlive = {
     enable = false;
     package = pkgs.texlive.combined.scheme-basic;
   };
+
   programs.zathura = {
     enable = true;
     options = {
@@ -161,6 +181,7 @@
     defaultCacheTtl = 300;
     defaultCacheTtlSsh = 300;
   };
+
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";
@@ -184,10 +205,15 @@
     network.listenAddress = "any";
     network.startWhenNeeded = true;
   };
+
   services.mpdris2.enable = true;
+
   services.playerctld.enable = true;
+
   services.syncthing.enable = true;
+
   services.udiskie.enable = true;
+
   #services.xcape = {
   #  enable = true;
   #  mapExpression = { Caps_Lock = "Escape"; };
