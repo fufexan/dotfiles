@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, nixpkgs, ... }:
 
 # enable flakes
 
@@ -9,7 +9,7 @@
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
-      flake-registry = /etc/nix/registry.json
     '';
+    registry.nixpkgs.flake = nixpkgs;
   };
 }

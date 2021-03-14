@@ -39,26 +39,39 @@
           services
         ];
 
-        kiiro.modules = with self.nixosModules; [
-          (import ./hosts/kiiro)
-          fonts
-          pipewire
-          services
-          snd_usb_audio
-          wayland
-          xorg
-        ];
+        kiiro = {
+          extraArgs = inputs;
+          modules = with self.nixosModules; [
+            (import ./hosts/kiiro)
+            fonts
+            pipewire
+            services
+            snd_usb_audio
+            wayland
+            xorg
+          ];
+        };
       };
 
       sharedOverlays = [
-        (final: prev:
-          with prev; {
-            inherit (inputs) wlroots-src;
+        #(final: prev:
+        #  with prev; {
+        #    inherit (inputs) wlroots-src;
 
-            #wlroots = prev.wlroots.overrideAttrs (old: {
-            #  src = wlroots-src
-            #});
-          })
+        #    wlroots = prev.wlroots.overrideAttrs (old: {
+        #      src = inputs.wlroots-src;
+        #      buildInputs = old.buildInputs ++ (with prev; [
+        #        libuuid
+        #        cmake
+        #        xorg.xcbutilrenderutil
+        #        xwayland
+        #      ]);
+        #    });
+        #    sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
+        #      mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
+        #      buildInputs = old.buildInputs ++ [ prev.cmake prev.wlroots ];
+        #    });
+        #  })
       ];
 
       sharedModules = [
