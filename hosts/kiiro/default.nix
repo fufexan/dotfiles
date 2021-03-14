@@ -38,6 +38,8 @@
   # use dconf in Home Manager
   services.dbus.packages = [ pkgs.gnome3.dconf ];
 
+  services.btrfs.autoScrub.enable = true;
+
   virtualisation.libvirtd.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
 }
