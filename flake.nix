@@ -23,8 +23,7 @@
   };
 
   outputs = { self, utils, nixpkgs, agenix, ... }@inputs:
-    let pkgs = self.pkgs.nixpkgs;
-    in utils.lib.systemFlake {
+    utils.lib.systemFlake {
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
