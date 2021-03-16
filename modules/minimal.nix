@@ -14,8 +14,10 @@
     enable = true;
     enableZshIntegration = true;
     defaultCommand = "rg --files --hidden";
-    changeDirWidgetOptions =
-      [ "--preview 'tree -C -L 3 -a {} | head -200'" "--exact" ];
+    changeDirWidgetOptions = [
+      "--preview 'exa --icons --git --color always -T -L 3 {} | head -200'"
+      "--exact"
+    ];
   };
   programs.gh = {
     enable = true;

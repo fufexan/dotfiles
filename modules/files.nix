@@ -2,10 +2,8 @@
 
 # manage home.files
 
-let
-  home = config.home.homeDirectory;
-in
-{
+let home = config.home.homeDirectory;
+in {
   # font for rofi applets
   home.file.featherfont = {
     source = ../config/fonts/feather.ttf;
@@ -30,7 +28,7 @@ in
     source = ../config/youtube-dl.conf;
     target = "${home}/.config/youtube-dl/config";
   };
-  
+
   # scripts
   # script to dynamically modify bspwm borders and gaps
   home.file.dynamic_bspwm = {

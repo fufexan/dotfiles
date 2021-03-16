@@ -24,7 +24,7 @@
     # messaging
     discord
     element-desktop
-    lightcord
+    #lightcord
     mumble
     tdesktop
     zoom-us
@@ -74,7 +74,8 @@
         y = 0;
       };
       scrolling.history = 10000;
-      font = let font = "JetBrainsMono Nerd Font"; in {
+      font = let font = "JetBrainsMono Nerd Font";
+      in {
         normal.family = font;
         bold.family = font;
         italic.family = font;
@@ -150,12 +151,10 @@
   programs.newsboat = {
     enable = true;
     autoReload = true;
-    urls = [
-      {
-        title = "Drew DeVault's Blog";
-        url = "https://drewdevault.com/blog/index.xml";
-      }
-    ];
+    urls = [{
+      title = "Drew DeVault's Blog";
+      url = "https://drewdevault.com/blog/index.xml";
+    }];
   };
 
   programs.texlive = {

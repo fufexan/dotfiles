@@ -9,8 +9,7 @@ let
     HDMI-0 =
       "00ffffffffffff0009d1ea78455400000b1e010380301b782eb065a656539d280c5054a56b80d1c081c081008180a9c0b30001010101023a801871382d40582c4500dc0c1100001e000000ff0045334c30373535303031390a20000000fd00324c1e5311000a202020202020000000fc0042656e5120424c323238330a200193020322f14f901f05140413031207161501061102230907078301000065030c001000023a801871382d40582c4500dc0c1100001e011d8018711c1620582c2500dc0c1100009e011d007251d01e206e285500dc0c1100001e8c0ad08a20e02d10103e9600dc0c1100001800000000000000000000000000000000000000000081";
   };
-in
-{
+in {
   # X specific programs
   home.packages = with pkgs; [
     maim
@@ -133,10 +132,7 @@ in
   services.picom = {
     enable = true;
     blur = true;
-    blurExclude = [
-      "class_g = 'slop'"
-      "class_g = 'Firefox'"
-    ];
+    blurExclude = [ "class_g = 'slop'" "class_g = 'Firefox'" ];
     experimentalBackends = true;
     extraOptions = ''
       # improve performance
@@ -189,7 +185,8 @@ in
   };
   services.sxhkd = {
     enable = true;
-    keybindings = let rofiScripts = "~/.local/bin/rofi"; in {
+    keybindings = let rofiScripts = "~/.local/bin/rofi";
+    in {
       # start terminal
       "super + Return" = "alacritty";
       # application launcher
@@ -320,8 +317,8 @@ in
         single_monocle = true;
       };
       startupPrograms = [
-        "autorandr -c"  # sets proper monitor layout
-        "bspc desktop -f ^1"  # focuses first desktop (workspace)
+        "autorandr -c" # sets proper monitor layout
+        "bspc desktop -f ^1" # focuses first desktop (workspace)
       ];
     };
   };

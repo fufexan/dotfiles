@@ -34,6 +34,7 @@
     gotop
     htop # system monitor
     ripgrep # better grep
+    tree
     usbutils
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
