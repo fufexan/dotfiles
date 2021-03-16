@@ -74,10 +74,10 @@
         y = 0;
       };
       scrolling.history = 10000;
-      font = {
-        normal.family = "FiraCode Nerd Font";
-        bold.family = "FiraCode Nerd Font";
-        italic.family = "FiraCode Nerd Font";
+      font = let font = "JetBrainsMono Nerd Font"; in {
+        normal.family = font;
+        bold.family = font;
+        italic.family = font;
         size = 11.0;
       };
       draw_bold_text_with_bright_colors = true;
