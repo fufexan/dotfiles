@@ -11,8 +11,8 @@ rofi_command="rofi -theme $HOME/.local/share/rofi/layouts/three.rasi"
 
 # Options
 screen=""
-full=""
 area=""
+full=""
 
 # Variable passed to rofi
 options="$screen\n$area\n$full"
@@ -22,11 +22,10 @@ case $chosen in
     $screen)
 		~/.local/bin/maim_monitor.sh
         ;;
+    $area)
+        maim -Bus | tee ~/Pictures/ss/$(date +%Y.%m.%d-%H.%M)_sel.png | xclip -selection clipboard -t image/png
+		;;
 	$full)
 		maim -Bd 0.2 | tee ~/Pictures/ss/$(date +%Y.%m.%d-%H.%M)_full.png | xclip -selection clipboard -t image/png
 		;;
-    $area)
-		flameshot gui
-        ;;
 esac
-

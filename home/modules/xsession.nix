@@ -90,7 +90,7 @@ in {
       global = {
         alignment = "center";
         follow = "mouse";
-        font = "Noto Sans 11";
+        font = "Noto Sans 10";
         format = "<b>%s</b>\\n%b";
         frame_width = 2;
         geometry = "400x5-4+32";
@@ -128,7 +128,6 @@ in {
       };
     };
   };
-  services.flameshot.enable = true;
   services.picom = {
     enable = true;
     blur = true;

@@ -22,7 +22,7 @@
     dirHashes = {
       dl = "$HOME/Downloads";
       docs = "$HOME/Documents";
-      dotfiles = "$HOME/Documents/code/dotfiles";
+      dots = "$HOME/Documents/code/dotfiles";
       code = "$HOME/Documents/code";
       pics = "$HOME/Pictures";
       vids = "$HOME/Videos";
