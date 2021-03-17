@@ -30,7 +30,7 @@
     # messaging
     discord
     element-desktop
-    #lightcord
+    lightcord
     mumble
     tdesktop
     zoom-us

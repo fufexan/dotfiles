@@ -40,7 +40,10 @@
 
       nixosModules = import ./modules;
 
-      channelsConfig = { allowUnfree = true; };
+      channelsConfig = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "openssl-1.0.2u" ];
+      };
 
       nixosProfiles = {
         homesv.modules = with self.nixosModules; [
@@ -62,25 +65,42 @@
         };
       };
 
-      sharedOverlays = [
-        #(final: prev:
-        #  with prev; {
-        #    inherit (inputs) wlroots-src;
+      overlay = import ./overlays;
 
-        #    wlroots = prev.wlroots.overrideAttrs (old: {
-        #      src = inputs.wlroots-src;
-        #      buildInputs = old.buildInputs ++ (with prev; [
-        #        libuuid
-        #        cmake
-        #        xorg.xcbutilrenderutil
-        #        xwayland
-        #      ]);
-        #    });
-        #    sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
-        #      mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
-        #      buildInputs = old.buildInputs ++ [ prev.cmake prev.wlroots ];
-        #    });
-        #  })
+      packagesFunc = channels: {
+        inherit (channels.nixpkgs)
+        lightcord;
+      };
+
+      sharedOverlays = [
+        self.overlay
+        (final: prev:
+          with prev; {
+            inherit (inputs) wlroots-src;
+
+            picom = prev.picom.overrideAttrs (old: {
+              src = prev.fetchFromGitHub {
+                owner = "tryone144";
+                repo = "compton";
+                rev = "c67d7d7b2c36f29846c6693a2f39a2e191a2fcc4";
+                sha256 = "1y1821islx0cg61z9kshs4mkvcp45bpkmzbll5zpzq84ycnqji2y";
+              };
+            });
+
+            #wlroots = prev.wlroots.overrideAttrs (old: {
+            #  src = inputs.wlroots-src;
+            #  buildInputs = old.buildInputs ++ (with prev; [
+            #    libuuid
+            #    cmake
+            #    xorg.xcbutilrenderutil
+            #    xwayland
+            #  ]);
+            #});
+            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
+            #  mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
+            #  buildInputs = old.buildInputs ++ [ prev.cmake prev.wlroots ];
+            #});
+          })
       ];
 
       sharedModules = [
