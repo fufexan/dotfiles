@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ self, config, pkgs, nixpkgs, ... }@inputs:
+{ pkgs, ... }:
 
 {
   # speed fix for Intel CPUs

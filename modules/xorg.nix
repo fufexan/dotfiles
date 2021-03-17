@@ -1,10 +1,8 @@
+# Xorg config
+
 {
-  # configure X
   services.xserver = {
     enable = true;
-
-    # keyboard config
-    layout = "ro";
 
     videoDrivers = [ "nvidia" ];
 

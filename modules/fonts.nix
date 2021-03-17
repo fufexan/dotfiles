@@ -17,7 +17,7 @@
       tewi-font
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" "Iosevka" "JetBrainsMono" ]; })
+      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
     ];
 
     # use fonts specified by user rather than default ones
@@ -27,9 +27,9 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" "DejaVu Serif" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" "DejaVu Sans" ];
-      monospace = [ "FiraCode Nerd Font" "Noto Color Emoji" "DejaVu Sans Mono" ];
+      serif = [ "Noto Serif" "Noto Color Emoji" ];
+      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
+      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
       emoji = [ "Noto Color Emoji" ];
     };
   };

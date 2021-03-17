@@ -3,41 +3,51 @@
 with lib;
 let
   pipewire = (pkgs.pipewire.override { hsphfpdSupport = true; }).overrideAttrs
-    ({ buildInputs ? [ ], mesonFlags ? [], ... }: {
+    ({ buildInputs ? [ ], mesonFlags ? [ ], ... }: {
       version = "git";
       src = inputs.pipewire;
       buildInputs = buildInputs ++ [ pkgs.SDL2 ];
-      mesonFlags = mesonFlags ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
+      mesonFlags = mesonFlags
+        ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
       patches = [
-        (pkgs.path + "/pkgs/development/libraries/pipewire/alsa-profiles-use-libdir.patch")
-        (pkgs.path + "/pkgs/development/libraries/pipewire/installed-tests-path.patch")
-        (pkgs.path + "/pkgs/development/libraries/pipewire/pipewire-config-dir.patch")
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/alsa-profiles-use-libdir.patch")
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/installed-tests-path.patch")
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/pipewire-config-dir.patch")
         ./patches/pipewire-pulse-path.patch
       ];
     });
-  pipewirei686 = (pkgs.pkgsi686Linux.pipewire.override { hsphfpdSupport = true; }).overrideAttrs
-    ({ buildInputs ? [ ], mesonFlags ? [],... }: {
-      version = "git";
-      src = inputs.pipewire;
-      buildInputs = buildInputs ++ [ pkgs.pkgsi686Linux.SDL2 ];
-      mesonFlags = mesonFlags ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
-      patches = [
-        (pkgs.path + "/pkgs/development/libraries/pipewire/alsa-profiles-use-libdir.patch")
-        (pkgs.path + "/pkgs/development/libraries/pipewire/installed-tests-path.patch")
-        (pkgs.path + "/pkgs/development/libraries/pipewire/pipewire-config-dir.patch")
-        ./patches/pipewire-pulse-path.patch
-      ];
-    });
-in
-{
-  environment.systemPackages = [ pipewire pkgs.pulseaudio pkgs.pavucontrol pkgs.alsaUtils ];
+  pipewirei686 = (pkgs.pkgsi686Linux.pipewire.override {
+    hsphfpdSupport = true;
+  }).overrideAttrs ({ buildInputs ? [ ], mesonFlags ? [ ], ... }: {
+    version = "git";
+    src = inputs.pipewire;
+    buildInputs = buildInputs ++ [ pkgs.pkgsi686Linux.SDL2 ];
+    mesonFlags = mesonFlags
+      ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
+    patches = [
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/alsa-profiles-use-libdir.patch")
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/installed-tests-path.patch")
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/pipewire-config-dir.patch")
+      ./patches/pipewire-pulse-path.patch
+    ];
+  });
+in {
+  environment.systemPackages =
+    [ pipewire pkgs.pulseaudio pkgs.pavucontrol pkgs.alsaUtils ];
   environment.pathsToLink = [ "/lib/pipewire" ];
   systemd.packages = [ pipewire pipewire.pulse ];
   services.udev.packages = [ pipewire ];
   systemd.user.sockets.pipewire.wantedBy = [ "sockets.target" ];
   systemd.user.sockets.pipewire-pulse.wantedBy = [ "sockets.target" ];
   systemd.user.services.pipewire.bindsTo = [ "dbus.service" ];
-  environment.sessionVariables.LD_LIBRARY_PATH = "/run/current-system/sw/lib/pipewire";
+  environment.sessionVariables.LD_LIBRARY_PATH =
+    "/run/current-system/sw/lib/pipewire";
   environment.etc."alsa/conf.d/50-pipewire.conf".source =
     "${pipewire}/share/alsa/alsa.conf.d/50-pipewire.conf";
   environment.etc."alsa/conf.d/99-pipewire-default.conf".source =
@@ -62,7 +72,7 @@ in
     context.spa-libs = {audio.convert.* = "audioconvert/libspa-audioconvert" support.* = "support/libspa-support"}
     filter.properties = {}
     stream.properties = {}
-'';
+  '';
   environment.etc."pipewire/jack.conf".text = ''
     context.modules = {libpipewire-module-protocol-native = null libpipewire-module-client-node = null libpipewire-module-metadata = null libpipewire-module-rtkit = {args = {} flags = ["ifexists" "nofail"]}}
     context.properties = {log.level = 0}

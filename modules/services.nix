@@ -1,22 +1,15 @@
 { pkgs, ... }:
 
 {
-  # mouse configuration (usually gaming ones)
   services.ratbagd.enable = true;
 
-  # torrent daemon
-  services.transmission = {
-    enable = true;
-    group = "users";
-    user = "mihai";
-    home = "/home/mihai";
-  };
+  services.transmission.enable = true;
+
   services.openssh = {
     enable = true;
     useDns = true;
   };
 
-  # enable mDNS
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -24,7 +17,6 @@
     publish.domain = true;
   };
 
-  # enable location services
   services.geoclue2.enable = true;
 
   services.printing = {
@@ -32,7 +24,6 @@
     drivers = [ pkgs.fxlinuxprint ];
   };
 
-  # samba public share
   services.samba = {
     enable = true;
     securityType = "user";
@@ -56,11 +47,9 @@
       };
     };
   };
-
-  # allow Windows clients to see samba
   services.samba-wsdd.enable = true;
 
-  # Tailscale VPN alternative
   services.tailscale.enable = true;
+
   services.udisks2.enable = true;
 }
