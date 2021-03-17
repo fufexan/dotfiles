@@ -53,174 +53,40 @@ in {
   environment.etc."alsa/conf.d/99-pipewire-default.conf".source =
     "${pipewire}/share/alsa/alsa.conf.d/99-pipewire-default.conf";
   environment.etc."pipewire/pipewire.conf".text = ''
-    context.properties = {
-        library.name.system = support/libspa-support
-        context.data-loop.library.name.system = support/libspa-support
-        support.dbus = true
-        link.max-buffers = 64
-        mem.warn-mlock = false
-        mem.allow-mlock = true
-        mem.mlock-all = false
-        log.level = 0
-        core.daemon = true
-        core.name = pipewire-0
-        default.clock.rate = 48000
-        #default.clock.quantum = 256
-        #default.clock.min-quantum = 32
-        default.clock.max-quantum = 8192
-        default.video.width = 640
-        default.video.height = 480
-        default.video.rate.num = 25
-        default.video.rate.denom = 1
-    }
-    context.spa-libs = {
-        audio.convert.* = audioconvert/libspa-audioconvert
-        api.alsa.* = alsa/libspa-alsa
-        api.v4l2.* = v4l2/libspa-v4l2
-        api.libcamera.* = libcamera/libspa-libcamera
-        api.bluez5.* = bluez5/libspa-bluez5
-        api.vulkan.* = vulkan/libspa-vulkan
-        api.jack.* = jack/libspa-jack
-        support.* = support/libspa-support
-        #videotestsrc = videotestsrc/libspa-videotestsrc
-        #audiotestsrc = audiotestsrc/libspa-audiotestsrc
-    }
-    context.modules = {
-        libpipewire-module-rtkit = {
-            args = {
-                nice.level = -11
-                rt.prio = 20
-                rt.time.soft = 200000
-                rt.time.hard = 200000
-            }
-            flags = [ ifexists nofail ]
-        }
-        libpipewire-module-protocol-native = null
-        libpipewire-module-profiler = null
-        libpipewire-module-metadata = null
-        libpipewire-module-spa-device-factory = null
-        libpipewire-module-spa-node-factory = null
-        libpipewire-module-client-node = null
-        libpipewire-module-client-device = null
-        libpipewire-module-portal = null
-        libpipewire-module-access = {
-            args = {
-                access.allowed = [ "${pipewire}/bin/pipewire-media-session" ]
-                #access.rejected = [ ]
-                #access.restricted = [ ]
-                #access.force = flatpak
-            }
-        }
-        libpipewire-module-adapter = null
-        libpipewire-module-link-factory = null
-        libpipewire-module-session-manager = null
-    }
-    context.objects = {
-        spa-node-factory = {
-            args = {
-                factory.name = support.node.driver
-                node.name = Dummy-Driver
-                priority.driver = 8000
-            }
-        }
-    }
-    context.exec = {
-        ${pipewire}/bin/pipewire-media-session = { args = "" }
-    }
+    context.exec = {}
+    context.modules = {libpipewire-module-protocol-native = null libpipewire-module-portal = {flags = ["ifexists" "nofail"]} libpipewire-module-access = {args = {}} libpipewire-module-adapter = null libpipewire-module-client-device = null libpipewire-module-client-node = null libpipewire-module-link-factory = null libpipewire-module-metadata = null libpipewire-module-profiler = null libpipewire-module-rtkit = {args = {} flags = ["ifexists" "nofail"]} libpipewire-module-session-manager = null libpipewire-module-spa-device-factory = null libpipewire-module-spa-node-factory = null}
+    context.objects = {spa-node-factory = {args = {factory.name = "support.node.driver" node.name = "Dummy-Driver" priority.driver = 8000}}}
+    context.properties = {core.daemon = true core.name = "pipewire-0" default = {clock = {max-quantum = 8192 min-quantum = 16 quantum = 32 rate = 48000}} link.max-buffers = 16}
+    context.spa-libs = {api.alsa.* = "alsa/libspa-alsa" api.bluez5.* = "bluez5/libspa-bluez5" api.jack.* = "jack/libspa-jack" api.libcamera.* = "libcamera/libspa-libcamera" api.v4l2.* = "v4l2/libspa-v4l2" api.vulkan.* = "vulkan/libspa-vulkan" audio.convert.* = "audioconvert/libspa-audioconvert" support.* = "support/libspa-support"}
   '';
   environment.etc."pipewire/client.conf".text = ''
-    context.properties = {
-        mem.warn-mlock = true
-        mem.allow-mlock = true
-        mem.mlock-all = false
-        log.level = 0
-    }
-    context.spa-libs = {
-        audio.convert.* = audioconvert/libspa-audioconvert
-        support.* = support/libspa-support
-    }
-    context.modules = {
-        libpipewire-module-protocol-native = null
-        libpipewire-module-client-node = null
-        libpipewire-module-client-device = null
-        libpipewire-module-adapter = null
-        libpipewire-module-metadata = null
-        libpipewire-module-session-manager = null
-    }
+    context.modules = {libpipewire-module-protocol-native = null libpipewire-module-adapter = null libpipewire-module-client-device = null libpipewire-module-client-node = null libpipewire-module-metadata = null libpipewire-module-session-manager = null}
+    context.properties = {log.level = 0}
+    context.spa-libs = {audio.convert.* = "audioconvert/libspa-audioconvert" support.* = "support/libspa-support"}
+    filter.properties = {}
+    stream.properties = {}
   '';
   environment.etc."pipewire/client-rt.conf".text = ''
-    context.properties = {
-        mem.warn-mlock = true
-        mem.allow-mlock = false
-        log.level = 0
-    }
-    context.spa-libs = {
-        audio.convert.* = audioconvert/libspa-audioconvert
-        support.* = support/libspa-support
-    }
-    context.modules = {
-        libpipewire-module-rtkit = {
-            args = {
-                nice.level = -11
-                rt.prio = 20
-                rt.time.soft = 200000
-                rt.time.hard = 200000
-            }
-            flags = [ ifexists nofail ]
-        }
-        libpipewire-module-protocol-native = null
-        libpipewire-module-client-node = null
-        libpipewire-module-client-device = null
-        libpipewire-module-adapter = null
-        libpipewire-module-metadata = null
-        libpipewire-module-session-manager = null
-    }
+    context.modules = {libpipewire-module-protocol-native = null libpipewire-module-adapter = null libpipewire-module-client-device = null libpipewire-module-client-node = null libpipewire-module-metadata = null libpipewire-module-rtkit = {args = {} flags = ["ifexists" "nofail"]} libpipewire-module-session-manager = null}
+    context.properties = {log.level = 0}
+    context.spa-libs = {audio.convert.* = "audioconvert/libspa-audioconvert" support.* = "support/libspa-support"}
+    filter.properties = {}
+    stream.properties = {}
   '';
   environment.etc."pipewire/jack.conf".text = ''
-    context.properties = {
-        mem.warn-mlock = true
-        mem.allow-mlock = false
-        log.level = 0
-    }
-    context.spa-libs = {
-        support.* = support/libspa-support
-    }
-    context.modules = {
-        libpipewire-module-rtkit = {
-            args = {
-                nice.level = -11
-                rt.prio = 20
-                rt.time.soft = 200000
-                rt.time.hard = 200000
-            }
-            flags = [ ifexists nofail ]
-        }
-        libpipewire-module-protocol-native = null
-        libpipewire-module-client-node = null
-        libpipewire-module-metadata = null
-    }
-    jack.properties = {
-         #jack.merge-monitor  = false
-    }
+    context.modules = {libpipewire-module-protocol-native = null libpipewire-module-client-node = null libpipewire-module-metadata = null libpipewire-module-rtkit = {args = {} flags = ["ifexists" "nofail"]}}
+    context.properties = {log.level = 0}
+    context.spa-libs = {support.* = "support/libspa-support"}
+    jack.properties = {}
   '';
   environment.etc."pipewire/pipewire-pulse.conf".text = ''
-    context.properties = {
-        mem.warn-mlock = true
-        mem.allow-mlock = false
-        log.level = 0
-    }
     context.spa-libs = {
         audio.convert.* = audioconvert/libspa-audioconvert
         support.* = support/libspa-support
     }
     context.modules = {
         libpipewire-module-rtkit = {
-            args = {
-                nice.level = -11
-                rt.prio = 20
-                rt.time.soft = 200000
-                rt.time.hard = 200000
-            }
+            args = {}
             flags = [ ifexists nofail ]
         }
         libpipewire-module-protocol-native = null
@@ -241,13 +107,6 @@ in {
                 #pulse.default.tlength = 256/48000
             }
         }
-    }
-
-    stream.properties = {
-        #node.latency = 256/48000
-        resample.quality = 1
-        channelmix.normalize = false
-        channelmix.mix-lfe = false
     }
   '';
   environment.etc."alsa/conf.d/49-pipewire-modules.conf".text = ''

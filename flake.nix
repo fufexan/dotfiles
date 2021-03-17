@@ -26,10 +26,14 @@
       flake = false;
     };
 
-    #pipewire = {
-    #  url = "git+https://gitlab.freedesktop.org/pipewire/pipewire";
-    #  flake = false;
-    #};
+    pipewire = {
+      type = "gitlab";
+      host = "gitlab.freedesktop.org";
+      owner = "pipewire";
+      repo = "pipewire";
+      rev = "6324298bc5a716bb301918cfef7f31045e211883";
+      flake = false;
+    };
   };
 
   outputs = { self, utils, nixpkgs, agenix, home-manager, ... }@inputs:

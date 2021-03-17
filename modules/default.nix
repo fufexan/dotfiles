@@ -12,7 +12,7 @@
   # NixOS module
   pipewire = import ./pipewire.nix;
   # tdeo's version
-  #pipewire-unstable = import ./pipewire-unstable.nix;
+  pipewire-unstable = import ./pipewire-unstable.nix;
 
   # various services
   services = import ./services.nix;

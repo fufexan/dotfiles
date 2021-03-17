@@ -126,12 +126,32 @@
         "type": "github"
       }
     },
+    "pipewire": {
+      "flake": false,
+      "locked": {
+        "host": "gitlab.freedesktop.org",
+        "lastModified": 1615062678,
+        "narHash": "sha256-7aTBeeL2TZYNJkYEeXT0xmX9QR1bIl3y5fCw38VgQ7g=",
+        "owner": "pipewire",
+        "repo": "pipewire",
+        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "gitlab.freedesktop.org",
+        "owner": "pipewire",
+        "repo": "pipewire",
+        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
+        "type": "gitlab"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-wayland": "nixpkgs-wayland",
+        "pipewire": "pipewire",
         "utils": "utils",
         "wlroots-src": "wlroots-src"
       }

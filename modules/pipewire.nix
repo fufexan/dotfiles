@@ -1,3 +1,9 @@
+{ pkgs, ... }:
+
+let
+  pipewire = pkgs.pipewire;
+  pipewirei686 = pkgs.pkgsi686Linux.pipewire;
+in
 {
   # sound
   services.pipewire = {
@@ -16,14 +22,313 @@
           "default.clock.min-quantum" = 16;
         };
       };
-      pipewire-pulse = {
-        "context.modules" = {
-          "libpipewire-module-protocol-pulse.args" = {
-            "pulse.min.req" = "32/48000";
-            "pulse.min.quantum" = "32/48000";
-          };
-        };
-      };
     };
   };
+
+  environment.etc."pipewire/pipewire.conf".text = ''
+    context.properties = {
+        library.name.system = support/libspa-support
+        context.data-loop.library.name.system = support/libspa-support
+        support.dbus = true
+        link.max-buffers = 64
+        mem.warn-mlock = false
+        mem.allow-mlock = true
+        mem.mlock-all = false
+        log.level = 0
+        core.daemon = true
+        core.name = pipewire-0
+        default.clock.rate = 48000
+        #default.clock.quantum = 256
+        #default.clock.min-quantum = 32
+        default.clock.max-quantum = 8192
+        default.video.width = 640
+        default.video.height = 480
+        default.video.rate.num = 25
+        default.video.rate.denom = 1
+    }
+    context.spa-libs = {
+        audio.convert.* = audioconvert/libspa-audioconvert
+        api.alsa.* = alsa/libspa-alsa
+        api.v4l2.* = v4l2/libspa-v4l2
+        api.libcamera.* = libcamera/libspa-libcamera
+        api.bluez5.* = bluez5/libspa-bluez5
+        api.vulkan.* = vulkan/libspa-vulkan
+        api.jack.* = jack/libspa-jack
+        support.* = support/libspa-support
+        #videotestsrc = videotestsrc/libspa-videotestsrc
+        #audiotestsrc = audiotestsrc/libspa-audiotestsrc
+    }
+    context.modules = {
+        libpipewire-module-rtkit = {
+            args = {
+                nice.level = -11
+                rt.prio = 20
+                rt.time.soft = 200000
+                rt.time.hard = 200000
+            }
+            flags = [ ifexists nofail ]
+        }
+        libpipewire-module-protocol-native = null
+        libpipewire-module-profiler = null
+        libpipewire-module-metadata = null
+        libpipewire-module-spa-device-factory = null
+        libpipewire-module-spa-node-factory = null
+        libpipewire-module-client-node = null
+        libpipewire-module-client-device = null
+        libpipewire-module-portal = null
+        libpipewire-module-access = {
+            args = {
+                #access.rejected = [ ]
+                #access.restricted = [ ]
+                #access.force = flatpak
+            }
+        }
+        libpipewire-module-adapter = null
+        libpipewire-module-link-factory = null
+        libpipewire-module-session-manager = null
+    }
+    context.objects = {
+        spa-node-factory = {
+            args = {
+                factory.name = support.node.driver
+                node.name = Dummy-Driver
+                priority.driver = 8000
+            }
+        }
+    }
+    context.exec = {
+    #    ${pipewire}/bin/pipewire-media-session = { args = "" }
+    }
+  '';
+  environment.etc."pipewire/client.conf".text = ''
+    context.properties = {
+        mem.warn-mlock = true
+        mem.allow-mlock = true
+        mem.mlock-all = false
+        log.level = 0
+    }
+    context.spa-libs = {
+        audio.convert.* = audioconvert/libspa-audioconvert
+        support.* = support/libspa-support
+    }
+    context.modules = {
+        libpipewire-module-protocol-native = null
+        libpipewire-module-client-node = null
+        libpipewire-module-client-device = null
+        libpipewire-module-adapter = null
+        libpipewire-module-metadata = null
+        libpipewire-module-session-manager = null
+    }
+  '';
+  environment.etc."pipewire/client-rt.conf".text = ''
+    context.properties = {
+        mem.warn-mlock = true
+        mem.allow-mlock = false
+        log.level = 0
+    }
+    context.spa-libs = {
+        audio.convert.* = audioconvert/libspa-audioconvert
+        support.* = support/libspa-support
+    }
+    context.modules = {
+        libpipewire-module-rtkit = {
+            args = {
+                nice.level = -11
+                rt.prio = 20
+                rt.time.soft = 200000
+                rt.time.hard = 200000
+            }
+            flags = [ ifexists nofail ]
+        }
+        libpipewire-module-protocol-native = null
+        libpipewire-module-client-node = null
+        libpipewire-module-client-device = null
+        libpipewire-module-adapter = null
+        libpipewire-module-metadata = null
+        libpipewire-module-session-manager = null
+    }
+  '';
+  environment.etc."pipewire/jack.conf".text = ''
+    context.properties = {
+        mem.warn-mlock = true
+        mem.allow-mlock = false
+        log.level = 0
+    }
+    context.spa-libs = {
+        support.* = support/libspa-support
+    }
+    context.modules = {
+        libpipewire-module-rtkit = {
+            args = {
+                nice.level = -11
+                rt.prio = 20
+                rt.time.soft = 200000
+                rt.time.hard = 200000
+            }
+            flags = [ ifexists nofail ]
+        }
+        libpipewire-module-protocol-native = null
+        libpipewire-module-client-node = null
+        libpipewire-module-metadata = null
+    }
+    jack.properties = {
+         #jack.merge-monitor  = false
+    }
+  '';
+  environment.etc."pipewire/pipewire-pulse.conf".text = ''
+    context.properties = {
+        mem.warn-mlock = true
+        mem.allow-mlock = false
+        log.level = 0
+    }
+    context.spa-libs = {
+        audio.convert.* = audioconvert/libspa-audioconvert
+        support.* = support/libspa-support
+    }
+    context.modules = {
+        libpipewire-module-rtkit = {
+            args = {
+                nice.level = -11
+                rt.prio = 20
+                rt.time.soft = 200000
+                rt.time.hard = 200000
+            }
+            flags = [ ifexists nofail ]
+        }
+        libpipewire-module-protocol-native = null
+        libpipewire-module-client-node = null
+        libpipewire-module-adapter = null
+        libpipewire-module-metadata = null
+        libpipewire-module-protocol-pulse = {
+            args = {
+                server.address = [
+                    "unix:native"
+                    # "tcp:4713"
+                ]
+                pulse.min.req = 16/48000
+                pulse.min.quantum = 16/48000
+                pulse.min.frag = 16/48000
+                #pulse.default.req = 256/48000
+                #pulse.default.frag = 256/48000
+                #pulse.default.tlength = 256/48000
+            }
+        }
+    }
+
+    stream.properties = {
+        #node.latency = 256/48000
+        resample.quality = 1
+        channelmix.normalize = false
+        channelmix.mix-lfe = false
+    }
+  '';
+  environment.etc."alsa/conf.d/49-pipewire-modules.conf".text = ''
+    pcm_type.pipewire {
+      libs {
+        native ${pipewire.lib}/lib/alsa-lib/libasound_module_pcm_pipewire.so
+        32Bit ${pipewirei686.lib}/lib/alsa-lib/libasound_module_pcm_pipewire.so
+      }
+    }
+    ctl_type.pipewire {
+      libs {
+        native ${pipewire.lib}/lib/alsa-lib/libasound_module_ctl_pipewire.so
+        32Bit ${pipewirei686.lib}/lib/alsa-lib/libasound_module_ctl_pipewire.so
+      }
+    }
+  '';
+  environment.etc."pipewire/media-session.d/alsa-monitor.conf".text = ''
+    properties = {
+        alsa.jack-device = false
+        alsa.reserve = true
+    }
+    rules = [
+        {
+            matches = [ { device.name = "alsa_card.usb-Schiit_Audio_I_m_Fulla_Schiit-00" } ]
+            actions = {
+                update-props = {
+                    api.alsa.use-acp = true
+                    api.alsa.use-ucm = false
+                    api.alsa.soft-mixer = false
+                    api.alsa.ignore-dB = true
+                    device.profile-set = "default.conf"
+                    device.profile = "Off"
+                    api.acp.auto-profile = false
+                    api.acp.auto-port = false
+                    device.nick = "Schiit Fulla 2"
+                }
+            }
+        }
+        {
+            matches = [ { node.name = "alsa_output.usb-Schiit_Audio_I_m_Fulla_Schiit-00.analog-stereo" } ]
+            actions = {
+                update-props = {
+                    node.nick = "Schiit Fulla 2"
+                    priority.driver = 200
+                    priority.session = 200
+                    node.pause-on-idle = false
+                    resample.quality = 1
+                    channelmix.normalize = false
+                    channelmix.mix-lfe = false
+                    audio.channels = 2
+                    audio.format = "S16LE"
+                    audio.rate = 48000
+                    audio.position = "FL,FR"
+                    api.alsa.period-size = 2
+                    api.alsa.headroom = 0
+                    api.alsa.disable-mmap = false
+                    api.alsa.disable-batch = false
+                    api.alsa.use-chmap = false
+                    session.suspend-timeout-seconds = 0
+                }
+            }
+        }
+    ]
+  '';
+  environment.etc."pipewire/media-session.d/media-session.conf".text = ''
+    context.properties = {
+      log.level = 0
+    }
+    context.spa-libs = {
+        api.bluez5.* = bluez5/libspa-bluez5
+        api.alsa.* = alsa/libspa-alsa
+        api.v4l2.* = v4l2/libspa-v4l2
+        api.libcamera.* = libcamera/libspa-libcamera
+    }
+    context.modules = {
+        libpipewire-module-rtkit = {
+            args = {
+                nice.level = -11
+                rt.prio = 20
+                rt.time.soft = 200000
+                rt.time.hard = 200000
+            }
+            flags = [ ifexists nofail ]
+        }
+        libpipewire-module-protocol-native = null
+        libpipewire-module-client-node = null
+        libpipewire-module-client-device = null
+        libpipewire-module-adapter = null
+        libpipewire-module-metadata = null
+        libpipewire-module-session-manager = null
+    }
+    session.modules = {
+        default = [
+            flatpak
+            portal
+            v4l2
+            libcamera
+            suspend-node
+            policy-node
+            metadata
+            default-nodes
+            default-profile
+            default-routes
+            streams-follow-default
+            alsa-seq
+            alsa-monitor
+            bluez5
+            restore-stream
+        ]
+    }
+  '';
 }
