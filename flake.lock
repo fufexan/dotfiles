@@ -1,0 +1,115 @@
+{
+  "nodes": {
+    "agenix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1614636489,
+        "narHash": "sha256-VntWWhlx4zvGJVdQet9dTOiC2bBvW1xzDQ9ug1eQ8IQ=",
+        "owner": "ryantm",
+        "repo": "agenix",
+        "rev": "9eb981eeb552e0856cb562b7643b311933a0e992",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryantm",
+        "repo": "agenix",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1600209923,
+        "narHash": "sha256-zoOWauTliFEjI++esk6Jzk7QO5EKpddWXQm9yQK24iM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cd06d3c1df6879c9e41cb2c33113df10566c760",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1615259932,
+        "narHash": "sha256-IXecmbqCr+XCtFwzBO3tHEd8PoJ4X4EyPZebKbV2ioE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "29b0d4d0b600f8f5dd0b86e3362a33d4181938f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "29b0d4d0b600f8f5dd0b86e3362a33d4181938f9",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "agenix": "agenix",
+        "nixpkgs": "nixpkgs",
+        "utils": "utils",
+        "wlroots-src": "wlroots-src"
+      }
+    },
+    "utils": {
+      "inputs": {
+        "flake-utils": "flake-utils_2"
+      },
+      "locked": {
+        "lastModified": 1615832727,
+        "narHash": "sha256-0uMcR3oLMZ1zK+7FEp5tIYemQ4vZXEnrLzxpGAiB3GQ=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "d1ee0e5bff13d13cee8bc8ad090aaa270437f9dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
+    "wlroots-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615630660,
+        "narHash": "sha256-QgMeU7yJ5Nfi0mw2GeMX/IBjr5RBmmnn4NKellSpEHU=",
+        "owner": "danvd",
+        "repo": "wlroots-eglstreams",
+        "rev": "5e570dc6f5d5d4c9f65c21c3994d0b9ab14e9752",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danvd",
+        "repo": "wlroots-eglstreams",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
