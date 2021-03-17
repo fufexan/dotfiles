@@ -5,11 +5,17 @@
 
 {
   imports = [
+    # base config
+    ./minimal.nix
+
     # files to link in ~
-    ./files.nix
+    ./modules/files.nix
+
+    # Wayland config
+    #./modules/wayland.nix
 
     # X config
-    ./xsession.nix
+    ./modules/xsession.nix
   ];
 
   # install programs

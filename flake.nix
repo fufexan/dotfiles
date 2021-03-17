@@ -11,6 +11,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-wayland = {
+      url = "github:colemickens/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     wlroots-src = {
       url = "github:danvd/wlroots-eglstreams";
       flake = false;
@@ -22,7 +32,7 @@
     #};
   };
 
-  outputs = { self, utils, nixpkgs, agenix, ... }@inputs:
+  outputs = { self, utils, nixpkgs, agenix, home-manager, ... }@inputs:
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -77,7 +87,8 @@
         self.nixosModules.configuration
         self.nixosModules.flakes
         agenix.nixosModules.age
-        nixpkgs.nixosModules.notDetected # add nixos hardware
+        home-manager.nixosModules.home-manager
+        { home-manager.useGlobalPkgs = true; }
         { nix = utils.lib.nixDefaultsFromInputs inputs; }
       ];
     };
