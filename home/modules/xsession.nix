@@ -167,7 +167,7 @@ in {
       mpdSupport = true;
       pulseSupport = true;
     };
-    config = ../config/polybar;
+    config = ../config/polybar/config;
     script = ''
       polybar main &
       polybar external &
