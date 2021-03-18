@@ -75,7 +75,6 @@
       coc-pairs
       coc-highlight
       vim-nix
-      vimsence
     ];
     extraConfig = builtins.readFile ./config/init.vim;
     vimAlias = true;
