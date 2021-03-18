@@ -3,28 +3,37 @@
 with lib;
 let
   pipewire = (pkgs.pipewire.override { hsphfpdSupport = true; }).overrideAttrs
-  ({ buildInputs ? [ ], mesonFlags ? [], ... }: {
-    version = "git";
-    src = inputs.pipewire;
-    buildInputs = buildInputs ++ [ pkgs.SDL2 ];
-    mesonFlags = mesonFlags ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
-    patches = [
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0040-alsa-profiles-use-libdir.patch")
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0070-installed-tests-path.patch")
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0080-pipewire-config-dir.patch")
-      ./patches/pipewire-pulse-path.patch
-    ];
-  });
-  pipewirei686 = (pkgs.pkgsi686Linux.pipewire.override { hsphfpdSupport = true; }).overrideAttrs
-  ({ buildInputs ? [ ], mesonFlags ? [],... }: {
+    ({ buildInputs ? [ ], mesonFlags ? [ ], ... }: {
+      version = "git";
+      src = inputs.pipewire;
+      buildInputs = buildInputs ++ [ pkgs.SDL2 ];
+      mesonFlags = mesonFlags
+        ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
+      patches = [
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/0040-alsa-profiles-use-libdir.patch")
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/0070-installed-tests-path.patch")
+        (pkgs.path
+          + "/pkgs/development/libraries/pipewire/0080-pipewire-config-dir.patch")
+        ./patches/pipewire-pulse-path.patch
+      ];
+    });
+  pipewirei686 = (pkgs.pkgsi686Linux.pipewire.override {
+    hsphfpdSupport = true;
+  }).overrideAttrs ({ buildInputs ? [ ], mesonFlags ? [ ], ... }: {
     version = "git";
     src = inputs.pipewire;
     buildInputs = buildInputs ++ [ pkgs.pkgsi686Linux.SDL2 ];
-    mesonFlags = mesonFlags ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
+    mesonFlags = mesonFlags
+      ++ [ "-Dpipewire_media_session_prefix=${placeholder "mediaSession"}" ];
     patches = [
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0040-alsa-profiles-use-libdir.patch")
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0070-installed-tests-path.patch")
-      (pkgs.path + "/pkgs/development/libraries/pipewire/0080-pipewire-config-dir.patch")
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/0040-alsa-profiles-use-libdir.patch")
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/0070-installed-tests-path.patch")
+      (pkgs.path
+        + "/pkgs/development/libraries/pipewire/0080-pipewire-config-dir.patch")
       ./patches/pipewire-pulse-path.patch
     ];
   });

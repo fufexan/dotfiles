@@ -50,10 +50,13 @@
       };
 
       nixosProfiles = {
-        homesv.modules = with self.nixosModules; [
-          (import ./hosts/homesv)
-          services
-        ];
+        homesv = {
+          extraArgs = inputs;
+          modules = with self.nixosModules; [
+            (import ./hosts/homesv)
+            services
+          ];
+        };
 
         kiiro = {
           extraArgs = inputs;
@@ -61,7 +64,6 @@
             (import ./hosts/kiiro)
             fonts
             pipewire
-            services
             snd_usb_audio
             wayland
             xorg
@@ -71,10 +73,7 @@
 
       overlay = import ./overlays;
 
-      packagesFunc = channels: {
-        inherit (channels.nixpkgs)
-        lightcord;
-      };
+      packagesFunc = channels: { inherit (channels.nixpkgs) lightcord; };
 
       sharedOverlays = [
         self.overlay

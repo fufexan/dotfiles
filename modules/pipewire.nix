@@ -3,8 +3,7 @@
 let
   pipewire = pkgs.pipewire;
   pipewirei686 = pkgs.pkgsi686Linux.pipewire;
-in
-{
+in {
   # sound
   services.pipewire = {
     enable = true;

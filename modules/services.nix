@@ -4,7 +4,7 @@
 
 {
   security.acme = {
-    acceptTerms = true;\
+    acceptTerms = true;
     email = "fufexan@protonmail.com";
   };
 
@@ -53,11 +53,11 @@
   };
 
   services.openssh.knownHosts.kiiro.publicKey =
-  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ/FGSeXJhOeTVrAdnvvnFumuRliSWii6HceY879bSS8 fufexan@pm.me";
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ/FGSeXJhOeTVrAdnvvnFumuRliSWii6HceY879bSS8 fufexan@pm.me";
 
   services.samba = {
     enable = true;
-    securityType = user;
+    securityType = "user";
     extraConfig = ''
       workgroup = WORKGROUP
       server string = homesv

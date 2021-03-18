@@ -1,3 +1,1 @@
-final: prev: {
-  lightcord = prev.callPackage ./lightcord { };
-}
+final: prev: { lightcord = prev.callPackage ./lightcord { }; }
