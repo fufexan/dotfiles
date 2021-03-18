@@ -40,9 +40,6 @@
 
   nix.autoOptimiseStore = true;
 
-  # allow proprietary packages (including drivers)
-  nixpkgs.config.allowUnfree = true;
-
   # enable programs
   programs.less.enable = true;
   programs.zsh = {
@@ -67,8 +64,24 @@
   # disable sudo
   security.sudo.enable = false;
 
+  # services
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+    publish.domain = true;
+    publish.userServices = true;
+  };
+
+  services.openssh = {
+    enable = true;
+    useDns = true;
+    ports = [ 69 ];
+  };
+
+  services.transmission.enable = true;
+
   system.stateVersion = "20.09";
-  # allow system to auto-upgrade
   system.autoUpgrade.enable = true;
 
   time.timeZone = "Europe/Bucharest";

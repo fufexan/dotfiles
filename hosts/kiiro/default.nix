@@ -34,13 +34,29 @@
   };
   networking.firewall.enable = false;
 
-  programs.adb.enable = true;
-  programs.steam.enable = true;
+  programs = {
+    adb.enable = true;
+    steam.enable = true;
+  };
 
-  # use dconf in Home Manager
-  services.dbus.packages = [ pkgs.gnome3.dconf ];
+  services = {
+    dbus.packages = [ pkgs.gnome3.dconf ];
 
-  services.btrfs.autoScrub.enable = true;
+    btrfs.autoScrub.enable = true;
+
+    geoclue2.enable = true;
+
+    printing = {
+      enable = true;
+      drivers = [ pkgs.fxlinuxprint ];
+    };
+
+    ratbagd.enable = true;
+
+    tailscale.enable = true;
+
+    udisks2.enable = true;
+  };
 
   virtualisation.libvirtd.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
