@@ -26,6 +26,12 @@
       flake = false;
     };
 
+    nix-zsh-comp = {
+      url =
+        "github:spwhitt/nix-zsh-completions/939c48c182e9d018eaea902b1ee9d00a415dba86";
+      flake = false;
+    };
+
     pipewire = {
       type = "gitlab";
       host = "gitlab.freedesktop.org";
@@ -89,6 +95,9 @@
                 sha256 = "1y1821islx0cg61z9kshs4mkvcp45bpkmzbll5zpzq84ycnqji2y";
               };
             });
+
+            nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
+              (old: { src = inputs.nix-zsh-comp; });
 
             #wlroots = prev.wlroots.overrideAttrs (old: {
             #  src = inputs.wlroots-src;
