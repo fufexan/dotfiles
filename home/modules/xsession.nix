@@ -249,9 +249,12 @@ in {
         "~/.local/bin/dynamic_bspwm.sh {b,g} {+,-}";
       #	programs
       # screenshot curren monitor
-      "super + Print" = "~/.local/bin/maim_monitor.sh";
+      "Print" = "~/.local/bin/maim_monitor.sh";
       # screenshot menu
-      "Print" = "${rofiScripts}/screenshot.sh";
+      "super + Print" = "${rofiScripts}/screenshot.sh";
+      # screencast region
+      "{_,ctrl + } alt + Print" =
+        "~/.local/bin/scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).{mp4,gif}";
       # backlight menu
       "super + b" = "${rofiScripts}/backlight.sh";
       # powermenu

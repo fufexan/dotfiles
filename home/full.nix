@@ -42,6 +42,7 @@
     droidcam
     jellyfin-mpv-shim
     # misc
+    cached-nix-shell
     discord-rpc # RPC interfacing lib
     dunst # for dunstctl
     freerdp # for MS Office
