@@ -76,7 +76,7 @@
       coc-highlight
       vim-nix
     ];
-    extraConfig = builtins.readFile ./config/init.vim;
+    extraConfig = builtins.readFile ./config/nvim/init.vim;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;

@@ -16,17 +16,21 @@ in {
   };
 
   # config files
-  home.file."flameshot.ini" = {
-    source = ../config/flameshot.ini;
-    target = "${home}/.config/flameshot/flameshot.ini";
-  };
-  home.file.rangerrc = {
-    source = ../config/ranger.rc.conf;
+  home.file.ranger = {
+    source = ../config/ranger/rc.conf;
     target = "${home}/.config/ranger/rc.conf";
   };
+  home.file.rangerdevicons_init = {
+    source = ../config/ranger/devicons/__init__.py;
+    target = "${home}/.config/ranger/plugins/devicons/__init__.py";
+  };
+  home.file.rangerdevicons = {
+    source = ../config/ranger/devicons/devicons.py;
+    target = "${home}/.config/ranger/plugins/devicons/devicons.py";
+  };
   home.file.youtube-dl = {
-    source = ../config/youtube-dl.conf;
-    target = "${home}/.config/youtube-dl/config";
+    source = ../config/youtube-dl/conf;
+    target = "${home}/.config/youtube-dl/conf";
   };
 
   # scripts
@@ -44,5 +48,15 @@ in {
   home.file.rofiScripts = {
     source = ../scripts/rofi;
     target = "${home}/.local/bin/rofi";
+  };
+  # screen recording
+  home.file.scrrec = {
+    source = ../scripts/scrrec;
+    target = "${home}/.local/bin/scrrec";
+  };
+  # mp4 to gif
+  home.file.mov2gif = {
+    source = ../scripts/mov2gif;
+    target = "${home}/.local/bin/mov2gif";
   };
 }
