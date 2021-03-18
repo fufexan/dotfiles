@@ -184,8 +184,7 @@ in {
   };
   services.sxhkd = {
     enable = true;
-    keybindings = let rofiScripts = "~/.local/bin/rofi";
-    in {
+    keybindings = {
       # start terminal
       "super + Return" = "alacritty";
       # application launcher
@@ -251,23 +250,23 @@ in {
       # screenshot curren monitor
       "Print" = "~/.local/bin/maim_monitor.sh";
       # screenshot menu
-      "super + Print" = "${rofiScripts}/screenshot.sh";
+      "super + Print" = "screenshot.sh";
       # screencast region
-      "{_,ctrl + } alt + Print" =
-        "~/.local/bin/scrrec -s ~/Videos/Screen\ Recordings/$(date +%F-%T).{mp4,gif}";
+      "{_,ctrl + }alt + Print" =
+        "scrrec -s ~/Videos/scrrec/$(date +%F-%T).{mp4,gif}";
       # backlight menu
-      "super + b" = "${rofiScripts}/backlight.sh";
+      "super + b" = "backlight.sh";
       # powermenu
-      "super + p" = "${rofiScripts}/powermenu.sh";
+      "super + p" = "powermenu.sh";
       # volume menu
-      "super + v" = "${rofiScripts}/volume.sh";
+      "super + v" = "volume.sh";
       # mpd menu
-      "super + shift + m" = "${rofiScripts}/mpd.sh";
+      "super + shift + m" = "mpd.sh";
       # emoji launcher
       "super + e" = "rofi -show emoji";
       # rofi pass
       "super + i" = "rofi-pass";
-      # window switcher
+      # window switchere
       "alt + Tab" = "rofi -show window";
       # audio controls
       # play/pause

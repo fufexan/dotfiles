@@ -2,7 +2,7 @@
 
 {
   # add locations to $PATH
-  home.sessionPath = [ "~/.local/bin" ];
+  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
   # add environment variables
   home.sessionVariables = {
     EDITOR = "vim";
