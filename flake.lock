@@ -21,6 +21,23 @@
         "type": "github"
       }
     },
+    "alacritty-ligatures": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1612842776,
+        "narHash": "sha256-1dGk4ORzMSUQhuKSt5Yo7rOJCJ5/folwPX2tLiu0suA=",
+        "owner": "zenixls2",
+        "repo": "alacritty",
+        "rev": "3ed043046fc74f288d4c8fa7e4463dc201213500",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenixls2",
+        "ref": "ligature",
+        "repo": "alacritty",
+        "type": "github"
+      }
+    },
     "cachix": {
       "locked": {
         "lastModified": 1615879109,
@@ -165,6 +182,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "alacritty-ligatures": "alacritty-ligatures",
         "home-manager": "home-manager",
         "nix-zsh-comp": "nix-zsh-comp",
         "nixpkgs": "nixpkgs",

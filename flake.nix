@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    alacritty-ligatures = {
+      url = "github:zenixls2/alacritty/ligature";
+      flake = false;
+    };
+
     wlroots-src = {
       url = "github:danvd/wlroots-eglstreams";
       flake = false;
@@ -87,6 +92,16 @@
           with prev; {
             inherit (inputs) wlroots-src;
 
+            # dunno how to fix, please dm
+            #alacritty = prev.alacritty.overrideAttrs (old: {
+            #  src = inputs.alacritty-ligatures;
+            #  cargoDeps = old.cargoDeps.overrideAttrs (_: {
+            #    inherit src;
+            #    cargoSha256 =
+            #      "0000000000000000000000000000000000000000000000000000";
+            #  });
+            #});
+
             picom = prev.picom.overrideAttrs (old: {
               src = prev.fetchFromGitHub {
                 owner = "tryone144";
@@ -98,6 +113,10 @@
 
             nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
               (old: { src = inputs.nix-zsh-comp; });
+
+            wine = prev.wine.overrideAttrs (old: {
+              patches = ./overlays/patches/winepulse-v515revert-osu.patch;
+            });
 
             #wlroots = prev.wlroots.overrideAttrs (old: {
             #  src = inputs.wlroots-src;
