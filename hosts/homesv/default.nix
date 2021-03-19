@@ -1,8 +1,10 @@
 # home server configuration
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, agenix, inputs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
+
+  age.secrets.homesv.file = ../../secrets/homesv.age;
 
   home-manager.users.mihai = import ../../home/minimal.nix;
 
@@ -11,7 +13,9 @@
     version = 2;
     device = "/dev/sda";
   };
-  
+
+  environment.systemPackages = [ inputs.agenix.defaultPackage.x86_64-linux ]; 
+
   # network
   networking = {
     hostName = "homesv";
