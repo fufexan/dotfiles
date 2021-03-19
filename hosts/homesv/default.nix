@@ -14,8 +14,6 @@
     device = "/dev/sda";
   };
 
-  environment.systemPackages = [ inputs.agenix.defaultPackage.x86_64-linux ]; 
-
   # network
   networking = {
     hostName = "homesv";

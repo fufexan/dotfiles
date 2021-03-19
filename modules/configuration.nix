@@ -1,5 +1,5 @@
 # configuration shared by all hosts
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   # speed fix for Intel CPUs
@@ -12,6 +12,8 @@
 
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
+
+  environment.systemPackages = [ inputs.agenix.defaultPackage.x86_64-linux ]; 
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
