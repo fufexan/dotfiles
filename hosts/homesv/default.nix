@@ -4,7 +4,7 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  age.secrets.homesv.file = ../../secrets/homesv.age;
+  age.secrets.ddclientConfig.file = ../../secrets/ddclientConfig.age;
 
   home-manager.users.mihai = import ../../home/minimal.nix;
 

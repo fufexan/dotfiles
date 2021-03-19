@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, ... }:
 
 # server services
 
@@ -10,13 +10,8 @@
 
   services.ddclient = {
     enable = true;
-    domains = [ "@" "*" ];
     interval = "1h";
-    protocol = "namecheap";
-    username = "fufexan.xyz";
-    use = "web, web=dynamicdns.park-your-domain.com/getip";
-    server = "dynamicdns.park-your-domain.com";
-    password = "";
+    configFile = config.age.secrets.ddclientConfig.path;
   };
 
   services.nginx = {
