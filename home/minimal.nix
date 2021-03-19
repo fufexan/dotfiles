@@ -19,6 +19,7 @@
     # file downloaders
     youtube-dl
     # file managers
+    hunter
     ranger
     # nix tools
     nix-index
