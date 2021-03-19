@@ -188,8 +188,31 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "pipewire": "pipewire",
-        "utils": "utils",
+        "snm": "snm",
+        "utils": "utils_2",
         "wlroots-src": "wlroots-src"
+      }
+    },
+    "snm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1616143797,
+        "narHash": "sha256-RxwY8pYdmsWBWO4Gd4th5flB5jYQAFwmO68iP4dhcS0=",
+        "owner": "simple-nixos-mailserver",
+        "repo": "nixos-mailserver",
+        "rev": "7d53263b5a13bd476ed9f177d5a48d7b6feffecb",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "simple-nixos-mailserver",
+        "repo": "nixos-mailserver",
+        "rev": "7d53263b5a13bd476ed9f177d5a48d7b6feffecb",
+        "type": "gitlab"
       }
     },
     "unstableSmall": {
@@ -209,6 +232,21 @@
       }
     },
     "utils": {
+      "locked": {
+        "lastModified": 1605370193,
+        "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5021eac20303a61fafe17224c087f5519baed54d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
       "inputs": {
         "flake-utils": "flake-utils_2"
       },

@@ -14,38 +14,38 @@
     configFile = config.age.secrets.ddclientConfig.path;
   };
 
-  services.nginx = {
-    enable = false;
+  #services.nginx = {
+  #  enable = false;
 
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
+  #  recommendedGzipSettings = true;
+  #  recommendedOptimisation = true;
+  #  recommendedProxySettings = true;
+  #  recommendedTlsSettings = true;
 
-    sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
+  #  sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
 
-    virtualHosts = {
-      "jellyfin.fufexan.xyz" = {
-        forceSSL = true;
-        enableACME = true;
+  #  virtualHosts = {
+  #    "jellyfin.fufexan.xyz" = {
+  #      forceSSL = true;
+  #      enableACME = true;
 
-        locations."= /".return = "302 https://$host/web";
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8096";
-          extraConfig = "proxy_buffering off";
-        };
-        locations."= /web/".proxyPass = "http://127.0.0.1:8096/web/index.html";
-        locations."/socket" = {
-          proxyPass = "http://127.0.0.1:8096";
-          proxyWebsockets = true;
-          extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-          '';
-        };
-      };
-    };
-  };
+  #      locations."= /".return = "302 https://$host/web";
+  #      locations."/" = {
+  #        proxyPass = "http://127.0.0.1:8096";
+  #        extraConfig = "proxy_buffering off";
+  #      };
+  #      locations."= /web/".proxyPass = "http://127.0.0.1:8096/web/index.html";
+  #      locations."/socket" = {
+  #        proxyPass = "http://127.0.0.1:8096";
+  #        proxyWebsockets = true;
+  #        extraConfig = ''
+  #          proxy_set_header Upgrade $http_upgrade;
+  #          proxy_set_header Connection "upgrade";
+  #        '';
+  #      };
+  #    };
+  #  };
+  #};
 
   services.openssh.knownHosts.kiiro.publicKey =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ/FGSeXJhOeTVrAdnvvnFumuRliSWii6HceY879bSS8 fufexan@pm.me";

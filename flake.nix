@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    snm = {
+      url =
+        "gitlab:simple-nixos-mailserver/nixos-mailserver/7d53263b5a13bd476ed9f177d5a48d7b6feffecb";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     alacritty-ligatures = {
       url = "github:zenixls2/alacritty/ligature";
       flake = false;
@@ -47,7 +53,7 @@
     };
   };
 
-  outputs = { self, utils, nixpkgs, agenix, home-manager, ... }@inputs:
+  outputs = { self, utils, nixpkgs, agenix, home-manager, snm, ... }@inputs:
     utils.lib.systemFlake {
       inherit self inputs;
 
@@ -65,6 +71,8 @@
           extraArgs = inputs;
           modules = with self.nixosModules; [
             (import ./hosts/homesv)
+            snm.nixosModule
+            (import ./modules/mailserver.nix)
             services
           ];
         };

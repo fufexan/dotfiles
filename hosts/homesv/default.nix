@@ -4,7 +4,10 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  age.secrets.ddclientConfig.file = ../../secrets/ddclientConfig.age;
+  age.secrets = {
+    ddclientConfig.file = ../../secrets/ddclientConfig.age;
+    mailPass.file = ../../secrets/mailPass.age;
+  };
 
   home-manager.users.mihai = import ../../home/minimal.nix;
 
