@@ -7,9 +7,7 @@
 , glib
 , gst_all_1
 }:
-/*with import <nixpkgs> {};*/
 
-assert stdenv.isDarwin -> IOKit != null;
 let
   date = "2020-05-22";
   mozillaOverlay = fetchFromGitHub {
