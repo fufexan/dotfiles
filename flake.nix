@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url =
       "github:NixOS/nixpkgs/29b0d4d0b600f8f5dd0b86e3362a33d4181938f9";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -59,7 +59,16 @@
 
       channels.nixpkgs.input = nixpkgs;
 
-      nixosModules = import ./modules;
+      nixosModules = utils.lib.modulesFromList [
+        ./modules/configuration.nix
+        ./modules/fonts.nix
+        ./modules/mailserver.nix
+        ./modules/pipewire.nix
+        ./modules/services.nix
+        ./modules/snd_usb_audio.nix
+        ./modules/wayland.nix
+        ./modules/xorg.nix
+      ];
 
       channelsConfig = {
         allowUnfree = true;
@@ -68,17 +77,14 @@
 
       nixosProfiles = {
         homesv = {
-          extraArgs = inputs;
-          modules = with self.nixosModules; [
-            (import ./hosts/homesv)
-            snm.nixosModule
-            (import ./modules/mailserver.nix)
-            services
-          ];
+          modules = with self.nixosModules;
+            [ services ] ++ [
+              (import ./hosts/homesv)
+              (snm.nixosModule (import ./modules/mailserver.nix))
+            ];
         };
 
         kiiro = {
-          extraArgs = inputs;
           modules = with self.nixosModules; [
             (import ./hosts/kiiro)
             fonts
@@ -92,7 +98,17 @@
 
       overlay = import ./overlays;
 
-      packagesFunc = channels: { inherit (channels.nixpkgs) lightcord; };
+      packagesBuilder = channels: { inherit (channels.nixpkgs) lightcord; };
+
+      sharedExtraArgs = { inherit inputs; };
+
+      sharedModules = [
+        self.nixosModules.configuration
+        agenix.nixosModules.age
+        home-manager.nixosModules.home-manager
+        { home-manager.useGlobalPkgs = true; }
+        utils.nixosModules.saneFlakeDefaults
+      ];
 
       sharedOverlays = [
         self.overlay
@@ -140,15 +156,6 @@
             #  buildInputs = old.buildInputs ++ [ prev.cmake prev.wlroots ];
             #});
           })
-      ];
-
-      sharedModules = [
-        self.nixosModules.configuration
-        self.nixosModules.flakes
-        agenix.nixosModules.age
-        home-manager.nixosModules.home-manager
-        { home-manager.useGlobalPkgs = true; }
-        { nix = utils.lib.nixDefaultsFromInputs inputs; }
       ];
     };
 }

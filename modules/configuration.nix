@@ -13,7 +13,10 @@
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
 
-  environment.systemPackages = [ inputs.agenix.defaultPackage.x86_64-linux ]; 
+  environment.systemPackages = [
+    inputs.agenix.defaultPackage.x86_64-linux
+    pkgs.git
+  ];
 
   # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
