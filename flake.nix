@@ -4,20 +4,15 @@
   inputs = {
     nixpkgs.url =
       "github:NixOS/nixpkgs/29b0d4d0b600f8f5dd0b86e3362a33d4181938f9";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    # flakes
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs-wayland = {
-      url = "github:colemickens/nixpkgs-wayland";
+    gytis = {
+      url = "github:gytis-ivaskevicius/nixfiles";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -27,13 +22,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # not flakes
     alacritty-ligatures = {
       url = "github:zenixls2/alacritty/ligature";
-      flake = false;
-    };
-
-    wlroots-src = {
-      url = "github:danvd/wlroots-eglstreams";
       flake = false;
     };
 
@@ -43,7 +34,7 @@
       flake = false;
     };
 
-    pipewire = {
+    pipewire-git = {
       type = "gitlab";
       host = "gitlab.freedesktop.org";
       owner = "pipewire";
@@ -51,20 +42,24 @@
       rev = "6324298bc5a716bb301918cfef7f31045e211883";
       flake = false;
     };
+    
+    wlroots-src = {
+      url = "github:danvd/wlroots-eglstreams";
+      flake = false;
+    };
   };
 
-  outputs = { self, utils, nixpkgs, agenix, home-manager, snm, ... }@inputs:
-    utils.lib.systemFlake {
+  outputs = { self, nixpkgs, agenix, gytis, snm, ... }@inputs:
+    gytis.inputs.utils.lib.systemFlake {
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
 
       channelsConfig = {
         allowUnfree = true;
-        permittedInsecurePackages = [ "openssl-1.0.2u" ];
       };
 
-      nixosModules = utils.lib.modulesFromList [
+      nixosModules = gytis.inputs.utils.lib.modulesFromList [
         ./modules/configuration.nix
         ./modules/fonts.nix
         ./modules/mailserver.nix
@@ -92,35 +87,29 @@
         ];
       };
 
-      packagesBuilder = channels: { inherit (channels.nixpkgs) lightcord; };
+      packagesBuilder = channels: { inherit (channels.nixpkgs) hunter; };
 
       sharedExtraArgs = { inherit inputs; };
 
       sharedModules = [
         self.nixosModules.configuration
         agenix.nixosModules.age
-        home-manager.nixosModules.home-manager
+        gytis.inputs.home-manager.nixosModules.home-manager
         { home-manager.useGlobalPkgs = true; }
-        utils.nixosModules.saneFlakeDefaults
+        gytis.inputs.utils.nixosModules.saneFlakeDefaults
       ];
 
       overlay = import ./overlays;
 
       sharedOverlays = [
         self.overlay
+        gytis.overlay
         (final: prev:
           with prev; {
             inherit (inputs) wlroots-src;
 
-            # dunno how to fix, please dm
-            #alacritty = prev.alacritty.overrideAttrs (old: {
-            #  src = inputs.alacritty-ligatures;
-            #  cargoDeps = old.cargoDeps.overrideAttrs (_: {
-            #    inherit src;
-            #    cargoSha256 =
-            #      "0000000000000000000000000000000000000000000000000000";
-            #  });
-            #});
+            nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
+              (old: { src = inputs.nix-zsh-comp; });
 
             picom = prev.picom.overrideAttrs (old: {
               src = prev.fetchFromGitHub {
@@ -131,9 +120,6 @@
               };
             });
 
-            nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
-              (old: { src = inputs.nix-zsh-comp; });
-
             #wlroots = prev.wlroots.overrideAttrs (old: {
             #  src = inputs.wlroots-src;
             #  buildInputs = old.buildInputs ++ (with prev; [
@@ -142,10 +128,6 @@
             #    xorg.xcbutilrenderutil
             #    xwayland
             #  ]);
-            #});
-            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
-            #  mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
-            #  buildInputs = old.buildInputs ++ [ prev.cmake prev.wlroots ];
             #});
           })
       ];
