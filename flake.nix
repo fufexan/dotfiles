@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url =
       "github:NixOS/nixpkgs/29b0d4d0b600f8f5dd0b86e3362a33d4181938f9";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -59,6 +59,11 @@
 
       channels.nixpkgs.input = nixpkgs;
 
+      channelsConfig = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "openssl-1.0.2u" ];
+      };
+
       nixosModules = utils.lib.modulesFromList [
         ./modules/configuration.nix
         ./modules/fonts.nix
@@ -70,33 +75,22 @@
         ./modules/xorg.nix
       ];
 
-      channelsConfig = {
-        allowUnfree = true;
-        permittedInsecurePackages = [ "openssl-1.0.2u" ];
-      };
-
       nixosProfiles = {
-        homesv = {
-          modules = with self.nixosModules;
-            [ services ] ++ [
-              (import ./hosts/homesv)
-              (snm.nixosModule (import ./modules/mailserver.nix))
-            ];
-        };
+        homesv.modules = with self.nixosModules; [
+          (import ./hosts/homesv)
+          (snm.nixosModule (import ./modules/mailserver.nix))
+          services
+        ];
 
-        kiiro = {
-          modules = with self.nixosModules; [
-            (import ./hosts/kiiro)
-            fonts
-            pipewire
-            snd_usb_audio
-            wayland
-            xorg
-          ];
-        };
+        kiiro.modules = with self.nixosModules; [
+          (import ./hosts/kiiro)
+          fonts
+          pipewire
+          snd_usb_audio
+          wayland
+          xorg
+        ];
       };
-
-      overlay = import ./overlays;
 
       packagesBuilder = channels: { inherit (channels.nixpkgs) lightcord; };
 
@@ -109,6 +103,8 @@
         { home-manager.useGlobalPkgs = true; }
         utils.nixosModules.saneFlakeDefaults
       ];
+
+      overlay = import ./overlays;
 
       sharedOverlays = [
         self.overlay
@@ -137,10 +133,6 @@
 
             nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
               (old: { src = inputs.nix-zsh-comp; });
-
-            wine = prev.wine.overrideAttrs (old: {
-              patches = ./overlays/patches/winepulse-v515revert-osu.patch;
-            });
 
             #wlroots = prev.wlroots.overrideAttrs (old: {
             #  src = inputs.wlroots-src;
