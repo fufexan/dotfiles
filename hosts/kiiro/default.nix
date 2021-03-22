@@ -1,8 +1,15 @@
 # symbolistic yellow; main pc
-{ config, pkgs, ... }:
+{ config, pkgs, agenix, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
+
+  age.secrets = {
+    mailPassPlain = {
+      file = ../../secrets/mailPassPlain.age;
+      owner = "mihai";
+    };
+  };
 
   home-manager.users.mihai = import ../../home/full.nix;
 

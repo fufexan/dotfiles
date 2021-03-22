@@ -11,4 +11,5 @@ let
 in {
   "ddclientConfig.age".publicKeys = users ++ systems;
   "mailPass.age".publicKeys = users ++ systems;
+  "mailPassPlain.age".publicKeys = users ++ systems;
 }

@@ -11,6 +11,9 @@
     # files to link in ~
     ./modules/files.nix
 
+    # mail config
+    ./modules/mail.nix
+
     # Wayland config
     #./modules/wayland.nix
 
@@ -50,18 +53,6 @@
     scrcpy # mirror Android screen
     ueberzug # image display in terminals
   ];
-
-  # accounts
-  #accounts.email = {
-  #  accounts.fufexan = {
-  #    address = "mihai@fufexan.xyz";
-  #    aliases = [ "me@fufexan.xyz" ];
-  #    name = "mihai";
-  #    neomutt.enable = true;
-  #    notmuch.enable = true;
-  #    offlineimap.enable = true;
-  #  };
-  #};
 
   gtk = {
     enable = true;
@@ -140,11 +131,6 @@
     enable = true;
     package = pkgs.ncmpcpp.override { visualizerSupport = true; };
     settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
-  };
-
-  programs.neomutt = {
-    enable = false;
-    checkStatsInterval = 60;
   };
 
   # add more plugins on top of ./minimal.nix ones
