@@ -73,7 +73,6 @@
         ./modules/security.nix
         ./modules/services.nix
         ./modules/snd_usb_audio.nix
-        ./modules/wayland.nix
         ./modules/xorg.nix
       ];
 
@@ -89,7 +88,6 @@
           fonts
           pipewire
           snd_usb_audio
-          wayland
           xorg
         ];
       };
