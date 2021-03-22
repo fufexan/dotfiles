@@ -167,13 +167,6 @@
   };
 
   # services
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    defaultCacheTtl = 300;
-    defaultCacheTtlSsh = 300;
-  };
-
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Music";

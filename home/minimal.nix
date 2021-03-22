@@ -42,6 +42,7 @@
     enableNixDirenvIntegration = true;
     enableZshIntegration = true;
   };
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -51,10 +52,12 @@
       "--exact"
     ];
   };
+
   programs.gh = {
     enable = true;
     gitProtocol = "ssh";
   };
+
   programs.git = {
     enable = true;
     ignores = [ "*~" "*.swp" ];
@@ -65,10 +68,12 @@
     userEmail = "fufexan@pm.me";
     userName = "Mihai Fufezan";
   };
+
   programs.gpg = {
     enable = true;
     settings = { homedir = "~/.local/share/gnupg"; };
   };
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
@@ -82,10 +87,19 @@
     vimdiffAlias = true;
     withNodeJs = true;
   };
+
   programs.password-store = {
     enable = true;
     package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
   };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    defaultCacheTtl = 300;
+    defaultCacheTtlSsh = 300;
+  };
+
   services.lorri.enable = true;
 }

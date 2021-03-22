@@ -106,6 +106,7 @@
       gco = "git checkout";
       gcb = "git checkout -b";
       gd = "git diff";
+      gds = "git diff --staged";
       gp = "git push";
       gpl = "git pull";
       gl = "git log";
