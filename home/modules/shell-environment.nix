@@ -2,7 +2,10 @@
 
 {
   # add locations to $PATH
-  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.local/bin/rofi"
+  ];
   # add environment variables
   home.sessionVariables = {
     EDITOR = "vim";
@@ -22,8 +25,8 @@
     dirHashes = {
       dl = "$HOME/Downloads";
       docs = "$HOME/Documents";
-      dots = "$HOME/Documents/code/dotfiles";
       code = "$HOME/Documents/code";
+      dots = "$HOME/Documents/code/dotfiles";
       pics = "$HOME/Pictures";
       vids = "$HOME/Videos";
     };

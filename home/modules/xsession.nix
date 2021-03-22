@@ -41,7 +41,7 @@ in {
           gamma = "1.099:1.0:0.909";
           mode = "1366x768";
           position = "1920x312";
-          rate = "59.79";
+          rate = "60.00";
         };
       };
       hooks.postswitch = "systemctl --user restart random-background polybar";
@@ -61,6 +61,20 @@ in {
         DVI-D-0.enable = false;
       };
       hooks.postswitch = "systemctl --user restart random-background polybar";
+    };
+    profiles.osu = {
+      fingerprint = edids;
+      config = {
+        HDMI-0 = {
+          enable = true;
+          crtc = 1;
+          gamma = "1.099:1.0:0.909";
+          mode = "1280x1024";
+          position = "0x0";
+          rate = "75.00";
+          primary = true;
+        };
+      };
     };
   };
   programs.feh.enable = true;
@@ -184,7 +198,12 @@ in {
   };
   services.sxhkd = {
     enable = true;
-    keybindings = {
+    keybindings = 
+    let
+      # user scripts
+      s = "~/.local/bin";
+      rs = "${s}/rofi";
+    in {
       # start terminal
       "super + Return" = "alacritty";
       # application launcher
@@ -245,23 +264,23 @@ in {
       "super + r" = "bspc node @parent -R 90";
       # increase/decrease borders
       "super + {_, ctrl + } {equal,minus}" =
-        "~/.local/bin/dynamic_bspwm.sh {b,g} {+,-}";
+        "${s}/dynamic_bspwm.sh {b,g} {+,-}";
       #	programs
       # screenshot curren monitor
-      "Print" = "~/.local/bin/maim_monitor.sh";
+      "Print" = "${s}/maim_monitor.sh";
       # screenshot menu
-      "super + Print" = "screenshot.sh";
+      "super + Print" = "${rs}/screenshot.sh";
       # screencast region
-      "{_,ctrl + }alt + Print" =
-        "scrrec -s ~/Videos/scrrec/$(date +%F-%T).{mp4,gif}";
+      "alt + {_,ctrl + }Print" =
+        "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).{mp4,gif}";
       # backlight menu
-      "super + b" = "backlight.sh";
+      "super + b" = "${rs}/backlight.sh";
       # powermenu
-      "super + p" = "powermenu.sh";
+      "super + p" = "${rs}/powermenu.sh";
       # volume menu
-      "super + v" = "volume.sh";
+      "super + v" = "${rs}/volume.sh";
       # mpd menu
-      "super + shift + m" = "mpd.sh";
+      "super + shift + m" = "${rs}/mpd.sh";
       # emoji launcher
       "super + e" = "rofi -show emoji";
       # rofi pass
@@ -297,12 +316,6 @@ in {
         HDMI-0 = [ "一" "二" "三" "四" "五" ];
         DVI-D-0 = [ "六" "七" "八" "九" "十" ];
       };
-      rules = {
-        "osu!.exe" = {
-          desktop = "^3";
-          state = "fullscreen";
-        };
-      };
       settings = {
         border_width = 2;
         window_gap = 8;
@@ -318,8 +331,8 @@ in {
         single_monocle = true;
       };
       startupPrograms = [
-        "autorandr -c" # sets proper monitor layout
-        "bspc desktop -f ^1" # focuses first desktop (workspace)
+        # sets proper monitor layout, then focuses first desktop
+        "autorandr -c && bspc desktop -f 1"
       ];
     };
   };
