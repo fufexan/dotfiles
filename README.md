@@ -3,18 +3,23 @@
 In-house baked configs for Home-Manager and NixOS. Borrowed bits sprinkled on
 top. Using flakes.
 
+The system is built using
+[flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus).
+Check it out!
+
 ## Components
 
 As of now, there are multiple modules included for:
 
 - [Home](./home) - Home-Manager config
-- Flakes - enable flakes
 - Fonts - configure fonts
 - PipeWire - replace Pulseaudio, JACK and ALSA
-- PipeWire-unstable - tadeokondrak's replacement for the NixOS module
-- Services - manage services
-- Snd-usb-audio - low latency usb soundcards
-- Wayland - compositors related options
+- PipeWire-unstable - tadeokondrak's replacement for the NixOS module (which
+  sadly doesn't work for me)
+- Security - tweaks for a more secure system, borrowed from
+  [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
+- Services - server services
+- Snd-usb-audio - low latency usb soundcard support in the kernel
 - Xorg - default DM/DE/WM and keyboard config
 
 Most of the configuration lies in `modules/configuration.nix`.
