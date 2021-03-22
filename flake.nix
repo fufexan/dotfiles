@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url =
       "github:NixOS/nixpkgs/29b0d4d0b600f8f5dd0b86e3362a33d4181938f9";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     # flakes
     agenix = {
@@ -13,6 +14,13 @@
 
     gytis = {
       url = "github:gytis-ivaskevicius/nixfiles";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "hm";
+      inputs.utils.follows = "utils";
+    };
+
+    hm = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -42,24 +50,22 @@
       rev = "6324298bc5a716bb301918cfef7f31045e211883";
       flake = false;
     };
-    
+
     wlroots-src = {
       url = "github:danvd/wlroots-eglstreams";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, agenix, gytis, snm, ... }@inputs:
-    gytis.inputs.utils.lib.systemFlake {
+  outputs = { self, utils, nixpkgs, agenix, gytis, hm, snm, ... }@inputs:
+    utils.lib.systemFlake {
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
 
-      channelsConfig = {
-        allowUnfree = true;
-      };
+      channelsConfig = { allowUnfree = true; };
 
-      nixosModules = gytis.inputs.utils.lib.modulesFromList [
+      nixosModules = utils.lib.modulesFromList [
         ./modules/configuration.nix
         ./modules/fonts.nix
         ./modules/mailserver.nix
@@ -94,9 +100,9 @@
       sharedModules = [
         self.nixosModules.configuration
         agenix.nixosModules.age
-        gytis.inputs.home-manager.nixosModules.home-manager
+        hm.nixosModules.home-manager
         { home-manager.useGlobalPkgs = true; }
-        gytis.inputs.utils.nixosModules.saneFlakeDefaults
+        utils.nixosModules.saneFlakeDefaults
       ];
 
       overlay = import ./overlays;
