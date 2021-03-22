@@ -70,6 +70,7 @@
         ./modules/fonts.nix
         ./modules/mailserver.nix
         ./modules/pipewire.nix
+        ./modules/security.nix
         ./modules/services.nix
         ./modules/snd_usb_audio.nix
         ./modules/wayland.nix
@@ -99,6 +100,7 @@
 
       sharedModules = [
         self.nixosModules.configuration
+        self.nixosModules.security
         agenix.nixosModules.age
         hm.nixosModules.home-manager
         { home-manager.useGlobalPkgs = true; }
