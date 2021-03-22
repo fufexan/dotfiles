@@ -81,6 +81,8 @@
     defaultCacheTtlSsh = 300;
   };
 
+  programs.kakoune.enable = true;
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
