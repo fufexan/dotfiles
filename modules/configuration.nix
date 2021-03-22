@@ -81,7 +81,6 @@
   services.openssh = {
     enable = true;
     useDns = true;
-    ports = [ 69 ];
   };
 
   services.transmission.enable = true;
@@ -94,6 +93,6 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "libvirtd" "adbusers" ];
+    extraGroups = [ "wheel" "libvirtd" "adbusers" "transmission" ];
   };
 }

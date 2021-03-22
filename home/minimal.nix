@@ -74,6 +74,13 @@
     settings = { homedir = "~/.local/share/gnupg"; };
   };
 
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    defaultCacheTtl = 300;
+    defaultCacheTtlSsh = 300;
+  };
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
@@ -94,11 +101,19 @@
     settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
   };
 
-  services.gpg-agent = {
+  programs.ssh = {
     enable = true;
-    enableSshSupport = true;
-    defaultCacheTtl = 300;
-    defaultCacheTtlSsh = 300;
+    compression = true;
+    matchBlocks = {
+      "homesv.local" = {
+        user = "mihai";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      "kiiro.local" = {
+        user = "mihai";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
   };
 
   services.lorri.enable = true;
