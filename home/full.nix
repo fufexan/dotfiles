@@ -15,7 +15,7 @@
     ./modules/mail.nix
 
     # Wayland config
-    #./modules/wayland.nix
+    ./modules/wayland.nix
 
     # X config
     ./modules/xsession.nix
