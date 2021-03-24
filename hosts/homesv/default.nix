@@ -29,7 +29,7 @@
   };
 
   # don't suspend when lid is closed
-  services.logind.lidswitch = "ignore";
+  services.logind.lidSwitch = "ignore";
 
   users.users = {
     user.isNormalUser = true;
