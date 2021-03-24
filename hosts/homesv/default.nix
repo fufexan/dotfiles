@@ -24,7 +24,12 @@
     interfaces.wlp2s0.useDHCP = true;
     wireless.iwd.enable = true;
   };
-  networking.firewall.enable = false;
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 ];
+  };
+
+  # don't suspend when lid is closed
+  services.logind.lidswitch = "ignore";
 
   users.users = {
     user.isNormalUser = true;

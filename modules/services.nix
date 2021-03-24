@@ -77,10 +77,13 @@
   };
 
   services.samba-wsdd.enable = true;
+  networking.firewall.allowedTCPPorts = [ 139 445 5357 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 3702 ];
 
   services.syncthing = {
     enable = true;
     guiAddress = ":8384";
+    openDefaultPorts = true;
   };
 
   services.transmission = {
