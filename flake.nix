@@ -114,12 +114,10 @@
         gytis.overlay
         (final: prev:
           with prev; {
-            inherit (inputs) wlroots-src;
-
             nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
               (old: { src = inputs.nix-zsh-comp; });
 
-            picom = prev.picom.overrideAttrs (old: {
+            picom-kawase = prev.picom.overrideAttrs (old: {
               src = prev.fetchFromGitHub {
                 owner = "tryone144";
                 repo = "compton";
@@ -127,6 +125,7 @@
                 sha256 = "1y1821islx0cg61z9kshs4mkvcp45bpkmzbll5zpzq84ycnqji2y";
               };
             });
+            picom = final.picom-kawase;
 
             # NOTE: sway 1.5.1 won't build with this for some reason
             #wlroots = prev.wlroots.overrideAttrs (old: {
@@ -158,7 +157,7 @@
       supportedSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
 
       packagesBuilder = channels: {
-        inherit (channels.nixpkgs) hunter nix-zsh-completions picom;
+        inherit (channels.nixpkgs) hunter nix-zsh-completions picom-kawase;
       };
 
       appsBuilder = channels:
@@ -169,7 +168,7 @@
             drv = hunter;
             exePath = "/bin/hunter";
           };
-          picom = mkApp {
+          picom-kawase = mkApp {
             drv = picom;
             exePath = "/bin/picom";
           };
