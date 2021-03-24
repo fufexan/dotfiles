@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     # flakes
     agenix = {
@@ -155,6 +155,8 @@
       ];
 
       supportedSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+
+      defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) hunter nix-zsh-completions picom-kawase;
