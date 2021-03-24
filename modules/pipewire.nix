@@ -13,15 +13,19 @@ in {
     pulse.enable = true;
 
     config = {
-      pipewire."context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 256;
-        "default.clock.min-quantum" = 16;
+      pipewire = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 256;
+          "default.clock.min-quantum" = 8;
+        };
       };
-      pipewire-pulse."context.properties".libpipewire-module-protocol-pulse.args = {
-        "pulse.min.req" = "16/48000";
-        "pulse.min.quantum" = "16/48000";
-        "pulse.min.frag" = "16/48000";
+      pipewire-pulse = {
+        "context.modules".libpipewire-module-protocol-pulse.args = {
+          "pulse.min.req" = "8/48000";
+          "pulse.min.quantum" = "8/48000";
+          "pulse.min.frag" = "8/48000";
+        };
       };
     };
   };
