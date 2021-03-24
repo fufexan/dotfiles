@@ -323,8 +323,9 @@
         "nixpkgs": "nixpkgs",
         "pipewire-git": "pipewire-git",
         "snm": "snm",
+        "sway-git": "sway-git",
         "utils": "utils_2",
-        "wlroots-src": "wlroots-src"
+        "wlroots-git": "wlroots-git"
       }
     },
     "snm": {
@@ -347,6 +348,23 @@
         "repo": "nixos-mailserver",
         "rev": "7d53263b5a13bd476ed9f177d5a48d7b6feffecb",
         "type": "gitlab"
+      }
+    },
+    "sway-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1616575659,
+        "narHash": "sha256-vAWmHSXJ5nJxfu20CPlTZalNbdn/IBg2SGZdqV+GYDc=",
+        "owner": "swaywm",
+        "repo": "sway",
+        "rev": "a9563a37101e022d5e9c14f8244b1f8a109b4536",
+        "type": "github"
+      },
+      "original": {
+        "owner": "swaywm",
+        "ref": "1.6-rc2",
+        "repo": "sway",
+        "type": "github"
       }
     },
     "utils": {
@@ -382,14 +400,14 @@
         "type": "github"
       }
     },
-    "wlroots-src": {
+    "wlroots-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1615630660,
-        "narHash": "sha256-QgMeU7yJ5Nfi0mw2GeMX/IBjr5RBmmnn4NKellSpEHU=",
+        "lastModified": 1616489812,
+        "narHash": "sha256-wGfX/y2NbQUzZsDEuEPodHZpB5sk+DPXykbbVykX+fE=",
         "owner": "danvd",
         "repo": "wlroots-eglstreams",
-        "rev": "5e570dc6f5d5d4c9f65c21c3994d0b9ab14e9752",
+        "rev": "d6ff7c293def4e2852d3805f7054a14c477e01c9",
         "type": "github"
       },
       "original": {

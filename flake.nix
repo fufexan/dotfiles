@@ -2,8 +2,7 @@
   description = "Advancing with Nix Flakes";
 
   inputs = {
-    nixpkgs.url =
-      "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     # flakes
@@ -51,7 +50,11 @@
       flake = false;
     };
 
-    wlroots-src = {
+    sway-git = {
+      url = "github:swaywm/sway/1.6-rc2";
+      flake = false;
+    };
+    wlroots-git = {
       url = "github:danvd/wlroots-eglstreams";
       flake = false;
     };
@@ -79,7 +82,8 @@
       nixosProfiles = {
         homesv.modules = with self.nixosModules; [
           (import ./hosts/homesv)
-          (snm.nixosModule (import ./modules/mailserver.nix))
+          snm.nixosModule
+          (import ./modules/mailserver.nix)
           services
         ];
 
@@ -91,8 +95,6 @@
           xorg
         ];
       };
-
-      packagesBuilder = channels: { inherit (channels.nixpkgs) hunter; };
 
       sharedExtraArgs = { inherit inputs; };
 
@@ -126,8 +128,9 @@
               };
             });
 
+            # NOTE: sway 1.5.1 won't build with this for some reason
             #wlroots = prev.wlroots.overrideAttrs (old: {
-            #  src = inputs.wlroots-src;
+            #  src = inputs.wlroots-git;
             #  buildInputs = old.buildInputs ++ (with prev; [
             #    libuuid
             #    cmake
@@ -135,7 +138,41 @@
             #    xwayland
             #  ]);
             #});
+
+            # broken
+            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
+            #  version = "1.6-rc1";
+            #  src = inputs.sway-git;
+            #  buildInputs = with prev;
+            #    [ cmake wayland-protocols libdrm ] ++ old.buildInputs;
+            #});
+
+            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
+            #  mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
+            #  buildInputs = with prev;
+            #    [ cmake wayland-protocols libdrm ] ++ old.buildInputs;
+            #});
           })
       ];
+
+      supportedSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
+
+      packagesBuilder = channels: {
+        inherit (channels.nixpkgs) hunter nix-zsh-completions picom;
+      };
+
+      appsBuilder = channels:
+        with channels.nixpkgs;
+        let mkApp = utils.lib.mkApp;
+        in {
+          hunter = mkApp {
+            drv = hunter;
+            exePath = "/bin/hunter";
+          };
+          picom = mkApp {
+            drv = picom;
+            exePath = "/bin/picom";
+          };
+        };
     };
 }
