@@ -87,6 +87,15 @@
           services
         ];
 
+        kasshoku = {
+          system = "i686-linux";
+          modules = with self.nixosModules; [
+            (import ./hosts/kasshoku)
+            fonts
+            pipewire
+            xorg
+          ];
+        };
         kiiro.modules = with self.nixosModules; [
           (import ./hosts/kiiro)
           fonts
