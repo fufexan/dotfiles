@@ -66,10 +66,10 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      window.dynamic_padding = false;
+      window.dynamic_padding = true;
       window.padding = {
-        x = 0;
-        y = 0;
+        x = 5;
+        y = 5;
       };
       scrolling.history = 10000;
       font = let font = "JetBrainsMono Nerd Font";
