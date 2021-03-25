@@ -1,4 +1,4 @@
 final: prev:
 {
-  hunter = prev.callPackage ./hunter { };
+  hunter = prev.callPackage ./hunter { }; 
 }

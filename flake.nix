@@ -66,7 +66,10 @@
 
       channels.nixpkgs.input = nixpkgs;
 
-      channelsConfig = { allowUnfree = true; };
+      channelsConfig = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "libsixel-1.8.6" ];
+      };
 
       nixosModules = utils.lib.modulesFromList [
         ./modules/configuration.nix
@@ -123,9 +126,11 @@
         gytis.overlay
         (final: prev:
           with prev; {
+
             nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
               (old: { src = inputs.nix-zsh-comp; });
 
+            picom = final.picom-kawase;
             picom-kawase = prev.picom.overrideAttrs (old: {
               src = prev.fetchFromGitHub {
                 owner = "tryone144";
@@ -134,7 +139,6 @@
                 sha256 = "1y1821islx0cg61z9kshs4mkvcp45bpkmzbll5zpzq84ycnqji2y";
               };
             });
-            picom = final.picom-kawase;
 
             # NOTE: sway 1.5.1 won't build with this for some reason
             #wlroots = prev.wlroots.overrideAttrs (old: {
