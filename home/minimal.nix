@@ -95,6 +95,8 @@
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
+    withPython = false;
+    withPython3 = false;
   };
 
   programs.password-store = {
