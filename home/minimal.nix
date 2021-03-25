@@ -81,7 +81,27 @@
     defaultCacheTtlSsh = 300;
   };
 
-  programs.kakoune.enable = true;
+  programs.kakoune = {
+    enable = true;
+    config = {
+      indentWidth = 2;
+      numberLines = {
+        enable = true;
+        highlightCursor = true;
+      };
+      showMatching = true;
+      tabStop = 4;
+      wrapLines = {
+        enable = true;
+        indent = true;
+        marker = "⏎";
+        word = true;
+      };
+    };
+    plugins = with pkgs.kakounePlugins; [
+      kakoune-rainbow kak-fzf kak-lsp
+    ];
+  };
 
   programs.neovim = {
     enable = true;
