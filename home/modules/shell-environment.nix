@@ -94,6 +94,8 @@
       zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
       zstyle ':completion:*' verbose true
       _comp_options+=(globdots)
+
+			${builtins.readFile ./nix-completions.sh}
     '';
     shellAliases = {
       grep = "grep --color";

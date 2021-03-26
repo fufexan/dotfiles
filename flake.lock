@@ -206,23 +206,6 @@
         "type": "github"
       }
     },
-    "nix-zsh-comp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1600188236,
-        "narHash": "sha256-3HVYez/wt7EP8+TlhTppm968Wl8x5dXuGU0P+8xNDpo=",
-        "owner": "spwhitt",
-        "repo": "nix-zsh-completions",
-        "rev": "939c48c182e9d018eaea902b1ee9d00a415dba86",
-        "type": "github"
-      },
-      "original": {
-        "owner": "spwhitt",
-        "repo": "nix-zsh-completions",
-        "rev": "939c48c182e9d018eaea902b1ee9d00a415dba86",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1616670887,
@@ -319,7 +302,6 @@
         "alacritty-ligatures": "alacritty-ligatures",
         "gytis": "gytis",
         "hm": "hm",
-        "nix-zsh-comp": "nix-zsh-comp",
         "nixpkgs": "nixpkgs",
         "pipewire-git": "pipewire-git",
         "snm": "snm",

@@ -35,13 +35,7 @@
       flake = false;
     };
 
-    nix-zsh-comp = {
-      url =
-        "github:spwhitt/nix-zsh-completions/939c48c182e9d018eaea902b1ee9d00a415dba86";
-      flake = false;
-    };
-
-    pipewire-git = {
+		pipewire-git = {
       type = "gitlab";
       host = "gitlab.freedesktop.org";
       owner = "pipewire";
@@ -126,9 +120,6 @@
         gytis.overlay
         (final: prev:
           with prev; {
-
-            nix-zsh-completions = prev.nix-zsh-completions.overrideAttrs
-              (old: { src = inputs.nix-zsh-comp; });
 
             picom = final.picom-kawase;
             picom-kawase = prev.picom.overrideAttrs (old: {
