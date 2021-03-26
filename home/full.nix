@@ -8,6 +8,9 @@
     # base config
     ./minimal.nix
 
+    # emacs config
+    ./editors/emacs.nix
+
     # files to link in ~
     ./modules/files.nix
 
@@ -109,11 +112,6 @@
       background_opacity = 0.7;
       live_config_reload = true;
     };
-  };
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs27;
   };
 
   programs.firefox = {
