@@ -83,6 +83,8 @@
     useDns = true;
   };
 
+  services.tailscale.enable = true;
+
   services.transmission.enable = true;
 
   system.stateVersion = "20.09";

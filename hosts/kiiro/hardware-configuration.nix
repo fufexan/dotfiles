@@ -28,5 +28,5 @@
     [ { device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; }
     ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }

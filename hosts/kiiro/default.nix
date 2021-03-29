@@ -59,8 +59,6 @@
 
     ratbagd.enable = true;
 
-    tailscale.enable = true;
-
     udisks2.enable = true;
   };
 
