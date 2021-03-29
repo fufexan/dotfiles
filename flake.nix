@@ -35,7 +35,12 @@
       flake = false;
     };
 
-		pipewire-git = {
+    picom-jonaburg = {
+      url = "github:jonaburg/picom";
+      flake = false;
+    };
+
+    pipewire-git = {
       type = "gitlab";
       host = "gitlab.freedesktop.org";
       owner = "pipewire";
@@ -121,15 +126,9 @@
         (final: prev:
           with prev; {
 
-            picom = final.picom-kawase;
-            picom-kawase = prev.picom.overrideAttrs (old: {
-              src = prev.fetchFromGitHub {
-                owner = "tryone144";
-                repo = "compton";
-                rev = "c67d7d7b2c36f29846c6693a2f39a2e191a2fcc4";
-                sha256 = "1y1821islx0cg61z9kshs4mkvcp45bpkmzbll5zpzq84ycnqji2y";
-              };
-            });
+            picom = final.picom-jonaburg;
+            picom-jonaburg =
+              prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
 
             # NOTE: sway 1.5.1 won't build with this for some reason
             #wlroots = prev.wlroots.overrideAttrs (old: {
@@ -163,7 +162,7 @@
       defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
 
       packagesBuilder = channels: {
-        inherit (channels.nixpkgs) hunter nix-zsh-completions picom-kawase;
+        inherit (channels.nixpkgs) hunter nix-zsh-completions picom-jonaburg;
       };
 
       appsBuilder = channels:
@@ -174,8 +173,8 @@
             drv = hunter;
             exePath = "/bin/hunter";
           };
-          picom-kawase = mkApp {
-            drv = picom;
+          picom-jonaburg = mkApp {
+            drv = picom-jonaburg;
             exePath = "/bin/picom";
           };
         };

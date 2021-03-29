@@ -277,6 +277,22 @@
         "type": "github"
       }
     },
+    "picom-jonaburg": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606582992,
+        "narHash": "sha256-R+YUGBrLst6CpUgG9VCwaZ+LiBSDWTp0TLt1Ou4xmpQ=",
+        "owner": "jonaburg",
+        "repo": "picom",
+        "rev": "a8445684fe18946604848efb73ace9457b29bf80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jonaburg",
+        "repo": "picom",
+        "type": "github"
+      }
+    },
     "pipewire-git": {
       "flake": false,
       "locked": {
@@ -303,6 +319,7 @@
         "gytis": "gytis",
         "hm": "hm",
         "nixpkgs": "nixpkgs",
+        "picom-jonaburg": "picom-jonaburg",
         "pipewire-git": "pipewire-git",
         "snm": "snm",
         "sway-git": "sway-git",
