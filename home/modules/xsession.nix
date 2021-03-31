@@ -148,6 +148,52 @@ in {
     blurExclude = [ "class_g = 'slop'" "class_g = 'Firefox'" ];
     experimentalBackends = true;
     extraOptions = ''
+      #################################
+      #          Animations           #
+      #################################
+      # requires https://github.com/jonaburg/picom
+      # (These are also the default values)
+      transition-length = 300
+      transition-pow-x = 0.1
+      transition-pow-y = 0.1
+      transition-pow-w = 0.1
+      transition-pow-h = 0.1
+      size-transition = true
+
+
+      #################################
+      #             Corners           #
+      #################################
+      # requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
+      corner-radius = 10.0;
+      rounded-corners-exclude = [
+        #"window_type = 'normal'",
+        "class_g = 'awesome'",
+        "class_g = 'Dunst'",
+        #"class_g = 'URxvt'",
+        #"class_g = 'XTerm'",
+        #"class_g = 'kitty'",
+        #"class_g = 'Alacritty'",
+        "class_g = 'Polybar'",
+        "class_g = 'code-oss'",
+        "class_g = 'TelegramDesktop'",
+        #"class_g = 'firefox'",
+        "class_g = 'Thunderbird'"
+      ];
+      round-borders = 1;
+      round-borders-exclude = [
+        #"class_g = 'TelegramDesktop'",
+      ];
+
+      fading = true;
+      fade-delta = 5
+
+      # Specify a list of conditions of windows that should not be faded.
+      # don't need this, we disable fading for all normal windows with wintypes: {}
+      fade-exclude = [
+        "class_g = 'slop'"   # maim
+      ]
+
       # improve performance
       glx-no-rebind-pixmap = true;
 
