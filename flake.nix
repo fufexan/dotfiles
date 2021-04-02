@@ -40,15 +40,6 @@
       flake = false;
     };
 
-    pipewire-git = {
-      type = "gitlab";
-      host = "gitlab.freedesktop.org";
-      owner = "pipewire";
-      repo = "pipewire";
-      rev = "6324298bc5a716bb301918cfef7f31045e211883";
-      flake = false;
-    };
-
     sway-git = {
       url = "github:swaywm/sway/1.6-rc2";
       flake = false;
@@ -77,7 +68,6 @@
         ./modules/pipewire.nix
         ./modules/security.nix
         ./modules/services.nix
-        ./modules/snd_usb_audio.nix
         ./modules/xorg.nix
       ];
 
@@ -102,7 +92,6 @@
           (import ./hosts/kiiro)
           fonts
           pipewire
-          snd_usb_audio
           xorg
         ];
       };

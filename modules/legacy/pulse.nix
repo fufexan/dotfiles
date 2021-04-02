@@ -27,10 +27,10 @@
 
     # default.pa
     # sets to interrupt mode instead of timed scheduling
-    configFile = pkgs.runCommand "default.pa" {} ''
-        sed 's/module-udev-detect$/module-udev-detect tsched=0/' \
-        ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
-    '';
+    #configFile = pkgs.runCommand "default.pa" {} ''
+    #    sed 's/module-udev-detect$/module-udev-detect tsched=0/' \
+    #    ${pkgs.pulseaudio}/etc/pulse/default.pa > $out
+    #'';
   };
 
   # realtime processing for group `audio'
