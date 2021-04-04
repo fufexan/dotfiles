@@ -95,6 +95,6 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "libvirtd" "adbusers" "transmission" ];
+    extraGroups = [ "audio" "adbusers" "libvirtd" "transmission" "wheel" ];
   };
 }
