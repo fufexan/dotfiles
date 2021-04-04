@@ -23,13 +23,10 @@ window {
   background-color: #0000;
   border:           2px;
   border-color:     @accent;
+  border-radius:    10px;
   height:           53%;
   width:            50%;
   location:         center;
-}
-
-prompt {
-  enabled:            false;
 }
 
 entry {
@@ -37,16 +34,15 @@ entry {
   text-color:         @foreground;
   placeholder-color:  #666;
   expand:             true;
-  horizontal-align:   0;
+  horizontal-align:   0.5;
   placeholder:       "Search...";
   blink:              true;
 }
 
 inputbar {
-  children:         [ prompt, entry ];
+  children:         [ entry ];
   background-color: #0000;
   text-color:       @foreground;
-  expand:           false;
 }
 
 listview {
@@ -60,7 +56,6 @@ listview {
 
 mainbox {
   background-color: #0000;
-  border:           3% 0% 0% 0%;
   children:         [ inputbar, listview ];
   spacing:          2%;
   padding:          1em;
@@ -71,7 +66,7 @@ element {
   text-color:       @foreground;
   orientation:      vertical;
   border-radius:    0%;
-  padding:          2% 0% 2% 0%;
+  padding:          2.5% 0%;
 }
 
 element-icon {
@@ -86,9 +81,8 @@ element-text {
 
 element selected {
   background-color: @accent;
+  border-radius:    10px;
   text-color:       @background;
-  border:           0% 0.2% 0.3% 0%;
-  border-color:     @on;
 }
 
 element selected.urgent {

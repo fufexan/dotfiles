@@ -293,25 +293,6 @@
         "type": "github"
       }
     },
-    "pipewire-git": {
-      "flake": false,
-      "locked": {
-        "host": "gitlab.freedesktop.org",
-        "lastModified": 1615062678,
-        "narHash": "sha256-7aTBeeL2TZYNJkYEeXT0xmX9QR1bIl3y5fCw38VgQ7g=",
-        "owner": "pipewire",
-        "repo": "pipewire",
-        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
-        "type": "gitlab"
-      },
-      "original": {
-        "host": "gitlab.freedesktop.org",
-        "owner": "pipewire",
-        "repo": "pipewire",
-        "rev": "6324298bc5a716bb301918cfef7f31045e211883",
-        "type": "gitlab"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -320,7 +301,6 @@
         "hm": "hm",
         "nixpkgs": "nixpkgs",
         "picom-jonaburg": "picom-jonaburg",
-        "pipewire-git": "pipewire-git",
         "snm": "snm",
         "sway-git": "sway-git",
         "utils": "utils_2",
