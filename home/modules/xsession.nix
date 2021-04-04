@@ -103,6 +103,7 @@ in {
     settings = {
       global = {
         alignment = "center";
+        corner_radius = 10;
         follow = "mouse";
         font = "Noto Sans 10";
         format = "<b>%s</b>\\n%b";
@@ -153,11 +154,11 @@ in {
       #################################
       # requires https://github.com/jonaburg/picom
       # (These are also the default values)
-      transition-length = 300
-      transition-pow-x = 0.1
-      transition-pow-y = 0.1
-      transition-pow-w = 0.1
-      transition-pow-h = 0.1
+      #transition-length = 100
+      transition-pow-x = 1.4 #0.2
+      transition-pow-y = 1.4 #0.2
+      transition-pow-w = 1.4 #0.2
+      transition-pow-h = 1.4 #0.2
       size-transition = true
 
 
@@ -167,22 +168,12 @@ in {
       # requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
       corner-radius = 10.0;
       rounded-corners-exclude = [
-        #"window_type = 'normal'",
-        "class_g = 'awesome'",
-        "class_g = 'Dunst'",
-        #"class_g = 'URxvt'",
-        #"class_g = 'XTerm'",
-        #"class_g = 'kitty'",
-        #"class_g = 'Alacritty'",
         "class_g = 'Polybar'",
-        "class_g = 'code-oss'",
-        "class_g = 'TelegramDesktop'",
-        #"class_g = 'firefox'",
-        "class_g = 'Thunderbird'"
       ];
       round-borders = 1;
       round-borders-exclude = [
         #"class_g = 'TelegramDesktop'",
+        "_PICOM_ROUNDED:32c = 1",
       ];
 
       fading = true;
@@ -358,6 +349,24 @@ in {
     preferStatusNotifierItems = true;
     windowManager.bspwm = {
       enable = true;
+      extraConfig = ''
+        bspc subscribe desktop_layout | while read -r Event
+        do
+          Desktop=$(echo "$Event" | awk '{print $3}')
+          State=$(echo "$Event" | awk '{print $4}')
+          if [ "$State" = "monocle" ]; then 
+            bspc query -N -d $Desktop | while read -r Node
+            do
+              xprop -id $Node -f _PICOM_ROUNDED 32c -set _PICOM_ROUNDED 1
+            done
+          elif [ $(bspc config window_gap) -gt 0 ]; then
+            bspc query -N -d $Desktop | while read -r Node
+            do
+              xprop -id $Node -remove _PICOM_ROUNDED
+            done
+          fi
+        done &
+      '';
       monitors = {
         HDMI-0 = [ "一" "二" "三" "四" "五" ];
         DVI-D-0 = [ "六" "七" "八" "九" "十" ];

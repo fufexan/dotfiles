@@ -32,6 +32,17 @@ case $1 in
 		esac
 
 		bspc config window_gap $gaps
+
+    nodes=$(bspc query -N -n '.leaf.window.tiled')
+    if [ $gaps = 0 ]; then
+      for node in $nodes; do
+        xprop -id $node -f _PICOM_ROUNDED 32c -set _PICOM_ROUNDED 1
+      done
+    else
+      for node in $nodes; do
+        xprop -id $node -remove _PICOM_ROUNDED
+      done
+    fi
 		;;
 	*)
 		echo "Usage: bspwm_rice.sh (b/g) (+/-)
