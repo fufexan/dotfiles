@@ -169,11 +169,12 @@ in {
       corner-radius = 10.0;
       rounded-corners-exclude = [
         "class_g = 'Polybar'",
+        "class_g = 'Steam'",
+        "_PICOM_ROUNDED:32c = 1",
       ];
       round-borders = 1;
       round-borders-exclude = [
         #"class_g = 'TelegramDesktop'",
-        "_PICOM_ROUNDED:32c = 1",
       ];
 
       fading = true;
@@ -182,7 +183,7 @@ in {
       # Specify a list of conditions of windows that should not be faded.
       # don't need this, we disable fading for all normal windows with wintypes: {}
       fade-exclude = [
-        "class_g = 'slop'"   # maim
+        "class_g = 'slop'" # maim
       ]
 
       # improve performance
@@ -303,13 +304,11 @@ in {
       "super + {_, ctrl + } {equal,minus}" =
         "${s}/dynamic_bspwm.sh {b,g} {+,-}";
       #	programs
-      # screenshot curren monitor
-      "Print" = "${s}/maim_monitor.sh";
-      # screenshot menu
-      "super + Print" = "${rs}/screenshot.sh";
+      # screenshot selection
+      "{_,super + ,super + ctrl + }Print" = "${s}/screenshot.sh {area,screen,rofi}";
       # screencast region
-      "alt + {_,ctrl + }Print" =
-        "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).{mp4,gif}";
+      "alt + Print" =
+        "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).mp4";
       # backlight menu
       "super + b" = "${rs}/backlight.sh";
       # powermenu
