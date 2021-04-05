@@ -36,7 +36,6 @@
     # messaging
     discord
     element-desktop
-    lightcord
     mumble
     tdesktop
     zoom-us
@@ -46,7 +45,7 @@
     transmission-remote-gtk
     # video
     droidcam
-    jellyfin-mpv-shim
+    #jellyfin-mpv-shim
     # misc
     cached-nix-shell
     discord-rpc # RPC interfacing lib

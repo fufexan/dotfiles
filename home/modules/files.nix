@@ -41,8 +41,8 @@ in {
   };
   # script to screenshot the monitor which contains the mouse
   home.file.maim_monitor = {
-    source = ../scripts/maim_monitor.sh;
-    target = "${home}/.local/bin/maim_monitor.sh";
+    source = ../scripts/screenshot.sh;
+    target = "${home}/.local/bin/screenshot.sh";
   };
   # rofi applets scripts
   home.file.rofiScripts = {
