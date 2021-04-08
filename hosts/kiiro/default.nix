@@ -52,6 +52,19 @@
 
     geoclue2.enable = true;
 
+    mopidy = {
+      enable = true;
+      #dataDir = "/home/mihai/.config/mopidy";
+      extensionPackages = [
+        pkgs.mopidy-local
+        pkgs.mopidy-mpd
+        pkgs.mopidy-mpris
+        pkgs.mopidy-soundcloud
+        pkgs.mopidy-spotify
+        pkgs.mopidy-youtube
+      ];
+    };
+
     printing = {
       enable = true;
       drivers = [ pkgs.fxlinuxprint ];
