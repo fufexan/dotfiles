@@ -11,13 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    gytis = {
-      url = "github:gytis-ivaskevicius/nixfiles";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "hm";
-      inputs.utils.follows = "utils";
-    };
-
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,16 +43,13 @@
     };
   };
 
-  outputs = { self, utils, nixpkgs, agenix, gytis, hm, snm, ... }@inputs:
+  outputs = { self, utils, nixpkgs, ... }@inputs:
     utils.lib.systemFlake {
       inherit self inputs;
 
       channels.nixpkgs.input = nixpkgs;
 
-      channelsConfig = {
-        allowUnfree = true;
-        permittedInsecurePackages = [ "libsixel-1.8.6" ];
-      };
+      channelsConfig = { allowUnfree = true; };
 
       nixosModules = utils.lib.modulesFromList [
         ./modules/configuration.nix
@@ -74,7 +64,7 @@
       nixosProfiles = {
         homesv.modules = with self.nixosModules; [
           (import ./hosts/homesv)
-          snm.nixosModule
+          inputs.snm.nixosModule
           (import ./modules/mailserver.nix)
           services
         ];
@@ -101,8 +91,8 @@
       sharedModules = [
         self.nixosModules.configuration
         self.nixosModules.security
-        agenix.nixosModules.age
-        hm.nixosModules.home-manager
+        inputs.agenix.nixosModules.age
+        inputs.hm.nixosModules.home-manager
         { home-manager.useGlobalPkgs = true; }
         utils.nixosModules.saneFlakeDefaults
       ];
@@ -111,7 +101,6 @@
 
       sharedOverlays = [
         self.overlay
-        gytis.overlay
         (final: prev:
           with prev; {
 
@@ -151,7 +140,7 @@
       defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
 
       packagesBuilder = channels: {
-        inherit (channels.nixpkgs) hunter nix-zsh-completions picom-jonaburg;
+        inherit (channels.nixpkgs) hunter picom-jonaburg;
       };
 
       appsBuilder = channels:
