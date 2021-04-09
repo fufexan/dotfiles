@@ -23,20 +23,11 @@
     };
 
     # not flakes
-    alacritty-ligatures = {
-      url = "github:zenixls2/alacritty/ligature";
-      flake = false;
-    };
-
     picom-jonaburg = {
       url = "github:jonaburg/picom";
       flake = false;
     };
 
-    sway-git = {
-      url = "github:swaywm/sway/1.6-rc2";
-      flake = false;
-    };
     wlroots-git = {
       url = "github:danvd/wlroots-eglstreams";
       flake = false;
@@ -108,7 +99,6 @@
             picom-jonaburg =
               prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
 
-            # NOTE: sway 1.5.1 won't build with this for some reason
             #wlroots = prev.wlroots.overrideAttrs (old: {
             #  src = inputs.wlroots-git;
             #  buildInputs = old.buildInputs ++ (with prev; [
@@ -117,20 +107,6 @@
             #    xorg.xcbutilrenderutil
             #    xwayland
             #  ]);
-            #});
-
-            # broken
-            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
-            #  version = "1.6-rc1";
-            #  src = inputs.sway-git;
-            #  buildInputs = with prev;
-            #    [ cmake wayland-protocols libdrm ] ++ old.buildInputs;
-            #});
-
-            #sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
-            #  mesonFlags = old.mesonFlags ++ [ "-Dwerror=false" ];
-            #  buildInputs = with prev;
-            #    [ cmake wayland-protocols libdrm ] ++ old.buildInputs;
             #});
           })
       ];
