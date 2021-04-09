@@ -30,6 +30,7 @@
     ranger
     # nix tools
     nix-index
+    nixfmt
     # misc
     exa # ls alternative with colors & icons
     file # info about files
