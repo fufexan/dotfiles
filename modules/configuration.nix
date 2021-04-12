@@ -16,7 +16,6 @@
   environment.systemPackages =
     [ inputs.agenix.defaultPackage.x86_64-linux pkgs.git ];
 
-  # internationalisation
   i18n.defaultLocale = "ro_RO.UTF-8";
 
   # OpenGL
@@ -38,10 +37,28 @@
     ];
   };
 
-  # disable global DHCP
   networking.useDHCP = false;
 
-  nix.autoOptimiseStore = true;
+  nix = {
+    autoOptimiseStore = true;
+    binaryCaches = [
+      "https://cache.nixos.org"
+      "https://cachix.cachix.org"
+      "https://fufexan.cachix.org"
+      "https://nix-community.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   nixpkgs.overlays = [
     (final: prev:
