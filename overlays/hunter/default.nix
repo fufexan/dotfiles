@@ -1,13 +1,7 @@
-{ lib
-, stdenv
-, callPackage
-, makeRustPlatform
-, fetchFromGitHub
-, IOKit ? null
-, makeWrapper
-, glib
-, gst_all_1
-}:
+{ lib, stdenv, callPackage, makeRustPlatform, fetchFromGitHub, IOKit ? null
+, makeWrapper, glib, gst_all_1, libsixel ? null, withSixel ? false }:
+# enabling sixel is highly discouraged. it's insecure and probably won't work
+# on many terminals (tested on kitty)
 
 let
   date = "2020-05-22";
@@ -27,8 +21,7 @@ let
     cargo = rustNightly;
     rustc = rustNightly;
   };
-in
-rustPlatform.buildRustPackage rec {
+in rustPlatform.buildRustPackage rec {
   pname = "hunter";
   version = "1.3.5";
 
@@ -49,7 +42,8 @@ rustPlatform.buildRustPackage rec {
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-plugins-bad
-  ] ++ lib.optionals stdenv.isDarwin [ IOKit ];
+  ] ++ lib.optionals stdenv.isDarwin [ IOKit ]
+    ++ lib.optionals withSixel [ libsixel ];
 
   postInstall = ''
     wrapProgram $out/bin/hunter --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "$GST_PLUGIN_SYSTEM_PATH_1_0"
@@ -59,7 +53,7 @@ rustPlatform.buildRustPackage rec {
 
   meta = with lib; {
     description = "The fastest file manager in the galaxy!";
-    homepage = https://github.com/rabite0/hunter;
+    homepage = "https://github.com/rabite0/hunter";
     license = licenses.wtfpl;
     maintainers = [ ];
     platforms = platforms.unix;
