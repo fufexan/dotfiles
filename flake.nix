@@ -52,7 +52,7 @@
         ./modules/xorg.nix
       ];
 
-      nixosProfiles = {
+      nixosHosts = {
         homesv.modules = with self.nixosModules; [
           (import ./hosts/homesv)
           inputs.snm.nixosModule
@@ -76,8 +76,6 @@
           xorg
         ];
       };
-
-      sharedExtraArgs = { inherit inputs; };
 
       sharedModules = [
         self.nixosModules.configuration
@@ -112,8 +110,6 @@
       ];
 
       supportedSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-
-      defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) hunter picom-jonaburg;
