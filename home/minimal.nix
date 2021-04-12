@@ -6,7 +6,7 @@
   imports = [
     # shell config
     ./modules/shell-environment.nix
-    
+
     ./editors/kakoune.nix
 
     ./editors/neovim.nix
@@ -32,9 +32,9 @@
     nix-index
     nixfmt
     # misc
+    bat # better cat
     exa # ls alternative with colors & icons
     file # info about files
-    glxinfo # info about OpenGL
     gotop
     htop # system monitor
     ripgrep # better grep
@@ -50,11 +50,11 @@
     enableNixDirenvIntegration = true;
     enableZshIntegration = true;
     stdlib = ''
-    use_flake() {
-      watch_file flake.nix
-      watch_file flake.lock
-      eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
-    }
+      use_flake() {
+        watch_file flake.nix
+        watch_file flake.lock
+        eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
+      }
     '';
   };
 
