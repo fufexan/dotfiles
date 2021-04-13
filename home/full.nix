@@ -119,6 +119,45 @@
     profiles.mihai.name = "mihai";
   };
 
+  programs.kitty = {
+    enable = true;
+    font.name = "JetBrainsMono Nerd Font";
+    font.size = 12;
+    settings = {
+      scrollback_lines = 10000;
+      window_padding_width = 4;
+
+      # colors
+      background_opacity = "0.7";
+      foreground = "#fdf0ed";
+      background = "#16161c";
+      # black
+      color0 = "#232530";
+      color8 = "#2e303e";
+      # red
+      color1 = "#e95678";
+      color9 = "#ec6a88";
+      # green
+      color2 = "#29d398";
+      color10 = "#3fdaa4";
+      # yellow
+      color3 = "#fab795";
+      color11 = "#fbc3a7";
+      # blue
+      color4 = "#26bbd9";
+      color12 = "#3fc6de";
+      # magenta
+      color5 = "#ee64ae";
+      color13 = "#f075b7";
+      # cyan
+      color6 = "#59e3e3";
+      color14 = "#6be6e6";
+      # white
+      color7 = "#fadad1";
+      color15 = "#fdf0ed";
+    };
+  };
+
   programs.mpv = {
     enable = true;
     defaultProfiles = [ "gpu-hq" ];
