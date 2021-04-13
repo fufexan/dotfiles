@@ -1,0 +1,41 @@
+# This is a basic GitHub Action with Nix Flakes and Cachix
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events
+  push:
+  pull_request:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Build Configuration
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Define hosts that the CI will check
+    strategy:
+      matrix:
+        host:
+        - homesv
+        #- kasshoku
+        - kiiro
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0 # Nix Flakes doesn't work on shallow clones
+      - uses: cachix/install-nix-action@v13
+        with:
+          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v10
+        with:
+          name: fufexan
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix build .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel -L
