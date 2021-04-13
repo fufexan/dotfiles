@@ -5,32 +5,17 @@
 
 {
   imports = [
-    # base config
-    ./minimal.nix
-
-    # emacs config
+    ./minimal.nix # base config
     ./editors/emacs.nix
-
-    # files to link in ~
-    ./modules/files.nix
-
-    # mail config
+    ./modules/files.nix # files to link in ~
     ./modules/mail.nix
-
-    # Wayland config
+    ./modules/media.nix # audio/video
     ./modules/wayland.nix
-
-    # X config
     ./modules/xsession.nix
   ];
 
   # install programs
   home.packages = with pkgs; [
-    # audio
-    carla
-    pavucontrol
-    playerctl
-    pulsemixer
     # games
     lutris
     # messaging
@@ -39,13 +24,10 @@
     mumble
     tdesktop
     zoom-us
-    # music
-    spotify
     # torrents
     transmission-remote-gtk
     # video
     droidcam
-    #jellyfin-mpv-shim
     # misc
     cached-nix-shell
     discord-rpc # RPC interfacing lib
@@ -157,18 +139,6 @@
     };
   };
 
-  programs.mpv = {
-    enable = true;
-    defaultProfiles = [ "gpu-hq" ];
-    scripts = [ pkgs.mpvScripts.mpris ];
-  };
-
-  programs.ncmpcpp = {
-    enable = true;
-    package = pkgs.ncmpcpp.override { visualizerSupport = true; };
-    settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
-  };
-
   programs.neovim.plugins = with pkgs.vimPlugins; [
     coc-prettier
     coc-snippets
@@ -201,34 +171,6 @@
   };
 
   # services
-  services.mpd = {
-    enable = true;
-    musicDirectory = "${config.home.homeDirectory}/Music";
-    extraConfig = ''
-      zeroconf_enabled "yes"
-      zeroconf_name "MPD @ %h"
-      input {
-        plugin "curl"
-      }
-      audio_output {
-        type "fifo"
-        name "Visualizer"
-        path "/tmp/mpd.fifo"
-        format    "48000:16:2"
-      }
-      audio_output {
-        type "pulse"
-        name "PulseAudio"
-      }
-    '';
-    network.listenAddress = "any";
-    network.startWhenNeeded = true;
-  };
-
-  services.mpdris2.enable = true;
-
-  services.playerctld.enable = true;
-
   services.syncthing.enable = true;
 
   services.udiskie.enable = true;
