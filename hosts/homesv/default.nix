@@ -9,7 +9,7 @@
     mailPass.file = ../../secrets/mailPass.age;
   };
 
-  home-manager.users.mihai = import ../../home/minimal.nix;
+  home-manager.users.mihai = import ../../home/cli.nix;
 
   boot.loader.grub = {
     enable = true;
@@ -24,9 +24,7 @@
     interfaces.wlp2s0.useDHCP = true;
     wireless.iwd.enable = true;
   };
-  networking.firewall = {
-    allowedTCPPorts = [ 80 443 ];
-  };
+  networking.firewall = { allowedTCPPorts = [ 80 443 ]; };
 
   # don't suspend when lid is closed
   services.logind.lidSwitch = "ignore";

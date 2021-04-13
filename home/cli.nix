@@ -5,7 +5,7 @@
 {
   imports = [
     # shell config
-    ./modules/shell-environment.nix
+    ./modules/shell.nix
 
     ./editors/kakoune.nix
 

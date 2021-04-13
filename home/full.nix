@@ -5,7 +5,7 @@
 
 {
   imports = [
-    ./minimal.nix # base config
+    ./cli.nix # base config
     ./editors/emacs.nix
     ./modules/files.nix # files to link in ~
     ./modules/mail.nix
