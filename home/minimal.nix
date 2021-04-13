@@ -31,6 +31,7 @@
     # nix tools
     nix-index
     nixfmt
+    rnix-lsp
     # misc
     bat # better cat
     exa # ls alternative with colors & icons
@@ -116,6 +117,4 @@
       };
     };
   };
-
-  services.lorri.enable = true;
 }
