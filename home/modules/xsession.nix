@@ -63,7 +63,7 @@ in {
       hooks.postswitch = "systemctl --user restart random-background polybar";
     };
     profiles.osu = {
-      fingerprint = edids;
+      fingerprint.HDMI-0 = edids.HDMI-0;
       config = {
         HDMI-0 = {
           enable = true;
@@ -149,11 +149,8 @@ in {
     blurExclude = [ "class_g = 'slop'" "class_g = 'Firefox'" ];
     experimentalBackends = true;
     extraOptions = ''
-      #################################
-      #          Animations           #
-      #################################
+      # Animations
       # requires https://github.com/jonaburg/picom
-      # (These are also the default values)
       #transition-length = 100
       transition-pow-x = 1.4 #0.2
       transition-pow-y = 1.4 #0.2
@@ -162,9 +159,7 @@ in {
       size-transition = true
 
 
-      #################################
-      #             Corners           #
-      #################################
+      # Corners
       # requires: https://github.com/sdhand/compton or https://github.com/jonaburg/picom
       corner-radius = 10.0;
       rounded-corners-exclude = [
@@ -236,14 +231,13 @@ in {
   };
   services.sxhkd = {
     enable = true;
-    keybindings = 
-    let
+    keybindings = let
       # user scripts
       s = "~/.local/bin";
       rs = "${s}/rofi";
     in {
       # start terminal
-      "super + Return" = "alacritty";
+      "super + Return" = "kitty";
       # application launcher
       "super + @space" = "rofi -show combi";
       # reload sxhkd
@@ -301,14 +295,13 @@ in {
       # rotate window layout clockwise 90 degrees
       "super + r" = "bspc node @parent -R 90";
       # increase/decrease borders
-      "super + {_, ctrl + } {equal,minus}" =
-        "${s}/dynamic_bspwm.sh {b,g} {+,-}";
+      "super + {_,ctrl + } {equal,minus}" = "${s}/dynamic_bspwm.sh {b,g} {+,-}";
       #	programs
       # screenshot selection
-      "{_,super + ,super + ctrl + }Print" = "${s}/screenshot.sh {area,screen,rofi}";
+      "{_,super + ,super + ctrl + }Print" =
+        "${s}/screenshot.sh {area,screen,rofi}";
       # screencast region
-      "alt + Print" =
-        "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).mp4";
+      "alt + Print" = "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).mp4";
       # backlight menu
       "super + b" = "${rs}/backlight.sh";
       # powermenu
@@ -386,7 +379,7 @@ in {
       };
       startupPrograms = [
         # sets proper monitor layout, then focuses first desktop
-        "autorandr -c && bspc desktop -f 1"
+        "autorandr -c && bspc desktop -f ^1"
       ];
     };
   };
