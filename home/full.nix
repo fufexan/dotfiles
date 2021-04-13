@@ -49,7 +49,6 @@
     # misc
     cached-nix-shell
     discord-rpc # RPC interfacing lib
-    dunst # for dunstctl
     freerdp # for MS Office
     piper # configure mouse
     scrcpy # mirror Android screen
@@ -170,13 +169,11 @@
     settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
   };
 
-  # add more plugins on top of ./minimal.nix ones
-  programs.neovim.plugins = (with pkgs.vimPlugins; [
+  programs.neovim.plugins = with pkgs.vimPlugins; [
     coc-prettier
     coc-snippets
     latex-live-preview
-    vimsence
-  ]);
+  ];
 
   programs.newsboat = {
     enable = true;
@@ -235,10 +232,4 @@
   services.syncthing.enable = true;
 
   services.udiskie.enable = true;
-
-  #services.xcape = {
-  #  enable = true;
-  #  mapExpression = { Caps_Lock = "Escape"; };
-  #  timeout = 100;
-  #};
 }

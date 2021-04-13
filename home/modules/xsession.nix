@@ -12,6 +12,7 @@ let
 in {
   # X specific programs
   home.packages = with pkgs; [
+    dunst # for dunstctl
     maim
     xclip
     xdotool
