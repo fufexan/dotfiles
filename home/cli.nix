@@ -59,16 +59,6 @@
     '';
   };
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-    defaultCommand = "rg --files --hidden";
-    changeDirWidgetOptions = [
-      "--preview 'exa --icons --git --color always -T -L 3 {} | head -200'"
-      "--exact"
-    ];
-  };
-
   programs.gh = {
     enable = true;
     gitProtocol = "ssh";
@@ -101,6 +91,16 @@
     enable = true;
     package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
     settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
+  };
+
+  programs.skim = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultCommand = "rg --files --hidden";
+    changeDirWidgetOptions = [
+      "--preview 'exa --icons --git --color always -T -L 3 {} | head -200'"
+      "--exact"
+    ];
   };
 
   programs.ssh = {
