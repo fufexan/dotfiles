@@ -17,8 +17,7 @@
     };
 
     snm = {
-      url =
-        "gitlab:simple-nixos-mailserver/nixos-mailserver/7d53263b5a13bd476ed9f177d5a48d7b6feffecb";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -52,7 +51,7 @@
         ./modules/xorg.nix
       ];
 
-      nixosHosts = {
+      hosts = {
         homesv.modules = with self.nixosModules; [
           (import ./hosts/homesv)
           inputs.snm.nixosModule
