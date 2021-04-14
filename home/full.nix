@@ -35,6 +35,7 @@
     piper # configure mouse
     scrcpy # mirror Android screen
     ueberzug # image display in terminals
+    wine-osu
   ];
 
   gtk = {

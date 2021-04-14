@@ -26,11 +26,6 @@
       url = "github:jonaburg/picom";
       flake = false;
     };
-
-    wlroots-git = {
-      url = "github:danvd/wlroots-eglstreams";
-      flake = false;
-    };
   };
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
@@ -85,33 +80,34 @@
         utils.nixosModules.saneFlakeDefaults
       ];
 
-      overlay = import ./overlays;
+      overlays.unix = import ./overlays;
+      overlays.linux = (final: prev: {
+        picom-jonaburg =
+          prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
+        picom = final.picom-jonaburg;
+      });
 
-      sharedOverlays = [
-        self.overlay
-        (final: prev:
-          with prev; {
+      sharedOverlays = [ self.overlays.unix self.overlays.linux ];
 
-            picom = final.picom-jonaburg;
-            picom-jonaburg =
-              prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
+      # this needs fixing upstream
+      #packagesBuilder = channels: { inherit (channels.nixpkgs) hunter; };
 
-            #wlroots = prev.wlroots.overrideAttrs (old: {
-            #  src = inputs.wlroots-git;
-            #  buildInputs = old.buildInputs ++ (with prev; [
-            #    libuuid
-            #    cmake
-            #    xorg.xcbutilrenderutil
-            #    xwayland
-            #  ]);
-            #});
-          })
-      ];
-
-      supportedSystems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
-
-      packagesBuilder = channels: {
-        inherit (channels.nixpkgs) hunter picom-jonaburg;
+      packages = {
+        x86_64-linux = {
+          hunter = self.pkgs.x86_64-linux.nixpkgs.hunter;
+          picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
+          wine-osu = self.pkgs.x86_64-linux.nixpkgs.wine-osu;
+        };
+        i686-linux = {
+          hunter = self.pkgs.i686-linux.nixpkgs.hunter;
+          picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
+          wine-osu = self.pkgs.i686-linux.nixpkgs.wine-osu;
+        };
+        aarch64-linux = {
+          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
+          hunter = self.pkgs.aarch64-linux.nixpkgs.hunter;
+        };
+        x86_64-darwin = { hunter = self.pkgs.x86_64-darwin.nixpkgs.hunter; };
       };
 
       appsBuilder = channels:
@@ -121,10 +117,6 @@
           hunter = mkApp {
             drv = hunter;
             exePath = "/bin/hunter";
-          };
-          picom-jonaburg = mkApp {
-            drv = picom-jonaburg;
-            exePath = "/bin/picom";
           };
         };
     };

@@ -20,6 +20,7 @@ jobs:
         package:
         - hunter
         - picom-jonaburg
+        - wine-osu
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: cachix/install-nix-action@v13
@@ -42,7 +43,7 @@ jobs:
         host:
         - homesv
         #- kasshoku
-        - kiiro
+        #- kiiro
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2.3.4

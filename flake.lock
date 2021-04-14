@@ -110,8 +110,7 @@
         "nixpkgs": "nixpkgs",
         "picom-jonaburg": "picom-jonaburg",
         "snm": "snm",
-        "utils": "utils_2",
-        "wlroots-git": "wlroots-git"
+        "utils": "utils_2"
       }
     },
     "snm": {
@@ -122,17 +121,16 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1616143797,
-        "narHash": "sha256-RxwY8pYdmsWBWO4Gd4th5flB5jYQAFwmO68iP4dhcS0=",
+        "lastModified": 1618259567,
+        "narHash": "sha256-zeY0bgOskQ5HjAnUywXUAce24D+wM411IjkEh9PBzgU=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "7d53263b5a13bd476ed9f177d5a48d7b6feffecb",
+        "rev": "3069998c0f53e04e716bb698e721680b0db4e8ca",
         "type": "gitlab"
       },
       "original": {
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "7d53263b5a13bd476ed9f177d5a48d7b6feffecb",
         "type": "gitlab"
       }
     },
@@ -167,22 +165,6 @@
         "owner": "gytis-ivaskevicius",
         "ref": "staging",
         "repo": "flake-utils-plus",
-        "type": "github"
-      }
-    },
-    "wlroots-git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1618070270,
-        "narHash": "sha256-1ujn7mRn+91GPJ2H1VSZL9GIWVKjoQVL4mx6mzlrocw=",
-        "owner": "danvd",
-        "repo": "wlroots-eglstreams",
-        "rev": "cf32748a79cb31ad6d87836c23a19977d6b12e47",
-        "type": "github"
-      },
-      "original": {
-        "owner": "danvd",
-        "repo": "wlroots-eglstreams",
         "type": "github"
       }
     }
