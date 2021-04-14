@@ -12,8 +12,27 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  packages:
+    name: Build Packages
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+        - hunter
+        - picom-jonaburg
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: cachix/install-nix-action@v13
+        with:
+          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install
+          extra_nix_config: experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v10
+        with:
+          name: fufexan
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix build -L .#${{ matrix.package }}
+
+  environment:
     name: Build Configuration
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -32,8 +51,7 @@ jobs:
       - uses: cachix/install-nix-action@v13
         with:
           install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-3.0pre20201007_5257a25/install
-          extra_nix_config: |
-            experimental-features = nix-command flakes
+          extra_nix_config: experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v10
         with:
           name: fufexan
