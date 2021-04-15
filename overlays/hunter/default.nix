@@ -1,40 +1,28 @@
-{ lib, stdenv, callPackage, makeRustPlatform, fetchFromGitHub, IOKit ? null
-, makeWrapper, glib, gst_all_1, libsixel ? null, withSixel ? false }:
-# enabling sixel is highly discouraged. it's insecure and probably won't work
-# on many terminals (tested on kitty)
+{ lib
+, stdenv
+, pkg-config
+, rustPlatform
+, fetchFromGitHub
+, IOKit
+, makeWrapper
+, glib
+, gst_all_1
+}:
 
-let
-  date = "2020-05-22";
-  mozillaOverlay = fetchFromGitHub {
-    owner = "mozilla";
-    repo = "nixpkgs-mozilla";
-    rev = "e912ed483e980dfb4666ae0ed17845c4220e5e7c";
-    sha256 = "08fvzb8w80bkkabc1iyhzd15f4sm7ra10jn32kfch5klgl0gj3j3";
-  };
-  mozilla = callPackage "${mozillaOverlay.out}/package-set.nix" { };
-  rustNightly = (mozilla.rustChannelOf {
-    inherit date;
-    channel = "nightly";
-    sha256 = "sha256-wOlAS9KJp9UBP/W4maScqf9iu7MvweaJ7pCqeAnuh8Q=";
-  }).rust;
-  rustPlatform = makeRustPlatform {
-    cargo = rustNightly;
-    rustc = rustNightly;
-  };
-in rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage rec {
   pname = "hunter";
   version = "1.3.5";
 
   src = fetchFromGitHub {
-    owner = "rabite0";
+    owner = "06kellyjac";
     repo = "hunter";
-    rev = "v${version}";
-    sha256 = "0z28ymz0kr726zjsrksipy7jz7y1kmqlxigyqkh3pyh154b38cis";
+    rev = "2484f0db580bed1972fd5000e1e949a4082d2f01";
+    sha256 = "sha256-oSuwM6cxEw4ybiwoYX6A/aqiU6NVu9cLLONalUHuE1A=";
   };
 
   RUSTC_BOOTSTRAP = 1;
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper pkg-config ];
   buildInputs = [
     glib
     gst_all_1.gstreamer
@@ -42,20 +30,21 @@ in rustPlatform.buildRustPackage rec {
     gst_all_1.gst-plugins-good
     gst_all_1.gst-plugins-ugly
     gst_all_1.gst-plugins-bad
-  ] ++ lib.optionals stdenv.isDarwin [ IOKit ]
-    ++ lib.optionals withSixel [ libsixel ];
+  ] ++ lib.optionals stdenv.isDarwin [ IOKit ];
+
+  cargoBuildFlags = [ "--no-default-features" "--features=img,video" ];
 
   postInstall = ''
     wrapProgram $out/bin/hunter --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "$GST_PLUGIN_SYSTEM_PATH_1_0"
   '';
 
-  cargoSha256 = "18ycj1f310s74gkjz2hh4dqzjb3bnxm683968l1cbxs7gq20jzx6";
+  cargoSha256 = "sha256-9DvEuT7Ht0p9vvlQqT/pKL2XuIkJNVAA3KSD+D0Ap38=";
 
   meta = with lib; {
     description = "The fastest file manager in the galaxy!";
     homepage = "https://github.com/rabite0/hunter";
     license = licenses.wtfpl;
-    maintainers = [ ];
+    maintainers = with maintainers; [ fufexan ];
     platforms = platforms.unix;
   };
 }
