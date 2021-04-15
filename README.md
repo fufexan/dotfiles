@@ -9,13 +9,18 @@ Check it out!
 
 ## Components
 
+You can check out all this flake has to offer with
+`nix flake show github:fufexan/dotfiles`!
+
+### System
+
 As of now, there are multiple modules included for:
 
 - [Home](./home) - Home-Manager config
 - Fonts - configure fonts
-- PipeWire - replace Pulseaudio, JACK and ALSA
+- PipeWire - replace Pulseaudio, JACK and ALSA, configured for low latency
 - Security - tweaks for a more secure system, borrowed from
-  [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
+[hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
 - Services - server services
 - Xorg - default DM/DE/WM and keyboard config
 
@@ -24,12 +29,48 @@ Most of the configuration lies in `modules/configuration.nix`.
 Older modules that I don't use anymore have been moved to
 [modules/legacy](./modules/legacy).
 
-## Install / Try it out
+#### Installing / Trying it out
 
 1. Clone the repo somewhere and `cd` into it.
 2. `# nixos-rebuild <switch/test> --flake '.#kiiro'`. If you want a different
-   hostname, change it in `flake.nix` and `hosts/<hostname>/default.nix`.
+hostname, change it in `flake.nix` and `hosts/<hostname>/default.nix`.
 3. Maybe reboot.
+
+### Apps & Packages
+
+I have some packages available in this flake:
+
+- [Hunter](https://github.com/rabite0/hunter) - the fastest file manager in the
+galaxy!
+- [Picom (Jonaburg's fork)](https://github.com/jonaburg/picom) - rounded corners
+and pretty animations!
+- Wine Osu! - a special wine built with low latency patches to make playing osu!
+a joy!
+
+#### Running
+
+These packages can be run with
+`$ nix shell github:fufexan/dotfiles#<package> -c <bin_name>`.
+
+Apps can be run with `$ nix run github:fufexan/dotfiles#<app>`. For now only
+hunter is available as an app, but in the future I may add others as well.
+
+#### Installing
+
+In order to install the above, you'll have to add my flake to your inputs:
+```nix
+inputs.fufexan.url = "github:fufexan/dotfiles";
+```
+The next step is adding my packages, for example like this:
+```nix
+environment.systemPackages = [
+  ...
+  inputs.fufexan.packages.<your_arch>.<package>
+];
+```
+
+The packages are also available as overlays, so if you need them like that just
+include `inputs.fufexan.overlays.<linux/generic>` in your `overlays`.
 
 ## People
 
