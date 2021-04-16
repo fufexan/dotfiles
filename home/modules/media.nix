@@ -54,4 +54,9 @@
   services.mpdris2.enable = true;
 
   services.playerctld.enable = true;
+
+  services.pulseeffects = {
+    enable = true;
+    package = pkgs.pulseeffects-pw;
+  };
 }

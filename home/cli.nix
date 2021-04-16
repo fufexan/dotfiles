@@ -31,6 +31,7 @@
     # nix tools
     nix-index
     nixfmt
+    nixpkgs-fmt
     rnix-lsp
     # misc
     bat # better cat
