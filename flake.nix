@@ -90,24 +90,30 @@
       sharedOverlays = [ self.overlays.unix self.overlays.linux ];
 
       # this needs fixing upstream
-      #packagesBuilder = channels: { inherit (channels.nixpkgs) hunter; };
+      #packagesBuilder = channels: { inherit (channels.nixpkgs) hunter shellac-server; };
 
       packages = {
         x86_64-linux = {
           hunter = self.pkgs.x86_64-linux.nixpkgs.hunter;
           picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
+          shellac-server = self.pkgs.x86_64-linux.nixpkgs.shellac-server;
           wine-osu = self.pkgs.x86_64-linux.nixpkgs.wine-osu;
         };
         i686-linux = {
           hunter = self.pkgs.i686-linux.nixpkgs.hunter;
           picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
+          shellac-server = self.pkgs.i686-linux.nixpkgs.shellac-server;
           wine-osu = self.pkgs.i686-linux.nixpkgs.wine-osu;
         };
         aarch64-linux = {
-          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
           hunter = self.pkgs.aarch64-linux.nixpkgs.hunter;
+          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
+          shellac-server = self.pkgs.aarch64-linux.nixpkgs.shellac-server;
         };
-        x86_64-darwin = { hunter = self.pkgs.x86_64-darwin.nixpkgs.hunter; };
+        x86_64-darwin = {
+          hunter = self.pkgs.x86_64-darwin.nixpkgs.hunter;
+          shellac-server = self.pkgs.x86_64-darwin.nixpkgs.shellac-server;
+        };
       };
 
       appsBuilder = channels:
