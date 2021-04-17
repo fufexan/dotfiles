@@ -14,6 +14,16 @@
     configFile = config.age.secrets.ddclientConfig.path;
   };
 
+  services.minecraft-server = {
+    enable = true;
+    eula = true;
+    jvmOpts = ''
+      -Xmx2G -Xms1G -XX:+UseG1GC
+      -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2
+    '';
+    openFirewall = true;
+  };
+
   #services.nginx = {
   #  enable = false;
 
