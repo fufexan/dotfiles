@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,7 +92,8 @@
         picom = final.picom-jonaburg;
       });
 
-      sharedOverlays = [ self.overlays.unix self.overlays.linux ];
+      sharedOverlays =
+        [ self.overlays.unix self.overlays.linux inputs.nur.overlay ];
 
       # this needs fixing upstream
       #packagesBuilder = channels: { inherit (channels.nixpkgs) hunter shellac-server; };

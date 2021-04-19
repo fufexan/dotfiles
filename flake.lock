@@ -87,6 +87,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1618807028,
+        "narHash": "sha256-DEU6/pUmKO7PDwefma9pzY7gPW2aC29APSWQ2CDXu7g=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "bc5cf74e57e94440e9d78dfd71dc1751b22b1533",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "picom-jonaburg": {
       "flake": false,
       "locked": {
@@ -108,6 +123,7 @@
         "agenix": "agenix",
         "hm": "hm",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "picom-jonaburg": "picom-jonaburg",
         "snm": "snm",
         "utils": "utils_2"
