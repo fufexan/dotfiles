@@ -1,5 +1,5 @@
 # home server configuration
-{ config, pkgs, agenix, inputs, ... }:
+{ config, lib, pkgs, agenix, inputs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -28,6 +28,8 @@
 
   # don't suspend when lid is closed
   services.logind.lidSwitch = "ignore";
+
+  services.journald.extraConfig = lib.mkForce "";
 
   users.users = {
     user.isNormalUser = true;

@@ -38,6 +38,8 @@
   };
 
   networking.useDHCP = false;
+  # I don't currently have IPv6 so don't waste time trying to get it
+  networking.dhcpcd.wait = "ipv4";
 
   nix = {
     autoOptimiseStore = true;
@@ -122,6 +124,9 @@
     publish.userServices = true;
   };
 
+  # don't keep logs after reboots so boot isn't slowed down by flush
+  services.journald.extraConfig = "Storage=volatile";
+
   services.openssh = {
     enable = true;
     useDns = true;
@@ -141,4 +146,6 @@
     shell = pkgs.zsh;
     extraGroups = [ "audio" "adbusers" "libvirtd" "transmission" "wheel" ];
   };
+
+  zramSwap.enable = true;
 }
