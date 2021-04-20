@@ -10,7 +10,6 @@
     playerctl
     pulsemixer
     # music
-    spotify
     nur.repos.milahu.spotify-adblock-linux
     # video
     #jellyfin-mpv-shim

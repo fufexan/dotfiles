@@ -109,6 +109,8 @@
       scrollback_lines = 10000;
       window_padding_width = 4;
 
+      allow_remote_control = "yes";
+
       # colors
       background_opacity = "0.7";
       foreground = "#fdf0ed";
