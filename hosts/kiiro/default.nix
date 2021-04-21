@@ -28,6 +28,7 @@
 
   # enable Nvidia KMS (for Wayland and less screen tearing on Xorg)
   hardware.nvidia.modesetting.enable = true;
+  hardware.opentabletdriver.enable = true;
 
   # Japanese input using fcitx
   i18n.inputMethod = {
@@ -71,6 +72,10 @@
     };
 
     ratbagd.enable = true;
+
+    udev.extraRules = ''
+      ACTION=="add|change", KERNEL=="sda", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+    '';
 
     udisks2.enable = true;
   };
