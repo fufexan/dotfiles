@@ -94,7 +94,6 @@ in {
   };
 
   # notification daemon
-  services.caffeine.enable = true;
   services.dunst = {
     enable = true;
     iconTheme = {
@@ -144,6 +143,7 @@ in {
       };
     };
   };
+
   services.picom = {
     enable = true;
     blur = true;
@@ -209,6 +209,7 @@ in {
       xrender-sync-fence = true;
     '';
   };
+
   services.polybar = {
     enable = true;
     package = pkgs.polybar.override {
@@ -221,15 +222,18 @@ in {
       polybar external &
     '';
   };
+
   services.random-background = {
     enable = true;
     imageDirectory =
       "${config.home.homeDirectory}/Pictures/wallpapers/artworks";
   };
+
   services.redshift = {
     enable = true;
     provider = "geoclue2";
   };
+
   services.sxhkd = {
     enable = true;
     keybindings = let
