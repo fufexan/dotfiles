@@ -40,29 +40,29 @@
         "stream.properties" = { "node.latency" = "32/48000"; };
       };
     };
-  };
-
-  # lower latency alsa format
-  environment.etc."pipewire/media-session.d/alsa-monitor.conf".text = ''
-    rules = [
-      {
+    # lower latency alsa format
+    media-session.config.alsa-monitor = {
+      rules = [{
         matches = [
           # you won't get much out of it, about ~40ms in jack_iodelay
-          { node.name = "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo" }
+          {
+            node.name =
+              "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo";
+          }
           # with this you'll get ~3ms
-          { node.name = "alsa_output.pci-0000_00_1b.0.analog-stereo" }
-        ]
+          { node.name = "alsa_output.pci-0000_00_1b.0.analog-stereo"; }
+        ];
         actions = {
           update-props = {
-            audio.format = "S32LE"
-            audio.rate = 192000
-            api.alsa.period-size = 2
-            #api.alsa.disable-batch = true
-          }
-        }
-      }
-    ]
-  '';
+            "audio.format" = "S32LE";
+            "audio.rate" = 192000;
+            "api.alsa.period-size" = 2;
+            #"api.alsa.disable-batch" = true;
+          };
+        };
+      }];
+    };
+  };
 
   # enable higher rtprio for the audio group
   # TODO: change to rtkit or something
