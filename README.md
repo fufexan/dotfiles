@@ -44,6 +44,8 @@ I have some packages available in this flake:
 galaxy!
 - [Picom (Jonaburg's fork)](https://github.com/jonaburg/picom) - rounded corners
 and pretty animations!
+- [Shellac-server](https://gitlab.redox-os.org/AdminXVII/shellac-server) - shell
+autocompletion for Ion Shell.
 - Wine Osu! - a special wine built with low latency patches to make playing osu!
 a joy!
 
@@ -70,7 +72,7 @@ environment.systemPackages = [
 ```
 
 The packages are also available as overlays, so if you need them like that just
-include `inputs.fufexan.overlays.<linux/generic>` in your `overlays`.
+include `inputs.fufexan.overlays.<linux/unix>` in your `overlays`.
 
 ## People
 
