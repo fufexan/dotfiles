@@ -8,7 +8,6 @@
   programs.kakoune = {
     enable = true;
     config = {
-      indentWidth = 2;
       hooks = [
         {
           # tab completion
@@ -34,6 +33,24 @@
         # languages
         {
           name = "WinSetOption";
+          group = "languages";
+          option = "filetype=(c|cc|cpp)";
+          commands = ''
+            # get extension
+            declare-option str ext %sh{echo ""''${kak_bufname##*.}""}
+            # filename without extension
+            declare-option str noext "%sh{basename ""$kak_bufname"" .""$kak_opt_ext""}"
+            # compiling
+            map buffer normal <F9> %{: make %opt{noext}<ret>}
+            # running
+            map buffer normal <F10> %{: terminal sh -c "./%opt{noext}; read"<ret>}
+            set-option buffer indentwidth 4
+            set-option buffer tabstop 4
+          '';
+        }
+        {
+          name = "WinSetOption";
+          group = "languages";
           option = "filetype=nix";
           commands = ''
             expandtab
@@ -45,36 +62,7 @@
         }
         {
           name = "WinSetOption";
-          option = "filetype=haskell";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 2
-            evaluate-commands %sh{
-              if which ormolu > /dev/null; then
-                echo 'set-option buffer formatcmd ormolu'
-                echo 'hook buffer BufWritePre .* format'
-              fi
-            }
-          '';
-        }
-        {
-          name = "WinSetOption";
-          option = "filetype=python";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 4
-            set-option buffer tabstop 4
-            set-option buffer indentwidth 4
-            evaluate-commands %sh{
-              if which black > /dev/null; then
-                echo 'set-option buffer formatcmd "black - --quiet --fast"'
-                echo 'hook buffer BufWritePre .* format'
-              fi
-            }
-          '';
-        }
-        {
-          name = "WinSetOption";
+          group = "languages";
           option = "filetype=javascript";
           commands = ''
             expandtab
@@ -89,6 +77,7 @@
         }
         {
           name = "WinSetOption";
+          group = "languages";
           option = "filetype=rust";
           commands = ''
             set-option buffer softtabstop 4
@@ -104,6 +93,7 @@
         }
         {
           name = "WinSetOption";
+          group = "languages";
           option = "filetype=sh";
           commands = ''
             expandtab
@@ -113,6 +103,7 @@
         }
         {
           name = "WinSetOption";
+          group = "languages";
           option = "filetype=html";
           commands = ''
             expandtab
@@ -121,6 +112,7 @@
         }
         {
           name = "WinSetOption";
+          group = "languages";
           option = "filetype=json";
           commands = ''
             expandtab
@@ -128,12 +120,13 @@
           '';
         }
       ];
+      indentWidth = 2;
+      tabStop = 2;
       numberLines = {
         enable = true;
         highlightCursor = true;
       };
       showMatching = true;
-      tabStop = 2;
       wrapLines = {
         enable = true;
         indent = true;
