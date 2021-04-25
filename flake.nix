@@ -53,23 +53,23 @@
 
       hosts = {
         homesv.modules = with self.nixosModules; [
-          (import ./hosts/homesv)
+          ./hosts/homesv
           inputs.snm.nixosModule
-          (import ./modules/mailserver.nix)
+          ./modules/mailserver.nix
           services
         ];
 
         kasshoku = {
           system = "i686-linux";
           modules = with self.nixosModules; [
-            (import ./hosts/kasshoku)
+            ./hosts/kasshoku
             fonts
             pipewire
             xorg
           ];
         };
         kiiro.modules = with self.nixosModules; [
-          (import ./hosts/kiiro)
+          ./hosts/kiiro
           fonts
           pipewire
           xorg
@@ -95,30 +95,21 @@
       sharedOverlays =
         [ self.overlays.unix self.overlays.linux inputs.nur.overlay ];
 
-      # this needs fixing upstream
-      #packagesBuilder = channels: { inherit (channels.nixpkgs) hunter shellac-server; };
+      packagesBuilder = channels: {
+        inherit (channels.nixpkgs) hunter shellac-server;
+      };
 
       packages = {
         x86_64-linux = {
-          hunter = self.pkgs.x86_64-linux.nixpkgs.hunter;
           picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
-          shellac-server = self.pkgs.x86_64-linux.nixpkgs.shellac-server;
           wine-osu = self.pkgs.x86_64-linux.nixpkgs.wine-osu;
         };
         i686-linux = {
-          hunter = self.pkgs.i686-linux.nixpkgs.hunter;
           picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
-          shellac-server = self.pkgs.i686-linux.nixpkgs.shellac-server;
           wine-osu = self.pkgs.i686-linux.nixpkgs.wine-osu;
         };
         aarch64-linux = {
-          hunter = self.pkgs.aarch64-linux.nixpkgs.hunter;
           picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
-          shellac-server = self.pkgs.aarch64-linux.nixpkgs.shellac-server;
-        };
-        x86_64-darwin = {
-          hunter = self.pkgs.x86_64-darwin.nixpkgs.hunter;
-          shellac-server = self.pkgs.x86_64-darwin.nixpkgs.shellac-server;
         };
       };
 
