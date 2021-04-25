@@ -120,6 +120,11 @@
           '';
         }
       ];
+      keyMappings = [{
+        key = "<F12>";
+        mode = "normal";
+        effect = "<a-|>xclip -selection clipboard<ret>";
+      }];
       indentWidth = 2;
       tabStop = 2;
       numberLines = {
