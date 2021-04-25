@@ -151,10 +151,16 @@
   programs.newsboat = {
     enable = true;
     autoReload = true;
-    urls = [{
-      title = "Drew DeVault's Blog";
-      url = "https://drewdevault.com/blog/index.xml";
-    }];
+    urls = [
+      {
+        title = "Drew DeVault's Blog";
+        url = "https://drewdevault.com/blog/index.xml";
+      }
+      {
+        title = "Christine Dodrill's Blog";
+        url = "https://christine.website/blog.rss";
+      }
+    ];
   };
 
   programs.texlive = {
