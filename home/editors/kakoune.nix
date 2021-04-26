@@ -144,13 +144,8 @@
       #auto-pairs-kak
       # allows kak to talk to lsp servers
       kak-lsp
-      # highlights parenthesis, brackets and braces in rainbow colours depending on depth level
-      # NOTE: doesn't work for some reason
-      kakoune-rainbow
       # enables expandtab and other indent options
       smarttab-kak
-      # shows buffers in the statusline
-      tabs-kak
       # most plugins depend on these
       connect-kak
       #kakoune.cr
