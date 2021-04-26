@@ -76,19 +76,11 @@
             overlays = [ ];
           };
 
-        nixpkgs-25420cd = importNixpkgsRev {
-          rev = "25420cd7876abeb4eae04912db700de79e51121b";
-          sha256 = "140j5fllh8646a9cisnhhm0kmjny9ag9i0a8p783kbvlbgks0n5g";
-        };
         nixpkgs-e5920f7 = importNixpkgsRev {
           rev = "e5920f73965ce9fd69c93b9518281a3e8cb77040";
           sha256 = "0kmjg80bnzc54yn17kwm0mq1n0gimvxx0i4vmh7yf7yp9hsdx6l6";
         };
-      in {
-        steam = nixpkgs-25420cd.steam;
-        lutris = nixpkgs-25420cd.lutris;
-        kakounePlugins = nixpkgs-e5920f7.kakounePlugins;
-      })
+      in { kakounePlugins = nixpkgs-e5920f7.kakounePlugins; })
   ];
 
   # enable programs
