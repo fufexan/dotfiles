@@ -13,6 +13,10 @@
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
 
+  environment.shellAliases = {
+    nix-repl = "nix repl ${inputs.utils.lib.repl}";
+  };
+
   environment.systemPackages =
     [ inputs.agenix.defaultPackage.x86_64-linux pkgs.git ];
 
