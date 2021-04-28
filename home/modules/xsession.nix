@@ -368,6 +368,12 @@ in {
         HDMI-0 = [ "一" "二" "三" "四" "五" ];
         DVI-D-0 = [ "六" "七" "八" "九" "十" ];
       };
+      rules = {
+        "Firefox" = { desktop = "^1"; };
+        "osu!.exe" = { desktop = "^3"; };
+        "discord" = { desktop = "^6"; };
+        "TelegramDesktop" = { desktop = "^7"; };
+      };
       settings = {
         border_width = 2;
         window_gap = 8;

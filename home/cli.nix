@@ -8,8 +8,6 @@
     ./modules/shell.nix
 
     ./editors/kakoune.nix
-
-    ./editors/neovim.nix
   ];
 
   programs.home-manager.enable = true;

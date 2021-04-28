@@ -8,7 +8,7 @@
   ];
   # add environment variables
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "kak";
     # make java apps work in tiling WMs
     _JAVA_AWT_WM_NONREPARENTING = 1;
     # make apps aware of fcitx
