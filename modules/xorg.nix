@@ -15,6 +15,7 @@
       enable = true;
       mouse.accelProfile = "flat";
       mouse.accelSpeed = "0";
+      mouse.middleEmulation = false;
     };
   };
 }
