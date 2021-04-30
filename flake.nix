@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-kak.url =
+      "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     # flakes
@@ -76,24 +78,58 @@
         ];
       };
 
+      homeConfigurations = let
+        username = "mihai";
+        homeDirectory = "/home/mihai";
+        system = "x86_64-linux";
+        generateHome = inputs.hm.lib.homeManagerConfiguration;
+        nixpkgs = {
+          config = { allowUnfree = true; };
+          overlays =
+            [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
+        };
+      in {
+        # homeConfigurations
+        cli = generateHome {
+          inherit system username homeDirectory;
+          configuration = { config, pkgs, ... }: {
+            imports = [ ./home/cli.nix ];
+            inherit nixpkgs;
+          };
+        };
+        full = generateHome {
+          inherit system username homeDirectory;
+          configuration = { config, pkgs, ... }: {
+            imports = [ ./home/full.nix ];
+            inherit nixpkgs;
+          };
+        };
+      };
+
       sharedModules = [
         self.nixosModules.configuration
         self.nixosModules.security
         inputs.agenix.nixosModules.age
         inputs.hm.nixosModules.home-manager
-        { home-manager.useGlobalPkgs = true; }
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
         utils.nixosModules.saneFlakeDefaults
       ];
 
-      overlays.unix = import ./overlays;
+      overlays.generic = import ./overlays;
       overlays.linux = (final: prev: {
+        kakounePlugins =
+          inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
+
         picom-jonaburg =
           prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
         picom = final.picom-jonaburg;
       });
 
       sharedOverlays =
-        [ self.overlays.unix self.overlays.linux inputs.nur.overlay ];
+        [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs) hunter shellac-server;

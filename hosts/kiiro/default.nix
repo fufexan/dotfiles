@@ -11,8 +11,6 @@
     };
   };
 
-  home-manager.users.mihai = import ../../home/full.nix;
-
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load

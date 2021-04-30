@@ -72,7 +72,7 @@ environment.systemPackages = [
 ```
 
 The packages are also available as overlays, so if you need them like that just
-include `inputs.fufexan.overlays.<linux/unix>` in your `overlays`.
+include `inputs.fufexan.overlays.<linux/generic>` in your `overlays`.
 
 ## People
 

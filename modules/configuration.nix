@@ -66,27 +66,6 @@
     };
   };
 
-  nixpkgs.overlays = [
-    (final: prev:
-      let
-        # Import nixpkgs at a specified commit
-        importNixpkgsRev = { rev, sha256 }:
-          import (builtins.fetchTarball {
-            name = "nixpkgs-src-" + rev;
-            url = "https://github.com/NixOS/nixpkgs/archive/" + rev + ".tar.gz";
-            inherit sha256;
-          }) {
-            inherit (config.nixpkgs) config system;
-            overlays = [ ];
-          };
-
-        nixpkgs-e5920f7 = importNixpkgsRev {
-          rev = "e5920f73965ce9fd69c93b9518281a3e8cb77040";
-          sha256 = "0kmjg80bnzc54yn17kwm0mq1n0gimvxx0i4vmh7yf7yp9hsdx6l6";
-        };
-      in { kakounePlugins = nixpkgs-e5920f7.kakounePlugins; })
-  ];
-
   # enable programs
   programs.less.enable = true;
   programs.zsh = {
@@ -112,25 +91,27 @@
   security.sudo.enable = false;
 
   # services
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish.enable = true;
-    publish.domain = true;
-    publish.userServices = true;
+  services = {
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      publish.enable = true;
+      publish.domain = true;
+      publish.userServices = true;
+    };
+
+    # don't keep logs after reboots so boot isn't slowed down by flush
+    journald.extraConfig = "Storage=volatile";
+
+    openssh = {
+      enable = true;
+      useDns = true;
+    };
+
+    tailscale.enable = true;
+
+    transmission.enable = true;
   };
-
-  # don't keep logs after reboots so boot isn't slowed down by flush
-  services.journald.extraConfig = "Storage=volatile";
-
-  services.openssh = {
-    enable = true;
-    useDns = true;
-  };
-
-  services.tailscale.enable = true;
-
-  services.transmission.enable = true;
 
   system.stateVersion = "20.09";
   system.autoUpgrade.enable = true;

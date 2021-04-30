@@ -87,6 +87,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kak": {
+      "locked": {
+        "lastModified": 1617237341,
+        "narHash": "sha256-hpreNEzXH+cPrJtE0Puu8QEbcAWVzxOsJ4V9uwB6sk4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e5920f73965ce9fd69c93b9518281a3e8cb77040",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e5920f73965ce9fd69c93b9518281a3e8cb77040",
+        "type": "github"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1619350910,
@@ -123,6 +139,7 @@
         "agenix": "agenix",
         "hm": "hm",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-kak": "nixpkgs-kak",
         "nur": "nur",
         "picom-jonaburg": "picom-jonaburg",
         "snm": "snm",
