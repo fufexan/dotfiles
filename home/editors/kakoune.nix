@@ -125,6 +125,7 @@
         mode = "normal";
         effect = "<a-|>xclip -selection clipboard<ret>";
       }];
+      colorScheme = "desertex";
       indentWidth = 2;
       tabStop = 2;
       numberLines = {
@@ -139,6 +140,9 @@
         word = true;
       };
     };
+    extraConfig = ''
+      def saveas -params 1 -file-completion %{ rename-buffer -file %arg{1}; write }
+    '';
     plugins = with pkgs.kakounePlugins; [
       # won't work without kakoune.cr
       #auto-pairs-kak
