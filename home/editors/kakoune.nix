@@ -56,7 +56,7 @@
             expandtab
             set-option buffer softtabstop 2
             # formatting
-            set-option buffer formatcmd nixfmt
+            set-option buffer formatcmd 'nixfmt -w 100'
             hook buffer BufWritePre .* format
           '';
         }
