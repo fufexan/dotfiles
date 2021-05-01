@@ -33,4 +33,38 @@
       emoji = [ "Noto Color Emoji" ];
     };
   };
+
+  # Japanese input using fcitx
+  i18n.inputMethod = {
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+  };
+
+  services = {
+    dbus.packages = [ pkgs.gnome3.dconf ];
+
+    geoclue2.enable = true;
+
+    udisks2.enable = true;
+
+    xserver = {
+      enable = true;
+
+      displayManager.autoLogin = {
+        enable = true;
+        user = "mihai";
+      };
+      displayManager.sddm.enable = true;
+
+      windowManager.bspwm.enable = true;
+
+      libinput = {
+        enable = true;
+        # disable mouse acceleration
+        mouse.accelProfile = "flat";
+        mouse.accelSpeed = "0";
+        mouse.middleEmulation = false;
+      };
+    };
+  };
 }

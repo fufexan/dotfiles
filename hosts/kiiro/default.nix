@@ -28,12 +28,6 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.opentabletdriver.enable = true;
 
-  # Japanese input using fcitx
-  i18n.inputMethod = {
-    enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
-  };
-
   networking = {
     hostName = "kiiro";
     interfaces.enp3s0.useDHCP = true;
@@ -45,11 +39,7 @@
   };
 
   services = {
-    dbus.packages = [ pkgs.gnome3.dconf ];
-
     btrfs.autoScrub.enable = true;
-
-    geoclue2.enable = true;
 
     mopidy = {
       enable = true;
@@ -75,7 +65,7 @@
       ACTION=="add|change", KERNEL=="sda", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
     '';
 
-    udisks2.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
   };
 
   virtualisation.libvirtd.enable = true;

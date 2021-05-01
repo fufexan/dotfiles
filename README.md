@@ -17,14 +17,12 @@ You can check out all this flake has to offer with
 As of now, there are multiple modules included for:
 
 - [Home](./home) - Home-Manager config
-- Fonts - configure fonts
+- Minimal - configuration suited for servers
+- Desktop - config aimed at desktop usage
 - PipeWire - replace Pulseaudio, JACK and ALSA, configured for low latency
 - Security - tweaks for a more secure system, borrowed from
 [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
 - Services - server services
-- Xorg - default DM/DE/WM and keyboard config
-
-Most of the configuration lies in `modules/configuration.nix`.
 
 Older modules that I don't use anymore have been moved to
 [modules/legacy](./modules/legacy).
@@ -47,7 +45,7 @@ and pretty animations!
 - [Shellac-server](https://gitlab.redox-os.org/AdminXVII/shellac-server) - shell
 autocompletion for Ion Shell.
 - Wine Osu! - a special wine built with low latency patches to make playing osu!
-a joy!
+a joy! (works best when paired with the PipeWire module)
 
 #### Running
 
@@ -81,6 +79,6 @@ configs. I am thankful to all of them.
 
 - [gytis-ivaskevicius](https://github.com/gytis-ivaskevicius)
 - [DieracDelta](https://github.com/DieracDelta)
-- [Nobbz](https://github.com/Nobbz)
+- [NobbZ](https://github.com/NobbZ)
 - [hlissner](https://github.com/hlissner)
 - [tadeokondrak](https://github.com/tadeokondrak)

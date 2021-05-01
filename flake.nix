@@ -3,8 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-kak.url =
-      "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
+    nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     # flakes
@@ -44,9 +43,10 @@
       channelsConfig = { allowUnfree = true; };
 
       nixosModules = utils.lib.modulesFromList [
-        ./modules/configuration.nix
+        ./modules/desktop.nix
         ./modules/fonts.nix
         ./modules/mailserver.nix
+        ./modules/minimal.nix
         ./modules/pipewire.nix
         ./modules/security.nix
         ./modules/services.nix
@@ -63,19 +63,9 @@
 
         kasshoku = {
           system = "i686-linux";
-          modules = with self.nixosModules; [
-            ./hosts/kasshoku
-            fonts
-            pipewire
-            xorg
-          ];
+          modules = with self.nixosModules; [ ./hosts/kasshoku desktop pipewire ];
         };
-        kiiro.modules = with self.nixosModules; [
-          ./hosts/kiiro
-          fonts
-          pipewire
-          xorg
-        ];
+        kiiro.modules = with self.nixosModules; [ ./hosts/kiiro desktop pipewire ];
       };
 
       homeConfigurations = let
@@ -85,8 +75,7 @@
         generateHome = inputs.hm.lib.homeManagerConfiguration;
         nixpkgs = {
           config = { allowUnfree = true; };
-          overlays =
-            [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
+          overlays = [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
         };
       in {
         # homeConfigurations
@@ -107,7 +96,7 @@
       };
 
       sharedModules = [
-        self.nixosModules.configuration
+        self.nixosModules.minimal
         self.nixosModules.security
         inputs.agenix.nixosModules.age
         inputs.hm.nixosModules.home-manager
@@ -120,20 +109,15 @@
 
       overlays.generic = import ./overlays;
       overlays.linux = (final: prev: {
-        kakounePlugins =
-          inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
+        kakounePlugins = inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
 
-        picom-jonaburg =
-          prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
+        picom-jonaburg = prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
         picom = final.picom-jonaburg;
       });
 
-      sharedOverlays =
-        [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
+      sharedOverlays = [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
 
-      packagesBuilder = channels: {
-        inherit (channels.nixpkgs) hunter shellac-server;
-      };
+      packagesBuilder = channels: { inherit (channels.nixpkgs) hunter shellac-server; };
 
       packages = {
         x86_64-linux = {
@@ -144,9 +128,7 @@
           picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
           wine-osu = self.pkgs.i686-linux.nixpkgs.wine-osu;
         };
-        aarch64-linux = {
-          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
-        };
+        aarch64-linux = { picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg; };
       };
 
       appsBuilder = channels:
