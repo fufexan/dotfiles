@@ -92,6 +92,15 @@
             imports = [ ./home/full.nix ];
             inherit nixpkgs;
           };
+          extraModules = [
+            ./home/modules/files.nix
+            ./home/modules/mail.nix
+            ./home/modules/media.nix
+            ./home/modules/xsession.nix
+            ./home/editors/emacs.nix
+            ./home/editors/kakoune.nix
+            ./home/editors/neovim.nix
+          ];
         };
       };
 

@@ -6,12 +6,6 @@
 {
   imports = [
     ./cli.nix # base config
-    ./editors/emacs.nix
-    ./modules/files.nix # files to link in ~
-    ./modules/mail.nix
-    ./modules/media.nix # audio/video
-    ./modules/wayland.nix
-    ./modules/xsession.nix
   ];
 
   # install programs

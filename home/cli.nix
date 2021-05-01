@@ -6,8 +6,6 @@
   imports = [
     # shell config
     ./modules/shell.nix
-
-    ./editors/kakoune.nix
   ];
 
   programs.home-manager.enable = true;
@@ -105,15 +103,18 @@
   programs.ssh = {
     enable = true;
     compression = true;
-    matchBlocks = {
-      "homesv.local" = {
-        user = "mihai";
-        identityFile = "~/.ssh/id_ed25519";
+    matchBlocks =
+      let home = config.home.homeDirectory;
+      in
+      {
+        "homesv.local" = {
+          user = "mihai";
+          identityFile = "${home}/.ssh/id_ed25519";
+        };
+        "kiiro.local" = {
+          user = "mihai";
+          identityFile = "${home}/.ssh/id_ed25519";
+        };
       };
-      "kiiro.local" = {
-        user = "mihai";
-        identityFile = "~/.ssh/id_ed25519";
-      };
-    };
   };
 }
