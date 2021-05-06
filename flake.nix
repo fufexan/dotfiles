@@ -126,7 +126,7 @@
 
       sharedOverlays = [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
 
-      packagesBuilder = channels: { inherit (channels.nixpkgs) hunter shellac-server; };
+      packagesBuilder = channels: { inherit (channels.nixpkgs) shellac-server; };
 
       packages = {
         x86_64-linux = {
@@ -139,15 +139,5 @@
         };
         aarch64-linux = { picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg; };
       };
-
-      appsBuilder = channels:
-        with channels.nixpkgs;
-        let mkApp = utils.lib.mkApp;
-        in {
-          hunter = mkApp {
-            drv = hunter;
-            exePath = "/bin/hunter";
-          };
-        };
     };
 }

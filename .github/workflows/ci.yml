@@ -18,7 +18,6 @@ jobs:
     strategy:
       matrix:
         package:
-        - hunter
         - picom-jonaburg
         - wine-osu
     steps:

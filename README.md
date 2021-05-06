@@ -38,8 +38,6 @@ hostname, change it in `flake.nix` and `hosts/<hostname>/default.nix`.
 
 I have some packages available in this flake:
 
-- [Hunter](https://github.com/rabite0/hunter) - the fastest file manager in the
-galaxy!
 - [Picom (Jonaburg's fork)](https://github.com/jonaburg/picom) - rounded corners
 and pretty animations!
 - [Shellac-server](https://gitlab.redox-os.org/AdminXVII/shellac-server) - shell
@@ -52,8 +50,7 @@ a joy! (works best when paired with the PipeWire module)
 These packages can be run with
 `$ nix shell github:fufexan/dotfiles#<package> -c <bin_name>`.
 
-Apps can be run with `$ nix run github:fufexan/dotfiles#<app>`. For now only
-hunter is available as an app, but in the future I may add others as well.
+Apps can be run with `$ nix run github:fufexan/dotfiles#<app>`.
 
 #### Installing
 
