@@ -3,7 +3,8 @@
 # manage home.files
 
 let home = config.home.homeDirectory;
-in {
+in
+{
   # font for rofi applets
   home.file.featherfont = {
     source = ../config/fonts/feather.ttf;

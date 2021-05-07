@@ -1,5 +1,5 @@
 {
-  description = "Advancing with Nix Flakes";
+  description = "fufexan's NixOS and Home-Manager flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -63,46 +63,61 @@
 
         kasshoku = {
           system = "i686-linux";
-          modules = with self.nixosModules; [ ./hosts/kasshoku desktop pipewire ];
-        };
-        kiiro.modules = with self.nixosModules; [ ./hosts/kiiro desktop pipewire ];
-      };
-
-      homeConfigurations = let
-        username = "mihai";
-        homeDirectory = "/home/mihai";
-        system = "x86_64-linux";
-        generateHome = inputs.hm.lib.homeManagerConfiguration;
-        nixpkgs = {
-          config = { allowUnfree = true; };
-          overlays = [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
-        };
-      in {
-        # homeConfigurations
-        cli = generateHome {
-          inherit system username homeDirectory;
-          configuration = { config, pkgs, ... }: {
-            imports = [ ./home/cli.nix ];
-            inherit nixpkgs;
-          };
-        };
-        full = generateHome {
-          inherit system username homeDirectory;
-          configuration = { config, pkgs, ... }: {
-            imports = [ ./home/full.nix ];
-            inherit nixpkgs;
-          };
-          extraModules = [
-            ./home/modules/files.nix
-            ./home/modules/mail.nix
-            ./home/modules/media.nix
-            ./home/modules/xsession.nix
-            ./home/editors/emacs.nix
-            ./home/editors/kakoune.nix
-            ./home/editors/neovim.nix
+          modules = with self.nixosModules; [
+            ./hosts/kasshoku
+            desktop
+            pipewire
           ];
         };
+
+        kiiro.modules = with self.nixosModules; [
+          ./hosts/kiiro
+          desktop
+          pipewire
+        ];
       };
+
+      homeConfigurations =
+        let
+          username = "mihai";
+          homeDirectory = "/home/mihai";
+          system = "x86_64-linux";
+          generateHome = inputs.hm.lib.homeManagerConfiguration;
+          nixpkgs = {
+            config = { allowUnfree = true; };
+            overlays = [
+              self.overlays.generic
+              self.overlays.linux
+              inputs.nur.overlay
+            ];
+          };
+        in
+        {
+          # homeConfigurations
+          cli = generateHome {
+            inherit system username homeDirectory;
+            configuration = { config, pkgs, ... }: {
+              imports = [ ./home/cli.nix ];
+              inherit nixpkgs;
+            };
+          };
+          full = generateHome {
+            inherit system username homeDirectory;
+            configuration = { config, pkgs, ... }: {
+              imports = [ ./home/full.nix ];
+              inherit nixpkgs;
+            };
+            extraModules = [
+              ./home/modules/files.nix
+              ./home/modules/mail.nix
+              ./home/modules/media.nix
+              ./home/modules/xsession.nix
+              ./home/editors/emacs.nix
+              ./home/editors/kakoune.nix
+              ./home/editors/neovim.nix
+            ];
+          };
+        };
 
       sharedModules = [
         self.nixosModules.minimal
@@ -120,13 +135,22 @@
       overlays.linux = (final: prev: {
         kakounePlugins = inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
 
-        picom-jonaburg = prev.picom.overrideAttrs (old: { src = inputs.picom-jonaburg; });
+        picom-jonaburg = prev.picom.overrideAttrs (old: {
+          src = inputs.picom-jonaburg;
+        });
         picom = final.picom-jonaburg;
       });
 
-      sharedOverlays = [ self.overlays.generic self.overlays.linux inputs.nur.overlay ];
+      sharedOverlays = [
+        self.overlays.generic
+        self.overlays.linux
+        inputs.nur.overlay
+      ];
 
-      packagesBuilder = channels: { inherit (channels.nixpkgs) shellac-server; };
+      packagesBuilder = channels: {
+        inherit (channels.nixpkgs)
+          shellac-server;
+      };
 
       packages = {
         x86_64-linux = {

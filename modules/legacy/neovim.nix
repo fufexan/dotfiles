@@ -9,7 +9,7 @@
       configure = {
         packages.plugins = with pkgs.vimPlugins; {
           start = [ vim-nix coc-nvim coc-pairs coc-prettier coc-snippets coc-highlight latex-live-preview ];
-          opt = [];
+          opt = [ ];
         };
         customRC = "source ~/.config/nvim/init.vim";
       };

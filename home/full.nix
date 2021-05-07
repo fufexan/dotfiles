@@ -50,13 +50,15 @@
         y = 5;
       };
       scrolling.history = 10000;
-      font = let font = "JetBrainsMono Nerd Font";
-      in {
-        normal.family = font;
-        bold.family = font;
-        italic.family = font;
-        size = 11.0;
-      };
+      font =
+        let font = "JetBrainsMono Nerd Font";
+        in
+        {
+          normal.family = font;
+          bold.family = font;
+          italic.family = font;
+          size = 11.0;
+        };
       draw_bold_text_with_bright_colors = true;
       colors = {
         primary = {

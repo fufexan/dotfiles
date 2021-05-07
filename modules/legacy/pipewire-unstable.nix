@@ -37,7 +37,8 @@ let
       ./patches/pipewire-pulse-path.patch
     ];
   });
-in {
+in
+{
   environment.systemPackages =
     [ pipewire pkgs.pulseaudio pkgs.pavucontrol pkgs.alsaUtils ];
   environment.pathsToLink = [ "/lib/pipewire" ];

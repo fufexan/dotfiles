@@ -5,20 +5,21 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "ahci" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "ahci" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/78ce78ef-56e0-45e4-9877-200706ac642c";
+    {
+      device = "/dev/disk/by-uuid/78ce78ef-56e0-45e4-9877-200706ac642c";
       fsType = "ext4";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ee96e61f-7b27-a996-b4816819a971"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/ee96e61f-7b27-a996-b4816819a971"; }];
 }

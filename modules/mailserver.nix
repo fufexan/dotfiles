@@ -5,7 +5,8 @@
 let
   domains = [ "fufexan.xyz" ];
   fqdn = "mail.fufexan.xyz";
-in {
+in
+{
   mailserver = {
     enable = true;
     fqdn = fqdn;
