@@ -35,10 +35,9 @@
           name = "WinSetOption";
           option = "filetype=(c|cc|cpp)";
           commands = ''
-            noexpandtab
             set-option buffer indentwidth 4
             set-option buffer tabstop 4
-            set-option buffer softtabstop 4
+            noexpandtab
             # get extension
             declare-option str ext %sh{echo ""''${kak_bufname##*.}""}
             # filename without extension
