@@ -1,5 +1,4 @@
-#!/usr/bin/env cached-nix-shell
-#! nix-shell -i bash -p libnotify maim xdotool xclip
+#!/bin/sh
 
 # screenshot tool
 # single screen, all screens or selected area

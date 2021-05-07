@@ -23,9 +23,9 @@
     # video
     droidcam
     # misc
-    cached-nix-shell
-    discord-rpc # RPC interfacing lib
     freerdp # for MS Office
+    gifsicle
+    libnotify
     piper # configure mouse
     scrcpy # mirror Android screen
     ueberzug # image display in terminals
@@ -135,12 +135,6 @@
       color15 = "#fdf0ed";
     };
   };
-
-  programs.neovim.plugins = with pkgs.vimPlugins; [
-    coc-prettier
-    coc-snippets
-    latex-live-preview
-  ];
 
   programs.newsboat = {
     enable = true;
