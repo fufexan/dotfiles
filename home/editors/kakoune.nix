@@ -33,9 +33,12 @@
         # languages
         {
           name = "WinSetOption";
-          group = "languages";
           option = "filetype=(c|cc|cpp)";
           commands = ''
+            noexpandtab
+            set-option buffer indentwidth 4
+            set-option buffer tabstop 4
+            set-option buffer softtabstop 4
             # get extension
             declare-option str ext %sh{echo ""''${kak_bufname##*.}""}
             # filename without extension
@@ -44,25 +47,21 @@
             map buffer normal <F9> %{: make %opt{noext}<ret>}
             # running
             map buffer normal <F10> %{: terminal sh -c "./%opt{noext}; read"<ret>}
-            set-option buffer indentwidth 4
-            set-option buffer tabstop 4
           '';
         }
         {
           name = "WinSetOption";
-          group = "languages";
           option = "filetype=nix";
           commands = ''
             expandtab
             set-option buffer softtabstop 2
             # formatting
-            set-option buffer formatcmd 'nixfmt -w 100'
+            set-option buffer formatcmd 'nixpkgs-fmt'
             hook buffer BufWritePre .* format
           '';
         }
         {
           name = "WinSetOption";
-          group = "languages";
           option = "filetype=javascript";
           commands = ''
             expandtab
@@ -77,7 +76,6 @@
         }
         {
           name = "WinSetOption";
-          group = "languages";
           option = "filetype=rust";
           commands = ''
             set-option buffer softtabstop 4
@@ -93,27 +91,7 @@
         }
         {
           name = "WinSetOption";
-          group = "languages";
-          option = "filetype=sh";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 2
-            hook buffer BufWritePre .* lint
-          '';
-        }
-        {
-          name = "WinSetOption";
-          group = "languages";
-          option = "filetype=html";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 2
-          '';
-        }
-        {
-          name = "WinSetOption";
-          group = "languages";
-          option = "filetype=json";
+          option = "filetype=(sh|html|json)";
           commands = ''
             expandtab
             set-option buffer softtabstop 2
