@@ -92,32 +92,32 @@
             ];
           };
         in
-        {
-          # homeConfigurations
-          cli = generateHome {
-            inherit system username homeDirectory;
-            configuration = { config, pkgs, ... }: {
-              imports = [ ./home/cli.nix ];
-              inherit nixpkgs;
+          {
+            # homeConfigurations
+            cli = generateHome {
+              inherit system username homeDirectory;
+              configuration = { config, pkgs, ... }: {
+                imports = [ ./home/cli.nix ];
+                inherit nixpkgs;
+              };
+            };
+            full = generateHome {
+              inherit system username homeDirectory;
+              configuration = { config, pkgs, ... }: {
+                imports = [ ./home/full.nix ];
+                inherit nixpkgs;
+              };
+              extraModules = [
+                ./home/modules/files.nix
+                ./home/modules/mail.nix
+                ./home/modules/media.nix
+                ./home/modules/xsession.nix
+                ./home/editors/emacs.nix
+                ./home/editors/kakoune.nix
+                ./home/editors/neovim.nix
+              ];
             };
           };
-          full = generateHome {
-            inherit system username homeDirectory;
-            configuration = { config, pkgs, ... }: {
-              imports = [ ./home/full.nix ];
-              inherit nixpkgs;
-            };
-            extraModules = [
-              ./home/modules/files.nix
-              ./home/modules/mail.nix
-              ./home/modules/media.nix
-              ./home/modules/xsession.nix
-              ./home/editors/emacs.nix
-              ./home/editors/kakoune.nix
-              ./home/editors/neovim.nix
-            ];
-          };
-        };
 
       sharedModules = [
         self.nixosModules.minimal
@@ -132,14 +132,18 @@
       ];
 
       overlays.generic = import ./overlays;
-      overlays.linux = (final: prev: {
-        kakounePlugins = inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
+      overlays.linux = (
+        final: prev: {
+          kakounePlugins = inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
 
-        picom-jonaburg = prev.picom.overrideAttrs (old: {
-          src = inputs.picom-jonaburg;
-        });
-        picom = final.picom-jonaburg;
-      });
+          picom-jonaburg = prev.picom.overrideAttrs (
+            old: {
+              src = inputs.picom-jonaburg;
+            }
+          );
+          picom = final.picom-jonaburg;
+        }
+      );
 
       sharedOverlays = [
         self.overlays.generic
@@ -149,7 +153,9 @@
 
       packagesBuilder = channels: {
         inherit (channels.nixpkgs)
-          shellac-server;
+          shellac-server
+          kakoune-cr
+          ;
       };
 
       packages = {
