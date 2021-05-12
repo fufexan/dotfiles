@@ -50,58 +50,46 @@
         }
         {
           name = "WinSetOption";
-          option = "filetype=nix";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 2
-            # formatting
-            set-option buffer formatcmd 'nixpkgs-fmt'
-            hook buffer BufWritePre .* format
-          '';
-        }
-        {
-          name = "WinSetOption";
-          option = "filetype=javascript";
-          commands = ''
-            expandtab
-            set-option buffer softtabstop 2
-            evaluate-commands %sh{
-              if which prettier > /dev/null; then
-                echo 'set-option buffer formatcmd "prettier --parser=typescript"'
-                echo 'hook buffer BufWritePre .* format'
-              fi
-            }
-          '';
-        }
-        {
-          name = "WinSetOption";
           option = "filetype=rust";
           commands = ''
             set-option buffer softtabstop 4
             set-option buffer tabstop 4
             set-option buffer indentwidth 4
-            evaluate-commands %sh{
-              if which rustfmt > /dev/null; then
-                echo 'set-option buffer formatcmd rustfmt'
-                echo 'hook buffer BufWritePre .* format'
-              fi
-            }
+            expandtab
           '';
         }
+        # languages with 2 spaces indentation
         {
           name = "WinSetOption";
-          option = "filetype=(sh|html|json)";
+          option = "filetype=(html|javascript|json|nix|sh)";
           commands = ''
             expandtab
             set-option buffer softtabstop 2
           '';
         }
+        # languages with lsp support
+        {
+          name = "WinSetOption";
+          option = "filetype=nix";
+          commands = ''
+            lsp-enable-window
+            hook window BufWritePre .* lsp-formatting-sync
+          '';
+        }
       ];
-      keyMappings = [{
-        key = "<F12>";
-        mode = "normal";
-        effect = "<a-|>xclip -selection clipboard<ret>";
-      }];
+      keyMappings = [
+        {
+          key = "<F12>";
+          mode = "normal";
+          effect = "<a-|>xclip -selection clipboard<ret>";
+        }
+        {
+          key = "l";
+          mode = "user";
+          effect = "enter-user-mode lsp<ret>";
+          docstring = "LSP mode";
+        }
+      ];
       colorScheme = "desertex";
       indentWidth = 2;
       tabStop = 2;
@@ -119,18 +107,21 @@
     };
     extraConfig = ''
       def saveas -params 1 -file-completion %{ rename-buffer -file %arg{1}; write }
+      eval %sh{
+        kcr init kakoune
+        kak-lsp --kakoune -s $kak_session
+      }
     '';
     plugins = with pkgs.kakounePlugins; [
       # won't work without kakoune.cr
-      #auto-pairs-kak
+      auto-pairs-kak
       # allows kak to talk to lsp servers
       kak-lsp
       # enables expandtab and other indent options
       smarttab-kak
       # most plugins depend on these
       connect-kak
-      #kakoune.cr
       prelude-kak
-    ];
+    ] ++ [ pkgs.kakoune-cr ];
   };
 }
