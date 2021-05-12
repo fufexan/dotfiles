@@ -81,11 +81,13 @@
   security.doas = {
     enable = true;
     # keep environment when running as root
-    extraRules = [{
-      groups = [ "wheel" ];
-      keepEnv = true;
-      noPass = true;
-    }];
+    extraRules = [
+      {
+        groups = [ "wheel" ];
+        keepEnv = true;
+        noPass = true;
+      }
+    ];
   };
   # disable sudo
   security.sudo.enable = false;

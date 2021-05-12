@@ -45,6 +45,11 @@
 
     geoclue2.enable = true;
 
+    ipfs = {
+      enable = true;
+      autoMount = true;
+    };
+
     udisks2.enable = true;
 
     xserver = {

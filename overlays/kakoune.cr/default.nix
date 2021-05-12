@@ -10,7 +10,7 @@ crystal.buildCrystalPackage rec {
   pname = "kakoune-cr";
   version = "unstable-2021-04-30";
 
-  dependencies = [ bat fd fzf jq ];
+  propagatedUserEnvPkgs = [ bat fd fzf jq ];
 
   src = fetchFromGitHub {
     repo = "kakoune.cr";
