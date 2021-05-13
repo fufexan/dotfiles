@@ -70,7 +70,7 @@
         # languages with lsp support
         {
           name = "WinSetOption";
-          option = "filetype=nix";
+          option = "filetype=(c|cpp|nix)";
           commands = ''
             lsp-enable-window
             hook window BufWritePre .* lsp-formatting-sync
@@ -86,7 +86,7 @@
         {
           key = "l";
           mode = "user";
-          effect = "enter-user-mode lsp<ret>";
+          effect = ": enter-user-mode lsp<ret>";
           docstring = "LSP mode";
         }
       ];
@@ -111,6 +111,8 @@
         kcr init kakoune
         kak-lsp --kakoune -s $kak_session
       }
+      require-module auto-pairs
+      auto-pairs-enable
     '';
     plugins = with pkgs.kakounePlugins; [
       # won't work without kakoune.cr
