@@ -44,13 +44,11 @@
 
       nixosModules = utils.lib.modulesFromList [
         ./modules/desktop.nix
-        ./modules/fonts.nix
         ./modules/mailserver.nix
         ./modules/minimal.nix
         ./modules/pipewire.nix
         ./modules/security.nix
         ./modules/services.nix
-        ./modules/xorg.nix
       ];
 
       hosts = {
