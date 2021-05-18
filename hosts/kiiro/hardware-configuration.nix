@@ -10,15 +10,15 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [];
 
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/b641b204-0b6b-4905-830d-57bce629cfb2";
       fsType = "btrfs";
-      options = [ "subvol=nixos" "compress-force=zstd:1" ];
+      options = [ "subvol=nixos" "compress=zstd:1" "noatime" ];
     };
 
   fileSystems."/boot" =
@@ -28,7 +28,7 @@
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; }];
+    [ { device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; } ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }
