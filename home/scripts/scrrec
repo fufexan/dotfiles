@@ -1,5 +1,5 @@
-#!/usr/bin/env cached-nix-shell
-#! nix-shell -i bash -p ffmpeg libnotify slop
+#!/usr/bin/env bash
+# you need ffmpeg libnotify slop
 
 # Select a region and record it.
 #
