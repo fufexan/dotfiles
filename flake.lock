@@ -139,11 +139,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1621440395,
-        "narHash": "sha256-3YqpPFkG9lp5JrWs6n+1GS3R6ukH2Y5IDV8595zfwAM=",
+        "lastModified": 1621460367,
+        "narHash": "sha256-CcSPkVBCRgnKVqGdP5bo+qW5DnTdj18cbCJgskIjQU0=",
         "owner": "fufexan",
         "repo": "osu.nix",
-        "rev": "55f7131ad34b465aa863f47702e64d64a8fdbb62",
+        "rev": "5d67cafcb679fcb6b2b5014f3825baa29e6f9e8f",
         "type": "github"
       },
       "original": {

@@ -46,9 +46,7 @@
 
       nixosModules = utils.lib.modulesFromList [
         ./modules/desktop.nix
-        ./modules/mailserver.nix
         ./modules/minimal.nix
-        ./modules/pipewire.nix
         ./modules/security.nix
         ./modules/services.nix
       ];
@@ -66,14 +64,13 @@
           modules = with self.nixosModules; [
             ./hosts/kasshoku
             desktop
-            pipewire
           ];
         };
 
         kiiro.modules = with self.nixosModules; [
           ./hosts/kiiro
           desktop
-          pipewire
+          inputs.osu-nix.nixosModule
         ];
       };
 

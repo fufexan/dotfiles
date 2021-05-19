@@ -54,6 +54,8 @@
       ];
     };
 
+    pipewire.lowLatency = true;
+
     printing = {
       enable = true;
       drivers = [ pkgs.fxlinuxprint ];
