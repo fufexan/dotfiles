@@ -22,6 +22,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    osu-nix.url = github:fufexan/osu.nix;
+
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,6 +82,7 @@
           username = "mihai";
           homeDirectory = "/home/mihai";
           system = "x86_64-linux";
+          extraSpecialArgs = { inherit inputs; };
           generateHome = inputs.hm.lib.homeManagerConfiguration;
           nixpkgs = {
             config = { allowUnfree = true; };
@@ -94,14 +97,14 @@
             # homeConfigurations
             cli = generateHome {
               inherit system username homeDirectory;
-              configuration = { config, pkgs, ... }: {
+              configuration = {
                 imports = [ ./home/cli.nix ];
                 inherit nixpkgs;
               };
             };
             full = generateHome {
-              inherit system username homeDirectory;
-              configuration = { config, pkgs, ... }: {
+              inherit system username homeDirectory extraSpecialArgs;
+              configuration = {
                 imports = [ ./home/full.nix ];
                 inherit nixpkgs;
               };
@@ -159,13 +162,13 @@
       packages = {
         x86_64-linux = {
           picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
-          wine-osu = self.pkgs.x86_64-linux.nixpkgs.wine-osu;
         };
         i686-linux = {
           picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
-          wine-osu = self.pkgs.i686-linux.nixpkgs.wine-osu;
         };
-        aarch64-linux = { picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg; };
+        aarch64-linux = {
+          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
+        };
       };
     };
 }

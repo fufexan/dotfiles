@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
@@ -29,7 +29,7 @@
     piper # configure mouse
     scrcpy # mirror Android screen
     ueberzug # image display in terminals
-    wine-osu
+    inputs.osu-nix.packages.x86_64-linux.wine-osu
   ];
 
   gtk = {
@@ -51,14 +51,15 @@
       };
       scrolling.history = 10000;
       font =
-        let font = "JetBrainsMono Nerd Font";
+        let
+          font = "JetBrainsMono Nerd Font";
         in
-        {
-          normal.family = font;
-          bold.family = font;
-          italic.family = font;
-          size = 11.0;
-        };
+          {
+            normal.family = font;
+            bold.family = font;
+            italic.family = font;
+            size = 11.0;
+          };
       draw_bold_text_with_bright_colors = true;
       colors = {
         primary = {
