@@ -149,10 +149,12 @@
         inputs.nur.overlay
       ];
 
-      packagesBuilder = channels: {
-        inherit (channels.nixpkgs)
-          shellac-server
-          ;
+      outputsBuilder = channels: {
+        packages = {
+          inherit (channels.nixpkgs)
+            shellac-server
+            ;
+        };
       };
 
       packages = {
