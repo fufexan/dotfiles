@@ -152,15 +152,16 @@
       packagesBuilder = channels: {
         inherit (channels.nixpkgs)
           shellac-server
-          kakoune-cr
           ;
       };
 
       packages = {
         x86_64-linux = {
+          kakoune-cr = self.pkgs.x86_64-linux.nixpkgs.kakoune-cr;
           picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
         };
         i686-linux = {
+          kakoune-cr = self.pkgs.i686-linux.nixpkgs.kakoune-cr;
           picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
         };
         aarch64-linux = {

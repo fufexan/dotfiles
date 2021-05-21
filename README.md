@@ -35,8 +35,8 @@ I have some packages available in this flake:
 and pretty animations!
 - [Shellac-server](https://gitlab.redox-os.org/AdminXVII/shellac-server) - shell
 autocompletion for Ion Shell.
-- Wine Osu! - a special wine built with low latency patches to make playing osu!
-a joy! (works best when paired with the PipeWire module)
+- [kakoune.cr](https://github.com/alexherbo2/kakoune.cr) - A command-line tool
+for Kakoune
 
 ## Install / Run
 
