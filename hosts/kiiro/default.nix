@@ -54,7 +54,7 @@
       ];
     };
 
-    pipewire.lowLatency = true;
+    pipewire.lowLatency.enable = true;
 
     printing = {
       enable = true;
