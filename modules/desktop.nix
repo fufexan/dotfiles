@@ -40,9 +40,9 @@
     fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
 
-  services = {
-    dbus.packages = [ pkgs.gnome3.dconf ];
+  programs.dconf.enable = true;
 
+  services = {
     geoclue2.enable = true;
 
     ipfs = {

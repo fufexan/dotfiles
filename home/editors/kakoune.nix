@@ -90,18 +90,28 @@
           docstring = "LSP mode";
         }
       ];
-      colorScheme = "desertex";
+      colorScheme = "default+";
       indentWidth = 2;
       tabStop = 2;
       numberLines = {
         enable = true;
         highlightCursor = true;
       };
+      scrollOff = {
+        columns = 3;
+        lines = 3;
+      };
       showMatching = true;
+      showWhitespace = {
+        enable = true;
+        lineFeed = " ";
+        nonBreakingSpace = " ";
+        space = " ";
+        tab = "│";
+      };
       wrapLines = {
         enable = true;
         indent = true;
-        marker = "⏎";
         word = true;
       };
     };
@@ -125,5 +135,11 @@
       connect-kak
       prelude-kak
     ] ++ [ pkgs.kakoune-cr ];
+  };
+
+  # colorschemes
+  home.file."default+" = {
+    source = ./default+.kak;
+    target = ".config/kak/colors/default+.kak";
   };
 }

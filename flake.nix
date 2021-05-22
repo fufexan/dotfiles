@@ -82,7 +82,12 @@
           extraSpecialArgs = { inherit inputs; };
           generateHome = inputs.hm.lib.homeManagerConfiguration;
           nixpkgs = {
-            config = { allowUnfree = true; };
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "ffmpeg-3.4.8"
+              ];
+            };
             overlays = [
               self.overlays.generic
               self.overlays.linux
