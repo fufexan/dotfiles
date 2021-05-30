@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 # minimal config, suitable for servers
 
@@ -26,9 +26,8 @@
     ranger
     # nix tools
     nix-index
-    nixfmt
     nixpkgs-fmt
-    rnix-lsp
+    inputs.nix-eval-lsp.defaultPackage.x86_64-linux
     # misc
     bat # better cat
     exa # ls alternative with colors & icons
@@ -104,17 +103,18 @@
     enable = true;
     compression = true;
     matchBlocks =
-      let home = config.home.homeDirectory;
+      let
+        home = config.home.homeDirectory;
       in
-      {
-        "homesv.local" = {
-          user = "mihai";
-          identityFile = "${home}/.ssh/id_ed25519";
+        {
+          "homesv.local" = {
+            user = "mihai";
+            identityFile = "${home}/.ssh/id_ed25519";
+          };
+          "kiiro.local" = {
+            user = "mihai";
+            identityFile = "${home}/.ssh/id_ed25519";
+          };
         };
-        "kiiro.local" = {
-          user = "mihai";
-          identityFile = "${home}/.ssh/id_ed25519";
-        };
-      };
   };
 }

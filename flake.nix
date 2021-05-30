@@ -7,26 +7,22 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     # flakes
-    agenix = {
-      url = "github:ryantm/agenix";
+    agenix.url = "github:ryantm/agenix";
+    hm.url = "github:nix-community/home-manager";
+
+    nix-eval-lsp = {
+      url = "github:aaronjanse/nix-eval-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils/flake-utils";
     };
 
-    hm = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    nur.url = "github:nix-community/NUR";
     osu-nix.url = github:fufexan/osu.nix;
 
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils/flake-utils";
     };
 
     # not flakes
@@ -115,9 +111,9 @@
                 ./home/modules/mail.nix
                 ./home/modules/media.nix
                 ./home/modules/xsession.nix
-                ./home/editors/emacs.nix
-                ./home/editors/kakoune.nix
-                ./home/editors/neovim.nix
+                ./home/editors/emacs
+                ./home/editors/kakoune
+                ./home/editors/neovim
               ];
             };
           };

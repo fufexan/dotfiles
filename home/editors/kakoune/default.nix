@@ -73,7 +73,15 @@
           option = "filetype=(c|cpp|nix)";
           commands = ''
             lsp-enable-window
+            lsp-inlay-diagnostics-enable window
             hook window BufWritePre .* lsp-formatting-sync
+          '';
+        }
+        {
+          name = "WinSetOption";
+          option = "filetype=(c|cpp)";
+          commands = ''
+            lsp-semantic-tokens
           '';
         }
       ];
@@ -141,5 +149,10 @@
   home.file."default+" = {
     source = ./default+.kak;
     target = ".config/kak/colors/default+.kak";
+  };
+  # LSP
+  home.file."kak-lsp" = {
+    source = ./kak-lsp.toml;
+    target = ".config/kak-lsp/kak-lsp.toml";
   };
 }

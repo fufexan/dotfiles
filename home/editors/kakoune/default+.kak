@@ -49,3 +49,7 @@ face global Prompt yellow,default
 face global MatchingChar default,default+b
 face global Whitespace default,default+f
 face global BufferPadding blue,default
+
+# LSP diagnostics
+face global InlayDiagnosticError red+difg
+face global InlayDiagnosticWarning yellow+difg

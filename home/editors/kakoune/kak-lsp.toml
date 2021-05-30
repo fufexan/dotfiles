@@ -1,0 +1,30 @@
+snippet_support = true
+verbosity = 2
+
+[semantic_tokens]
+type = "type"
+variable = "variable"
+namespace = "module"
+function = "function"
+string = "string"
+keyword = "keyword"
+operator = "operator"
+comment = "comment"
+
+[semantic_token_modifiers]
+documentation = "documentation"
+readonly = "default+d"
+
+[server]
+timeout = 1800 # seconds = 30 minutes
+
+[language.c_cpp]
+filetypes = ["c", "cc", "cpp", "cxx"]
+roots = ["compile_commands.json", ".clangd"]
+command = "clangd"
+
+[language.nix]
+filetypes = ["nix"]
+roots = ["flake.nix", "shell.nix", "default.nix", ".git"]
+command = "nix-eval-lsp"
+formatTool = "nixpkgs-fmt"
