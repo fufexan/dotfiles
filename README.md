@@ -18,12 +18,8 @@ Name           | Description
 -------------- | -----------
 Minimal        | configuration suited for servers
 Desktop        | config aimed at desktop usage
-PipeWire       | replace Pulseaudio, JACK and ALSA, configured for low latency
 Security       | tweaks for a more secure system, borrowed from [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
 Services       | server services
-
-Older modules that I don't use anymore have been moved to
-[modules/legacy](./modules/legacy).
 
 My [home](./home) config managed with Home Manager is also in this flake!
 
@@ -32,9 +28,7 @@ My [home](./home) config managed with Home Manager is also in this flake!
 I have some packages available in this flake:
 
 - [Picom (Jonaburg's fork)](https://github.com/jonaburg/picom) - rounded corners
-and pretty animations!
-- [Shellac-server](https://gitlab.redox-os.org/AdminXVII/shellac-server) - shell
-autocompletion for Ion Shell.
+and pretty animations
 - [kakoune.cr](https://github.com/alexherbo2/kakoune.cr) - A command-line tool
 for Kakoune
 
@@ -102,6 +96,14 @@ If you want to install packages, do:
   ];
 }
 ```
+
+### Moved and retired things
+
+- Pipewire low latency module + wine-osu: <https://github.com/fufexan/osu.nix>
+- shellac-server: <https://github.com/gytis-ivaskevicius/shellac-server>
+
+Most of the old modules that I don't use anymore have been moved to
+[modules/legacy](./modules/legacy).
 
 ## People
 

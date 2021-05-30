@@ -149,13 +149,15 @@
         inputs.nur.overlay
       ];
 
-      outputsBuilder = channels: {
-        packages = {
-          inherit (channels.nixpkgs)
-            shellac-server
-            ;
-        };
-      };
+      # waitig for fup fix
+      #outputsBuilder = channels: {
+      #  packages = {
+      #    inherit (channels.nixpkgs)
+      #      kakoune-cr
+      #      picom-jonaburg
+      #      ;
+      #  };
+      #};
 
       packages = {
         x86_64-linux = {

@@ -45,6 +45,7 @@ crystal.buildCrystalPackage rec {
     description = "A command-line tool for Kakoune";
     license = licenses.unlicense;
     maintainers = with maintainers; [ loewenheim ];
-    platforms = platforms.unix;
+    # crystal is broken on the others
+    platforms = with platforms; [ "x86_64-linux" "i686-linux" ];
   };
 }
