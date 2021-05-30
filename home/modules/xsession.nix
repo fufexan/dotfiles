@@ -24,7 +24,7 @@ in
   # programs
   # manage monitor configurations
   programs.autorandr = {
-    enable = true;
+    enable = false;
     profiles.home = {
       fingerprint = edids;
       config = {
@@ -220,7 +220,7 @@ in
     config = ../config/polybar/config;
     script = ''
       polybar main &
-      polybar external &
+      #polybar external &
     '';
   };
 
@@ -360,8 +360,7 @@ in
         done &
       '';
       monitors = {
-        HDMI-0 = [ "一" "二" "三" "四" "五" ];
-        DVI-D-0 = [ "六" "七" "八" "九" "十" ];
+        HDMI-0 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
       };
       rules = {
         "Firefox" = { desktop = "^1"; };
@@ -383,10 +382,10 @@ in
         gapless_monocle = true;
         single_monocle = true;
       };
-      startupPrograms = [
-        # sets proper monitor layout, then focuses first desktop
-        "autorandr -c && bspc desktop -f ^1"
-      ];
+      #startupPrograms = [
+      #  # sets proper monitor layout, then focuses first desktop
+      #  "autorandr -c && bspc desktop -f ^1"
+      #];
     };
   };
 }
