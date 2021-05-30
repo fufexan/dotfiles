@@ -35,8 +35,6 @@
     gotop
     htop # system monitor
     ripgrep # better grep
-    tree
-    usbutils
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
@@ -62,7 +60,7 @@
 
   programs.git = {
     enable = true;
-    ignores = [ "*~" "*.swp" ];
+    ignores = [ "*~" "*.swp" "result" ];
     signing = {
       key = "3AC82B48170331D3";
       signByDefault = true;

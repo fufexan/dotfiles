@@ -15,7 +15,6 @@
     # messaging
     discord
     element-desktop
-    mumble
     tdesktop
     zoom-us
     # torrents
@@ -23,12 +22,7 @@
     # video
     droidcam
     # misc
-    freerdp # for MS Office
-    gifsicle
     libnotify
-    piper # configure mouse
-    scrcpy # mirror Android screen
-    ueberzug # image display in terminals
     inputs.osu-nix.packages.x86_64-linux.wine-osu
   ];
 

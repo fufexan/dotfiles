@@ -1,67 +1,9 @@
-" CoC extensions
-"let g:coc_global_extensions = [
-"  \ 'coc-pairs',
-"  \ 'coc-emmet',
-"  \ 'coc-html',
-"  \ 'coc-css',
-"  \ 'coc-highlight',
-"  \ 'coc-lists',
-"  \ 'coc-tsserver',
-"  \ 'coc-prettier',
-"  \ 'coc-syntax',
-"  \ ]
-
-"
-" CoC settings
-"
-
-let g:livepreview_previewer = 'zathura'
 " Prevent delays
 set updatetime=300
-
 " Text edit may fail if hidden is not set
 set hidden
-
-" Don't pass messages to completion menu
 set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-"if has("patch-8.1.1564")
-"  " Recently vim can merge signcolumn and number column into one
-"  set signcolumn=number
-"else
-"  set signcolumn=yes
-"endif
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-"
-" vim-latex-live-preview
-"
-
-"
-" My own settings
-"
+set signcolumn=number
 
 " text width and show commands
 set tw=80
@@ -117,8 +59,8 @@ let e=expand('%:e')
 :	nnoremap <F10> :terminal ./%:r<CR>i
 :endif
 
-" copy file to primary system clipboard
-noremap <F12> ggVG"+y
+" copy selection to primary system clipboard
+noremap <F12> "+y
 
 " enable netrw
 filetype plugin on

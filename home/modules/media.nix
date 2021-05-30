@@ -5,7 +5,6 @@
 {
   home.packages = with pkgs; [
     # audio control
-    carla
     pavucontrol
     playerctl
     pulsemixer
