@@ -94,7 +94,7 @@
           {
             # homeConfigurations
             cli = generateHome {
-              inherit system username homeDirectory;
+              inherit system username homeDirectory extraSpecialArgs;
               configuration = {
                 imports = [ ./home/cli.nix ];
                 inherit nixpkgs;
@@ -127,7 +127,6 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         }
-        utils.nixosModules.saneFlakeDefaults
       ];
 
       overlays.generic = import ./overlays;

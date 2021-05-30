@@ -1,5 +1,5 @@
 # home server configuration
-{ config, lib, pkgs, agenix, inputs, ... }:
+{ config, lib, pkgs, agenix, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -8,8 +8,6 @@
     ddclientConfig.file = ../../secrets/ddclientConfig.age;
     mailPass.file = ../../secrets/mailPass.age;
   };
-
-  home-manager.users.mihai = import ../../home/cli.nix;
 
   boot.loader.grub = {
     enable = true;
