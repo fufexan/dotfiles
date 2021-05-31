@@ -151,8 +151,8 @@
     target = ".config/kak/colors/default+.kak";
   };
   # LSP
-  home.file."kak-lsp" = {
-    source = ./kak-lsp.toml;
-    target = ".config/kak-lsp/kak-lsp.toml";
-  };
+  #home.file."kak-lsp" = {
+  #  source = ./kak-lsp.toml;
+  #  target = ".config/kak-lsp/kak-lsp.toml";
+  #};
 }
