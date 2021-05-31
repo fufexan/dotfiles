@@ -18,7 +18,6 @@
   networking = {
     hostName = "kasshoku";
     interfaces.enp9s0.useDHCP = true;
-    interfaces.enp0s29f7u3.useDHCP = true;
     wireless.iwd.enable = true;
     enableB43Firmware = true;
   };
