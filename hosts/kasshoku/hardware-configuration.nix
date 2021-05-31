@@ -16,10 +16,10 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/78ce78ef-56e0-45e4-9877-200706ac642c";
+      device = "/dev/disk/by-uuid/78ce78ef-56e0-45e4-9877-200705ac642c";
       fsType = "ext4";
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/ee96e61f-7b27-a996-b4816819a971"; }];
+    [{ device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; }];
 }
