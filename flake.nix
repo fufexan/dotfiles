@@ -153,14 +153,15 @@
       ];
 
       # waitig for fup fix
-      #outputsBuilder = channels: {
-      #  packages = {
-      #    inherit (channels.nixpkgs)
-      #      kakoune-cr
-      #      picom-jonaburg
-      #      ;
-      #  };
-      #};
+      outputsBuilder = channels: {
+        packages = {
+          inherit (channels.nixpkgs)
+            discord
+            #kakoune-cr
+            #picom-jonaburg
+            ;
+        };
+      };
 
       packages = {
         x86_64-linux = {
