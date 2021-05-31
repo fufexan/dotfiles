@@ -35,7 +35,9 @@
     },
     "hm": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1622368473,
@@ -106,19 +108,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1621714816,
-        "narHash": "sha256-u6Rhw+1uwaTXThZWuySv9JPXzNuKI9Fmj36g4kb2Ojc=",
-        "path": "/nix/store/9cgbnddc5bl6wqqv9cyjqv2qfagn9n4r-source",
-        "rev": "278bcdce1f0da616661a6205161b13bd89a2f3bf",
-        "type": "path"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1622059058,
         "narHash": "sha256-t1/ZMtyxClVSfcV4Pt5C1YpkeJ/UwFF3oitLD7Ch/UA=",
         "owner": "NixOS",
@@ -133,7 +122,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1621361101,
         "narHash": "sha256-jH4vlCdaWgTDMeNU/NUJXmSs+xrpBVPWzwb5xzq2aec=",
@@ -165,7 +154,7 @@
     },
     "osu-nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "utils": "utils"
       },
       "locked": {
@@ -203,7 +192,7 @@
         "agenix": "agenix",
         "hm": "hm",
         "nix-eval-lsp": "nix-eval-lsp",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-kak": "nixpkgs-kak",
         "nur": "nur",
         "osu-nix": "osu-nix",

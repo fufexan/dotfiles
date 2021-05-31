@@ -4,8 +4,6 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  home-manager.users.mihai = import ../../home/cli.nix;
-
   boot.loader.grub = {
     enable = true;
     version = 2;

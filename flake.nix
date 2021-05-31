@@ -8,7 +8,10 @@
 
     # flakes
     agenix.url = "github:ryantm/agenix";
-    hm.url = "github:nix-community/home-manager";
+    hm = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-eval-lsp = {
       url = "github:aaronjanse/nix-eval-lsp";

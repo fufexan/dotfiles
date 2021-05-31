@@ -32,7 +32,6 @@
       vaapiIntel
       libvdpau-va-gl
       vaapiVdpau
-      intel-ocl
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       vaapiIntel
