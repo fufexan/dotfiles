@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
+    master.url = "github:NixOS/nixpkgs";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
 
     # flakes
@@ -39,9 +40,26 @@
     utils.lib.systemFlake {
       inherit self inputs;
 
-      channels.nixpkgs.input = nixpkgs;
+
+      # channel setup
+      
+      channels = {
+        nixpkgs.input = inputs.nixpkgs;
+        master.input = inputs.master;
+        nixpkgs-kak.input = inputs.nixpkgs-kak;
+      };
+
+      channels.nixpkgs.overlaysBuilder = channels: [
+        (final: prev: {
+          inherit (channels.master) quintom-cursor-theme;
+          inherit (channels.nixpkgs-kak) kakounePlugins;
+        })
+      ];
 
       channelsConfig = { allowUnfree = true; };
+
+
+      # modules and hosts
 
       nixosModules = utils.lib.modulesFromList [
         ./modules/desktop.nix
@@ -50,6 +68,12 @@
         ./modules/services.nix
       ];
 
+      sharedModules = [
+        self.nixosModules.minimal
+        self.nixosModules.security
+        inputs.agenix.nixosModules.age
+      ];
+      
       hosts = {
         homesv.modules = with self.nixosModules; [
           ./hosts/homesv
@@ -72,6 +96,9 @@
           inputs.osu-nix.nixosModule
         ];
       };
+
+
+      # homes
 
       homeConfigurations =
         let
@@ -105,6 +132,7 @@
             };
             full = generateHome {
               inherit system username homeDirectory extraSpecialArgs;
+              pkgs = self.pkgs.x86_64-linux.nixpkgs;
               configuration = {
                 imports = [ ./home/full.nix ];
                 inherit nixpkgs;
@@ -114,35 +142,22 @@
                 ./home/modules/mail.nix
                 ./home/modules/media.nix
                 ./home/modules/xsession.nix
-                ./home/editors/emacs
                 ./home/editors/kakoune
-                ./home/editors/neovim
               ];
             };
           };
 
-      sharedModules = [
-        self.nixosModules.minimal
-        self.nixosModules.security
-        inputs.agenix.nixosModules.age
-        inputs.hm.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
+
+      # overlays
 
       overlays.generic = import ./overlays;
       overlays.linux = (
         final: prev: {
-          kakounePlugins = inputs.nixpkgs-kak.legacyPackages.x86_64-linux.kakounePlugins;
-
           picom-jonaburg = prev.picom.overrideAttrs (
             old: {
               src = inputs.picom-jonaburg;
             }
           );
-          picom = final.picom-jonaburg;
         }
       );
 
@@ -152,29 +167,11 @@
         inputs.nur.overlay
       ];
 
-      # waitig for fup fix
-      outputsBuilder = channels: {
-        packages = {
-          inherit (channels.nixpkgs)
-            discord
-            #kakoune-cr
-            #picom-jonaburg
-            ;
-        };
-      };
 
-      packages = {
-        x86_64-linux = {
-          kakoune-cr = self.pkgs.x86_64-linux.nixpkgs.kakoune-cr;
-          picom-jonaburg = self.pkgs.x86_64-linux.nixpkgs.picom-jonaburg;
-        };
-        i686-linux = {
-          kakoune-cr = self.pkgs.i686-linux.nixpkgs.kakoune-cr;
-          picom-jonaburg = self.pkgs.i686-linux.nixpkgs.picom-jonaburg;
-        };
-        aarch64-linux = {
-          picom-jonaburg = self.pkgs.aarch64-linux.nixpkgs.picom-jonaburg;
-        };
+      # packages
+
+      outputsBuilder = channels: {
+        packages = utils.lib.exporters.fromOverlays self.overlays channels;
       };
     };
 }

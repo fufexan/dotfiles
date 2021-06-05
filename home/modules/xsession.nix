@@ -147,6 +147,7 @@ in
 
   services.picom = {
     enable = true;
+    package = pkgs.picom-jonaburg;
     blur = true;
     blurExclude = [ "class_g = 'slop'" "class_g = 'Firefox'" ];
     experimentalBackends = true;
@@ -334,9 +335,9 @@ in
   xsession = {
     enable = true;
     pointerCursor = {
-      package = pkgs.capitaine-cursors;
-      name = "capitaine-cursors";
-      size = 16;
+      package = pkgs.quintom-cursor-theme;
+      name = "Quintom_Ink";
+      size = 24;
     };
     preferStatusNotifierItems = true;
     windowManager.bspwm = {

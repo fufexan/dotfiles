@@ -65,6 +65,7 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+    generateRegistryFromInputs = true;
   };
 
   # enable programs
