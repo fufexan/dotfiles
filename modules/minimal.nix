@@ -114,7 +114,7 @@
 
     tailscale.enable = true;
 
-    transmission.enable = true;
+    #transmission.enable = true;
   };
 
   system.stateVersion = "20.09";

@@ -42,7 +42,7 @@
     btrfs.autoScrub.enable = true;
 
     mopidy = {
-      enable = true;
+      enable = false;
       #dataDir = "/home/mihai/.config/mopidy";
       extensionPackages = [
         pkgs.mopidy-local
@@ -57,7 +57,7 @@
     pipewire.lowLatency.enable = true;
 
     printing = {
-      enable = true;
+      enable = false;
       drivers = [ pkgs.fxlinuxprint ];
     };
 
@@ -70,6 +70,6 @@
     xserver.videoDrivers = [ "nvidia" ];
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = false;
   environment.systemPackages = with pkgs; [ virt-manager ];
 }
