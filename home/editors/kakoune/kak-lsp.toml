@@ -26,5 +26,5 @@ command = "clangd"
 [language.nix]
 filetypes = ["nix"]
 roots = ["flake.nix", "shell.nix", "default.nix", ".git"]
-command = "nix-eval-lsp"
+command = "rnix-lsp"
 formatTool = "nixpkgs-fmt"
