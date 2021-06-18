@@ -120,6 +120,8 @@
       gss = "git status";
       us = "systemctl --user";
       rs = "doas systemctl";
+      x = "xplr";
+      xd = "cd $(xplr)";
     };
     shellGlobalAliases = { exa = "exa --icons --git"; };
   };

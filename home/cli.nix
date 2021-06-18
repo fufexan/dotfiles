@@ -24,11 +24,11 @@
     # file downloaders
     youtube-dl
     # file managers
-    hunter
-    ranger
+    xplr
     # nix tools
     nix-index
     nixpkgs-fmt
+    rnix-lsp
     inputs.nix-eval-lsp.defaultPackage.x86_64-linux
     # misc
     bat # better cat
@@ -117,4 +117,3 @@
     defaultCacheTtlSsh = 300;
   };
 }
-
