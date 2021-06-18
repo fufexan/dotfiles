@@ -10,9 +10,9 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     {
@@ -28,7 +28,7 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; } ];
+    [{ device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
 }
