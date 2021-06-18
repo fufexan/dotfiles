@@ -5,7 +5,7 @@
 {
   imports = [
     # shell config
-    ./modules/shell.nix
+    ./modules/shell
   ];
 
   programs.home-manager.enable = true;
