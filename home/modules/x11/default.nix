@@ -8,6 +8,7 @@
     ./dunst.nix
     ./picom.nix
     ./polybar
+    ./rofi
     ./sxhkd.nix
   ];
 
@@ -21,25 +22,7 @@
     xdragon # file drag n drop
   ];
 
-  # programs
-  programs = {
-    feh.enable = true;
-
-    rofi = {
-      enable = true;
-      package = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-      theme = ../../config/rofi/general.rasi;
-    };
-
-    rofi.pass = {
-      enable = true;
-      extraConfig = ''
-        URL_field='url';
-        USERNAME_field='user';
-      '';
-      stores = [ "$HOME/.local/share/password-store" ];
-    };
-  };
+  programs.feh.enable = true;
 
   services = {
     random-background = {

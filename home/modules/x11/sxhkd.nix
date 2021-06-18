@@ -4,6 +4,7 @@ let
   # user scripts
   s = "~/.local/bin";
   rs = "${s}/rofi";
+  bspwm_dynamic = builtins.readFile ../../files/bin/dynamic_bspwm;
 in
 {
   services.sxhkd = {
@@ -70,7 +71,7 @@ in
       # rotate window layout clockwise 90 degrees
       "super + r" = "bspc node @parent -R 90";
       # increase/decrease borders
-      "super + {_,ctrl + } {equal,minus}" = "${s}/dynamic_bspwm.sh {b,g} {+,-}";
+      "super + {_,ctrl + } {equal,minus}" = "${bspwm_dynamic} {b,g} {+,-}";
 
       # programs
 

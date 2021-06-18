@@ -32,7 +32,6 @@
     inputs.nix-eval-lsp.defaultPackage.x86_64-linux
     # misc
     bat # better cat
-    cut
     exa # ls alternative with colors & icons
     file # info about files
     gotop
@@ -51,13 +50,6 @@
         enableFlakes = true;
       };
       enableZshIntegration = true;
-      #stdlib = ''
-      #  use_flake() {
-      #    watch_file flake.nix
-      #    watch_file flake.lock
-      #    eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
-      #  }
-      #'';
     };
 
     gh = {
