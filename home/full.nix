@@ -28,10 +28,16 @@
 
   gtk = {
     enable = true;
-    iconTheme.name = "Papirus-Dark";
-    iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "Orchis-dark-compact";
-    theme.package = pkgs.orchis;
+
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+
+    theme = {
+      name = "Orchis-dark-compact";
+      package = pkgs.orchis;
+    };
   };
 
   # programs
@@ -48,12 +54,12 @@
         let
           font = "JetBrainsMono Nerd Font";
         in
-          {
-            normal.family = font;
-            bold.family = font;
-            italic.family = font;
-            size = 11.0;
-          };
+        {
+          normal.family = font;
+          bold.family = font;
+          italic.family = font;
+          size = 11.0;
+        };
       draw_bold_text_with_bright_colors = true;
       colors = {
         primary = {
@@ -165,7 +171,9 @@
   };
 
   # services
-  services.syncthing.enable = true;
+  services = {
+    syncthing.enable = true;
 
-  services.udiskie.enable = true;
+    udiskie.enable = true;
+  };
 }
