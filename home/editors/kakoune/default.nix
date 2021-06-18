@@ -145,14 +145,8 @@
     ] ++ [ pkgs.kakoune-cr ];
   };
 
-  # colorschemes
-  home.file."default+" = {
-    source = ./default+.kak;
-    target = ".config/kak/colors/default+.kak";
-  };
-  # LSP
-  #home.file."kak-lsp" = {
-  #  source = ./kak-lsp.toml;
-  #  target = ".config/kak-lsp/kak-lsp.toml";
-  #};
+  # colorscheme
+  home.file.".config/kak/colors/default+.kak".source = ./default+.kak;
+  # LSP config
+  home.file.".config/kak-lsp/kak-lsp.toml".source = ./kak-lsp.toml;
 }
