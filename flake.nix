@@ -42,7 +42,7 @@
 
 
       # channel setup
-      
+
       channels = {
         nixpkgs.input = inputs.nixpkgs;
         master.input = inputs.master;
@@ -73,7 +73,7 @@
         self.nixosModules.security
         inputs.agenix.nixosModules.age
       ];
-      
+
       hosts = {
         homesv.modules = with self.nixosModules; [
           ./hosts/homesv
@@ -118,31 +118,31 @@
             ];
           };
         in
-          {
-            # homeConfigurations
-            cli = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
-              configuration = {
-                imports = [ ./home/cli.nix ];
-                inherit nixpkgs;
-              };
-            };
-            full = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
-              pkgs = self.pkgs.x86_64-linux.nixpkgs;
-              configuration = {
-                imports = [ ./home/full.nix ];
-                inherit nixpkgs;
-              };
-              extraModules = [
-                ./home/modules/files.nix
-                ./home/modules/mail.nix
-                ./home/modules/media.nix
-                ./home/modules/xsession.nix
-                ./home/editors/kakoune
-              ];
+        {
+          # homeConfigurations
+          cli = generateHome {
+            inherit system username homeDirectory extraSpecialArgs;
+            configuration = {
+              imports = [ ./home/cli.nix ];
+              inherit nixpkgs;
             };
           };
+          full = generateHome {
+            inherit system username homeDirectory extraSpecialArgs;
+            pkgs = self.pkgs.x86_64-linux.nixpkgs;
+            configuration = {
+              imports = [ ./home/full.nix ];
+              inherit nixpkgs;
+            };
+            extraModules = [
+              ./home/modules/files.nix
+              ./home/modules/mail.nix
+              ./home/modules/media.nix
+              ./home/modules/x11
+              ./home/editors/kakoune
+            ];
+          };
+        };
 
 
       # overlays
