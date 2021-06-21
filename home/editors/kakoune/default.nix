@@ -129,19 +129,13 @@
         kcr init kakoune
         kak-lsp --kakoune -s $kak_session
       }
-      require-module auto-pairs
-      auto-pairs-enable
+      enable-auto-pairs
     '';
     plugins = with pkgs.kakounePlugins; [
-      # won't work without kakoune.cr
-      auto-pairs-kak
       # allows kak to talk to lsp servers
       kak-lsp
       # enables expandtab and other indent options
       smarttab-kak
-      # most plugins depend on these
-      connect-kak
-      prelude-kak
     ] ++ [ pkgs.kakoune-cr ];
   };
 
