@@ -23,7 +23,11 @@
     droidcam
     # misc
     libnotify
-    inputs.osu-nix.defaultPackage.x86_64-linux
+    (
+      inputs.osu-nix.defaultPackage.x86_64-linux.override {
+        location = "$HOME/Games/osu!stable";
+      }
+    )
   ];
 
   gtk = {
