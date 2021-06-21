@@ -50,10 +50,12 @@
       };
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: {
-          inherit (channels.master) quintom-cursor-theme;
-          inherit (channels.nixpkgs-kak) kakounePlugins;
-        })
+        (
+          final: prev: {
+            inherit (channels.master) quintom-cursor-theme;
+            inherit (channels.nixpkgs-kak) kakounePlugins;
+          }
+        )
       ];
 
       channelsConfig = { allowUnfree = true; };
@@ -118,31 +120,31 @@
             ];
           };
         in
-        {
-          # homeConfigurations
-          cli = generateHome {
-            inherit system username homeDirectory extraSpecialArgs;
-            configuration = {
-              imports = [ ./home/cli.nix ];
-              inherit nixpkgs;
+          {
+            # homeConfigurations
+            cli = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              configuration = {
+                imports = [ ./home/cli.nix ];
+                inherit nixpkgs;
+              };
+            };
+            full = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              pkgs = self.pkgs.x86_64-linux.nixpkgs;
+              configuration = {
+                imports = [ ./home/full.nix ];
+                inherit nixpkgs;
+              };
+              extraModules = [
+                ./home/modules/files.nix
+                ./home/modules/mail.nix
+                ./home/modules/media.nix
+                ./home/modules/x11
+                ./home/editors/kakoune
+              ];
             };
           };
-          full = generateHome {
-            inherit system username homeDirectory extraSpecialArgs;
-            pkgs = self.pkgs.x86_64-linux.nixpkgs;
-            configuration = {
-              imports = [ ./home/full.nix ];
-              inherit nixpkgs;
-            };
-            extraModules = [
-              ./home/modules/files.nix
-              ./home/modules/mail.nix
-              ./home/modules/media.nix
-              ./home/modules/x11
-              ./home/editors/kakoune
-            ];
-          };
-        };
 
 
       # overlays

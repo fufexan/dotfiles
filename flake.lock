@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "discord-ipc-bridge": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1607757308,
+        "narHash": "sha256-hLdlvH0QITJjD3HQOnu/+7FKWFDsYqpr5h7AOcG+8k8=",
+        "owner": "hitomi-team",
+        "repo": "discord-ipc-bridge",
+        "rev": "7004fd3e073e5d44bde2101cd26203b10c6fa9a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hitomi-team",
+        "repo": "discord-ipc-bridge",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1623660459,
@@ -169,15 +185,16 @@
     },
     "osu-nix": {
       "inputs": {
+        "discord-ipc-bridge": "discord-ipc-bridge",
         "nixpkgs": "nixpkgs_3",
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1622831909,
-        "narHash": "sha256-v1FZG9VG9rDb9iFwYFXrZXnJzJrKKN7jV6IV8OtylBw=",
+        "lastModified": 1624295795,
+        "narHash": "sha256-WST3SS6g9ng5A3Wj3huZ2bvaMrFMmdObIMI7jAB8k4c=",
         "owner": "fufexan",
         "repo": "osu.nix",
-        "rev": "997913e93f0444d15ffef5321c634de7a92bf02b",
+        "rev": "0c559c10464138fe9aa4520fb203defdc91dd1cb",
         "type": "github"
       },
       "original": {
