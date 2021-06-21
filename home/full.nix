@@ -23,7 +23,7 @@
     droidcam
     # misc
     libnotify
-    inputs.osu-nix.packages.x86_64-linux.wine-osu
+    inputs.osu-nix.defaultPackage.x86_64-linux
   ];
 
   gtk = {
@@ -54,12 +54,12 @@
         let
           font = "JetBrainsMono Nerd Font";
         in
-        {
-          normal.family = font;
-          bold.family = font;
-          italic.family = font;
-          size = 11.0;
-        };
+          {
+            normal.family = font;
+            bold.family = font;
+            italic.family = font;
+            size = 11.0;
+          };
       draw_bold_text_with_bright_colors = true;
       colors = {
         primary = {
