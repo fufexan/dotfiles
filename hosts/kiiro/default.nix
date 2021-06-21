@@ -25,8 +25,19 @@
   };
 
   # enable Nvidia KMS (for Wayland and less screen tearing on Xorg)
-  hardware.nvidia.modesetting.enable = true;
-  hardware.opentabletdriver.enable = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      disabledPlugins = [ "sap" ];
+      hsphfpd.enable = true;
+      package = pkgs.bluezFull;
+      powerOnBoot = false;
+    };
+
+    opentabletdriver.enable = true;
+
+    nvidia.modesetting.enable = true;
+  };
 
   networking = {
     hostName = "kiiro";
