@@ -30,6 +30,11 @@
     };
 
     # not flakes
+    kakoune-cr = {
+      url = "github:alexherbo2/kakoune.cr";
+      flake = false;
+    };
+
     picom-jonaburg = {
       url = "github:jonaburg/picom";
       flake = false;
@@ -149,7 +154,7 @@
 
       # overlays
 
-      overlays.generic = import ./overlays;
+      overlays.generic = import ./overlays { inherit inputs; };
       overlays.linux = (
         final: prev: {
           picom-jonaburg = prev.picom.overrideAttrs (

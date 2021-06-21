@@ -1,23 +1,16 @@
-{ bat, crystal, fd, fzf, fetchFromGitHub, fetchurl, jq, lib, stdenv }:
+{ crystal, fetchurl, lib, stdenv, inputs }:
 let
   icon = fetchurl {
     url = "https://github.com/mawww/kakoune/raw/master/doc/kakoune_logo.svg";
     sha256 = "1x9gdrnrqgzvr1ixr6s8ff6cvz01yp2xdh5ad6nbh6p2d094h617";
-    name = "kakoune.svg";
+    name = "kcr.svg";
   };
 in
 crystal.buildCrystalPackage rec {
   pname = "kakoune-cr";
-  version = "unstable-2021-04-30";
+  version = "unstable-2021-06-19";
 
-  propagatedUserEnvPkgs = [ bat fd fzf jq ];
-
-  src = fetchFromGitHub {
-    repo = "kakoune.cr";
-    owner = "alexherbo2";
-    rev = "c0bfd9e76a972359098af9f1957ab681e3a54318";
-    sha256 = "sha256-acqC5RT9duI/zmE5Nk7COI2sQzvi0lkmLJ8orvBOL7c=";
-  };
+  src = inputs.kakoune-cr;
 
   crystalBinaries.kcr.src = "src/cli.cr";
 
@@ -34,7 +27,7 @@ crystal.buildCrystalPackage rec {
   postInstall = ''
     install -Dm555 share/kcr/commands/*/kcr-* -t $out/bin
     install -Dm444 ${icon} -t $out/share/icons/hicolor/scalable/apps/${icon.name}
-    install -Dm444 share/kcr/applications/kakoune.desktop -t $out/share/applications
+    install -Dm444 share/kcr/applications/kcr.desktop -t $out/share/applications
     cp -r share/kcr $out/share/
   '';
 

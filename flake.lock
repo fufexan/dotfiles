@@ -69,6 +69,22 @@
         "type": "github"
       }
     },
+    "kakoune-cr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624296703,
+        "narHash": "sha256-LWL3Xg670fc7k2c0TIUG/aZbpTbqsDEpLJFDz7nBNe8=",
+        "owner": "alexherbo2",
+        "repo": "kakoune.cr",
+        "rev": "1967abdc1f2e3abe007fa69d2d35711ab4610f3a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexherbo2",
+        "repo": "kakoune.cr",
+        "type": "github"
+      }
+    },
     "master": {
       "locked": {
         "lastModified": 1623857827,
@@ -223,6 +239,7 @@
       "inputs": {
         "agenix": "agenix",
         "hm": "hm",
+        "kakoune-cr": "kakoune-cr",
         "master": "master",
         "nix-eval-lsp": "nix-eval-lsp",
         "nixpkgs": "nixpkgs_2",
