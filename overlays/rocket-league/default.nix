@@ -2,32 +2,29 @@
 , legendary-gl
 , writeShellScriptBin
 , winetricks
-, makeDesktopIcon
+, makeDesktopItem
 , symlinkJoin
-, wine ? null
+, wine
+, winestreamproxy
 , wineFlags ? ""
 , pname ? "rocket-league"
 , verbose ? false
-, location ? "$HOME/Games/rocketleague"
-, tricks ? [ dxvk ]
-, dib
+, basepath ? "$HOME/Games"
+, location ? "${basepath}/rocketleague"
+, tricks ? [ "dxvk" "win10" ]
 }:
 
 # simple script to run Rocket League installed through legendary-gl
 
 let
   rlicon = builtins.fetchurl {
-    url = "";
-    name = "rl.png";
-    sha256 = lib.fakeSha256;
+    url = "https://www.pngkey.com/png/full/16-160666_rocket-league-png.png";
+    name = "rocket-league.png";
+    sha256 = "09n90zvv8i8bk3b620b6qzhj37jsrhmxxf7wqlsgkifs4k2q8qpf";
   };
 
-  # discord ipc bridge stuff
-  REGKEY = "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunServices";
-  wdib = "winediscordipcbridge.exe";
-
   # concat winetricks args
-  tricks = with builtins;
+  tricksString = with builtins;
     if (length tricks) > 0 then
       concatStringsSep " " tricks
     else
@@ -35,24 +32,22 @@ let
 
   script = writeShellScriptBin pname ''
     export WINEPREFIX="${location}"
+    export DXVK_HUD=compiler
+    export WINEFSYNC=1
+    export WINEESYNC=1
 
-    PATH=${wine}/bin:${winetricks}/bin:${legendary-gl}/bin:$PATH
+    PATH=${wine}/bin:${winetricks}/bin:${legendary-gl}/bin:${winestreamproxy}/bin:$PATH
 
     if [ ! -d "$WINEPREFIX" ]; then
       # install tricks
-      winetricks -q -f ${tricksStmt}
+      winetricks -q ${tricksString}
       wineserver -k
-
-      # install Rocket League
-      legendary install Sugar --base-path $HOME/Games/${pname}
-
-      # install ipcbridge
-      cp ${dib}/bin/${wdib} $WINEPREFIX/drive_c/windows/${wdib}
-      wine reg add '${REGKEY}' /v winediscordipcbridge /d 'C:\windows\${wdib}' /f
-
     fi
 
-    legendary launch Sugar
+    legendary update Sugar --base-path ${basepath}
+    # no rpc for rocket unless bakkesmod I guess
+    #winestreamproxy -f &
+    legendary launch Sugar --base-path ${basepath}
     wineserver -w
   '';
 
