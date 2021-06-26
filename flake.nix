@@ -162,6 +162,8 @@
               src = inputs.picom-jonaburg;
             }
           );
+
+          winetricks = prev.winetricks.override { wine = final.wine-tkg; };
         }
       );
 
