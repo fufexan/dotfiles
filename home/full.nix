@@ -11,7 +11,14 @@
   # install programs
   home.packages = with pkgs; [
     # games
+    legendary-gl
     lutris
+    (
+      inputs.osu-nix.defaultPackage.x86_64-linux.override {
+        location = "$HOME/Games/osu!stable";
+      }
+    )
+    rocket-league
     # messaging
     discord
     element-desktop
@@ -23,11 +30,6 @@
     droidcam
     # misc
     libnotify
-    (
-      inputs.osu-nix.defaultPackage.x86_64-linux.override {
-        location = "$HOME/Games/osu!stable";
-      }
-    )
   ];
 
   gtk = {

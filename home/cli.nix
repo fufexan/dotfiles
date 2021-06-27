@@ -32,10 +32,11 @@
     inputs.nix-eval-lsp.defaultPackage.x86_64-linux
     # misc
     bat # better cat
+    bottom # system monitor
     exa # ls alternative with colors & icons
+    fd # better find
     file # info about files
     gotop
-    htop # system monitor
     ripgrep # better grep
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
@@ -94,19 +95,19 @@
         let
           home = config.home.homeDirectory;
         in
-        {
-          "homesv" = {
-            host = "100.84.134.107";
-            identityFile = "${home}/.ssh/id_ed25519";
+          {
+            "homesv" = {
+              host = "100.84.134.107";
+              identityFile = "${home}/.ssh/id_ed25519";
+            };
+            "kiiro" = {
+              host = "100.79.149.35";
+              identityFile = "${home}/.ssh/id_ed25519";
+            };
+            "phone" = {
+              host = "100.124.95.67";
+            };
           };
-          "kiiro" = {
-            host = "100.79.149.35";
-            identityFile = "${home}/.ssh/id_ed25519";
-          };
-          "phone" = {
-            host = "100.124.95.67";
-          };
-        };
     };
   };
 
