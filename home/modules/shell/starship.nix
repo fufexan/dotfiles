@@ -9,15 +9,11 @@ in
     settings = {
       add_newline = false;
       character = {
-        success_symbol = "[➜](bold green)";
-        error_symbol = "[➜](bold red)";
+        success_symbol = "[›](bold green)";
+        error_symbol = "[›](bold red)";
+        vicmd_symbol = "[‹](bold green)";
       };
       cmd_duration.show_notifications = true;
-      directory = {
-        style = "bold purple";
-        # doesn't work yet 🤔
-        substitutions = starshipSubst config.programs.zsh.dirHashes;
-      };
       format = lib.concatStrings [
         "$directory"
 
@@ -30,7 +26,6 @@ in
         "$rust"
 
         "$cmd_duration"
-        "$line_break"
 
         "$character"
       ];
