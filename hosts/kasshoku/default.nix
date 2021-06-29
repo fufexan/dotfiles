@@ -14,7 +14,6 @@
   networking = {
     hostName = "kasshoku";
     interfaces.enp9s0.useDHCP = true;
-    wireless.iwd.enable = true;
   };
 
   system.stateVersion = lib.mkForce "21.05";

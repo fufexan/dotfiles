@@ -10,16 +10,15 @@
     ];
 
   boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "ahci" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = [ "kvm-intel" "wl" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/78ce78ef-56e0-45e4-9877-200705ac642c";
+      device = "/dev/disk/by-uuid/51a85007-e6ad-4cfd-b883-12658399a359";
       fsType = "ext4";
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; }];
+    [ { device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; } ];
 }
