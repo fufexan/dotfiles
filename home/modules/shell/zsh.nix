@@ -57,15 +57,6 @@
       echo -ne '\e[5 q' # Use beam shape cursor on startup.
       preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-      # git integration
-      autoload -Uz vcs_info
-      precmd_vcs_info() { vcs_info }
-      precmd_functions+=( precmd_vcs_info )
-      setopt prompt_subst
-      RPROMPT=\$vcs_info_msg_0_
-      zstyle ':vcs_info:git:*' formats '%F{blue}(%b)%r%f'
-      zstyle ':vcs_info:*' enable git
-
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
       zstyle ':completion:*' list-colors '\'
