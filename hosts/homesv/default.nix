@@ -18,9 +18,7 @@
   # network
   networking = {
     hostName = "homesv";
-    interfaces.enp3s0.useDHCP = true;
-    interfaces.wlp2s0.useDHCP = true;
-    wireless.iwd.enable = true;
+    interfaces.enp9s0.useDHCP = true;
   };
   networking.firewall = { allowedTCPPorts = [ 80 443 ]; };
 
@@ -37,4 +35,6 @@
       extraGroups = [ "render" ];
     };
   };
+
+  system.stateVersion = lib.mkForce "21.05";
 }
