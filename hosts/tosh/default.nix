@@ -12,9 +12,7 @@
 
   # network
   networking = {
-    hostName = "kasshoku";
-    interfaces.enp9s0.useDHCP = true;
+    hostName = "tosh";
+    networkmanager.enable = true;
   };
-
-  system.stateVersion = lib.mkForce "21.05";
 }

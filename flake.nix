@@ -89,8 +89,8 @@
           services
         ];
 
-        kasshoku.modules = with self.nixosModules; [
-          ./hosts/kasshoku
+        tosh.modules = with self.nixosModules; [
+          ./hosts/tosh
         ];
 
         kiiro.modules = with self.nixosModules; [

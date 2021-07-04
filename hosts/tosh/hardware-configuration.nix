@@ -9,16 +9,20 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "ahci" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "ums_realtek" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = [ "kvm-intel" "wl" ];
+  boot.kernelModules = [];
+  boot.extraModulePackages = [];
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/51a85007-e6ad-4cfd-b883-12658399a359";
+      device = "/dev/disk/by-uuid/3f009ab5-2372-437a-a131-146bd20987cf";
       fsType = "ext4";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; } ];
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/55d7ef51-78c9-4d56-acec-ce00fcdcfb5e"; }
+  ];
+
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 }
