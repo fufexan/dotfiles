@@ -10,6 +10,8 @@
     device = "/dev/sda";
   };
 
+  hardware.opentabletdriver.enable = true;
+
   # network
   networking = {
     hostName = "tosh";
