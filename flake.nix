@@ -91,6 +91,8 @@
 
         tosh.modules = with self.nixosModules; [
           ./hosts/tosh
+          desktop
+          inputs.osu-nix.nixosModule
         ];
 
         kiiro.modules = with self.nixosModules; [
