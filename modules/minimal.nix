@@ -70,6 +70,10 @@
       "osu-nix.cachix.org-1:vn/szRSrx1j0IA/oqLAokr/kktKQzsDgDPQzkLFR9Cg="
     ];
 
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
+
     gc = {
       automatic = true;
       dates = "weekly";
