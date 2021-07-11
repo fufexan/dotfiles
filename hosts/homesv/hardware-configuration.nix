@@ -10,7 +10,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "uhci_hcd" "ehci_pci" "ata_piix" "ahci" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "wl" ];
 
   fileSystems."/" =
@@ -25,5 +25,5 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; } ];
+    [{ device = "/dev/disk/by-uuid/ee96e61f-7b27-43d2-a996-b4816819a971"; }];
 }
