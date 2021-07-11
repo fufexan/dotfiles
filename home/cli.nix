@@ -28,7 +28,7 @@
     # nix tools
     nix-index
     nixpkgs-fmt
-    rnix-lsp
+    inputs.rnix-lsp.defaultPackage.x86_64-linux
     inputs.nix-eval-lsp.defaultPackage.x86_64-linux
     # misc
     bat # better cat
@@ -95,19 +95,19 @@
         let
           home = config.home.homeDirectory;
         in
-          {
-            "homesv" = {
-              host = "100.84.134.107";
-              identityFile = "${home}/.ssh/id_ed25519";
-            };
-            "kiiro" = {
-              host = "100.79.149.35";
-              identityFile = "${home}/.ssh/id_ed25519";
-            };
-            "phone" = {
-              host = "100.124.95.67";
-            };
+        {
+          "homesv" = {
+            host = "100.84.134.107";
+            identityFile = "${home}/.ssh/id_ed25519";
           };
+          "kiiro" = {
+            host = "100.79.149.35";
+            identityFile = "${home}/.ssh/id_ed25519";
+          };
+          "phone" = {
+            host = "100.124.95.67";
+          };
+        };
     };
   };
 

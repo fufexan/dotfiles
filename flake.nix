@@ -21,7 +21,13 @@
     };
 
     nur.url = "github:nix-community/NUR";
-    osu-nix.url = github:fufexan/osu.nix;
+    osu-nix.url = github:fufexan/osu.nix/tkg;
+
+    rnix-lsp = {
+      url = "github:nix-community/rnix-lsp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils/flake-utils";
+    };
 
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
@@ -57,7 +63,6 @@
       channels.nixpkgs.overlaysBuilder = channels: [
         (
           final: prev: {
-            inherit (channels.master) quintom-cursor-theme;
             inherit (channels.nixpkgs-kak) kakounePlugins;
           }
         )
@@ -123,34 +128,35 @@
               self.overlays.generic
               self.overlays.linux
               inputs.nur.overlay
+              inputs.osu-nix.overlay
             ];
           };
         in
-          {
-            # homeConfigurations
-            cli = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
-              configuration = {
-                imports = [ ./home/cli.nix ];
-                inherit nixpkgs;
-              };
-            };
-            full = generateHome {
-              inherit system username homeDirectory extraSpecialArgs;
-              pkgs = self.pkgs.x86_64-linux.nixpkgs;
-              configuration = {
-                imports = [ ./home/full.nix ];
-                inherit nixpkgs;
-              };
-              extraModules = [
-                ./home/modules/files.nix
-                ./home/modules/mail.nix
-                ./home/modules/media.nix
-                ./home/modules/x11
-                ./home/editors/kakoune
-              ];
+        {
+          # homeConfigurations
+          cli = generateHome {
+            inherit system username homeDirectory extraSpecialArgs;
+            configuration = {
+              imports = [ ./home/cli.nix ];
+              inherit nixpkgs;
             };
           };
+          full = generateHome {
+            inherit system username homeDirectory extraSpecialArgs;
+            pkgs = self.pkgs.x86_64-linux.nixpkgs;
+            configuration = {
+              imports = [ ./home/full.nix ];
+              inherit nixpkgs;
+            };
+            extraModules = [
+              ./home/modules/files.nix
+              ./home/modules/mail.nix
+              ./home/modules/media.nix
+              ./home/modules/x11
+              ./home/editors/kakoune
+            ];
+          };
+        };
 
 
       # overlays

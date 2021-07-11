@@ -13,11 +13,8 @@
     # games
     legendary-gl
     lutris
-    (
-      inputs.osu-nix.defaultPackage.x86_64-linux.override {
-        location = "$HOME/Games/osu!stable";
-      }
-    )
+    #(inputs.osu-nix.defaultPackage.x86_64-linux.override { location = "$HOME/Games/osu!stable"; })
+    (osu-stable.override { location = "$HOME/Games/osu!stable"; })
     rocket-league
     # messaging
     discord
@@ -60,12 +57,12 @@
         let
           font = "JetBrainsMono Nerd Font";
         in
-          {
-            normal.family = font;
-            bold.family = font;
-            italic.family = font;
-            size = 11.0;
-          };
+        {
+          normal.family = font;
+          bold.family = font;
+          italic.family = font;
+          size = 11.0;
+        };
       draw_bold_text_with_bright_colors = true;
       colors = {
         primary = {

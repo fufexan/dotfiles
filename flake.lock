@@ -100,6 +100,24 @@
         "type": "github"
       }
     },
+    "naersk": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1605267184,
+        "narHash": "sha256-0FSNlq6nN0/W88fg5kTkgRhAOQ8pI+uSZqBG9w49pMM=",
+        "owner": "nmattia",
+        "repo": "naersk",
+        "rev": "ce273fa593dcc94a629d0d869f07d96d2b337e37",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nmattia",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
     "nix-eval-lsp": {
       "inputs": {
         "flake-utils": [
@@ -153,6 +171,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-tkg": {
+      "locked": {
+        "lastModified": 1625833080,
+        "narHash": "sha256-9WtdZlqg4W+luSWnFNdDutpID0g2TsiN6urk6l4qFPQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "3191d4f0af44159e6f215b7fa975a41fd00b8f01",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1625657323,
@@ -184,6 +217,20 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1605988311,
+        "narHash": "sha256-PA+kgq46NApOAJlmBNJHs5DwsIrY+jodM0e4g7VtXyY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2247d824fe07f16325596acc7faa286502faffd1",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "nur": {
       "locked": {
         "lastModified": 1625717305,
@@ -199,22 +246,43 @@
         "type": "github"
       }
     },
+    "oglfPatches": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624106954,
+        "narHash": "sha256-PPchKKmTcGqCSMzmOcj2PhTeWcLgfzuCOU/yMAQh6mU=",
+        "owner": "openglfreak",
+        "repo": "wine-tkg-userpatches",
+        "rev": "ff6328a6b5e36dd8a007a7273290aa30ab3164d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openglfreak",
+        "repo": "wine-tkg-userpatches",
+        "rev": "ff6328a6b5e36dd8a007a7273290aa30ab3164d9",
+        "type": "github"
+      }
+    },
     "osu-nix": {
       "inputs": {
         "discord-ipc-bridge": "discord-ipc-bridge",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-tkg": "nixpkgs-tkg",
+        "oglfPatches": "oglfPatches",
+        "tkgPatches": "tkgPatches",
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1624301136,
-        "narHash": "sha256-M4wdf69DVON2kl/CN3UF1neuQrtjrTvzF+8r1s0P2LE=",
+        "lastModified": 1626003791,
+        "narHash": "sha256-E5AvRo8kBww9U8JTdYLCXVYegsQ6cu9lD7THbFKwIWY=",
         "owner": "fufexan",
         "repo": "osu.nix",
-        "rev": "6fc02d0b88d29ea346bdcb91fff6601b922a10e0",
+        "rev": "dc037114cfb00b90275c2ae019d28eab5f737493",
         "type": "github"
       },
       "original": {
         "owner": "fufexan",
+        "ref": "tkg",
         "repo": "osu.nix",
         "type": "github"
       }
@@ -235,6 +303,31 @@
         "type": "github"
       }
     },
+    "rnix-lsp": {
+      "inputs": {
+        "naersk": "naersk",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "utils",
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1625436070,
+        "narHash": "sha256-jnASPNbCn6T99Yn9OeppQNN9Cs+plVcd6Cd9mLYw5Tw=",
+        "owner": "nix-community",
+        "repo": "rnix-lsp",
+        "rev": "55838bd432a7f4c79a33464bf76c73886226d38c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "rnix-lsp",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -247,6 +340,7 @@
         "nur": "nur",
         "osu-nix": "osu-nix",
         "picom-jonaburg": "picom-jonaburg",
+        "rnix-lsp": "rnix-lsp",
         "snm": "snm",
         "utils": "utils_3"
       }
@@ -270,6 +364,23 @@
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
         "type": "gitlab"
+      }
+    },
+    "tkgPatches": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1624646123,
+        "narHash": "sha256-MjN479YSlyhLt9fxoishGVCuQLg1SRMLF4TWh7cRuIQ=",
+        "owner": "Frogging-Family",
+        "repo": "wine-tkg-git",
+        "rev": "257bfe71c045db0fbbb9f3896f9697068b9f482a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Frogging-Family",
+        "repo": "wine-tkg-git",
+        "rev": "257bfe71c045db0fbbb9f3896f9697068b9f482a",
+        "type": "github"
       }
     },
     "utils": {
