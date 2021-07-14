@@ -13,6 +13,7 @@
       dots = "$HOME/Documents/code/dotfiles";
       pics = "$HOME/Pictures";
       vids = "$HOME/Videos";
+      nixpkgs = "$HOME/Documents/code/git/nixpkgs";
     };
     dotDir = ".config/zsh";
     history = {
