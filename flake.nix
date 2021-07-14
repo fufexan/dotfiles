@@ -50,12 +50,6 @@
 
       # channel setup
 
-      channels = {
-        nixpkgs.input = inputs.nixpkgs;
-        master.input = inputs.master;
-        nixpkgs-kak.input = inputs.nixpkgs-kak;
-      };
-
       channels.nixpkgs.overlaysBuilder = channels: [
         (
           final: prev: {
@@ -76,7 +70,7 @@
         ./modules/services.nix
       ];
 
-      sharedModules = [
+      hostDefaults.modules = [
         self.nixosModules.minimal
         self.nixosModules.security
         inputs.agenix.nixosModules.age
@@ -160,21 +154,9 @@
       # overlays
 
       overlays.generic = import ./overlays { inherit inputs; };
-      overlays.linux = (
-        final: prev: {
-          picom-jonaburg = prev.picom.overrideAttrs (
-            old: {
-              src = inputs.picom-jonaburg;
-            }
-          );
-
-          winetricks = prev.winetricks.override { wine = final.wine-tkg; };
-        }
-      );
 
       sharedOverlays = [
         self.overlays.generic
-        self.overlays.linux
         inputs.nur.overlay
       ];
 
