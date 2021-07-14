@@ -13,8 +13,7 @@
     # games
     legendary-gl
     lutris
-    #(inputs.osu-nix.defaultPackage.x86_64-linux.override { location = "$HOME/Games/osu!stable"; })
-    (osu-stable.override { location = "$HOME/Games/osu!stable"; })
+    (inputs.osu-nix.defaultPackage.x86_64-linux.override { location = "$HOME/Games/osu!stable"; })
     rocket-league
     # messaging
     discord
