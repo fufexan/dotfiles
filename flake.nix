@@ -21,7 +21,10 @@
     };
 
     nur.url = "github:nix-community/NUR";
-    osu-nix.url = github:fufexan/osu.nix/tkg;
+    osu-nix = {
+      url = github:fufexan/osu.nix;
+      inputs.utils.follows = "utils/flake-utils";
+    };
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
@@ -36,15 +39,8 @@
     };
 
     # not flakes
-    kakoune-cr = {
-      url = "github:alexherbo2/kakoune.cr";
-      flake = false;
-    };
-
-    picom-jonaburg = {
-      url = "github:jonaburg/picom";
-      flake = false;
-    };
+    kakoune-cr = { url = "github:alexherbo2/kakoune.cr"; flake = false; };
+    picom-jonaburg = { url = "github:jonaburg/picom"; flake = false; };
   };
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
@@ -153,7 +149,9 @@
               ./home/modules/mail.nix
               ./home/modules/media.nix
               ./home/modules/x11
+              ./home/editors/emacs
               ./home/editors/kakoune
+              ./home/editors/neovim
             ];
           };
         };
