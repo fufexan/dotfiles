@@ -11,11 +11,9 @@ final: prev: {
     inherit (final) winestreamproxy;
   };
 
-  wine-tkg = prev.callPackage ./wine-tkg {
-    inherit (inputs.master.legacyPackages.x86_64-linux) wineWowPackages;
-  };
+  technic-launcher = prev.callPackage ./technic-launcher { };
 
-  winestreamproxy = prev.callPackage ./winestreamproxy {
-    wine = final.wine-tkg;
-  };
+  wine-tkg = prev.callPackage ./wine-tkg { inherit (inputs.master.legacyPackages.x86_64-linux) wineWowPackages; };
+
+  winestreamproxy = prev.callPackage ./winestreamproxy { wine = final.wine-tkg; };
 }
