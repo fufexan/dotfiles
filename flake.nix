@@ -10,7 +10,7 @@
     # flakes
     agenix.url = "github:ryantm/agenix";
     hm = {
-      url = "github:nix-community/home-manager";
+      url = path:../git/home-manager; #"github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

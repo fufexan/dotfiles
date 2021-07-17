@@ -72,17 +72,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1626073055,
-        "narHash": "sha256-vocByfpVu6m9zvtJugDvmd6/9iT2HJuG4tmDICKd0lI=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "775cb20bd4af7781fbf336fb201df02ee3d544bb",
-        "type": "github"
+        "narHash": "sha256-1UeBv72pIUutCVxaMo5FRrOQmX53p11MN5CWN4G9FYA=",
+        "path": "../git/home-manager",
+        "type": "path"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
+        "path": "../git/home-manager",
+        "type": "path"
       }
     },
     "kakoune-cr": {

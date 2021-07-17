@@ -29,6 +29,8 @@
   };
 
   services = {
+    easyeffects.enable = true;
+
     mpd = {
       enable = true;
       musicDirectory = "${config.home.homeDirectory}/Music";
@@ -56,10 +58,5 @@
     mpdris2.enable = true;
 
     playerctld.enable = true;
-
-    pulseeffects = {
-      enable = true;
-      package = pkgs.pulseeffects-pw;
-    };
   };
 }
