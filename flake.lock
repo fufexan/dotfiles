@@ -72,13 +72,17 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-1UeBv72pIUutCVxaMo5FRrOQmX53p11MN5CWN4G9FYA=",
-        "path": "../git/home-manager",
-        "type": "path"
+        "lastModified": 1626281056,
+        "narHash": "sha256-6U8UPcaCWYLEmBdnHilXqQYCb5nEimR2gzwve9cnbf0=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "df3b87814debc0fae0f9380de1053e87abbf01ec",
+        "type": "github"
       },
       "original": {
-        "path": "../git/home-manager",
-        "type": "path"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "kakoune-cr": {
