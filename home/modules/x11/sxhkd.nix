@@ -76,7 +76,7 @@ in
       # programs
 
       # screenshot selection
-      "{_,super + ,super + ctrl + }Print" = "${s}/screenshot.sh {area,screen,rofi}";
+      "Print" = "flameshot gui";
       # screencast region
       "alt + Print" = "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).mp4";
       # powermenu

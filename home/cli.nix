@@ -89,26 +89,7 @@
       ];
     };
 
-    ssh = {
-      enable = true;
-      matchBlocks =
-        let
-          home = config.home.homeDirectory;
-        in
-        {
-          "homesv" = {
-            host = "100.84.134.107";
-            identityFile = "${home}/.ssh/id_ed25519";
-          };
-          "kiiro" = {
-            host = "100.79.149.35";
-            identityFile = "${home}/.ssh/id_ed25519";
-          };
-          "phone" = {
-            host = "100.124.95.67";
-          };
-        };
-    };
+    ssh.enable = true;
   };
 
   services.gpg-agent = {
@@ -116,5 +97,6 @@
     enableSshSupport = true;
     defaultCacheTtl = 300;
     defaultCacheTtlSsh = 300;
+    pinentryFlavor = "gnome3";
   };
 }
