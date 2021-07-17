@@ -44,7 +44,7 @@
   };
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
-    utils.lib.systemFlake {
+    utils.lib.mkFlake {
       inherit self inputs;
 
 
@@ -63,7 +63,7 @@
 
       # modules and hosts
 
-      nixosModules = utils.lib.modulesFromList [
+      nixosModules = utils.lib.exportModules [
         ./modules/desktop.nix
         ./modules/minimal.nix
         ./modules/security.nix
@@ -164,7 +164,7 @@
       # packages
 
       outputsBuilder = channels: {
-        packages = utils.lib.exporters.fromOverlays self.overlays channels;
+        packages = utils.lib.exportOverlays self.overlays channels;
       };
     };
 }
