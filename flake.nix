@@ -116,9 +116,7 @@
             };
             overlays = [
               self.overlays.generic
-              self.overlays.linux
               inputs.nur.overlay
-              inputs.osu-nix.overlay
             ];
           };
         in
