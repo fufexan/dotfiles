@@ -9,8 +9,7 @@ in
 {
   mailserver = {
     enable = true;
-    fqdn = fqdn;
-    domains = domains;
+    inherit domains fqdn;
 
     loginAccounts = {
       "me@fufexan.xyz" = {
@@ -31,8 +30,5 @@ in
     enablePop3Ssl = true;
 
     enableManageSieve = true;
-
-    # for machines with more than 1G RAM
-    virusScanning = true;
   };
 }
