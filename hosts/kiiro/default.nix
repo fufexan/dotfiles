@@ -11,6 +11,8 @@
     };
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load
