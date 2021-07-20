@@ -27,7 +27,7 @@
     nur.url = "github:nix-community/NUR";
     osu-nix = {
       url = github:fufexan/osu.nix;
-      inputs.utils.follows = "fu";
+      inputs.utils.follows = "utils";
     };
 
     rnix-lsp = {

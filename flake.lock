@@ -287,15 +287,15 @@
         "oglfPatches": "oglfPatches",
         "tkgPatches": "tkgPatches",
         "utils": [
-          "fu"
+          "utils"
         ]
       },
       "locked": {
-        "lastModified": 1626818776,
-        "narHash": "sha256-o/vh2EfywbcAR/+9b7R0a9Dqg1/2GkQd8bGg4ZwoFcw=",
+        "lastModified": 1626818838,
+        "narHash": "sha256-STGKKG4FGTxzv03JklZ/ptHyqmjgCtu8fMzymu/Czp8=",
         "owner": "fufexan",
         "repo": "osu.nix",
-        "rev": "fdfb4fc0ef43bd75fac12e958f54696d1f777f29",
+        "rev": "b0be415e2b3ba2ac2ec59a666725c5070952e56c",
         "type": "github"
       },
       "original": {
