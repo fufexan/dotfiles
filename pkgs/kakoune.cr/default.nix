@@ -1,4 +1,4 @@
-{ crystal, fetchurl, lib, stdenv, inputs }:
+{ crystal, fetchurl, lib, stdenv, kakoune-cr }:
 let
   icon = fetchurl {
     url = "https://github.com/mawww/kakoune/raw/master/doc/kakoune_logo.svg";
@@ -10,7 +10,7 @@ crystal.buildCrystalPackage rec {
   pname = "kakoune-cr";
   version = "unstable-2021-06-19";
 
-  src = inputs.kakoune-cr;
+  src = kakoune-cr;
 
   crystalBinaries.kcr.src = "src/cli.cr";
 

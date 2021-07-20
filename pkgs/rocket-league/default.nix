@@ -63,4 +63,11 @@ in
 symlinkJoin {
   name = pname;
   paths = [ script desktopItems ];
+  meta = {
+    description = "Rocket League installer and runner (using legendary)";
+    homepage = "https://rocketleague.com";
+    license.free = false;
+    maintainer = lib.maintainers.fufexan;
+    platforms = with lib.platforms; [ "x86_64-linux" ];
+  };
 }

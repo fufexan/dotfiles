@@ -5,7 +5,7 @@ let
 in
 {
   stable = callPackage ./base.nix rec {
-    pname = "discord";
+    pname = "discord-electron";
     binaryName = "Discord";
     desktopName = "Discord";
     version = "0.0.15";

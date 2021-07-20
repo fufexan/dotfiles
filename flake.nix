@@ -60,6 +60,7 @@
             inherit (channels.nixpkgs-kak) kakounePlugins;
           }
         )
+        (import ./pkgs { inherit inputs; })
       ];
 
       channelsConfig = { allowUnfree = true; };
@@ -154,19 +155,20 @@
 
 
       # overlays
-
-      overlays.generic = import ./overlays { inherit inputs; };
-
-      sharedOverlays = [
-        self.overlays.generic
-        inputs.nur.overlay
-      ];
+      overlays = utils.lib.exportOverlays {
+        inherit (self) pkgs inputs;
+      };
 
 
       # packages
 
       outputsBuilder = channels: {
-        packages = utils.lib.exportOverlays self.overlays channels;
+        packages = utils.lib.exportPackages self.overlays channels;
       };
     };
+
+  nixConfig = {
+    substituters = [ "https://app.cachix.org/cache/fufexan" ];
+    trusted-public-keys = [ "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY=" ];
+  };
 }

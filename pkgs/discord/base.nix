@@ -4,7 +4,7 @@
 , binaryName
 , desktopName
 , isWayland ? true
-, extraOptions ? [ ]
+, extraOptions ? []
 , autoPatchelfHook
 , makeDesktopItem
 , lib
@@ -116,11 +116,13 @@ stdenv.mkDerivation rec {
     libdbusmenu
   ];
 
-  flags = (lib.optionals isWayland [
-    "--enable-features=UseOzonePlatform"
-    "--ozone-platform=wayland"
-    "--enable-webrtc-pipewire-capturer"
-  ]) ++ extraOptions;
+  flags = (
+    lib.optionals isWayland [
+      "--enable-features=UseOzonePlatform"
+      "--ozone-platform=wayland"
+      "--enable-webrtc-pipewire-capturer"
+    ]
+  ) ++ extraOptions;
 
   installPhase = ''
     mkdir -p $out/{bin,usr/lib/${pname},share/pixmaps}
@@ -160,10 +162,9 @@ stdenv.mkDerivation rec {
   };
 
   meta = with lib; {
-    description = "All-in-one cross-platform voice and text chat for gamers";
+    description = "All-in-one cross-platform voice and text chat for gamers, built with latest Electron";
     homepage = "https://discordapp.com/";
     downloadPage = "https://discordapp.com/download";
     platforms = [ "x86_64-linux" ];
   };
 }
-
