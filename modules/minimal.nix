@@ -133,7 +133,6 @@
   };
 
   system.stateVersion = "20.09";
-  system.autoUpgrade.enable = true;
 
   time.timeZone = "Europe/Bucharest";
 
