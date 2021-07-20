@@ -77,36 +77,31 @@
     };
   };
 
-  services.openssh.knownHosts.kiiro.publicKey =
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ/FGSeXJhOeTVrAdnvvnFumuRliSWii6HceY879bSS8 fufexan@pm.me";
-
   services.samba = {
     enable = true;
-    securityType = "user";
+    nsswins = true;
     extraConfig = ''
-      workgroup = WORKGROUP
-      server string = homesv
-      netbios name = homesv
-      security = user
-      hosts allow = 10.0.0 localhost
-      hosts deny = 0.0.0.0/0
-      use sendfile = yes
-      guest account = nobody
-      map to guest = bad user
+      server smb encrypt = desired
+      hosts allow = 10. 100. localhost
+      hosts deny = ALL
+      map to guest = Bad User
     '';
-    shares.private = {
+    shares.drive = {
       path = "/media";
       browseable = "yes";
       "read only" = "no";
-      "guest ok" = "no";
-      "create mask" = "0644";
+      "create mask" = "0664";
       "directory mask" = "0755";
-      "force user" = "mihai";
       "force group" = "users";
     };
   };
 
-  services.samba-wsdd.enable = true;
+  services.samba-wsdd = {
+    enable = true;
+    discovery = true;
+    workgroup = "WORKGROUP";
+  };
+
   networking.firewall.allowedTCPPorts = [ 80 139 443 445 5357 8443 ];
   networking.firewall.allowedUDPPorts = [ 137 138 3702 ];
 

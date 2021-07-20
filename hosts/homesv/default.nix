@@ -31,12 +31,7 @@
   };
 
   users.users = {
-    user.isNormalUser = true;
-    server = {
-      isSystemUser = true;
-      group = "server";
-      extraGroups = [ "render" ];
-    };
+    user.isSystemUser = true;
   };
 
   system.stateVersion = lib.mkForce "21.05";
