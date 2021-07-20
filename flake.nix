@@ -5,7 +5,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
     master.url = "github:NixOS/nixpkgs";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    fu.url = "github:numtide/flake-utils";
+    utils = {
+      url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+      inputs.flake-utils.follows = "fu";
+    };
 
     # flakes
     agenix.url = "github:ryantm/agenix";
@@ -17,28 +21,28 @@
     nix-eval-lsp = {
       url = "github:aaronjanse/nix-eval-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils/flake-utils";
+      inputs.flake-utils.follows = "fu";
     };
 
     nur.url = "github:nix-community/NUR";
     osu-nix = {
       url = github:fufexan/osu.nix;
-      inputs.utils.follows = "utils/flake-utils";
+      inputs.utils.follows = "fu";
     };
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "utils/flake-utils";
+      inputs.utils.follows = "fu";
     };
 
     snm = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils/flake-utils";
+      inputs.nixpkgs-21_05.follows = "nixpkgs";
+      inputs.utils.follows = "fu";
     };
 
-    # not flakes
     kakoune-cr = { url = "github:alexherbo2/kakoune.cr"; flake = false; };
     picom-jonaburg = { url = "github:jonaburg/picom"; flake = false; };
   };
