@@ -55,12 +55,14 @@
       # channel setup
 
       channels.nixpkgs.overlaysBuilder = channels: [
+        inputs.osu-nix.overlays."nixpkgs/wine-tkg"
+        inputs.osu-nix.overlays."nixpkgs/winestreamproxy"
         (
           final: prev: {
             inherit (channels.nixpkgs-kak) kakounePlugins;
           }
         )
-        (import ./pkgs { inherit inputs; })
+        self.overlay
       ];
 
       channelsConfig = { allowUnfree = true; };
@@ -120,7 +122,7 @@
               ];
             };
             overlays = [
-              self.overlays.generic
+              self.overlay
               inputs.nur.overlay
             ];
           };
@@ -155,13 +157,12 @@
 
 
       # overlays
+      overlay = import ./pkgs { inherit inputs; };
       overlays = utils.lib.exportOverlays {
         inherit (self) pkgs inputs;
       };
 
-
       # packages
-
       outputsBuilder = channels: {
         packages = utils.lib.exportPackages self.overlays channels;
       };

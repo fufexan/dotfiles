@@ -1,4 +1,5 @@
 { inputs }:
+
 final: prev: {
   discord-electron = prev.callPackage ./discord {
     branch = "stable";
@@ -12,9 +13,8 @@ final: prev: {
   );
 
   rocket-league = prev.callPackage ./rocket-league {
-    wine = inputs.osu-nix.overlays."nixpkgs/wine-tkg".wine-tkg;
-
-    inherit (inputs.osu-nix.overlays."nixpkgs/winestreamproxy") winestreamproxy;
+    wine = prev.wine-tkg;
+    inherit (prev) winestreamproxy;
   };
 
   technic-launcher = prev.callPackage ./technic-launcher { };
