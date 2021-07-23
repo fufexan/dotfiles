@@ -4,7 +4,7 @@ let
   # user scripts
   s = "~/.local/bin";
   rs = "${s}/rofi";
-  bspwm_dynamic = builtins.readFile ../../files/bin/dynamic_bspwm;
+  bspwm_dynamic = builtins.readFile ../files/bin/dynamic_bspwm;
 in
 {
   services.sxhkd = {

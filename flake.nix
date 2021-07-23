@@ -140,14 +140,16 @@
             inherit system username homeDirectory extraSpecialArgs;
             pkgs = self.pkgs.x86_64-linux.nixpkgs;
             configuration = {
-              imports = [ ./home/full.nix ];
+              imports = [ ./home ];
               inherit nixpkgs;
             };
             extraModules = [
-              ./home/modules/files.nix
-              ./home/modules/mail.nix
-              ./home/modules/media.nix
-              ./home/modules/x11
+              ./home/files.nix
+              ./home/games.nix
+              ./home/media.nix
+              ./home/nix.nix
+              ./home/mail.nix
+              ./home/x11
               ./home/editors/emacs
               ./home/editors/kakoune
               ./home/editors/neovim

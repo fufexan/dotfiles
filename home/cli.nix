@@ -5,7 +5,7 @@
 {
   imports = [
     # shell config
-    ./modules/shell
+    ./shell
   ];
 
   programs.home-manager.enable = true;
@@ -19,24 +19,22 @@
     # archives
     p7zip
     unrar
+
     # file converters
     ffmpeg
+
     # file downloaders
     youtube-dl
+
     # file managers
     xplr
-    # nix tools
-    nix-index
-    nixpkgs-fmt
-    inputs.rnix-lsp.defaultPackage.x86_64-linux
-    inputs.nix-eval-lsp.defaultPackage.x86_64-linux
-    # misc
+
+    # coreutils
     bat # better cat
     bottom # system monitor
     exa # ls alternative with colors & icons
     fd # better find
     file # info about files
-    gotop
     ripgrep # better grep
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
@@ -44,15 +42,6 @@
   xdg.enable = true;
 
   programs = {
-    direnv = {
-      enable = true;
-      nix-direnv = {
-        enable = true;
-        enableFlakes = true;
-      };
-      enableZshIntegration = true;
-    };
-
     gh = {
       enable = true;
       gitProtocol = "ssh";
@@ -90,13 +79,5 @@
     };
 
     ssh.enable = true;
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    defaultCacheTtl = 300;
-    defaultCacheTtlSsh = 300;
-    pinentryFlavor = "gnome3";
   };
 }

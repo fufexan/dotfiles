@@ -16,11 +16,11 @@
       # Animations
       # requires https://github.com/jonaburg/picom
       #transition-length = 100
-      transition-pow-x = 1.4 #0.2
-      transition-pow-y = 1.4 #0.2
-      transition-pow-w = 1.4 #0.2
-      transition-pow-h = 1.4 #0.2
-      size-transition = true
+      #transition-pow-x = 1.4 #0.2
+      #transition-pow-y = 1.4 #0.2
+      #transition-pow-w = 1.4 #0.2
+      #transition-pow-h = 1.4 #0.2
+      #size-transition = true
 
 
       # Corners

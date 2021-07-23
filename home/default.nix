@@ -10,26 +10,12 @@
 
   # install programs
   home.packages = with pkgs; [
-    # games
-    legendary-gl
-    lutris
-    (inputs.osu-nix.defaultPackage.x86_64-linux.override { location = "$HOME/Games/osu!stable"; })
-    rocket-league
-    (technic-launcher.override {
-      src = builtins.fetchurl {
-        url = "https://mc-launcher.com/files/unc/Technic.jar";
-        sha256 = "sha256-b9ekp9pheryqoGtlOM/JtEe2TUHOlDDQuMFk98VNZs0=";
-      };
-    })
     # messaging
     discord
     element-desktop
     tdesktop
-    zoom-us
     # torrents
     transmission-remote-gtk
-    # video
-    droidcam
     # misc
     libnotify
   ];
@@ -102,7 +88,6 @@
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox-bin;
     profiles.mihai.name = "mihai";
   };
 
@@ -148,7 +133,7 @@
   };
 
   programs.newsboat = {
-    enable = true;
+    enable = false;
     autoReload = true;
     urls = [
       {
@@ -180,6 +165,14 @@
 
   # services
   services = {
+    gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      defaultCacheTtl = 300;
+      defaultCacheTtlSsh = 300;
+      pinentryFlavor = "gnome3";
+    };
+
     syncthing.enable = true;
 
     udiskie.enable = true;

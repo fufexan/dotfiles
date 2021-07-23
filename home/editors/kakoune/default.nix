@@ -46,6 +46,8 @@
             map buffer normal <F9> %{: make %opt{noext}<ret>}
             # running
             map buffer normal <F10> %{: terminal sh -c "./%opt{noext}; read"<ret>}
+
+            lsp-semantic-tokens
           '';
         }
         {
@@ -77,13 +79,6 @@
             hook window BufWritePre .* lsp-formatting-sync
           '';
         }
-        {
-          name = "WinSetOption";
-          option = "filetype=(c|cpp)";
-          commands = ''
-            lsp-semantic-tokens
-          '';
-        }
       ];
       keyMappings = [
         {
@@ -112,7 +107,7 @@
       showMatching = true;
       showWhitespace = {
         enable = true;
-        lineFeed = " ";
+        lineFeed = "↵ ";
         nonBreakingSpace = " ";
         space = " ";
         tab = "│";

@@ -23,13 +23,14 @@
     initExtra = ''
       # autoloads
       autoload -U history-search-end
-      autoload -Uz vcs_info
       autoload edit-command-line
 
       # search history based on what's typed in the prompt
+
       # group functions
       zle -N history-beginning-search-backward-end history-search-end
       zle -N history-beginning-search-forward-end history-search-end
+
       # bind functions to up and down arrow keys
       bindkey "^[[A" history-beginning-search-backward-end
       bindkey "^[[B" history-beginning-search-forward-end
@@ -76,22 +77,25 @@
       l = "exa -l";
       la = "exa -la";
       md = "mkdir -p";
+
       ga = "git add";
       gb = "git branch";
       gc = "git commit";
       gca = "git commit --amend";
       gcm = "git commit -m";
       gco = "git checkout";
-      gcb = "git checkout -b";
       gd = "git diff";
       gds = "git diff --staged";
       gp = "git push";
       gpl = "git pull";
       gl = "git log";
+      gr = "git rebase";
       gs = "git status --short";
       gss = "git status";
+
       us = "systemctl --user";
       rs = "doas systemctl";
+
       x = "xplr";
       xd = "cd $(xplr)";
     };
