@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
+    nixpkgs-osu.follows = "osu-nix/nixpkgs";
     master.url = "github:NixOS/nixpkgs";
     fu.url = "github:numtide/flake-utils";
     utils = {
@@ -64,6 +65,11 @@
         )
         self.overlay
       ];
+      channels.nixpkgs-osu.overlaysBuilder = _: [
+        inputs.osu-nix.overlays."nixpkgs/wine-tkg"
+        inputs.osu-nix.overlays."nixpkgs/winestreamproxy"
+        self.overlay
+      ];
 
       channelsConfig = { allowUnfree = true; };
 
@@ -122,7 +128,10 @@
               ];
             };
             overlays = [
-              self.overlay
+              self.overlays."nixpkgs-osu/rocket-league"
+              self.overlays."nixpkgs/picom-jonaburg"
+              self.overlays."nixpkgs/kakoune-cr"
+              self.overlays."nixpkgs/technic-launcher"
               inputs.nur.overlay
             ];
           };

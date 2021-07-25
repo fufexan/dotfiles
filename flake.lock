@@ -354,6 +354,10 @@
         "nix-eval-lsp": "nix-eval-lsp",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-kak": "nixpkgs-kak",
+        "nixpkgs-osu": [
+          "osu-nix",
+          "nixpkgs"
+        ],
         "nur": "nur",
         "osu-nix": "osu-nix",
         "picom-jonaburg": "picom-jonaburg",
