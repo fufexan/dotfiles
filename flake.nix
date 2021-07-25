@@ -14,6 +14,8 @@
 
     # flakes
     agenix.url = "github:ryantm/agenix";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -132,6 +134,7 @@
               self.overlays."nixpkgs/picom-jonaburg"
               self.overlays."nixpkgs/kakoune-cr"
               self.overlays."nixpkgs/technic-launcher"
+              inputs.emacs-overlay.overlay
               inputs.nur.overlay
             ];
           };

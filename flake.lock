@@ -50,6 +50,21 @@
         "type": "github"
       }
     },
+    "emacs-overlay": {
+      "locked": {
+        "lastModified": 1627117072,
+        "narHash": "sha256-HOsnsguL9HBPsXRTzmx55KKpBgGUm4MSnkorTcInjDI=",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "0772ac0f16bc09c470d002fd2c2b7f3fa6044204",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
+      }
+    },
     "fu": {
       "locked": {
         "lastModified": 1623875721,
@@ -347,6 +362,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "emacs-overlay": "emacs-overlay",
         "fu": "fu",
         "hm": "hm",
         "kakoune-cr": "kakoune-cr",
