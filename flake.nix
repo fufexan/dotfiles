@@ -82,7 +82,6 @@
         ./modules/desktop.nix
         ./modules/minimal.nix
         ./modules/security.nix
-        ./modules/services.nix
       ];
 
       hostDefaults.modules = [
@@ -94,9 +93,9 @@
       hosts = {
         homesv.modules = with self.nixosModules; [
           ./hosts/homesv
+          ./hosts/homesv/services.nix
           inputs.snm.nixosModule
           ./modules/mailserver.nix
-          services
         ];
 
         tosh.modules = with self.nixosModules; [
@@ -181,9 +180,4 @@
         packages = utils.lib.exportPackages self.overlays channels;
       };
     };
-
-  nixConfig = {
-    substituters = [ "https://app.cachix.org/cache/fufexan" ];
-    trusted-public-keys = [ "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY=" ];
-  };
 }
