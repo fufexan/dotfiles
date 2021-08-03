@@ -36,6 +36,10 @@
       powerOnBoot = false;
     };
 
+    cpu.intel.updateMicrocode = true;
+
+    enableAllFirmware = true;
+
     opentabletdriver.enable = true;
 
     nvidia.modesetting.enable = true;
