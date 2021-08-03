@@ -130,7 +130,7 @@
             };
             overlays = [
               self.overlays."nixpkgs-osu/rocket-league"
-              self.overlays."nixpkgs/picom-jonaburg"
+              #self.overlays."nixpkgs/picom-jonaburg"
               self.overlays."nixpkgs/kakoune-cr"
               self.overlays."nixpkgs/technic-launcher"
               inputs.emacs-overlay.overlay
