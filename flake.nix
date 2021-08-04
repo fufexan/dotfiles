@@ -119,7 +119,7 @@
           username = "mihai";
           homeDirectory = "/home/mihai";
           system = "x86_64-linux";
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs self; };
           generateHome = inputs.hm.lib.homeManagerConfiguration;
           nixpkgs = {
             config = {
@@ -130,7 +130,7 @@
             };
             overlays = [
               self.overlays."nixpkgs-osu/rocket-league"
-              #self.overlays."nixpkgs/picom-jonaburg"
+              self.overlays."nixpkgs/picom-jonaburg"
               self.overlays."nixpkgs/kakoune-cr"
               self.overlays."nixpkgs/technic-launcher"
               inputs.emacs-overlay.overlay

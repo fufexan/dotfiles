@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, config, inputs, self, ... }:
 
 # games
 
@@ -12,7 +12,7 @@
       location = "$HOME/Games/osu!stable";
     })
 
-    rocket-league
+    self.packages.x86_64-linux.rocket-league
 
     (technic-launcher.override {
       src = builtins.fetchurl {
