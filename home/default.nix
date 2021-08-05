@@ -177,4 +177,45 @@
 
     udiskie.enable = true;
   };
+
+  xresources.properties = {
+    #! special
+    "*.foreground" = "#fdf0ed";
+    "*.background" = "#16161c";
+    "*.cursorColor" = "#D8DEE9";
+    "*fading" = 35;
+    "*fadeColor" = "#4C566A";
+
+    #! black
+    "*.color0" = "#232530";
+    "*.color8" = "#2e303e";
+
+    #! red
+    "*.color1" = "#e95678";
+    "*.color9" = "#ec6a88";
+
+    #! green
+    "*.color2" = "#29d398";
+    "*.color10" = "#3fdaa4";
+
+    #! yellow
+    "*.color3" = "#fab795";
+    "*.color11" = "#fbc3a7";
+
+    #! blue
+    "*.color4" = "#26bbd9";
+    "*.color12" = "#3fc6de";
+
+    #! magenta
+    "*.color5" = "#ee64ae";
+    "*.color13" = "#f075b7";
+
+    #! cyan
+    "*.color6" = "#59e3e3";
+    "*.color14" = "#6be6e6";
+
+    #! white
+    "*.color7" = "#fadad1";
+    "*.color15" = "#fdf0ed";
+  };
 }
