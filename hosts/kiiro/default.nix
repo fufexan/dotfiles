@@ -82,6 +82,7 @@
 
     udev.extraRules = ''
       ACTION=="add|change", KERNEL=="sda", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+      SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
     xserver.videoDrivers = [ "nvidia" ];
