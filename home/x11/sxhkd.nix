@@ -3,8 +3,6 @@
 let
   # user scripts
   s = "~/.local/bin";
-  rs = "${s}/rofi";
-  bspwm_dynamic = builtins.readFile ../files/bin/dynamic_bspwm;
 in
 {
   services.sxhkd = {
@@ -71,7 +69,7 @@ in
       # rotate window layout clockwise 90 degrees
       "super + r" = "bspc node @parent -R 90";
       # increase/decrease borders
-      "super + {_,ctrl + } {equal,minus}" = "${bspwm_dynamic} {b,g} {+,-}";
+      "super + {_,ctrl + } {equal,minus}" = "${s}/dynamic_bspwm {b,g} {+,-}";
 
       # programs
 
@@ -80,7 +78,7 @@ in
       # screencast region
       "alt + Print" = "${s}/scrrec -s ~/Videos/scrrec/$(date +%F-%T).mp4";
       # powermenu
-      "super + p" = "${rs}/powermenu.sh";
+      "super + p" = "${s}/powermenu";
       # emoji launcher
       "super + e" = "rofi -show emoji";
       # rofi pass

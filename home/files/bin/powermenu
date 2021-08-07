@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Options
+shutdown=""
+reboot=""
+lock=""
+suspend=""
+logout=""
+
+# Variable passed to rofi
+options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
+
+chosen="$(echo -e "$options" | rofi -dmenu -selected-row 2)"
+case $chosen in
+    $shutdown)
+        shutdown now
+        ;;
+    $reboot)
+        reboot
+        ;;
+    $lock)
+        i3lock
+        ;;
+    $suspend)
+        playerctl pause; systemctl suspend
+        ;;
+    $logout)
+        bspc quit
+        ;;
+    *)
+esac
