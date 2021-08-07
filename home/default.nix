@@ -3,6 +3,9 @@
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
 
+let
+  c = import ./colors.nix;
+in
 {
   imports = [
     ./cli.nix # base config
@@ -55,32 +58,36 @@
           size = 11.0;
         };
       draw_bold_text_with_bright_colors = true;
-      colors = {
-        primary = {
-          background = "0x16161c";
-          foreground = "0xfdf0ed";
+      colors =
+        let
+          x = c: "0x${c}";
+        in
+        {
+          primary = {
+            background = x c.bg;
+            foreground = x c.fg;
+          };
+          normal = {
+            black = x c.normal.black;
+            red = x c.normal.red;
+            green = x c.normal.green;
+            yellow = x c.normal.yellow;
+            blue = x c.normal.blue;
+            magenta = x c.normal.magenta;
+            cyan = x c.normal.cyan;
+            white = x c.normal.white;
+          };
+          bright = {
+            black = x c.bright.black;
+            red = x c.bright.red;
+            green = x c.bright.green;
+            yellow = x c.bright.yellow;
+            blue = x c.bright.blue;
+            magenta = x c.bright.magenta;
+            cyan = x c.bright.cyan;
+            white = x c.bright.white;
+          };
         };
-        normal = {
-          black = "0x232530";
-          red = "0xe95678";
-          green = "0x29d398";
-          yellow = "0xfab795";
-          blue = "0x26bbd9";
-          magenta = "0xee64ae";
-          cyan = "0x59e3e3";
-          white = "0xfadad1";
-        };
-        bright = {
-          black = "0x2e303e";
-          red = "0xec6a88";
-          green = "0x3fdaa4";
-          yellow = "0xfbc3a7";
-          blue = "0x3fc6de";
-          magenta = "0xf075b7";
-          cyan = "0x6be6e6";
-          white = "0xfdf0ed";
-        };
-      };
       background_opacity = 0.7;
       live_config_reload = true;
     };
@@ -95,41 +102,45 @@
     enable = true;
     font.name = "JetBrainsMono Nerd Font";
     font.size = 12;
-    settings = {
-      scrollback_lines = 10000;
-      window_padding_width = 4;
+    settings =
+      let
+        x = c: "#${c}";
+      in
+      {
+        scrollback_lines = 10000;
+        window_padding_width = 4;
 
-      allow_remote_control = "yes";
+        allow_remote_control = "yes";
 
-      # colors
-      background_opacity = "0.7";
-      foreground = "#fdf0ed";
-      background = "#16161c";
-      # black
-      color0 = "#232530";
-      color8 = "#2e303e";
-      # red
-      color1 = "#e95678";
-      color9 = "#ec6a88";
-      # green
-      color2 = "#29d398";
-      color10 = "#3fdaa4";
-      # yellow
-      color3 = "#fab795";
-      color11 = "#fbc3a7";
-      # blue
-      color4 = "#26bbd9";
-      color12 = "#3fc6de";
-      # magenta
-      color5 = "#ee64ae";
-      color13 = "#f075b7";
-      # cyan
-      color6 = "#59e3e3";
-      color14 = "#6be6e6";
-      # white
-      color7 = "#fadad1";
-      color15 = "#fdf0ed";
-    };
+        # colors
+        background_opacity = "0.7";
+        foreground = x c.fg;
+        background = x c.bg;
+        # black
+        color0 = x c.normal.black;
+        color8 = x c.bright.black;
+        # red
+        color1 = x c.normal.red;
+        color9 = x c.bright.red;
+        # green
+        color2 = x c.normal.green;
+        color10 = x c.bright.green;
+        # yellow
+        color3 = x c.normal.yellow;
+        color11 = x c.bright.yellow;
+        # blue
+        color4 = x c.normal.blue;
+        color12 = x c.bright.blue;
+        # magenta
+        color5 = x c.normal.magenta;
+        color13 = x c.bright.magenta;
+        # cyan
+        color6 = x c.normal.cyan;
+        color14 = x c.bright.cyan;
+        # white
+        color7 = x c.normal.white;
+        color15 = x c.bright.white;
+      };
   };
 
   programs.newsboat = {
@@ -156,10 +167,10 @@
     enable = true;
     options = {
       recolor = true;
-      recolor-darkcolor = "#FDF0ED";
+      recolor-darkcolor = "#${c.fg}";
       recolor-lightcolor = "rgba(0,0,0,0)";
       default-bg = "rgba(0,0,0,0.7)";
-      default-fg = "#FDF0ED";
+      default-fg = "#${c.fg}";
     };
   };
 
@@ -178,44 +189,38 @@
     udiskie.enable = true;
   };
 
-  xresources.properties = {
-    #! special
-    "*.foreground" = "#fdf0ed";
-    "*.background" = "#16161c";
-    "*.cursorColor" = "#D8DEE9";
-    "*fading" = 35;
-    "*fadeColor" = "#4C566A";
+  xresources.properties =
+    let
+      x = c: "#${c}";
+    in
+    {
+      #! special
+      "*.foreground" = x c.fg;
+      "*.background" = x c.bg;
 
-    #! black
-    "*.color0" = "#232530";
-    "*.color8" = "#2e303e";
-
-    #! red
-    "*.color1" = "#e95678";
-    "*.color9" = "#ec6a88";
-
-    #! green
-    "*.color2" = "#29d398";
-    "*.color10" = "#3fdaa4";
-
-    #! yellow
-    "*.color3" = "#fab795";
-    "*.color11" = "#fbc3a7";
-
-    #! blue
-    "*.color4" = "#26bbd9";
-    "*.color12" = "#3fc6de";
-
-    #! magenta
-    "*.color5" = "#ee64ae";
-    "*.color13" = "#f075b7";
-
-    #! cyan
-    "*.color6" = "#59e3e3";
-    "*.color14" = "#6be6e6";
-
-    #! white
-    "*.color7" = "#fadad1";
-    "*.color15" = "#fdf0ed";
-  };
+      # black
+      "*.color0" = x c.normal.black;
+      "*.color8" = x c.bright.black;
+      # red
+      "*.color1" = x c.normal.red;
+      "*.color9" = x c.bright.red;
+      # green
+      "*.color2" = x c.normal.green;
+      "*.color10" = x c.bright.green;
+      # yellow
+      "*.color3" = x c.normal.yellow;
+      "*.color11" = x c.bright.yellow;
+      # blue
+      "*.color4" = x c.normal.blue;
+      "*.color12" = x c.bright.blue;
+      # magenta
+      "*.color5" = x c.normal.magenta;
+      "*.color13" = x c.bright.magenta;
+      # cyan
+      "*.color6" = x c.normal.cyan;
+      "*.color14" = x c.bright.cyan;
+      # white
+      "*.color7" = x c.normal.white;
+      "*.color15" = x c.bright.white;
+    };
 }
