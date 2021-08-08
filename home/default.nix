@@ -32,8 +32,10 @@ in
     };
 
     theme = {
-      name = "Orchis-dark-compact";
-      package = pkgs.orchis;
+      name = "Orchis-purple-dark-compact";
+      package = (pkgs.orchis-theme.override {
+        accentColor = "purple";
+      });
     };
   };
 
