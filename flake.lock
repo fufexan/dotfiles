@@ -247,18 +247,18 @@
         "type": "github"
       }
     },
-    "picom-jonaburg": {
+    "picom": {
       "flake": false,
       "locked": {
-        "lastModified": 1606582992,
-        "narHash": "sha256-R+YUGBrLst6CpUgG9VCwaZ+LiBSDWTp0TLt1Ou4xmpQ=",
-        "owner": "jonaburg",
+        "lastModified": 1628091164,
+        "narHash": "sha256-k39uebbqSUOxke2BjaIxgccJNz+mhlhAtTtmxhIHo1M=",
+        "owner": "yshui",
         "repo": "picom",
-        "rev": "a8445684fe18946604848efb73ace9457b29bf80",
+        "rev": "78e8666498490ae25349a44f156d0811b30abb70",
         "type": "github"
       },
       "original": {
-        "owner": "jonaburg",
+        "owner": "yshui",
         "repo": "picom",
         "type": "github"
       }
@@ -298,7 +298,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-kak": "nixpkgs-kak",
         "nur": "nur",
-        "picom-jonaburg": "picom-jonaburg",
+        "picom": "picom",
         "rnix-lsp": "rnix-lsp",
         "snm": "snm",
         "utils": "utils"

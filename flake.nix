@@ -40,7 +40,7 @@
     };
 
     kakoune-cr = { url = "github:alexherbo2/kakoune.cr"; flake = false; };
-    picom-jonaburg = { url = "github:jonaburg/picom"; flake = false; };
+    picom = { url = "github:yshui/picom"; flake = false; };
   };
 
   outputs = { self, utils, nixpkgs, ... }@inputs:

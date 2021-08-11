@@ -8,8 +8,8 @@ final: prev: {
 
   kakoune-cr = prev.callPackage ./kakoune.cr { inherit (inputs) kakoune-cr; };
 
-  picom-jonaburg = prev.picom.overrideAttrs (
-    old: { src = inputs.picom-jonaburg; }
-  );
-
+  picom = prev.picom.overrideAttrs (old: {
+    version = "unstable-2021-08-04";
+    src = inputs.picom;
+  });
 }
