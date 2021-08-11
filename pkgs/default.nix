@@ -12,10 +12,4 @@ final: prev: {
     old: { src = inputs.picom-jonaburg; }
   );
 
-  rocket-league = prev.callPackage ./rocket-league {
-    wine = prev.wine-tkg;
-    inherit (prev) winestreamproxy;
-  };
-
-  technic-launcher = prev.callPackage ./technic-launcher { };
 }

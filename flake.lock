@@ -34,22 +34,6 @@
         "type": "gitlab"
       }
     },
-    "discord-ipc-bridge": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1607757308,
-        "narHash": "sha256-hLdlvH0QITJjD3HQOnu/+7FKWFDsYqpr5h7AOcG+8k8=",
-        "owner": "hitomi-team",
-        "repo": "discord-ipc-bridge",
-        "rev": "7004fd3e073e5d44bde2101cd26203b10c6fa9a4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hitomi-team",
-        "repo": "discord-ipc-bridge",
-        "type": "github"
-      }
-    },
     "emacs-overlay": {
       "locked": {
         "lastModified": 1627117072,
@@ -116,21 +100,6 @@
         "type": "github"
       }
     },
-    "master": {
-      "locked": {
-        "lastModified": 1626183848,
-        "narHash": "sha256-9wm47vLYLfYEXHYTtxMSv1R/JTFbkubBqanrtnvk4dU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "64f7cb574a6f7d5908bc18250fdd2b51771ab6b1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "naersk": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
@@ -149,26 +118,26 @@
         "type": "github"
       }
     },
-    "nix-eval-lsp": {
+    "nix-gaming": {
       "inputs": {
-        "flake-utils": [
-          "fu"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
+        "nixpkgs": "nixpkgs_2",
+        "oglfPatches": "oglfPatches",
+        "tkgPatches": "tkgPatches",
+        "utils": [
+          "utils"
         ]
       },
       "locked": {
-        "lastModified": 1624068016,
-        "narHash": "sha256-+LZZ+uwzLL8Lwj2wSuFbbcs9xiw3nLm/GudLnkV0Ubg=",
-        "owner": "aaronjanse",
-        "repo": "nix-eval-lsp",
-        "rev": "3e42793fc43cc1a2ebe0f9f857e798ae3cca16e5",
+        "lastModified": 1628684010,
+        "narHash": "sha256-V0BFTukswFVKt8bVjmfIPzn9gjNEhg0pxnTTIWeVlv0=",
+        "owner": "fufexan",
+        "repo": "nix-gaming",
+        "rev": "465c7a24bbeec323715a9d3c11b76d4be90a99c8",
         "type": "github"
       },
       "original": {
-        "owner": "aaronjanse",
-        "repo": "nix-eval-lsp",
+        "owner": "fufexan",
+        "repo": "nix-gaming",
         "type": "github"
       }
     },
@@ -201,23 +170,22 @@
         "type": "github"
       }
     },
-    "nixpkgs-wine-osu": {
+    "nixpkgs_2": {
       "locked": {
-        "lastModified": 1621361101,
-        "narHash": "sha256-jH4vlCdaWgTDMeNU/NUJXmSs+xrpBVPWzwb5xzq2aec=",
+        "lastModified": 1626019149,
+        "narHash": "sha256-0QeLkPoWjTDw9n1fmrwUg9IFIsjuD/YcX/DvMUQtqQw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "73b982e62194a5d85827d87b0851aee06932979f",
+        "rev": "eed20f01e43e94f0adae14e8407e8ef386897060",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "73b982e62194a5d85827d87b0851aee06932979f",
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1627533199,
         "narHash": "sha256-NyIUcNevwtsMBINn56jnDF8wz3TV1AFxw+Vw6JMnkyE=",
@@ -229,21 +197,6 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1626019149,
-        "narHash": "sha256-0QeLkPoWjTDw9n1fmrwUg9IFIsjuD/YcX/DvMUQtqQw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "eed20f01e43e94f0adae14e8407e8ef386897060",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -294,31 +247,6 @@
         "type": "github"
       }
     },
-    "osu-nix": {
-      "inputs": {
-        "discord-ipc-bridge": "discord-ipc-bridge",
-        "nixpkgs": "nixpkgs_3",
-        "nixpkgs-wine-osu": "nixpkgs-wine-osu",
-        "oglfPatches": "oglfPatches",
-        "tkgPatches": "tkgPatches",
-        "utils": [
-          "utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1626818838,
-        "narHash": "sha256-STGKKG4FGTxzv03JklZ/ptHyqmjgCtu8fMzymu/Czp8=",
-        "owner": "fufexan",
-        "repo": "osu.nix",
-        "rev": "b0be415e2b3ba2ac2ec59a666725c5070952e56c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fufexan",
-        "repo": "osu.nix",
-        "type": "github"
-      }
-    },
     "picom-jonaburg": {
       "flake": false,
       "locked": {
@@ -366,16 +294,10 @@
         "fu": "fu",
         "hm": "hm",
         "kakoune-cr": "kakoune-cr",
-        "master": "master",
-        "nix-eval-lsp": "nix-eval-lsp",
-        "nixpkgs": "nixpkgs_2",
+        "nix-gaming": "nix-gaming",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-kak": "nixpkgs-kak",
-        "nixpkgs-osu": [
-          "osu-nix",
-          "nixpkgs"
-        ],
         "nur": "nur",
-        "osu-nix": "osu-nix",
         "picom-jonaburg": "picom-jonaburg",
         "rnix-lsp": "rnix-lsp",
         "snm": "snm",

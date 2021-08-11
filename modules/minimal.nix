@@ -62,12 +62,12 @@
     binaryCaches = [
       "https://cache.nixos.org"
       "https://fufexan.cachix.org"
-      "https://osu-nix.cachix.org"
+      "https://nix-gaming.cachix.org"
     ];
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
-      "osu-nix.cachix.org-1:vn/szRSrx1j0IA/oqLAokr/kktKQzsDgDPQzkLFR9Cg="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
 
     extraOptions = ''

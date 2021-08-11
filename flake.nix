@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
-    nixpkgs-osu.follows = "osu-nix/nixpkgs";
-    master.url = "github:NixOS/nixpkgs";
     fu.url = "github:numtide/flake-utils";
     utils = {
       url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
@@ -21,17 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-eval-lsp = {
-      url = "github:aaronjanse/nix-eval-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
+    nix-gaming = {
+      url = github:fufexan/nix-gaming;
+      inputs.utils.follows = "utils";
     };
 
     nur.url = "github:nix-community/NUR";
-    osu-nix = {
-      url = github:fufexan/osu.nix;
-      inputs.utils.follows = "utils";
-    };
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
@@ -58,18 +51,11 @@
       # channel setup
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        inputs.osu-nix.overlays."nixpkgs/wine-tkg"
-        inputs.osu-nix.overlays."nixpkgs/winestreamproxy"
         (
           final: prev: {
             inherit (channels.nixpkgs-kak) kakounePlugins;
           }
         )
-        self.overlay
-      ];
-      channels.nixpkgs-osu.overlaysBuilder = _: [
-        inputs.osu-nix.overlays."nixpkgs/wine-tkg"
-        inputs.osu-nix.overlays."nixpkgs/winestreamproxy"
         self.overlay
       ];
 
@@ -101,13 +87,13 @@
         tosh.modules = with self.nixosModules; [
           ./hosts/tosh
           desktop
-          inputs.osu-nix.nixosModule
+          inputs.nix-gaming.nixosModule
         ];
 
         kiiro.modules = with self.nixosModules; [
           ./hosts/kiiro
           desktop
-          inputs.osu-nix.nixosModule
+          inputs.nix-gaming.nixosModule
         ];
       };
 
@@ -129,10 +115,8 @@
               ];
             };
             overlays = [
-              self.overlays."nixpkgs-osu/rocket-league"
               self.overlays."nixpkgs/picom-jonaburg"
               self.overlays."nixpkgs/kakoune-cr"
-              self.overlays."nixpkgs/technic-launcher"
               inputs.emacs-overlay.overlay
               inputs.nur.overlay
             ];
