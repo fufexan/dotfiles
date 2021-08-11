@@ -14,7 +14,7 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
   # make modules available to modprobe
