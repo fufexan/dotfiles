@@ -115,7 +115,6 @@
               ];
             };
             overlays = [
-              self.overlays."nixpkgs/picom-jonaburg"
               self.overlays."nixpkgs/kakoune-cr"
               inputs.emacs-overlay.overlay
               inputs.nur.overlay
@@ -131,7 +130,8 @@
               inherit nixpkgs;
             };
           };
-          full = generateHome {
+
+          "mihai@kiiro" = generateHome {
             inherit system username homeDirectory extraSpecialArgs;
             pkgs = self.pkgs.x86_64-linux.nixpkgs;
             configuration = {
@@ -148,6 +148,23 @@
               ./home/editors/emacs
               ./home/editors/kakoune
               ./home/editors/neovim
+            ];
+          };
+
+          "mihai@tosh" = generateHome {
+            inherit system username homeDirectory extraSpecialArgs;
+            pkgs = self.pkgs.x86_64-linux.nixpkgs;
+            configuration = {
+              imports = [ ./home ];
+              inherit nixpkgs;
+            };
+            extraModules = [
+              ./home/files.nix
+              ./home/media.nix
+              ./home/nix.nix
+              ./home/x11
+              ./home/editors/emacs
+              ./home/editors/kakoune
             ];
           };
         };

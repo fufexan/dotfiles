@@ -11,7 +11,7 @@ in
       # general
 
       # start terminal
-      "super + Return" = "kitty";
+      "super + Return" = "alacritty";
       # application launcher
       "super + @space" = "rofi -show combi";
       # reload sxhkd
