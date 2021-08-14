@@ -105,4 +105,40 @@
       ];
     };
   };
+
+  xresources.properties =
+    let
+      c = import ../colors.nix;
+      x = c: "#${c}";
+    in
+    {
+      #! special
+      "*.foreground" = x c.fg;
+      "*.background" = x c.bg;
+
+      # black
+      "*.color0" = x c.normal.black;
+      "*.color8" = x c.bright.black;
+      # red
+      "*.color1" = x c.normal.red;
+      "*.color9" = x c.bright.red;
+      # green
+      "*.color2" = x c.normal.green;
+      "*.color10" = x c.bright.green;
+      # yellow
+      "*.color3" = x c.normal.yellow;
+      "*.color11" = x c.bright.yellow;
+      # blue
+      "*.color4" = x c.normal.blue;
+      "*.color12" = x c.bright.blue;
+      # magenta
+      "*.color5" = x c.normal.magenta;
+      "*.color13" = x c.bright.magenta;
+      # cyan
+      "*.color6" = x c.normal.cyan;
+      "*.color14" = x c.bright.cyan;
+      # white
+      "*.color7" = x c.normal.white;
+      "*.color15" = x c.bright.white;
+    };
 }
