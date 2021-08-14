@@ -1,11 +1,12 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  home.packages = [ pkgs.pure-prompt ];
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     autocd = true;
-    defaultKeymap = "viins";
     dirHashes = {
       dl = "$HOME/Downloads";
       docs = "$HOME/Documents";
@@ -23,7 +24,6 @@
     initExtra = ''
       # autoloads
       autoload -U history-search-end
-      autoload edit-command-line
 
       # search history based on what's typed in the prompt
 
@@ -35,30 +35,6 @@
       bindkey "^[[A" history-beginning-search-backward-end
       bindkey "^[[B" history-beginning-search-forward-end
 
-      # allow editing the command in $EDITOR with ^E
-      zle -N edit-command-line
-      bindkey '^e' edit-command-line
-
-      # change cursor shape for different vi modes
-      function zle-keymap-select {
-        if [[ $KEYMAP == vicmd ]] ||
-           [[ $1 = 'block' ]]; then
-          echo -ne '\e[1 q'
-        elif [[ $KEYMAP == main ]] ||
-             [[ $KEYMAP == viins ]] ||
-             [[ $KEYMAP = '\' ]] ||
-             [[ $1 = 'beam' ]]; then
-          echo -ne '\e[5 q'
-        fi
-      }
-      zle -N zle-keymap-select
-      zle-line-init() {
-        echo -ne "\e[5 q"
-      }
-      zle -N zle-line-init
-      echo -ne '\e[5 q' # Use beam shape cursor on startup.
-      preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
       zstyle ':completion:*' list-colors '\'
@@ -68,6 +44,17 @@
       zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
       zstyle ':completion:*' verbose true
       _comp_options+=(globdots)
+
+      # pure prompt
+      autoload -U promptinit; promptinit
+
+      PURE_PROMPT_SYMBOL=›
+      PURE_PROMPT_VICMD_SYMBOL=‹
+
+      zstyle :prompt:pure:git:stash show yes
+      zstyle :prompt:pure:prompt:success color green
+
+      prompt pure
 
       ${builtins.readFile ./nix-completions.sh}
     '';
