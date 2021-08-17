@@ -118,6 +118,7 @@
               self.overlays."nixpkgs/kakoune-cr"
               inputs.emacs-overlay.overlay
               inputs.nur.overlay
+              inputs.utils.overlay
             ];
           };
         in
