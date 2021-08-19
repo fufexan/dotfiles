@@ -22,7 +22,7 @@
     };
 
     ncmpcpp = {
-      enable = true;
+      enable = false;
       package = pkgs.ncmpcpp.override { visualizerSupport = true; };
       settings = { ncmpcpp_directory = "~/.local/share/ncmpcpp"; };
     };
@@ -32,7 +32,7 @@
     easyeffects.enable = true;
 
     mpd = {
-      enable = true;
+      enable = false;
       musicDirectory = "${config.home.homeDirectory}/Music";
       extraConfig = ''
         zeroconf_enabled "yes"
@@ -55,7 +55,7 @@
       network.startWhenNeeded = true;
     };
 
-    mpdris2.enable = true;
+    mpdris2.enable = false;
 
     playerctld.enable = true;
   };

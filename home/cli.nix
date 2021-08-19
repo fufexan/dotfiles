@@ -20,9 +20,6 @@
     p7zip
     unrar
 
-    # file converters
-    ffmpeg
-
     # file downloaders
     youtube-dl
 

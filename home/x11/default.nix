@@ -78,9 +78,11 @@
 
       rules = {
         "Firefox" = { desktop = "^1"; };
+        "Emacs" = { desktop = "^2"; };
         "osu!.exe" = { desktop = "^3"; };
         "discord" = { desktop = "^6"; };
         "TelegramDesktop" = { desktop = "^7"; };
+        "Element" = { desktop = "^8"; };
       };
 
       settings = {
