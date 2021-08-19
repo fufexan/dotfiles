@@ -20,9 +20,12 @@
     };
 
     nix-gaming = {
-      url = github:fufexan/nix-gaming;
+      url = "github:fufexan/nix-gaming";
       inputs.utils.follows = "utils";
     };
+
+    nobbz.url = "github:NobbZ/nixos-config/overhaul";
+    unstable.follows = "nobbz/unstable";
 
     nur.url = "github:nix-community/NUR";
 
