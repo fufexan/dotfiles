@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
+
     fu.url = "github:numtide/flake-utils";
     utils = {
       url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
@@ -12,7 +13,6 @@
 
     # flakes
     agenix.url = "github:ryantm/agenix";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     hm = {
       url = "github:nix-community/home-manager";
@@ -26,8 +26,6 @@
 
     nobbz.url = "github:NobbZ/nixos-config/overhaul";
     unstable.follows = "nobbz/unstable";
-
-    nur.url = "github:nix-community/NUR";
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
@@ -111,16 +109,9 @@
           extraSpecialArgs = { inherit inputs self; };
           generateHome = inputs.hm.lib.homeManagerConfiguration;
           nixpkgs = {
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                "ffmpeg-3.4.8"
-              ];
-            };
+            config = { allowUnfree = true; };
             overlays = [
               self.overlays."nixpkgs/kakoune-cr"
-              inputs.emacs-overlay.overlay
-              inputs.nur.overlay
               inputs.utils.overlay
             ];
           };
