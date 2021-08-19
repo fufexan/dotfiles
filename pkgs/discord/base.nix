@@ -4,7 +4,7 @@
 , binaryName
 , desktopName
 , isWayland ? true
-, extraOptions ? []
+, extraOptions ? [ ]
 , autoPatchelfHook
 , makeDesktopItem
 , lib
