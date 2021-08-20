@@ -34,6 +34,38 @@
         "type": "gitlab"
       }
     },
+    "discord-horizon-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1618422020,
+        "narHash": "sha256-xf1xrIeqqEFeGsiM7rKMk+900G5n1UP13t2QyFCM/ng=",
+        "owner": "Pieloaf",
+        "repo": "Discord-Themes",
+        "rev": "17271f7ac544790c359251ba8a8919feedcfaea3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Pieloaf",
+        "repo": "Discord-Themes",
+        "type": "github"
+      }
+    },
+    "discord-tweaks": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627600834,
+        "narHash": "sha256-xSzbP86w5OUy1ZO1iHgv1drbujtlPQAgJmLA3x7UOFc=",
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "rev": "bc28b090f9ed706d7f8271aeaa64bdcb886fd0ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "type": "github"
+      }
+    },
     "emacs": {
       "locked": {
         "lastModified": 1629336814,
@@ -409,6 +441,46 @@
         "type": "github"
       }
     },
+    "powercord": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "powercord": "powercord_2",
+        "utils": [
+          "utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1629450006,
+        "narHash": "sha256-fEsMZa0PXAXS8o3Hf8tGE656KZ4QPr93mQ3RNUsl9dI=",
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "rev": "010e73101054824afd95efb49287619f00caccf5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "type": "github"
+      }
+    },
+    "powercord_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628942781,
+        "narHash": "sha256-51i05DbNIVf/a4bzLq5OFUgH61uas+z2UHyk+miGM1Y=",
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "rev": "2a5b9fa46bc373cb7f87d40eea7e34af9636050e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "type": "github"
+      }
+    },
     "rnix-lsp": {
       "inputs": {
         "naersk": "naersk",
@@ -436,6 +508,8 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "discord-horizon-theme": "discord-horizon-theme",
+        "discord-tweaks": "discord-tweaks",
         "fu": "fu",
         "hm": "hm",
         "kakoune-cr": "kakoune-cr",
@@ -444,6 +518,7 @@
         "nixpkgs-kak": "nixpkgs-kak",
         "nobbz": "nobbz",
         "picom": "picom",
+        "powercord": "powercord",
         "rnix-lsp": "rnix-lsp",
         "snm": "snm",
         "unstable": [

@@ -27,6 +27,14 @@
     nobbz.url = "github:NobbZ/nixos-config/overhaul";
     unstable.follows = "nobbz/unstable";
 
+    powercord = {
+      url = "github:LavaDesu/powercord-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
+    };
+    discord-horizon-theme = { url = "github:Pieloaf/Discord-Themes"; flake = false; };
+    discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
+
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -113,6 +121,7 @@
             overlays = [
               self.overlays."nixpkgs/kakoune-cr"
               inputs.utils.overlay
+              inputs.powercord.overlay
             ];
           };
         in

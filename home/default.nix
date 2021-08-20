@@ -11,7 +11,10 @@
 
   home.packages = with pkgs; [
     # messaging
-    discord
+    (discord-plugged.override {
+      plugins = [ inputs.discord-tweaks ];
+      themes = [ "${inputs.discord-horizon-theme}/themes" ];
+    })
     element-desktop
     tdesktop
     # torrents
