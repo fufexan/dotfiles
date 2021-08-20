@@ -143,6 +143,7 @@
               inherit nixpkgs;
             };
             extraModules = [
+              ./home/profiles/mihai-kiiro
               ./home/files.nix
               ./home/games.nix
               ./home/media.nix
@@ -163,6 +164,7 @@
               inherit nixpkgs;
             };
             extraModules = [
+              ./home/profiles/mihai-tosh
               ./home/files.nix
               ./home/media.nix
               ./home/nix.nix

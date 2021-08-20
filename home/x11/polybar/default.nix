@@ -1,16 +1,12 @@
 { config, pkgs, ... }:
 
 let
-  poly = pkgs.polybar.override {
-    pulseSupport = true;
-  };
-
   mprisScript = pkgs.callPackage ./mpris.nix { };
 in
 {
   services.polybar = {
     enable = true;
-    package = poly;
+    package = pkgs.polybarFull;
 
     config = {
       "colors" = {
@@ -61,11 +57,6 @@ in
 
       "bar/main" = {
         "monitor" = "";
-        "inherit" = "layout";
-      };
-
-      "bar/external" = {
-        "monitor" = "DVI-D-0";
         "inherit" = "layout";
       };
 
@@ -122,7 +113,7 @@ in
         "type" = "internal/cpu";
         "interval" = "0.5";
         "format" = "<label> <ramp-coreload>";
-        "label" = "CPU %percentage%%";
+        "label" = "󰍛 %percentage%%";
         "format-foreground" = "\${colors.green}";
 
         "ramp-coreload-0" = "▁";
@@ -162,12 +153,11 @@ in
         "type" = "internal/memory";
         "format" = "<label>";
         "format-foreground" = "\${colors.blue}";
-        "label" = "󰍛 %gb_used%";
+        "label" = "󰇖 %gb_used%";
       };
 
       "module/wireless-network" = {
         "type" = "internal/network";
-        "interface" = "";
         "interval" = 3;
         "ping-interval" = 10;
 
@@ -186,9 +176,6 @@ in
       "module/temperature" = {
         "type" = "internal/temperature";
         "interval" = 1;
-        "thermal-zone" = 2;
-        "base-temperature" = 30;
-        "warn-temperature" = 70;
         "units" = true;
 
         "format" = "<ramp> <label>";
@@ -264,4 +251,3 @@ in
     '';
   };
 }
-
