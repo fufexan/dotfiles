@@ -81,8 +81,12 @@
     ratbagd.enable = true;
 
     udev.extraRules = ''
+      # bfq for HDD
       ACTION=="add|change", KERNEL=="sda", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+      # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+      # make WoL persistent
+      ACTION=="add", SUBSYSTEM=="net", NAME=="enp3s0", RUN+="${pkgs.ethtool}/bin/ethtool -s enp3s0 wol g"
     '';
 
     xserver.videoDrivers = [ "nvidia" ];
