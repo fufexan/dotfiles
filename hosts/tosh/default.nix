@@ -12,9 +12,14 @@
 
   hardware.opentabletdriver.enable = true;
 
-  # network
   networking = {
     hostName = "tosh";
     networkmanager.enable = true;
+  };
+
+  services = {
+    pipewire.lowLatency.enable = true;
+    upower.enable = true;
+    tlp.enable = true;
   };
 }
