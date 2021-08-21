@@ -26,13 +26,16 @@
     # file managers
     xplr
 
-    # coreutils
-    bat # better cat
-    bottom # system monitor
-    exa # ls alternative with colors & icons
-    fd # better find
-    file # info about files
-    ripgrep # better grep
+    file
+
+    # modern coreutils
+    bat
+    bottom
+    du-dust
+    duf
+    exa
+    fd
+    ripgrep
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
@@ -46,6 +49,7 @@
 
     git = {
       enable = true;
+      delta.enable = true;
       ignores = [ "*~" "*.swp" "result" ];
       signing = {
         key = "3AC82B48170331D3";
