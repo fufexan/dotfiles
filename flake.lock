@@ -34,6 +34,21 @@
         "type": "gitlab"
       }
     },
+    "devshell": {
+      "locked": {
+        "lastModified": 1629275356,
+        "narHash": "sha256-R17M69EKXP6q8/mNHaK53ECwjFo1pdF+XaJC9Qq8zjg=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "26f25a12265f030917358a9632cd600b51af1d97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
     "discord-horizon-theme": {
       "flake": false,
       "locked": {
@@ -508,6 +523,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "devshell": "devshell",
         "discord-horizon-theme": "discord-horizon-theme",
         "discord-tweaks": "discord-tweaks",
         "fu": "fu",
@@ -595,11 +611,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1628855985,
-        "narHash": "sha256-OqhVFoCCA6GfGuMhZXQ5CrmZUYsumCJTwI72FOMf82I=",
+        "lastModified": 1629829440,
+        "narHash": "sha256-Xow39if+NedeAgfg/aisCNSKK4N489mFL7gRP1chV3E=",
         "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
-        "rev": "a79a0b86e59dc087df6704f9b13b1ed951ef5c5f",
+        "rev": "602777f843bc5b562deddc5ed20de8f4fede6bd0",
         "type": "github"
       },
       "original": {

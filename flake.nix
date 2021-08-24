@@ -14,6 +14,8 @@
     # flakes
     agenix.url = "github:ryantm/agenix";
 
+    devshell.url = "github:numtide/devshell";
+
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,6 +68,7 @@
           }
         )
         self.overlay
+        inputs.devshell.overlay
       ];
 
       channelsConfig = { allowUnfree = true; };
@@ -175,7 +178,6 @@
           };
         };
 
-
       # overlays
       overlay = import ./pkgs { inherit inputs; };
       overlays = utils.lib.exportOverlays {
@@ -185,6 +187,10 @@
       # packages
       outputsBuilder = channels: {
         packages = utils.lib.exportPackages self.overlays channels;
+        devShell = channels.nixpkgs.devshell.mkShell {
+          packages = with channels.nixpkgs; [ nixpkgs-fmt rnix-lsp ];
+          name = "dots";
+        };
       };
     };
 }
