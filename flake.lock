@@ -524,7 +524,8 @@
           "nobbz",
           "unstable"
         ],
-        "utils": "utils"
+        "utils": "utils",
+        "vim-horizon": "vim-horizon"
       }
     },
     "snm": {
@@ -605,6 +606,22 @@
         "owner": "gytis-ivaskevicius",
         "ref": "staging",
         "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
+    "vim-horizon": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1611040948,
+        "narHash": "sha256-DHhSzcNSK+SEg1BdaRY4UjXjMaKK1UOF3YYveM8Pt8k=",
+        "owner": "ntk148v",
+        "repo": "vim-horizon",
+        "rev": "9c1c616981739764e0d70ee45a46964b1e036b31",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ntk148v",
+        "repo": "vim-horizon",
         "type": "github"
       }
     }
