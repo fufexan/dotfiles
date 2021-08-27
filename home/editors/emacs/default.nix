@@ -13,6 +13,8 @@
       markdown-mode
       nix-mode
 
+      evil
+
       # QoL
       consult
       editorconfig
