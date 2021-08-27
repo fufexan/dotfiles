@@ -12,6 +12,13 @@
   home.packages = with pkgs; [
     # messaging
     (discord-plugged.override {
+      discord-canary = (discord-canary.override rec {
+        version = "0.0.127";
+        src = fetchurl {
+          url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
+          sha256 = "d/UkVVD+G0++ubYPUxM5E4s7NeKG/Z7fMFZljAa3LAs=";
+        };
+      });
       plugins = [ inputs.discord-tweaks ];
       themes = [ "${inputs.discord-horizon-theme}/themes" ];
     })
