@@ -20,7 +20,6 @@
         };
       });
       plugins = [ inputs.discord-tweaks ];
-      themes = [ "${inputs.discord-horizon-theme}/themes" ];
     })
     element-desktop
     tdesktop

@@ -34,8 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
-    discord-horizon-theme = { url = "github:Pieloaf/Discord-Themes"; flake = false; };
-    discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
@@ -50,6 +48,7 @@
       inputs.utils.follows = "fu";
     };
 
+    discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
     kakoune-cr = { url = "github:alexherbo2/kakoune.cr"; flake = false; };
     picom = { url = "github:yshui/picom"; flake = false; };
   };

@@ -49,22 +49,6 @@
         "type": "github"
       }
     },
-    "discord-horizon-theme": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1618422020,
-        "narHash": "sha256-xf1xrIeqqEFeGsiM7rKMk+900G5n1UP13t2QyFCM/ng=",
-        "owner": "Pieloaf",
-        "repo": "Discord-Themes",
-        "rev": "17271f7ac544790c359251ba8a8919feedcfaea3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Pieloaf",
-        "repo": "Discord-Themes",
-        "type": "github"
-      }
-    },
     "discord-tweaks": {
       "flake": false,
       "locked": {
@@ -524,7 +508,6 @@
       "inputs": {
         "agenix": "agenix",
         "devshell": "devshell",
-        "discord-horizon-theme": "discord-horizon-theme",
         "discord-tweaks": "discord-tweaks",
         "fu": "fu",
         "hm": "hm",
