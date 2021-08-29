@@ -1,5 +1,5 @@
 # symbolistic yellow; main pc
-{ config, pkgs, agenix, ... }:
+{ config, lib, pkgs, agenix, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -10,8 +10,6 @@
       owner = "mihai";
     };
   };
-
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
@@ -26,12 +24,10 @@
     systemd-boot.enable = true;
   };
 
-  # enable Nvidia KMS (for Wayland and less screen tearing on Xorg)
   hardware = {
     bluetooth = {
       enable = true;
       disabledPlugins = [ "sap" ];
-      hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
     };
@@ -42,13 +38,10 @@
 
     opentabletdriver.enable = true;
 
-    nvidia.modesetting.enable = true;
+    pulseaudio.enable = lib.mkForce false;
   };
 
-  networking = {
-    hostName = "kiiro";
-    interfaces.enp3s0.useDHCP = true;
-  };
+  networking.hostName = "kiiro";
 
   programs = {
     adb.enable = true;
@@ -58,25 +51,9 @@
   services = {
     btrfs.autoScrub.enable = true;
 
-    mopidy = {
-      enable = false;
-      #dataDir = "/home/mihai/.config/mopidy";
-      extensionPackages = [
-        pkgs.mopidy-local
-        pkgs.mopidy-mpd
-        pkgs.mopidy-mpris
-        pkgs.mopidy-soundcloud
-        pkgs.mopidy-spotify
-        pkgs.mopidy-youtube
-      ];
-    };
-
     pipewire.lowLatency.enable = true;
 
-    printing = {
-      enable = false;
-      drivers = [ pkgs.fxlinuxprint ];
-    };
+    printing.enable = true;
 
     ratbagd.enable = true;
 
@@ -89,9 +66,11 @@
       ACTION=="add", SUBSYSTEM=="net", NAME=="enp3s0", RUN+="${pkgs.ethtool}/bin/ethtool -s enp3s0 wol g"
     '';
 
-    xserver.videoDrivers = [ "nvidia" ];
-  };
+    xserver = {
+      desktopManager.gnome.enable = true;
+      windowManager.bspwm.enable = true;
 
-  virtualisation.libvirtd.enable = false;
-  environment.systemPackages = with pkgs; [ virt-manager ];
+      videoDrivers = [ "nvidia" ];
+    };
+  };
 }
