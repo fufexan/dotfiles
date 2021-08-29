@@ -13,10 +13,10 @@
     # messaging
     (discord-plugged.override {
       discord-canary = (discord-canary.override rec {
-        version = "0.0.127";
+        version = "0.0.128";
         src = fetchurl {
           url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-          sha256 = "d/UkVVD+G0++ubYPUxM5E4s7NeKG/Z7fMFZljAa3LAs=";
+          sha256 = "sha256-cw0YBMlapk4QLKiU8ErzzyDaPIXkosUSu7ycRV8VraM=";
         };
       });
       plugins = [ inputs.discord-tweaks ];
