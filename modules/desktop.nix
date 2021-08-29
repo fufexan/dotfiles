@@ -60,13 +60,7 @@
     xserver = {
       enable = true;
 
-      displayManager.autoLogin = {
-        enable = true;
-        user = "mihai";
-      };
-      displayManager.sddm.enable = true;
-
-      windowManager.bspwm.enable = true;
+      displayManager.gdm.enable = true;
 
       libinput = {
         enable = true;
