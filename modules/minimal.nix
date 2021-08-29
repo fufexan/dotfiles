@@ -18,7 +18,16 @@
     pkgs.git
   ];
 
-  i18n.defaultLocale = "ro_RO.UTF-8";
+  i18n = {
+    defaultLocale = "ro_RO.UTF-8";
+    # saves space
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "ja_JP.EUC-JP/EUC-JP"
+      "ja_JP.UTF-8/UTF-8"
+      "ro_RO.UTF-8/UTF-8"
+    ];
+  };
 
   # OpenGL
   hardware.opengl = {
@@ -52,19 +61,17 @@
         sshKey = "/root/.ssh/id_ed25519";
         maxJobs = 4;
         hostName = "kiiro";
-        supportedFeatures = [ "benchmark" "kvm" "big-parallel" ];
+        supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];
       }
     ];
     distributedBuilds = true;
 
     binaryCaches = [
-      "https://cache.nixos.org"
       "https://fufexan.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://nix-community.cachix.org"
     ];
     binaryCachePublicKeys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -139,7 +146,7 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "audio" "adbusers" "libvirtd" "transmission" "wheel" ];
+    extraGroups = [ "adbusers" "libvirtd" "transmission" "wheel" ];
   };
 
   zramSwap.enable = true;
