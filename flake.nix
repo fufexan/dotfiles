@@ -70,6 +70,8 @@
         )
         self.overlay
         inputs.devshell.overlay
+        inputs.powercord.overlay
+        inputs.utils.overlay
       ];
 
       channelsConfig = { allowUnfree = true; };
@@ -87,24 +89,47 @@
         self.nixosModules.minimal
         self.nixosModules.security
         inputs.agenix.nixosModules.age
+        inputs.hm.nixosModule
+        {
+          home-manager = {
+            extraSpecialArgs = { inherit inputs self; };
+            useGlobalPkgs = true; 
+          };
+        }
       ];
 
       hosts = {
         homesv.modules = with self.nixosModules; [
           ./hosts/homesv
           inputs.snm.nixosModule
+          { home-manager.users.mihai = import ./home/cli.nix; }
         ];
 
         tosh.modules = with self.nixosModules; [
           ./hosts/tosh
           desktop
           inputs.nix-gaming.nixosModule
+          { home-manager.users.mihai = import ./home; }
         ];
 
         kiiro.modules = with self.nixosModules; [
           ./hosts/kiiro
           desktop
           inputs.nix-gaming.nixosModule
+          {
+            home-manager.users.mihai.imports = [
+              ./home
+              ./home/profiles/mihai-kiiro
+              ./home/files.nix
+              ./home/games.nix
+              ./home/media.nix
+              ./home/nix.nix
+              ./home/x11
+              ./home/editors/emacs
+              ./home/editors/kakoune
+              ./home/editors/neovim
+            ];
+          }
         ];
       };
 
