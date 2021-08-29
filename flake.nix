@@ -61,6 +61,7 @@
 
       # channel setup
 
+      # apply overlays to nixpkgs
       channels.nixpkgs.overlaysBuilder = channels: [
         (
           final: prev: {
@@ -91,9 +92,7 @@
       hosts = {
         homesv.modules = with self.nixosModules; [
           ./hosts/homesv
-          ./hosts/homesv/services.nix
           inputs.snm.nixosModule
-          ./modules/mailserver.nix
         ];
 
         tosh.modules = with self.nixosModules; [

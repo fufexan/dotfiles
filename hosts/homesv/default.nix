@@ -2,12 +2,16 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./mailserver.nix
+    ./services.nix
+  ];
 
   age.secrets = {
-    vaultwarden.file = ../../secrets/vaultwarden.age;
     ddclientConfig.file = ../../secrets/ddclientConfig.age;
     mailPass.file = ../../secrets/mailPass.age;
+    vaultwarden.file = ../../secrets/vaultwarden.age;
   };
 
   boot.loader.grub = {
