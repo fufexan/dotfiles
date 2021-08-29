@@ -7,6 +7,11 @@ let
   };
 in
 {
+  imports = [
+    ./options.nix
+    ./theming.nix
+  ];
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
