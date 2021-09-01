@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    naersk = {
+      url = "github:nmattia/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.utils.follows = "utils";
@@ -37,6 +42,7 @@
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
+      inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
     };
@@ -93,7 +99,7 @@
         {
           home-manager = {
             extraSpecialArgs = { inherit inputs self; };
-            useGlobalPkgs = true; 
+            useGlobalPkgs = true;
           };
         }
       ];
