@@ -60,7 +60,18 @@
     xserver = {
       enable = true;
 
-      displayManager.gdm.enable = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+
+      displayManager.session = [
+        {
+          manage = "window";
+          name = "home-manager";
+          start = "exec $HOME/.xsession-hm";
+        }
+      ];
 
       libinput = {
         enable = true;

@@ -41,6 +41,9 @@
   # manage X session
   xsession = {
     enable = true;
+    # to be able to use system-configured sessions alongside HM ones
+    scriptPath = ".xsession-hm";
+
     pointerCursor = {
       package = pkgs.quintom-cursor-theme;
       name = "Quintom_Ink";
