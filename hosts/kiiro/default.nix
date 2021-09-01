@@ -36,6 +36,8 @@
 
     enableAllFirmware = true;
 
+    nvidia.modesetting.enable = true;
+
     opentabletdriver.enable = true;
 
     pulseaudio.enable = lib.mkForce false;
@@ -67,6 +69,8 @@
     '';
 
     xserver = {
+      displayManager.gdm.nvidiaWayland = true;
+
       desktopManager.gnome.enable = true;
       windowManager.bspwm.enable = true;
 
