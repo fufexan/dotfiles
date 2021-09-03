@@ -81,5 +81,7 @@
         mouse.middleEmulation = false;
       };
     };
+
+    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
 }

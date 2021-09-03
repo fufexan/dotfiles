@@ -24,6 +24,19 @@
     systemd-boot.enable = true;
   };
 
+  environment.gnome.excludePackages = with pkgs.gnome; [
+    gnome-contacts
+    gnome-disk-utility
+    gnome-font-viewer
+    gnome-maps
+    yelp
+  ] ++ (with pkgs; [
+    cheese
+    epiphany
+    geany
+    gnome-connections
+  ]);
+
   hardware = {
     bluetooth = {
       enable = true;
@@ -71,7 +84,16 @@
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
 
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome = {
+        enable = true;
+        sessionPath = with pkgs.gnomeExtensions; [
+          alttab-mod
+          appindicator
+          blur-me
+          gsconnect
+          vitals
+        ];
+      };
       windowManager.bspwm.enable = true;
 
       videoDrivers = [ "nvidia" ];
