@@ -29,6 +29,15 @@ in
     o.completeopt = 'menuone,noselect'
     o.shortmess = o.shortmess + 'c'
 
+    -- keymaps
+    vim.api.nvim_set_keymap( 'n', ';', ':', {noremap = true})
+    vim.api.nvim_set_keymap( 'n', ':', ';', {noremap = true})
+    vim.api.nvim_set_keymap( 'v', '<F12>', '"+y', {noremap = true})
+    vim.api.nvim_set_keymap( 'n', '<F12>', 'ggVG"+y', {noremap = true})
+
+    -- autocmd
+    vim.cmd 'autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 1000)'
+
     -- lsp
     local lspc = require 'lspconfig'
     lspc.rnix.setup {}

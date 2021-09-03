@@ -13,10 +13,10 @@
     # messaging
     (discord-plugged.override {
       discord-canary = (discord-canary.override rec {
-        version = "0.0.128";
+        version = "0.0.129";
         src = fetchurl {
           url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-          sha256 = "sha256-cw0YBMlapk4QLKiU8ErzzyDaPIXkosUSu7ycRV8VraM=";
+          sha256 = "sha256-c/I3MJoYYHDvLtAhNP79EIixhLS+Pvmz74kPM9reifQ=";
         };
       });
       plugins = [ inputs.discord-tweaks ];
@@ -39,7 +39,7 @@
 
     theme = {
       name = "Orchis-purple-dark-compact";
-      package = (pkgs.orchis-theme.override { accentColor = "purple"; });
+      package = (pkgs.orchis-theme.override { accentColor = "purple"; tweaks = "primary compact"; });
     };
   };
 

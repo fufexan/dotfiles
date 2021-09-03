@@ -57,12 +57,12 @@ in
           };
         };
 
-      background_opacity = 0.7;
+      #background_opacity = 0.7;
     };
   };
 
   programs.kitty = {
-    enable = true;
+    enable = false;
     font.name = font;
     font.size = 12;
     settings =
