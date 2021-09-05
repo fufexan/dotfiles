@@ -8,7 +8,7 @@
       location = "$HOME/Games/osu!stable";
     })
 
-    rocket-league
+    (rocket-league.override { inherit (pkgs) legendary-gl; })
 
     #(technic-launcher.override {
     #  src = builtins.fetchurl {

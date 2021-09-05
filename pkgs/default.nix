@@ -13,6 +13,16 @@ final: prev: {
 
   kakoune-cr = prev.callPackage ./kakoune.cr { inherit (inputs) kakoune-cr; };
 
+  legendary-gl = prev.legendary-gl.overrideAttrs (o: rec {
+    version = "0.20.9";
+    src = prev.fetchFromGitHub {
+      owner = "derrod";
+      repo = "legendary";
+      rev = version;
+      sha256 = "sha256-22IxUAIMZxe3VhOE5460MTT0t+UWRtsNdPbakQ7dv8Y=";
+    };
+  });
+
   orchis-theme = prev.callPackage ./orchis-theme { };
 
   picom = prev.picom.overrideAttrs (old: {
