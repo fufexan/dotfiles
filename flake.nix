@@ -7,7 +7,7 @@
 
     fu.url = "github:numtide/flake-utils";
     utils = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+      url = "github:gytis-ivaskevicius/flake-utils-plus/1.3.0";
       inputs.flake-utils.follows = "fu";
     };
 
@@ -159,55 +159,55 @@
             ];
           };
         in
-        {
-          # homeConfigurations
-          cli = generateHome {
-            inherit system username homeDirectory extraSpecialArgs;
-            configuration = {
-              imports = [ ./home/cli.nix ];
-              inherit nixpkgs;
+          {
+            # homeConfigurations
+            cli = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              configuration = {
+                imports = [ ./home/cli.nix ];
+                inherit nixpkgs;
+              };
             };
-          };
 
-          "mihai@kiiro" = generateHome {
-            inherit system username homeDirectory extraSpecialArgs;
-            pkgs = self.pkgs.x86_64-linux.nixpkgs;
-            configuration = {
-              imports = [ ./home ];
-              inherit nixpkgs;
+            "mihai@kiiro" = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              pkgs = self.pkgs.x86_64-linux.nixpkgs;
+              configuration = {
+                imports = [ ./home ];
+                inherit nixpkgs;
+              };
+              extraModules = [
+                ./home/profiles/mihai-kiiro
+                ./home/files.nix
+                ./home/games.nix
+                ./home/media.nix
+                ./home/nix.nix
+                ./home/mail.nix
+                ./home/x11
+                ./home/editors/emacs
+                ./home/editors/kakoune
+                ./home/editors/neovim
+              ];
             };
-            extraModules = [
-              ./home/profiles/mihai-kiiro
-              ./home/files.nix
-              ./home/games.nix
-              ./home/media.nix
-              ./home/nix.nix
-              ./home/mail.nix
-              ./home/x11
-              ./home/editors/emacs
-              ./home/editors/kakoune
-              ./home/editors/neovim
-            ];
-          };
 
-          "mihai@tosh" = generateHome {
-            inherit system username homeDirectory extraSpecialArgs;
-            pkgs = self.pkgs.x86_64-linux.nixpkgs;
-            configuration = {
-              imports = [ ./home ];
-              inherit nixpkgs;
+            "mihai@tosh" = generateHome {
+              inherit system username homeDirectory extraSpecialArgs;
+              pkgs = self.pkgs.x86_64-linux.nixpkgs;
+              configuration = {
+                imports = [ ./home ];
+                inherit nixpkgs;
+              };
+              extraModules = [
+                ./home/profiles/mihai-tosh
+                ./home/files.nix
+                ./home/media.nix
+                ./home/nix.nix
+                ./home/x11
+                ./home/editors/emacs
+                ./home/editors/kakoune
+              ];
             };
-            extraModules = [
-              ./home/profiles/mihai-tosh
-              ./home/files.nix
-              ./home/media.nix
-              ./home/nix.nix
-              ./home/x11
-              ./home/editors/emacs
-              ./home/editors/kakoune
-            ];
           };
-        };
 
       # overlays
       overlay = import ./pkgs { inherit inputs; };

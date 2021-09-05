@@ -87,7 +87,9 @@
       options = "--delete-older-than 7d";
     };
 
+    generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
+    linkInputs = true;
   };
 
   # enable programs
