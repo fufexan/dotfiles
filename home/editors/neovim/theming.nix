@@ -12,9 +12,6 @@ in
     o.background = 'dark'
     vim.cmd 'syntax on'
     vim.cmd 'colorscheme horizon'
-    vim.cmd 'hi Normal guibg=none'
-    vim.cmd 'hi EndOfBuffer guibg=none'
-    vim.cmd 'hi SignColumn guibg=none'
     o.cursorline = true
 
     -- feline --

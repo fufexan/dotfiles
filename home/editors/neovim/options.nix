@@ -32,6 +32,7 @@ in
     -- keymaps
     vim.api.nvim_set_keymap( 'n', ';', ':', {noremap = true})
     vim.api.nvim_set_keymap( 'n', ':', ';', {noremap = true})
+    vim.api.nvim_set_keymap( 'n', '<ESC>', '<ESC>:nohlsearch<CR>', {noremap = true})
     vim.api.nvim_set_keymap( 'v', '<F12>', '"+y', {noremap = true})
     vim.api.nvim_set_keymap( 'n', '<F12>', 'ggVG"+y', {noremap = true})
 
