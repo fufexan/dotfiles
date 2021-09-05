@@ -412,6 +412,23 @@
         "type": "github"
       }
     },
+    "paperwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617616509,
+        "narHash": "sha256-gZbS2Xy+CuQfzzZ5IwMahr3VLtyTiLxJTJVawml9sXE=",
+        "owner": "paperwm",
+        "repo": "PaperWM",
+        "rev": "e9f714846b9eac8bdd5b33c3d33f1a9d2fbdecd4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "paperwm",
+        "ref": "next-release",
+        "repo": "PaperWM",
+        "type": "github"
+      }
+    },
     "picom": {
       "flake": false,
       "locked": {
@@ -507,6 +524,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-kak": "nixpkgs-kak",
         "nobbz": "nobbz",
+        "paperwm": "paperwm",
         "picom": "picom",
         "powercord": "powercord",
         "rnix-lsp": "rnix-lsp",

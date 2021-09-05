@@ -1,9 +1,14 @@
 { inputs }:
 
 final: prev: {
-  discord-electron = prev.callPackage ./discord {
-    branch = "stable";
-    pkgs = prev;
+  discord-electron = prev.callPackage ./discord { branch = "stable"; };
+
+  gnomeExtensions = prev.gnomeExtensions // {
+    paperwm = prev.gnomeExtensions.paperwm.overrideAttrs (_: {
+      version = "pre-40.0";
+      src = inputs.paperwm;
+      patches = ./paperwm.patch;
+    });
   };
 
   kakoune-cr = prev.callPackage ./kakoune.cr { inherit (inputs) kakoune-cr; };

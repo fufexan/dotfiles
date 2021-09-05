@@ -91,8 +91,13 @@
           appindicator
           blur-me
           gsconnect
+          paperwm
           vitals
-        ];
+
+          disable-workspace-switch-animation-for-gnome-40
+          cleaner-overview
+          vertical-overview
+        ] ++ [ pkgs.gnome.gnome-tweaks ];
       };
       windowManager.bspwm.enable = true;
 
