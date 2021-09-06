@@ -9,7 +9,7 @@
     playerctl
     pulsemixer
     # music
-    #spotify-adblock-linux
+    spotify-adblock
     # video
     #jellyfin-mpv-shim
   ];

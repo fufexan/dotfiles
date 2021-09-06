@@ -29,4 +29,8 @@ final: prev: {
     version = "unstable-2021-08-04";
     src = inputs.picom;
   });
+
+  spotify-adblock = prev.callPackage ./spotify-adblock/wrapper.nix {
+    spotify-adblocker = prev.callPackage ./spotify-adblock { };
+  }; 
 }
