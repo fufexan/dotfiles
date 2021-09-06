@@ -4,13 +4,14 @@
 , binaryName
 , desktopName
 , isWayland ? true
+, enableVulkan ? true
 , extraOptions ? [ ]
 , autoPatchelfHook
 , makeDesktopItem
 , lib
 , stdenv
 , wrapGAppsHook
-, alsaLib
+, alsa-lib
 , at-spi2-atk
 , at-spi2-core
 , atk
@@ -41,6 +42,7 @@
 , libXrender
 , libXtst
 , libxcb
+, libxshmfence
 , mesa
 , nspr
 , nss
@@ -49,6 +51,10 @@
 , libappindicator-gtk3
 , libdbusmenu
 , nodePackages
+, vulkan-loader
+, vulkan-extension-layer
+, writeScript
+, common-updater-scripts
 }:
 
 let
@@ -59,7 +65,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     nodePackages.asar
-    alsaLib
+    alsa-lib
     autoPatchelfHook
     cups
     libdrm
@@ -69,6 +75,7 @@ stdenv.mkDerivation rec {
     libXScrnSaver
     libXtst
     libxcb
+    libxshmfence
     mesa
     nss
     wrapGAppsHook
@@ -80,8 +87,10 @@ stdenv.mkDerivation rec {
     libcxx
     systemd
     libpulseaudio
+    libdrm
+    mesa
     stdenv.cc.cc
-    alsaLib
+    alsa-lib
     atk
     at-spi2-atk
     at-spi2-core
@@ -114,11 +123,15 @@ stdenv.mkDerivation rec {
     libXScrnSaver
     libappindicator-gtk3
     libdbusmenu
+    vulkan-loader
+    vulkan-extension-layer
   ];
 
   flags = (
     lib.optionals isWayland [
-      "--enable-features=UseOzonePlatform"
+      "--flag-switches-begin"
+      "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer${lib.optionalString enableVulkan ",Vulkan"}"
+      "--flag-switches-end"
       "--ozone-platform=wayland"
       "--enable-webrtc-pipewire-capturer"
     ]
@@ -137,23 +150,23 @@ stdenv.mkDerivation rec {
     asar p resources/app resources/app.asar --unpack-dir '**'
     rm -rf resources/app
 
-    # Copy Relevanat data
+    # Copy Relevant data
     cp -r resources/*  $out/usr/lib/${pname}/
 
     # Create starter script for discord
-    echo "#!${stdenv.shell}" > $out/bin/${pname}
-    echo "exec ${electron}/bin/electron ${lib.concatStringsSep " " flags} $out/usr/lib/${pname}/app.asar \$@" >> $out/bin/${pname}
-    chmod 755 $out/bin/${pname}
-
-    wrapProgram $out/bin/${pname} \
+    echo "#!${stdenv.shell}" > $out/bin/${binaryName}
+    echo "exec ${electron}/bin/electron ${lib.concatStringsSep " " flags} $out/usr/lib/${pname}/app.asar \$@" >> $out/bin/${binaryName}
+    chmod 755 $out/bin/${binaryName}
+  '' + ''
+    wrapProgram $out/bin/${binaryName} \
         "''${gappsWrapperArgs[@]}" \
         --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
-        --prefix LD_LIBRARY_PATH : ${libPath}
+        --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${pname}
   '';
 
   desktopItem = makeDesktopItem {
     name = pname;
-    exec = pname;
+    exec = binaryName;
     icon = pname;
     inherit desktopName;
     genericName = meta.description;
