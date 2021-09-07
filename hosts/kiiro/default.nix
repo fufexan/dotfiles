@@ -12,7 +12,7 @@
   };
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
   # modules to load
   boot.kernelModules = [ "v4l2loopback" ];
   # make modules available to modprobe
@@ -23,19 +23,6 @@
     efi.canTouchEfiVariables = true;
     systemd-boot.enable = true;
   };
-
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    gnome-contacts
-    gnome-disk-utility
-    gnome-font-viewer
-    gnome-maps
-    yelp
-  ] ++ (with pkgs; [
-    cheese
-    epiphany
-    geany
-    gnome-connections
-  ]);
 
   hardware = {
     bluetooth = {
@@ -83,25 +70,14 @@
 
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
-
-      desktopManager.gnome = {
-        enable = true;
-        sessionPath = with pkgs.gnomeExtensions; [
-          alttab-mod
-          appindicator
-          blur-me
-          gsconnect
-          paperwm
-          vitals
-
-          disable-workspace-switch-animation-for-gnome-40
-          cleaner-overview
-          vertical-overview
-        ] ++ [ pkgs.gnome.gnome-tweaks ];
-      };
       windowManager.bspwm.enable = true;
 
       videoDrivers = [ "nvidia" ];
+    };
+
+    zerotierone = {
+      enable = true;
+      joinNetworks = [ "af415e486f732fbc" ];
     };
   };
 }

@@ -122,6 +122,7 @@
         kiiro.modules = with self.nixosModules; [
           ./hosts/kiiro
           desktop
+          ./modules/gnome.nix
           inputs.nix-gaming.nixosModule
           {
             home-manager.users.mihai.imports = [
