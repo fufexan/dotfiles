@@ -24,7 +24,7 @@ in
       nvim-treesitter
       nvim-ts-rainbow
       nvim-web-devicons
-      telescope-fzy-native-nvim
+      #telescope-fzy-native-nvim
       telescope-nvim
       vim-nix
       vim-fugitive

@@ -134,7 +134,7 @@
               ./home/nix.nix
               ./home/x11
               ./home/editors/emacs
-              ./home/editors/kakoune
+              #./home/editors/kakoune
               ./home/editors/neovim
             ];
           }
@@ -186,7 +186,7 @@
               ./home/mail.nix
               ./home/x11
               ./home/editors/emacs
-              ./home/editors/kakoune
+              #./home/editors/kakoune
               ./home/editors/neovim
             ];
           };
@@ -219,7 +219,7 @@
       # packages
       outputsBuilder = channels: {
         packages = utils.lib.exportPackages self.overlays channels;
-        devShell = channels.nixpkgs.devshell.mkShell {
+        devShell = channels.nixpkgs.mkShell {
           packages = with channels.nixpkgs; [ nixpkgs-fmt rnix-lsp ];
           name = "dots";
         };

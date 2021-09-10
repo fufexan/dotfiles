@@ -42,10 +42,10 @@
 
     geoclue2.enable = true;
 
-    ipfs = {
-      enable = true;
-      autoMount = true;
-    };
+    #ipfs = {
+    #  enable = true;
+    #  autoMount = true;
+    #};
 
     pipewire = {
       enable = true;

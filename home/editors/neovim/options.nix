@@ -77,7 +77,7 @@ in
     }
 
     -- telescope
-    require('telescope').load_extension('fzy_native')
+    --require('telescope').load_extension('fzy_native')
 
     -- lexima
     vim.fn['lexima#set_default_rules']()
