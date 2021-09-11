@@ -21,6 +21,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kmonad = {
+      url = "github:kmonad/kmonad/d130553134f0fb2254852e719a06bc36dce58441?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
+    };
+
     naersk = {
       url = "github:nmattia/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -108,6 +114,7 @@
             useGlobalPkgs = true;
           };
         }
+        inputs.kmonad.nixosModule
       ];
 
       hosts = {

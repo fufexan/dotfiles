@@ -279,6 +279,32 @@
         "type": "github"
       }
     },
+    "kmonad": {
+      "inputs": {
+        "flake-utils": [
+          "fu"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1630622629,
+        "narHash": "sha256-dBZfNRzxF/dDatmlGUM7ZcfCTAixnRsYXKzAXbb12P8=",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "rev": "d130553134f0fb2254852e719a06bc36dce58441",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "rev": "d130553134f0fb2254852e719a06bc36dce58441",
+        "type": "github"
+      }
+    },
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -800,6 +826,7 @@
         "discord-tweaks": "discord-tweaks",
         "fu": "fu",
         "hm": "hm",
+        "kmonad": "kmonad",
         "naersk": "naersk",
         "nix-doom-emacs": "nix-doom-emacs",
         "nix-gaming": "nix-gaming",

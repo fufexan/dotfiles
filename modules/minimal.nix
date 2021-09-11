@@ -131,6 +131,11 @@
     # don't keep logs after reboots so boot isn't slowed down by flush
     journald.extraConfig = "Storage=volatile";
 
+    kmonad = {
+      enable = true;
+      configfiles = [ ./main.kbd ];
+    };
+
     openssh = {
       enable = true;
       useDns = true;

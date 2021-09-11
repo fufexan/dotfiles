@@ -1,0 +1,58 @@
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd")
+  output (uinput-sink "KMonad"
+    "/run/current-system/sw/bin/sleep 1 && /run/current-system/sw/bin/setxkbmap -option compose:ralt")
+  cmp-seq ralt
+  cmp-seq-delay 5
+  fallthrough true
+  allow-cmd false
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(deflayer colemak
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @tab q    w    f    p    b    j    l    u    y    ;    [    ]    \
+  @esc a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft x    c    d    v    z    k    h    ,    .    /    rsft
+  @spc lmet lalt           spc            lmet rmet cmp  rctl
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @tab q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @esc a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  @spc lmet lalt           spc            lmet rmet cmp  rctl
+)
+
+(deflayer special
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    @cmk _    _    @qwe _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _    _
+)
+
+(deflayer symbols
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
+  _    _    _    _    _    _    ins  _    up   _    pgup home prnt _
+  _    _    _    _    _    _    _    left down rght pgdn end  _
+  _    _    _    _    _    _    _    mute vold volu _    _
+  _    _    prev           pp             next _    _    _
+)
+
+(defalias
+  esc (tap-next esc lctl)
+  sym (layer-toggle symbols)
+  tab (tap-next tab @sym)
+  spc (layer-toggle special)
+  cmk (layer-switch colemak)
+  qwe (layer-switch qwerty)
+)
