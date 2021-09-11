@@ -26,6 +26,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-doom-emacs = {
+      url = "github:vlaci/nix-doom-emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
+    };
+
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.utils.follows = "utils";
@@ -132,9 +138,10 @@
               ./home/media.nix
               ./home/nix.nix
               ./home/x11
-              ./home/editors/emacs
-              #./home/editors/kakoune
+              ./home/editors/emacs/doom.nix
+              ./home/editors/kakoune
               ./home/editors/neovim
+              inputs.nix-doom-emacs.hmModule
             ];
           }
         ];
@@ -184,7 +191,7 @@
               ./home/mail.nix
               ./home/x11
               ./home/editors/emacs
-              #./home/editors/kakoune
+              ./home/editors/kakoune
               ./home/editors/neovim
             ];
           };

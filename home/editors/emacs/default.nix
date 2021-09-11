@@ -18,7 +18,7 @@
       # QoL
       consult
       editorconfig
-      eglot
+      lsp-mode
       magit
       multiple-cursors
       nixpkgs-fmt
