@@ -11,8 +11,6 @@ final: prev: {
     });
   };
 
-  kakoune-cr = prev.callPackage ./kakoune.cr { inherit (inputs) kakoune-cr; };
-
   legendary-gl = prev.legendary-gl.overrideAttrs (o: rec {
     version = "0.20.9";
     src = prev.fetchFromGitHub {
@@ -32,5 +30,5 @@ final: prev: {
 
   spotify-adblock = prev.callPackage ./spotify-adblock/wrapper.nix {
     spotify-adblocker = prev.callPackage ./spotify-adblock { };
-  }; 
+  };
 }

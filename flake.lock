@@ -150,22 +150,6 @@
         "type": "github"
       }
     },
-    "kakoune-cr": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1630861849,
-        "narHash": "sha256-atrXnXmCeoR3hjarqiEsI8mwcpapICGugtKT79MMpsY=",
-        "owner": "alexherbo2",
-        "repo": "kakoune.cr",
-        "rev": "3476ad6d961ea9369cbde7346cf02b123213c72b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "alexherbo2",
-        "repo": "kakoune.cr",
-        "type": "github"
-      }
-    },
     "lowdown-src": {
       "flake": false,
       "locked": {
@@ -518,7 +502,6 @@
         "discord-tweaks": "discord-tweaks",
         "fu": "fu",
         "hm": "hm",
-        "kakoune-cr": "kakoune-cr",
         "naersk": "naersk",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_3",

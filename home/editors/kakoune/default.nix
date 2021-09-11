@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 # personal kakoune config
-#
-# the only required plugin is smarttab
 
 {
   programs.kakoune = {
@@ -121,17 +119,15 @@
     extraConfig = ''
       def saveas -params 1 -file-completion %{ rename-buffer -file %arg{1}; write }
       eval %sh{
-        kcr init kakoune
         kak-lsp --kakoune -s $kak_session
       }
-      enable-auto-pairs
     '';
     plugins = with pkgs.kakounePlugins; [
       # allows kak to talk to lsp servers
       kak-lsp
       # enables expandtab and other indent options
       smarttab-kak
-    ] ++ [ pkgs.kakoune-cr ];
+    ];
   };
 
   # colorscheme

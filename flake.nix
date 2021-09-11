@@ -55,7 +55,6 @@
     };
 
     discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
-    kakoune-cr = { url = "github:alexherbo2/kakoune.cr"; flake = false; };
     paperwm = { url = "github:paperwm/PaperWM/next-release"; flake = false; };
     picom = { url = "github:yshui/picom"; flake = false; };
     vim-horizon = { url = "github:ntk148v/vim-horizon"; flake = false; };
@@ -154,7 +153,6 @@
           nixpkgs = {
             config = { allowUnfree = true; };
             overlays = [
-              self.overlays."nixpkgs/kakoune-cr"
               inputs.utils.overlay
               inputs.powercord.overlay
             ];
