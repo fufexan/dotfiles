@@ -50,6 +50,7 @@
           kiiro.modules = [
             ./hosts/kiiro
             ./modules/desktop.nix
+            ./modules/gamemode.nix
             ./modules/gnome.nix
             { home-manager.users.mihai.imports = hmModules.desktop; }
           ];
