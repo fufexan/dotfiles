@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, colors, ... }:
 
 # terminals
 
 let
   font = "JetBrainsMono Nerd Font";
-  c = import ./colors.nix;
+  c = colors;
 in
 {
   programs.alacritty = {

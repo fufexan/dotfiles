@@ -1,5 +1,6 @@
+{ colors, ... }:
 let
-  c = import ../../colors.nix;
+  c = colors;
   h = color: "'#${color}'";
 in
 {

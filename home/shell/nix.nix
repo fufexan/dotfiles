@@ -7,8 +7,7 @@
     fup-repl
     nix-index
     nixpkgs-fmt
-    #rnix-lsp
-    inputs.rnix-lsp.defaultPackage.x86_64-linux
+    #inputs.rnix-lsp.defaultPackage.x86_64-linux
   ];
 
   programs.direnv = {

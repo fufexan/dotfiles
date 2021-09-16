@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, colors, ... }:
 
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
@@ -54,20 +54,16 @@
       package = pkgs.texlive.combined.scheme-basic;
     };
 
-    zathura =
-      let
-        c = import ./colors.nix;
-      in
-      {
-        enable = true;
-        options = {
-          recolor = true;
-          recolor-darkcolor = "#${c.fg}";
-          recolor-lightcolor = "rgba(0,0,0,0)";
-          default-bg = "rgba(0,0,0,0.7)";
-          default-fg = "#${c.fg}";
-        };
+    zathura = {
+      enable = true;
+      options = {
+        recolor = true;
+        recolor-darkcolor = "#${colors.fg}";
+        recolor-lightcolor = "rgba(0,0,0,0)";
+        default-bg = "rgba(0,0,0,0.7)";
+        default-fg = "#${colors.fg}";
       };
+    };
   };
 
   services = {

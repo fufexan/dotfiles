@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, colors, ... }:
 
 # rofi config
 
@@ -23,7 +23,6 @@
       theme =
         let
           inherit (config.lib.formats.rasi) mkLiteral;
-          colors = import ../../colors.nix;
         in
         {
           "*" = {

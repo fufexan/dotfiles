@@ -1,5 +1,6 @@
+{ colors, ... }:
 let
-  c = (import ../../colors.nix).normal;
+  c = colors.normal;
 in
 {
   programs.neovim.extraConfig = ''

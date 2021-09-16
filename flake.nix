@@ -7,10 +7,9 @@
         desktop = [
           ./home
           ./home/profiles/mihai-kiiro
-          ./home/files.nix
+          ./home/files
           ./home/games.nix
           ./home/media.nix
-          ./home/nix.nix
           ./home/x11
           ./home/editors/emacs/doom.nix
           ./home/editors/kakoune
@@ -65,7 +64,10 @@
           inputs.nix-gaming.nixosModule
           {
             home-manager = {
-              extraSpecialArgs = { inherit inputs self; };
+              extraSpecialArgs = {
+                inherit inputs self;
+                colors = import ./home/colors.nix;
+              };
               useGlobalPkgs = true;
             };
           }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, colors, ... }:
 
 # most of X configuration
 
@@ -113,7 +113,7 @@
 
   xresources.properties =
     let
-      c = import ../colors.nix;
+      c = colors;
       x = c: "#${c}";
     in
     {

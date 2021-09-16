@@ -2,21 +2,18 @@
 
 {
   home.file = {
-    # font for rofi applets
     ".local/share/fonts" = {
-      source = ./files/fonts;
+      source = ./fonts;
       recursive = true;
     };
 
-    # config files
     ".config" = {
-      source = ./files/config;
+      source = ./config;
       recursive = true;
     };
 
-    # scripts
     ".local/bin" = {
-      source = ./files/bin;
+      source = ./bin;
       recursive = true;
     };
   };

@@ -27,6 +27,7 @@
     xplr
 
     file
+    gh
 
     # modern coreutils
     bat
@@ -42,11 +43,6 @@
   xdg.enable = true;
 
   programs = {
-    gh = {
-      enable = true;
-      gitProtocol = "ssh";
-    };
-
     git = {
       enable = true;
       delta.enable = true;
