@@ -31,10 +31,12 @@ in
 
     -- keymaps
     vim.api.nvim_set_keymap( 'n', ';', ':', {noremap = true})
+    vim.api.nvim_set_keymap( 'v', ';', ':', {noremap = true})
     vim.api.nvim_set_keymap( 'n', ':', ';', {noremap = true})
+    vim.api.nvim_set_keymap( 'v', ':', ';', {noremap = true})
     vim.api.nvim_set_keymap( 'n', '<ESC>', '<ESC>:nohlsearch<CR>', {noremap = true})
     vim.api.nvim_set_keymap( 'v', '<F12>', '"+y', {noremap = true})
-    vim.api.nvim_set_keymap( 'n', '<F12>', 'ggVG"+y', {noremap = true})
+    vim.api.nvim_set_keymap( 'n', '<F12>', ':%+y<CR>', {noremap = true})
 
     -- autocmd
     vim.cmd 'autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 1000)'
@@ -62,22 +64,34 @@ in
     }
     -- tree sitter
     require('nvim-treesitter.configs').setup {
-      --ensure_installed = {"bash", "c", "css", "javascript", "json", "lua", "nix", "rust", "toml"},
+      ensure_installed = {"bash", "haskell", "json", "lua", "nix", "toml"},
       highlight = {
         enable = true,
-        disable = {"css"}
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
+      indent = {
+        enable = true,
       },
       rainbow = {
         enable = true,
-        disable = {"html"},
         extended_mode = true,
         max_file_lines = 10000,
         colors = {"#${c.red}", "#${c.green}", "#${c.yellow}", "#${c.blue}", "#${c.cyan}", "#${c.magenta}", "#${c.white}"}
       }
     }
+    o.foldmethod = 'expr' 
+    o.foldexpr = 'nvim_treesitter#foldexpr()'
 
     -- telescope
-    --require('telescope').load_extension('fzy_native')
+    --require('telescope').setup{}
 
     -- lexima
     vim.fn['lexima#set_default_rules']()

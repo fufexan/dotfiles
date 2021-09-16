@@ -24,12 +24,14 @@ in
       nvim-treesitter
       nvim-ts-rainbow
       nvim-web-devicons
-      #telescope-fzy-native-nvim
       telescope-nvim
       vim-nix
       vim-fugitive
       vim-horizon
     ];
+
+    # for treesitter
+    extraPackages = [ pkgs.gcc ];
 
     viAlias = true;
     vimAlias = true;
