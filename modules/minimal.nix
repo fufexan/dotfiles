@@ -47,9 +47,7 @@
     ];
   };
 
-  networking.useDHCP = false;
-  # I don't currently have IPv6 so don't waste time trying to get it
-  networking.dhcpcd.wait = "ipv4";
+  networking.networkmanager.enable = true;
 
   nix = {
     autoOptimiseStore = true;
@@ -87,6 +85,7 @@
       options = "--delete-older-than 7d";
     };
 
+    # FUP options
     generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
     linkInputs = true;
@@ -153,7 +152,7 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "adbusers" "libvirtd" "transmission" "wheel" ];
+    extraGroups = [ "adbusers" "networkmanager" "libvirtd" "transmission" "wheel" ];
   };
 
   zramSwap.enable = true;

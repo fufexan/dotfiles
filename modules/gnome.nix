@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ lib, pkgs, ... }:
 
 # GNOME 40 config
 
@@ -17,6 +17,8 @@
       gnome-connections
     ]
   );
+
+  hardware.pulseaudio.enable = lib.mkForce false;
 
   networking = {
     # for GSConnect

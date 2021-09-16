@@ -37,10 +37,6 @@
     enableAllFirmware = true;
 
     nvidia.modesetting.enable = true;
-
-    opentabletdriver.enable = true;
-
-    pulseaudio.enable = lib.mkForce false;
   };
 
   networking.hostName = "kiiro";
@@ -70,7 +66,6 @@
 
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
-      windowManager.bspwm.enable = true;
 
       videoDrivers = [ "nvidia" ];
     };

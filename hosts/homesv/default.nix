@@ -21,10 +21,7 @@
   };
 
   # network
-  networking = {
-    hostName = "homesv";
-    interfaces.enp9s0.useDHCP = true;
-  };
+  networking.hostName = "homesv";
 
   services = {
     # don't suspend when lid is closed

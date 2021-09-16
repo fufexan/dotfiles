@@ -10,12 +10,7 @@
     device = "/dev/sda";
   };
 
-  hardware.opentabletdriver.enable = true;
-
-  networking = {
-    hostName = "tosh";
-    networkmanager.enable = true;
-  };
+  networking.hostName = "tosh";
 
   services = {
     pipewire.lowLatency.enable = true;
