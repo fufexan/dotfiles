@@ -806,11 +806,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1631097616,
-        "narHash": "sha256-QRj5UbsplV2Hpy8syF3INOok42Bi0Z4+IfRX+njSda8=",
+        "lastModified": 1631531304,
+        "narHash": "sha256-hlJ0FYaxUGpFqAuhB+Fde7ydxJQXV3NIwKQ8rW85gc8=",
         "owner": "nix-community",
         "repo": "rnix-lsp",
-        "rev": "a9f24f2c765675f7dc794328331864e0a53dcada",
+        "rev": "ab9c26a903846fc6712b811bdb32a2539ed3a42d",
         "type": "github"
       },
       "original": {
