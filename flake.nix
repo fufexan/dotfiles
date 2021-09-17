@@ -12,7 +12,7 @@
           ./home/media.nix
           ./home/x11
           ./home/editors/emacs
-          ./home/editors/kakoune
+          ./home/editors/helix
           ./home/editors/neovim
         ];
       };
