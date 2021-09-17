@@ -52,6 +52,19 @@
             ./modules/gnome.nix
             { home-manager.users.mihai.imports = hmModules.desktop; }
           ];
+
+          iso = {
+            builder = nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem;
+            modules = [
+              ./modules/iso.nix
+              {
+                home-manager.users.mihai.imports = [
+                  ./home/cli.nix
+                  ./home/editors/neovim
+                ];
+              }
+            ];
+          };
         };
 
         hostDefaults.modules = [
