@@ -11,10 +11,9 @@
           ./home/games.nix
           ./home/media.nix
           ./home/x11
-          ./home/editors/emacs/doom.nix
+          ./home/editors/emacs
           ./home/editors/kakoune
           ./home/editors/neovim
-          inputs.nix-doom-emacs.hmModule
         ];
       };
     in
@@ -146,12 +145,6 @@
     naersk = {
       url = "github:nmattia/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-doom-emacs = {
-      url = "github:vlaci/nix-doom-emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
     };
 
     nix-gaming = {

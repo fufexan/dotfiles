@@ -9,23 +9,25 @@
       # themes
       horizon-theme
 
+      doom
+
       # language modes
-      markdown-mode
-      nix-mode
+      #markdown-mode
+      #nix-mode
 
-      evil
+      #evil
 
-      # QoL
-      consult
-      editorconfig
-      lsp-mode
-      magit
-      multiple-cursors
-      nixpkgs-fmt
-      phi-autopair
-      treemacs
-      undo-tree
-      vertico
+      ## QoL
+      #consult
+      #editorconfig
+      #lsp-mode
+      #magit
+      #multiple-cursors
+      #nixpkgs-fmt
+      #phi-autopair
+      #treemacs
+      #undo-tree
+      #vertico
     ];
   };
 }
