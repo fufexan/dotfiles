@@ -3,10 +3,9 @@
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
     let
-      hmModules = {
-        desktop = [
+      hmModules = rec {
+        shared = [
           ./home
-          ./home/profiles/mihai-kiiro
           ./home/files
           ./home/games.nix
           ./home/media.nix
@@ -15,6 +14,10 @@
           ./home/editors/helix
           ./home/editors/neovim
         ];
+
+        io = shared ++ [ ./home/profiles/mihai-tosh ];
+        kiiro = shared ++ [ ./home/profiles/mihai-kiiro ];
+        tosh = shared ++ [ ./home/profiles/mihai-tosh ];
       };
     in
     utils.lib.mkFlake
@@ -39,18 +42,12 @@
             { home-manager.users.mihai = import ./home/cli.nix; }
           ];
 
-          tosh.modules = [
-            ./hosts/tosh
-            ./modules/desktop.nix
-            { home-manager.users.mihai.imports = hmModules.desktop; }
-          ];
-
-          kiiro.modules = [
-            ./hosts/kiiro
+          io.modules = [
+            ./hosts/io
             ./modules/desktop.nix
             ./modules/gamemode.nix
             ./modules/gnome.nix
-            { home-manager.users.mihai.imports = hmModules.desktop; }
+            { home-manager.users.mihai.imports = hmModules.kiiro; }
           ];
 
           iso = {
@@ -65,6 +62,20 @@
               }
             ];
           };
+
+          kiiro.modules = [
+            ./hosts/kiiro
+            ./modules/desktop.nix
+            ./modules/gamemode.nix
+            ./modules/gnome.nix
+            { home-manager.users.mihai.imports = hmModules.kiiro; }
+          ];
+
+          tosh.modules = [
+            ./hosts/tosh
+            ./modules/desktop.nix
+            { home-manager.users.mihai.imports = hmModules.tosh; }
+          ];
         };
 
         hostDefaults.modules = [
