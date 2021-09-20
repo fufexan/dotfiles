@@ -47,10 +47,7 @@
   };
 
   services = {
-    btrfs.autoScrub = {
-      enable = true;
-      fileSystems = [ "/" ];
-    };
+    btrfs.autoScrub.enable = true;
 
     pipewire.lowLatency.enable = true;
 
