@@ -2,7 +2,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  #imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ];
 
   # kernel
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
@@ -30,12 +30,18 @@
 
   networking.hostName = "io";
 
+  nix = {
+    buildMachines = lib.mkForce [ ];
+  };
+
   programs = {
     adb.enable = true;
     steam.enable = true;
   };
 
   services = {
+    kmonad.configfiles = [ ./main.kbd ];
+
     pipewire.lowLatency.enable = true;
 
     printing.enable = true;
