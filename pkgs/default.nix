@@ -2,6 +2,7 @@
 
 final: prev: {
   discord-electron = prev.callPackage ./discord { branch = "stable"; };
+  discord-electron-canary = prev.callPackage ./discord { branch = "canary"; };
 
   gnomeExtensions = prev.gnomeExtensions // {
     paperwm = prev.gnomeExtensions.paperwm.overrideAttrs (

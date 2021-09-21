@@ -21,6 +21,7 @@
       });
       plugins = [ inputs.discord-tweaks ];
     })
+    discord-electron
     element-desktop
     tdesktop
     # torrents
