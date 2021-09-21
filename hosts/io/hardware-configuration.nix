@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
@@ -14,30 +15,35 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
+    {
+      device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
+    {
+      device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/persistent" =
-    { device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
+    {
+      device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
       options = [ "subvol=persistent" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/866A-2122";
+    {
+      device = "/dev/disk/by-uuid/866A-2122";
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  swapDevices = [{ device = "/dev/nvme0n1p5"; }];
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
+  powerManagement.cpuFreqGovernor = "powersave";
 }

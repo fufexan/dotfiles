@@ -1,11 +1,11 @@
-# symbolistic yellow; main pc
 { config, lib, pkgs, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelParams = [ "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -44,14 +44,16 @@
 
     pipewire.lowLatency.enable = true;
 
-    printing.enable = true;
+    power-profiles-daemon.enable = false;
 
-    ratbagd.enable = true;
+    printing.enable = true;
 
     udev.extraRules = ''
       # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
+
+    tlp.enable = true;
 
     xserver.videoDrivers = [ "amdgpu" ];
 

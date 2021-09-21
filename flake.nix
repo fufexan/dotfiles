@@ -9,14 +9,19 @@
           ./home/files
           ./home/games.nix
           ./home/media.nix
-          ./home/x11
           ./home/editors/emacs
           ./home/editors/helix
           ./home/editors/neovim
         ];
 
-        io = shared ++ [ ./home/profiles/mihai-tosh ];
-        kiiro = shared ++ [ ./home/profiles/mihai-kiiro ];
+        io = shared ++ [
+          ./home/profiles/mihai-io
+          ./home/wayland
+        ];
+        kiiro = shared ++ [
+          ./home/profiles/mihai-kiiro
+          ./home/x11
+        ];
         tosh = shared ++ [ ./home/profiles/mihai-tosh ];
       };
     in
@@ -47,7 +52,7 @@
             ./modules/desktop.nix
             ./modules/gamemode.nix
             ./modules/gnome.nix
-            { home-manager.users.mihai.imports = hmModules.kiiro; }
+            { home-manager.users.mihai.imports = hmModules.io; }
           ];
 
           iso = {
