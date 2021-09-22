@@ -25,8 +25,8 @@ in
     pname = "discord-electron";
     binaryName = "Discord";
     desktopName = "Discord";
-    version = "0.0.15";
-    isWayland = false;
+    version = "0.0.16";
+    isWayland = true;
     extraOptions = [
       "--enable-vulkan"
       "--ignore-gpu-blocklist"
@@ -35,7 +35,7 @@ in
     ];
     src = fetchurl {
       url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-      sha256 = "0pn2qczim79hqk2limgh88fsn93sa8wvana74mpdk5n6x5afkvdd";
+      sha256 = "sha256-UTVKjs/i7C/m8141bXBsakQRFd/c//EmqqhKhkr1OOk=";
     };
   };
 }.${branch}
