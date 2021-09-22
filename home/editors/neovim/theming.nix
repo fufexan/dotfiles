@@ -138,8 +138,8 @@ in
     }
 
     require('feline').setup {
-      default_bg = colors.bg,
-      default_fg = colors.fg,
+      bg = colors.bg,
+      fg = colors.fg,
       colors = colors,
       vi_mode_colors = vi_mode_colors,
       components = components

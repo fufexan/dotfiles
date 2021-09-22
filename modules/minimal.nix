@@ -65,12 +65,10 @@
     distributedBuilds = true;
 
     binaryCaches = [
-      "https://fufexan.cachix.org"
       "https://nix-gaming.cachix.org"
       "https://nix-community.cachix.org"
     ];
     binaryCachePublicKeys = [
-      "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];

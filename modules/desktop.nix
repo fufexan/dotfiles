@@ -76,6 +76,8 @@
         mouse.accelProfile = "flat";
         mouse.accelSpeed = "0";
         mouse.middleEmulation = false;
+        # touchpad settings
+        touchpad.naturalScrolling = true;
       };
     };
 
