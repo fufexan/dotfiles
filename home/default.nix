@@ -24,6 +24,7 @@
     discord-electron
     element-desktop
     tdesktop
+    teams
     # torrents
     transmission-remote-gtk
     # misc

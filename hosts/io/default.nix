@@ -26,6 +26,11 @@
     cpu.amd.updateMicrocode = true;
 
     enableAllFirmware = true;
+
+    opengl = {
+      extraPackages = with pkgs; [ amdvlk ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ amdvlk ];
+    };
   };
 
   networking.hostName = "io";
@@ -36,6 +41,7 @@
 
   programs = {
     adb.enable = true;
+    light.enable = true;
     steam.enable = true;
   };
 

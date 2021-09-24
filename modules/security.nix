@@ -5,7 +5,8 @@
 {
   ## System security tweaks
   # Prevent replacing the running kernel w/o reboot
-  security.protectKernelImage = true;
+  # Also prevents hibernation
+  #security.protectKernelImage = true;
 
   # tmpfs = /tmp is mounted in ram. Doing so makes temp file management speedy
   # on ssd systems, and volatile! Because it's wiped on reboot.
