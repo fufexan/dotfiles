@@ -17,18 +17,8 @@ in
 
     -- feline --
     local components = {
-      left = {
-        active = {},
-        inactive = {}
-      },
-      mid = {
-        active = {},
-        inactive = {}
-      },
-      right = {
-        active = {},
-        inactive = {}
-      }
+      active = {{}, {}, {}},
+      inactive = {{}, {}}
     }
 
     local colors = {
@@ -55,7 +45,7 @@ in
 
     local vi_mode_utils = require('feline.providers.vi_mode')
 
-    components.left.active[1] = {
+    table.insert(components.active[1], {
       provider = function()
         local mode = vi_mode_text[vim.fn.mode()]
         mode = mode and mode or 'UNKNOWN'
@@ -69,9 +59,9 @@ in
           style = 'bold'
         }
       end,
-    }
+    })
 
-    components.left.active[2] = {
+    table.insert(components.active[1], {
       provider = 'file_info',
       hl = {
         fg = colors.fg,
@@ -80,25 +70,18 @@ in
       },
       left_sep = {
         str = ' ',
-        hl = {
-          fg = 'NONE',
-          bg = colors.yellow
-        }
+        hl = {bg = colors.yellow}
       },
       right_sep = {
         {
           str = ' ',
-          hl = {
-            fg = 'NONE',
-            bg = colors.yellow
-          }
+          hl = {bg = colors.yellow}
         },
         ' '
       }
-    }
+    })
 
-
-    components.right.active[1] = {
+    table.insert(components.active[3], {
       provider = 'line_percentage',
       hl = {
         fg = colors.fg,
@@ -107,21 +90,15 @@ in
       },
       right_sep = {
         str = ' ',
-        hl = {
-          fg = 'NONE',
-          bg = colors.magenta
-        }
+        hl = { bg = colors.magenta }
       },
       left_sep = {
         str = ' ',
-        hl = {
-          fg = 'NONE',
-          bg = colors.magenta
-        }
+        hl = { bg = colors.magenta }
       }
-    }
+    })
 
-    components.right.active[2] = {
+    table.insert(components.active[3], {
       provider = 'position',
       hl = {
         fg = colors.fg,
@@ -130,12 +107,9 @@ in
       },
       right_sep = {
         str = ' ',
-        hl = {
-          fg = 'NONE',
-          bg = colors.green
-        }
+        hl = { bg = colors.green }
       }
-    }
+    })
 
     require('feline').setup {
       bg = colors.bg,
