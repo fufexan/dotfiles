@@ -61,7 +61,10 @@
 
     tlp.enable = true;
 
-    xserver.videoDrivers = [ "amdgpu" ];
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+      desktopManager.gnome.sessionPath = with pkgs.gnomeExtensions; [ ideapad-mode ];
+    };
 
     zerotierone = {
       enable = true;

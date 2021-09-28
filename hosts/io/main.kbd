@@ -2,7 +2,7 @@
   input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
   output (uinput-sink "KMonad"
     "/run/current-system/sw/bin/sleep 1 && /run/current-system/sw/bin/setxkbmap -option compose:ralt")
-  cmp-seq ralt
+  cmp-seq menu
   cmp-seq-delay 5
   fallthrough true
   allow-cmd false
@@ -21,7 +21,7 @@
   tab  q    w    f    p    b    j    l    u    y    ;    [    ]    \
   @esc a    r    s    t    g    m    n    e    i    o    '    ret
   lsft x    c    d    v    z    k    h    ,    .    /    rsft
-  @lay lmet lalt           @spc           lmet rmet cmp  rctl
+  @lay lmet lalt           @spc           ralt rctl _    _
 )
 
 (deflayer qwerty
@@ -29,7 +29,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @esc a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  @lay lmet lalt           @spc           lmet rmet cmp  rctl
+  @lay lmet lalt           @spc           ralt rctl _    _
 )
 
 (deflayer layouts
