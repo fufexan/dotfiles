@@ -3,21 +3,6 @@
 # GNOME 40 config
 
 {
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    gnome-contacts
-    gnome-disk-utility
-    gnome-font-viewer
-    gnome-maps
-    yelp
-  ] ++ (
-    with pkgs; [
-      cheese
-      epiphany
-      geany
-      gnome-connections
-    ]
-  );
-
   hardware.pulseaudio.enable = lib.mkForce false;
 
   networking = {
@@ -42,13 +27,13 @@
     desktopManager.gnome = {
       enable = true;
       sessionPath = with pkgs.gnomeExtensions; [
-        alttab-mod
         appindicator
         blur-me
         gsconnect
-        paperwm
         vitals
 
+        # paperwm
+        paperwm
         disable-workspace-switch-animation-for-gnome-40
         cleaner-overview
         vertical-overview
