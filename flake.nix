@@ -85,7 +85,6 @@
 
         hostDefaults.modules = [
           ./modules/minimal.nix
-          ./modules/security.nix
           inputs.agenix.nixosModules.age
           inputs.hm.nixosModule
           inputs.kmonad.nixosModule
@@ -149,7 +148,7 @@
     nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
 
     utils = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus/release-1.2.0-without-deprecated-code";
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
       inputs.flake-utils.follows = "fu";
     };
 
