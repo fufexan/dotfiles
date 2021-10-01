@@ -26,11 +26,6 @@
     cpu.amd.updateMicrocode = true;
 
     enableAllFirmware = true;
-
-    opengl = {
-      extraPackages = with pkgs; [ amdvlk ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ amdvlk ];
-    };
   };
 
   networking.hostName = "io";
@@ -46,6 +41,8 @@
   };
 
   services = {
+    btrfs.autoScrub.enable = true;
+
     kmonad.configfiles = [ ./main.kbd ];
 
     pipewire.lowLatency.enable = true;
@@ -53,6 +50,8 @@
     power-profiles-daemon.enable = false;
 
     printing.enable = true;
+
+    ratbagd.enable = true;
 
     udev.extraRules = ''
       # add my android device to adbusers

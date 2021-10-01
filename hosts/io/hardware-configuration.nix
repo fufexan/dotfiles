@@ -18,21 +18,21 @@
     {
       device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" "compress=zstd:1" "noatime" ];
     };
 
   fileSystems."/home" =
     {
       device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=home" "compress=zstd:1" "noatime" ];
     };
 
   fileSystems."/persistent" =
     {
       device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
       fsType = "btrfs";
-      options = [ "subvol=persistent" ];
+      options = [ "subvol=persistent" "compress=zstd:1" "noatime" ];
     };
 
   fileSystems."/boot" =
@@ -45,5 +45,5 @@
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
-  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement.cpuFreqGovernor = "ondemand";
 }
