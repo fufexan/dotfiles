@@ -38,4 +38,6 @@ final: prev: {
   spotify-adblock = prev.callPackage ./spotify-adblock/wrapper.nix {
     spotify-adblocker = prev.callPackage ./spotify-adblock { };
   };
+
+  technic-launcher = prev.callPackage ./technic.nix { };
 }
