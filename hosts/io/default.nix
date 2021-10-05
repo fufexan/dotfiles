@@ -4,8 +4,9 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelParams = [ "nmi_watchdog=0" ];
+  boot.consoleLogLevel = 6;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  boot.kernelParams = [ /*"iommu=soft"*/ "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -42,6 +43,8 @@
 
   services = {
     btrfs.autoScrub.enable = true;
+
+    cpupower-gui.enable = true;
 
     kmonad.configfiles = [ ./main.kbd ];
 
