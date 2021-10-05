@@ -1,22 +1,22 @@
-# symbolistic yellow; main pc
-{ config, lib, pkgs, agenix, ... }:
+# biggest homeserver
+{ config, lib, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./services.nix
+  ];
 
   age.secrets = {
-    mailPassPlain = {
-      file = ../../secrets/mailPassPlain.age;
-      owner = "mihai";
-    };
+    ddclientConfig.file = ../../secrets/ddclientConfig.age;
+    mailPass.file = ../../secrets/mailPass.age;
+    vaultwarden.file = ../../secrets/vaultwarden.age;
   };
 
-  # kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
-  # modules to load
-  boot.kernelModules = [ "v4l2loopback" ];
-  # make modules available to modprobe
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
 
   # bootloader
   boot.loader = {
@@ -25,54 +25,18 @@
   };
 
   hardware = {
-    bluetooth = {
-      enable = true;
-      disabledPlugins = [ "sap" ];
-      package = pkgs.bluezFull;
-      powerOnBoot = false;
-    };
-
     cpu.intel.updateMicrocode = true;
 
     enableAllFirmware = true;
-
-    nvidia.modesetting.enable = true;
   };
 
   networking.hostName = "kiiro";
 
-  programs = {
-    adb.enable = true;
-    steam.enable = true;
-  };
-
   services = {
     btrfs.autoScrub.enable = true;
 
-    pipewire.lowLatency.enable = true;
-
-    printing.enable = true;
-
-    ratbagd.enable = true;
-
-    udev.extraRules = ''
-      # bfq for HDD
-      ACTION=="add|change", KERNEL=="sda", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
-      # add my android device to adbusers
-      SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
-      # make WoL persistent
-      ACTION=="add", SUBSYSTEM=="net", NAME=="enp3s0", RUN+="${pkgs.ethtool}/bin/ethtool -s enp3s0 wol g"
-    '';
-
-    xserver = {
-      displayManager.gdm.nvidiaWayland = true;
-
-      videoDrivers = [ "nvidia" ];
-    };
-
-    zerotierone = {
-      enable = true;
-      joinNetworks = [ "af415e486f732fbc" ];
-    };
+    journald.extraConfig = lib.mkForce "";
   };
+
+  system.stateVersion = lib.mkForce "21.11";
 }
