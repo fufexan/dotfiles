@@ -55,18 +55,18 @@
             { home-manager.users.mihai.imports = hmModules.io; }
           ];
 
-          iso = {
-            builder = nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem;
-            modules = [
-              ./modules/iso.nix
-              {
-                home-manager.users.mihai.imports = [
-                  ./home/cli.nix
-                  ./home/editors/neovim
-                ];
-              }
-            ];
-          };
+          #iso = {
+          #  builder = nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem;
+          #  modules = [
+          #    ./modules/iso.nix
+          #    {
+          #      home-manager.users.mihai.imports = [
+          #        ./home/cli.nix
+          #        ./home/editors/neovim
+          #      ];
+          #    }
+          #  ];
+          #};
 
           kiiro.modules = [
             ./hosts/kiiro

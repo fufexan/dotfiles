@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./mailserver.nix
+    #./mailserver.nix
     ./services.nix
   ];
 
