@@ -10,11 +10,14 @@
 
     (rocket-league.override { inherit (pkgs) legendary-gl; })
 
-    #(technic-launcher.override {
-    #  src = builtins.fetchurl {
-    #    url = "https://mc-launcher.com/files/unc/Technic.jar";
-    #    sha256 = "sha256-b9ekp9pheryqoGtlOM/JtEe2TUHOlDDQuMFk98VNZs0=";
-    #  };
-    #})
-  ] ++ (with pkgs; [ legendary-gl ]);
+  ] ++ (with pkgs; [
+    legendary-gl
+
+    (technic-launcher.override {
+      src = builtins.fetchurl {
+        url = "https://mc-launcher.com/files/unc/Technic.jar";
+        sha256 = "1rwcgzzjxy17qcbczxvq2c8hilmkr16flw48myz93jgx4gii6vxl";
+      };
+    })
+  ]);
 }
