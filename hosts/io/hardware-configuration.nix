@@ -45,5 +45,5 @@
 
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
-  powerManagement.cpuFreqGovernor = "schedutil";
+  powerManagement.cpuFreqGovernor = "powersave";
 }

@@ -6,7 +6,7 @@
   # kernel
   boot.consoleLogLevel = 6;
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
-  boot.kernelParams = [ /*"iommu=soft"*/ "nmi_watchdog=0" ];
+  boot.kernelParams = [ "iommu=soft" "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -20,6 +20,7 @@
     bluetooth = {
       enable = true;
       disabledPlugins = [ "sap" ];
+      hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
     };
@@ -50,8 +51,6 @@
 
     pipewire.lowLatency.enable = true;
 
-    power-profiles-daemon.enable = false;
-
     printing.enable = true;
 
     ratbagd.enable = true;
@@ -60,8 +59,6 @@
       # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
-
-    tlp.enable = true;
 
     xserver = {
       videoDrivers = [ "amdgpu" ];
