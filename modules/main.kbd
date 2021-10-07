@@ -27,9 +27,9 @@
 (deflayer qwerty
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @esc a    s    d    f    g    h    j    k    l    ;    '    ret
+  @cps a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  @lay lmet lalt           @spc           lmet rmet cmp  rctl
+  lctl lmet lalt           spc            lmet rmet cmp  rctl
 )
 
 (deflayer layouts
@@ -55,4 +55,5 @@
   sym (layer-toggle symbols)
   esc (tap-next-release esc lctl)
   spc (tap-next-release spc @sym)
+  cps (tap-next-release caps @lay)
 )
