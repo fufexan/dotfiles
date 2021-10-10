@@ -18,7 +18,6 @@
       };
 
       font = "Roboto 14";
-      fullscreen = false;
 
       theme =
         let
