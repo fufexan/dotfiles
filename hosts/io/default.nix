@@ -7,6 +7,15 @@
   boot.consoleLogLevel = 6;
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.kernelParams = [ "iommu=soft" "nmi_watchdog=0" ];
+  boot.kernelPatches = [
+    {
+      name = "conservative";
+      patch = null;
+      config = ''
+        CPU_FREQ_GOV_CONSERVATIVE y
+      '';
+    }
+  ];
 
   # bootloader
   boot.loader = {
