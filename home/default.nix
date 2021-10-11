@@ -52,8 +52,8 @@
     };
 
     texlive = {
-      enable = false;
-      package = pkgs.texlive.combined.scheme-basic;
+      enable = true;
+      extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
     };
 
     zathura = {
