@@ -5,19 +5,19 @@
 , gnome-themes-extra
 , gtk-engine-murrine
 , sassc
-, accentColor ? "default"
+, accentColor ? "all"
 , tweaks ? "" # can be "solid" "compact" "black" "primary", or concatenated
 }:
 
 stdenvNoCC.mkDerivation rec {
   pname = "orchis-theme";
-  version = "unstable-2021-10-02";
+  version = "unstable-2021-10-13";
 
   src = fetchFromGitHub {
     repo = "Orchis-theme";
     owner = "vinceliuice";
-    rev = "cf8781e74d6c913511a4b2f9b81857e2296a51d5";
-    sha256 = "sha256-ZH69B+t2fz1M0e1cDjLkvYdE3LdBEbPegTEMpZCJS0A=";
+    rev = "18811c46cc6178ce70adcc0bee56fe0cf9af19f4";
+    sha256 = "sha256-B0YSpdoRfB8DvMx+3yXpNLEULnLd1BoqNWLXRPOfp2Q=";
   };
 
   nativeBuildInputs = [ gtk3 sassc ];
