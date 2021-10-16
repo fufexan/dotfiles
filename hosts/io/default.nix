@@ -4,7 +4,8 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  boot.consoleLogLevel = 6;
+  boot.kernelModules = [ "amdgpu" ];
+  # need to figure out which patch fixes amdgpu blank screen after suspend
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.kernelParams = [ "iommu=soft" "nmi_watchdog=0" ];
   boot.kernelPatches = [
@@ -41,42 +42,39 @@
 
   networking.hostName = "io";
 
-  nix = {
-    buildMachines = lib.mkForce [ ];
-  };
+  nix.buildMachines = lib.mkForce [ ];
 
   programs = {
     adb.enable = true;
-    light.enable = true;
     steam.enable = true;
   };
 
   services = {
     btrfs.autoScrub.enable = true;
 
-    cpupower-gui.enable = true;
-
     kmonad.configfiles = [ ./main.kbd ];
 
     pipewire.lowLatency.enable = true;
 
+    power-profiles-daemon.enable = false;
+
     printing.enable = true;
 
     ratbagd.enable = true;
+
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+      };
+    };
 
     udev.extraRules = ''
       # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
-    xserver = {
-      videoDrivers = [ "amdgpu" ];
-      desktopManager.gnome.sessionPath = with pkgs.gnomeExtensions; [ ideapad-mode ];
-    };
-
-    zerotierone = {
-      enable = true;
-      joinNetworks = [ "af415e486f732fbc" ];
-    };
+    xserver.videoDrivers = [ "amdgpu" ];
   };
 }

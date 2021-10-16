@@ -30,6 +30,7 @@
         appindicator
         blur-me
         gsconnect
+        night-theme-switcher
         vitals
 
         # paperwm
