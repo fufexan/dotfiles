@@ -47,7 +47,10 @@
     ];
   };
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
 
   nix = {
     autoOptimiseStore = true;
@@ -137,6 +140,8 @@
       enable = true;
       useDns = true;
     };
+
+    resolved.enable = true;
 
     tailscale.enable = true;
 
