@@ -29,21 +29,22 @@
     transmission-remote-gtk
     # misc
     libnotify
+    (pkgs.orchis-theme.override { tweaks = "primary compact"; })
   ];
 
-  gtk = {
-    enable = true;
+  #gtk = {
+  #  enable = true;
 
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
+  #  iconTheme = {
+  #    name = "Papirus-Dark";
+  #    package = pkgs.papirus-icon-theme;
+  #  };
 
-    theme = {
-      name = "Orchis-purple-dark-compact";
-      package = (pkgs.orchis-theme.override { accentColor = "purple"; tweaks = "primary compact"; });
-    };
-  };
+  #  theme = {
+  #    name = "Orchis-purple-dark-compact";
+  #    package = (pkgs.orchis-theme.override { accentColor = "purple"; tweaks = "primary compact"; });
+  #  };
+  #};
 
   programs = {
     firefox = {
