@@ -29,7 +29,9 @@
     transmission-remote-gtk
     # misc
     libnotify
+    # theming
     (pkgs.orchis-theme.override { tweaks = "primary compact"; })
+    papirus-icon-theme
   ];
 
   #gtk = {
