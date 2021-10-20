@@ -38,6 +38,8 @@
     cpu.amd.updateMicrocode = true;
 
     enableAllFirmware = true;
+
+    opentabletdriver.enable = true;
   };
 
   networking.hostName = "io";
