@@ -17,8 +17,10 @@ in
     plugins = with pkgs.vimPlugins; [
       bufferline-nvim
       feline-nvim
-      lexima-vim
       lspkind-nvim
+      luasnip
+      nvim-autopairs
+      nvim-cmp
       nvim-lspconfig
       nvim-tree-lua
       nvim-treesitter

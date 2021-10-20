@@ -27,14 +27,10 @@ in
     o.softtabstop = 2
     o.shiftwidth = 2
     o.expandtab = true
-    o.completeopt = 'menuone,noselect'
+    o.completeopt = 'menu,menuone,noselect'
     o.shortmess = o.shortmess + 'c'
 
     -- keymaps
-    vim.api.nvim_set_keymap( 'n', ';', ':', {noremap = true})
-    vim.api.nvim_set_keymap( 'v', ';', ':', {noremap = true})
-    vim.api.nvim_set_keymap( 'n', ':', ';', {noremap = true})
-    vim.api.nvim_set_keymap( 'v', ':', ';', {noremap = true})
     vim.api.nvim_set_keymap( 'n', '<ESC>', '<ESC>:nohlsearch<CR>', {noremap = true})
     vim.api.nvim_set_keymap( 'v', '<F12>', '"+y', {noremap = true})
     vim.api.nvim_set_keymap( 'n', '<F12>', ':%+y<CR>', {noremap = true})
@@ -42,9 +38,67 @@ in
     -- autocmd
     vim.cmd 'autocmd BufWritePre *.nix lua vim.lsp.buf.formatting_sync(nil, 1000)'
 
-    -- lsp
-    local lspc = require 'lspconfig'
-    lspc.rnix.setup {}
+    -- autopairs
+    require('nvim-autopairs').setup({
+      fast_wrap = {}
+    })
+    require('nvim-autopairs').setup({
+      enable_check_bracket_line = false,
+
+      fast_wrap = {
+        map = '<M-e>',
+        chars = { '{', '[', '(', '"', "'" },
+        pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], '%s+', ${"''"}),
+        offset = 0, -- Offset from pattern match
+        end_key = '$',
+        keys = 'qwertyuiopzxcvbnmasdfghjkl',
+        check_comma = true,
+        highlight = 'Search',
+        highlight_grey='Comment'
+      },
+    })
+
+    -- cmp  
+    local cmp = require'cmp'
+
+    cmp.setup({
+      snippet = {
+        expand = function(args)
+          require('luasnip').lsp_expand(args.body)
+        end,
+      },
+      mapping = {
+        -- ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+        -- ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      },
+      sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+      }
+    })
+
+    -- autopairs
+    require("nvim-autopairs.completion.cmp").setup({
+      map_cr = true, --  map <CR> on insert mode
+      map_complete = true, -- it will auto insert `(` (map_char) after select function or method item
+      auto_select = true, -- automatically select the first item
+      insert = false, -- use insert confirm behavior instead of replace
+      map_char = { -- modifies the function or method delimiter by filetypes
+        all = '(',
+        tex = '{'
+      }
+    })
+
+    -- lspconfig
+    require('lspconfig')['rnix'].setup {
+      -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
 
     -- lsp icons
     require('lspkind').init {
@@ -93,9 +147,6 @@ in
 
     -- telescope
     --require('telescope').setup{}
-
-    -- lexima
-    vim.fn['lexima#set_default_rules']()
     
   '';
 }
