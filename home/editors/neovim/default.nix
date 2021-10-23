@@ -1,11 +1,5 @@
 { pkgs, inputs, ... }:
 
-let
-  vim-horizon = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-horizon";
-    src = inputs.vim-horizon;
-  };
-in
 {
   imports = [
     ./options.nix
@@ -27,9 +21,9 @@ in
       nvim-ts-rainbow
       nvim-web-devicons
       telescope-nvim
+      tokyonight-nvim
       vim-nix
       vim-fugitive
-      vim-horizon
     ];
 
     # for treesitter

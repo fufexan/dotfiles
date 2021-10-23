@@ -12,7 +12,7 @@ in
     o.termguicolors = true
     o.background = 'dark'
     vim.cmd 'syntax on'
-    vim.cmd 'colorscheme horizon'
+    vim.cmd 'colorscheme tokyonight'
     o.cursorline = true
 
     -- feline --
