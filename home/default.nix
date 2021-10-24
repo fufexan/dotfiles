@@ -32,6 +32,7 @@
     # theming
     (pkgs.orchis-theme.override { tweaks = "primary compact"; })
     papirus-icon-theme
+    inputs.neovitality.defaultPackage.x86_64-linux
   ];
 
   #gtk = {

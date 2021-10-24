@@ -11,7 +11,7 @@
           ./home/media.nix
           ./home/editors/emacs
           ./home/editors/helix
-          ./home/editors/neovim
+          #./home/editors/neovim
         ];
 
         io = shared ++ [
@@ -132,7 +132,7 @@
 
         # overlays
         overlay = import ./pkgs { inherit inputs; };
-        overlays = utils.lib.exportOverlays { inherit (self) pkgs inputs; };
+        overlays = utils.lib.exportOverlays { inherit (self) pkgs; inputs = (builtins.removeAttrs inputs [ "neovitality" ]); };
 
         # packages
         outputsBuilder = channels: {
@@ -174,6 +174,14 @@
     naersk = {
       url = "github:nmattia/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    neovitality = {
+      url = "github:vi-tality/neovitality";
+      inputs = {
+        flake-utils.follows = "fu";
+        devshell.follows = "devshell";
+      };
     };
 
     nix-gaming = {
