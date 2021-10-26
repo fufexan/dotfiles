@@ -617,11 +617,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1635040504,
-        "narHash": "sha256-EtwuXPxOnITZSyQKO4OiB4mc6GFFPYhyA+dtJIX87DQ=",
+        "lastModified": 1635085216,
+        "narHash": "sha256-gy1TjtpL8Sjaa7UnwsdcgmvsxA57D16kXMbDqSfHgGI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "6acebb8b56e21247423a5692e9ca30dff05abb63",
+        "rev": "09e96fe6096f07365eb65b51bb7f2fd0f1b043b0",
         "type": "github"
       },
       "original": {
@@ -640,17 +640,19 @@
           "fu"
         ],
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "nixpkgs-jdtls": "nixpkgs-jdtls",
         "nur": "nur",
         "vim-plugins-overlay": "vim-plugins-overlay"
       },
       "locked": {
-        "lastModified": 1635064325,
-        "narHash": "sha256-n3bF4qYNEOrTAg/WfLTrEmmrjPOFAAcKWeUjjT936Oo=",
+        "lastModified": 1635150802,
+        "narHash": "sha256-UHq5rRh6GK9kB5OSIy53DSrYhiu73iJ29eIHefm+F/E=",
         "owner": "vi-tality",
         "repo": "neovitality",
-        "rev": "ccedf5d59eb197c404db9623f60ccb3e8f32d401",
+        "rev": "ae4229774d6c5d0118265b052c08d0b7fcb0a3a4",
         "type": "github"
       },
       "original": {
@@ -662,7 +664,7 @@
     "nix": {
       "inputs": {
         "lowdown-src": "lowdown-src",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1634663590,
@@ -681,7 +683,7 @@
     },
     "nix-gaming": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "oglfPatches": "oglfPatches",
         "tkgPatches": "tkgPatches",
         "utils": [
@@ -781,22 +783,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1635040645,
-        "narHash": "sha256-03rjG21EQKIPS804/EQrwb42WqdwHAPHYn6lsa695LQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "ce24ebd3dcd557d87f115283180051d4af0e7f6e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1628417749,
         "narHash": "sha256-LI00lL97qfnVPYLM50nh9BhHY9viHziuLjkMzBrIuTE=",
         "owner": "NixOS",
@@ -810,7 +796,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1635040645,
         "narHash": "sha256-03rjG21EQKIPS804/EQrwb42WqdwHAPHYn6lsa695LQ=",
@@ -826,7 +812,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1632864508,
         "narHash": "sha256-d127FIvGR41XbVRDPVvozUPQ/uRHbHwvfyKHwEt5xFM=",
@@ -841,7 +827,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1630481079,
         "narHash": "sha256-leWXLchbAbqOlLT6tju631G40SzQWPqaAXQG3zH1Imw=",
@@ -886,11 +872,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1635061961,
-        "narHash": "sha256-5NqbwkGi4EGobrYZYqsWKjpfqCJn0dIn0NWj625RSKc=",
+        "lastModified": 1635140934,
+        "narHash": "sha256-s+sTUFqi8LZfi+bv0YmHub/+L2rz1PncV0lKO/wcXyw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f50850b1e860a87ae725bf9209fbdc6fb0a9657c",
+        "rev": "855b4865716f5a8cfcebce5ba984127a12568551",
         "type": "github"
       },
       "original": {
@@ -1360,7 +1346,7 @@
     "rnix-lsp": {
       "inputs": {
         "naersk": "naersk_2",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "utils": "utils"
       },
       "locked": {
@@ -1415,7 +1401,7 @@
         "naersk": "naersk",
         "neovitality": "neovitality",
         "nix-gaming": "nix-gaming",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-kak": "nixpkgs-kak",
         "nobbz": "nobbz",
         "paperwm": "paperwm",
