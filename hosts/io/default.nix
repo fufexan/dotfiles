@@ -8,15 +8,6 @@
   # need to figure out which patch fixes amdgpu blank screen after suspend
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.kernelParams = [ "iommu=soft" "nmi_watchdog=0" ];
-  boot.kernelPatches = [
-    {
-      name = "conservative";
-      patch = null;
-      config = ''
-        CPU_FREQ_GOV_CONSERVATIVE y
-      '';
-    }
-  ];
 
   # bootloader
   boot.loader = {
@@ -55,6 +46,8 @@
     btrfs.autoScrub.enable = true;
 
     kmonad.configfiles = [ ./main.kbd ];
+
+    journald.extraConfig = lib.mkForce "";
 
     pipewire.lowLatency.enable = true;
 
