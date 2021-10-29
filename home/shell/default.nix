@@ -3,7 +3,6 @@
 {
   imports = [
     ./nix.nix
-    #./starship.nix
     ./zsh.nix
   ];
 
