@@ -179,7 +179,6 @@
     neovitality = {
       url = "github:vi-tality/neovitality";
       inputs = {
-        nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "fu";
         devshell.follows = "devshell";
       };
