@@ -6,8 +6,8 @@
   # kernel
   boot.kernelModules = [ "amdgpu" ];
   # need to figure out which patch fixes amdgpu blank screen after suspend
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
-  boot.kernelParams = [ "iommu=soft" "nmi_watchdog=0" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "acpi.ec_no_wakeup=1" "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -62,6 +62,7 @@
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+        DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
       };
     };
 
