@@ -155,7 +155,7 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "adbusers" "networkmanager" "libvirtd" "transmission" "wheel" ];
+    extraGroups = [ "adbusers" "networkmanager" "libvirtd" "transmission" "video" "wheel" ];
   };
 
   zramSwap.enable = true;
