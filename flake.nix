@@ -15,6 +15,8 @@
         io = shared ++ [
           ./home/profiles/mihai-io
           ./home/wayland
+          # for games
+          ./home/x11
         ];
         kiiro = shared ++ [
           ./home/profiles/mihai-kiiro
@@ -83,7 +85,6 @@
 
         hostDefaults.modules = [
           ./modules/minimal.nix
-          inputs.agenix.nixosModules.age
           inputs.hm.nixosModule
           inputs.kmonad.nixosModule
           inputs.nix-gaming.nixosModule
@@ -150,8 +151,6 @@
     };
 
     # flakes
-    agenix.url = "github:ryantm/agenix";
-
     devshell.url = "github:numtide/devshell";
 
     fu.url = "github:numtide/flake-utils";
@@ -185,9 +184,6 @@
       inputs.utils.follows = "utils";
     };
 
-    nobbz.url = "github:NobbZ/nixos-config/overhaul";
-    unstable.follows = "nobbz/unstable";
-
     powercord = {
       url = "github:LavaDesu/powercord-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -209,8 +205,6 @@
     };
 
     discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
-    paperwm = { url = "github:paperwm/PaperWM/next-release"; flake = false; };
     picom = { url = "github:yshui/picom"; flake = false; };
-    vim-horizon = { url = "github:ntk148v/vim-horizon"; flake = false; };
   };
 }

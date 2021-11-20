@@ -7,12 +7,6 @@
     ./services.nix
   ];
 
-  age.secrets = {
-    ddclientConfig.file = ../../secrets/ddclientConfig.age;
-    mailPass.file = ../../secrets/mailPass.age;
-    vaultwarden.file = ../../secrets/vaultwarden.age;
-  };
-
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;

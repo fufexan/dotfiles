@@ -3,7 +3,7 @@
 {
   programs.emacs = {
     enable = true;
-    package = inputs.nobbz.packages.x86_64-linux.emacsPgtkGcc;
+    package = pkgs.emacs; #inputs.nobbz.packages.x86_64-linux.emacsPgtkGcc;
 
     extraPackages = epkgs: with epkgs; [
       # themes

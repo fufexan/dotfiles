@@ -8,12 +8,6 @@
     ./services.nix
   ];
 
-  age.secrets = {
-    ddclientConfig.file = ../../secrets/ddclientConfig.age;
-    mailPass.file = ../../secrets/mailPass.age;
-    vaultwarden.file = ../../secrets/vaultwarden.age;
-  };
-
   boot.loader.grub = {
     enable = true;
     version = 2;

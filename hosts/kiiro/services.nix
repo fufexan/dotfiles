@@ -10,25 +10,23 @@
   };
 
   services.vaultwarden = {
-    enable = true;
+    enable = false;
     config = {
       domain = "https://bw.fufexan.net:8443";
       signupsAllowed = true;
     };
-    environmentFile = config.age.secrets.vaultwarden.path;
   };
 
   services.ddclient = {
-    enable = true;
+    enable = false;
     interval = "1h";
-    configFile = config.age.secrets.ddclientConfig.path;
   };
 
   services.minecraft-server = {
     enable = false;
     eula = true;
     jvmOpts = ''
-      -Xmx2G -Xms1G -XX:+UseG1GC
+      -Xmx6G -Xms1G -XX:+UseG1GC
       -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2
     '';
     openFirewall = true;

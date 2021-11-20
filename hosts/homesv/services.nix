@@ -8,8 +8,8 @@
     nsswins = true;
     extraConfig = ''
       server smb encrypt = desired
-      hosts allow = 10. 100. localhost
       hosts deny = ALL
+      hosts allow = 10. 100. localhost
       map to guest = Bad User
     '';
     shares.drive = {
