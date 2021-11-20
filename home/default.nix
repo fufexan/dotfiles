@@ -30,18 +30,19 @@
     # misc
     libnotify
     # theming
-    (pkgs.orchis-theme.override { tweaks = "primary compact"; })
-    papirus-icon-theme
+    quintom-cursor-theme
+    (orchis-theme.override { tweaks = "primary compact"; })
     inputs.neovitality.defaultPackage.x86_64-linux
   ];
 
-  #gtk = {
-  #  enable = true;
+  gtk = {
+    enable = true;
 
-  #  iconTheme = {
-  #    name = "Papirus-Dark";
-  #    package = pkgs.papirus-icon-theme;
-  #  };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+  };
 
   #  theme = {
   #    name = "Orchis-purple-dark-compact";
@@ -55,10 +56,10 @@
       profiles.mihai = { };
     };
 
-    texlive = {
-      enable = true;
-      extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
-    };
+    #texlive = {
+    #  enable = true;
+    #  extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
+    #};
 
     zathura = {
       enable = true;
@@ -73,6 +74,8 @@
   };
 
   services = {
+    flameshot.enable = true;
+
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
