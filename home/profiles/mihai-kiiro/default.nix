@@ -15,4 +15,9 @@
 
     "module/temperature".thermal-zone = "2";
   };
+
+  xsession.windowManager.bspwm.monitors = {
+    HDMI-0 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
+    VGA-0 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
+  };
 }

@@ -12,7 +12,9 @@
       "base-temperature" = 30;
       "warn-temperature" = 70;
     };
+  };
 
-    #"module/temperature".thermal-zone = "2";
+  xsession.windowManager.bspwm.monitors = {
+    LVDS-1 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
   };
 }

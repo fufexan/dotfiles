@@ -98,7 +98,10 @@ in
       "XF86Audio{Raise,Lower}Volume" = "pulsemixer --change-volume {+,-}5";
       # toggle mute
       "XF86AudioMute" = "pulsemixer --toggle-mute";
+
+      # backlight
+
+      "XF86BrightnessMon{Up,Down}" = "light -{A,U} 5";
     };
   };
 }
-

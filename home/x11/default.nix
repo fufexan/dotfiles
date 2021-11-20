@@ -72,11 +72,6 @@
         done &
       '';
 
-      monitors = {
-        HDMI-0 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-        LVDS-1 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
-      };
-
       rules = {
         "Firefox" = { desktop = "^1"; };
         "Emacs" = { desktop = "^2"; };
@@ -90,10 +85,10 @@
         border_width = 2;
         window_gap = 8;
 
-        active_border_color = "#e95678";
-        focused_border_color = "#16161c";
-        normal_border_color = "#fab795";
-        presel_feedback_color = "#29d398";
+        active_border_color = x c.normal.red;
+        focused_border_color = x c.normal.black;
+        normal_border_color = x c.normal.yellow;
+        presel_feedback_color = x c.normal.green;
 
         split_ratio = 0.5;
         borderless_monocle = true;
