@@ -126,7 +126,7 @@
       # allows kak to talk to lsp servers
       kak-lsp
       # enables expandtab and other indent options
-      smarttab-kak
+      #smarttab-kak # not in nixpkgs
     ];
   };
 

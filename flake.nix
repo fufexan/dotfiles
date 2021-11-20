@@ -9,9 +9,7 @@
           ./home/files
           ./home/games.nix
           ./home/media.nix
-          ./home/editors/emacs
           ./home/editors/helix
-          #./home/editors/neovim
         ];
 
         io = shared ++ [
@@ -31,7 +29,6 @@
 
         # apply overlays to nixpkgs
         channels.nixpkgs.overlaysBuilder = channels: [
-          (final: prev: { inherit (channels.nixpkgs-kak) kakounePlugins; })
           self.overlay
           inputs.devshell.overlay
           inputs.powercord.overlay
@@ -51,7 +48,7 @@
             ./hosts/io
             ./modules/desktop.nix
             ./modules/gamemode.nix
-            ./modules/gnome.nix
+            #./modules/gnome.nix
             ./modules/school.nix
             { home-manager.users.mihai.imports = hmModules.io; }
           ];
@@ -146,7 +143,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-kak.url = "github:NixOS/nixpkgs/e5920f73965ce9fd69c93b9518281a3e8cb77040";
 
     utils = {
       url = "github:gytis-ivaskevicius/flake-utils-plus";
