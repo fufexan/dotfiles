@@ -2,6 +2,8 @@
 
 {
   home.file = {
+    ".wl-session".source = ./wl-session;
+
     ".local/share/fonts" = {
       source = ./fonts;
       recursive = true;

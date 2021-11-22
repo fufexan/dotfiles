@@ -1,0 +1,26 @@
+/* https://cloudninja.pw/docs/wofi.html */
+/* https://github.com/jjquin/swayarch/tree/master/.config/wofi */
+window {
+  border: 0;
+  background-color: #333333;
+}
+
+#input {
+  border: 1px solid magenta;
+  background-color: #555555;
+  font-size: 18px;
+}
+
+#outer-box {
+  margin: 10px;
+}
+
+#scroll {
+  margin: 5px 0px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+#scroll label {
+  margin: 2px 0px;
+}
