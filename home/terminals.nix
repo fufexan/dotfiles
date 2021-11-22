@@ -57,7 +57,7 @@ in
           };
         };
 
-      #background_opacity = 0.7;
+      background_opacity = 0.9;
     };
   };
 
