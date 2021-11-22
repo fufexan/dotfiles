@@ -14,7 +14,6 @@
   environment.pathsToLink = [ "/share/zsh" ];
 
   environment.systemPackages = [
-    inputs.agenix.defaultPackage.x86_64-linux
     pkgs.git
   ];
 
