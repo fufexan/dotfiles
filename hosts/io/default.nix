@@ -7,7 +7,7 @@
   boot.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # supposedly conserves battery
-  boot.kernelParams = [ "nmi_watchdog=0" ];
+  boot.kernelParams = [ "acpi.ec_no_wakeup=1" "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -20,7 +20,6 @@
   hardware = {
     bluetooth = {
       enable = true;
-      disabledPlugins = [ "sap" ];
       hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
@@ -44,6 +43,8 @@
   };
 
   services = {
+    blueman.enable = true;
+
     btrfs.autoScrub.enable = true;
 
     kmonad.configfiles = [ ./main.kbd ];
@@ -63,7 +64,6 @@
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-        DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
       };
     };
 
@@ -72,6 +72,16 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
-    xserver.videoDrivers = [ "amdgpu" ];
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+
+      displayManager.session = [
+        {
+          manage = "window";
+          name = "Wayfire";
+          start = "exec $HOME/.wl-session";
+        }
+      ];
+    };
   };
 }
