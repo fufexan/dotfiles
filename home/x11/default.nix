@@ -29,6 +29,8 @@ in
   programs.feh.enable = true;
 
   services = {
+    flameshot.enable = true;
+
     random-background = {
       enable = true;
       imageDirectory = "${config.home.homeDirectory}/Pictures/wallpapers/summer/dark";

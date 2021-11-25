@@ -38,17 +38,21 @@
   gtk = {
     enable = true;
 
+    font = {
+      name = "Roboto";
+      package = pkgs.roboto;
+    };
+
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-  };
 
-  #  theme = {
-  #    name = "Orchis-purple-dark-compact";
-  #    package = (pkgs.orchis-theme.override { accentColor = "purple"; tweaks = "primary compact"; });
-  #  };
-  #};
+    theme = {
+      name = "Orchis-purple-dark-compact";
+      package = (pkgs.orchis-theme.override { tweaks = "primary compact"; });
+    };
+  };
 
   programs = {
     firefox = {
@@ -74,7 +78,7 @@
   };
 
   services = {
-    flameshot.enable = true;
+    blueman-applet.enable = true;
 
     gpg-agent = {
       enable = true;
@@ -83,6 +87,8 @@
       defaultCacheTtlSsh = 3600;
       pinentryFlavor = "gnome3";
     };
+
+    network-manager-applet.enable = true;
 
     syncthing.enable = true;
 

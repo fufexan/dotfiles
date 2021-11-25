@@ -29,6 +29,12 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    glib
+    gsettings-desktop-schemas
+    quintom-cursor-theme
+  ];
+
   # Japanese input using fcitx
   i18n.inputMethod = {
     enabled = "fcitx";

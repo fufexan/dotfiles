@@ -1,8 +1,10 @@
+{ config, ... }:
+
 # manage files in ~
 
 {
   home.file = {
-    ".wl-session".source = ./wl-session;
+    ".wayland-session".text = import ./wayland-session.nix { inherit config; };
 
     ".local/share/fonts" = {
       source = ./fonts;
