@@ -10,6 +10,7 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      roboto
 
       # nerdfonts
       (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
@@ -40,6 +41,8 @@
     enabled = "fcitx";
     fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
+
+  location.provider = "geoclue2";
 
   programs.dconf.enable = true;
 

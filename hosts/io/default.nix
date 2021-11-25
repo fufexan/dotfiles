@@ -4,10 +4,18 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
+  boot.extraModulePackages = with config.boot.kernelPackages; [ anbox ];
   boot.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPatches = [
+    {
+      name = "amd_pmc";
+      patch = ../../pkgs/amd_pmc.patch;
+      extraConfig = "";
+    }
+  ];
   # supposedly conserves battery
-  boot.kernelParams = [ "acpi.ec_no_wakeup=1" "nmi_watchdog=0" ];
+  boot.kernelParams = [ "nmi_watchdog=0" ];
 
   # bootloader
   boot.loader = {
@@ -20,6 +28,7 @@
   hardware = {
     bluetooth = {
       enable = true;
+      disabledPlugins = [ "sap" ];
       hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
@@ -75,6 +84,8 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
 
+      displayManager.gdm.enable = lib.mkForce false;
+      displayManager.startx.enable = true;
       displayManager.session = [
         {
           manage = "window";
@@ -84,4 +95,6 @@
       ];
     };
   };
+
+  virtualisation.waydroid.enable = true;
 }
