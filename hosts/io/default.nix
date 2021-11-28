@@ -4,7 +4,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  boot.extraModulePackages = with config.boot.kernelPackages; [ anbox ];
+  #boot.extraModulePackages = with config.boot.kernelPackages; [ anbox ];
   boot.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPatches = [
@@ -56,8 +56,43 @@
 
     btrfs.autoScrub.enable = true;
 
+    clight = {
+      enable = true;
+      settings = {
+        backlight = {
+          ## Transition step in percentage
+          trans_step = 0.05;
+
+          ## Transition timeout in ms
+          trans_timeout = 1000;
+
+          ## Timeouts between captures during day/night/event on AC
+          ## Set any of these to <= 0 to disable captures
+          ## in the corresponding day time.
+          ac_timeouts = [ 60 300 300 ];
+
+          ## Timeouts between captures during day/night/event on BATT
+          ## Set any of these to <= 0 to disable captures
+          ## in the corresponding day time.
+          batt_timeouts = [ 60 300 300 ];
+
+          pause_on_lid_closed = true;
+          capture_on_lid_opened = true;
+        };
+
+        gamma = {
+          long_transition = true;
+        };
+
+        sensor.devname = "iio:device0";
+
+        dimmer.timeouts = [ 600 300 ];
+      };
+    };
+
     kmonad.configfiles = [ ./main.kbd ];
 
+    # keep logs around
     journald.extraConfig = lib.mkForce "";
 
     pipewire.lowLatency.enable = true;
@@ -84,8 +119,6 @@
     xserver = {
       videoDrivers = [ "amdgpu" ];
 
-      displayManager.gdm.enable = lib.mkForce false;
-      displayManager.startx.enable = true;
       displayManager.session = [
         {
           manage = "window";

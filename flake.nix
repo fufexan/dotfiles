@@ -204,6 +204,7 @@
       inputs.utils.follows = "fu";
     };
 
+    clightd = { url = "github:FedeDP/Clightd"; flake = false; };
     discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
     picom = { url = "github:yshui/picom"; flake = false; };
   };

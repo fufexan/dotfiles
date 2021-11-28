@@ -96,6 +96,22 @@
         "type": "github"
       }
     },
+    "clightd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636487915,
+        "narHash": "sha256-UuX5uKAJ/nOKFLDzSJspI+rqhyhWNhMS+Zk7Tb9e3aM=",
+        "owner": "FedeDP",
+        "repo": "Clightd",
+        "rev": "d6c65acc4b61ee7bfa1a2a45173d2839d1e7a8f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FedeDP",
+        "repo": "Clightd",
+        "type": "github"
+      }
+    },
     "cmp-buffer": {
       "flake": false,
       "locked": {
@@ -1122,6 +1138,7 @@
     },
     "root": {
       "inputs": {
+        "clightd": "clightd",
         "devshell": "devshell",
         "discord-tweaks": "discord-tweaks",
         "fu": "fu",

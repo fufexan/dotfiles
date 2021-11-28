@@ -1,6 +1,8 @@
 { inputs }:
 
 final: prev: {
+  clightd = prev.clightd.overrideAttrs (o: { src = inputs.clightd; });
+
   discord-electron = prev.callPackage ./discord { branch = "stable"; };
   discord-electron-canary = prev.callPackage ./discord { branch = "canary"; };
 
