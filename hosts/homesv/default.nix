@@ -4,7 +4,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    #./mailserver.nix
     ./services.nix
   ];
 
@@ -14,12 +13,12 @@
     device = "/dev/sda";
   };
 
+  # used by tailscale for exit node
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
   };
 
-  # network
   networking.hostName = "homesv";
 
   services = {
@@ -29,12 +28,6 @@
     # keep journal
     journald.extraConfig = lib.mkForce "";
   };
-
-  users.users = {
-    user.isSystemUser = true;
-    user.group = "user";
-  };
-  users.groups.user = { };
 
   system.stateVersion = lib.mkForce "21.05";
 }

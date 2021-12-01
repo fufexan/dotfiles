@@ -64,22 +64,6 @@
         "type": "github"
       }
     },
-    "blobs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1604995301,
-        "narHash": "sha256-wcLzgLec6SGJA8fx1OEN1yV/Py5b+U5iyYpksUY/yLw=",
-        "owner": "simple-nixos-mailserver",
-        "repo": "blobs",
-        "rev": "2cccdf1ca48316f2cfd1c9a0017e8de5a7156265",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "simple-nixos-mailserver",
-        "repo": "blobs",
-        "type": "gitlab"
-      }
-    },
     "calvera-dark-nvim": {
       "flake": false,
       "locked": {
@@ -235,22 +219,6 @@
       "original": {
         "owner": "numtide",
         "repo": "devshell",
-        "type": "github"
-      }
-    },
-    "discord-tweaks": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1627600834,
-        "narHash": "sha256-xSzbP86w5OUy1ZO1iHgv1drbujtlPQAgJmLA3x7UOFc=",
-        "owner": "NurMarvin",
-        "repo": "discord-tweaks",
-        "rev": "bc28b090f9ed706d7f8271aeaa64bdcb886fd0ef",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NurMarvin",
-        "repo": "discord-tweaks",
         "type": "github"
       }
     },
@@ -1101,46 +1069,6 @@
         "type": "github"
       }
     },
-    "powercord": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "powercord": "powercord_2",
-        "utils": [
-          "utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1634905040,
-        "narHash": "sha256-DAzzwfZCRk9HTlDwdrleFGlg8Y5wVFDvIXsnZnNnn9s=",
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "rev": "b80649b63864bdc06c65d069ae9e8d440fd7e68a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "type": "github"
-      }
-    },
-    "powercord_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1634897852,
-        "narHash": "sha256-VuPvcTGkhTnZhrAskKWjuT8AigL+T7Lg3kUNRBJXi5E=",
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "rev": "1d2318bcd7c5e5a5230d8bf25813ed648cfd7b76",
-        "type": "github"
-      },
-      "original": {
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "type": "github"
-      }
-    },
     "presence-nvim": {
       "flake": false,
       "locked": {
@@ -1187,7 +1115,6 @@
       "inputs": {
         "clightd": "clightd",
         "devshell": "devshell",
-        "discord-tweaks": "discord-tweaks",
         "fu": "fu",
         "hm": "hm",
         "kmonad": "kmonad",
@@ -1196,9 +1123,7 @@
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_3",
         "picom": "picom",
-        "powercord": "powercord",
         "rnix-lsp": "rnix-lsp",
-        "snm": "snm",
         "utils": "utils_2"
       }
     },
@@ -1232,33 +1157,6 @@
         "owner": "norcalli",
         "repo": "snippets.nvim",
         "type": "github"
-      }
-    },
-    "snm": {
-      "inputs": {
-        "blobs": "blobs",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-21_05": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "fu"
-        ]
-      },
-      "locked": {
-        "lastModified": 1637168372,
-        "narHash": "sha256-YKxvDWybHekcquQKMV+onyX5YRiT/cGDl+u7Tgu8Agw=",
-        "owner": "simple-nixos-mailserver",
-        "repo": "nixos-mailserver",
-        "rev": "4f0f0128d8d4115571b3ff0ce2378ddf7de7278e",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "simple-nixos-mailserver",
-        "repo": "nixos-mailserver",
-        "type": "gitlab"
       }
     },
     "sql-nvim": {

@@ -7,6 +7,7 @@
     ./services.nix
   ];
 
+  # used by tailscale for exit node
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
@@ -29,6 +30,7 @@
   services = {
     btrfs.autoScrub.enable = true;
 
+    # keep logs around
     journald.extraConfig = lib.mkForce "";
   };
 

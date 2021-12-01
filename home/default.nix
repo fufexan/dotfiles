@@ -11,17 +11,6 @@
 
   home.packages = with pkgs; [
     # messaging
-    (discord-plugged.override {
-      discord-canary = (discord-canary.override rec {
-        version = "0.0.130";
-        src = fetchurl {
-          url = "https://dl-canary.discordapp.net/apps/linux/${version}/discord-canary-${version}.tar.gz";
-          sha256 = "sha256-UamSiwjR68Pfm3uyHaI871VaGwIKJ5DShl8uE3rvX+U=";
-        };
-      });
-      plugins = [ inputs.discord-tweaks ];
-    })
-    discord-electron
     element-desktop
     tdesktop
     teams
@@ -31,7 +20,6 @@
     libnotify
     # theming
     quintom-cursor-theme
-    (orchis-theme.override { tweaks = "primary compact"; })
     inputs.neovitality.defaultPackage.x86_64-linux
   ];
 
@@ -59,11 +47,6 @@
       enable = true;
       profiles.mihai = { };
     };
-
-    #texlive = {
-    #  enable = true;
-    #  extraPackages = tpkgs: { inherit (tpkgs) scheme-full; };
-    #};
 
     zathura = {
       enable = true;

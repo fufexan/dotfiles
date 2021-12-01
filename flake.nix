@@ -3,14 +3,15 @@
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
     let
-      hmModules = rec {
-        shared = [
-          ./home
-          ./home/files
-          ./home/games.nix
-          ./home/media.nix
-          ./home/editors/helix
-        ];
+      shared = [
+        ./home
+        ./home/files
+        ./home/games.nix
+        ./home/media.nix
+        ./home/editors/helix
+      ];
+      hmModules = {
+        inherit shared;
 
         io = shared ++ [
           ./home/profiles/mihai-io
@@ -18,10 +19,7 @@
           # for games
           ./home/x11
         ];
-        kiiro = shared ++ [
-          ./home/profiles/mihai-kiiro
-          ./home/x11
-        ];
+
         tosh = shared ++ [ ./home/profiles/mihai-tosh ];
       };
     in
@@ -33,7 +31,6 @@
         channels.nixpkgs.overlaysBuilder = channels: [
           self.overlay
           inputs.devshell.overlay
-          inputs.powercord.overlay
           inputs.utils.overlay
         ];
         channelsConfig.allowUnfree = true;
@@ -42,7 +39,6 @@
         hosts = {
           homesv.modules = [
             ./hosts/homesv
-            inputs.snm.nixosModule
             { home-manager.users.mihai = import ./home/cli.nix; }
           ];
 
@@ -70,10 +66,7 @@
 
           kiiro.modules = [
             ./hosts/kiiro
-            ./modules/desktop.nix
-            ./modules/gamemode.nix
-            ./modules/gnome.nix
-            { home-manager.users.mihai.imports = hmModules.kiiro; }
+            { home-manager.users.mihai.imports = hmModules.shared; }
           ];
 
           tosh.modules = [
@@ -184,12 +177,6 @@
       inputs.utils.follows = "utils";
     };
 
-    powercord = {
-      url = "github:LavaDesu/powercord-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "utils";
-    };
-
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.naersk.follows = "naersk";
@@ -197,15 +184,7 @@
       inputs.utils.follows = "fu";
     };
 
-    snm = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-21_05.follows = "nixpkgs";
-      inputs.utils.follows = "fu";
-    };
-
     clightd = { url = "github:FedeDP/Clightd"; flake = false; };
-    discord-tweaks = { url = "github:NurMarvin/discord-tweaks"; flake = false; };
     picom = { url = "github:yshui/picom"; flake = false; };
   };
 }

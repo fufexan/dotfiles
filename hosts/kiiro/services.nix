@@ -9,19 +9,6 @@
     server = "https://acme-staging-v02.api.letsencrypt.org/directory";
   };
 
-  services.vaultwarden = {
-    enable = false;
-    config = {
-      domain = "https://bw.fufexan.net:8443";
-      signupsAllowed = true;
-    };
-  };
-
-  services.ddclient = {
-    enable = false;
-    interval = "1h";
-  };
-
   services.minecraft-server = {
     enable = false;
     eula = true;
@@ -33,7 +20,7 @@
   };
 
   services.nginx = {
-    enable = true;
+    enable = false;
 
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
@@ -43,15 +30,6 @@
     sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
 
     virtualHosts = {
-      "bw.fufexan.net" = {
-        forceSSL = true;
-        enableACME = true;
-
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:8443";
-        };
-      };
-
       "jellyfin.fufexan.net" = {
         forceSSL = true;
         enableACME = true;

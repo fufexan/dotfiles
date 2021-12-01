@@ -3,9 +3,6 @@
 final: prev: {
   clightd = prev.clightd.overrideAttrs (o: { src = inputs.clightd; });
 
-  discord-electron = prev.callPackage ./discord { branch = "stable"; };
-  discord-electron-canary = prev.callPackage ./discord { branch = "canary"; };
-
   legendary-gl = prev.legendary-gl.overrideAttrs (o: rec {
     version = "0.20.9";
     src = prev.fetchFromGitHub {
