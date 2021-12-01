@@ -18,54 +18,53 @@
 
         modules = {
           battery = {
-            format = "{capacity}% {icon}";
+            format = "{power} W {capacity}% {icon}";
             format-alt = "{time} {icon}";
-            format-charging = "{capacity}% ";
-            format-icons = [ "" "" "" "" "" ];
-            format-plugged = "{capacity}% ";
+            format-charging = "{capacity}% {icon}󰉁";
+            format-icons = [ "" "" "" "" "" "" "" "" "" "" ];
+            format-plugged = "{capacity}%󰚥";
+            interval = 2;
             states = {
               critical = 15;
               warning = 30;
             };
           };
 
-          clock = {
-            format-alt = "{:%Y-%m-%d}";
-            tooltip-format = "{:%e %b %H:%M}";
-          };
+          clock.format = "{:%e %b %H:%M}";
 
           cpu = {
             format = "{usage}% ";
             tooltip = false;
           };
 
-          memory = { format = "{}% "; };
+          memory.format = "{}% 󰘙";
 
           network = {
             interval = 1;
             format-alt = "{ifname}: {ipaddr}/{cidr}";
-            format-disconnected = "Disconnected ⚠";
-            format-ethernet = "{ifname}: {ipaddr}/{cidr}   up: {bandwidthUpBits} down: {bandwidthDownBits}";
-            format-linked = "{ifname} (No IP) ";
-            format-wifi = "{essid} ({signalStrength}%) ";
+            format-disconnected = "Disconnected 󰀨";
+            format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰇧  󰁞 {bandwidthUpBits} 󰁆 {bandwidthDownBits}";
+            format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
+            format-linked = "{ifname} (No IP) 󰀨";
+            format-wifi = "{essid} ({signalStrength}%) {icon}";
           };
 
           pulseaudio = {
             format = "{volume}% {icon} {format_source}";
             format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = " {icon} {format_source}";
+            format-bluetooth-muted = "󰝟 {icon} {format_source}";
             format-icons = {
               car = "";
-              default = [ "" "" "" ];
-              handsfree = "";
-              headphones = "";
+              default = [ "󰕿" "󰖀" "󰕾" ];
+              hands-free = "";
+              headphone = "󰋋";
               headset = "";
-              phone = "";
-              portable = "";
+              phone = "󰏲";
+              portable = "󰏲";
             };
-            format-muted = " {format_source}";
-            format-source = "";
-            format-source-muted = "";
+            format-muted = "󰝟 { format_source }";
+            format-source = "󰍬";
+            format-source-muted = "󰍭";
             on-click = "pavucontrol";
           };
         };

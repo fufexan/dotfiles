@@ -41,8 +41,7 @@
       borderRadius = 10;
       borderSize = 0;
       defaultTimeout = 5000;
-      font = "SF UI Text Regular 10";
-      #iconPath = config.services.dunst.settings.global.icon_path;
+      font = "Roboto Regular 10";
       margin = "4,4";
     };
   };
@@ -59,24 +58,53 @@
             }
           ];
         };
-        docked = {
+        docked-all = {
           outputs = [
             {
               criteria = "eDP-1";
               scale = 2.0;
+              position = "1366,0";
             }
             {
               criteria = "DP-1";
-              position = "2560,0";
+              position = "0,0";
             }
             {
               criteria = "DP-2";
-              position = "2560,0";
+              position = "1280,0";
+            }
+          ];
+        };
+
+        docked1 = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              position = "0,0";
+            }
+            {
+              criteria = "DP-1";
+              position = "1280,0";
+            }
+          ];
+        };
+
+        docked2 = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              position = "0,0";
+            }
+            {
+              criteria = "DP-2";
+              position = "1280,0";
             }
           ];
         };
       };
-      systemdTarget = "graphical.target";
+      systemdTarget = "graphical-session.target";
     };
 
     wlsunset = {

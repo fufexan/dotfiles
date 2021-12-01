@@ -6,7 +6,7 @@ let
       border: none;
       border-radius: 0;
       /* `otf-font-awesome` is required to be installed for icons */
-      font-family: SF UI Text, Roboto, Helvetica, Arial, sans-serif;
+      font-family: Roboto, Helvetica, Arial, sans-serif;
       font-size: 13px;
       min-height: 0;
     }

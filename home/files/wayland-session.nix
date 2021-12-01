@@ -6,12 +6,14 @@ let
     systemctl --user import-environment
     systemctl --user start hm-graphical-session.target
     
-    #gnome_schema=org.gnome.desktop.interface
-    #
-    #gsettings set $gnome_schema gtk-theme ${config.gtk.theme.name}
-    #gsettings set $gnome_schema icon-theme ${config.gtk.iconTheme.name}
-    #gsettings set $gnome_schema cursor-theme ${config.xsession.pointerCursor.name}
-    #gsettings set $gnome_schema font-name ${config.gtk.font.name}
+  '' + /*
+    gnome_schema=org.gnome.desktop.interface
+
+    gsettings set $gnome_schema gtk-theme ${config.gtk.theme.name}
+    gsettings set $gnome_schema icon-theme ${config.gtk.iconTheme.name}
+    gsettings set $gnome_schema cursor-theme ${config.xsession.pointerCursor.name}
+    gsettings set $gnome_schema font-name ${config.gtk.font.name}
+  */''
     
     dbus-run-session ${wm}
     
