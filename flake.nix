@@ -50,7 +50,7 @@
             ./hosts/io
             ./modules/desktop.nix
             ./modules/gamemode.nix
-            #./modules/gnome.nix
+            ./modules/gnome.nix
             ./modules/school.nix
             { home-manager.users.mihai.imports = hmModules.io; }
           ];

@@ -97,19 +97,19 @@
 
     pipewire.lowLatency.enable = true;
 
-    power-profiles-daemon.enable = false;
+    #power-profiles-daemon.enable = false;
 
     printing.enable = true;
 
     ratbagd.enable = true;
 
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-      };
-    };
+    #tlp = {
+    #  enable = true;
+    #  settings = {
+    #    CPU_SCALING_GOVERNOR_ON_AC = "performance";
+    #    CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+    #  };
+    #};
 
     udev.extraRules = ''
       # add my android device to adbusers
