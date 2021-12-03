@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, colors, ... }:
 
 # manage files in ~
 
@@ -13,5 +13,7 @@
       source = ./config;
       recursive = true;
     };
+    
+    ".config/wayfire.ini".text = import ./wayfire.nix { inherit colors; };
   };
 }

@@ -4,7 +4,7 @@
 
 let
   font = "JetBrainsMono Nerd Font";
-  c = colors;
+  inherit (colors) x0 x fg bg normal bright;
 in
 {
   programs.alacritty = {
@@ -25,37 +25,33 @@ in
       };
 
       draw_bold_text_with_bright_colors = true;
-      colors =
-        let
-          x = c: "0x${c}";
-        in
-        {
-          primary = {
-            background = x c.bg;
-            foreground = x c.fg;
-          };
-          #normal = map (e: v: e = x c.v.e) [ "black" "red" "green" "yellow" "blue" "magenta" "cyan" "white" ];
-          normal = {
-            black = x c.normal.black;
-            red = x c.normal.red;
-            green = x c.normal.green;
-            yellow = x c.normal.yellow;
-            blue = x c.normal.blue;
-            magenta = x c.normal.magenta;
-            cyan = x c.normal.cyan;
-            white = x c.normal.white;
-          };
-          bright = {
-            black = x c.bright.black;
-            red = x c.bright.red;
-            green = x c.bright.green;
-            yellow = x c.bright.yellow;
-            blue = x c.bright.blue;
-            magenta = x c.bright.magenta;
-            cyan = x c.bright.cyan;
-            white = x c.bright.white;
-          };
+      colors = {
+        primary = {
+          background = x0 bg;
+          foreground = x0 fg;
         };
+        #normal = map (e: v: e = x0 c.v.e) [ "black" "red" "green" "yellow" "blue" "magenta" "cyan" "white" ];
+        normal = {
+          black = x0 normal.black;
+          red = x0 normal.red;
+          green = x0 normal.green;
+          yellow = x0 normal.yellow;
+          blue = x0 normal.blue;
+          magenta = x0 normal.magenta;
+          cyan = x0 normal.cyan;
+          white = x0 normal.white;
+        };
+        bright = {
+          black = x0 bright.black;
+          red = x0 bright.red;
+          green = x0 bright.green;
+          yellow = x0 bright.yellow;
+          blue = x0 bright.blue;
+          magenta = x0 bright.magenta;
+          cyan = x0 bright.cyan;
+          white = x0 bright.white;
+        };
+      };
 
       background_opacity = 0.9;
     };
@@ -65,44 +61,40 @@ in
     enable = false;
     font.name = font;
     font.size = 12;
-    settings =
-      let
-        x = c: "#${c}";
-      in
-      {
-        scrollback_lines = 10000;
-        window_padding_width = 4;
+    settings = {
+      scrollback_lines = 10000;
+      window_padding_width = 4;
 
-        allow_remote_control = "yes";
+      allow_remote_control = "yes";
 
-        # colors
-        background_opacity = "0.7";
-        foreground = x c.fg;
-        background = x c.bg;
-        # black
-        color0 = x c.normal.black;
-        color8 = x c.bright.black;
-        # red
-        color1 = x c.normal.red;
-        color9 = x c.bright.red;
-        # green
-        color2 = x c.normal.green;
-        color10 = x c.bright.green;
-        # yellow
-        color3 = x c.normal.yellow;
-        color11 = x c.bright.yellow;
-        # blue
-        color4 = x c.normal.blue;
-        color12 = x c.bright.blue;
-        # magenta
-        color5 = x c.normal.magenta;
-        color13 = x c.bright.magenta;
-        # cyan
-        color6 = x c.normal.cyan;
-        color14 = x c.bright.cyan;
-        # white
-        color7 = x c.normal.white;
-        color15 = x c.bright.white;
-      };
+      # colors
+      background_opacity = "0.7";
+      foreground = x fg;
+      background = x bg;
+      # black
+      color0 = x normal.black;
+      color8 = x bright.black;
+      # red
+      color1 = x normal.red;
+      color9 = x bright.red;
+      # green
+      color2 = x normal.green;
+      color10 = x bright.green;
+      # yellow
+      color3 = x normal.yellow;
+      color11 = x bright.yellow;
+      # blue
+      color4 = x normal.blue;
+      color12 = x bright.blue;
+      # magenta
+      color5 = x normal.magenta;
+      color13 = x bright.magenta;
+      # cyan
+      color6 = x normal.cyan;
+      color14 = x bright.cyan;
+      # white
+      color7 = x normal.white;
+      color15 = x bright.white;
+    };
   };
 }

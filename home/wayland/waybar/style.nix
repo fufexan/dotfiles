@@ -1,6 +1,7 @@
 { colors, ... }:
 
 let
+  inherit (colors) fg bg normal bright x rgba;
   style = ''
     * {
       border: none;
@@ -12,8 +13,8 @@ let
     }
 
     window#waybar {
-      background-color: rgba(43, 48, 59, 0.5);
-      color: #ffffff;
+      background-color: ${rgba bg};
+      color: ${x fg};
       transition-property: background-color;
       transition-duration: .5s;
     }
@@ -27,23 +28,14 @@ let
       background-color: transparent;
     }
     window#waybar.solo {
-      background-color: #FFFFFF;
+      background-color: ${x fg};
     }
     */
-
-    window#waybar.termite {
-      background-color: #3F3F3F;
-    }
-
-    window#waybar.chromium {
-      background-color: #000000;
-      border: none;
-    }
 
     #workspaces button {
       padding: 0 5px;
       background-color: transparent;
-      color: #ffffff;
+      color: ${x fg};
       /* Use box-shadow instead of border so the text isn't offset */
       box-shadow: inset 0 -3px transparent;
     }
@@ -51,12 +43,12 @@ let
     /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
     #workspaces button:hover {
       background: rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 -3px #ffffff;
+      box-shadow: inset 0 -3px ${x fg};
     }
 
     #workspaces button.focused {
       background-color: #64727D;
-      box-shadow: inset 0 -3px #ffffff;
+      box-shadow: inset 0 -3px ${x fg};
     }
 
     #workspaces button.urgent {
@@ -65,7 +57,7 @@ let
 
     #mode {
       background-color: #64727D;
-      border-bottom: 3px solid #ffffff;
+      border-bottom: 3px solid ${x fg};
     }
 
     #clock,
@@ -83,7 +75,7 @@ let
     #idle_inhibitor,
     #mpd {
       padding: 0 10px;
-      color: #ffffff;
+      color: ${x bg};
     }
 
     #window,
@@ -103,28 +95,29 @@ let
 
     #clock {
       background-color: #64727D;
+      color: ${x fg};
     }
 
     #battery {
-      background-color: #ffffff;
-      color: #000000;
+      background-color: ${x fg};
+      color: ${x bg};
     }
 
     #battery.charging, #battery.plugged {
-      color: #ffffff;
+      color: ${x fg};
       background-color: #26A65B;
     }
 
     @keyframes blink {
       to {
-          background-color: #ffffff;
-          color: #000000;
+          background-color: ${x fg};
+          color: ${x bg};
       }
     }
 
     #battery.critical:not(.charging) {
-      background-color: #f53c3c;
-      color: #ffffff;
+      background-color: ${x bright.red};
+      color: ${x fg};
       animation-name: blink;
       animation-duration: 0.5s;
       animation-timing-function: linear;
@@ -133,16 +126,15 @@ let
     }
 
     label:focus {
-      background-color: #000000;
+      background-color: ${x fg};
     }
 
     #cpu {
-      background-color: #2ecc71;
-      color: #000000;
+      background-color: ${x normal.green};
     }
 
     #memory {
-      background-color: #9b59b6;
+      background-color: ${x normal.magenta};
     }
 
     #disk {
@@ -150,24 +142,23 @@ let
     }
 
     #backlight {
-      background-color: #90b1b1;
+      background-color: ${x normal.yellow};
     }
 
     #network {
-      background-color: #2980b9;
+      background-color: ${x normal.blue};
     }
 
     #network.disconnected {
-      background-color: #f53c3c;
+      background-color: ${x normal.red};
     }
 
     #pulseaudio {
-      background-color: #f1c40f;
-      color: #000000;
+      background-color: ${x normal.yellow};
     }
 
     #pulseaudio.muted {
-      background-color: #90b1b1;
+      background-color: ${rgba normal.yellow};
       color: #2a5c45;
     }
 
@@ -194,7 +185,8 @@ let
     }
 
     #tray {
-      background-color: #2980b9;
+      background-color: ${x normal.cyan};
+      color: ${x bg};
     }
 
     #tray > .passive {
@@ -242,7 +234,7 @@ let
 
     #keyboard-state {
       background: #97e1ad;
-      color: #000000;
+      color: ${x fg};
       padding: 0 0px;
       margin: 0 5px;
       min-width: 16px;

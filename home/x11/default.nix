@@ -3,8 +3,7 @@
 # most of X configuration
 
 let
-  c = colors;
-  x = c: "#${c}";
+  inherit (colors) x fg bg normal bright;
 in
 {
   imports = [
@@ -91,10 +90,10 @@ in
         border_width = 2;
         window_gap = 8;
 
-        active_border_color = x c.normal.red;
-        focused_border_color = x c.normal.black;
-        normal_border_color = x c.normal.yellow;
-        presel_feedback_color = x c.normal.green;
+        active_border_color = x normal.red;
+        focused_border_color = x normal.black;
+        normal_border_color = x normal.yellow;
+        presel_feedback_color = x normal.green;
 
         split_ratio = 0.5;
         borderless_monocle = true;
@@ -112,32 +111,32 @@ in
 
   xresources.properties = {
     #! special
-    "*.foreground" = x c.fg;
-    "*.background" = x c.bg;
+    "*.foreground" = x fg;
+    "*.background" = x bg;
 
     # black
-    "*.color0" = x c.normal.black;
-    "*.color8" = x c.bright.black;
+    "*.color0" = x normal.black;
+    "*.color8" = x bright.black;
     # red
-    "*.color1" = x c.normal.red;
-    "*.color9" = x c.bright.red;
+    "*.color1" = x normal.red;
+    "*.color9" = x bright.red;
     # green
-    "*.color2" = x c.normal.green;
-    "*.color10" = x c.bright.green;
+    "*.color2" = x normal.green;
+    "*.color10" = x bright.green;
     # yellow
-    "*.color3" = x c.normal.yellow;
-    "*.color11" = x c.bright.yellow;
+    "*.color3" = x normal.yellow;
+    "*.color11" = x bright.yellow;
     # blue
-    "*.color4" = x c.normal.blue;
-    "*.color12" = x c.bright.blue;
+    "*.color4" = x normal.blue;
+    "*.color12" = x bright.blue;
     # magenta
-    "*.color5" = x c.normal.magenta;
-    "*.color13" = x c.bright.magenta;
+    "*.color5" = x normal.magenta;
+    "*.color13" = x bright.magenta;
     # cyan
-    "*.color6" = x c.normal.cyan;
-    "*.color14" = x c.bright.cyan;
+    "*.color6" = x normal.cyan;
+    "*.color14" = x bright.cyan;
     # white
-    "*.color7" = x c.normal.white;
-    "*.color15" = x c.bright.white;
+    "*.color7" = x normal.white;
+    "*.color15" = x bright.white;
   };
 }

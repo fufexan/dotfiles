@@ -85,7 +85,7 @@
             home-manager = {
               extraSpecialArgs = {
                 inherit inputs self;
-                colors = import ./home/colors.nix;
+                colors = import ./home/colors.nix { inherit (nixpkgs) lib; };
               };
               useGlobalPkgs = true;
             };
