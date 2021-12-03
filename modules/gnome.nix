@@ -3,6 +3,12 @@
 # GNOME 40 config
 
 {
+  environment.systemPackages = with pkgs.gnomeExtensions; [
+    appindicator
+    gsconnect
+    vitals
+    pkgs.pantheon.elementary-sound-theme
+  ];
   hardware.pulseaudio.enable = lib.mkForce false;
 
   networking = {
@@ -26,11 +32,6 @@
   services.xserver = {
     desktopManager.gnome = {
       enable = true;
-      sessionPath = with pkgs.gnomeExtensions; [
-        appindicator
-        gsconnect
-        vitals
-      ];
     };
   };
 }

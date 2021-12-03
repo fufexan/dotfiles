@@ -4,7 +4,7 @@ let
   wm = "wayfire";
   wayland-session = ''
     systemctl --user import-environment
-    systemctl --user start hm-graphical-session.target
+    #systemctl --user start hm-graphical-session.target
     
   '' + /*
     gnome_schema=org.gnome.desktop.interface

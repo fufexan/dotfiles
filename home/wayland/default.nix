@@ -25,7 +25,7 @@
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
-    XDG_CURRENT_DESKTOP = "wayfire";
+    XDG_CURRENT_DESKTOP = "sway";
   };
 
   programs = {

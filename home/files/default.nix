@@ -4,7 +4,10 @@
 
 {
   home.file = {
-    ".wayland-session".text = import ./wayland-session.nix { inherit config; };
+    ".wayland-session" = {
+      text = import ./wayland-session.nix { inherit config; };
+      executable = true;
+    };
 
     ".config" = {
       source = ./config;

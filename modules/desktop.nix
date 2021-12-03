@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   fonts = {
@@ -99,15 +99,26 @@
     '';
   };
 
-  xdg.portal = {
-    enable = true;
-    wlr = {
+  xdg.portal =
+    let
+      gnome = config.services.xserver.desktopManager.gnome.enable;
+    in
+    {
       enable = true;
+      wlr = {
+        enable = true;
+        settings = {
+          screencast = {
+            output_name = "eDP-1";
+            max_fps = 30;
+            exec_before = "pkill mako";
+            exec_after = "mako";
+            chooser_type = "default";
+          };
+        };
+      };
+      extraPortals = [ pkgs.xdg-desktop-portal-wlr ]
+        ++ lib.optional (!gnome) pkgs.xdg-desktop-portal-gtk;
+      gtkUsePortal = true;
     };
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      #xdg-desktop-portal-gtk
-    ];
-    #gtkUsePortal = true;
-  };
 }
