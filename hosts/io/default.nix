@@ -10,7 +10,7 @@
   boot.kernelPatches = [
     {
       name = "amd_pmc";
-      patch = ../../pkgs/amd_pmc.patch;
+      patch = ../../pkgs/patches/amd_pmc.patch;
       extraConfig = "";
     }
   ];

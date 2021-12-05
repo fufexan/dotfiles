@@ -14,7 +14,7 @@ final: prev: {
 
   xwayland = prev.xwayland.overrideAttrs ({ patches ? [ ], ... }: {
     preConfigure = ''
-      patch -p1 < ${./xwayland.patch}
+      patch -p1 < ${./patches/xwayland.patch}
     '';
   });
 }

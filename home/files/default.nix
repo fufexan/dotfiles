@@ -13,7 +13,7 @@
       source = ./config;
       recursive = true;
     };
-    
+
     ".config/wayfire.ini".text = import ./wayfire.nix { inherit colors; };
   };
 }

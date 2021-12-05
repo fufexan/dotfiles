@@ -10,11 +10,16 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      window.dynamic_padding = true;
-      window.padding = {
-        x = 5;
-        y = 5;
+      window = {
+        decorations = "none";
+        dynamic_padding = true;
+        padding = {
+          x = 5;
+          y = 5;
+        };
+        startup_mode = "Maximized";
       };
+
       scrolling.history = 10000;
 
       font = {
