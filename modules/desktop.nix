@@ -44,6 +44,33 @@
 
   location.provider = "geoclue2";
 
+  networking = {
+    # for Rocket League
+    firewall = {
+      allowedTCPPortRanges = [
+        {
+          from = 27015;
+          to = 27030;
+        }
+        {
+          from = 27036;
+          to = 27037;
+        }
+      ];
+      allowedUDPPorts = [ 4380 27036 ];
+      allowedUDPPortRanges = [
+        {
+          from = 7000;
+          to = 9000;
+        }
+        {
+          from = 27000;
+          to = 27031;
+        }
+      ];
+    };
+  };
+
   programs.dconf.enable = true;
 
   services = {

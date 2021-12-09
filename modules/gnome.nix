@@ -32,11 +32,4 @@
       enable = true;
     };
   };
-
-  # currently broken. TODO: fix
-  #nixpkgs.overlays = [
-  #  (final: prev: {
-  #    gnome.gdm = prev.gnome.gdm.overrideAttrs (o: { patches = o.patches ++ [ ../pkgs/patches/gdm.patch ]; });
-  #  })
-  #];
 }
