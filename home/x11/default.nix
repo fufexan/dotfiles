@@ -1,9 +1,10 @@
-{ config, pkgs, colors, ... }:
+{ config, pkgs, nix-colors, self, ... }:
 
 # most of X configuration
 
 let
-  inherit (colors) x fg bg normal bright;
+  inherit (self.lib) mapAttrs x;
+  colors = mapAttrs (n: v: x v) nix-colors.colors;
 in
 {
   imports = [
@@ -90,10 +91,10 @@ in
         border_width = 2;
         window_gap = 8;
 
-        active_border_color = x normal.red;
-        focused_border_color = x normal.black;
-        normal_border_color = x normal.yellow;
-        presel_feedback_color = x normal.green;
+        active_border_color = colors.base08;
+        focused_border_color = colors.base02;
+        normal_border_color = colors.base0A;
+        presel_feedback_color = colors.base0B;
 
         split_ratio = 0.5;
         borderless_monocle = true;
@@ -111,32 +112,32 @@ in
 
   xresources.properties = {
     #! special
-    "*.foreground" = x fg;
-    "*.background" = x bg;
+    "*.foreground" = colors.base06;
+    "*.background" = colors.base00;
 
     # black
-    "*.color0" = x normal.black;
-    "*.color8" = x bright.black;
+    "*.color0" = colors.base02;
+    "*.color8" = colors.base03;
     # red
-    "*.color1" = x normal.red;
-    "*.color9" = x bright.red;
+    "*.color1" = colors.base08;
+    "*.color9" = colors.base08;
     # green
-    "*.color2" = x normal.green;
-    "*.color10" = x bright.green;
+    "*.color2" = colors.base0B;
+    "*.color10" = colors.base0B;
     # yellow
-    "*.color3" = x normal.yellow;
-    "*.color11" = x bright.yellow;
+    "*.color3" = colors.base0A;
+    "*.color11" = colors.base0A;
     # blue
-    "*.color4" = x normal.blue;
-    "*.color12" = x bright.blue;
+    "*.color4" = colors.base0D;
+    "*.color12" = colors.base0D;
     # magenta
-    "*.color5" = x normal.magenta;
-    "*.color13" = x bright.magenta;
+    "*.color5" = colors.base0E;
+    "*.color13" = colors.base0E;
     # cyan
-    "*.color6" = x normal.cyan;
-    "*.color14" = x bright.cyan;
+    "*.color6" = colors.base0C;
+    "*.color14" = colors.base0C;
     # white
-    "*.color7" = x normal.white;
-    "*.color15" = x bright.white;
+    "*.color7" = colors.base06;
+    "*.color15" = colors.base07;
   };
 }

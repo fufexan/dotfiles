@@ -1,4 +1,4 @@
-{ pkgs, config, colors, ... }:
+{ pkgs, config, nix-colors, self, ... }:
 
 {
   programs.waybar = {
@@ -71,7 +71,7 @@
       }
     ];
 
-    style = import ./style.nix { inherit colors; };
+    style = import ./style.nix { inherit nix-colors self; };
 
     systemd.enable = true;
   };

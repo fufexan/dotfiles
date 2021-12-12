@@ -1,10 +1,12 @@
-{ pkgs, colors, ... }:
+{ pkgs, nix-colors, self, ... }:
 
 # terminals
 
 let
+  inherit (self.lib) mapAttrs x0 x;
   font = "JetBrainsMono Nerd Font";
-  inherit (colors) x0 x fg bg normal bright;
+  acolors = mapAttrs (n: v: x0 v) nix-colors.colors;
+  colors = mapAttrs (n: v: x v) nix-colors.colors;
 in
 {
   programs.alacritty = {
@@ -30,32 +32,22 @@ in
       };
 
       draw_bold_text_with_bright_colors = true;
-      colors = {
+      colors = rec {
         primary = {
-          background = x0 bg;
-          foreground = x0 fg;
+          background = acolors.base00;
+          foreground = acolors.base05;
         };
-        #normal = map (e: v: e = x0 c.v.e) [ "black" "red" "green" "yellow" "blue" "magenta" "cyan" "white" ];
         normal = {
-          black = x0 normal.black;
-          red = x0 normal.red;
-          green = x0 normal.green;
-          yellow = x0 normal.yellow;
-          blue = x0 normal.blue;
-          magenta = x0 normal.magenta;
-          cyan = x0 normal.cyan;
-          white = x0 normal.white;
+          black = acolors.base02;
+          red = acolors.base08;
+          green = acolors.base0B;
+          yellow = acolors.base0A;
+          blue = acolors.base0D;
+          magenta = acolors.base0E;
+          cyan = acolors.base0C;
+          white = acolors.base05;
         };
-        bright = {
-          black = x0 bright.black;
-          red = x0 bright.red;
-          green = x0 bright.green;
-          yellow = x0 bright.yellow;
-          blue = x0 bright.blue;
-          magenta = x0 bright.magenta;
-          cyan = x0 bright.cyan;
-          white = x0 bright.white;
-        };
+        bright = normal // { black = acolors.base03; white = acolors.base06; };
       };
 
       background_opacity = 0.9;
@@ -74,32 +66,32 @@ in
 
       # colors
       background_opacity = "0.7";
-      foreground = x fg;
-      background = x bg;
+      foreground = colors.base00;
+      background = colors.base05;
       # black
-      color0 = x normal.black;
-      color8 = x bright.black;
+      color0 = colors.base02;
+      color8 = colors.base03;
       # red
-      color1 = x normal.red;
-      color9 = x bright.red;
+      color1 = colors.base08;
+      color9 = colors.base08;
       # green
-      color2 = x normal.green;
-      color10 = x bright.green;
+      color2 = colors.baseOB;
+      color10 = colors.baseOB;
       # yellow
-      color3 = x normal.yellow;
-      color11 = x bright.yellow;
+      color3 = colors.base0A;
+      color11 = colors.base0A;
       # blue
-      color4 = x normal.blue;
-      color12 = x bright.blue;
+      color4 = colors.base0D;
+      color12 = colors.base0D;
       # magenta
-      color5 = x normal.magenta;
-      color13 = x bright.magenta;
+      color5 = colors.base0E;
+      color13 = colors.base0E;
       # cyan
-      color6 = x normal.cyan;
-      color14 = x bright.cyan;
+      color6 = colors.base0C;
+      color14 = colors.base0C;
       # white
-      color7 = x normal.white;
-      color15 = x bright.white;
+      color7 = colors.base05;
+      color15 = colors.base06;
     };
   };
 }

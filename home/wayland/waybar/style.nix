@@ -1,7 +1,10 @@
-{ colors, ... }:
+{ nix-colors, self }:
 
 let
-  inherit (colors) fg bg normal bright x rgba;
+  inherit (self.lib) mapAttrs rgba x;
+  colors = mapAttrs (n: v: x v) nix-colors.colors;
+  rcolors = mapAttrs (n: v: rgba v) nix-colors.colors;
+
   style = ''
     * {
       border: none;
@@ -13,8 +16,8 @@ let
     }
 
     window#waybar {
-      background-color: ${rgba bg};
-      color: ${x fg};
+      background-color: ${rcolors.base00};
+      color: ${colors.base06};
       transition-property: background-color;
       transition-duration: .5s;
     }
@@ -28,14 +31,14 @@ let
       background-color: transparent;
     }
     window#waybar.solo {
-      background-color: ${x fg};
+      background-color: ${colors.base06};
     }
     */
 
     #workspaces button {
       padding: 0 5px;
       background-color: transparent;
-      color: ${x fg};
+      color: ${colors.base06};
       /* Use box-shadow instead of border so the text isn't offset */
       box-shadow: inset 0 -3px transparent;
     }
@@ -43,12 +46,12 @@ let
     /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
     #workspaces button:hover {
       background: rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 -3px ${x fg};
+      box-shadow: inset 0 -3px ${colors.base06};
     }
 
     #workspaces button.focused {
       background-color: #64727D;
-      box-shadow: inset 0 -3px ${x fg};
+      box-shadow: inset 0 -3px ${colors.base06};
     }
 
     #workspaces button.urgent {
@@ -57,7 +60,7 @@ let
 
     #mode {
       background-color: #64727D;
-      border-bottom: 3px solid ${x fg};
+      border-bottom: 3px solid ${colors.base06};
     }
 
     #clock,
@@ -75,7 +78,7 @@ let
     #idle_inhibitor,
     #mpd {
       padding: 0 10px;
-      color: ${x bg};
+      color: ${colors.base00};
     }
 
     #window,
@@ -95,29 +98,29 @@ let
 
     #clock {
       background-color: #64727D;
-      color: ${x fg};
+      color: ${colors.base06};
     }
 
     #battery {
-      background-color: ${x fg};
-      color: ${x bg};
+      background-color: ${colors.base06};
+      color: ${colors.base00};
     }
 
     #battery.charging, #battery.plugged {
-      color: ${x fg};
+      color: ${colors.base06};
       background-color: #26A65B;
     }
 
     @keyframes blink {
       to {
-          background-color: ${x fg};
-          color: ${x bg};
+          background-color: ${colors.base06};
+          color: ${colors.base00};
       }
     }
 
     #battery.critical:not(.charging) {
-      background-color: ${x bright.red};
-      color: ${x fg};
+      background-color: ${colors.base08};
+      color: ${colors.base06};
       animation-name: blink;
       animation-duration: 0.5s;
       animation-timing-function: linear;
@@ -126,15 +129,15 @@ let
     }
 
     label:focus {
-      background-color: ${x fg};
+      background-color: ${colors.base06};
     }
 
     #cpu {
-      background-color: ${x normal.green};
+      background-color: ${colors.base0B};
     }
 
     #memory {
-      background-color: ${x normal.magenta};
+      background-color: ${colors.base0E};
     }
 
     #disk {
@@ -142,23 +145,23 @@ let
     }
 
     #backlight {
-      background-color: ${x normal.yellow};
+      background-color: ${colors.base0A};
     }
 
     #network {
-      background-color: ${x normal.blue};
+      background-color: ${colors.base0D};
     }
 
     #network.disconnected {
-      background-color: ${x normal.red};
+      background-color: ${colors.base08};
     }
 
     #pulseaudio {
-      background-color: ${x normal.yellow};
+      background-color: ${colors.base0A};
     }
 
     #pulseaudio.muted {
-      background-color: ${rgba normal.yellow};
+      background-color: ${rcolors.base0A};
       color: #2a5c45;
     }
 
@@ -185,8 +188,8 @@ let
     }
 
     #tray {
-      background-color: ${x normal.cyan};
-      color: ${x bg};
+      background-color: ${colors.base0C};
+      color: ${colors.base00};
     }
 
     #tray > .passive {
@@ -234,7 +237,7 @@ let
 
     #keyboard-state {
       background: #97e1ad;
-      color: ${x fg};
+      color: ${colors.base06};
       padding: 0 0px;
       margin: 0 5px;
       min-width: 16px;

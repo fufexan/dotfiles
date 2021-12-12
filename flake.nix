@@ -9,6 +9,7 @@
         ./home/games.nix
         ./home/media.nix
         ./home/editors/helix
+        inputs.nix-colors.homeManagerModule
       ];
       hmModules = {
         inherit shared;
@@ -21,6 +22,10 @@
         ];
 
         tosh = shared ++ [ ./home/profiles/mihai-tosh ];
+      };
+      extraSpecialArgs = {
+        inherit inputs self;
+        nix-colors = inputs.nix-colors.colorSchemes.horizon-terminal-dark;
       };
     in
     utils.lib.mkFlake
@@ -83,10 +88,7 @@
           inputs.nix-gaming.nixosModule
           {
             home-manager = {
-              extraSpecialArgs = {
-                inherit inputs self;
-                colors = import ./home/colors.nix { inherit (nixpkgs) lib; };
-              };
+              inherit extraSpecialArgs;
               useGlobalPkgs = true;
             };
           }
@@ -96,7 +98,7 @@
         homeConfigurations =
           let
             configuration = { };
-            extraSpecialArgs = { inherit inputs self; };
+            inherit extraSpecialArgs;
             generateHome = inputs.hm.lib.homeManagerConfiguration;
             homeDirectory = "/home/${username}";
             pkgs = self.pkgs.${system}.nixpkgs;
@@ -120,6 +122,9 @@
               extraModules = hmModules.tosh;
             };
           };
+
+        # library of functions I use
+        lib = import ./lib { inherit (nixpkgs) lib; };
 
         # overlays
         overlay = import ./pkgs { inherit inputs; };
@@ -171,6 +176,8 @@
         devshell.follows = "devshell";
       };
     };
+
+    nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";

@@ -583,6 +583,21 @@
         "type": "github"
       }
     },
+    "nix-colors": {
+      "locked": {
+        "lastModified": 1639142470,
+        "narHash": "sha256-yCSogSpNih9rlUVT0dXXd5qcMJr28/WnIk1k4J8EOFo=",
+        "owner": "Misterio77",
+        "repo": "nix-colors",
+        "rev": "c109a8a98595d76c7fec6a2c797c4904b8e4fced",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Misterio77",
+        "repo": "nix-colors",
+        "type": "github"
+      }
+    },
     "nix-gaming": {
       "inputs": {
         "nixpkgs": "nixpkgs_2",
@@ -1120,6 +1135,7 @@
         "kmonad": "kmonad",
         "naersk": "naersk",
         "neovitality": "neovitality",
+        "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_3",
         "picom": "picom",
