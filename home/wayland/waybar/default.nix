@@ -18,7 +18,7 @@
 
         modules = {
           battery = {
-            format = "{power} W {capacity}% {icon}";
+            format = "{power:.2} W {capacity}% {icon}";
             format-alt = "{time} {icon}";
             format-charging = "{capacity}% {icon}󰉁";
             format-icons = [ "" "" "" "" "" "" "" "" "" "" ];

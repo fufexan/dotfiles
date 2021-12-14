@@ -103,7 +103,7 @@ let
     focus_button_with_modifiers = false
     focus_buttons = BTN_LEFT | BTN_MIDDLE | BTN_RIGHT
     focus_buttons_passthrough = true
-    max_render_time = -1
+    max_render_time = 2
     plugins = autostart blur command decoration expo fast-switcher idle matcher move oswitch place resize simple-tile vswipe window-rules zoom
     vheight = 0
     vwidth = 9

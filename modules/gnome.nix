@@ -7,7 +7,6 @@
     appindicator
     gsconnect
     vitals
-    pkgs.pantheon.elementary-sound-theme
   ];
 
   # we're using pipewire instead

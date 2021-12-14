@@ -65,7 +65,7 @@ in
   };
 
   services = {
-    blueman-applet.enable = true;
+    #blueman-applet.enable = true;
 
     gpg-agent = {
       enable = true;
@@ -75,7 +75,7 @@ in
       pinentryFlavor = "gnome3";
     };
 
-    network-manager-applet.enable = true;
+    #network-manager-applet.enable = true;
 
     syncthing.enable = true;
 

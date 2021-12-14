@@ -7,7 +7,7 @@
     DisplayPort-2 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
   };
 
-  home.keyboard = { };
+  home.keyboard = lib.mkForce null;
 
   services =
     let

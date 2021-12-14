@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 # Wayland config
 
 {
-  imports = [ ./waybar ];
+  #imports = [ ./waybar ];
 
   home.packages = with pkgs; [
     # screenshot
@@ -25,7 +25,7 @@
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = 1;
-    XDG_CURRENT_DESKTOP = "sway";
+    #XDG_CURRENT_DESKTOP = "sway";
   };
 
   programs = {
@@ -48,7 +48,7 @@
 
   services = {
     kanshi = {
-      enable = true;
+      enable = false;
       profiles = {
         undocked = {
           outputs = [
@@ -108,7 +108,7 @@
     };
 
     wlsunset = {
-      enable = true;
+      enable = false;
       latitude = "46.0";
       longitude = "23.0";
     };
@@ -118,6 +118,23 @@
     Unit = {
       Description = "Home Manager System Tray";
       Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
+  wayland.windowManager.sway = {
+    enable = false;
+    config = {
+      keybindings =
+        let
+          modifier = config.wayland.windowManager.sway.config.modifier;
+        in
+        lib.mkOptionDefault {
+          "${modifier}+Return" = "exec alacritty";
+          "${modifier}+Shift+q" = "kill";
+          "${modifier}+d" = "exec ${config.wayland.windowManager.sway.config.menu}";
+        };
+      menu = "wofi --show drun";
+      modifier = "Mod4";
     };
   };
 }

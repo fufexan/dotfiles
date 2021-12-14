@@ -120,11 +120,11 @@
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
 
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
-  };
+  #security.pam.services.swaylock = {
+  #  text = ''
+  #    auth include login
+  #  '';
+  #};
 
   xdg.portal =
     let

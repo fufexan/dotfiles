@@ -52,12 +52,12 @@
   };
 
   services = {
-    blueman.enable = true;
+    #blueman.enable = true;
 
     btrfs.autoScrub.enable = true;
 
     clight = {
-      enable = true;
+      enable = false;
       settings = {
         backlight = {
           ## Transition step in percentage
@@ -97,19 +97,20 @@
 
     pipewire.lowLatency.enable = true;
 
-    #power-profiles-daemon.enable = false;
+    # disable in favor of TLP
+    power-profiles-daemon.enable = false;
 
     printing.enable = true;
 
     ratbagd.enable = true;
 
-    #tlp = {
-    #  enable = true;
-    #  settings = {
-    #    CPU_SCALING_GOVERNOR_ON_AC = "performance";
-    #    CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-    #  };
-    #};
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+      };
+    };
 
     udev.extraRules = ''
       # add my android device to adbusers
