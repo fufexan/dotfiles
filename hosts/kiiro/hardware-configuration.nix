@@ -16,17 +16,21 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/b641b204-0b6b-4905-830d-57bce629cfb2";
+      device = "/dev/disk/by-uuid/a2fc0125-f3e6-4984-9eff-9010c154cb7b";
       fsType = "btrfs";
-      options = [ "subvol=nixos" "compress=zstd:1" "noatime" ];
+      options = [ "subvol=root" ];
+    };
+
+  fileSystems."/persist" =
+    {
+      device = "/dev/disk/by-uuid/a2fc0125-f3e6-4984-9eff-9010c154cb7b";
+      fsType = "btrfs";
+      options = [ "subvol=persist" ];
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/9828-7DF4";
+      device = "/dev/disk/by-uuid/7B5A-471E";
       fsType = "vfat";
     };
-
-  swapDevices =
-    [{ device = "/dev/disk/by-uuid/da287a75-894e-4380-a4ab-ba55b485a16d"; }];
 }
