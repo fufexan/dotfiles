@@ -9,7 +9,7 @@
     playerctl
     pulsemixer
     # music
-    spotify
+    (spotify.override { deviceScaleFactor = 2; })
     # video
     #jellyfin-mpv-shim
   ];

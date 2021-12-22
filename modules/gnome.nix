@@ -7,6 +7,7 @@
     appindicator
     gsconnect
     vitals
+    pkgs.gnome.gnome-tweaks
   ];
 
   # we're using pipewire instead

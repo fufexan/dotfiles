@@ -3,26 +3,6 @@
 
   outputs = { self, utils, nixpkgs, ... }@inputs:
     let
-      shared = [
-        ./home
-        ./home/files
-        ./home/games.nix
-        ./home/media.nix
-        ./home/editors/helix
-        inputs.nix-colors.homeManagerModule
-      ];
-      hmModules = {
-        inherit shared;
-
-        io = shared ++ [
-          ./home/profiles/mihai-io
-          ./home/wayland
-          # for games
-          ./home/x11
-        ];
-
-        tosh = shared ++ [ ./home/profiles/mihai-tosh ];
-      };
       extraSpecialArgs = {
         inherit inputs self;
         nix-colors = inputs.nix-colors.colorSchemes.horizon-terminal-dark;
@@ -53,7 +33,7 @@
             ./modules/gamemode.nix
             ./modules/gnome.nix
             ./modules/school.nix
-            { home-manager.users.mihai.imports = hmModules.io; }
+            { home-manager.users.mihai = import ./home/profiles/mihai-io; }
           ];
 
           #iso = {
@@ -71,13 +51,13 @@
 
           kiiro.modules = [
             ./hosts/kiiro
-            { home-manager.users.mihai.imports = hmModules.shared; }
+            { home-manager.users.mihai = import ./home/cli.nix; }
           ];
 
           tosh.modules = [
             ./hosts/tosh
             ./modules/desktop.nix
-            { home-manager.users.mihai.imports = hmModules.tosh; }
+            { home-manager.users.mihai = import ./home/profiles/mihai-tosh; }
           ];
         };
 
@@ -105,21 +85,18 @@
             system = "x86_64-linux";
             username = "mihai";
           in
-          {
+          rec {
             # homeConfigurations
             cli = generateHome {
               inherit system username homeDirectory extraSpecialArgs pkgs configuration;
               extraModules = [ ./home/cli.nix ];
             };
 
-            "mihai@kiiro" = generateHome {
-              inherit system username homeDirectory extraSpecialArgs pkgs configuration;
-              extraModules = hmModules.desktop;
-            };
+            "mihai@kiiro" = cli;
 
             "mihai@tosh" = generateHome {
               inherit system username homeDirectory extraSpecialArgs pkgs configuration;
-              extraModules = hmModules.tosh;
+              extraModules = [ ./home/profiles/mihai-tosh ];
             };
           };
 

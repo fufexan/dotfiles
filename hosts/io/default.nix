@@ -4,15 +4,23 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  #boot.extraModulePackages = with config.boot.kernelPackages; [ anbox ];
+  #boot.extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
   boot.kernelModules = [ "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPatches = [
     {
-      name = "amd_pmc";
-      patch = ../../pkgs/patches/amd_pmc.patch;
+      name = "fix_apu";
+      patch = pkgs.fetchpatch {
+        url = "https://gitlab.freedesktop.org/agd5f/linux/-/commit/0556ece54f58ee73222308a29ac9407a21748ee5.patch";
+        sha256 = "sha256-9YOIGv77oVtXkUD82uKSA3Btg4j4S16zp/0ClYN6Q64=";
+      };
       extraConfig = "";
     }
+    #{
+    #  name = "amd_pmc";
+    #  patch = ../../pkgs/patches/amd_pmc.patch;
+    #  extraConfig = "";
+    #}
   ];
   # supposedly conserves battery
   boot.kernelParams = [ "nmi_watchdog=0" ];
@@ -32,6 +40,15 @@
       hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
+      settings = {
+        # make Xbox Series X controller work
+        General = {
+          Privacy = "device";
+          JustWorksRepairing = "always";
+          Class = "0x000100";
+          FastConnectable = true;
+        };
+      };
     };
 
     cpu.amd.updateMicrocode = true;
@@ -39,6 +56,8 @@
     enableAllFirmware = true;
 
     opentabletdriver.enable = true;
+
+    xpadneo.enable = true;
   };
 
   networking.hostName = "io";
