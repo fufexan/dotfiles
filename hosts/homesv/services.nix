@@ -20,12 +20,12 @@
       "directory mask" = "0755";
       "force group" = "users";
     };
+    openFirewall = true;
   };
 
   services.samba-wsdd = {
     enable = true;
     discovery = true;
-    workgroup = "WORKGROUP";
   };
 
   networking.firewall.allowedTCPPorts = [ 80 139 443 445 5357 8384 8443 ];
@@ -36,13 +36,14 @@
     group = "users";
     guiAddress = ":8384";
     openDefaultPorts = true;
-    declarative = { };
   };
 
   services.transmission = {
     home = "/media/Torrents";
     openFirewall = true;
+    openRPCPort = true;
     settings.rpc-bind-address = "0.0.0.0";
-    settings.rpc-whitelist-enables = false;
+    settings.rpc-whitelist = "127.0.0.1,10.*,100.*";
+    settings.rpc-host-whitelist = "homesv,homesv.local";
   };
 }
