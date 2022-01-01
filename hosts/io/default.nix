@@ -16,11 +16,11 @@
       };
       extraConfig = "";
     }
-    #{
-    #  name = "amd_pmc";
-    #  patch = ../../pkgs/patches/amd_pmc.patch;
-    #  extraConfig = "";
-    #}
+    {
+      name = "amd_pmc";
+      patch = ../../pkgs/patches/amd_pmc.patch;
+      extraConfig = "";
+    }
   ];
   # supposedly conserves battery
   boot.kernelParams = [ "nmi_watchdog=0" ];

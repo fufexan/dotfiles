@@ -4,9 +4,9 @@
 
 {
   home.packages = with inputs.nix-gaming.packages.x86_64-linux; [
-    (osu-stable.override {
-      location = "$HOME/Games/osu!stable";
-    })
+    #(osu-stable.override {
+    #  location = "$HOME/Games/osu!stable";
+    #})
 
     (rocket-league.override { inherit (pkgs) legendary-gl; })
 

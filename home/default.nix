@@ -24,7 +24,6 @@ in
     libnotify
     # theming
     quintom-cursor-theme
-    inputs.neovitality.defaultPackage.x86_64-linux
   ];
 
   gtk = {

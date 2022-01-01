@@ -105,7 +105,7 @@
 
         # overlays
         overlay = import ./pkgs { inherit inputs; };
-        overlays = utils.lib.exportOverlays { inherit (self) pkgs; inputs = (builtins.removeAttrs inputs [ "neovitality" ]); };
+        overlays = utils.lib.exportOverlays { inherit (self) inputs pkgs; };
 
         # packages
         outputsBuilder = channels: {
@@ -144,14 +144,6 @@
     naersk = {
       url = "github:nmattia/naersk";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovitality = {
-      url = "github:vi-tality/neovitality";
-      inputs = {
-        flake-utils.follows = "fu";
-        devshell.follows = "devshell";
-      };
     };
 
     nix-colors.url = "github:Misterio77/nix-colors";
