@@ -4,8 +4,8 @@
   imports = [ ./hardware-configuration.nix ];
 
   # kernel
-  #boot.extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
-  boot.kernelModules = [ "amdgpu" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+  boot.kernelModules = [ "acpi_call" "amdgpu" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPatches = [
     {
