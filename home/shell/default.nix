@@ -1,5 +1,11 @@
 { config, ... }:
 
+let
+  h = config.home.homeDirectory;
+  d = config.xdg.dataHome;
+  c = config.xdg.configHome;
+  cache = config.xdg.cacheHome;
+in
 {
   imports = [
     ./nix.nix
@@ -8,11 +14,18 @@
 
   # add locations to $PATH
   home.sessionPath = [
-    "${config.home.homeDirectory}/.local/bin"
-    "${config.home.homeDirectory}/.local/bin/rofi"
+    (h + "/.local/bin")
+    (h + "/.local/bin/rofi")
   ];
+
   # add environment variables
   home.sessionVariables = {
+    # clean up ~
+    LESSHISTFILE = cache + "/less/history";
+    LESSKEY = c + "/less/lesskey";
+    WINEPREFIX = d + "/wine";
+    XAUTHORITY = "$XDG_RUNTIME_DIR/Xauthority";
+
     EDITOR = "hx";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     # make java apps work in tiling WMs
@@ -21,5 +34,14 @@
     GTK_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
     QT_IM_MODULE = "fcitx";
+  };
+
+  xdg = {
+    enable = true;
+    cacheHome = __toPath (h + "/.local/cache");
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, inputs, nix-colors, self, ... }:
+{ pkgs, config, inputs, nix-colors, self, ... }:
 
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
@@ -14,16 +14,21 @@ in
   ];
 
   home.packages = with pkgs; [
+    # archives
+    p7zip
+    unrar
+    # file downloaders
+    yt-dlp
+    # file managers
+    file
+    gh
     # messaging
-    element-desktop
     tdesktop
     teams
     # torrents
     transmission-remote-gtk
     # misc
     libnotify
-    # theming
-    quintom-cursor-theme
   ];
 
   gtk = {
@@ -33,6 +38,8 @@ in
       name = "Roboto";
       package = pkgs.roboto;
     };
+
+    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
     iconTheme = {
       name = "Papirus-Dark";
@@ -51,6 +58,39 @@ in
       profiles.mihai = { };
     };
 
+    git = {
+      enable = true;
+      delta.enable = true;
+      ignores = [ "*~" "*.swp" "result" ];
+      signing = {
+        key = "3AC82B48170331D3";
+        signByDefault = true;
+      };
+      userEmail = "fufexan@pm.me";
+      userName = "Mihai Fufezan";
+    };
+
+    gpg = {
+      enable = true;
+      homedir = "${config.xdg.dataHome}/gnupg";
+    };
+
+    password-store = {
+      enable = true;
+      package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
+      settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
+    };
+
+    skim = {
+      enable = true;
+      enableZshIntegration = true;
+      defaultCommand = "rg --files --hidden";
+      changeDirWidgetOptions = [
+        "--preview 'exa --icons --git --color always -T -L 3 {} | head -200'"
+        "--exact"
+      ];
+    };
+
     zathura = {
       enable = true;
       options = {
@@ -64,8 +104,6 @@ in
   };
 
   services = {
-    #blueman-applet.enable = true;
-
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
@@ -73,8 +111,6 @@ in
       defaultCacheTtlSsh = 3600;
       pinentryFlavor = "gnome3";
     };
-
-    #network-manager-applet.enable = true;
 
     syncthing.enable = true;
 
