@@ -7,8 +7,8 @@
     #(osu-stable.override {
     #  location = "$HOME/Games/osu!stable";
     #})
-
-    (rocket-league.override { inherit (pkgs) legendary-gl; })
+    osu-lazer-bin
+    rocket-league
 
   ] ++ (with pkgs; [
     legendary-gl

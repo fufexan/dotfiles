@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, self, nix-colors, ... }:
 
 # Wayland config
 
@@ -121,20 +121,47 @@
     };
   };
 
-  wayland.windowManager.sway = {
-    enable = false;
-    config = {
-      keybindings =
-        let
-          modifier = config.wayland.windowManager.sway.config.modifier;
-        in
-        lib.mkOptionDefault {
-          "${modifier}+Return" = "exec alacritty";
-          "${modifier}+Shift+q" = "kill";
-          "${modifier}+d" = "exec ${config.wayland.windowManager.sway.config.menu}";
+  wayland.windowManager.sway =
+    let
+      inherit (self.lib) mapAttrs x xrgba;
+      colors = mapAttrs (n: v: x v) nix-colors.colors;
+      rcolors = mapAttrs (n: v: xrgba v) nix-colors.colors;
+    in
+    {
+      enable = true;
+      config = {
+        keybindings =
+          let
+            sway = config.wayland.windowManager.sway.config;
+            m = sway.modifier;
+          in
+          lib.mkOptionDefault {
+            "${m}+Return" = "exec ${sway.terminal}";
+            "${m}+q" = "kill";
+            "${m}+d" = "exec ${sway.menu}";
+          };
+        menu = "${pkgs.wofi}/bin/wofi --show drun";
+        terminal = "alacritty";
+        modifier = "Mod4";
+        bars = [ ];
+        input = {
+          "type:mouse" = {
+            accel_profile = "flat";
+            pointer_accel = "-1";
+          };
         };
-      menu = "wofi --show drun";
-      modifier = "Mod4";
+        output = {
+          "*" = {
+            bg = "~/Pictures/wallpapers/neon/citysunset.jpg fill";
+            max_render_time = "7";
+          };
+        };
+      };
+      extraSessionCommands = ''
+        export SDL_VIDEODRIVER=wayland
+        export QT_QPA_PLATFORM=wayland
+        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      '';
+      wrapperFeatures = { gtk = true; };
     };
-  };
 }

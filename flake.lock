@@ -3,11 +3,11 @@
     "clightd": {
       "flake": false,
       "locked": {
-        "lastModified": 1636487915,
-        "narHash": "sha256-UuX5uKAJ/nOKFLDzSJspI+rqhyhWNhMS+Zk7Tb9e3aM=",
+        "lastModified": 1641464825,
+        "narHash": "sha256-uygMc4SPYBk+G+ENp+KsgDhkm+oq9ZMvWX4wF6iohPM=",
         "owner": "FedeDP",
         "repo": "Clightd",
-        "rev": "d6c65acc4b61ee7bfa1a2a45173d2839d1e7a8f8",
+        "rev": "33bc0adf2016454b09af951dffcbd70aa43d793f",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1641121012,
-        "narHash": "sha256-svaOMxNMQgFHjcxdmLojOxTxfqSENtnO+S3kb+npIwY=",
+        "lastModified": 1641459437,
+        "narHash": "sha256-z0IOcc6LLbVhyri/aTyWzRqJs3p1pBK9idOiMwCWiqs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "8e7a10602d1eb1d242c9d3f9b822203d5751a8c6",
+        "rev": "c751aeb19e84a0a777f36fd5ea73482a066bb406",
         "type": "github"
       },
       "original": {
@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1640904492,
-        "narHash": "sha256-KrFdQl9sRxfkA18OnfY10+wvcRsExEjl0HHUQH2Di8E=",
+        "lastModified": 1641489023,
+        "narHash": "sha256-c6HBx8jecAwpvqiuymUnzeazssXHI/gNGbsjkOK8bdc=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "57f79e1181805df1ec1c6336dca40aee9671cee0",
+        "rev": "59b5130854f96a9841db3dbbcbb8f5aa11e1a12f",
         "type": "github"
       },
       "original": {
@@ -165,11 +165,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1641104204,
-        "narHash": "sha256-mCjEJNKaeS/BhQQFNSxHfA0/XtujbTAAJpustt1hIxI=",
+        "lastModified": 1641463613,
+        "narHash": "sha256-xZN9igqdZvnhSeTx8OlGby/OaYQHwgXVrBrPW0gLEh8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "28d58b979250ef33f049fe1c74daa50b7515126b",
+        "rev": "77fda7f672726e1a95c8cd200f27bccfc86c870b",
         "type": "github"
       },
       "original": {
