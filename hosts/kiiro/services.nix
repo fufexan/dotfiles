@@ -3,9 +3,9 @@
 # server services
 
 {
-  security.acme = {
+  security.acme.defaults = {
     email = "fufexan@protonmail.com";
-    defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    server = "https://acme-staging-v02.api.letsencrypt.org/directory";
   };
 
   services.minecraft-server = {

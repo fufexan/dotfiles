@@ -32,7 +32,6 @@
             ./modules/desktop.nix
             ./modules/gamemode.nix
             ./modules/gnome.nix
-            ./modules/school.nix
             { home-manager.users.mihai = import ./home/profiles/mihai-io; }
           ];
 
@@ -149,7 +148,8 @@
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming = {
-      url = "github:fufexan/nix-gaming";
+      url = "github:fufexan/nix-gaming/fup-unfree";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
 
