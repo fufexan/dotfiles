@@ -1,28 +1,12 @@
 {
   "nodes": {
-    "clightd": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1641464825,
-        "narHash": "sha256-uygMc4SPYBk+G+ENp+KsgDhkm+oq9ZMvWX4wF6iohPM=",
-        "owner": "FedeDP",
-        "repo": "Clightd",
-        "rev": "33bc0adf2016454b09af951dffcbd70aa43d793f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "FedeDP",
-        "repo": "Clightd",
-        "type": "github"
-      }
-    },
     "devshell": {
       "locked": {
-        "lastModified": 1640301433,
-        "narHash": "sha256-eplae8ZNiEmxbOgwUn9IihaJfEUxoUilkwciRPGskYE=",
+        "lastModified": 1642188268,
+        "narHash": "sha256-DNz4xScpXIn7rSDohdayBpPR9H9OWCMDOgTYegX081k=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "f87fb932740abe1c1b46f6edd8a36ade17881666",
+        "rev": "696acc29668b644df1740b69e1601119bf6da83b",
         "type": "github"
       },
       "original": {
@@ -53,11 +37,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1641915897,
-        "narHash": "sha256-C5Vw7B8BKA/kr9tWVYjEdD3AjstXFqoxkkzrOwfQZxk=",
+        "lastModified": 1642117744,
+        "narHash": "sha256-/SvxBe/m6JiRSlKIrgD6LQxee9GGewFyq+lsPxoViMY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5209ea0d8c77399ec4987590e9738953f15f8d80",
+        "rev": "a5dd5d5f197724f3065fd39c59c7ccea3c8dcb8f",
         "type": "github"
       },
       "original": {
@@ -114,11 +98,11 @@
     },
     "nix-colors": {
       "locked": {
-        "lastModified": 1641508823,
-        "narHash": "sha256-GmYZoYfu3iCjwwd9dqISlLkAsPE0/etea7fGLON9YBQ=",
+        "lastModified": 1642257683,
+        "narHash": "sha256-j1AdA6zRD4eqLhMqXXlvdP+ePoGCfAFIepodZ1kcjNs=",
         "owner": "Misterio77",
         "repo": "nix-colors",
-        "rev": "9b9e3ef54e1963a6174fb466bbaf37d4a87568d8",
+        "rev": "b26e7acb111b5ab1c8c1f05a79ab5f6aaeb62d3a",
         "type": "github"
       },
       "original": {
@@ -129,19 +113,17 @@
     },
     "nix-gaming": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs",
         "utils": [
           "utils"
         ]
       },
       "locked": {
-        "lastModified": 1642073376,
-        "narHash": "sha256-UurrpVxsYLBE+gVTea2N69iXXKsFZGt9qnZk7YC4074=",
+        "lastModified": 1642268218,
+        "narHash": "sha256-8bvp0pxdsJQV8gNSijYL9S0BMQ2RXZWeip4KkIScfhM=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "25545db0a2875b96c5d236600784eb1c583f05a7",
+        "rev": "ec23107bf2d6e92de79a2469c1fe141211ed7fd9",
         "type": "github"
       },
       "original": {
@@ -153,33 +135,32 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1641850495,
-        "narHash": "sha256-V+luTtgE/W1ldiGJBPGjjBw6B+yKG62owwOs/Kj9fI8=",
+        "lastModified": 1642265851,
+        "narHash": "sha256-6J2paKHuQKhaBJNVf7k1NI9pqiMiAlkgt0x7obFtQ70=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "81f05d871faf75d1456df6adec1d2118d787f65c",
+        "rev": "60dec7aa319dc620cd77ecae8ce48f5374450452",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1642069818,
+        "narHash": "sha256-666w6j8wl/bojfgpp0k58/UJ5rbrdYFbI2RFT2BXbSQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "46821ea01c8f54d2a20f5a503809abfc605269d7",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "picom": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1637837551,
-        "narHash": "sha256-VBnIzisg/7Xetd/AWVHlnaWXlxX+wqeYTpstO6+T5cE=",
-        "owner": "yshui",
-        "repo": "picom",
-        "rev": "31e58712ec11b198340ae217d33a73d8ac73b7fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yshui",
-        "repo": "picom",
         "type": "github"
       }
     },
@@ -211,7 +192,6 @@
     },
     "root": {
       "inputs": {
-        "clightd": "clightd",
         "devshell": "devshell",
         "fu": "fu",
         "hm": "hm",
@@ -219,8 +199,7 @@
         "naersk": "naersk",
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
-        "nixpkgs": "nixpkgs",
-        "picom": "picom",
+        "nixpkgs": "nixpkgs_2",
         "rnix-lsp": "rnix-lsp",
         "utils": "utils"
       }

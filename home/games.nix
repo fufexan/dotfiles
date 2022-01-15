@@ -4,9 +4,7 @@
 
 {
   home.packages = with inputs.nix-gaming.packages.x86_64-linux; [
-    #(osu-stable.override {
-    #  location = "$HOME/Games/osu!stable";
-    #})
+    (osu-stable.override { location = "$HOME/Games/osu!stable"; })
     osu-lazer-bin
     rocket-league
 

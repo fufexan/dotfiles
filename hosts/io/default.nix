@@ -18,6 +18,11 @@
 
   boot.plymouth.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    # steam with HiDPI override
+    (steam.overrideAttrs (o: { postInstall = ''wrapProgram "${steam}/bin/steam" --set GDK_SCALE 2''; }))
+  ];
+
   hardware = {
     bluetooth = {
       enable = true;
@@ -28,10 +33,10 @@
       settings = {
         # make Xbox Series X controller work
         General = {
-          Privacy = "device";
-          JustWorksRepairing = "always";
           Class = "0x000100";
           FastConnectable = true;
+          JustWorksRepairing = "always";
+          Privacy = "device";
         };
       };
     };
@@ -60,40 +65,6 @@
 
     btrfs.autoScrub.enable = true;
 
-    clight = {
-      enable = false;
-      settings = {
-        backlight = {
-          ## Transition step in percentage
-          trans_step = 0.05;
-
-          ## Transition timeout in ms
-          trans_timeout = 1000;
-
-          ## Timeouts between captures during day/night/event on AC
-          ## Set any of these to <= 0 to disable captures
-          ## in the corresponding day time.
-          ac_timeouts = [ 60 300 300 ];
-
-          ## Timeouts between captures during day/night/event on BATT
-          ## Set any of these to <= 0 to disable captures
-          ## in the corresponding day time.
-          batt_timeouts = [ 60 300 300 ];
-
-          pause_on_lid_closed = true;
-          capture_on_lid_opened = true;
-        };
-
-        gamma = {
-          long_transition = true;
-        };
-
-        sensor.devname = "iio:device0";
-
-        dimmer.timeouts = [ 600 300 ];
-      };
-    };
-
     kmonad.configfiles = [ ./main.kbd ];
 
     # keep logs around
@@ -121,18 +92,6 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
-    xserver = {
-      videoDrivers = [ "amdgpu" ];
-
-      displayManager.session = [
-        {
-          manage = "window";
-          name = "Wayfire";
-          start = "exec $HOME/.wl-session";
-        }
-      ];
-    };
+    xserver.videoDrivers = [ "amdgpu" ];
   };
-
-  virtualisation.waydroid.enable = true;
 }

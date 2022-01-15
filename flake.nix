@@ -149,7 +149,6 @@
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming/fup-unfree";
-      inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
 
@@ -159,8 +158,5 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
     };
-
-    clightd = { url = "github:FedeDP/Clightd"; flake = false; };
-    picom = { url = "github:yshui/picom"; flake = false; };
   };
 }
