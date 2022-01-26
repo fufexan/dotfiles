@@ -148,7 +148,7 @@
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming = {
-      url = "github:fufexan/nix-gaming/fup-unfree";
+      url = "github:fufexan/nix-gaming";
       inputs.utils.follows = "utils";
     };
 

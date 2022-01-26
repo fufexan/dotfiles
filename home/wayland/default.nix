@@ -145,9 +145,9 @@
         modifier = "Mod4";
         bars = [ ];
         input = {
-          "type:mouse" = {
+          "type:pointer" = {
             accel_profile = "flat";
-            pointer_accel = "-1";
+            pointer_accel = "0";
           };
         };
         output = {

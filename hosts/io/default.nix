@@ -45,6 +45,11 @@
 
     enableAllFirmware = true;
 
+    openrazer = {
+      enable = true;
+      users = [ "mihai" ];
+    };
+
     opentabletdriver.enable = true;
 
     xpadneo.enable = true;
