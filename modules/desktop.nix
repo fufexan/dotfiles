@@ -146,6 +146,6 @@
       };
       extraPortals = [ pkgs.xdg-desktop-portal-wlr ]
         ++ lib.optional (!gnome) pkgs.xdg-desktop-portal-gtk;
-      gtkUsePortal = true;
+      gtkUsePortal = !gnome;
     };
 }
