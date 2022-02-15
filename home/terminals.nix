@@ -50,7 +50,7 @@ in
         bright = normal // { black = acolors.base03; white = acolors.base06; };
       };
 
-      background_opacity = 0.9;
+      window.opacity = 0.9;
     };
   };
 

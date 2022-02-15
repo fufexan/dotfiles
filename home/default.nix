@@ -13,23 +13,39 @@ in
     ./terminals.nix
   ];
 
-  home.packages = with pkgs; [
-    # archives
-    p7zip
-    unrar
-    # file downloaders
-    yt-dlp
-    # file managers
-    file
-    gh
-    # messaging
-    tdesktop
-    teams
-    # torrents
-    transmission-remote-gtk
-    # misc
-    libnotify
-  ];
+  home.packages = with pkgs;
+    let
+      teams-chromium = makeDesktopItem {
+        name = "Teams";
+        desktopName = "Teams";
+        genericName = "Microsoft Teams";
+        exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://teams.live.com\"";
+        icon = "teams";
+        type = "Application";
+        categories = "Network;InstantMessaging;";
+        terminal = "false";
+        mimeType = "x-scheme-handler/teams";
+      };
+    in
+    [
+      # archives
+      p7zip
+      unrar
+      # file downloaders
+      yt-dlp
+      # file managers
+      file
+      gh
+      # messaging
+      tdesktop
+      teams
+      teams-chromium
+      # torrents
+      transmission-remote-gtk
+      # misc
+      libnotify
+      xournalpp
+    ];
 
   gtk = {
     enable = true;
@@ -53,6 +69,12 @@ in
   };
 
   programs = {
+    chromium = {
+      enable = true;
+      commandLineArgs = [ "--ozone-platform-hint=auto" ];
+      extensions = [{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }];
+    };
+
     firefox = {
       enable = true;
       profiles.mihai = { };
