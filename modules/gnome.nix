@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
     gsconnect
+    ideapad-mode
     vitals
     pkgs.gnome.gnome-tweaks
   ];

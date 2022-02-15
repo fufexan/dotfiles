@@ -52,8 +52,6 @@
   };
 
   nix = {
-    autoOptimiseStore = true;
-
     buildMachines = [
       {
         system = "x86_64-linux";
@@ -65,15 +63,6 @@
       }
     ];
     distributedBuilds = true;
-
-    binaryCaches = [
-      "https://nix-gaming.cachix.org"
-      "https://nix-community.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
 
     extraOptions = ''
       builders-use-substitutes = true
@@ -89,6 +78,20 @@
     generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
     linkInputs = true;
+
+    settings = {
+      auto-optimise-store = true;
+
+      substituters = [
+        "https://nix-gaming.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+
   };
 
   # enable programs
