@@ -7,57 +7,13 @@ jobs:
   checks:
     name: Check expressions
     runs-on: ubuntu-latest
-    #strategy:
-    #  matrix:
-    #    attr:
-    #    - homeConfigurations
-    #    - nixosConfigurations
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.4.0
         with:
           fetch-depth: 0 # Nix Flakes doesn't work on shallow clones
-      - uses: cachix/install-nix-action@v13
+      - uses: cachix/install-nix-action@v16
         with:
-          install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.4pre20210823_af94b54/install
+          install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.7.0pre20220209_52f5231/install
           extra_nix_config: experimental-features = nix-command flakes
-      - run: nix flake check # .#${{ matrix.attr }}
-
-  #packages:
-  #  name: Build Packages
-  #  runs-on: ubuntu-latest
-  #  strategy:
-  #    matrix:
-  #      package:
-  #  steps:
-  #    - uses: actions/checkout@v2.3.4
-  #    - uses: cachix/install-nix-action@v13
-  #      with:
-  #        install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.4pre20210823_af94b54/install
-  #        extra_nix_config: experimental-features = nix-command flakes
-  #    - uses: cachix/cachix-action@v10
-  #      with:
-  #        name: fufexan
-  #        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-  #    - run: nix build -L .#${{ matrix.package }}
-
-  #environment:
-  #  name: Build Configuration
-  #  runs-on: ubuntu-latest
-  #  strategy:
-  #    matrix:
-  #      host:
-  #      - homesv
-  #  steps:
-  #    - uses: actions/checkout@v2.3.4
-  #      with:
-  #        fetch-depth: 0 # Nix Flakes doesn't work on shallow clones
-  #    - uses: cachix/install-nix-action@v13
-  #      with:
-  #        install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.4pre20210823_af94b54/install
-  #        extra_nix_config: experimental-features = nix-command flakes
-  #    - uses: cachix/cachix-action@v10
-  #      with:
-  #        name: fufexan
-  #        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-  #    - run: nix build .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel -L
+      - run: nix flake check
