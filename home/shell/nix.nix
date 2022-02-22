@@ -4,7 +4,6 @@
 
 {
   home.packages = with pkgs; [
-    fup-repl
     nix-index
     nixpkgs-fmt
     inputs.rnix-lsp.defaultPackage.x86_64-linux

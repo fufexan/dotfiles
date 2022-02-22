@@ -81,7 +81,7 @@
       gss = "git status";
 
       us = "systemctl --user";
-      rs = "doas systemctl";
+      rs = "sudo systemctl";
     };
     shellGlobalAliases = { exa = "exa --icons --git"; };
   };

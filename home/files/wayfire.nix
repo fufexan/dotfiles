@@ -1,7 +1,7 @@
-{ nix-colors, self }:
+{ nix-colors, inputs }:
 
 let
-  inherit (self.lib) mapAttrs xrgba x;
+  inherit (inputs.self.lib) mapAttrs xrgba x;
   colors = mapAttrs (n: v: x v) nix-colors.colors;
   rgba = mapAttrs (n: v: xrgba v) nix-colors.colors;
 

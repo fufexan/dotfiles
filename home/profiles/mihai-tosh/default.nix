@@ -1,11 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../.
-    ../../x11
-  ];
-
   services.polybar.config = {
     "bar/external" = {
       "monitor" = "VGA-1";

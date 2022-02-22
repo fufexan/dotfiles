@@ -1,4 +1,4 @@
-{ config, nix-colors, self, ... }:
+{ config, nix-colors, inputs, ... }:
 
 # manage files in ~
 
@@ -14,6 +14,6 @@
       recursive = true;
     };
 
-    ".config/wayfire.ini".text = import ./wayfire.nix { inherit nix-colors self; };
+    ".config/wayfire.ini".text = import ./wayfire.nix { inherit nix-colors inputs; };
   };
 }

@@ -1,5 +1,6 @@
-# configuration shared by all hosts
 { pkgs, config, lib, inputs, ... }:
+
+# configuration shared by all hosts
 
 {
   # speed fix for Intel CPUs
@@ -13,9 +14,7 @@
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
 
-  environment.systemPackages = [
-    pkgs.git
-  ];
+  environment.systemPackages = [ pkgs.git ];
 
   i18n = {
     defaultLocale = "ro_RO.UTF-8";
@@ -52,6 +51,12 @@
   };
 
   nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      builders-use-substitutes = true
+      experimental-features = nix-command flakes
+    '';
+      
     buildMachines = [
       {
         system = "x86_64-linux";
@@ -64,20 +69,13 @@
     ];
     distributedBuilds = true;
 
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
-
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-
-    # FUP options
-    generateNixPathFromInputs = true;
-    generateRegistryFromInputs = true;
-    linkInputs = true;
+    
+    registry = lib.mapAttrs (n: v: { flake = v; }) inputs;
 
     settings = {
       auto-optimise-store = true;
@@ -93,6 +91,11 @@
     };
 
   };
+  
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [ inputs.self.overlay ];
+  };
 
   # enable programs
   programs.less.enable = true;
@@ -105,20 +108,7 @@
   # enable realtime capabilities to user processes
   security.rtkit.enable = true;
 
-  # allow users in group `wheel` to use doas without prompting for password
-  security.doas = {
-    enable = true;
-    # keep environment when running as root
-    extraRules = [
-      {
-        groups = [ "wheel" ];
-        keepEnv = true;
-        noPass = true;
-      }
-    ];
-  };
-  # disable sudo
-  security.sudo.enable = false;
+  security.sudo.wheelNeedsPassword = false;
 
   # services
   services = {
@@ -133,10 +123,7 @@
     # don't keep logs after reboots so boot isn't slowed down by flush
     journald.extraConfig = "Storage=volatile";
 
-    kmonad = {
-      enable = true;
-      configfiles = [ ./main.kbd ];
-    };
+    kmonad.enable = true;
 
     openssh = {
       enable = true;

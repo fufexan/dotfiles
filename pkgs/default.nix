@@ -1,5 +1,3 @@
-{ inputs }:
-
 final: prev: {
   technic-launcher = prev.callPackage ./technic.nix { };
 

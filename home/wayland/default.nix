@@ -1,4 +1,4 @@
-{ config, pkgs, lib, self, nix-colors, ... }:
+{ config, pkgs, lib, inputs, nix-colors, ... }:
 
 # Wayland config
 
@@ -123,7 +123,7 @@
 
   wayland.windowManager.sway =
     let
-      inherit (self.lib) mapAttrs x xrgba;
+      inherit (inputs.self.lib) mapAttrs x xrgba;
       colors = mapAttrs (n: v: x v) nix-colors.colors;
       rcolors = mapAttrs (n: v: xrgba v) nix-colors.colors;
     in

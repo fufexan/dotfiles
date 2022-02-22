@@ -1,11 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [
-    ../.
-    ../../wayland
-  ];
-
   xsession.windowManager.bspwm.monitors = {
     eDP = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];
     DisplayPort-1 = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" ];

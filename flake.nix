@@ -1,128 +1,36 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = { self, utils, nixpkgs, ... }@inputs:
-    let
-      extraSpecialArgs = {
-        inherit inputs self;
-        nix-colors = inputs.nix-colors.colorSchemes.horizon-terminal-dark;
-      };
-    in
-    utils.lib.mkFlake
-      {
-        inherit self inputs;
+  outputs = { self, nixpkgs, ... }@inputs:
+    rec {
+      lib = import ./lib inputs;
 
-        # apply overlays to nixpkgs
-        channels.nixpkgs.overlaysBuilder = channels: [
-          self.overlay
-          inputs.devshell.overlay
-          inputs.utils.overlay
-        ];
-        channelsConfig.allowUnfree = true;
+      overlay = import ./pkgs;
 
-        # modules and hosts
-        hosts = {
-          homesv.modules = [
-            ./hosts/homesv
-            { home-manager.users.mihai = import ./home/cli.nix; }
-          ];
+      nixosConfigurations = import ./hosts inputs;
 
-          io.modules = [
-            ./hosts/io
-            ./modules/desktop.nix
-            ./modules/gamemode.nix
-            ./modules/gnome.nix
-            { home-manager.users.mihai = import ./home/profiles/mihai-io; }
-          ];
+      inherit (import ./home/profiles inputs) homeConfigurations;
 
-          #iso = {
-          #  builder = nixpkgs.lib.makeOverridable nixpkgs.lib.nixosSystem;
-          #  modules = [
-          #    ./modules/iso.nix
-          #    {
-          #      home-manager.users.mihai.imports = [
-          #        ./home/cli.nix
-          #        ./home/editors/neovim
-          #      ];
-          #    }
-          #  ];
-          #};
-
-          kiiro.modules = [
-            ./hosts/kiiro
-            { home-manager.users.mihai = import ./home/cli.nix; }
-          ];
-
-          tosh.modules = [
-            ./hosts/tosh
-            ./modules/desktop.nix
-            { home-manager.users.mihai = import ./home/profiles/mihai-tosh; }
-          ];
-        };
-
-        hostDefaults.modules = [
-          ./modules/minimal.nix
-          inputs.hm.nixosModule
-          inputs.kmonad.nixosModule
-          inputs.nix-gaming.nixosModule
-          {
-            home-manager = {
-              inherit extraSpecialArgs;
-              useGlobalPkgs = true;
-            };
-          }
-        ];
-
-        # homes
-        homeConfigurations =
+      devShell = {
+        "x86_64-linux" =
           let
-            configuration = { };
-            inherit extraSpecialArgs;
-            generateHome = inputs.hm.lib.homeManagerConfiguration;
-            homeDirectory = "/home/${username}";
-            pkgs = self.pkgs.${system}.nixpkgs;
-            system = "x86_64-linux";
-            username = "mihai";
+            pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [ inputs.devshell.overlay ]; };
           in
-          rec {
-            # homeConfigurations
-            cli = generateHome {
-              inherit system username homeDirectory extraSpecialArgs pkgs configuration;
-              extraModules = [ ./home/cli.nix ];
-            };
 
-            "mihai@kiiro" = cli;
+          pkgs.devshell.mkShell {
+            packages = with pkgs; [
+              git
+              nixpkgs-fmt
+              inputs.rnix-lsp.defaultPackage."x86_64-linux"
+            ];
 
-            "mihai@tosh" = generateHome {
-              inherit system username homeDirectory extraSpecialArgs pkgs configuration;
-              extraModules = [ ./home/profiles/mihai-tosh ];
-            };
-          };
-
-        # library of functions I use
-        lib = import ./lib { inherit (nixpkgs) lib; };
-
-        # overlays
-        overlay = import ./pkgs { inherit inputs; };
-        overlays = utils.lib.exportOverlays { inherit (self) inputs pkgs; };
-
-        # packages
-        outputsBuilder = channels: {
-          packages = utils.lib.exportPackages self.overlays channels;
-          devShell = channels.nixpkgs.devshell.mkShell {
-            packages = with channels.nixpkgs; [ nixpkgs-fmt rnix-lsp ];
             name = "dots";
           };
-        };
       };
+    };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    utils = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-      inputs.flake-utils.follows = "fu";
-    };
 
     # flakes
     devshell.url = "github:numtide/devshell";
@@ -140,7 +48,7 @@
     };
 
     kmonad = {
-      url = "github:kmonad/kmonad/d130553134f0fb2254852e719a06bc36dce58441?dir=nix";
+      url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "fu";
     };
@@ -152,10 +60,7 @@
 
     nix-colors.url = "github:Misterio77/nix-colors";
 
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.utils.follows = "utils";
-    };
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
