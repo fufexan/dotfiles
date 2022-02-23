@@ -2,7 +2,7 @@ inputs:
 
 let
   inherit (inputs) self;
-  inherit (self.lib) mkHome;
+  inherit (self.lib) mkHome extraSpecialArgs;
 
   sharedModules = [
     ../.
@@ -10,9 +10,8 @@ let
     ../games.nix
     ../media.nix
     ../editors/helix
-    inputs.nix-colors.homeManagerModule
   ];
-  
+
   homeImports = {
     "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ];
     "mihai@kiiro" = [ ../cli.nix ];
@@ -20,19 +19,19 @@ let
   };
 in
 {
-  inherit homeImports;
-    
+  inherit homeImports extraSpecialArgs;
+
   homeConfigurations = {
     "mihai@io" = mkHome {
       username = "mihai";
       extraModules = homeImports."mihai@io";
     };
-    
+
     "mihai@kiiro" = mkHome {
       username = "mihai";
       extraModules = homeImports."mihai@kiiro";
     };
-      
+
     "mihai@tosh" = mkHome {
       username = "mihai";
       extraModules = homeImports."mihai@tosh";

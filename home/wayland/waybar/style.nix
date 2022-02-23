@@ -1,9 +1,7 @@
-{ nix-colors, self }:
+colors:
 
 let
-  inherit (self.lib) mapAttrs rgba x;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
-  rcolors = mapAttrs (n: v: rgba v) nix-colors.colors;
+  inherit (colors) xcolors rgbaColors;
 
   style = ''
     * {
@@ -16,8 +14,8 @@ let
     }
 
     window#waybar {
-      background-color: ${rcolors.base00};
-      color: ${colors.base06};
+      background-color: ${rgbaColors.base00};
+      color: ${xcolors.base06};
       transition-property: background-color;
       transition-duration: .5s;
     }
@@ -31,14 +29,14 @@ let
       background-color: transparent;
     }
     window#waybar.solo {
-      background-color: ${colors.base06};
+      background-color: ${xcolors.base06};
     }
     */
 
     #workspaces button {
       padding: 0 5px;
       background-color: transparent;
-      color: ${colors.base06};
+      color: ${xcolors.base06};
       /* Use box-shadow instead of border so the text isn't offset */
       box-shadow: inset 0 -3px transparent;
     }
@@ -46,12 +44,12 @@ let
     /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
     #workspaces button:hover {
       background: rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 -3px ${colors.base06};
+      box-shadow: inset 0 -3px ${xcolors.base06};
     }
 
     #workspaces button.focused {
       background-color: #64727D;
-      box-shadow: inset 0 -3px ${colors.base06};
+      box-shadow: inset 0 -3px ${xcolors.base06};
     }
 
     #workspaces button.urgent {
@@ -60,7 +58,7 @@ let
 
     #mode {
       background-color: #64727D;
-      border-bottom: 3px solid ${colors.base06};
+      border-bottom: 3px solid ${xcolors.base06};
     }
 
     #clock,
@@ -78,7 +76,7 @@ let
     #idle_inhibitor,
     #mpd {
       padding: 0 10px;
-      color: ${colors.base00};
+      color: ${xcolors.base00};
     }
 
     #window,
@@ -98,29 +96,29 @@ let
 
     #clock {
       background-color: #64727D;
-      color: ${colors.base06};
+      color: ${xcolors.base06};
     }
 
     #battery {
-      background-color: ${colors.base06};
-      color: ${colors.base00};
+      background-color: ${xcolors.base06};
+      color: ${xcolors.base00};
     }
 
     #battery.charging, #battery.plugged {
-      color: ${colors.base06};
+      color: ${xcolors.base06};
       background-color: #26A65B;
     }
 
     @keyframes blink {
       to {
-          background-color: ${colors.base06};
-          color: ${colors.base00};
+          background-color: ${xcolors.base06};
+          color: ${xcolors.base00};
       }
     }
 
     #battery.critical:not(.charging) {
-      background-color: ${colors.base08};
-      color: ${colors.base06};
+      background-color: ${xcolors.base08};
+      color: ${xcolors.base06};
       animation-name: blink;
       animation-duration: 0.5s;
       animation-timing-function: linear;
@@ -129,15 +127,15 @@ let
     }
 
     label:focus {
-      background-color: ${colors.base06};
+      background-color: ${xcolors.base06};
     }
 
     #cpu {
-      background-color: ${colors.base0B};
+      background-color: ${xcolors.base0B};
     }
 
     #memory {
-      background-color: ${colors.base0E};
+      background-color: ${xcolors.base0E};
     }
 
     #disk {
@@ -145,23 +143,23 @@ let
     }
 
     #backlight {
-      background-color: ${colors.base0A};
+      background-color: ${xcolors.base0A};
     }
 
     #network {
-      background-color: ${colors.base0D};
+      background-color: ${xcolors.base0D};
     }
 
     #network.disconnected {
-      background-color: ${colors.base08};
+      background-color: ${xcolors.base08};
     }
 
     #pulseaudio {
-      background-color: ${colors.base0A};
+      background-color: ${xcolors.base0A};
     }
 
     #pulseaudio.muted {
-      background-color: ${rcolors.base0A};
+      background-color: ${rgbaColors.base0A};
       color: #2a5c45;
     }
 
@@ -188,8 +186,8 @@ let
     }
 
     #tray {
-      background-color: ${colors.base0C};
-      color: ${colors.base00};
+      background-color: ${xcolors.base0C};
+      color: ${xcolors.base00};
     }
 
     #tray > .passive {
@@ -237,7 +235,7 @@ let
 
     #keyboard-state {
       background: #97e1ad;
-      color: ${colors.base06};
+      color: ${xcolors.base06};
       padding: 0 0px;
       margin: 0 5px;
       min-width: 16px;

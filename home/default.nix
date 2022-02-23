@@ -1,11 +1,10 @@
-{ pkgs, config, inputs, nix-colors, self, ... }:
+{ pkgs, config, colors, ... }:
 
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
 
 let
-  inherit (self.lib) mapAttrs x;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
+  inherit (colors) xcolors;
 in
 {
   imports = [
@@ -117,10 +116,10 @@ in
       enable = true;
       options = {
         recolor = true;
-        recolor-darkcolor = "#${colors.base00}";
+        recolor-darkcolor = "#${xcolors.base00}";
         recolor-lightcolor = "rgba(0,0,0,0)";
         default-bg = "rgba(0,0,0,0.7)";
-        default-fg = "#${colors.base06}";
+        default-fg = "#${xcolors.base06}";
       };
     };
   };

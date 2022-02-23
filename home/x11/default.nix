@@ -1,10 +1,9 @@
-{ config, pkgs, nix-colors, self, ... }:
+{ config, pkgs, colors, ... }:
 
 # most of X configuration
 
 let
-  inherit (self.lib) mapAttrs x;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
+  inherit (colors) xcolors;
 in
 {
   imports = [
@@ -91,10 +90,10 @@ in
         border_width = 2;
         window_gap = 8;
 
-        active_border_color = colors.base08;
-        focused_border_color = colors.base02;
-        normal_border_color = colors.base0A;
-        presel_feedback_color = colors.base0B;
+        active_border_color = xcolors.base08;
+        focused_border_color = xcolors.base02;
+        normal_border_color = xcolors.base0A;
+        presel_feedback_color = xcolors.base0B;
 
         split_ratio = 0.5;
         borderless_monocle = true;
@@ -112,32 +111,32 @@ in
 
   xresources.properties = {
     #! special
-    "*.foreground" = colors.base06;
-    "*.background" = colors.base00;
+    "*.foreground" = xcolors.base06;
+    "*.background" = xcolors.base00;
 
     # black
-    "*.color0" = colors.base02;
-    "*.color8" = colors.base03;
+    "*.color0" = xcolors.base02;
+    "*.color8" = xcolors.base03;
     # red
-    "*.color1" = colors.base08;
-    "*.color9" = colors.base08;
+    "*.color1" = xcolors.base08;
+    "*.color9" = xcolors.base08;
     # green
-    "*.color2" = colors.base0B;
-    "*.color10" = colors.base0B;
+    "*.color2" = xcolors.base0B;
+    "*.color10" = xcolors.base0B;
     # yellow
-    "*.color3" = colors.base0A;
-    "*.color11" = colors.base0A;
+    "*.color3" = xcolors.base0A;
+    "*.color11" = xcolors.base0A;
     # blue
-    "*.color4" = colors.base0D;
-    "*.color12" = colors.base0D;
+    "*.color4" = xcolors.base0D;
+    "*.color12" = xcolors.base0D;
     # magenta
-    "*.color5" = colors.base0E;
-    "*.color13" = colors.base0E;
+    "*.color5" = xcolors.base0E;
+    "*.color13" = xcolors.base0E;
     # cyan
-    "*.color6" = colors.base0C;
-    "*.color14" = colors.base0C;
+    "*.color6" = xcolors.base0C;
+    "*.color14" = xcolors.base0C;
     # white
-    "*.color7" = colors.base06;
-    "*.color15" = colors.base07;
+    "*.color7" = xcolors.base06;
+    "*.color15" = xcolors.base07;
   };
 }

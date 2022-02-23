@@ -1,11 +1,9 @@
-{ config, pkgs, nix-colors, self, ... }:
+{ config, pkgs, colors, ... }:
 
 # rofi config
 
 let
-  inherit (self.lib) mapAttrs xrgba x;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
-  rcolors = mapAttrs (n: v: xrgba v) nix-colors.colors;
+  inherit (colors) xcolors xrgbaColors;
 in
 {
   programs = {
@@ -30,16 +28,16 @@ in
         in
         {
           "*" = {
-            accent = mkLiteral "#${colors.base0A}";
-            on = mkLiteral "#${colors.base0B}";
-            off = mkLiteral "#${colors.base08}";
-            foreground = mkLiteral "#${colors.base06}";
-            background = mkLiteral "#${colors.base02}";
+            accent = mkLiteral "#${xcolors.base0A}";
+            on = mkLiteral "#${xcolors.base0B}";
+            off = mkLiteral "#${xcolors.base08}";
+            foreground = mkLiteral "#${xcolors.base06}";
+            background = mkLiteral "#${xcolors.base02}";
           };
 
           window = {
             transparency = "real";
-            background-color = mkLiteral "${rcolors.base00}";
+            background-color = mkLiteral "${xrgbaColors.base00}";
             border = mkLiteral "2px";
             border-color = mkLiteral "@accent";
             border-radius = mkLiteral "10px";

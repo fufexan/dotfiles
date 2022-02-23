@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, nix-colors, ... }:
+{ config, pkgs, lib, ... }:
 
 # Wayland config
 
@@ -121,47 +121,41 @@
     };
   };
 
-  wayland.windowManager.sway =
-    let
-      inherit (inputs.self.lib) mapAttrs x xrgba;
-      colors = mapAttrs (n: v: x v) nix-colors.colors;
-      rcolors = mapAttrs (n: v: xrgba v) nix-colors.colors;
-    in
-    {
-      enable = true;
-      config = {
-        keybindings =
-          let
-            sway = config.wayland.windowManager.sway.config;
-            m = sway.modifier;
-          in
-          lib.mkOptionDefault {
-            "${m}+Return" = "exec ${sway.terminal}";
-            "${m}+q" = "kill";
-            "${m}+d" = "exec ${sway.menu}";
-          };
-        menu = "${pkgs.wofi}/bin/wofi --show drun";
-        terminal = "alacritty";
-        modifier = "Mod4";
-        bars = [ ];
-        input = {
-          "type:pointer" = {
-            accel_profile = "flat";
-            pointer_accel = "0";
-          };
+  wayland.windowManager.sway = {
+    enable = true;
+    config = {
+      keybindings =
+        let
+          sway = config.wayland.windowManager.sway.config;
+          m = sway.modifier;
+        in
+        lib.mkOptionDefault {
+          "${m}+Return" = "exec ${sway.terminal}";
+          "${m}+q" = "kill";
+          "${m}+d" = "exec ${sway.menu}";
         };
-        output = {
-          "*" = {
-            bg = "~/Pictures/wallpapers/neon/citysunset.jpg fill";
-            max_render_time = "7";
-          };
+      menu = "${pkgs.wofi}/bin/wofi --show drun";
+      terminal = "alacritty";
+      modifier = "Mod4";
+      bars = [ ];
+      input = {
+        "type:pointer" = {
+          accel_profile = "flat";
+          pointer_accel = "0";
         };
       };
-      extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      '';
-      wrapperFeatures = { gtk = true; };
+      output = {
+        "*" = {
+          bg = "~/Pictures/wallpapers/neon/citysunset.jpg fill";
+          max_render_time = "7";
+        };
+      };
     };
+    extraSessionCommands = ''
+      export SDL_VIDEODRIVER=wayland
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    '';
+    wrapperFeatures = { gtk = true; };
+  };
 }

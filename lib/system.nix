@@ -1,16 +1,15 @@
 inputs:
 
+let
+  inherit (inputs.nixpkgs) lib;
+in
 rec {
   supportedSystems = [ "x86_64-linux" ];
 
-  forAllSystems = f:
-    inputs.nixpkgs.lib.genAttrs supportedSystems (system: f system);
+  genSystems = f:
+    lib.genAttrs supportedSystems (system: f system);
 
-  nixpkgsFor = forAllSystems (system: overlays: import inputs.nixpkgs {
+  nixpkgsFor = genSystems (system: overlays: import inputs.nixpkgs {
     inherit system overlays;
   });
-
-  defArgs = { system = "x86_64-linux"; };
-
-  mkSystem = args: inputs.nixpkgs.lib.nixosSystem (defArgs // args // { modules = [{ _module.args = { inherit inputs; }; }]; });
 }

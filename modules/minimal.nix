@@ -56,7 +56,7 @@
       builders-use-substitutes = true
       experimental-features = nix-command flakes
     '';
-      
+
     buildMachines = [
       {
         system = "x86_64-linux";
@@ -74,7 +74,7 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    
+
     registry = lib.mapAttrs (n: v: { flake = v; }) inputs;
 
     settings = {
@@ -91,10 +91,10 @@
     };
 
   };
-  
+
   nixpkgs = {
+    pkgs = inputs.self.pkgs.${config.nixpkgs.system};
     config.allowUnfree = true;
-    overlays = [ inputs.self.overlay ];
   };
 
   # enable programs

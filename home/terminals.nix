@@ -1,12 +1,10 @@
-{ pkgs, nix-colors, self, ... }:
+{ pkgs, colors, ... }:
 
 # terminals
 
 let
-  inherit (self.lib) mapAttrs x0 x;
+  inherit (colors) xcolors x0Colors;
   font = "JetBrainsMono Nerd Font";
-  acolors = mapAttrs (n: v: x0 v) nix-colors.colors;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
 in
 {
   programs.alacritty = {
@@ -34,20 +32,20 @@ in
       draw_bold_text_with_bright_colors = true;
       colors = rec {
         primary = {
-          background = acolors.base00;
-          foreground = acolors.base05;
+          background = x0Colors.base00;
+          foreground = x0Colors.base05;
         };
         normal = {
-          black = acolors.base02;
-          red = acolors.base08;
-          green = acolors.base0B;
-          yellow = acolors.base0A;
-          blue = acolors.base0D;
-          magenta = acolors.base0E;
-          cyan = acolors.base0C;
-          white = acolors.base05;
+          black = x0Colors.base02;
+          red = x0Colors.base08;
+          green = x0Colors.base0B;
+          yellow = x0Colors.base0A;
+          blue = x0Colors.base0D;
+          magenta = x0Colors.base0E;
+          cyan = x0Colors.base0C;
+          white = x0Colors.base05;
         };
-        bright = normal // { black = acolors.base03; white = acolors.base06; };
+        bright = normal // { black = x0Colors.base03; white = x0Colors.base06; };
       };
 
       window.opacity = 0.9;
@@ -66,32 +64,32 @@ in
 
       # colors
       background_opacity = "0.7";
-      foreground = colors.base00;
-      background = colors.base05;
+      foreground = xcolors.base00;
+      background = xcolors.base05;
       # black
-      color0 = colors.base02;
-      color8 = colors.base03;
+      color0 = xcolors.base02;
+      color8 = xcolors.base03;
       # red
-      color1 = colors.base08;
-      color9 = colors.base08;
+      color1 = xcolors.base08;
+      color9 = xcolors.base08;
       # green
-      color2 = colors.baseOB;
-      color10 = colors.baseOB;
+      color2 = xcolors.baseOB;
+      color10 = xcolors.baseOB;
       # yellow
-      color3 = colors.base0A;
-      color11 = colors.base0A;
+      color3 = xcolors.base0A;
+      color11 = xcolors.base0A;
       # blue
-      color4 = colors.base0D;
-      color12 = colors.base0D;
+      color4 = xcolors.base0D;
+      color12 = xcolors.base0D;
       # magenta
-      color5 = colors.base0E;
-      color13 = colors.base0E;
+      color5 = xcolors.base0E;
+      color13 = xcolors.base0E;
       # cyan
-      color6 = colors.base0C;
-      color14 = colors.base0C;
+      color6 = xcolors.base0C;
+      color14 = xcolors.base0C;
       # white
-      color7 = colors.base05;
-      color15 = colors.base06;
+      color7 = xcolors.base05;
+      color15 = xcolors.base06;
     };
   };
 }

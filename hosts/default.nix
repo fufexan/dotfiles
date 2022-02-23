@@ -4,26 +4,24 @@ let
   inherit (inputs) self;
 
   sharedModules = [
-    #../modules/minimal.nix
+    { _module.args = { inherit inputs; }; }
+    ../modules/minimal.nix
     inputs.hm.nixosModule
     inputs.kmonad.nixosModule
     inputs.nix-gaming.nixosModule
     {
       home-manager = {
-        extraSpecialArgs = {
-          inherit inputs self;
-          nix-colors = inputs.nix-colors.colorSchemes.horizon-terminal-dark;
-        };
+        inherit (inputs.self.lib) extraSpecialArgs;
         useGlobalPkgs = true;
       };
     }
   ];
-  
-  inherit (self.lib) mkSystem nixosSystem makeOverridable;
+
+  inherit (self.lib) nixosSystem makeOverridable;
   inherit (import "${self}/home/profiles" inputs) homeImports;
 in
 {
-  io = mkSystem {
+  io = nixosSystem {
     modules = [
       ./io
       ../modules/desktop.nix
@@ -31,48 +29,56 @@ in
       ../modules/gnome.nix
       { home-manager.users.mihai.imports = homeImports."mihai@io"; }
     ] ++ sharedModules;
-      
+
+    system = "x86_64-linux";
   };
 
-  homesv = mkSystem {
+  homesv = nixosSystem {
     modules = [
       ./homesv
       { home-manager.users.mihai.imports = homeImports."mihai@kiiro"; }
     ] ++ sharedModules;
+
+    system = "x86_64-linux";
   };
 
-  /*iso = makeOverridable mkSystem {
+  /*iso = makeOverridable nixosSystem {
     system = "x86_64-linux";
 
     modules = [
-      ../modules/iso.nix
-      {
-        home-manager = {
-          extraSpecialArgs = { inherit inputs; };
-          useGlobalPkgs = true;
-          users.mihai.imports = [
-            ../home/cli.nix
-            ../home/editors/helix
-          ];
-        };
-      }
+    ../modules/iso.nix
+    {
+    home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+    users.mihai.imports = [
+    ../home/cli.nix
+    ../home/editors/helix
+    ];
+    };
+    }
     ];
 
     specialArgs = { inherit inputs; };
-  };*/
+    };
+  */
 
-  kiiro = mkSystem {
+  kiiro = nixosSystem {
     modules = [
       ./kiiro
       { home-manager.users.mihai.imports = homeImports."mihai@kiiro"; }
     ] ++ sharedModules;
+
+    system = "x86_64-linux";
   };
 
-  tosh = mkSystem {
+  tosh = nixosSystem {
     modules = [
       ./tosh
       ../modules/desktop.nix
       { home-manager.users.mihai.imports = homeImports."mihai@tosh"; }
     ] ++ sharedModules;
+
+    system = "x86_64-linux";
   };
 }

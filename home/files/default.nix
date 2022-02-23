@@ -1,11 +1,11 @@
-{ config, nix-colors, inputs, ... }:
+{ config, colors, ... }:
 
 # manage files in ~
 
 {
   home.file = {
     ".wayland-session" = {
-      text = import ./wayland-session.nix { inherit config; };
+      text = import ./wayland-session.nix config;
       executable = true;
     };
 
@@ -14,6 +14,6 @@
       recursive = true;
     };
 
-    ".config/wayfire.ini".text = import ./wayfire.nix { inherit nix-colors inputs; };
+    ".config/wayfire.ini".text = import ./wayfire.nix colors;
   };
 }

@@ -1,9 +1,7 @@
-{ nix-colors, inputs }:
+colors:
 
 let
-  inherit (inputs.self.lib) mapAttrs xrgba x;
-  colors = mapAttrs (n: v: x v) nix-colors.colors;
-  rgba = mapAttrs (n: v: xrgba v) nix-colors.colors;
+  inherit (colors) xrgbaColors;
 
   wayfire-config = ''
     [alpha]
@@ -98,7 +96,7 @@ let
     binding_side_menu = <super> KEY_S
 
     [core]
-    background_color = \${rgba.base00}
+    background_color = \${xrgbaColors.base00}
     close_top_view = <super> KEY_Q | <alt> KEY_F4
     focus_button_with_modifiers = false
     focus_buttons = BTN_LEFT | BTN_MIDDLE | BTN_RIGHT
@@ -111,7 +109,7 @@ let
 
     [cube]
     activate = <alt> <ctrl> BTN_LEFT
-    background = \${rgba.base00}
+    background = \${xrgbaColors.base00}
     background_mode = simple 
     cubemap_image = 
     deform = 0
@@ -127,16 +125,16 @@ let
     zoom = 0.100000
 
     [decoration]
-    active_color = \${rgba.base00}
+    active_color = \${xrgbaColors.base00}
     border_size = 0
     button_order = minimize maximize close
     font = Roboto
     ignore_views = none
-    inactive_color = \${rgba.base04}
+    inactive_color = \${xrgbaColors.base04}
     title_height = 20
 
     [expo]
-    background = \${rgba.base00}
+    background = \${xrgbaColors.base00}
     duration = 50
     offset = 10
     select_workspace_1 = KEY_1
@@ -237,13 +235,13 @@ let
 
     [scale]
     allow_zoom = false
-    bg_color = \${rgba.base00}
+    bg_color = \${xrgbaColors.base00}
     duration = 750
     inactive_alpha = 0.750000
     interact = false
     middle_click_close = false
     spacing = 50
-    text_color = \${rgba.base00}
+    text_color = \${xrgbaColors.base00}
     title_font_size = 16
     title_overlay = all
     title_position = center
@@ -257,7 +255,7 @@ let
     view_thumbnail_scale = 1.000000
 
     [vswipe]
-    background = \${rgba.base00}
+    background = \${xrgbaColors.base00}
     duration = 180
     enable_smooth_transition = true
     enable_vertical = false
@@ -268,7 +266,7 @@ let
     #threshold = 0.250000
 
     [vswitch]
-    background = \${rgba.base00}
+    background = \${xrgbaColors.base00}
     binding_down = <ctrl> <super> KEY_DOWN
     binding_left = <ctrl> <super> KEY_LEFT
     binding_right = <ctrl> <super> KEY_RIGHT

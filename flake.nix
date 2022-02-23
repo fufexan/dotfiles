@@ -2,31 +2,45 @@
   description = "fufexan's NixOS and Home-Manager flake";
 
   outputs = { self, nixpkgs, ... }@inputs:
-    rec {
+    let
       lib = import ./lib inputs;
+      inherit (lib) genSystems;
 
       overlay = import ./pkgs;
 
-      nixosConfigurations = import ./hosts inputs;
+      pkgs = genSystems (system:
+        import nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.devshell.overlay
+            overlay
+          ];
+          config.allowUnfree = true;
+        });
+    in
+    {
+      inherit lib overlay pkgs;
 
+      # standalone home-manager config
       inherit (import ./home/profiles inputs) homeConfigurations;
 
-      devShell = {
-        "x86_64-linux" =
-          let
-            pkgs = import nixpkgs { system = "x86_64-linux"; overlays = [ inputs.devshell.overlay ]; };
-          in
+      # nixos-configs with home-manager
+      nixosConfigurations = import ./hosts inputs;
 
-          pkgs.devshell.mkShell {
-            packages = with pkgs; [
-              git
-              nixpkgs-fmt
-              inputs.rnix-lsp.defaultPackage."x86_64-linux"
-            ];
+      devShell = genSystems (system:
+        pkgs.${system}.devshell.mkShell {
+          packages = with pkgs.${system}; [
+            git
+            nixpkgs-fmt
+            inputs.rnix-lsp.defaultPackage.${system}
+          ];
+          name = "dots";
+        });
 
-            name = "dots";
-          };
-      };
+      packages = genSystems (system: {
+        inherit (pkgs.${system})
+          waveform;
+      });
     };
 
   inputs = {
