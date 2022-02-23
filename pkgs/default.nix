@@ -1,4 +1,7 @@
 final: prev: {
+  # instant repl with automatic flake loading
+  repl = prev.callPackage ./repl { };
+
   technic-launcher = prev.callPackage ./technic.nix { };
 
   waveform = prev.callPackage ./waveform { };

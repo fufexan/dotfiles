@@ -33,12 +33,14 @@
             git
             nixpkgs-fmt
             inputs.rnix-lsp.defaultPackage.${system}
+            repl
           ];
           name = "dots";
         });
 
       packages = genSystems (system: {
         inherit (pkgs.${system})
+          repl
           waveform;
       });
     };
