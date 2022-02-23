@@ -5,10 +5,6 @@
 In-house baked configs for Home-Manager and NixOS. Borrowed bits sprinkled on
 top. Using [flakes](https://nixos.wiki/wiki/Flakes).
 
-The system and packages are built using
-[flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus).
-Check it out!
-
 ## Configurations & Modules
 
 You can check out all this flake has to offer with
@@ -18,8 +14,10 @@ As of now, there are multiple modules included for:
 
 Name           | Description
 -------------- | -----------
-Minimal        | configuration suited for servers
+Minimal        | shared configuration
 Desktop        | config aimed at desktop usage
+Gamemode       | gamemode settings
+Gnome          | Gnome options
 Security       | tweaks for a more secure system, borrowed from [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix)
 
 My [$HOME](./home) config managed with [Home Manager](https://github.com/nix-community/home-manager)
