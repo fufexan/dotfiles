@@ -20,10 +20,8 @@ in
         genericName = "Microsoft Teams";
         exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://teams.live.com\"";
         icon = "teams";
-        type = "Application";
-        categories = "Network;InstantMessaging;";
-        terminal = "false";
-        mimeType = "x-scheme-handler/teams";
+        categories = [ "Network" "InstantMessaging" ];
+        mimeTypes = [ "x-scheme-handler/teams" ];
       };
     in
     [

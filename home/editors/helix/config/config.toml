@@ -1,0 +1,9 @@
+theme = "base16_default"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.normal]
+"space".a.f = ":fmt"
