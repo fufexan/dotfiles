@@ -9,6 +9,7 @@ let
     ../files
     ../games.nix
     ../media.nix
+    ../editors/emacs
     ../editors/helix
   ];
 

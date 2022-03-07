@@ -13,6 +13,7 @@
           inherit system;
           overlays = [
             inputs.devshell.overlay
+            inputs.emacs-overlay.overlay
             overlay
           ];
           config.allowUnfree = true;
@@ -50,6 +51,8 @@
 
     # flakes
     devshell.url = "github:numtide/devshell";
+
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     fu.url = "github:numtide/flake-utils";
 
