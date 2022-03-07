@@ -24,6 +24,8 @@
     exa
     fd
     ripgrep
+
+    joshuto
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
