@@ -1,4 +1,5 @@
 final: prev: {
+  gdb-frontend = prev.callPackage ./gdb-frontend { };
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl { };
 

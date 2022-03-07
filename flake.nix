@@ -40,6 +40,7 @@
 
       packages = genSystems (system: {
         inherit (pkgs.${system})
+          gdb-frontend
           repl
           waveform;
       });
