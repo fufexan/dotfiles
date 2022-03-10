@@ -5,6 +5,7 @@
 , python3
 , gdb
 , tmux
+, writeShellScript
 }:
 
 stdenv.mkDerivation rec {
@@ -19,13 +20,16 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [ gdb python3 tmux ];
+  propagatedUserEnvPkgs = [ gdb python3 tmux ];
 
   dontConfigure = true;
   dontBuild = true;
 
   installPhase = ''
-    mkdir $out
+    mkdir -p $out/bin
     cp -r . $out
+    echo "${python3}/bin/python $out/run.py \"\$@\"" > $out/bin/gdbfrontend
+    chmod +x $out/bin/gdbfrontend
   '';
 
   postPatch = ''
@@ -44,6 +48,7 @@ stdenv.mkDerivation rec {
   meta = with lib; {
     description = "GDBFrontend is an easy, flexible and extensionable gui debugger";
     homepage = "https://github.com/rohanrhu/gdb-frontend";
+    mainProgram = "gdbfrontend";
     platforms = platforms.linux;
     maintainers = with maintainers; [ fufexan ];
   };
