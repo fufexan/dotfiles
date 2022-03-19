@@ -28,8 +28,8 @@
       # nixos-configs with home-manager
       nixosConfigurations = import ./hosts inputs;
 
-      devShell = genSystems (system:
-        pkgs.${system}.devshell.mkShell {
+      devShells = genSystems (system: {
+        default = pkgs.${system}.devshell.mkShell {
           packages = with pkgs.${system}; [
             git
             nixpkgs-fmt
@@ -37,7 +37,8 @@
             repl
           ];
           name = "dots";
-        });
+        };
+      });
 
       packages = genSystems (system: {
         inherit (pkgs.${system})
