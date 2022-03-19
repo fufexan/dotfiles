@@ -147,7 +147,7 @@
       output = {
         "*" = {
           bg = "~/Pictures/wallpapers/neon/citysunset.jpg fill";
-          #max_render_time = "7";
+          max_render_time = "7";
           scale = "1";
         };
       };

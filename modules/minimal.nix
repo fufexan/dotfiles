@@ -62,8 +62,8 @@
         system = "x86_64-linux";
         sshUser = "root";
         sshKey = "/root/.ssh/id_ed25519";
-        maxJobs = 4;
-        hostName = "kiiro";
+        maxJobs = 8;
+        hostName = "io";
         supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];
       }
     ];

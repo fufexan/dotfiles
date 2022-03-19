@@ -18,11 +18,6 @@
 
   boot.plymouth.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    # steam with HiDPI override
-    (steam.overrideAttrs (o: { postInstall = ''wrapProgram "${steam}/bin/steam" --set GDK_SCALE 2''; }))
-  ];
-
   hardware = {
     bluetooth = {
       enable = true;
@@ -66,8 +61,6 @@
   };
 
   services = {
-    #blueman.enable = true;
-
     btrfs.autoScrub.enable = true;
 
     kmonad.configfiles = [ ./main.kbd ];
@@ -77,20 +70,9 @@
 
     pipewire.lowLatency.enable = true;
 
-    # disable in favor of TLP
-    power-profiles-daemon.enable = false;
-
     printing.enable = true;
 
     ratbagd.enable = true;
-
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-      };
-    };
 
     udev.extraRules = ''
       # add my android device to adbusers

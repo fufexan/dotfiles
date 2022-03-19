@@ -7,18 +7,18 @@
     enable = true;
     nsswins = true;
     extraConfig = ''
-      server smb encrypt = desired
-      hosts deny = ALL
-      hosts allow = 10. 100. localhost
-      map to guest = Bad User
+      hosts allow = 10.0.0.0/8 100.0.0.0/8 localhost
+      hosts deny = 0.0.0.0/8
+      guest account = nobody
+      map to guest = bad user
     '';
     shares.drive = {
       path = "/media";
       browseable = "yes";
       "read only" = "no";
-      "create mask" = "0664";
-      "directory mask" = "0755";
-      "force group" = "users";
+      "guest ok" = "yes";
+      "create mask" = "0777";
+      "directory mask" = "0777";
     };
     openFirewall = true;
   };
