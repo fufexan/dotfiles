@@ -6,8 +6,7 @@ in
 rec {
   supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
 
-  genSystems = f:
-    lib.genAttrs supportedSystems (system: f system);
+  genSystems = lib.genAttrs supportedSystems;
 
   nixpkgsFor = genSystems (system: overlays: import inputs.nixpkgs {
     inherit system overlays;

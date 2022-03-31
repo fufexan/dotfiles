@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 let
   # user scripts
   s = "~/.local/bin";

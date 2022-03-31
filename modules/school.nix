@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   users.users.mihai.extraGroups = [ "vboxusers" ];
 

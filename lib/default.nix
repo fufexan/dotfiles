@@ -2,7 +2,7 @@ inputs:
 
 # personal lib
 let
-  lib = inputs.nixpkgs.lib;
+  inherit (inputs.nixpkgs) lib;
 
   colors = import ./colors.nix lib;
   system = import ./system.nix inputs;

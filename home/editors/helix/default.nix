@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 
 {
   home.packages = [ inputs.helix.defaultPackage.x86_64-linux ];

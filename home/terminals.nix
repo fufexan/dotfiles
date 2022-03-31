@@ -1,4 +1,4 @@
-{ pkgs, colors, ... }:
+{ colors, ... }:
 
 # terminals
 

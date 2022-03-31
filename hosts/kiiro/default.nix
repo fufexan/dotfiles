@@ -1,5 +1,5 @@
 # biggest homeserver
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 
 {
   imports = [

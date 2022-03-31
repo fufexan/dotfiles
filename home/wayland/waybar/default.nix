@@ -1,4 +1,4 @@
-{ pkgs, config, colors, ... }:
+{ colors, ... }:
 
 {
   programs.waybar = {

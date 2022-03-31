@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   services.polybar.config = {
     "bar/external" = {

@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, self, ... }:
+{ pkgs, inputs, ... }:
 
 # games
 

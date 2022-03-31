@@ -9,13 +9,13 @@ let
   colors = with self.lib; rec {
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
     # normal hex values
-    xcolors = mapAttrs (n: v: x v) baseColors;
+    xcolors = mapAttrs (n: x) baseColors;
     # argb hex values
-    xrgbaColors = mapAttrs (n: v: xrgba v) baseColors;
+    xrgbaColors = mapAttrs (n: xrgba) baseColors;
     # 0xABCDEF colors (alacritty)
-    x0Colors = mapAttrs (n: v: x0 v) baseColors;
+    x0Colors = mapAttrs (n: x0) baseColors;
     # rgba(,,,) colors (css)
-    rgbaColors = mapAttrs (n: v: rgba v) baseColors;
+    rgbaColors = mapAttrs (n: rgba) baseColors;
   };
 
   extraSpecialArgs = { inherit colors inputs; };

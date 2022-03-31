@@ -1,6 +1,4 @@
 # home server configuration
-{ config, lib, pkgs, ... }:
-
 {
   imports = [ ./hardware-configuration.nix ];
 

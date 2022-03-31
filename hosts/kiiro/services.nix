@@ -1,5 +1,3 @@
-{ config, ... }:
-
 # server services
 
 {

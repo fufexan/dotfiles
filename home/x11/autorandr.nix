@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 let
   edids = {
     DVI-D-0 =

@@ -61,7 +61,7 @@ in
 
     theme = {
       name = "Orchis-purple-dark-compact";
-      package = (pkgs.orchis-theme.override { tweaks = [ "primary" "compact" ]; });
+      package = pkgs.orchis-theme.override { tweaks = [ "primary" "compact" ]; };
     };
   };
 

@@ -1,5 +1,5 @@
 # home server configuration
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 
 {
   imports = [
@@ -22,7 +22,7 @@
   networking.hostName = "homesv";
 
   # don't suspend when lid is closed
-  services.logind.lidSwitch = "ignore"; 
+  services.logind.lidSwitch = "ignore";
 
   system.stateVersion = lib.mkForce "21.05";
 

@@ -1,4 +1,4 @@
-final: prev: {
+_: prev: {
   gdb-frontend = prev.callPackage ./gdb-frontend { };
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl { };
@@ -7,7 +7,7 @@ final: prev: {
 
   waveform = prev.callPackage ./waveform { };
 
-  xwayland = prev.xwayland.overrideAttrs ({ patches ? [ ], ... }: {
+  xwayland = prev.xwayland.overrideAttrs (_: {
     preConfigure = ''
       patch -p1 < ${./patches/xwayland.patch}
     '';

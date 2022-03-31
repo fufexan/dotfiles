@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   mprisScript = pkgs.callPackage ./mpris.nix { };

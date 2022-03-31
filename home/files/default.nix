@@ -1,11 +1,11 @@
-{ config, colors, ... }:
+{ colors, ... }:
 
 # manage files in ~
 
 {
   home.file = {
     ".wayland-session" = {
-      text = import ./wayland-session.nix config;
+      text = import ./wayland-session.nix;
       executable = true;
     };
 
