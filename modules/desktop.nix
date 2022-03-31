@@ -37,9 +37,20 @@
   ];
 
   # Japanese input using fcitx
-  i18n.inputMethod = {
-    enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+  i18n = {
+    defaultLocale = "ro_RO.UTF-8";
+
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "ja_JP.EUC-JP/EUC-JP"
+      "ja_JP.UTF-8/UTF-8"
+      "ro_RO.UTF-8/UTF-8"
+    ];
+
+    inputMethod = {
+      enabled = "fcitx";
+      fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+    };
   };
 
   location.provider = "geoclue2";
@@ -71,6 +82,13 @@
     };
   };
 
+
+  # add gaming cache
+  nix.settings = {
+    substituters = [ "https://nix-gaming.cachix.org" ];
+    trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+  };
+
   programs.dconf.enable = true;
 
   services = {
@@ -78,10 +96,7 @@
 
     geoclue2.enable = true;
 
-    #ipfs = {
-    #  enable = true;
-    #  autoMount = true;
-    #};
+    kmonad.enable = true;
 
     pipewire = {
       enable = true;
@@ -90,6 +105,8 @@
       jack.enable = true;
       pulse.enable = true;
     };
+
+    transmission.enable = true;
 
     udisks2.enable = true;
 
@@ -137,7 +154,7 @@
         settings = {
           screencast = {
             output_name = "eDP-1";
-            max_fps = 30;
+            max_fps = 60;
             exec_before = "pkill mako";
             exec_after = "mako";
             chooser_type = "default";

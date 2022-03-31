@@ -6,15 +6,19 @@ let
   sharedModules = [
     { _module.args = { inherit inputs; }; }
     ../modules/minimal.nix
+    #../modules/security.nix
     inputs.hm.nixosModule
-    inputs.kmonad.nixosModule
-    inputs.nix-gaming.nixosModule
     {
       home-manager = {
         inherit (inputs.self.lib) extraSpecialArgs;
         useGlobalPkgs = true;
       };
     }
+  ];
+
+  desktopModules = [
+    inputs.kmonad.nixosModule
+    inputs.nix-gaming.nixosModule
   ];
 
   inherit (self.lib) nixosSystem makeOverridable;
@@ -28,7 +32,7 @@ in
       ../modules/gamemode.nix
       ../modules/gnome.nix
       { home-manager.users.mihai.imports = homeImports."mihai@io"; }
-    ] ++ sharedModules;
+    ] ++ sharedModules ++ desktopModules;
 
     system = "x86_64-linux";
   };
@@ -36,7 +40,7 @@ in
   homesv = nixosSystem {
     modules = [
       ./homesv
-      { home-manager.users.mihai.imports = homeImports."mihai@kiiro"; }
+      { home-manager.users.mihai.imports = homeImports.server; }
     ] ++ sharedModules;
 
     system = "x86_64-linux";
@@ -66,7 +70,7 @@ in
   kiiro = nixosSystem {
     modules = [
       ./kiiro
-      { home-manager.users.mihai.imports = homeImports."mihai@kiiro"; }
+      { home-manager.users.mihai.imports = homeImports.server; }
     ] ++ sharedModules;
 
     system = "x86_64-linux";
@@ -77,8 +81,18 @@ in
       ./tosh
       ../modules/desktop.nix
       { home-manager.users.mihai.imports = homeImports."mihai@tosh"; }
-    ] ++ sharedModules;
+    ] ++ sharedModules ++ desktopModules;
 
     system = "x86_64-linux";
+  };
+
+  # servers
+  arm-server = nixosSystem {
+    modules = [
+      ./servers/arm-server
+      { home-manager.users.mihai.imports = homeImports.server; }
+    ] ++ sharedModules;
+
+    system = "aarch64-linux";
   };
 }

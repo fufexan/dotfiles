@@ -65,9 +65,6 @@
 
     kmonad.configfiles = [ ./main.kbd ];
 
-    # keep logs around
-    journald.extraConfig = lib.mkForce "";
-
     pipewire.lowLatency.enable = true;
 
     printing.enable = true;

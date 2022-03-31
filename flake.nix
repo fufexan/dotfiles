@@ -40,7 +40,7 @@
         };
       });
 
-      packages = genSystems (system: {
+      packages = lib.genAttrs [ "x86_64-linux" ] (system: {
         inherit (pkgs.${system})
           gdb-frontend
           repl

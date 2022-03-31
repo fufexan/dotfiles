@@ -21,13 +21,8 @@
 
   networking.hostName = "homesv";
 
-  services = {
-    # don't suspend when lid is closed
-    logind.lidSwitch = "ignore";
-
-    # keep journal
-    journald.extraConfig = lib.mkForce "";
-  };
+  # don't suspend when lid is closed
+  services.logind.lidSwitch = "ignore"; 
 
   system.stateVersion = lib.mkForce "21.05";
 

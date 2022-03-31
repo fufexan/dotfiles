@@ -27,12 +27,7 @@
 
   networking.hostName = "kiiro";
 
-  services = {
-    btrfs.autoScrub.enable = true;
-
-    # keep logs around
-    journald.extraConfig = lib.mkForce "";
-  };
+  services.btrfs.autoScrub.enable = true;
 
   system.stateVersion = lib.mkForce "21.11";
 }

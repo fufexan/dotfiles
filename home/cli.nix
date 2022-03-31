@@ -3,12 +3,8 @@
 # minimal config, suitable for servers
 
 {
-  imports = [
-    # shell config
-    ./shell
-  ];
+  imports = [ ./shell/zsh.nix ];
 
-  programs.home-manager.enable = true;
   home = {
     username = "mihai";
     homeDirectory = "/home/mihai";
@@ -28,6 +24,8 @@
     joshuto
   ];
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
+
+  programs.home-manager.enable = true;
 
   programs.ssh.enable = true;
 }

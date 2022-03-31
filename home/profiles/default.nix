@@ -9,14 +9,13 @@ let
     ../files
     ../games.nix
     ../media.nix
-    ../editors/emacs
     ../editors/helix
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ];
-    "mihai@kiiro" = [ ../cli.nix ];
+    "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ../editors/emacs ];
     "mihai@tosh" = sharedModules ++ [ ../wayland ./mihai-tosh ];
+    server = [ ../cli.nix ];
   };
 in
 {
@@ -28,14 +27,14 @@ in
       extraModules = homeImports."mihai@io";
     };
 
-    "mihai@kiiro" = mkHome {
-      username = "mihai";
-      extraModules = homeImports."mihai@kiiro";
-    };
-
     "mihai@tosh" = mkHome {
       username = "mihai";
       extraModules = homeImports."mihai@tosh";
+    };
+
+    "server" = mkHome {
+      username = "mihai";
+      extraModules = homeImports.server;
     };
   };
 }

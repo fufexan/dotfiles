@@ -6,44 +6,18 @@
   # speed fix for Intel CPUs
   boot.kernelParams = [ "intel_pstate=active" ];
 
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "ro";
-  };
+  console.font = "Lat2-Terminus16";
 
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = [ "/share/zsh" ];
 
   environment.systemPackages = [ pkgs.git ];
 
-  i18n = {
-    defaultLocale = "ro_RO.UTF-8";
-    # saves space
-    supportedLocales = [
-      "en_US.UTF-8/UTF-8"
-      "ja_JP.EUC-JP/EUC-JP"
-      "ja_JP.UTF-8/UTF-8"
-      "ro_RO.UTF-8/UTF-8"
-    ];
-  };
+  # saves space
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ];
 
   # OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    # support hardware accelerated encoding/decoding
-    extraPackages = with pkgs; [
-      vaapiIntel
-      libvdpau-va-gl
-      vaapiVdpau
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiIntel
-      libvdpau-va-gl
-      vaapiVdpau
-    ];
-  };
+  hardware.opengl.enable = true;
 
   networking.networkmanager = {
     enable = true;
@@ -58,6 +32,13 @@
     '';
 
     buildMachines = [
+      {
+        system = "aarch64-linux";
+        sshUser = "root";
+        maxJobs = 4;
+        hostName = "arm-server";
+        supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];
+      }
       {
         system = "x86_64-linux";
         sshUser = "root";
@@ -80,14 +61,8 @@
     settings = {
       auto-optimise-store = true;
 
-      substituters = [
-        "https://nix-gaming.cachix.org"
-        "https://nix-community.cachix.org"
-      ];
-      trusted-public-keys = [
-        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+      substituters = [ "https://nix-community.cachix.org" ];
+      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
     };
 
   };
@@ -120,11 +95,6 @@
       publish.userServices = true;
     };
 
-    # don't keep logs after reboots so boot isn't slowed down by flush
-    journald.extraConfig = "Storage=volatile";
-
-    kmonad.enable = true;
-
     openssh = {
       enable = true;
       useDns = true;
@@ -133,8 +103,6 @@
     resolved.enable = true;
 
     tailscale.enable = true;
-
-    transmission.enable = true;
   };
 
   system.stateVersion = "20.09";
