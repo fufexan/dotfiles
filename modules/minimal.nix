@@ -31,10 +31,11 @@
       experimental-features = nix-command flakes
     '';
 
-    buildMachines = [
+    buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
       {
         system = "aarch64-linux";
         sshUser = "root";
+        sshKey = "/root/.ssh/arm-server.key";
         maxJobs = 4;
         hostName = "arm-server";
         supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];

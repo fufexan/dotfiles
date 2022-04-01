@@ -7,6 +7,7 @@ let
   sharedModules = [
     ../.
     ../files
+    ../shell
     ../games.nix
     ../media.nix
     ../editors/helix

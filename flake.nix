@@ -6,7 +6,7 @@
       lib = import ./lib inputs;
       inherit (lib) genSystems;
 
-      overlay = import ./pkgs;
+      overlays.default = import ./pkgs;
 
       pkgs = genSystems (system:
         import nixpkgs {
@@ -14,16 +14,18 @@
           overlays = [
             inputs.devshell.overlay
             inputs.emacs-overlay.overlay
-            overlay
+            overlays.default
           ];
           config.allowUnfree = true;
         });
     in
     {
-      inherit lib overlay pkgs;
+      inherit lib overlays pkgs;
 
       # standalone home-manager config
       inherit (import ./home/profiles inputs) homeConfigurations;
+
+      deploy = import ./hosts/deploy.nix inputs;
 
       # nixos-configs with home-manager
       nixosConfigurations = import ./hosts inputs;
@@ -34,6 +36,7 @@
             git
             nixpkgs-fmt
             inputs.rnix-lsp.defaultPackage.${system}
+            inputs.deploy-rs.defaultPackage.${system}
             repl
           ];
           name = "dots";
@@ -50,6 +53,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.utils.follows = "fu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # flakes
     devshell.url = "github:numtide/devshell";

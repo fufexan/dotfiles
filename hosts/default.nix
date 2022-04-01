@@ -6,7 +6,7 @@ let
   sharedModules = [
     { _module.args = { inherit inputs; }; }
     ../modules/minimal.nix
-    #../modules/security.nix
+    ../modules/security.nix
     inputs.hm.nixosModule
     {
       home-manager = {

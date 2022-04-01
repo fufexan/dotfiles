@@ -80,12 +80,12 @@ in
     git = {
       enable = true;
       delta.enable = true;
-      ignores = [ "*~" "*.swp" "result" ];
+      ignores = [ "*~" "*.swp" "*result*" ".direnv" "node_modules" ];
       signing = {
-        key = "3AC82B48170331D3";
+        key = "5899325F2F120900";
         signByDefault = true;
       };
-      userEmail = "fufexan@pm.me";
+      userEmail = "fufexan@protonmail.com";
       userName = "Mihai Fufezan";
     };
 

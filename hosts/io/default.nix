@@ -52,8 +52,6 @@
 
   networking.hostName = "io";
 
-  nix.buildMachines = lib.mkForce [ ];
-
   programs = {
     adb.enable = true;
     light.enable = true;
