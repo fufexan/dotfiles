@@ -129,6 +129,7 @@ in
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       pinentryFlavor = "gnome3";
+      sshKeys = [ "73D1C4271E8C508E1E55259660C94BE828B07738" ];
     };
 
     syncthing.enable = true;
