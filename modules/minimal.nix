@@ -29,6 +29,10 @@
     extraOptions = ''
       builders-use-substitutes = true
       experimental-features = nix-command flakes
+
+      # for direnv GC roots
+      keep-outputs = true
+      keep-derivations = true
     '';
 
     buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
