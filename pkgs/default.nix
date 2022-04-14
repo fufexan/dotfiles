@@ -7,6 +7,10 @@ _: prev: {
 
   waveform = prev.callPackage ./waveform { };
 
+  #wayfireApplications-unwrapped = prev.wayfireApplications-unwrapped.extend {
+  #  wayfire-plugins = prev.callPackage ./wayfire-plugins { };
+  #};
+
   xwayland = prev.xwayland.overrideAttrs (_: {
     preConfigure = ''
       patch -p1 < ${./patches/xwayland.patch}
