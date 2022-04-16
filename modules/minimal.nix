@@ -13,8 +13,11 @@
 
   environment.systemPackages = [ pkgs.git ];
 
-  # saves space
-  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+  i18n = {
+    defaultLocale = lib.mkDefault "en_US.UTF-8";
+    # saves space
+    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+  };
 
   # OpenGL
   hardware.opengl.enable = true;

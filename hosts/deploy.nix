@@ -8,7 +8,7 @@ inputs:
         user = "root";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.arm-server;
       };
-      sshOpts = [ "-i" "$HOME/arm-server.key" ];
+      sshOpts = [ "-i" "$HOME/.ssh/arm-server.key" ];
     };
     io = {
       hostname = "io";
@@ -23,6 +23,8 @@ inputs:
         user = "root";
         path = activate.nixos inputs.self.nixosConfigurations.homesv;
       };
+      sshOpts = [ "-i" "$HOME/.ssh/homesv.key" ];
+      sshUser = "root";
     };
     kiiro = {
       hostname = "kiiro";

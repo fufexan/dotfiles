@@ -1,15 +1,12 @@
-diff --git a/present/present_wnmd.c b/present/present_wnmd.c
-index 7d1000a019a2db6bbe80b08a3d660663a02c8751..9d09d6c8c19a82747304244b7e8a3e2a96b3ef8a 100644
---- a/present/present_wnmd.c
-+++ b/present/present_wnmd.c
-@@ -501,7 +501,8 @@ present_wnmd_execute(present_vblank_ptr vblank, uint64_t ust, uint64_t crtc_msc)
-         present_execute_copy(vblank, crtc_msc);
-         assert(!vblank->queued);
+--- a/hw/xwayland/xwayland-present.c
++++ b/hw/xwayland/xwayland-present.c
+@@ -824,7 +824,8 @@
+         dixDestroyPixmap(vblank->pixmap, vblank->pixmap->drawable.id);
+         vblank->pixmap = NULL;
  
--        if (present_wnmd_queue_vblank(screen, window, vblank->crtc,
+-        if (xwl_present_queue_vblank(screen, window, vblank->crtc,
 +        if (vblank->target_msc > crtc_msc &&
-+            present_wnmd_queue_vblank(screen, window, vblank->crtc,
-                                       vblank->event_id, crtc_msc + 1)
-             == Success) {
-             xorg_list_add(&vblank->event_queue, &window_priv->idle_queue);
-
++            xwl_present_queue_vblank(screen, window, vblank->crtc,
+                                      vblank->event_id, crtc_msc + 1)
+             == Success)
+             return;
