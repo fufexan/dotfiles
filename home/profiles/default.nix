@@ -14,7 +14,7 @@ let
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ../editors/emacs ];
+    "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ../editors/neovim ];
     "mihai@tosh" = sharedModules ++ [ ../wayland ./mihai-tosh ];
     server = [ ../cli.nix ];
   };

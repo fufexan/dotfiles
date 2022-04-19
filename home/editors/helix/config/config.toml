@@ -5,5 +5,5 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-[keys.normal]
-"space".a.f = ":fmt"
+[keys.normal.'space'.'u']
+'f' = ':format' # Format file
