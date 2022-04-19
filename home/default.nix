@@ -1,48 +1,48 @@
-{ pkgs, config, colors, ... }:
-
+{
+  pkgs,
+  config,
+  colors,
+  ...
+}:
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
-
 let
   inherit (colors) xcolors;
-in
-{
+in {
   imports = [
     ./cli.nix # base config
     ./terminals.nix
   ];
 
-  home.packages = with pkgs;
-    let
-      teams-chromium = makeDesktopItem {
-        name = "Teams";
-        desktopName = "Teams";
-        genericName = "Microsoft Teams";
-        exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://teams.live.com\"";
-        icon = "teams";
-        categories = [ "Network" "InstantMessaging" ];
-        mimeTypes = [ "x-scheme-handler/teams" ];
-      };
-    in
-    [
-      # archives
-      p7zip
-      unrar
-      # file downloaders
-      yt-dlp
-      # file managers
-      file
-      gh
-      # messaging
-      tdesktop
-      teams
-      teams-chromium
-      # torrents
-      transmission-remote-gtk
-      # misc
-      libnotify
-      xournalpp
-    ];
+  home.packages = with pkgs; let
+    teams-chromium = makeDesktopItem {
+      name = "Teams";
+      desktopName = "Teams";
+      genericName = "Microsoft Teams";
+      exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://teams.live.com\"";
+      icon = "teams";
+      categories = ["Network" "InstantMessaging"];
+      mimeTypes = ["x-scheme-handler/teams"];
+    };
+  in [
+    # archives
+    p7zip
+    unrar
+    # file downloaders
+    yt-dlp
+    # file managers
+    file
+    gh
+    # messaging
+    tdesktop
+    teams
+    teams-chromium
+    # torrents
+    transmission-remote-gtk
+    # misc
+    libnotify
+    xournalpp
+  ];
 
   gtk = {
     enable = true;
@@ -61,26 +61,26 @@ in
 
     theme = {
       name = "Orchis-purple-dark-compact";
-      package = pkgs.orchis-theme.override { tweaks = [ "primary" "compact" ]; };
+      package = pkgs.orchis-theme.override {tweaks = ["primary" "compact"];};
     };
   };
 
   programs = {
     chromium = {
       enable = true;
-      commandLineArgs = [ "--ozone-platform-hint=auto" ];
-      extensions = [{ id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }];
+      commandLineArgs = ["--ozone-platform-hint=auto"];
+      extensions = [{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}];
     };
 
     firefox = {
       enable = true;
-      profiles.mihai = { };
+      profiles.mihai = {};
     };
 
     git = {
       enable = true;
       delta.enable = true;
-      ignores = [ "*~" "*.swp" "*result*" ".direnv" "node_modules" ];
+      ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
       signing = {
         key = "5899325F2F120900";
         signByDefault = true;
@@ -96,8 +96,8 @@ in
 
     password-store = {
       enable = true;
-      package = pkgs.pass.withExtensions (exts: [ exts.pass-otp ]);
-      settings = { PASSWORD_STORE_DIR = "$HOME/.local/share/password-store"; };
+      package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
+      settings = {PASSWORD_STORE_DIR = "$HOME/.local/share/password-store";};
     };
 
     skim = {
@@ -129,7 +129,7 @@ in
       defaultCacheTtl = 3600;
       defaultCacheTtlSsh = 3600;
       pinentryFlavor = "gnome3";
-      sshKeys = [ "73D1C4271E8C508E1E55259660C94BE828B07738" ];
+      sshKeys = ["73D1C4271E8C508E1E55259660C94BE828B07738"];
     };
 
     syncthing.enable = true;

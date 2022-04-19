@@ -1,6 +1,4 @@
-inputs:
-
-let
+inputs: let
   inherit (inputs) self;
   inherit (self.lib) mkHome extraSpecialArgs;
 
@@ -14,12 +12,11 @@ let
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [ ../wayland ./mihai-io ../editors/neovim ];
-    "mihai@tosh" = sharedModules ++ [ ../wayland ./mihai-tosh ];
-    server = [ ../cli.nix ];
+    "mihai@io" = sharedModules ++ [../wayland ./mihai-io ../editors/neovim];
+    "mihai@tosh" = sharedModules ++ [../wayland ./mihai-tosh];
+    server = [../cli.nix];
   };
-in
-{
+in {
   inherit homeImports extraSpecialArgs;
 
   homeConfigurations = {

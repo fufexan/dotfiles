@@ -1,7 +1,5 @@
 # biggest homeserver
-{ lib, ... }:
-
-{
+{lib, ...}: {
   imports = [
     ./hardware-configuration.nix
   ];

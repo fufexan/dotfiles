@@ -1,13 +1,13 @@
-{ lib
-, bash
-, stdenv
-, fetchFromGitHub
-, python3
-, gdb
-, tmux
-, writeShellScript
+{
+  lib,
+  bash,
+  stdenv,
+  fetchFromGitHub,
+  python3,
+  gdb,
+  tmux,
+  writeShellScript,
 }:
-
 stdenv.mkDerivation rec {
   pname = "gdb-frontend";
   version = "0.10.3-beta";
@@ -19,8 +19,8 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-+l1SguRKnLDqT4rgXcod9xhiCOJZEKdZlOZfTNzP7fk=";
   };
 
-  buildInputs = [ gdb python3 tmux ];
-  propagatedUserEnvPkgs = [ gdb python3 tmux ];
+  buildInputs = [gdb python3 tmux];
+  propagatedUserEnvPkgs = [gdb python3 tmux];
 
   dontConfigure = true;
   dontBuild = true;
@@ -50,6 +50,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/rohanrhu/gdb-frontend";
     mainProgram = "gdbfrontend";
     platforms = platforms.linux;
-    maintainers = with maintainers; [ fufexan ];
+    maintainers = with maintainers; [fufexan];
   };
 }

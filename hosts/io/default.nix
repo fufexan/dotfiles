@@ -1,14 +1,17 @@
-{ config, lib, pkgs, ... }:
-
 {
-  imports = [ ./hardware-configuration.nix ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [./hardware-configuration.nix];
 
   # kernel
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-  boot.kernelModules = [ "acpi_call" "amdgpu" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+  boot.kernelModules = ["acpi_call" "amdgpu"];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # supposedly conserves battery
-  boot.kernelParams = [ "nmi_watchdog=0" ];
+  boot.kernelParams = ["nmi_watchdog=0"];
 
   # bootloader
   boot.loader = {
@@ -21,7 +24,7 @@
   hardware = {
     bluetooth = {
       enable = true;
-      disabledPlugins = [ "sap" ];
+      disabledPlugins = ["sap"];
       hsphfpd.enable = true;
       package = pkgs.bluezFull;
       powerOnBoot = false;
@@ -42,7 +45,7 @@
 
     openrazer = {
       enable = true;
-      users = [ "mihai" ];
+      users = ["mihai"];
     };
 
     opentabletdriver.enable = true;
@@ -61,7 +64,7 @@
   services = {
     btrfs.autoScrub.enable = true;
 
-    kmonad.configfiles = [ ./main.kbd ];
+    kmonad.configfiles = [./main.kbd];
 
     pipewire.lowLatency.enable = true;
 
@@ -74,6 +77,6 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
-    xserver.videoDrivers = [ "amdgpu" ];
+    xserver.videoDrivers = ["amdgpu"];
   };
 }

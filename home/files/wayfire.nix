@@ -1,12 +1,10 @@
-colors:
-
-let
+colors: let
   inherit (colors) xrgbaColors;
 
   wayfire-config = ''
     [alpha]
     min_value = 0.100000
-    modifier = <alt> <super> 
+    modifier = <alt> <super>
 
     [animate]
     close_animation = fade
@@ -110,15 +108,15 @@ let
     [cube]
     activate = <alt> <ctrl> BTN_LEFT
     background = \${xrgbaColors.base00}
-    background_mode = simple 
-    cubemap_image = 
+    background_mode = simple
+    cubemap_image =
     deform = 0
     initial_animation = 350
     light = true
     rotate_left = <alt> <ctrl> KEY_LEFT
     rotate_right = <alt> <ctrl> KEY_RIGHT
     skydome_mirror = true
-    skydome_texture = 
+    skydome_texture =
     speed_spin_horiz = 0.020000
     speed_spin_vert = 0.020000
     speed_zoom = 0.070000
@@ -246,7 +244,7 @@ let
     title_overlay = all
     title_position = center
     toggle = <super> KEY_P
-    toggle_all = 
+    toggle_all =
 
     [switcher]
     next_view = <alt> KEY_TAB
@@ -309,7 +307,7 @@ let
     sensitivity = 24
 
     [zoom]
-    modifier = <super> 
+    modifier = <super>
     smoothing_duration = 300
     speed = 0.010000
 
@@ -328,8 +326,8 @@ let
     key_focus_right = <super> KEY_L
     key_toggle = <super> KEY_T
     tile_by_default = type is "toplevel"
-    #wm-actions.toggle_always_on_top 
+    #wm-actions.toggle_always_on_top
 
   '';
 in
-wayfire-config
+  wayfire-config

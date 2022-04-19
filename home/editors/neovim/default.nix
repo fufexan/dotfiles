@@ -1,8 +1,4 @@
-{ pkgs
-, ...
-}:
-
-let
+{pkgs, ...}: let
   vim-horizon = pkgs.vimUtils.buildVimPlugin rec {
     pname = "vim-horizon";
     version = "unstable-2022-03-17";
@@ -21,8 +17,7 @@ let
       sha256 = "sha256-gTIYyO7S9FIWMzP6PUzmF7G6HKJah2W6q6B2Px60kAE=";
     };
   });
-in
-{
+in {
   programs.neovim = {
     enable = true;
 
@@ -60,27 +55,27 @@ in
       which-key-nvim
     ];
 
-    extraPackages = with pkgs; [ gcc ripgrep fd ];
+    extraPackages = with pkgs; [gcc ripgrep fd];
 
-    extraConfig =
-      let
-        luaRequire = module: builtins.readFile (builtins.toString
-          ./config + "/${module}.lua");
-        luaConfig = builtins.concatStringsSep "\n" (map luaRequire [
-          "init"
-          "lspconfig"
-          "nvim-cmp"
-          "theming"
-          "treesitter"
-          "treesitter-textobjects"
-          "utils"
-          "which-key"
-        ]);
-      in
-      ''
-        lua << 
-        ${luaConfig}
-        
-      '';
+    extraConfig = let
+      luaRequire = module:
+        builtins.readFile (builtins.toString
+          ./config
+          + "/${module}.lua");
+      luaConfig = builtins.concatStringsSep "\n" (map luaRequire [
+        "init"
+        "lspconfig"
+        "nvim-cmp"
+        "theming"
+        "treesitter"
+        "treesitter-textobjects"
+        "utils"
+        "which-key"
+      ]);
+    in ''
+      lua << 
+      ${luaConfig}
+      
+    '';
   };
 }

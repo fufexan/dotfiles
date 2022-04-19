@@ -1,6 +1,4 @@
-colors:
-
-let
+colors: let
   inherit (colors) xcolors rgbaColors;
 
   style = ''
@@ -250,4 +248,4 @@ let
     }
   '';
 in
-style
+  style

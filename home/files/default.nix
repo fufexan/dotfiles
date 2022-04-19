@@ -1,7 +1,5 @@
-{ colors, ... }:
-
+{colors, ...}:
 # manage files in ~
-
 {
   home.file = {
     ".wayland-session" = {

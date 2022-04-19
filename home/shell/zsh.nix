@@ -1,7 +1,9 @@
-{ config, pkgs, ... }:
-
 {
-  home.packages = [ pkgs.pure-prompt ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.pure-prompt];
 
   programs.zsh = {
     enable = true;
@@ -86,6 +88,6 @@
       us = "systemctl --user";
       rs = "sudo systemctl";
     };
-    shellGlobalAliases = { exa = "exa --icons --git"; };
+    shellGlobalAliases = {exa = "exa --icons --git";};
   };
 }

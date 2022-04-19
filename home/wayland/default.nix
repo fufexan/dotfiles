@@ -1,7 +1,10 @@
-{ config, pkgs, lib, ... }:
-
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 # Wayland config
-
 {
   #imports = [ ./waybar ];
 
@@ -34,7 +37,7 @@
     firefox.package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
       forceWayland = true;
       extraPolicies = {
-        ExtensionSettings = { };
+        ExtensionSettings = {};
       };
     };
 
@@ -119,18 +122,17 @@
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
+      Requires = ["graphical-session-pre.target"];
     };
   };
 
   wayland.windowManager.sway = {
     enable = true;
     config = {
-      keybindings =
-        let
-          sway = config.wayland.windowManager.sway.config;
-          m = sway.modifier;
-        in
+      keybindings = let
+        sway = config.wayland.windowManager.sway.config;
+        m = sway.modifier;
+      in
         lib.mkOptionDefault {
           "${m}+Return" = "exec ${sway.terminal}";
           "${m}+q" = "kill";
@@ -139,7 +141,7 @@
       menu = "${pkgs.wofi}/bin/wofi --show drun";
       terminal = "alacritty";
       modifier = "Mod4";
-      bars = [ ];
+      bars = [];
       input = {
         "type:pointer" = {
           accel_profile = "flat";
@@ -159,6 +161,6 @@
       export QT_QPA_PLATFORM=wayland
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
     '';
-    wrapperFeatures = { gtk = true; };
+    wrapperFeatures = {gtk = true;};
   };
 }

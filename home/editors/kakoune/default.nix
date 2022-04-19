@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 # personal kakoune config
-
 {
   programs.kakoune = {
     enable = true;

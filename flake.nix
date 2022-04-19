@@ -1,55 +1,59 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = { self, nixpkgs, ... }@inputs:
-    let
-      lib = import ./lib inputs;
-      inherit (lib) genSystems;
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    lib = import ./lib inputs;
+    inherit (lib) genSystems;
 
-      overlays.default = import ./pkgs;
+    overlays.default = import ./pkgs;
 
-      pkgs = genSystems (system:
-        import nixpkgs {
-          inherit system;
-          overlays = [
-            inputs.devshell.overlay
-            inputs.emacs-overlay.overlay
-            overlays.default
-          ];
-          config.allowUnfree = true;
-        });
-    in
-    {
-      inherit lib overlays pkgs;
-
-      # standalone home-manager config
-      inherit (import ./home/profiles inputs) homeConfigurations;
-
-      deploy = import ./hosts/deploy.nix inputs;
-
-      # nixos-configs with home-manager
-      nixosConfigurations = import ./hosts inputs;
-
-      devShells = genSystems (system: {
-        default = pkgs.${system}.devshell.mkShell {
-          packages = with pkgs.${system}; [
-            git
-            nixpkgs-fmt
-            inputs.rnix-lsp.defaultPackage.${system}
-            inputs.deploy-rs.defaultPackage.${system}
-            repl
-          ];
-          name = "dots";
-        };
+    pkgs = genSystems (system:
+      import nixpkgs {
+        inherit system;
+        overlays = [
+          inputs.devshell.overlay
+          inputs.emacs-overlay.overlay
+          overlays.default
+        ];
+        config.allowUnfree = true;
       });
+  in {
+    inherit lib overlays pkgs;
 
-      packages = lib.genAttrs [ "x86_64-linux" ] (system: {
-        inherit (pkgs.${system})
-          gdb-frontend
+    # standalone home-manager config
+    inherit (import ./home/profiles inputs) homeConfigurations;
+
+    deploy = import ./hosts/deploy.nix inputs;
+
+    # nixos-configs with home-manager
+    nixosConfigurations = import ./hosts inputs;
+
+    devShells = genSystems (system: {
+      default = pkgs.${system}.devshell.mkShell {
+        packages = with pkgs.${system}; [
+          git
+          nixpkgs-fmt
+          inputs.rnix-lsp.defaultPackage.${system}
+          inputs.deploy-rs.defaultPackage.${system}
           repl
-          waveform;
-      });
-    };
+        ];
+        name = "dots";
+      };
+    });
+
+    packages = lib.genAttrs ["x86_64-linux"] (system: {
+      inherit
+        (pkgs.${system})
+        gdb-frontend
+        repl
+        waveform
+        ;
+    });
+  };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";

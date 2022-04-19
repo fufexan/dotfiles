@@ -1,6 +1,4 @@
-inputs:
-
-let
+inputs: let
   inherit (inputs) self;
   inherit (inputs.hm.lib) homeManagerConfiguration;
 
@@ -18,17 +16,19 @@ let
     rgbaColors = mapAttrs (n: rgba) baseColors;
   };
 
-  extraSpecialArgs = { inherit colors inputs; };
+  extraSpecialArgs = {inherit colors inputs;};
 
   defArgs = rec {
-    configuration = { };
+    configuration = {};
     system = "x86_64-linux";
     inherit extraSpecialArgs;
   };
 
-  mkHome = args: homeManagerConfiguration (defArgs // args // {
-    homeDirectory = "/home/${args.username}";
-    pkgs = inputs.self.pkgs.${args.system or defArgs.system};
-  });
-in
-{ inherit mkHome extraSpecialArgs; }
+  mkHome = args:
+    homeManagerConfiguration (defArgs
+      // args
+      // {
+        homeDirectory = "/home/${args.username}";
+        pkgs = inputs.self.pkgs.${args.system or defArgs.system};
+      });
+in {inherit mkHome extraSpecialArgs;}

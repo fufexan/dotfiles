@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 # my own installer
-
 {
   # kernel
   nix = {

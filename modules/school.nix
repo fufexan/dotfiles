@@ -1,5 +1,5 @@
 {
-  users.users.mihai.extraGroups = [ "vboxusers" ];
+  users.users.mihai.extraGroups = ["vboxusers"];
 
   virtualisation.virtualbox.host.enable = true;
 }

@@ -1,12 +1,9 @@
-{ colors, ... }:
-
+{colors, ...}:
 # terminals
-
 let
   inherit (colors) xcolors x0Colors;
   font = "JetBrainsMono Nerd Font";
-in
-{
+in {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -45,7 +42,12 @@ in
           cyan = x0Colors.base0C;
           white = x0Colors.base05;
         };
-        bright = normal // { black = x0Colors.base03; white = x0Colors.base06; };
+        bright =
+          normal
+          // {
+            black = x0Colors.base03;
+            white = x0Colors.base06;
+          };
       };
 
       window.opacity = 0.9;

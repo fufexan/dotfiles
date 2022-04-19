@@ -1,6 +1,4 @@
-inputs:
-
-{
+inputs: {
   nodes = with inputs.deploy-rs.lib.x86_64-linux; {
     arm-server = {
       hostname = "arm-server";
@@ -8,7 +6,7 @@ inputs:
         user = "root";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.arm-server;
       };
-      sshOpts = [ "-i" "$HOME/.ssh/arm-server.key" ];
+      sshOpts = ["-i" "$HOME/.ssh/arm-server.key"];
     };
     io = {
       hostname = "io";
@@ -23,7 +21,7 @@ inputs:
         user = "root";
         path = activate.nixos inputs.self.nixosConfigurations.homesv;
       };
-      sshOpts = [ "-i" "$HOME/.ssh/homesv.key" ];
+      sshOpts = ["-i" "$HOME/.ssh/homesv.key"];
       sshUser = "root";
     };
     kiiro = {

@@ -1,22 +1,26 @@
-{ pkgs, config, lib, inputs, ... }:
-
+{
+  pkgs,
+  config,
+  lib,
+  inputs,
+  ...
+}:
 # configuration shared by all hosts
-
 {
   # speed fix for Intel CPUs
-  boot.kernelParams = [ "intel_pstate=active" ];
+  boot.kernelParams = ["intel_pstate=active"];
 
   console.font = "Lat2-Terminus16";
 
   # enable zsh autocompletion for system packages (systemd, etc)
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 
-  environment.systemPackages = [ pkgs.git ];
+  environment.systemPackages = [pkgs.git];
 
   i18n = {
     defaultLocale = lib.mkDefault "en_US.UTF-8";
     # saves space
-    supportedLocales = [ "en_US.UTF-8/UTF-8" ];
+    supportedLocales = ["en_US.UTF-8/UTF-8"];
   };
 
   # OpenGL
@@ -45,7 +49,7 @@
         sshKey = "/root/.ssh/arm-server.key";
         maxJobs = 4;
         hostName = "arm-server";
-        supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];
+        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
       }
       {
         system = "x86_64-linux";
@@ -53,7 +57,7 @@
         sshKey = "/root/.ssh/id_ed25519";
         maxJobs = 8;
         hostName = "io";
-        supportedFeatures = [ "nixos-test" "benchmark" "kvm" "big-parallel" ];
+        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
       }
     ];
     distributedBuilds = true;
@@ -64,15 +68,14 @@
       options = "--delete-older-than 7d";
     };
 
-    registry = lib.mapAttrs (n: v: { flake = v; }) inputs;
+    registry = lib.mapAttrs (n: v: {flake = v;}) inputs;
 
     settings = {
       auto-optimise-store = true;
 
-      substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+      substituters = ["https://nix-community.cachix.org"];
+      trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
     };
-
   };
 
   nixpkgs = {
@@ -120,7 +123,7 @@
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "adbusers" "networkmanager" "libvirtd" "transmission" "video" "wheel" ];
+    extraGroups = ["adbusers" "networkmanager" "libvirtd" "transmission" "video" "wheel"];
   };
 
   zramSwap.enable = true;

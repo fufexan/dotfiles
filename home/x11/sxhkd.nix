@@ -1,8 +1,7 @@
 let
   # user scripts
   s = "~/.local/bin";
-in
-{
+in {
   services.sxhkd = {
     enable = true;
     keybindings = {

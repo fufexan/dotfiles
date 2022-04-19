@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   fonts = {
     fonts = with pkgs; [
       # icon fonts
@@ -13,7 +16,7 @@
       roboto
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];
 
     # use fonts specified by user rather than default ones
@@ -23,10 +26,10 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
-      emoji = [ "Noto Color Emoji" ];
+      serif = ["Noto Serif" "Noto Color Emoji"];
+      sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -49,7 +52,7 @@
 
     inputMethod = {
       enabled = "fcitx";
-      fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+      fcitx.engines = with pkgs.fcitx-engines; [mozc];
     };
   };
 
@@ -68,7 +71,7 @@
           to = 27037;
         }
       ];
-      allowedUDPPorts = [ 4380 27036 ];
+      allowedUDPPorts = [4380 27036];
       allowedUDPPortRanges = [
         {
           from = 7000;
@@ -82,17 +85,16 @@
     };
   };
 
-
   # add gaming cache
   nix.settings = {
-    substituters = [ "https://nix-gaming.cachix.org" ];
-    trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
   };
 
   programs.dconf.enable = true;
 
   services = {
-    dbus.packages = [ pkgs.gcr ];
+    dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = true;
 
@@ -134,7 +136,7 @@
       };
     };
 
-    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
   #security.pam.services.swaylock = {
@@ -143,26 +145,25 @@
   #  '';
   #};
 
-  xdg.portal =
-    let
-      gnome = config.services.xserver.desktopManager.gnome.enable;
-    in
-    {
+  xdg.portal = let
+    gnome = config.services.xserver.desktopManager.gnome.enable;
+  in {
+    enable = true;
+    wlr = {
       enable = true;
-      wlr = {
-        enable = true;
-        settings = {
-          screencast = {
-            output_name = "eDP-1";
-            max_fps = 60;
-            exec_before = "pkill mako";
-            exec_after = "mako";
-            chooser_type = "default";
-          };
+      settings = {
+        screencast = {
+          output_name = "eDP-1";
+          max_fps = 60;
+          exec_before = "pkill mako";
+          exec_after = "mako";
+          chooser_type = "default";
         };
       };
-      extraPortals = [ pkgs.xdg-desktop-portal-wlr ]
-        ++ lib.optional (!gnome) pkgs.xdg-desktop-portal-gtk;
-      gtkUsePortal = !gnome;
     };
+    extraPortals =
+      [pkgs.xdg-desktop-portal-wlr]
+      ++ lib.optional (!gnome) pkgs.xdg-desktop-portal-gtk;
+    gtkUsePortal = !gnome;
+  };
 }

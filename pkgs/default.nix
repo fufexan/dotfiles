@@ -1,11 +1,11 @@
 _: prev: {
-  gdb-frontend = prev.callPackage ./gdb-frontend { };
+  gdb-frontend = prev.callPackage ./gdb-frontend {};
   # instant repl with automatic flake loading
-  repl = prev.callPackage ./repl { };
+  repl = prev.callPackage ./repl {};
 
-  technic-launcher = prev.callPackage ./technic.nix { };
+  technic-launcher = prev.callPackage ./technic.nix {};
 
-  waveform = prev.callPackage ./waveform { };
+  waveform = prev.callPackage ./waveform {};
 
   #wayfireApplications-unwrapped = prev.wayfireApplications-unwrapped.extend {
   #  wayfire-plugins = prev.callPackage ./wayfire-plugins { };

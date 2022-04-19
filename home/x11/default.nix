@@ -1,11 +1,13 @@
-{ config, pkgs, colors, ... }:
-
+{
+  config,
+  pkgs,
+  colors,
+  ...
+}:
 # most of X configuration
-
 let
   inherit (colors) xcolors;
-in
-{
+in {
   imports = [
     #./autorandr.nix
     ./dunst.nix
@@ -62,7 +64,7 @@ in
         do
           Desktop=$(echo "$Event" | awk '{print $3}')
           State=$(echo "$Event" | awk '{print $4}')
-          if [ "$State" = "monocle" ]; then 
+          if [ "$State" = "monocle" ]; then
             bspc query -N -d $Desktop | while read -r Node
             do
               xprop -id $Node -f _PICOM_ROUNDED 32c -set _PICOM_ROUNDED 1
@@ -78,12 +80,12 @@ in
       '';
 
       rules = {
-        "Firefox" = { desktop = "^1"; };
-        "Emacs" = { desktop = "^2"; };
-        "osu!.exe" = { desktop = "^3"; };
-        "discord" = { desktop = "^6"; };
-        "TelegramDesktop" = { desktop = "^7"; };
-        "Element" = { desktop = "^8"; };
+        "Firefox" = {desktop = "^1";};
+        "Emacs" = {desktop = "^2";};
+        "osu!.exe" = {desktop = "^3";};
+        "discord" = {desktop = "^6";};
+        "TelegramDesktop" = {desktop = "^7";};
+        "Element" = {desktop = "^8";};
       };
 
       settings = {

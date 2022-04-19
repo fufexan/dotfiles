@@ -1,5 +1,4 @@
 # server services
-
 {
   services.samba = {
     enable = true;
@@ -26,8 +25,8 @@
     discovery = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 139 443 445 5357 8384 8443 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 3702 ];
+  networking.firewall.allowedTCPPorts = [80 139 443 445 5357 8384 8443];
+  networking.firewall.allowedUDPPorts = [137 138 3702];
 
   services.syncthing = {
     enable = true;

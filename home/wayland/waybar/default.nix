@@ -1,6 +1,4 @@
-{ colors, ... }:
-
-{
+{colors, ...}: {
   programs.waybar = {
     enable = true;
 
@@ -10,18 +8,18 @@
         position = "top";
         height = 30;
 
-        output = [ "eDP-1" "DP-1" "DP-2" ];
+        output = ["eDP-1" "DP-1" "DP-2"];
 
-        modules-left = [ "wlr/taskbar" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "cpu" "memory" "tray" "pulseaudio" "network" "battery" ];
+        modules-left = ["wlr/taskbar"];
+        modules-center = ["clock"];
+        modules-right = ["cpu" "memory" "tray" "pulseaudio" "network" "battery"];
 
         modules = {
           battery = {
             format = "{power:.2} W {capacity}% {icon}";
             format-alt = "{time} {icon}";
             format-charging = "{capacity}% {icon}󰉁";
-            format-icons = [ "" "" "" "" "" "" "" "" "" "" ];
+            format-icons = ["" "" "" "" "" "" "" "" "" ""];
             format-plugged = "{capacity}%󰚥";
             interval = 2;
             states = {
@@ -44,7 +42,7 @@
             format-alt = "{ifname}: {ipaddr}/{cidr}";
             format-disconnected = "Disconnected 󰀨";
             format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰇧  󰁞 {bandwidthUpBits} 󰁆 {bandwidthDownBits}";
-            format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
+            format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
             format-linked = "{ifname} (No IP) 󰀨";
             format-wifi = "{essid} ({signalStrength}%) {icon}";
           };
@@ -55,7 +53,7 @@
             format-bluetooth-muted = "󰝟 {icon} {format_source}";
             format-icons = {
               car = "";
-              default = [ "󰕿" "󰖀" "󰕾" ];
+              default = ["󰕿" "󰖀" "󰕾"];
               hands-free = "";
               headphone = "󰋋";
               headset = "";

@@ -1,9 +1,7 @@
-{ pkgs, ... }:
-
+{pkgs, ...}:
 # minimal config, suitable for servers
-
 {
-  imports = [ ./shell/zsh.nix ];
+  imports = [./shell/zsh.nix];
 
   home = {
     username = "mihai";
@@ -23,7 +21,7 @@
 
     joshuto
   ];
-  home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
+  home.extraOutputsToInstall = ["doc" "info" "devdoc"];
 
   programs.home-manager.enable = true;
 

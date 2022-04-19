@@ -1,6 +1,6 @@
 # home server configuration
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
 
   boot.loader.grub = {
     enable = true;

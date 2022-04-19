@@ -1,7 +1,9 @@
-{ lib, pkgs, ... }:
-
+{
+  lib,
+  pkgs,
+  ...
+}:
 # GNOME 41 config
-
 {
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
@@ -17,14 +19,18 @@
   networking = {
     # for GSConnect
     firewall = {
-      allowedTCPPortRanges = [{
-        from = 1714;
-        to = 1764;
-      }];
-      allowedUDPPortRanges = [{
-        from = 1714;
-        to = 1764;
-      }];
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+      allowedUDPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
     };
   };
 

@@ -1,10 +1,10 @@
-{ lib
-, stdenv
-, meson
-, ninja
-, fetchFromGitHub
+{
+  lib,
+  stdenv,
+  meson,
+  ninja,
+  fetchFromGitHub,
 }:
-
 stdenv.mkDerivation rec {
   pname = "wayfire-plugins";
   version = "unstable-2021-01-22";
@@ -16,7 +16,7 @@ stdenv.mkDerivation rec {
     sha256 = lib.fakeHash;
   };
 
-  nativeBuildInputs = [ meson ninja ];
+  nativeBuildInputs = [meson ninja];
 
   meta = {
     homepage = "https://github.com/ammen99/wayfire-plugins";

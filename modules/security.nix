@@ -1,7 +1,9 @@
-{ config, lib, ... }:
-
+{
+  config,
+  lib,
+  ...
+}:
 # security tweaks borrowed from @hlissner
-
 {
   ## System security tweaks
   # Prevent replacing the running kernel w/o reboot
@@ -59,7 +61,7 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.core.default_qdisc" = "cake";
   };
-  boot.kernelModules = [ "tcp_bbr" ];
+  boot.kernelModules = ["tcp_bbr"];
 
   # So we don't have to do this later...
   security.acme.acceptTerms = true;

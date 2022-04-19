@@ -1,9 +1,6 @@
-{ pkgs, ... }:
-
-let
-  mprisScript = pkgs.callPackage ./mpris.nix { };
-in
-{
+{pkgs, ...}: let
+  mprisScript = pkgs.callPackage ./mpris.nix {};
+in {
   services.polybar = {
     enable = true;
     package = pkgs.polybarFull;

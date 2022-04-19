@@ -1,7 +1,5 @@
 # home server configuration
-{ lib, ... }:
-
-{
+{lib, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./services.nix
