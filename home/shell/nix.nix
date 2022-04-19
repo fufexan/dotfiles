@@ -4,10 +4,12 @@
 
 {
   home.packages = with pkgs; [
+    alejandra
+    deadnix
     nix-index
-    nixpkgs-fmt
-    rnix-lsp
     repl
+    rnix-lsp
+    statix
   ];
 
   programs.direnv = {
