@@ -82,6 +82,22 @@
         "type": "github"
       }
     },
+    "discord-tweaks": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627600834,
+        "narHash": "sha256-xSzbP86w5OUy1ZO1iHgv1drbujtlPQAgJmLA3x7UOFc=",
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "rev": "bc28b090f9ed706d7f8271aeaa64bdcb886fd0ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NurMarvin",
+        "repo": "discord-tweaks",
+        "type": "github"
+      }
+    },
     "dream2nix": {
       "inputs": {
         "alejandra": [
@@ -426,6 +442,43 @@
         "type": "github"
       }
     },
+    "powercord": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "powercord": "powercord_2"
+      },
+      "locked": {
+        "lastModified": 1646308577,
+        "narHash": "sha256-6frqjMZXe1Qpc3Bg+nv+bS4FFuKWb3xGnzatVcu8HXs=",
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "rev": "85029adccb6fbbdbeacea3c296fbb225e7eb8ae1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LavaDesu",
+        "repo": "powercord-overlay",
+        "type": "github"
+      }
+    },
+    "powercord_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1646258494,
+        "narHash": "sha256-TU2yXr9T5zMSumciw9IaYRP1Tt7uy97opgFSYa7rP2o=",
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "rev": "8b99354d3186ef34b3ea239da4b07d6f157a7714",
+        "type": "github"
+      },
+      "original": {
+        "owner": "powercord-org",
+        "repo": "powercord",
+        "type": "github"
+      }
+    },
     "rnix-lsp": {
       "inputs": {
         "naersk": [
@@ -456,6 +509,7 @@
       "inputs": {
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
+        "discord-tweaks": "discord-tweaks",
         "emacs-overlay": "emacs-overlay",
         "fu": "fu",
         "helix": "helix",
@@ -465,6 +519,7 @@
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_3",
+        "powercord": "powercord",
         "rnix-lsp": "rnix-lsp"
       }
     },

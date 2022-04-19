@@ -17,6 +17,7 @@
         overlays = [
           inputs.devshell.overlay
           inputs.emacs-overlay.overlay
+          inputs.powercord.overlay
           overlays.default
         ];
         config.allowUnfree = true;
@@ -48,6 +49,7 @@
     packages = lib.genAttrs ["x86_64-linux"] (system: {
       inherit
         (pkgs.${system})
+        discord-canary-electron
         gdb-frontend
         repl
         waveform
@@ -95,6 +97,15 @@
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+
+    powercord = {
+      url = "github:LavaDesu/powercord-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    discord-tweaks = {
+      url = "github:NurMarvin/discord-tweaks";
+      flake = false;
+    };
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";

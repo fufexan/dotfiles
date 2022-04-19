@@ -2,6 +2,7 @@
   pkgs,
   config,
   colors,
+  inputs,
   ...
 }:
 # graphical session configuration
@@ -34,6 +35,9 @@ in {
     file
     gh
     # messaging
+    (discord-plugged.override {
+      plugins = [inputs.discord-tweaks];
+    })
     tdesktop
     teams
     teams-chromium
