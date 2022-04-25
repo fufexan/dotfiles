@@ -36,6 +36,8 @@
   };
 
   services.transmission = {
+    enable = true;
+    user = "nobody";
     home = "/media/Torrents";
     openFirewall = true;
     openRPCPort = true;

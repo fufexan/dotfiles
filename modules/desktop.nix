@@ -59,8 +59,8 @@
   location.provider = "geoclue2";
 
   networking = {
-    # for Rocket League
     firewall = {
+      # for Rocket League
       allowedTCPPortRanges = [
         {
           from = 27015;
@@ -82,6 +82,9 @@
           to = 27031;
         }
       ];
+
+      # Spotify downloaded track sync with other devices
+      allowedTCPPorts = [57621];
     };
   };
 
@@ -108,8 +111,6 @@
       pulse.enable = true;
     };
 
-    transmission.enable = true;
-
     udisks2.enable = true;
 
     xserver = {
@@ -122,6 +123,11 @@
           manage = "window";
           name = "home-manager";
           start = "exec $HOME/.xsession-hm";
+        }
+        {
+          manage = "window";
+          name = "Sway";
+          start = "exec sway";
         }
       ];
 
@@ -139,11 +145,11 @@
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
-  #security.pam.services.swaylock = {
-  #  text = ''
-  #    auth include login
-  #  '';
-  #};
+  security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
 
   xdg.portal = let
     gnome = config.services.xserver.desktopManager.gnome.enable;

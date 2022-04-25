@@ -26,9 +26,17 @@
   # OpenGL
   hardware.opengl.enable = true;
 
-  networking.networkmanager = {
-    enable = true;
-    dns = "systemd-resolved";
+  networking = {
+    firewall = {
+      enable = false;
+      trustedInterfaces = [config.services.tailscale.interfaceName];
+      allowedUDPPorts = [config.services.tailscale.port 3478];
+    };
+
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+    };
   };
 
   nix = {
@@ -73,8 +81,14 @@
     settings = {
       auto-optimise-store = true;
 
-      substituters = ["https://nix-community.cachix.org"];
-      trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://helix.cachix.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+      ];
     };
   };
 
