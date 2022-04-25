@@ -1,4 +1,8 @@
-{colors, ...}: {
+{
+  config,
+  colors,
+  ...
+}: {
   programs.waybar = {
     enable = true;
 
@@ -35,7 +39,7 @@
             tooltip = false;
           };
 
-          memory.format = "{}% 󰘙";
+          memory.format = "{}% 󰘚";
 
           network = {
             interval = 1;
@@ -60,7 +64,7 @@
               phone = "󰏲";
               portable = "󰏲";
             };
-            format-muted = "󰝟 { format_source }";
+            format-muted = "󰖁 {format_source}";
             format-source = "󰍬";
             format-source-muted = "󰍭";
             on-click = "pavucontrol";
@@ -71,6 +75,12 @@
 
     style = import ./style.nix colors;
 
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      target =
+        if config.wayland.windowManager.sway.enable
+        then "sway-session.target"
+        else "graphical-session.target";
+    };
   };
 }

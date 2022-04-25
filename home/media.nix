@@ -12,6 +12,8 @@
     pulsemixer
     # music
     (spotify.override {deviceScaleFactor = 2;})
+    # images
+    imv
     # video
     #jellyfin-mpv-shim
   ];

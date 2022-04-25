@@ -20,6 +20,7 @@
     ripgrep
 
     joshuto
+    ranger
   ];
   home.extraOutputsToInstall = ["doc" "info" "devdoc"];
 

@@ -6,7 +6,7 @@
 }:
 # Wayland config
 {
-  #imports = [ ./waybar ];
+  imports = [./sway.nix];
 
   home.packages = with pkgs; [
     # screenshot
@@ -14,7 +14,6 @@
     slurp
 
     # idle/lock
-    swayidle
     swaylock
 
     # wm
@@ -113,7 +112,7 @@
     };
 
     wlsunset = {
-      enable = false;
+      enable = true;
       latitude = "46.0";
       longitude = "23.0";
     };
@@ -124,43 +123,5 @@
       Description = "Home Manager System Tray";
       Requires = ["graphical-session-pre.target"];
     };
-  };
-
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      keybindings = let
-        sway = config.wayland.windowManager.sway.config;
-        m = sway.modifier;
-      in
-        lib.mkOptionDefault {
-          "${m}+Return" = "exec ${sway.terminal}";
-          "${m}+q" = "kill";
-          "${m}+d" = "exec ${sway.menu}";
-        };
-      menu = "${pkgs.wofi}/bin/wofi --show drun";
-      terminal = "alacritty";
-      modifier = "Mod4";
-      bars = [];
-      input = {
-        "type:pointer" = {
-          accel_profile = "flat";
-          pointer_accel = "0";
-        };
-      };
-      output = {
-        "*" = {
-          bg = "~/Pictures/wallpapers/neon/citysunset.jpg fill";
-          max_render_time = "7";
-          scale = "1";
-        };
-      };
-    };
-    extraSessionCommands = ''
-      export SDL_VIDEODRIVER=wayland
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-    '';
-    wrapperFeatures = {gtk = true;};
   };
 }
