@@ -21,6 +21,11 @@
     timeouts = [
       {
         timeout = 300;
+        command = "swaymsg output * dpms off";
+        resumeCommand = "swaymsg output * dpms on";
+      }
+      {
+        timeout = 300;
         command = "swaylock -fF";
       }
     ];
@@ -56,8 +61,11 @@
           "${m}+space" = "exec ${sway.menu}";
           # Fn + F7
           "${m}+semicolon" = "exec ${toggle-scaling}";
-          "${m}+Shift+i" = "exec slurp | grim -g - ~/Pictures/ss/$(date '+%F_%T').png";
-          "Print" = ''exec grim -g "$(slurp -d)" - | wl-copy'';
+          # screenshots
+          "Ctrl+Print" = "exec grim -c - ~/Pictures/ss/$(date '+%F_%T').png";
+          "Print" = "exec slurp | grim -g - ~/Pictures/ss/$(date '+%F_%T').png";
+          "${m}+Ctrl+Shift+r" = ''exec grim -c - | wl-copy'';
+          "${m}+Shift+r" = ''exec slurp | grim -g - | wl-copy'';
         };
 
       keycodebindings = {
@@ -72,7 +80,7 @@
         "--locked 233" = "exec light -A 5"; # brightness+
       };
 
-      menu = "${pkgs.wofi}/bin/wofi --show drun";
+      menu = "${pkgs.wofi}/bin/wofi --show drun --allow-images";
       terminal = "alacritty";
       modifier = "Mod4";
       bars = [];
@@ -102,6 +110,10 @@
     extraConfig = ''
       smart_borders on
       smart_gaps on
+    '';
+
+    extraSessionCommands = ''
+      export _XWAYLAND_GLOBAL_OUTPUT_SCALE=2;
     '';
 
     wrapperFeatures = {gtk = true;};

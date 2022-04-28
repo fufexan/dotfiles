@@ -20,9 +20,9 @@
 
         modules = {
           battery = {
-            format = "{power:.2} W {capacity}% {icon}";
-            format-alt = "{time} {icon}";
-            format-charging = "{capacity}% {icon}󰉁";
+            format = "{icon}";
+            format-alt = "{power:.2} W {capacity}% {time} {icon}";
+            format-charging = "{icon}󰉁";
             format-icons = ["" "" "" "" "" "" "" "" "" ""];
             format-plugged = "{capacity}%󰚥";
             interval = 2;
@@ -35,26 +35,27 @@
           clock.format = "{:%e %b %H:%M}";
 
           cpu = {
-            format = "{usage}% ";
+            format = " {usage}%";
             tooltip = false;
           };
 
-          memory.format = "{}% 󰘚";
+          memory.format = "󰘚 {}%";
 
           network = {
             interval = 1;
             format-alt = "{ifname}: {ipaddr}/{cidr}";
             format-disconnected = "Disconnected 󰀨";
-            format-ethernet = "{ifname}: {ipaddr}/{cidr} 󰇧  󰁞 {bandwidthUpBits} 󰁆 {bandwidthDownBits}";
+            format-ethernet = "󰇧 {ifname} 󰁞 {bandwidthUpBits} 󰁆 {bandwidthDownBits}";
             format-icons = ["󰤯" "󰤟" "󰤢" "󰤥" "󰤨"];
             format-linked = "{ifname} (No IP) 󰀨";
-            format-wifi = "{essid} ({signalStrength}%) {icon}";
+            format-wifi = "{icon}";
           };
 
           pulseaudio = {
-            format = "{volume}% {icon} {format_source}";
-            format-bluetooth = "{volume}% {icon} {format_source}";
-            format-bluetooth-muted = "󰝟 {icon} {format_source}";
+            format = "{icon} {volume}% {format_source}";
+            format-muted = "󰖁 {format_source}";
+            format-bluetooth = "{icon} {volume}% {format_source}";
+            format-bluetooth-muted = "󰖁 {icon} {format_source}";
             format-icons = {
               car = "";
               default = ["󰕿" "󰖀" "󰕾"];
@@ -64,7 +65,6 @@
               phone = "󰏲";
               portable = "󰏲";
             };
-            format-muted = "󰖁 {format_source}";
             format-source = "󰍬";
             format-source-muted = "󰍭";
             on-click = "pavucontrol";
