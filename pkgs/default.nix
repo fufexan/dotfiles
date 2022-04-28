@@ -25,10 +25,19 @@ _: prev: {
   #wayfireApplications-unwrapped = prev.wayfireApplications-unwrapped.extend {
   #  wayfire-plugins = prev.callPackage ./wayfire-plugins { };
   #};
+  wlroots = prev.wlroots.overrideAttrs (_: {
+    patches = [
+      (prev.fetchpatch {
+        url = "https://gitlab.freedesktop.org/lilydjwg/wlroots/-/commit/6c5ffcd1fee9e44780a6a8792f74ecfbe24a1ca7.diff";
+        sha256 = "sha256-Eo1pTa/PIiJsRZwIUnHGTIFFIedzODVf0ZeuXb0a3TQ=";
+      })
+    ];
+  });
 
   xwayland = prev.xwayland.overrideAttrs (_: {
-    preConfigure = ''
-      patch -p1 < ${./patches/xwayland.patch}
-    '';
+    patches = [
+      ./patches/xwayland-vsync.patch
+      ./patches/xwayland-hidpi.patch
+    ];
   });
 }
