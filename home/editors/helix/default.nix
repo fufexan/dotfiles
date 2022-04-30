@@ -1,5 +1,9 @@
-{inputs, ...}: {
-  home.packages = [inputs.helix.defaultPackage.x86_64-linux];
+{
+  inputs,
+  pkgs,
+  ...
+}: {
+  home.packages = [inputs.helix.defaultPackage.${pkgs.system}];
 
   home.file.".config/helix".source = ./config;
 }

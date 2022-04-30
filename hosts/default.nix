@@ -16,7 +16,7 @@ inputs: let
 
   desktopModules = [
     inputs.kmonad.nixosModule
-    inputs.nix-gaming.nixosModule
+    inputs.nix-gaming.nixosModules.default
   ];
 
   inherit (self.lib) nixosSystem makeOverridable;
