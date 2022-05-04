@@ -40,20 +40,9 @@
   ];
 
   # Japanese input using fcitx
-  i18n = {
-    defaultLocale = "ro_RO.UTF-8";
-
-    supportedLocales = [
-      "en_US.UTF-8/UTF-8"
-      "ja_JP.EUC-JP/EUC-JP"
-      "ja_JP.UTF-8/UTF-8"
-      "ro_RO.UTF-8/UTF-8"
-    ];
-
-    inputMethod = {
-      enabled = "fcitx";
-      fcitx.engines = with pkgs.fcitx-engines; [mozc];
-    };
+  i18n.inputMethod = {
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [mozc];
   };
 
   location.provider = "geoclue2";

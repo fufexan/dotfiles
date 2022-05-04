@@ -18,7 +18,7 @@
   environment.systemPackages = [pkgs.git];
 
   i18n = {
-    defaultLocale = lib.mkDefault "en_US.UTF-8";
+    defaultLocale = "en_US.UTF-8";
     # saves space
     supportedLocales = ["en_US.UTF-8/UTF-8"];
   };
