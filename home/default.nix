@@ -25,6 +25,15 @@ in {
       categories = ["Network" "InstantMessaging"];
       mimeTypes = ["x-scheme-handler/teams"];
     };
+    discord-chromium = makeDesktopItem {
+      name = "discord";
+      desktopName = "Discord";
+      genericName = "Discord";
+      exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://discord.com/channels/@me\"";
+      icon = "discord";
+      categories = ["Network" "InstantMessaging"];
+      mimeTypes = ["x-scheme-handler/discord"];
+    };
   in [
     # archives
     p7zip
@@ -38,6 +47,7 @@ in {
     (discord-plugged.override {
       plugins = [inputs.discord-tweaks];
     })
+    discord-chromium
     tdesktop
     teams
     teams-chromium

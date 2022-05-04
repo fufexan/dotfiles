@@ -34,6 +34,7 @@
     };
   };
 
+  services.gnome.games.enable = true;
   services.xserver = {
     desktopManager.gnome = {
       enable = true;

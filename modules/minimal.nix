@@ -27,11 +27,7 @@
   hardware.opengl.enable = true;
 
   networking = {
-    firewall = {
-      enable = false;
-      trustedInterfaces = [config.services.tailscale.interfaceName];
-      allowedUDPPorts = [config.services.tailscale.port 3478];
-    };
+    firewall.checkReversePath = "loose";
 
     networkmanager = {
       enable = true;
