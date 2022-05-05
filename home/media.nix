@@ -5,13 +5,25 @@
 }:
 # media - control and enjoy audio/video
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let
+    spotify-chromium = makeDesktopItem {
+      name = "spotify-web";
+      desktopName = "Spotify Web";
+      genericName = "Spotify Web";
+      exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://open.spotify.com\"";
+      icon = "spotify";
+      categories = ["Audio" "Music" "Player" "AudioVideo"];
+      mimeTypes = ["x-scheme-handler/spotify"];
+    };
+  in [
     # audio control
     pavucontrol
     playerctl
     pulsemixer
     # music
-    (spotify.override {deviceScaleFactor = 2;})
+    # (spotify.override {deviceScaleFactor = 2;})
+    spotify
+    spotify-chromium
     # images
     imv
     # video
