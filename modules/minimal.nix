@@ -13,9 +13,17 @@
   console.font = "Lat2-Terminus16";
 
   # enable zsh autocompletion for system packages (systemd, etc)
-  environment.pathsToLink = ["/share/zsh"];
+  environment = {
+    etc = {
+      "nix/flake-channels/system".source = inputs.self;
+      "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
+      "nix/flake-channels/home-manager".source = inputs.hm;
+    };
 
-  environment.systemPackages = [pkgs.git];
+    systemPackages = [pkgs.git];
+
+    pathsToLink = ["/share/zsh"];
+  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -73,6 +81,11 @@
     };
 
     registry = lib.mapAttrs (n: v: {flake = v;}) inputs;
+    
+    nixPath = [
+      "nixpkgs=/etc/nix/flake-channels/nixpkgs"
+      "home-manager=/etc/nix/flake-channels/home-manager"
+    ];
 
     settings = {
       auto-optimise-store = true;
