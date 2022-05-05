@@ -43,7 +43,7 @@ in
     meta = {
       description = "Minecraft Launcher with support for Technic Modpacks";
       homepage = "https://technicpack.net";
-      maintainers = lib.maintainers.fufexan;
+      maintainers = [lib.maintainers.fufexan];
       platforms = lib.platforms.linux;
     };
   }

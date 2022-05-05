@@ -23,6 +23,6 @@ stdenv.mkDerivation rec {
     description = "A repository for Wayfire plugins which I use to tweak my own desktop";
     license = lib.licenses.mit;
     platforms = lib.platforms.linux;
-    maintainers = lib.maintainers.fufexan;
+    maintainers = [lib.maintainers.fufexan];
   };
 }
