@@ -60,7 +60,7 @@
           to = 27037;
         }
       ];
-      allowedUDPPorts = [4380 27036];
+      allowedUDPPorts = [4380 27036 34197];
       allowedUDPPortRanges = [
         {
           from = 7000;
