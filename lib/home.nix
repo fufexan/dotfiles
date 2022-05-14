@@ -2,7 +2,7 @@ inputs: let
   inherit (inputs) self;
   inherit (inputs.hm.lib) homeManagerConfiguration;
 
-  theme = "horizon-terminal-dark";
+  theme = "catppuccin";
 
   colors = with self.lib; rec {
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;

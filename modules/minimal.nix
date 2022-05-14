@@ -81,7 +81,7 @@
     };
 
     registry = lib.mapAttrs (n: v: {flake = v;}) inputs;
-    
+
     nixPath = [
       "nixpkgs=/etc/nix/flake-channels/nixpkgs"
       "home-manager=/etc/nix/flake-channels/home-manager"
