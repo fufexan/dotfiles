@@ -33,9 +33,10 @@
       legendary-gl
 
       (technic-launcher.override {
-        src = builtins.fetchurl {
+        src = builtins.fetchurl rec {
           url = "https://mc-launcher.com/files/unc/Technic.jar";
-          sha256 = "1rwcgzzjxy17qcbczxvq2c8hilmkr16flw48myz93jgx4gii6vxl";
+          name = "technic-${sha256}";
+          sha256 = "1yhgyimdhja0aggssd2l0fc50nfdfisfj0ix6qha9g644ag78h5r";
         };
       })
     ]);
