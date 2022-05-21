@@ -1,4 +1,6 @@
 _: prev: {
+  catppuccin-gtk = prev.callPackage ./catppuccin-gtk {};
+
   gdb-frontend = prev.callPackage ./gdb-frontend {};
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};

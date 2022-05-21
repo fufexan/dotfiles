@@ -11,7 +11,7 @@
     languages = import ./languages.nix pkgs;
 
     settings = {
-      theme = "base16_default";
+      theme = "catppuccin";
       editor = {
         true-color = true;
         cursor-shape = {
@@ -26,4 +26,6 @@
       };
     };
   };
+
+  home.file.".config/helix/themes/catppuccin.toml".source = "${inputs.catppuccin-helix}/catppuccin.toml";
 }

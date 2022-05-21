@@ -49,6 +49,7 @@
     packages = lib.genAttrs ["x86_64-linux"] (system: {
       inherit
         (pkgs.${system})
+        catppuccin-gtk
         discord-canary-electron
         gdb-frontend
         repl
@@ -102,8 +103,21 @@
       url = "github:LavaDesu/powercord-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin-discord = {
+      url = "github:catppuccin/discord";
+      flake = false;
+    };
     discord-tweaks = {
       url = "github:NurMarvin/discord-tweaks";
+      flake = false;
+    };
+    powercord-image-tools = {
+      url = "github:powerfart-plugins/image-tools";
+      flake = false;
+    };
+
+    catppuccin-helix = {
+      url = "github:catppuccin/helix";
       flake = false;
     };
 

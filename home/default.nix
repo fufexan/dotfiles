@@ -45,7 +45,8 @@ in {
     gh
     # messaging
     (discord-plugged.override {
-      plugins = [inputs.discord-tweaks];
+      plugins = [inputs.discord-tweaks inputs.powercord-image-tools];
+      themes = [inputs.catppuccin-discord];
     })
     discord-chromium
     tdesktop
@@ -74,8 +75,11 @@ in {
     };
 
     theme = {
-      name = "Orchis-Orange-Dark-Compact";
-      package = pkgs.orchis-theme.override {tweaks = ["primary" "compact"];};
+      name = "Catppuccin-orange-dark-compact";
+      package = pkgs.catppuccin-gtk.override {
+        size = "compact";
+        color = "orange";
+      };
     };
   };
 
