@@ -27,12 +27,14 @@ colors: let
     [autostart]
     0_environment = dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY
     1_hm = systemctl --user start hm-graphical-session.target
+    2_eww = eww daemon
+
     autostart_wf_shell = false
     background = wf-background
     idle = swayidle -w \
-             timeout 600 'swaylock' \
+             timeout 360 'swaylock' \
              before-sleep 'swaylock'
-    panel = waybar
+    panel = eww open bar
 
     [blur]
     blur_by_default = type is "toplevel"
@@ -66,48 +68,62 @@ colors: let
     binding_next = KEY_NEXTSONG
     binding_pause = KEY_PLAYPAUSE
     binding_prev = KEY_PREVIOUSSONG
-    binding_screenshot = <shift> KEY_PRINT | <shift> KEY_SYSRQ
-    binding_screenshot_interactive = KEY_SYSRQ | KEY_PRINT
+    binding_screenshot = <shift> KEY_PRINT | <super> <shift> KEY_R
+    binding_screenshot_interactive = KEY_PRINT | <super> <shift> <ctrl> KEY_R
     binding_terminal = <super> KEY_ENTER
 
-    command_launcher = wofi --show=drun
-    command_light_down = light -U 2
-    command_light_up = light -A 2
+    command_launcher = wofi --show=drun --allow-images
+    command_light_down = light -U 5
+    command_light_up = light -A 5
     command_lock = swaylock
     command_logout = wlogout
     command_mute = pulsemixer --toggle-mute
     command_mic_mute = amixer set Capture toggle
     command_next = playerctl next
     command_pause = playerctl play-pause
-    command_prev = playerctl prev
-    command_screenshot = grim -g "$(slurp -d)" - | wl-copy
-    command_screenshot_interactive = slurp | grim -g - ~/Pictures/ss/$(date '+%F_%T').png
+    command_prev = playerctl previous
+    command_screenshot = grim -g "$(slurp)" - | wl-copy -t image/png
+    command_screenshot_interactive = grim -g "$(slurp)" - ~/Pictures/ss/$(date '+%F_%T').png | wl-copy -t image/png
     command_terminal = alacritty
-    command_volume_down = pulsemixer --change-volume -5
-    command_volume_up = pulsemixer --change-volume +5
+    command_volume_down = pulsemixer --change-volume -6
+    command_volume_up = pulsemixer --change-volume +6
 
     repeatable_binding_light_down = KEY_BRIGHTNESSDOWN
     repeatable_binding_light_up = KEY_BRIGHTNESSUP
     repeatable_binding_volume_down = KEY_VOLUMEDOWN
     repeatable_binding_volume_up = KEY_VOLUMEUP
-    command_side_menu = ~/.config/eww/scripts/open_side_menu.sh
-    binding_side_menu = <super> KEY_S
 
     [core]
-    background_color = \${xrgbaColors.base00}
+    background_color = #${xrgbaColors.base00}
     close_top_view = <super> KEY_Q | <alt> KEY_F4
     focus_button_with_modifiers = false
     focus_buttons = BTN_LEFT | BTN_MIDDLE | BTN_RIGHT
     focus_buttons_passthrough = true
     max_render_time = 7
-    plugins = autostart blur command decoration expo fast-switcher idle matcher move oswitch place resize simple-tile vswipe window-rules zoom
-    vheight = 0
-    vwidth = 9
+    plugins = autostart \
+      blur \
+      command \
+      decoration \
+      expo \
+      fast-switcher \
+      idle \
+      matcher \
+      move \
+      oswitch \
+      place \
+      resize \
+      simple-tile \
+      vswipe \
+      window-rules \
+      wrot \
+      zoom
+    vheight = 3
+    vwidth = 3
     xwayland = true
 
     [cube]
     activate = <alt> <ctrl> BTN_LEFT
-    background = \${xrgbaColors.base00}
+    background = #${xrgbaColors.base00}
     background_mode = simple
     cubemap_image =
     deform = 0
@@ -123,16 +139,16 @@ colors: let
     zoom = 0.100000
 
     [decoration]
-    active_color = \${xrgbaColors.base00}
+    active_color = #${xrgbaColors.base00}
     border_size = 0
     button_order = minimize maximize close
     font = Roboto
     ignore_views = none
-    inactive_color = \${xrgbaColors.base04}
+    inactive_color = #${xrgbaColors.base04}
     title_height = 20
 
     [expo]
-    background = \${xrgbaColors.base00}
+    background = #${xrgbaColors.base00}
     duration = 50
     offset = 10
     select_workspace_1 = KEY_1
@@ -233,14 +249,14 @@ colors: let
 
     [scale]
     allow_zoom = false
-    bg_color = \${xrgbaColors.base00}
+    bg_color = #${xrgbaColors.base00}
     duration = 750
     inactive_alpha = 0.750000
     interact = false
     middle_click_close = false
     spacing = 50
-    text_color = \${xrgbaColors.base00}
-    title_font_size = 16
+    text_color = #${xrgbaColors.base00}
+    title_font_size = 14
     title_overlay = all
     title_position = center
     toggle = <super> KEY_P
@@ -253,10 +269,10 @@ colors: let
     view_thumbnail_scale = 1.000000
 
     [vswipe]
-    background = \${xrgbaColors.base00}
+    background = #${xrgbaColors.base00}
     duration = 180
     enable_smooth_transition = true
-    enable_vertical = false
+    enable_vertical = true
     fingers = 3
     gap = 32.000000
     speed_cap = 0.500000
@@ -264,7 +280,7 @@ colors: let
     #threshold = 0.250000
 
     [vswitch]
-    background = \${xrgbaColors.base00}
+    background = #${xrgbaColors.base00}
     binding_down = <ctrl> <super> KEY_DOWN
     binding_left = <ctrl> <super> KEY_LEFT
     binding_right = <ctrl> <super> KEY_RIGHT
