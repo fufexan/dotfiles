@@ -6,7 +6,7 @@
 }:
 # Wayland config
 {
-  imports = [./sway.nix];
+  imports = [./sway.nix ../eww];
 
   home.packages = with pkgs; [
     # screenshot

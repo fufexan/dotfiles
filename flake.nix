@@ -72,6 +72,12 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    eww = {
+      url = "github:elkowar/eww";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+    };
+
     fu.url = "github:numtide/flake-utils";
 
     helix = {
