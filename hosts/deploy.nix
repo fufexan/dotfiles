@@ -15,6 +15,13 @@ inputs: {
         path = activate.nixos inputs.self.nixosConfigurations.io;
       };
     };
+    rog = {
+      hostname = "rog";
+      profiles.system = {
+        user = "root";
+        path = activate.nixos inputs.self.nixosConfigurations.rog;
+      };
+    };
     homesv = {
       hostname = "homesv";
       profiles.system = {

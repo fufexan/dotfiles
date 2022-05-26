@@ -28,8 +28,21 @@ in {
         ./io
         ../modules/desktop.nix
         ../modules/gamemode.nix
-        ../modules/gnome.nix
         {home-manager.users.mihai.imports = homeImports."mihai@io";}
+      ]
+      ++ sharedModules
+      ++ desktopModules;
+
+    system = "x86_64-linux";
+  };
+
+  rog = nixosSystem {
+    modules =
+      [
+        ./rog
+        ../modules/desktop.nix
+        ../modules/gamemode.nix
+        {home-manager.users.mihai.imports = homeImports."mihai@rog";}
       ]
       ++ sharedModules
       ++ desktopModules;
