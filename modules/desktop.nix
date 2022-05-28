@@ -7,6 +7,7 @@
   fonts = {
     fonts = with pkgs; [
       # icon fonts
+      material-icons
       material-design-icons
 
       # normal fonts
@@ -101,6 +102,8 @@
     };
 
     udisks2.enable = true;
+
+    upower.enable = true;
 
     xserver = {
       enable = true;
