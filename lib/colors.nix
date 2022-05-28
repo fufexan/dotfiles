@@ -10,6 +10,7 @@ with lib; rec {
 
   # same as x but adds an alpha channel for transparency
   xrgba = c: "${c}88";
+  xargb = c: "88${c}";
 
   # convert rrggbb hex to rgba(r, g, b, a) css
   rgba = c: let

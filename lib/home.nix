@@ -8,8 +8,10 @@ inputs: let
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
     # normal hex values
     xcolors = mapAttrs (n: x) baseColors;
-    # argb hex values
+    # rgba hex values
     xrgbaColors = mapAttrs (n: xrgba) baseColors;
+    # argb hex values
+    xargbColors = mapAttrs (n: xargb) baseColors;
     # 0xABCDEF colors (alacritty)
     x0Colors = mapAttrs (n: x0) baseColors;
     # rgba(,,,) colors (css)
