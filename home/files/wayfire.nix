@@ -30,7 +30,7 @@ colors: let
     2_eww = eww daemon
 
     autostart_wf_shell = false
-    background = wf-background
+    background = swaybg -i ~/.config/wallpaper.jpg
     idle = swayidle -w \
              timeout 360 'swaylock' \
              before-sleep 'swaylock'
@@ -82,8 +82,8 @@ colors: let
     command_next = playerctl next
     command_pause = playerctl play-pause
     command_prev = playerctl previous
-    command_screenshot = grim -g "$(slurp)" - | wl-copy -t image/png
-    command_screenshot_interactive = grim -g "$(slurp)" - ~/Pictures/ss/$(date '+%F_%T').png | wl-copy -t image/png
+    command_screenshot = grim -g "$(slurp -d)" - | wl-copy -t image/png
+    command_screenshot_interactive = grim -g "$(slurp -d)" - ~/Pictures/ss/$(date '+%F_%T').png | wl-copy -t image/png
     command_terminal = alacritty
     command_volume_down = pulsemixer --change-volume -6
     command_volume_up = pulsemixer --change-volume +6
@@ -327,10 +327,6 @@ colors: let
     smoothing_duration = 300
     speed = 0.010000
 
-    [output:eDP-1]
-    layout=0@0
-    scale=2
-
     [simple-tile]
     button_move = <super> BTN_LEFT
     button_resize = <super> BTN_RIGHT
@@ -343,7 +339,6 @@ colors: let
     key_toggle = <super> KEY_T
     tile_by_default = type is "toplevel"
     #wm-actions.toggle_always_on_top
-
   '';
 in
   wayfire-config
