@@ -90,6 +90,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprland = {
+      url = "github:vaxerski/hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
