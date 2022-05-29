@@ -7,7 +7,7 @@
 }:
 # Wayland config
 let
-  xcolors = colors.xrgbaColors;
+  xcolors = colors.xcolors;
 in {
   imports = [
     ../eww

@@ -68,8 +68,8 @@ colors: let
     binding_next = KEY_NEXTSONG
     binding_pause = KEY_PLAYPAUSE
     binding_prev = KEY_PREVIOUSSONG
-    binding_screenshot = <shift> KEY_PRINT | <super> <shift> KEY_R
-    binding_screenshot_interactive = KEY_PRINT | <super> <shift> <ctrl> KEY_R
+    binding_screenshot = KEY_PRINT | <super> <shift> KEY_R
+    binding_screenshot_interactive = <ctrl> KEY_PRINT | <super> <shift> <ctrl> KEY_R
     binding_terminal = <super> KEY_ENTER
 
     command_launcher = wofi --show=drun --allow-images

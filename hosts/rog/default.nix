@@ -68,7 +68,7 @@
   services = {
     kmonad.configfiles = [./main.kbd];
 
-    # pipewire.lowLatency.enable = true;
+    pipewire.lowLatency.enable = true;
 
     power-profiles-daemon.enable = false;
 

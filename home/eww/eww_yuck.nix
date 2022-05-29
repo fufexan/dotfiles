@@ -2,6 +2,7 @@ pkgs: let
   awkf = "${pkgs.gawk}/bin/awk '{ print $1 }'";
   awks = "${pkgs.gawk}/bin/awk -F'[][]' '{ print $2 }' | tr -d '%'";
   amixer = "${pkgs.alsa-utils}/bin/amixer -D pipewire";
+  bc = "${pkgs.bc}/bin/bc";
   pm = "${pkgs.pulsemixer}/bin/pulsemixer";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
 
@@ -40,6 +41,7 @@ pkgs: let
     (defpoll current_status :interval "1s"  "${music} time")
     (defpoll song_position :interval "1s"  "date -d@`${playerctl} position` +%M:%S")
     (defpoll song_time :interval "1s"  "date -d@`${music} ctime` +%M:%S")
+    (defpoll song_ctime :interval "1s"  "${music} ctime")
     (defpoll song_status :interval "1s"  "${music} status")
     (defpoll cover_art :interval "1s"  "${music} cover")
 
@@ -121,7 +123,7 @@ pkgs: let
         :tooltip "''${volume_percent}%"
         :max 100
         :min 0
-        :onchange "${pm} --set-volume {}" )))))
+        :onchange "${pm} --set-volume $(printf %.0f '{}')" )))))
 
     (defwidget bright []
       (eventbox :onhover "eww update br_reveal=true" :onhoverlost "eww update br_reveal=false"
@@ -290,7 +292,7 @@ pkgs: let
       (scale :value volume_percent
         :space-evenly "false"
         :orientation "h"
-        :onchange "${pm} --set-volume {}"
+        :onchange "${pm} --set-volume $(printf %.0f '{}')"
         :tooltip "volume on ''${volume_percent}%"
         :max 100
         :min 0))))
@@ -369,10 +371,12 @@ pkgs: let
                 :text song_time))
         (box :class "music_bar"
           :space-evenly "false"
-            (scale :onscroll "${pkgs.playerctl}/bin/playerctl position {}+"
+            (scale
+              ;; disabled as it will cue the song when window is open
+              ;; :onchange "${playerctl} position `${bc} <<< \"''${song_ctime} * {} / 100\"`"
               :min 0
               :max 100
-              :active "true"
+              :active "false"
               :value current_status)))))
 
     (defwindow music_win :stacking "fg" :focusable "false"
