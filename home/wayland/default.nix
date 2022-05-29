@@ -2,11 +2,18 @@
   config,
   pkgs,
   lib,
+  colors,
   ...
 }:
 # Wayland config
-{
-  imports = [./sway.nix ../eww];
+let
+  xcolors = colors.xrgbaColors;
+in {
+  imports = [
+    ../eww
+    ./hyprland
+    ./sway.nix
+  ];
 
   home.packages = with pkgs; [
     # screenshot
@@ -14,13 +21,15 @@
     slurp
 
     # idle/lock
-    swaylock
+    swaybg
+    swaylock-effects
 
     # wm
     wayfire
 
     # utils
     wl-clipboard
+    wlr-randr
     wlogout
     wofi
   ];
@@ -33,84 +42,21 @@
   };
 
   programs = {
-    firefox.package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-      forceWayland = true;
-      extraPolicies = {
-        ExtensionSettings = {};
-      };
-    };
+    firefox.package = pkgs.firefox-wayland;
 
     mako = {
       enable = true;
-      borderRadius = 10;
+      borderRadius = 16;
       borderSize = 0;
       defaultTimeout = 5000;
-      font = "Roboto Regular 10";
+      font = "Roboto Regular 12";
       margin = "4,4";
+      backgroundColor = "#${xcolors.base01}";
+      textColor = "#${xcolors.base06}";
     };
   };
 
   services = {
-    kanshi = {
-      enable = false;
-      profiles = {
-        undocked = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 2.0;
-            }
-          ];
-        };
-        docked-all = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 2.0;
-              position = "1366,0";
-            }
-            {
-              criteria = "DP-1";
-              position = "0,0";
-            }
-            {
-              criteria = "DP-2";
-              position = "1280,0";
-            }
-          ];
-        };
-
-        docked1 = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 2.0;
-              position = "0,0";
-            }
-            {
-              criteria = "DP-1";
-              position = "1280,0";
-            }
-          ];
-        };
-
-        docked2 = {
-          outputs = [
-            {
-              criteria = "eDP-1";
-              scale = 2.0;
-              position = "0,0";
-            }
-            {
-              criteria = "DP-2";
-              position = "1280,0";
-            }
-          ];
-        };
-      };
-      systemdTarget = "graphical-session.target";
-    };
-
     wlsunset = {
       enable = true;
       latitude = "46.0";

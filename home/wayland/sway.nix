@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  imports = [./waybar];
+  #imports = [./waybar];
 
   services.swayidle = {
     enable = true;
@@ -49,18 +49,18 @@
 
         # toggle output scaling
         output = "eDP-1";
-        toggle-scaling = pkgs.writeShellScript "sway-scale-toggle" ''
-          S=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '.[] | select(any(. == "${output}")).scale')
-          [ $S = 2 ] && S=1 || S=2
-          swaymsg output "${output}" scale $S
-        '';
+        # toggle-scaling = pkgs.writeShellScript "sway-scale-toggle" ''
+        #   S=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '.[] | select(any(. == "${output}")).scale')
+        #   [ $S = 2 ] && S=1 || S=2
+        #   swaymsg output "${output}" scale $S
+        # '';
       in
         lib.mkOptionDefault {
           "${m}+Return" = "exec ${sway.terminal}";
           "${m}+q" = "kill";
           "${m}+space" = "exec ${sway.menu}";
           # Fn + F7
-          "${m}+semicolon" = "exec ${toggle-scaling}";
+          # "${m}+semicolon" = "exec ${toggle-scaling}";
           # screenshots
           "Ctrl+Print" = "exec grim -c - ~/Pictures/ss/$(date '+%F_%T').png";
           "Print" = "exec slurp | grim -g - ~/Pictures/ss/$(date '+%F_%T').png";
@@ -100,9 +100,8 @@
 
       output = {
         "*" = {
-          bg = "~/Pictures/wallpapers/artworks/emi_crop.jpg fill";
+          bg = "~/.config/wallpaper.jpg fill";
           max_render_time = "7";
-          scale = "2";
         };
       };
     };
@@ -110,10 +109,6 @@
     extraConfig = ''
       smart_borders on
       smart_gaps on
-    '';
-
-    extraSessionCommands = ''
-      export _XWAYLAND_GLOBAL_OUTPUT_SCALE=2;
     '';
 
     wrapperFeatures = {gtk = true;};

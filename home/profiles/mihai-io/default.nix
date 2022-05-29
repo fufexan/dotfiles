@@ -16,5 +16,65 @@
     polybar.enable = mkForce false;
     random-background.enable = mkForce false;
     redshift.enable = mkForce false;
+
+    kanshi = {
+      enable = true;
+      profiles = {
+        undocked = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+            }
+          ];
+        };
+        docked-all = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              position = "1366,0";
+            }
+            {
+              criteria = "DP-1";
+              position = "0,0";
+            }
+            {
+              criteria = "DP-2";
+              position = "1280,0";
+            }
+          ];
+        };
+
+        docked1 = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              position = "0,0";
+            }
+            {
+              criteria = "DP-1";
+              position = "1280,0";
+            }
+          ];
+        };
+
+        docked2 = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              scale = 2.0;
+              position = "0,0";
+            }
+            {
+              criteria = "DP-2";
+              position = "1280,0";
+            }
+          ];
+        };
+      };
+      systemdTarget = "graphical-session.target";
+    };
   };
 }
