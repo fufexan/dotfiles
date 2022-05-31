@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -68,7 +69,15 @@
   };
 
   services = {
-    kmonad.configfiles = [./main.kbd];
+    kmonad.keyboards = {
+      rog = {
+        name = "rog";
+        device = "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd";
+        fallthrough = true;
+        allowCommands = false;
+        config = builtins.readFile "${inputs.self}/modules/main.kbd";
+      };
+    };
 
     pipewire.lowLatency.enable = true;
 
@@ -83,7 +92,8 @@
       };
     };
 
-    xserver.enable = lib.mkForce false;
+    xserver.displayManager.gdm.enable = lib.mkForce false;
+    xserver.displayManager.startx.enable = true;
 
     udev.extraRules = ''
       # add my android device to adbusers

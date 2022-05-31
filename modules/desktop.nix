@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   fonts = {
@@ -91,7 +92,18 @@
 
     geoclue2.enable = true;
 
-    kmonad.enable = true;
+    kmonad = {
+      enable = true;
+      keyboards = {
+        one2mini = {
+          name = "one2mini";
+          device = "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd";
+          fallthrough = true;
+          allowCommands = false;
+          config = builtins.readFile "${inputs.self}/modules/main.kbd";
+        };
+      };
+    };
 
     pipewire = {
       enable = true;

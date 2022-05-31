@@ -1,13 +1,3 @@
-(defcfg
-  input  (device-file "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd")
-  output (uinput-sink "KMonad"
-    "/run/current-system/sw/bin/sleep 1 && /run/current-system/sw/bin/setxkbmap -option compose:ralt")
-  cmp-seq ralt
-  cmp-seq-delay 5
-  fallthrough true
-  allow-cmd false
-)
-
 (defsrc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \

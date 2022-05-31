@@ -15,7 +15,7 @@ inputs: let
   ];
 
   desktopModules = [
-    inputs.kmonad.nixosModule
+    inputs.kmonad.nixosModules.default
     inputs.nix-gaming.nixosModules.default
   ];
 

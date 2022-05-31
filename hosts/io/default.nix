@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -71,7 +72,15 @@
   services = {
     btrfs.autoScrub.enable = true;
 
-    kmonad.configfiles = [./main.kbd];
+    kmonad.keyboards = {
+      io = {
+        name = "io";
+        device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+        fallthrough = true;
+        allowCommands = false;
+        config = builtins.readFile "${inputs.self}/modules/main.kbd";
+      };
+    };
 
     pipewire.lowLatency.enable = true;
 

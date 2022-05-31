@@ -49,7 +49,6 @@
     packages = lib.genAttrs ["x86_64-linux"] (system: {
       inherit
         (pkgs.${system})
-        catppuccin-gtk
         discord-canary-electron
         gdb-frontend
         hyprland
@@ -140,7 +139,7 @@
       inputs.utils.follows = "fu";
     };
 
-    wlroots = {
+    wlroots-hyprland = {
       url = "gitlab:wlroots/wlroots?host=gitlab.freedesktop.org";
       flake = false;
     };
