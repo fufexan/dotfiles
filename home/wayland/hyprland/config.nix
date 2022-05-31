@@ -112,16 +112,16 @@
     bind=SUPER,9,workspace,9
     bind=SUPER,0,workspace,10
 
-    bind=SUPERSHIFT,1,movetoworkspace,!
-    bind=SUPERSHIFT,2,movetoworkspace,@
-    bind=SUPERSHIFT,3,movetoworkspace,#
-    bind=SUPERSHIFT,4,movetoworkspace,$
-    bind=SUPERSHIFT,5,movetoworkspace,%
-    bind=SUPERSHIFT,6,movetoworkspace,^
-    bind=SUPERSHIFT,7,movetoworkspace,&
-    bind=SUPERSHIFT,8,movetoworkspace,*
-    bind=SUPERSHIFT,9,movetoworkspace,(
-    bind=SUPERSHIFT,0,movetoworkspace,)
+    bind=SUPERSHIFT,exclam,movetoworkspace,1
+    bind=SUPERSHIFT,at,movetoworkspace,2
+    bind=SUPERSHIFT,numbersign,movetoworkspace,3
+    bind=SUPERSHIFT,dollar,movetoworkspace,4
+    bind=SUPERSHIFT,percent,movetoworkspace,5
+    bind=SUPERSHIFT,asciicircum,movetoworkspace,6
+    bind=SUPERSHIFT,ampersand,movetoworkspace,7
+    bind=SUPERSHIFT,asterisk,movetoworkspace,8
+    bind=SUPERSHIFT,parenleft,movetoworkspace,9
+    bind=SUPERSHIFT,parenright,movetoworkspace,10
   '';
 in
   config

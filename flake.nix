@@ -140,7 +140,7 @@
     };
 
     wlroots-hyprland = {
-      url = "gitlab:wlroots/wlroots?host=gitlab.freedesktop.org";
+      url = "gitlab:wlroots/wlroots/75d31509db8c28e8379fe9570118ef8c82284581?host=gitlab.freedesktop.org";
       flake = false;
     };
   };

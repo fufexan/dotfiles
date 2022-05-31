@@ -43,10 +43,17 @@ inputs: final: prev: rec {
     }))
     .override {inherit (final) xwayland;};
 
-  hyprland = inputs.hyprland.packages.${prev.system}.default.override {
+  hyprland = (inputs.hyprland.packages.${prev.system}.default.override {
     wlroots = wlroots-hyprland;
     inherit (final) xwayland;
-  };
+  }).overrideAttrs(_: {
+    # reverts commit that switched to using wlroots from submodule
+    prePatch = "";
+    patches = [ ./patches/hyprland-wlroots.patch ];
+    postPatch = ''
+      make config
+    '';
+  });
 
   xwayland = prev.xwayland.overrideAttrs (_: {
     patches = [
