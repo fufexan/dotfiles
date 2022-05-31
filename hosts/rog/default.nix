@@ -57,7 +57,9 @@
 
   networking.hostName = "rog";
 
-  # powerManagement.powertop.enable = true;
+  nix.buildMachines = lib.mkForce [];
+
+  powerManagement.powertop.enable = true;
 
   programs = {
     adb.enable = true;
