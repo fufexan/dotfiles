@@ -1,5 +1,32 @@
-let
+{colors, ...}: let
+  c = colors.xcolors;
   eww_scss = ''
+    /* Catppuccin theme */
+    $rosewater:   #F5E0DC;
+    $flamingo:    #F2CDCD;
+    $mauve:       #DDB6F2;
+    $pink:        #F5C2E7;
+    $maroon:      #E8A2AF;
+    $red:         #F28FAD;
+    $peach:       #F8BD96;
+    $yellow:      #FAE3B0;
+    $green:       #ABE9B3;
+    $teal:        #B5E8E0;
+    $blue:        #96CDFB;
+    $sky:         #89DCEB;
+    $lavender:    #C9CBFF;
+
+    $crust:       #11111b;
+    $black0:      #161320;
+    $black1:      #1A1826;
+    $black2:      #1E1E2E;
+    $black3:      #302D41;
+    $black4:      #575268;
+    $gray0:       #6E6C7E;
+    $gray1:       #988BA2;
+    $gray2:       #C3BAC6;
+    $white:       #D9E0EE;   
+
     *{
       all: unset;
       font-family: Roboto;
@@ -8,7 +35,7 @@ let
 
     /** General **/
     .bar_class {
-      background-color: #0f0f17;
+      background-color: $crust;
     }
     .module {
       margin: 0px 0px 0px 0px;
@@ -16,7 +43,7 @@ let
 
     /** tooltip **/
     tooltip.background {
-      background-color: #0f0f17;
+      background-color: $crust;
       border-radius: 10px;
       color: #bfc9db;
     }
@@ -28,64 +55,63 @@ let
 
     /** Widgets **/
     .clock_time_sep {
-      color: #bfc9db;
+      color: $gray2;
       margin: -1px 0px 0px 0px;
     }
     .clock_date_class {
       margin: 0px 10px 0px -1px;
-      color: #d7beda;
+      color: $flamingo;
     }
     .clock_minute_class {
       margin: 0px 10px 0px 3px;
-      color: #bfc9db;
+      color: $white;
     }
-
     .clock_time_class {
-      color: #bfc9db;
+      color: $white;
       font-weight: bold;
       margin: 0px 5px 0px 0px;
     }
 
 
     .membar {
-      color: #e0b089;
+      color: $yellow;
       background-color: #38384d;
       border-radius: 10px;
     }
     .batbar {
-      color: #afbea2;
+      color: $green;
       background-color: #38384d;
       border-radius: 10px;
     }
     .brightbar trough highlight {
-      background-image: linear-gradient(to right, #e4c9af 30%, #f2cdcd 50%, #e0b089 100% *50);
+      background-image: linear-gradient(to right, $yellow 30%, $peach 50%, $maroon 100% *50);
       border-radius: 10px;
     }
     .volbar trough highlight {
-      background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+      background-image: linear-gradient(to right, $teal 30%, $blue 50%, $sky 100% *50);
       border-radius: 10px;
     }
     .volume_icon {
-      color: #a1bdce;
+      color: $blue;
       margin: 0px 10px 0px 10px;
     }
 
 
     .module_essid {
       font-size: 14;
-      color: #a1bdce;
+      color: $blue;
       margin: 0px 10px 0px 0px;
     }
     .module-wif {
-      color: #a1bdce;
+      color: $blue;
       margin: 0px 10px 0px 5px;
     }
 
     .iconmem {
-      color: #e0b089;
+      color: $yellow;
     }
     .iconbat {
-      color: #afbea2;
+      color: $green;
     }
     .iconbat, .iconmem {
       margin: 5px;
@@ -96,7 +122,7 @@ let
 
     .bright_icon {
       font-size: 20;
-      color: #e4c9af;
+      color: $yellow;
       margin: 0px 10px 0px 5px;
     }
 
@@ -107,19 +133,19 @@ let
     }
 
     .mem_module {
-      background-color: #0f0f17;
+      background-color: $crust;
       margin: 0px 10px 0px 3px;
     }
 
     .bat_module {
-      background-color: #0f0f17;
+      background-color: $crust;
       margin: 0px 10px 0px 3px;
     }
 
     scale trough {
       all: unset;
       background-color: #22242b;
-      box-shadow: 0 2px 3px 2px #06060b;
+      box-shadow: 0 2px 3px 2px $black1;
       border-radius: 16px;
       min-height: 10px;
       min-width: 70px;
@@ -129,7 +155,7 @@ let
     .works {
       font-weight: normal;
       margin: 10px 0px 0px 20px;
-      background-color: #0f0f17;
+      background-color: $crust;
     }
 
     /* workspaces */
@@ -163,29 +189,29 @@ let
     }
 
     .song {
-      color: #a1bdce;
+      color: $white;
       font-weight: bold;
     }
 
     .song_button {
-      color: #a1bdce;
+      color: $white;
       margin: 3px 0px 0px 5px;
     }
 
     .song_module {
-      color: #a1bdce;
+      color: $white;
     }
 
     // Calendar
     .cal {
-      background-color: #0f0f17;
+      background-color: $crust;
       font-family: JetBrainsMono Nerd Font;
       font-weight: normal;
       border-radius: 16px;
 
     	.cal-in {
     	  padding: 0px 10px 0px 10px;
-    	  color: #bfc9db;
+    	  color: $white;
 
     		.cal {
     	    &.highlight {
@@ -199,17 +225,17 @@ let
     }
 
     calendar:selected {
-      color: #a1bdce;
+      color: $blue;
     }
     calendar.header {
-      color: #a1bdce;
+      color: $gray2;
       font-weight: bold;
     }
     calendar.button {
       color: #afbea2;
     }
     calendar.highlight {
-      color: #a1bdce;
+      color: $blue;
       font-weight: bold;
     }
     calendar:indeterminate {
@@ -236,22 +262,22 @@ let
       margin: 30px;
     }
     .sys_win {
-      background-color: #0f0f17;
+      background-color: $crust;
       border-radius: 16px;
     }
     .sys_bat {
-      color: #afbea2;
+      color: $green;
       background-color: #38384d;
     }
     .sys_mem {
-      color: #e4c9af;
+      color: $yellow;
       background-color: #38384d;
     }
     .sys_icon_bat, .sys_text_bat {
-      color: #afbea2;
+      color: $green;
     }
     .sys_icon_mem, .sys_text_mem {
-      color: #e4c9af;
+      color: $yellow;
     }
     .sys_bat_box {
       margin: 15px 10px 10px 20px;
@@ -261,7 +287,7 @@ let
     }
 
     .music_pop {
-      background-color: #0f0f17;
+      background-color: $crust;
       border-radius: 16px;
     }
 
@@ -270,26 +296,26 @@ let
       background-position: center;
       min-height: 170px;
       min-width: 170px;
-      box-shadow: 5px 5px 5px 5px #06060b;
+      box-shadow: 5px 5px 5px 5px $black1;
       margin: 20px;
       border-radius: 16px;
     }
 
     .music {
-      color: #a1bdce;
+      color: $white;
       font-weight: bold;
       margin : 20px 20px 0px 0px;
     }
 
     .music_artist {
-      color: #bbc5d7;
+      color: $gray2;
       font-size: 16px;
       margin-right: 20px;
     }
 
     .music_button {
       font-family: JetBrainsMono Nerd Font;
-      color: #bbc5d7;
+      color: $white;
     }
 
     .music_button_box {
@@ -298,17 +324,17 @@ let
 
     .music_time {
       font-size: 14px;
-      color: #bbc5d7;
+      color: $gray2;
       margin: 0 20px -40px 0;
     }
 
     .music_bar scale trough highlight {
-      background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+      background-image: linear-gradient(to right, $teal 30%, $blue 50%, $sky 100% *50);
       border-radius: 24px;
     }
     .music_bar scale trough {
       background-color: #232232;
-      box-shadow: 0 6px 5px 2px #06060b;
+      box-shadow: 0 6px 5px 2px $black1;
       border-radius: 24px;
       min-height: 10px;
       min-width: 200px;
@@ -316,7 +342,7 @@ let
     }
 
     .audio-box {
-      background-color: #0f0f17;
+      background-color: $crust;
       border-radius: 16px;
     }
     .speaker_icon {
@@ -330,7 +356,7 @@ let
     }
 
     .speaker_text {
-      color: #a1bdce;
+      color: $blue;
       font-size : 26px;
       font-weight : bold;
       margin: 20px 0px 0px 0px;
@@ -338,13 +364,13 @@ let
 
     .speaker_bar scale trough highlight {
       all: unset;
-      background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+      background-image: linear-gradient(to right, $teal 30%, $blue 50%, $sky 100% *50);
       border-radius: 24px;
     }
     .speaker_bar scale trough {
       all: unset;
       background-color: #232232;
-      box-shadow: 0 6px 5px 2px #06060b;
+      box-shadow: 0 6px 5px 2px $black1;
       border-radius: 24px;
       min-height: 13px;
       min-width: 120px;
@@ -362,7 +388,7 @@ let
     }
 
     .mic_text {
-      color: #a1bdce;
+      color: $blue;
       font-size : 26px;
       font-weight : bold;
       margin: 0px 0px 0px 0px;
@@ -370,12 +396,12 @@ let
 
     .mic_bar scale trough highlight {
       all: unset;
-      background-image: linear-gradient(to right, #afcee0 30%, #a1bdce 50%, #77a5bf 100% *50);
+      background-image: linear-gradient(to right, $teal 30%, $blue 50%, $sky 100% *50);
       border-radius: 24px;
     }
     .mic_bar scale trough {
       all: unset;
-      box-shadow: 0 6px 5px 2px #06060b;
+      box-shadow: 0 6px 5px 2px $black1;
       background-color: #232232;
       border-radius: 24px;
       min-height: 13px;

@@ -3,7 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
+} @ args: let
   package = inputs.eww.packages.${pkgs.system}.eww-wayland;
 
   startscript = ''
@@ -13,8 +13,8 @@
 in {
   home.packages = [package];
 
-  xdg.configFile."eww/eww.yuck".text = import ./eww_yuck.nix pkgs;
-  xdg.configFile."eww/eww.scss".text = import ./eww_scss.nix;
+  xdg.configFile."eww/eww.yuck".text = import ./eww_yuck.nix args;
+  xdg.configFile."eww/eww.scss".text = import ./eww_scss.nix args;
   xdg.configFile."eww/images".source = ./images;
 
   systemd.user.services.eww = {

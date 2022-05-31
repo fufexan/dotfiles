@@ -1,4 +1,4 @@
-pkgs: let
+{pkgs, ...}: let
   awkf = "${pkgs.gawk}/bin/awk '{ print $1 }'";
   awks = "${pkgs.gawk}/bin/awk -F'[][]' '{ print $2 }' | tr -d '%'";
   amixer = "${pkgs.alsa-utils}/bin/amixer -D pipewire";
