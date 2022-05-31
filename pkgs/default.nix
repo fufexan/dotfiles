@@ -1,6 +1,4 @@
 inputs: final: prev: rec {
-  catppuccin-gtk = prev.callPackage ./catppuccin-gtk {};
-
   gdb-frontend = prev.callPackage ./gdb-frontend {};
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
@@ -24,9 +22,6 @@ inputs: final: prev: rec {
 
   waveform = prev.callPackage ./waveform {};
 
-  #wayfireApplications-unwrapped = prev.wayfireApplications-unwrapped.extend {
-  #  wayfire-plugins = prev.callPackage ./wayfire-plugins { };
-  #};
   wlroots = prev.wlroots.overrideAttrs (_: {
     patches = [
       (prev.fetchpatch {
@@ -38,6 +33,7 @@ inputs: final: prev: rec {
 
   wlroots-hyprland =
     (inputs.hyprland.packages.${prev.system}.wlroots.overrideAttrs (_: {
+      src = inputs.wlroots-hyprland;
       patches = [
         (prev.fetchpatch {
           url = "https://gitlab.freedesktop.org/lilydjwg/wlroots/-/commit/6c5ffcd1fee9e44780a6a8792f74ecfbe24a1ca7.diff";
