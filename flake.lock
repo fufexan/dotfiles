@@ -705,7 +705,8 @@
         "nixpkgs": "nixpkgs_4",
         "powercord": "powercord",
         "powercord-image-tools": "powercord-image-tools",
-        "rnix-lsp": "rnix-lsp"
+        "rnix-lsp": "rnix-lsp",
+        "wlroots": "wlroots_2"
       }
     },
     "rust-analyzer-src": {
@@ -756,6 +757,24 @@
         "owner": "wlroots",
         "repo": "wlroots",
         "rev": "75d31509db8c28e8379fe9570118ef8c82284581",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "gitlab.freedesktop.org",
+        "owner": "wlroots",
+        "repo": "wlroots",
+        "type": "gitlab"
+      }
+    },
+    "wlroots_2": {
+      "flake": false,
+      "locked": {
+        "host": "gitlab.freedesktop.org",
+        "lastModified": 1653997247,
+        "narHash": "sha256-xTXucnhPq/TIsHwPbzrRPM8o5rO7hjH0Oyf+teT+5dk=",
+        "owner": "wlroots",
+        "repo": "wlroots",
+        "rev": "638c5cda5116b4b7f6e1156e552945023688d83a",
         "type": "gitlab"
       },
       "original": {

@@ -9,7 +9,7 @@
     lib = import ./lib inputs;
     inherit (lib) genSystems;
 
-    overlays.default = import ./pkgs;
+    overlays.default = import ./pkgs inputs;
 
     pkgs = genSystems (system:
       import nixpkgs {
@@ -36,8 +36,8 @@
     devShells = genSystems (system: {
       default = pkgs.${system}.devshell.mkShell {
         packages = with pkgs.${system}; [
+          alejandra
           git
-          nixpkgs-fmt
           inputs.rnix-lsp.defaultPackage.${system}
           inputs.deploy-rs.defaultPackage.${system}
           repl
@@ -52,6 +52,7 @@
         catppuccin-gtk
         discord-canary-electron
         gdb-frontend
+        hyprland
         repl
         waveform
         ;
@@ -137,6 +138,11 @@
       inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
+    };
+
+    wlroots = {
+      url = "gitlab:wlroots/wlroots?host=gitlab.freedesktop.org";
+      flake = false;
     };
   };
 }

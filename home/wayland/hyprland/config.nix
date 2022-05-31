@@ -93,7 +93,7 @@
     bind=,Print,exec,grim -g $(slurp -d) - | wl-copy -t image/png
     bind=SUPERSHIFT,R,exec,grim -g $(slurp -d) - | wl-copy -t image/png
     # fullscreen
-    bind=CTRL,Print,exec,grim  - | wl-copy -t image/png
+    bind=CTRL,Print,exec,grim - | wl-copy -t image/png
     bind=SUPERSHIFTCTRL,R,exec,grim - | wl-copy -t image/png
 
     bind=SUPER,left,movefocus,l

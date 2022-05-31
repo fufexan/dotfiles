@@ -3,7 +3,7 @@
   inputs,
   ...
 } @ args: {
-  home.packages = [inputs.hyprland.packages.${pkgs.system}.default];
+  home.packages = [pkgs.hyprland];
 
   xdg.configFile."hypr/hyprland.conf".text = import ./config.nix args;
 

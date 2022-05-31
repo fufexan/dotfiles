@@ -25,7 +25,7 @@
     $gray0:       #6E6C7E;
     $gray1:       #988BA2;
     $gray2:       #C3BAC6;
-    $white:       #D9E0EE;   
+    $white:       #D9E0EE;
 
     *{
       all: unset;

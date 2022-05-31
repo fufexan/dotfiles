@@ -59,7 +59,15 @@ in {
     xournalpp
   ];
 
-  gtk = {
+  gtk = let
+    gtkconf = ''
+      decoration, decoration:backdrop, window {
+        box-shadow: none;
+        border: none;
+        margin: 0;
+      }
+    '';
+  in {
     enable = true;
 
     font = {
@@ -68,6 +76,7 @@ in {
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    gtk3.extraCss = gtkconf;
 
     iconTheme = {
       name = "Papirus-Dark";
