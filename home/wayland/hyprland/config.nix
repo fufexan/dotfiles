@@ -8,11 +8,12 @@
   config = ''
     # should be configured per-profile
     monitor=,1920x1080@144,0x0,1
-    workspace=DP-1,1
+    workspace=eDP-1,1
 
-    exec-once=systemctl --user start eww
-    exec-once=swaybg -i ~/.config/wallpaper.jpg;
+    exec-once=eww daemon; eww open bar
+    exec-once=swaybg -i ~/.config/wallpaper.jpg
     exec-once=swayidle -w timeout 360 'swaylock' before-sleep 'swaylock'
+    exec-once=mako
 
     input {
         kb_layout=
@@ -21,7 +22,7 @@
         kb_options=
         kb_rules=
 
-        follow_mouse=1
+        follow_mouse=0
         natural_scroll=0
     }
 
@@ -35,7 +36,7 @@
         col.active_border=0x${xargb.base06}
         col.inactive_border=0x${xargb.base02}
 
-        damage_tracking=monitor # experimental, monitor is 100% fine, but full might have some minor bugs, especially with high blur settings!
+        damage_tracking=full
     }
 
     decoration {
@@ -69,7 +70,6 @@
     #windowrule=pseudo,abc
     #windowrule=monitor 0,xyz
 
-    # example binds
     bind=SUPER,RETURN,exec,alacritty
     bind=SUPER,Q,killactive,
     bind=SUPERSHIFT,E,exec,pkill Hyprland
@@ -82,16 +82,16 @@
     bind=,XF86AudioPlay,exec,playerctl play-pause
     bind=,XF86AudioPrev,exec,playerctl previous
     bind=,XF86AudioNext,exec,playerctl next
-    bind=,XF86AudioLowerVolume,exec,pulsemixer --change-volume +6
-    bind=,XF86AudioRaiseVolume,exec,pulsemixer --change-volume -6
+    bind=,XF86AudioRaiseVolume,exec,pulsemixer --change-volume +6
+    bind=,XF86AudioLowerVolume,exec,pulsemixer --change-volume -6
     bind=,XF86AudioMute,exec,pulsemixer --mute
 
     bind=,XF86MonBrightnessUp,exec,light -A 5
     bind=,XF86MonBrightnessDown,exec,light -U 5
 
     # selection
-    bind=,Print,exec,grim -g $(slurp -d) - | wl-copy -t image/png
-    bind=SUPERSHIFT,R,exec,grim -g $(slurp -d) - | wl-copy -t image/png
+    bind=,Print,exec,grim -g $(slurp) - | wl-copy -t image/png
+    bind=SUPERSHIFT,R,exec,grim -g $(slurp) - | wl-copy -t image/png
     # fullscreen
     bind=CTRL,Print,exec,grim - | wl-copy -t image/png
     bind=SUPERSHIFTCTRL,R,exec,grim - | wl-copy -t image/png
@@ -112,16 +112,16 @@
     bind=SUPER,9,workspace,9
     bind=SUPER,0,workspace,10
 
-    bind=SUPERSHIFT,1,movetoworkspace,1
-    bind=SUPERSHIFT,2,movetoworkspace,2
-    bind=SUPERSHIFT,3,movetoworkspace,3
-    bind=SUPERSHIFT,4,movetoworkspace,4
-    bind=SUPERSHIFT,5,movetoworkspace,5
-    bind=SUPERSHIFT,6,movetoworkspace,6
-    bind=SUPERSHIFT,7,movetoworkspace,7
-    bind=SUPERSHIFT,8,movetoworkspace,8
-    bind=SUPERSHIFT,9,movetoworkspace,9
-    bind=SUPERSHIFT,0,movetoworkspace,10
+    bind=SUPERSHIFT,1,movetoworkspace,!
+    bind=SUPERSHIFT,2,movetoworkspace,@
+    bind=SUPERSHIFT,3,movetoworkspace,#
+    bind=SUPERSHIFT,4,movetoworkspace,$
+    bind=SUPERSHIFT,5,movetoworkspace,%
+    bind=SUPERSHIFT,6,movetoworkspace,^
+    bind=SUPERSHIFT,7,movetoworkspace,&
+    bind=SUPERSHIFT,8,movetoworkspace,*
+    bind=SUPERSHIFT,9,movetoworkspace,(
+    bind=SUPERSHIFT,0,movetoworkspace,)
   '';
 in
   config

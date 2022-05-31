@@ -59,7 +59,7 @@ in {
     xournalpp
   ];
 
-  gtk = let
+  xdg.configFile = let
     gtkconf = ''
       decoration, decoration:backdrop, window {
         box-shadow: none;
@@ -68,6 +68,11 @@ in {
       }
     '';
   in {
+    "gtk-3.0/gtk.css".text = gtkconf;
+    "gtk-4.0/gtk.css".text = gtkconf;
+  };
+
+  gtk = {
     enable = true;
 
     font = {
@@ -76,7 +81,11 @@ in {
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-    gtk3.extraCss = gtkconf;
+
+    cursorTheme = {
+      name = "Quintom_Ink";
+      package = pkgs.quintom-cursor-theme;
+    };
 
     iconTheme = {
       name = "Papirus-Dark";
@@ -85,10 +94,7 @@ in {
 
     theme = {
       name = "Catppuccin-orange-dark-compact";
-      package = pkgs.catppuccin-gtk.override {
-        size = "compact";
-        color = "orange";
-      };
+      package = pkgs.catppuccin-gtk.override {size = "compact";};
     };
   };
 

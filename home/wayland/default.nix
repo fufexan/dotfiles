@@ -51,8 +51,8 @@ in {
       defaultTimeout = 5000;
       font = "Roboto Regular 12";
       margin = "4,4";
-      backgroundColor = "#${xcolors.base01}";
-      textColor = "#${xcolors.base06}";
+      backgroundColor = xcolors.base01;
+      textColor = xcolors.base06;
     };
   };
 
