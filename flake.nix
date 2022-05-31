@@ -56,6 +56,8 @@
         waveform
         ;
     });
+
+    formatter = genSystems (system: pkgs.${system}.alejandra);
   };
 
   inputs = {
