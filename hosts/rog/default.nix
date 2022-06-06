@@ -7,6 +7,9 @@
 }: {
   imports = [./hardware-configuration.nix];
 
+  # binfmt
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+
   # kernel
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
   boot.kernelModules = ["acpi_call"];
@@ -54,6 +57,11 @@
     enableAllFirmware = true;
 
     opentabletdriver.enable = true;
+
+    opengl = {
+      extraPackages = with pkgs; [vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl];
+      extraPackages32 = with pkgs.pkgsi686Linux; [vaapiIntel libvdpau-va-gl vaapiVdpau];
+    };
   };
 
   networking.hostName = "rog";
@@ -69,12 +77,17 @@
   };
 
   services = {
+    dbus.packages = [pkgs.gcr];
+
     kmonad.keyboards = {
       rog = {
-        name = "rog";
+        # name = "rog";
         device = "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd";
-        fallthrough = true;
-        allowCommands = false;
+        defcfg = {
+          enable = true;
+          fallthrough = true;
+          allowCommands = false;
+        };
         config = builtins.readFile "${inputs.self}/modules/main.kbd";
       };
     };

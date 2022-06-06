@@ -94,12 +94,16 @@
 
     kmonad = {
       enable = true;
+      package = inputs.kmonad.packages.${pkgs.system}.default;
       keyboards = {
         one2mini = {
-          name = "one2mini";
+          # name = "one2mini";
           device = "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd";
-          fallthrough = true;
-          allowCommands = false;
+          defcfg = {
+            enable = true;
+            fallthrough = true;
+            allowCommands = false;
+          };
           config = builtins.readFile "${inputs.self}/modules/main.kbd";
         };
       };
