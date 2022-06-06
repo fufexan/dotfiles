@@ -6,8 +6,6 @@ inputs: final: prev: let
     })
   ];
 in rec {
-  gdb-frontend = prev.callPackage ./gdb-frontend {};
-
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
@@ -25,6 +23,10 @@ in rec {
       "--ignore-gpu-blocklist"
     ];
   };
+
+  gamescope = prev.callPackage ./gamescope {};
+
+  gdb-frontend = prev.callPackage ./gdb-frontend {};
 
   hyprland = inputs.hyprland.packages.${prev.system}.default.override {
     wlroots = (inputs.hyprland.packages.${prev.system}.wlroots.overrideAttrs (_: {patches = wlroots-patches;})).override {inherit (final) xwayland;};

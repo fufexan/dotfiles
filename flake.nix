@@ -50,6 +50,7 @@
       inherit
         (pkgs.${system})
         discord-canary-electron
+        gamescope
         gdb-frontend
         hyprland
         repl
