@@ -427,11 +427,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1654023946,
-        "narHash": "sha256-yCE0rN4l2zs/vfDOB6H3E4JlfZzb7x5kszW0dEJJFPk=",
+        "lastModified": 1654203793,
+        "narHash": "sha256-o8zH79yNz6HA14q16CUOx1MpqiLE37o+UpUiXljBVJU=",
         "owner": "vaxerski",
         "repo": "hyprland",
-        "rev": "471654d791abb1ea6c4740572fda6df53e6b24bf",
+        "rev": "f9c8a72e4689869a4373ce25b2458820027881e0",
         "type": "github"
       },
       "original": {
@@ -702,8 +702,7 @@
         "nixpkgs": "nixpkgs_4",
         "powercord": "powercord",
         "powercord-image-tools": "powercord-image-tools",
-        "rnix-lsp": "rnix-lsp",
-        "wlroots-hyprland": "wlroots-hyprland"
+        "rnix-lsp": "rnix-lsp"
       }
     },
     "rust-analyzer-src": {
@@ -749,24 +748,6 @@
       "flake": false,
       "locked": {
         "host": "gitlab.freedesktop.org",
-        "lastModified": 1653733431,
-        "narHash": "sha256-0JwNH2E9XlMVa7ZCsqxazpKwpZ2rW5QQjbk0DdZxa48=",
-        "owner": "wlroots",
-        "repo": "wlroots",
-        "rev": "93ee4c7684050807e959bb3b6d57826a72fba8c2",
-        "type": "gitlab"
-      },
-      "original": {
-        "host": "gitlab.freedesktop.org",
-        "owner": "wlroots",
-        "repo": "wlroots",
-        "type": "gitlab"
-      }
-    },
-    "wlroots-hyprland": {
-      "flake": false,
-      "locked": {
-        "host": "gitlab.freedesktop.org",
         "lastModified": 1653658290,
         "narHash": "sha256-zZaona39DOZNL93A1KG3zAi8vDttJBirxacq24hWCn4=",
         "owner": "wlroots",
@@ -778,7 +759,6 @@
         "host": "gitlab.freedesktop.org",
         "owner": "wlroots",
         "repo": "wlroots",
-        "rev": "75d31509db8c28e8379fe9570118ef8c82284581",
         "type": "gitlab"
       }
     }

@@ -5,14 +5,20 @@
   ...
 }: let
   xargb = colors.xargbColors;
+
+  grim = "${pkgs.grim}/bin/grim";
+  slurp = "${pkgs.slurp}/bin/slurp";
+  wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
+
   config = ''
     # should be configured per-profile
     monitor=,1920x1080@144,0x0,1
     workspace=eDP-1,1
 
-    exec-once=eww daemon; eww open bar
+    exec-once=dbus-update-activation-environment --systemd
+    exec-once=systemctl --user start hm-graphical-session.target
+    exec-once=systemctl --user start eww swayidle
     exec-once=swaybg -i ~/.config/wallpaper.jpg
-    exec-once=swayidle -w timeout 360 'swaylock' before-sleep 'swaylock'
     exec-once=mako
 
     input {
@@ -22,7 +28,8 @@
         kb_options=
         kb_rules=
 
-        follow_mouse=0
+        follow_mouse=1
+        force_no_accel=1
         natural_scroll=0
     }
 
@@ -54,7 +61,7 @@
         animation=windows,1,2,default
         animation=borders,1,2,default
         animation=fadein,1,2,default
-        animation=workspaces,1,2,default
+        animation=workspaces,1,2,slide
     }
 
     dwindle {
@@ -90,17 +97,18 @@
     bind=,XF86MonBrightnessDown,exec,light -U 5
 
     # selection
-    bind=,Print,exec,grim -g $(slurp) - | wl-copy -t image/png
-    bind=SUPERSHIFT,R,exec,grim -g $(slurp) - | wl-copy -t image/png
+    bind=,Print,exec,${grim} -g $(${slurp}) - | ${wl-copy} -t image/png
+    bind=SUPERSHIFT,R,exec,${grim} -g $(${slurp}) - | ${wl-copy} -t image/png
     # fullscreen
-    bind=CTRL,Print,exec,grim - | wl-copy -t image/png
-    bind=SUPERSHIFTCTRL,R,exec,grim - | wl-copy -t image/png
+    bind=CTRL,Print,exec,${grim} - | ${wl-copy} -t image/png
+    bind=SUPERSHIFTCTRL,R,exec,${grim} - | ${wl-copy} -t image/png
 
     bind=SUPER,left,movefocus,l
     bind=SUPER,right,movefocus,r
     bind=SUPER,up,movefocus,u
     bind=SUPER,down,movefocus,d
 
+    bind=SUPER,grave,togglespecialworkspace,
     bind=SUPER,1,workspace,1
     bind=SUPER,2,workspace,2
     bind=SUPER,3,workspace,3
