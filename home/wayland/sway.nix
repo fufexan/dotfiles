@@ -25,7 +25,7 @@
         resumeCommand = "swaymsg output * dpms on";
       }
       {
-        timeout = 300;
+        timeout = 360;
         command = "swaylock -fF";
       }
     ];
@@ -45,6 +45,9 @@
 
       keybindings = let
         sway = config.wayland.windowManager.sway.config;
+        grim = "${pkgs.grim}/bin/grim";
+        slurp = "${pkgs.slurp}/bin/slurp";
+        wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
         m = sway.modifier;
 
         # toggle output scaling
@@ -62,10 +65,10 @@
           # Fn + F7
           # "${m}+semicolon" = "exec ${toggle-scaling}";
           # screenshots
-          "Ctrl+Print" = "exec grim -c - ~/Pictures/ss/$(date '+%F_%T').png";
-          "Print" = "exec slurp | grim -g - ~/Pictures/ss/$(date '+%F_%T').png";
-          "${m}+Ctrl+Shift+r" = ''exec grim -c - | wl-copy'';
-          "${m}+Shift+r" = ''exec slurp | grim -g - | wl-copy'';
+          "Print" = ''exec ${grim} -g $(${slurp}) - | ${wl-copy} -t image/png'';
+          "${m}+Shift+r" = ''exec ${grim} -g $(${slurp}) - | ${wl-copy} -t image/png'';
+          "Ctrl+Print" = "exec ${grim} -c - ~/Pictures/Screenshots/$(date '+%F_%T').png";
+          "${m}+Ctrl+Shift+r" = ''exec ${grim} -c - ~/Pictures/Screenshots/$(date '+%F_%T').png'';
         };
 
       keycodebindings = {
@@ -84,6 +87,19 @@
       terminal = "alacritty";
       modifier = "Mod4";
       bars = [];
+
+      gaps = {
+        smartGaps = true;
+        smartBorders = "on";
+        outer = 5;
+        inner = 5;
+      };
+
+      startup = [
+        {command = "dbus-update-activation-environment --systemd";}
+        {command = "eww daemon; eww open bar";}
+        {command = "mako";}
+      ];
 
       input = {
         "type:pointer" = {

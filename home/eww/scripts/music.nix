@@ -62,7 +62,7 @@ pkgs: let
     	# Check if the file has a embbeded album art
     	if [ "$STATUS" -eq 0 ]; then
         if [[ $COVER_URL = https* ]]; then
-          curl $COVER_URL -o /tmp/cover_art.png
+          ${curl} $COVER_URL -o /tmp/cover_art.png
           echo "/tmp/cover_art.png"
         else
       		echo "$COVER_URL"

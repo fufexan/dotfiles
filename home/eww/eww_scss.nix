@@ -129,7 +129,7 @@
     .separ {
       color: #3e424f;
       font-weight: bold;
-      margin: 5px 5px;
+      margin: 0px 10px 0px 0px;
     }
 
     .mem_module {

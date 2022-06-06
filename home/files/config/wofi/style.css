@@ -1,26 +1,39 @@
-/* https://cloudninja.pw/docs/wofi.html */
-/* https://github.com/jjquin/swayarch/tree/master/.config/wofi */
 window {
-  border: 0;
-  background-color: #333333;
+    margin: 0px;
+    border: 1px solid #1A1826;
+    background-color: #161320;
 }
 
 #input {
-  border: 1px solid magenta;
-  background-color: #555555;
-  font-size: 18px;
+    margin: 5px;
+    border: none;
+    color: #f8f8f2;
+    background-color: #161320;
+}
+
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: #1E1D2F;
 }
 
 #outer-box {
-  margin: 10px;
+    margin: 5px;
+    border: none;
+    background-color: #1E1E2E;
 }
 
 #scroll {
-  margin: 5px 0px;
-  font-size: 16px;
-  color: #ccc;
+    margin: 0px;
+    border: none;
 }
 
-#scroll label {
-  margin: 2px 0px;
+#text {
+    margin: 5px;
+    border: none;
+    color: #f8f8f2;
+} 
+
+#entry:selected {
+    background-color: #302D41;
 }
