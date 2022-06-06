@@ -81,7 +81,6 @@
 
     kmonad.keyboards = {
       rog = {
-        # name = "rog";
         device = "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd";
         defcfg = {
           enable = true;

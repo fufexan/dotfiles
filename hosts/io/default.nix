@@ -76,8 +76,11 @@
       io = {
         name = "io";
         device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-        fallthrough = true;
-        allowCommands = false;
+        defcfg = {
+          enable = true;
+          fallthrough = true;
+          allowCommands = false;
+        };
         config = builtins.readFile "${inputs.self}/modules/main.kbd";
       };
     };

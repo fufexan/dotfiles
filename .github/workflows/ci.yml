@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2.4.0
+      - uses: cachix/install-nix-action@v17
         with:
-          fetch-depth: 0 # Nix Flakes doesn't work on shallow clones
-      - uses: cachix/install-nix-action@v16
-        with:
-          install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.7.0pre20220209_52f5231/install
-          extra_nix_config: experimental-features = nix-command flakes
+          install_url: https://releases.nixos.org/nix/nix-2.9.0/install
+          extra_nix_config: |
+            auto-optimise-store = true
+            experimental-features = nix-command flakes
       - run: nix flake check
