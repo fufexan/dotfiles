@@ -59,6 +59,12 @@ in {
     xournalpp
   ];
 
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
+
   xdg.configFile = let
     gtkconf = ''
       decoration, decoration:backdrop, window {
