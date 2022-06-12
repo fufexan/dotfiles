@@ -12,12 +12,15 @@
 
   config = ''
     # should be configured per-profile
-    monitor=,1920x1080@144,0x0,1
+    monitor=eDP-1,1920x1080@144,0x0,1
     workspace=eDP-1,1
+    monitor=HDMI-A-1,1366x768@60,1920x0,1
+    workspace=HDMI-A-1,10
 
-    exec-once=dbus-update-activation-environment --systemd
-    exec-once=systemctl --user start hm-graphical-session.target
-    exec-once=systemctl --user start eww swayidle
+    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY
+    exec-once=systemctl --user start graphical-session-pre.target
+    exec-once=systemctl --user start graphical-session.target
+    # exec-once=systemctl --user start eww swayidle
     exec-once=swaybg -i ~/.config/wallpaper.jpg
     exec-once=mako
 
@@ -97,18 +100,20 @@
     bind=,XF86MonBrightnessDown,exec,light -U 5
 
     # selection
-    bind=,Print,exec,${grim} -g $(${slurp}) - | ${wl-copy} -t image/png
-    bind=SUPERSHIFT,R,exec,${grim} -g $(${slurp}) - | ${wl-copy} -t image/png
+    bind=,Print,exec,${grim} -g $(${slurp}) | ${wl-copy} -t image/png
+    bind=SUPERSHIFT,R,exec,${grim} -g $(${slurp}) | ${wl-copy} -t image/png
     # fullscreen
     bind=CTRL,Print,exec,${grim} - | ${wl-copy} -t image/png
     bind=SUPERSHIFTCTRL,R,exec,${grim} - | ${wl-copy} -t image/png
 
+    # move focus
     bind=SUPER,left,movefocus,l
     bind=SUPER,right,movefocus,r
     bind=SUPER,up,movefocus,u
     bind=SUPER,down,movefocus,d
 
-    bind=SUPER,grave,togglespecialworkspace,
+    # go to workspace
+    bind=SUPER,grave,togglespecialworkspace,eDP-1
     bind=SUPER,1,workspace,1
     bind=SUPER,2,workspace,2
     bind=SUPER,3,workspace,3
@@ -120,6 +125,15 @@
     bind=SUPER,9,workspace,9
     bind=SUPER,0,workspace,10
 
+    # cycle workspaces
+    bind=SUPER,bracketleft,workspace,m-1
+    bind=SUPER,bracketright,workspace,m+1
+    # cycle monitors
+    bind=SUPERSHIFT,braceleft,focusmonitor,l
+    bind=SUPERSHIFT,braceright,focusmonitor,r
+
+    # move to workspace
+    bind=SUPERSHIFT,asciitilde,movetoworkspace,special
     bind=SUPERSHIFT,exclam,movetoworkspace,1
     bind=SUPERSHIFT,at,movetoworkspace,2
     bind=SUPERSHIFT,numbersign,movetoworkspace,3
