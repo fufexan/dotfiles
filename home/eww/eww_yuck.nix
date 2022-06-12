@@ -60,13 +60,12 @@
       (eventbox :onhover "eww update wifi_rev=true"
         :onhoverlost "eww update wifi_rev=false"
       (box :space-evenly "false"
-      (button :class "module-wif" :onclick "networkmanager_dmenu" :wrap "false" :limit-width 12 :style "color: ''${wifi_color};" wifi_icon)
+      (button :class "module-wif" :onclick "networkmanager_dmenu" :style "color: ''${wifi_color};" wifi_icon)
       (revealer :transition "slideright"
         :reveal wifi_rev
         :duration "350ms"
       (label :class "module_essid"
-        :text wifi_essid
-        :orientation "h")))))
+        :text wifi_essid)))))
 
 
     (defwidget bat []
@@ -99,7 +98,7 @@
     (defwidget clock_module []
       (eventbox :onhover "eww update time_rev=true"
         :onhoverlost "eww update time_rev=false"
-        (box :class "module" :space-evenly "false" :orientation "h" :spacing "3"
+        (box :class "module" :space-evenly "false" :spacing "3"
           (label :text clock_hour :class "clock_time_class")
           (label :text ":" :class "clock_time_sep")
           (label :text clock_minute :class "clock_minute_class")
@@ -112,8 +111,8 @@
     (defwidget volume []
       (eventbox :onhover "eww update vol_reveal=true"
         :onhoverlost "eww update vol_reveal=false"
-        (box :class "module-2" :space-evenly "false" :orientation "h" :spacing "3"
-          (button :onclick "${pop} audio"   :class "volume_icon" "")
+        (box :class "module-2" :space-evenly "false" :spacing "3"
+          (button :onclick "${pop} audio" :class "volume_icon" "")
           (revealer :transition "slideleft"
             :reveal vol_reveal
             :duration "350ms"
@@ -126,7 +125,7 @@
 
     (defwidget bright []
       (eventbox :onhover "eww update br_reveal=true" :onhoverlost "eww update br_reveal=false"
-      (box :class "module-2" :space-evenly "false" :orientation "h" :spacing "3"
+      (box :class "module-2" :space-evenly "false" :spacing "3"
         (label :text "" :class "bright_icon" :tooltip "brightness")
       (revealer :transition "slideleft"
         :reveal br_reveal
@@ -136,31 +135,31 @@
           :tooltip "''${brightness_percent}%"
           :max 100
           :min 0
-          :onchange "${pkgs.light}/bin/light -S {}" )))))
+          :onchange "${pkgs.light}/bin/light -S {}")))))
 
     ;; Music
     (defwidget music []
       (eventbox :onhover "eww update music_reveal=true"
         :onhoverlost "eww update music_reveal=false"
-        (box :class "module-2" :orientation "h" :space-evenly "false"
+        (box :class "module-2" :space-evenly "false"
           (box :class "song_cover_art" :style "background-image: url(\"''${cover_art}\");")
           (button :class "song_module" :onclick "${pop} music" song)
           (revealer :transition "slideright"
             :reveal music_reveal
             :duration "350ms"
-              (box :oreintation "h"
+              (box
                 (button :class "song_button" :onclick "${music} prev" "")
                 (button :class "song_button" :onclick "${music} toggle" song_status)
                 (button :class "song_button" :onclick "${music} next" ""))))))
 
     (defwidget left []
-      (box :orientation "h"
+      (box
        :space-evenly false
        :halign "start"
        :class "left_modules"))
 
     (defwidget right []
-      (box :orientation "h"
+      (box
         :space-evenly false
         :halign "end"
         :class "right_modules"
@@ -174,20 +173,17 @@
         (clock_module)))
 
     (defwidget center []
-      (box :orientation "h"
+      (box
        :space-evenly false
        :halign "center"
        :class "center_modules"
        (music)))
 
-
     (defwidget bar_1 []
       (box :class "bar_class"
-        :orientation "h"
         (left)
         (center)
         (right)))
-
 
     (defwindow bar
         :monitor 0
@@ -205,7 +201,7 @@
 
     (defwidget system []
       (box :class "sys_win" :orientation "v" :space-evenly "false" :spacing 0
-      (box :class "sys_bat_box" :orientation "h" :space-evenly "false"
+      (box :class "sys_bat_box" :space-evenly "false"
         (circular-progress :value battery
                   :class "sys_bat"
                   :thickness 9
@@ -230,7 +226,7 @@
                   :limit-width 22
                   :wrap false)))
               (label :text "" :class "sys_sep" :halign "center")
-      (box :class "sys_mem_box" :orientation "h" :space-evenly "false" :halign "start"
+      (box :class "sys_mem_box"  :space-evenly "false" :halign "start"
         (circular-progress :value memory_percentage
                   :class "sys_mem"
                   :thickness "9"
@@ -281,7 +277,7 @@
             (box :class "speaker_bar" :halign "center" :hexpand "false"
               (scale :value volume_percent
                 :space-evenly "false"
-                :orientation "h"
+
                 :onchange "${pm} --set-volume $(printf %.0f '{}')"
                 :tooltip "volume on ''${volume_percent}%"
                 :max 100
@@ -296,7 +292,7 @@
             (box :class "mic_bar" :halign "center" :hexpand "false"
               (scale :value mic_percent
                 :space-evenly "false"
-                :orientation "h"
+
                 :tooltip "mic on ''${mic_percent}%"
                 :onchange "${amixer} sset Capture {}%"
                 :max 100
@@ -326,7 +322,7 @@
     ;; Music window
     (defwidget music_pop []
       (box :class "music_pop"
-        :orientation "h"
+
         :space-evenly "false"
         (box :class "music_cover_art"
           :style "background-image: url(\"''${cover_art}\");")
@@ -341,8 +337,7 @@
               :wrap "true"
               :limit-width 20
               :text song_artist)
-            (centerbox :orientation "h"
-              :spacing 15
+            (centerbox
               :halign "center"
               :class "music_button_box"
               (button :class "music_button"
@@ -351,7 +346,7 @@
                 :onclick "${music} toggle" song_status)
               (button :class "music_button"
                 :onclick "${music} next" ""))
-            (centerbox :orientation "h"
+            (centerbox
               (label :xalign 0
                 :class "music_time"
                 :text song_position)

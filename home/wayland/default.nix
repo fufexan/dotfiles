@@ -54,6 +54,8 @@ in {
       backgroundColor = xcolors.base01;
       textColor = xcolors.base06;
     };
+
+    obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
   };
 
   services = {

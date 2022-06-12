@@ -16,5 +16,25 @@
     polybar.enable = mkForce false;
     random-background.enable = mkForce false;
     redshift.enable = mkForce false;
+
+    kanshi = {
+      enable = true;
+      profiles = {
+        undocked = {outputs = [{criteria = "eDP-1";}];};
+        docked = {
+          outputs = [
+            {
+              criteria = "eDP-1";
+              position = "0,0";
+            }
+            {
+              criteria = "HDMI-A-1";
+              position = "1920,0";
+            }
+          ];
+        };
+      };
+      systemdTarget = "graphical-session.target";
+    };
   };
 }

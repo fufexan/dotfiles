@@ -21,7 +21,6 @@
     playerctl
     pulsemixer
     # music
-    # (spotify.override {deviceScaleFactor = 2;})
     spotify
     spotify-chromium
     # images
@@ -42,6 +41,8 @@
       package = pkgs.ncmpcpp.override {visualizerSupport = true;};
       settings = {ncmpcpp_directory = "~/.local/share/ncmpcpp";};
     };
+
+    obs-studio.enable = true;
   };
 
   services = {

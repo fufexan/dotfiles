@@ -104,8 +104,8 @@
       };
     };
 
-    xserver.displayManager.gdm.enable = lib.mkForce false;
-    xserver.displayManager.startx.enable = true;
+    # pure wayland, we don't need xorg
+    xserver.enable = lib.mkForce false;
 
     udev.extraRules = ''
       # add my android device to adbusers
