@@ -136,7 +136,7 @@
     };
 
     rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
+      url = "github:mtoohey31/rnix-lsp/feat/improved-format-edits";
       inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";

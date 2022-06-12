@@ -3,12 +3,12 @@
   lib,
   pkgs,
   ...
-}: {
+}@args: {
   programs.helix = {
     enable = true;
     package = inputs.helix.defaultPackage.${pkgs.system};
 
-    languages = import ./languages.nix pkgs;
+    languages = import ./languages.nix args;
 
     settings = {
       theme = "catppuccin";
