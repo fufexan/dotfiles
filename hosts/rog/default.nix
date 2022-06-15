@@ -34,6 +34,16 @@
     theme = "breeze";
   };
 
+  environment.systemPackages = let
+    nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+      export __NV_PRIME_RENDER_OFFLOAD=1
+      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      export __VK_LAYER_NV_optimus=NVIDIA_only
+      exec -a "$0" "$@"
+    '';
+  in [nvidia-offload];
+
   hardware = {
     bluetooth = {
       enable = true;
@@ -62,9 +72,19 @@
       extraPackages = with pkgs; [vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl];
       extraPackages32 = with pkgs.pkgsi686Linux; [vaapiIntel libvdpau-va-gl vaapiVdpau];
     };
+
+    nvidia = {
+      modesetting.enable = true;
+      prime = {
+        offload.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
   };
 
   networking.hostName = "rog";
+  networking.firewall.enable = lib.mkForce false;
 
   nix.buildMachines = lib.mkForce [];
 
@@ -104,8 +124,9 @@
       };
     };
 
-    # pure wayland, we don't need xorg
-    xserver.enable = lib.mkForce false;
+    xserver.displayManager.gdm.enable = lib.mkForce false;
+    xserver.displayManager.startx.enable = true;
+    xserver.videoDrivers = ["nvidia"];
 
     udev.extraRules = ''
       # add my android device to adbusers
