@@ -11,6 +11,7 @@ let
 in {
   imports = [
     ../eww
+    ./libinput-gestures
     ./hyprland
     ./sway.nix
   ];

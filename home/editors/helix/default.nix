@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}@args: {
+} @ args: {
   programs.helix = {
     enable = true;
     package = inputs.helix.defaultPackage.${pkgs.system};
