@@ -35,6 +35,8 @@ in rec {
 
   technic-launcher = prev.callPackage ./technic.nix {};
 
+  tlauncher = prev.callPackage ./tlauncher.nix {};
+
   waveform = prev.callPackage ./waveform {};
 
   wlroots = prev.wlroots.overrideAttrs (_: {patches = wlroots-patches;});

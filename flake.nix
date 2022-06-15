@@ -54,6 +54,8 @@
         gdb-frontend
         hyprland
         repl
+        technic-launcher
+        tlauncher
         waveform
         ;
     });
