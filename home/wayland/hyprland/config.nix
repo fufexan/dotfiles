@@ -20,7 +20,6 @@
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY
     exec-once=systemctl --user start graphical-session-pre.target
     exec-once=systemctl --user start graphical-session.target
-    # exec-once=systemctl --user start eww swayidle
     exec-once=swaybg -i ~/.config/wallpaper.jpg
     exec-once=mako
 
@@ -100,8 +99,8 @@
     bind=,XF86MonBrightnessDown,exec,light -U 5
 
     # selection
-    bind=,Print,exec,${grim} -g $(${slurp}) | ${wl-copy} -t image/png
-    bind=SUPERSHIFT,R,exec,${grim} -g $(${slurp}) | ${wl-copy} -t image/png
+    bind=,Print,exec,${grim} -g "$(${slurp})" - | ${wl-copy} -t image/png
+    bind=SUPERSHIFT,R,exec,${grim} -g "$(${slurp})" - | ${wl-copy} -t image/png
     # fullscreen
     bind=CTRL,Print,exec,${grim} - | ${wl-copy} -t image/png
     bind=SUPERSHIFTCTRL,R,exec,${grim} - | ${wl-copy} -t image/png

@@ -166,17 +166,14 @@
       enable = true;
       settings = {
         screencast = {
-          output_name = "eDP-1";
-          max_fps = 60;
           exec_before = "pkill mako";
           exec_after = "mako";
-          chooser_type = "default";
+          chooser_type = "simple";
+          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
         };
       };
     };
-    extraPortals =
-      [pkgs.xdg-desktop-portal-wlr]
-      ++ lib.optional (!gnome) pkgs.xdg-desktop-portal-gtk;
+    extraPortals = [pkgs.xdg-desktop-portal-wlr];
     gtkUsePortal = !gnome;
   };
 }

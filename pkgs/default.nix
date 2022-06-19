@@ -5,6 +5,8 @@ inputs: final: prev: let
       sha256 = "sha256-Eo1pTa/PIiJsRZwIUnHGTIFFIedzODVf0ZeuXb0a3TQ=";
     })
   ];
+
+  hp = inputs.hyprland.packages.${prev.system};
 in rec {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
@@ -28,8 +30,12 @@ in rec {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  hyprland = inputs.hyprland.packages.${prev.system}.default.override {
-    wlroots = (inputs.hyprland.packages.${prev.system}.wlroots.overrideAttrs (_: {patches = wlroots-patches;})).override {inherit (final) xwayland;};
+  hyprland = hp.default.override {
+    wlroots =
+      (hp.wlroots.overrideAttrs (
+        _: {patches = wlroots-patches;}
+      ))
+      .override {inherit (final) xwayland;};
     inherit (final) xwayland;
   };
 
