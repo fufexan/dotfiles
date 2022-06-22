@@ -34,8 +34,9 @@
     }
 
     /** General **/
-    .bar_class {
+    .bar {
       background-color: $crust;
+      border-radius: 16px;
     }
     .module {
       margin: 0px 0px 0px 0px;
@@ -91,18 +92,18 @@
       background-image: linear-gradient(to right, $teal 30%, $blue 50%, $sky 100% *50);
       border-radius: 10px;
     }
-    .volume_icon {
+    .vol_icon {
       color: $blue;
       margin: 0px 10px 0px 10px;
     }
 
 
-    .module_essid {
+    .module_ssid {
       font-size: 14;
       color: $blue;
       margin: 0px 10px 0px 0px;
     }
-    .module-wif {
+    .module-net {
       color: $blue;
       margin: 0px 10px 0px 5px;
     }
@@ -113,10 +114,13 @@
     .iconbat {
       color: $green;
     }
-    .iconbat, .iconmem {
+    .iconcpu {
+      color: $blue;
+    }
+    .iconbat, .iconmem, .iconcpu {
       margin: 5px;
     }
-    .iconbat_text, .iconmem_text {
+    .iconbat_text, .iconmem_text, .iconcpu_text {
       font-size: 14px;
     }
 
@@ -132,12 +136,7 @@
       margin: 0px 10px 0px 0px;
     }
 
-    .mem_module {
-      background-color: $crust;
-      margin: 0px 10px 0px 3px;
-    }
-
-    .bat_module {
+    .mem_module, .bat_module, .cpu_module {
       background-color: $crust;
       margin: 0px 10px 0px 3px;
     }
@@ -304,7 +303,7 @@
     .music {
       color: $white;
       font-weight: bold;
-      margin : 20px 20px 0px 0px;
+      margin: 20px 20px 0px 0px;
     }
 
     .music_artist {

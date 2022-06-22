@@ -3,93 +3,107 @@
   awks = "${pkgs.gawk}/bin/awk -F'[][]' '{ print $2 }' | tr -d '%'";
   amixer = "${pkgs.alsa-utils}/bin/amixer -D pipewire";
   bc = "${pkgs.bc}/bin/bc";
+  jq = "${pkgs.jq}/bin/jq";
+  mpstat = "${pkgs.sysstat}/bin/mpstat";
   pm = "${pkgs.pulsemixer}/bin/pulsemixer";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
 
   battery = import ./scripts/battery.nix pkgs;
   memory = import ./scripts/memory.nix pkgs;
   music = import ./scripts/music.nix pkgs;
+  net = import ./scripts/net.nix pkgs;
   pop = import ./scripts/pop.nix pkgs;
-  wifi = import ./scripts/wifi.nix pkgs;
 
   eww_yuck = ''
     ;; Variables
-    (defpoll clock_hour :interval "5m" "date +\%H")
-    (defpoll clock_minute :interval "5s" "date +\%M")
-    (defpoll clock_date :interval "10h" "date '+%d/%m'")
+    (defpoll clock_hour :interval "1m" "date '+%H'")
+    (defpoll clock_minute :interval "5s" "date '+%M'")
+    (defpoll clock_date :interval "1h" "date '+%d/%m'")
 
-    (defpoll volume_percent :interval "3s" "${pm} --get-volume | ${awkf}")
+    (defpoll vol_percent :interval "3s" "${pm} --get-volume | ${awkf}")
     (defpoll mic_percent :interval "3s" "${amixer} sget Capture | grep 'Left:' | ${awks}")
 
     (defpoll brightness_percent :interval "5s" "${pkgs.light}/bin/light -G")
 
-    (defpoll battery :interval "15s" "${battery} bat")
-    (defpoll battery_text :interval "15s" "${battery} bat-text")
-    (defpoll battery_status :interval "15s" "${battery} bat-remaining")
+    (defpoll bat_perc :interval "15s" "${battery} bat")
+    (defpoll bat_text :interval "15s" "${battery} bat-text")
+    (defpoll bat_status :interval "15s" "${battery} bat-remaining")
 
-    (defpoll memory_percentage :interval "15s" "${memory} percentage")
-    (defpoll memory_used :interval "1m" "${memory} used")
-    (defpoll memory_total :interval "1m" "${memory} total")
-    (defpoll memory_free :interval "1m" "${memory} free")
+    (defpoll mem_perc :interval "15s" "${memory} percentage")
+    (defpoll mem_used :interval "15s" "${memory} used")
+    (defpoll mem_total :interval "15s" "${memory} total")
+    (defpoll mem_free :interval "15s" "${memory} free")
 
-    (defpoll wifi_color :interval "1m" "${wifi} color")
-    (defpoll wifi_essid :interval "1m" "${wifi} essid")
-    (defpoll wifi_icon :interval "1m" "${wifi} icon")
+    (defpoll cpu_perc :interval "1s" "${mpstat} -o JSON -u 1 1 | ${bc} -l <<< 100 - $(${jq} '.sysstat.hosts[0].statistics[0].cpu-load[0].idle')")
 
-    (defpoll song :interval "1s"  "${music} song")
-    (defpoll song_artist :interval "1s"  "${music} artist")
-    (defpoll current_status :interval "1s"  "${music} time")
-    (defpoll song_position :interval "1s"  "date -d@`${playerctl} position` +%M:%S")
-    (defpoll song_time :interval "1s"  "date -d@`${music} ctime` +%M:%S")
-    (defpoll song_ctime :interval "1s"  "${music} ctime")
-    (defpoll song_status :interval "1s"  "${music} status")
-    (defpoll cover_art :interval "1s"  "${music} cover")
+    (defpoll net_color :interval "1m" "${net} color")
+    (defpoll net_ssid :interval "1m" "${net} essid")
+    (defpoll net_icon :interval "1m" "${net} icon")
 
-    (defpoll calendar_day :interval "20h" "date '+%d'")
-    (defpoll calendar_year :interval "20h" "date '+%Y'")
+    (defpoll song_title :interval "1s" "${music} song")
+    (defpoll song_artist :interval "1s" "${music} artist")
+    (defpoll song_pos_perc :interval "1s" "${music} time")
+    (defpoll song_pos :interval "1s" "date -d@`${playerctl} position` +%M:%S")
+    (defpoll song_total :interval "1s" "date -d@`${music} ctime` +%M:%S")
+    (defpoll song_status :interval "1s" "${music} status")
+    (defpoll cover_art :interval "1s" "${music} cover")
+
+    (defpoll cal_day :interval "20h" "date '+%d'")
+    (defpoll cal_year :interval "20h" "date '+%Y'")
 
     (defvar vol_reveal false)
-    (defvar br_reveal false)
+    (defvar bright_reveal false)
     (defvar music_reveal false)
-    (defvar wifi_rev false)
+    (defvar net_rev false)
     (defvar time_rev false)
 
     ;; widgets
 
-    (defwidget wifi []
-      (eventbox :onhover "eww update wifi_rev=true"
-        :onhoverlost "eww update wifi_rev=false"
-      (box :space-evenly "false"
-      (button :class "module-wif" :onclick "networkmanager_dmenu" :style "color: ''${wifi_color};" wifi_icon)
-      (revealer :transition "slideright"
-        :reveal wifi_rev
-        :duration "350ms"
-      (label :class "module_essid"
-        :text wifi_essid)))))
+    (defwidget net []
+      (eventbox :onhover "eww update net_rev=true"
+        :onhoverlost "eww update net_rev=false"
+        (box :space-evenly "false"
+          (button :class "module-net" :onclick "networkmanager_dmenu" :style "color: ''${net_color};" net_icon)
+            (revealer :transition "slideright"
+              :reveal net_rev
+              :duration "350ms"
+              (label :class "module_ssid"
+                :text net_ssid)))))
 
 
     (defwidget bat []
       (box :class "bat_module"
-        (circular-progress :value battery
+        (circular-progress :value bat_perc
           :class "batbar"
           :thickness 4
-        (button
-          :class "iconbat"
-          :tooltip "battery on ''${battery}%"
-          :onclick "${pop} system"
-          (label :class "iconbat_text" :text "")))))
+          (button
+            :class "iconbat"
+            :tooltip "battery on ''${bat_perc}%"
+            :onclick "${pop} system"
+            (label :class "iconbat_text" :text "")))))
 
 
     (defwidget mem []
       (box :class "mem_module"
-        (circular-progress :value memory_percentage
+        (circular-progress :value mem_perc
           :class "membar"
           :thickness 4
-        (button
-          :class "iconmem"
-          :tooltip "using ''${memory_percentage}% ram"
-          :onclick "${pop} system"
-          (label :class "iconmem_text" :text "")))))
+          (button
+            :class "iconmem"
+            :tooltip "using ''${mem_perc}% ram"
+            :onclick "${pop} system"
+            (label :class "iconmem_text" :text "")))))
+
+    (defwidget cpu []
+      (box :class "cpu_module"
+        (circular-progress :value cpu_perc
+          :class "membar"
+          :thickness 4
+          (button
+            :class "iconcpu"
+              :tooltip "using ''${cpu_perc}% cpu"
+            :onclick "${pop} system"
+            (label :class "iconcpu_text" :text "")))))
 
     (defwidget sep []
       (box :class "module-2" :hexpand "false"
@@ -112,30 +126,30 @@
       (eventbox :onhover "eww update vol_reveal=true"
         :onhoverlost "eww update vol_reveal=false"
         (box :class "module-2" :space-evenly "false" :spacing "3"
-          (button :onclick "${pop} audio" :class "volume_icon" "")
+          (button :onclick "${pop} audio" :class "vol_icon" "")
           (revealer :transition "slideleft"
             :reveal vol_reveal
             :duration "350ms"
             (scale :class "volbar"
-              :value volume_percent
-              :tooltip "''${volume_percent}%"
+              :value vol_percent
+              :tooltip "''${vol_percent}%"
               :max 100
               :min 0
               :onchange "${pm} --set-volume $(printf %.0f '{}')" )))))
 
     (defwidget bright []
-      (eventbox :onhover "eww update br_reveal=true" :onhoverlost "eww update br_reveal=false"
+      (eventbox :onhover "eww update bright_reveal=true" :onhoverlost "eww update bright_reveal=false"
       (box :class "module-2" :space-evenly "false" :spacing "3"
         (label :text "" :class "bright_icon" :tooltip "brightness")
-      (revealer :transition "slideleft"
-        :reveal br_reveal
-        :duration "350ms"
-        (scale :class "brightbar"
-          :value brightness_percent
-          :tooltip "''${brightness_percent}%"
-          :max 100
-          :min 0
-          :onchange "${pkgs.light}/bin/light -S {}")))))
+        (revealer :transition "slideleft"
+          :reveal bright_reveal
+          :duration "350ms"
+          (scale :class "brightbar"
+            :min 0
+            :max 100
+            :value brightness_percent
+            :tooltip "''${brightness_percent}%"
+            :onchange "${pkgs.light}/bin/light -S {}")))))
 
     ;; Music
     (defwidget music []
@@ -143,29 +157,28 @@
         :onhoverlost "eww update music_reveal=false"
         (box :class "module-2" :space-evenly "false"
           (box :class "song_cover_art" :style "background-image: url(\"''${cover_art}\");")
-          (button :class "song_module" :onclick "${pop} music" song)
+          (button :class "song_module" :onclick "${pop} music" song_title)
           (revealer :transition "slideright"
             :reveal music_reveal
             :duration "350ms"
               (box
-                (button :class "song_button" :onclick "${music} prev" "")
-                (button :class "song_button" :onclick "${music} toggle" song_status)
-                (button :class "song_button" :onclick "${music} next" ""))))))
+                (button :class "song_button" :onclick "${playerctl} previous" "")
+                (button :class "song_button" :onclick "${playerctl} toggle" song_status)
+                (button :class "song_button" :onclick "${playerctl} next" ""))))))
 
     (defwidget left []
-      (box
-       :space-evenly false
-       :halign "start"
-       :class "left_modules"))
+      (box :class "left_modules"
+        :space-evenly false
+        :halign "start"
+      ))
 
     (defwidget right []
-      (box
+      (box :class "right_modules"
         :space-evenly false
         :halign "end"
-        :class "right_modules"
         (bright)
         (volume)
-        (wifi)
+        (net)
         (sep)
         (bat)
         (mem)
@@ -173,23 +186,22 @@
         (clock_module)))
 
     (defwidget center []
-      (box
-       :space-evenly false
-       :halign "center"
-       :class "center_modules"
-       (music)))
+      (box :class "center_modules"
+        :space-evenly false
+        :halign "center"
+        (music)))
 
-    (defwidget bar_1 []
-      (box :class "bar_class"
+    (defwidget bar []
+      (centerbox :class "bar"
         (left)
         (center)
         (right)))
 
     (defwindow bar
         :monitor 0
-        :geometry (geometry :x "0"
-          :y "0"
-          :width "100%"
+        :geometry (geometry :x "5px"
+          :y "5px"
+          :width "1910px"
           :height "30px"
           :anchor "top center")
         :stacking "fg"
@@ -197,66 +209,84 @@
         :exclusive true
         :wm-ignore false
         :focusable false
-      (bar_1))
+      (bar))
 
     (defwidget system []
       (box :class "sys_win" :orientation "v" :space-evenly "false" :spacing 0
+      ; battery
       (box :class "sys_bat_box" :space-evenly "false"
-        (circular-progress :value battery
-                  :class "sys_bat"
-                  :thickness 9
-              (label :text ""
-                  :class "sys_icon_bat"
-                  :limit-width 2
-                  :wrap false))
-              (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
-              (label :text "battery"
-                  :halign "start"
-                  :class "sys_text_bat"
-                  :limit-width 9
-                  :wrap false)
-              (label :text "''${battery_text}"
-                  :halign "start"
-                  :class "sys_text_bat_sub"
-                  :limit-width 22
-                  :wrap false)
-              (label :text "''${battery_status}"
-                  :halign "start"
-                  :class "sys_text_bat_sub"
-                  :limit-width 22
-                  :wrap false)))
-              (label :text "" :class "sys_sep" :halign "center")
+        (circular-progress :value bat_perc
+          :class "sys_bat"
+          :thickness 9
+          (label :text ""
+            :class "sys_icon_bat"
+            :limit-width 2
+            :wrap false))
+        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
+          (label :text "battery"
+            :halign "start"
+            :class "sys_text_bat"
+            :limit-width 9
+            :wrap false)
+          (label :text "''${bat_text}"
+            :halign "start"
+            :class "sys_text_bat_sub"
+            :limit-width 22
+            :wrap false)
+          (label :text "''${bat_status}"
+            :halign "start"
+            :class "sys_text_bat_sub"
+            :limit-width 22
+            :wrap false)))
+      (label :text "" :class "sys_sep" :halign "center")
+      ; memory
       (box :class "sys_mem_box"  :space-evenly "false" :halign "start"
-        (circular-progress :value memory_percentage
-                  :class "sys_mem"
-                  :thickness "9"
-              (label :text ""
-                  :class "sys_icon_mem"
-                  :limit-width 2
-                  :wrap false))
-              (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
-              (label :text "memory"
-                  :halign "start"
-                  :class "sys_text_mem"
-                  :limit-width 9
-                  :wrap false)
-              (label :text "''${memory_used} | ''${memory_total}"
-                  :halign "start"
-                  :class "sys_text_mem_sub"
-                  :limit-width 22
-                  :wrap false)
-              (label :text "''${memory_free}G free"
-                  :halign "start"
-                  :class "sys_text_mem_sub"
-                  :limit-width 22
-                  :wrap false)))))
+        (circular-progress :value mem_perc
+          :class "sys_mem"
+          :thickness "9"
+          (label :text ""
+            :class "sys_icon_mem"
+            :limit-width 2
+            :wrap false))
+        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
+          (label :text "memory"
+            :halign "start"
+            :class "sys_text_mem"
+            :limit-width 9
+            :wrap false)
+          (label :text "''${mem_used} | ''${mem_total}"
+            :halign "start"
+            :class "sys_text_mem_sub"
+            :limit-width 22
+            :wrap false)))
+      (label :text "" :class "sys_sep" :halign "center")
+      ; cpu
+      (box :class "sys_cpu_box"  :space-evenly "false" :halign "start"
+        (circular-progress :value cpu_perc
+          :class "sys_cpu"
+          :thickness "9"
+          (label :text ""
+            :class "sys_icon_cpu"
+            :limit-width 2
+            :wrap false))
+        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
+          (label :text "cpu"
+            :halign "start"
+            :class "sys_text_cpu"
+            :limit-width 9
+            :wrap false)
+          (label :text "''${cpu_perc}"
+            :halign "start"
+            :class "sys_text_cpu_sub"
+            :limit-width 22
+            :wrap false)))))
 
     (defwidget cal []
       (box :class "cal" :orientation "v"
       (box :class "cal-in"
       (calendar :class "cal"
-        :day calendar_day
-        :year calendar_year))))
+        :day cal_day
+        :year cal_year))))
 
     (defwindow calendar
       :monitor 0
@@ -275,11 +305,11 @@
           (box :orientation "v" :halign "center" :hexpand "false"
             (label :class "speaker_text" :text "speaker" :valign "center" :halign "left" )
             (box :class "speaker_bar" :halign "center" :hexpand "false"
-              (scale :value volume_percent
+              (scale :value vol_percent
                 :space-evenly "false"
 
                 :onchange "${pm} --set-volume $(printf %.0f '{}')"
-                :tooltip "volume on ''${volume_percent}%"
+                :tooltip "volume on ''${vol_percent}%"
                 :max 100
                 :min 0))))
 
@@ -322,7 +352,6 @@
     ;; Music window
     (defwidget music_pop []
       (box :class "music_pop"
-
         :space-evenly "false"
         (box :class "music_cover_art"
           :style "background-image: url(\"''${cover_art}\");")
@@ -332,7 +361,7 @@
             (label :class "music"
               :wrap "true"
               :limit-width 19
-              :text song)
+              :text song_title)
             (label :class "music_artist"
               :wrap "true"
               :limit-width 20
@@ -341,28 +370,26 @@
               :halign "center"
               :class "music_button_box"
               (button :class "music_button"
-                :onclick "${music} prev" "")
+                :onclick "${playerctl} previous" "")
               (button :class "music_button"
-                :onclick "${music} toggle" song_status)
+                :onclick "${playerctl} toggle" song_status)
               (button :class "music_button"
-                :onclick "${music} next" ""))
+                :onclick "${playerctl} next" ""))
             (centerbox
               (label :xalign 0
                 :class "music_time"
-                :text song_position)
+                :text song_pos)
               (label)
               (label :xalign 1
                 :class "music_time"
-                :text song_time))
+                :text song_total))
         (box :class "music_bar"
           :space-evenly "false"
             (scale
-              ;; disabled as it will cue the song when window is open
-              ;; :onchange "${playerctl} position `${bc} <<< \"''${song_ctime} * {} / 100\"`"
               :min 0
               :max 100
               :active "false"
-              :value current_status)))))
+              :value song_pos_perc)))))
 
     (defwindow music_win :stacking "fg" :focusable "false"
       :monitor 0
@@ -372,7 +399,6 @@
         :height "0%"
         :anchor "top center")
         (music_pop))
-
   '';
 in
   eww_yuck

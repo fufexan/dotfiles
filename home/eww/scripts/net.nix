@@ -1,6 +1,6 @@
 pkgs: let
   nmcli = "${pkgs.networkmanager}/bin/nmcli";
-  wifi = pkgs.writeShellScript "wifi" ''
+  net = pkgs.writeShellScript "net" ''
     status=$(${nmcli} g | grep -oE "disconnected")
     essid=$(${nmcli} -t -f NAME connection show --active | head -n1)
 
@@ -23,4 +23,4 @@ pkgs: let
     fi
   '';
 in
-  wifi
+  net
