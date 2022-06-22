@@ -158,22 +158,14 @@
     '';
   };
 
-  xdg.portal = let
-    gnome = config.services.xserver.desktopManager.gnome.enable;
-  in {
+  xdg.portal = {
     enable = true;
     wlr = {
       enable = true;
-      settings = {
-        screencast = {
-          exec_before = "pkill mako";
-          exec_after = "mako";
-          chooser_type = "simple";
-          chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-        };
+      settings.screencast = {
+        chooser_type = "simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
       };
     };
-    extraPortals = [pkgs.xdg-desktop-portal-wlr];
-    gtkUsePortal = !gnome;
   };
 }
