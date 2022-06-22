@@ -93,17 +93,26 @@
     bind=,XF86AudioNext,exec,playerctl next
     bind=,XF86AudioRaiseVolume,exec,pulsemixer --change-volume +6
     bind=,XF86AudioLowerVolume,exec,pulsemixer --change-volume -6
-    bind=,XF86AudioMute,exec,pulsemixer --mute
+    bind=,XF86AudioMute,exec,pulsemixer --toggle-mute
 
     bind=,XF86MonBrightnessUp,exec,light -A 5
     bind=,XF86MonBrightnessDown,exec,light -U 5
 
+    # screenshot
     # selection
-    bind=,Print,exec,${grim} -g "$(${slurp})" - | ${wl-copy} -t image/png
-    bind=SUPERSHIFT,R,exec,${grim} -g "$(${slurp})" - | ${wl-copy} -t image/png
-    # fullscreen
-    bind=CTRL,Print,exec,${grim} - | ${wl-copy} -t image/png
-    bind=SUPERSHIFTCTRL,R,exec,${grim} - | ${wl-copy} -t image/png
+    $ssselection=${grim} -g "$(${slurp})" - | ${wl-copy} -t image/png
+    bind=,Print,exec,$ssselection
+    bind=SUPERSHIFT,R,exec,$ssselection
+
+    # monitor
+    $ssmonitor=${grim} -o "$(${slurp} -f %o -or)" - | ${wl-copy} -t image/png
+    bind=CTRL,Print,exec,$ssmonitor
+    bind=SUPERSHIFTCTRL,R,exec,$ssmonitor
+    
+    # all-monitors
+    $ssall=${grim} - | ${wl-copy} -t image/png
+    bind=ALT,Print,exec,$ssall
+    bind=SUPERSHIFTALT,R,exec,$ssall
 
     # move focus
     bind=SUPER,left,movefocus,l

@@ -32,7 +32,7 @@ in rec {
 
   hyprland = hp.default.override {
     wlroots =
-      (hp.wlroots.overrideAttrs (
+      (hp.wlroots-hyprland.overrideAttrs (
         _: {patches = wlroots-patches;}
       ))
       .override {inherit (final) xwayland;};
