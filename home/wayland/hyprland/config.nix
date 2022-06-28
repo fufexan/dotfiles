@@ -12,10 +12,12 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,1920x1080@144,0x0,1
+    monitor=eDP-1,2560x1600@60,1366x0,1.75
     workspace=eDP-1,1
-    monitor=HDMI-A-1,1366x768@60,1920x0,1
-    workspace=HDMI-A-1,10
+    monitor=DP-1,1366x768@60,0x0,1
+    workspace=DP-1,10
+    monitor=DP-2,1366x768@60,0x0,1
+    workspace=DP-2,10
 
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY
     exec-once=systemctl --user start graphical-session-pre.target
@@ -24,7 +26,7 @@
     exec-once=mako
 
     input {
-        kb_layout=
+        kb_layout=ro
         kb_variant=
         kb_model=
         kb_options=
@@ -32,7 +34,10 @@
 
         follow_mouse=1
         force_no_accel=1
-        natural_scroll=0
+
+        touchpad {
+          natural_scroll=1
+        }
     }
 
     general {
@@ -108,7 +113,7 @@
     $ssmonitor=${grim} -o "$(${slurp} -f %o -or)" - | ${wl-copy} -t image/png
     bind=CTRL,Print,exec,$ssmonitor
     bind=SUPERSHIFTCTRL,R,exec,$ssmonitor
-    
+
     # all-monitors
     $ssall=${grim} - | ${wl-copy} -t image/png
     bind=ALT,Print,exec,$ssall

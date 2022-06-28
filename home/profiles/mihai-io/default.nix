@@ -1,38 +1,25 @@
 {lib, ...}: {
-  xsession.windowManager.bspwm.monitors = {
-    eDP = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
-    DisplayPort-1 = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
-    DisplayPort-2 = ["1" "2" "3" "4" "5" "6" "7" "8" "9"];
-  };
-
-  home.keyboard = lib.mkForce null;
-
-  services = let
-    inherit (lib) mkForce;
-  in {
-    dunst.enable = mkForce false;
-    flameshot.enable = mkForce false;
-    picom.enable = mkForce false;
-    polybar.enable = mkForce false;
-    random-background.enable = mkForce false;
-    redshift.enable = mkForce false;
-
+  services = {
     kanshi = {
+      # use 1.6 scaling: 2560 : 1.6 = 1600, exact division. good for offsets
+      # restart eww every time because it won't expand/contract automatically
       enable = true;
       profiles = {
         undocked = {
+          exec = "us restart eww";
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
+              scale = 1.6;
             }
           ];
         };
         docked-all = {
+          exec = "us restart eww";
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
+              scale = 1.6;
               position = "1366,0";
             }
             {
@@ -41,35 +28,37 @@
             }
             {
               criteria = "DP-2";
-              position = "1280,0";
+              position = "1600,0";
             }
           ];
         };
 
         docked1 = {
+          exec = "us restart eww";
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
-              position = "0,0";
+              scale = 1.6;
+              position = "1366,0";
             }
             {
               criteria = "DP-1";
-              position = "1280,0";
+              position = "0,0";
             }
           ];
         };
 
         docked2 = {
+          exec = "us restart eww";
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
-              position = "0,0";
+              scale = 1.6;
+              position = "1366,0";
             }
             {
               criteria = "DP-2";
-              position = "1280,0";
+              position = "0,0";
             }
           ];
         };

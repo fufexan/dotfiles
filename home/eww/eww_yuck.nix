@@ -180,8 +180,9 @@
         (volume)
         (net)
         (sep)
-        (bat)
+        (cpu)
         (mem)
+        (bat)
         (sep)
         (clock_module)))
 
@@ -201,8 +202,8 @@
         :monitor 0
         :geometry (geometry :x "5px"
           :y "5px"
-          :width "1910px"
-          :height "30px"
+          :width "99%"
+          :height "24px"
           :anchor "top center")
         :stacking "fg"
         :windowtype "dock"
