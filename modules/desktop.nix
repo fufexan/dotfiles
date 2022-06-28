@@ -43,8 +43,8 @@
 
   # Japanese input using fcitx
   i18n.inputMethod = {
-    enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [mozc];
+    enabled = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [mozc];
   };
 
   location.provider = "geoclue2";
@@ -160,12 +160,14 @@
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
+  # allow swaylock to unlock the screen
   security.pam.services.swaylock = {
     text = ''
       auth include login
     '';
   };
 
+  # wlroots screensharing
   xdg.portal = {
     enable = true;
     wlr = {
