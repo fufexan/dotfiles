@@ -19,9 +19,9 @@
   xdg.configFile = {
     "wayfire.ini".text = import ./wayfire.nix colors;
     "wallpaper.jpg".source = builtins.fetchurl {
-      name = "WavesDark.jpg";
-      url = "https://raw.githubusercontent.com/catppuccin/wallpapers/main/waves/Waves%20Dark%20Alt%206016x6016.jpg";
-      sha256 = "01ncs3p774phgnwai1kvldmfspp36rcpz10aw29808fbrvhfy676";
+      name = "WavyLines02.jpg";
+      url = "https://raw.githubusercontent.com/catppuccin/wallpapers/main/waves/wavy_lines_v02_5120x2880.png";
+      sha256 = "1yha3fbr7if2pmq9ylrcshnf8cmcz1r9whmr3b95kdgan0mm0pbz";
     };
     "swaylock/config".text = ''
       ignore-empty-password
