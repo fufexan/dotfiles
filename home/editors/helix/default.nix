@@ -11,7 +11,7 @@
     languages = import ./languages.nix args;
 
     settings = {
-      theme = "catppuccin";
+      theme = "catppuccin_mocha";
       editor = {
         true-color = true;
         cursor-shape = {
@@ -27,5 +27,8 @@
     };
   };
 
-  home.file.".config/helix/themes/catppuccin.toml".source = "${inputs.catppuccin-helix}/catppuccin.toml";
+  xdg.configFile = let
+    variants = ["catppuccin_latte" "catppuccin_frappe" "catppuccin_macchiato" "catppuccin_mocha"];
+  in
+    lib.mapAttrs' (n: v: lib.nameValuePair "helix/themes/${n}.toml" v) (lib.genAttrs variants (n: {source = "${inputs.catppuccin-helix}/italics/${n}.toml";}));
 }
