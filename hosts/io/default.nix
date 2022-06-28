@@ -22,10 +22,7 @@
     systemd-boot.enable = true;
   };
 
-  boot.plymouth = {
-    enable = true;
-    theme = "breeze";
-  };
+  boot.plymouth.enable = true;
 
   hardware = {
     bluetooth = {
@@ -49,12 +46,9 @@
 
     enableAllFirmware = true;
 
-    openrazer = {
-      enable = true;
-      users = ["mihai"];
-    };
-
     opentabletdriver.enable = true;
+
+    video.hidpi.enable = true;
 
     xpadneo.enable = true;
   };
@@ -106,6 +100,8 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
+    xserver.displayManager.gdm.enable = lib.mkForce false;
+    xserver.displayManager.startx.enable = true;
     xserver.videoDrivers = ["amdgpu"];
   };
 }

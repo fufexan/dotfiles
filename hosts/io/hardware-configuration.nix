@@ -2,7 +2,9 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
+  config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }: {
@@ -16,31 +18,23 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
+    device = "/dev/disk/by-uuid/97eaaf3d-b138-40b8-af13-c54b86c6fdff";
     fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd:1" "noatime"];
+    options = ["subvol=root"];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
+    device = "/dev/disk/by-uuid/97eaaf3d-b138-40b8-af13-c54b86c6fdff";
     fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd:1" "noatime"];
-  };
-
-  fileSystems."/persistent" = {
-    device = "/dev/disk/by-uuid/7dbde697-8e18-41a3-a769-4ce447e9cd40";
-    fsType = "btrfs";
-    options = ["subvol=persistent" "compress=zstd:1" "noatime"];
+    options = ["subvol=home"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/866A-2122";
+    device = "/dev/disk/by-uuid/9A1D-705E";
     fsType = "vfat";
   };
 
-  swapDevices = [{device = "/dev/nvme0n1p5";}];
+  swapDevices = [];
 
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "schedutil";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
