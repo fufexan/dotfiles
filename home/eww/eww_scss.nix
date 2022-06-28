@@ -74,16 +74,21 @@
     }
 
 
-    .membar {
-      color: $yellow;
+    /* system pies */
+    .cpubar, .membar, .batbar {
       background-color: #38384d;
       border-radius: 10px;
+    }
+    .cpubar {
+      color: $blue;
+    }
+    .membar {
+      color: $yellow;
     }
     .batbar {
       color: $green;
-      background-color: #38384d;
-      border-radius: 10px;
     }
+
     .brightbar trough highlight {
       background-image: linear-gradient(to right, $yellow 30%, $peach 50%, $maroon 100% *50);
       border-radius: 10px;
@@ -246,17 +251,22 @@
       font-size: 18;
       margin: 0px 10px 0px 10px;
     }
-    .sys_text_bat_sub, .sys_text_mem_sub {
+    .sys_text_bat_sub, .sys_text_mem_sub, .sys_text_cpu_sub {
       font-size: 16;
       color: #bbc5d7;
       margin: 5px 0px 0px 25px;
     }
-    .sys_text_bat, .sys_text_mem {
+    .sys_text_mem, .sys_text_cpu {
       font-size: 20;
       font-weight: bold;
       margin: 14px 0px 0px 25px;
     }
-    .sys_icon_bat, .sys_icon_mem {
+    .sys_text_bat {
+      font-size: 20;
+      font-weight: bold;
+      margin: 10px 0px 0px 25px;
+    }
+    .sys_icon_bat, .sys_icon_mem, .sys_icon_cpu {
       font-size: 30;
       margin: 30px;
     }
@@ -272,16 +282,26 @@
       color: $yellow;
       background-color: #38384d;
     }
+    .sys_cpu {
+      color: $blue;
+      background-color: #38384d;
+    }
     .sys_icon_bat, .sys_text_bat {
       color: $green;
     }
     .sys_icon_mem, .sys_text_mem {
       color: $yellow;
     }
-    .sys_bat_box {
+    .sys_icon_cpu, .sys_text_cpu {
+      color: $blue;
+    }
+    .sys_cpu_box {
       margin: 15px 10px 10px 20px;
     }
     .sys_mem_box {
+      margin: 10px 10px 10px 20px;
+    }
+    .sys_bat_box {
       margin: 10px 10px 15px 20px;
     }
 

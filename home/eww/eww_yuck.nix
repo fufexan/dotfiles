@@ -1,14 +1,15 @@
 {pkgs, ...}: let
+  awk = "${pkgs.gawk}/bin/awk";
   awkf = "${pkgs.gawk}/bin/awk '{ print $1 }'";
   awks = "${pkgs.gawk}/bin/awk -F'[][]' '{ print $2 }' | tr -d '%'";
   amixer = "${pkgs.alsa-utils}/bin/amixer -D pipewire";
   bc = "${pkgs.bc}/bin/bc";
-  jq = "${pkgs.jq}/bin/jq";
-  mpstat = "${pkgs.sysstat}/bin/mpstat";
+  grep = "${pkgs.gnugrep}/bin/grep";
   pm = "${pkgs.pulsemixer}/bin/pulsemixer";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
 
   battery = import ./scripts/battery.nix pkgs;
+  cpu = import ./scripts/cpu.nix pkgs;
   memory = import ./scripts/memory.nix pkgs;
   music = import ./scripts/music.nix pkgs;
   net = import ./scripts/net.nix pkgs;
@@ -21,7 +22,7 @@
     (defpoll clock_date :interval "1h" "date '+%d/%m'")
 
     (defpoll vol_percent :interval "3s" "${pm} --get-volume | ${awkf}")
-    (defpoll mic_percent :interval "3s" "${amixer} sget Capture | grep 'Left:' | ${awks}")
+    (defpoll mic_percent :interval "3s" "${amixer} sget Capture | ${grep} 'Left:' | ${awks}")
 
     (defpoll brightness_percent :interval "5s" "${pkgs.light}/bin/light -G")
 
@@ -34,7 +35,7 @@
     (defpoll mem_total :interval "15s" "${memory} total")
     (defpoll mem_free :interval "15s" "${memory} free")
 
-    (defpoll cpu_perc :interval "1s" "${mpstat} -o JSON -u 1 1 | ${bc} -l <<< 100 - $(${jq} '.sysstat.hosts[0].statistics[0].cpu-load[0].idle')")
+    (defpoll cpu_perc :interval "1s" "${cpu}")
 
     (defpoll net_color :interval "1m" "${net} color")
     (defpoll net_ssid :interval "1m" "${net} essid")
@@ -97,7 +98,7 @@
     (defwidget cpu []
       (box :class "cpu_module"
         (circular-progress :value cpu_perc
-          :class "membar"
+          :class "cpubar"
           :thickness 4
           (button
             :class "iconcpu"
@@ -163,7 +164,7 @@
             :duration "350ms"
               (box
                 (button :class "song_button" :onclick "${playerctl} previous" "")
-                (button :class "song_button" :onclick "${playerctl} toggle" song_status)
+                (button :class "song_button" :onclick "${playerctl} play-pause" song_status)
                 (button :class "song_button" :onclick "${playerctl} next" ""))))))
 
     (defwidget left []
@@ -214,6 +215,48 @@
 
     (defwidget system []
       (box :class "sys_win" :orientation "v" :space-evenly "false" :spacing 0
+      ; cpu
+      (box :class "sys_cpu_box"  :space-evenly "false" :halign "start"
+        (circular-progress :value cpu_perc
+          :class "sys_cpu"
+          :thickness "9"
+          (label :text ""
+            :class "sys_icon_cpu"
+            :limit-width 2
+            :wrap false))
+        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
+          (label :text "cpu"
+            :halign "start"
+            :class "sys_text_cpu"
+            :limit-width 9
+            :wrap false)
+          (label :text "''${cpu_perc}%"
+            :halign "start"
+            :class "sys_text_cpu_sub"
+            :limit-width 22
+            :wrap false)))      
+      (label :text "" :class "sys_sep" :halign "center")
+      ; memory
+      (box :class "sys_mem_box"  :space-evenly "false" :halign "start"
+        (circular-progress :value mem_perc
+          :class "sys_mem"
+          :thickness "9"
+          (label :text ""
+            :class "sys_icon_mem"
+            :limit-width 2
+            :wrap false))
+        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
+          (label :text "memory"
+            :halign "start"
+            :class "sys_text_mem"
+            :limit-width 9
+            :wrap false)
+          (label :text "''${mem_used} | ''${mem_total}"
+            :halign "start"
+            :class "sys_text_mem_sub"
+            :limit-width 22
+            :wrap false)))
+      (label :text "" :class "sys_sep" :halign "center")
       ; battery
       (box :class "sys_bat_box" :space-evenly "false"
         (circular-progress :value bat_perc
@@ -237,48 +280,6 @@
           (label :text "''${bat_status}"
             :halign "start"
             :class "sys_text_bat_sub"
-            :limit-width 22
-            :wrap false)))
-      (label :text "" :class "sys_sep" :halign "center")
-      ; memory
-      (box :class "sys_mem_box"  :space-evenly "false" :halign "start"
-        (circular-progress :value mem_perc
-          :class "sys_mem"
-          :thickness "9"
-          (label :text ""
-            :class "sys_icon_mem"
-            :limit-width 2
-            :wrap false))
-        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
-          (label :text "memory"
-            :halign "start"
-            :class "sys_text_mem"
-            :limit-width 9
-            :wrap false)
-          (label :text "''${mem_used} | ''${mem_total}"
-            :halign "start"
-            :class "sys_text_mem_sub"
-            :limit-width 22
-            :wrap false)))
-      (label :text "" :class "sys_sep" :halign "center")
-      ; cpu
-      (box :class "sys_cpu_box"  :space-evenly "false" :halign "start"
-        (circular-progress :value cpu_perc
-          :class "sys_cpu"
-          :thickness "9"
-          (label :text ""
-            :class "sys_icon_cpu"
-            :limit-width 2
-            :wrap false))
-        (box :orientation "v" :space-evenly "false" :spacing 0 :vexpand "false"
-          (label :text "cpu"
-            :halign "start"
-            :class "sys_text_cpu"
-            :limit-width 9
-            :wrap false)
-          (label :text "''${cpu_perc}"
-            :halign "start"
-            :class "sys_text_cpu_sub"
             :limit-width 22
             :wrap false)))))
 
