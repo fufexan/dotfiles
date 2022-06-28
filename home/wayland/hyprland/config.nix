@@ -6,7 +6,14 @@
 }: let
   xargb = colors.xargbColors;
 
+  emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
+  launcher = "${pkgs.wofi}/bin/wofi --show drun --allow-images";
+  term = "${pkgs.kitty}/bin/kitty";
+
   grim = "${pkgs.grim}/bin/grim";
+  light = "${pkgs.light}/bin/light";
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  pulsemixer = "${pkgs.pulsemixer}/bin/pulsemixer";
   slurp = "${pkgs.slurp}/bin/slurp";
   wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
 
@@ -19,7 +26,7 @@
     monitor=DP-2,1366x768@60,0x0,1
     workspace=DP-2,10
 
-    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY
+    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
     exec-once=systemctl --user start graphical-session-pre.target
     exec-once=systemctl --user start graphical-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
@@ -84,24 +91,25 @@
     #windowrule=pseudo,abc
     #windowrule=monitor 0,xyz
 
-    bind=SUPER,RETURN,exec,alacritty
+    bind=SUPER,RETURN,exec,${term}
+    bind=SUPER,Space,exec,${launcher}
     bind=SUPER,Q,killactive,
     bind=SUPERSHIFT,E,exec,pkill Hyprland
+    bind=SUPER,E,exec,${emoji}
     bind=SUPER,F,fullscreen,
     bind=SUPER,T,togglefloating,
-    bind=SUPER,Space,exec,wofi --show drun --allow-images
     bind=SUPER,P,pseudo,
     bind=SUPER,L,exec,swaylock
 
-    bind=,XF86AudioPlay,exec,playerctl play-pause
-    bind=,XF86AudioPrev,exec,playerctl previous
-    bind=,XF86AudioNext,exec,playerctl next
-    bind=,XF86AudioRaiseVolume,exec,pulsemixer --change-volume +6
-    bind=,XF86AudioLowerVolume,exec,pulsemixer --change-volume -6
-    bind=,XF86AudioMute,exec,pulsemixer --toggle-mute
+    bind=,XF86AudioPlay,exec,${playerctl} play-pause
+    bind=,XF86AudioPrev,exec,${playerctl} previous
+    bind=,XF86AudioNext,exec,${playerctl} next
+    bind=,XF86AudioRaiseVolume,exec,${pulsemixer} --change-volume +6
+    bind=,XF86AudioLowerVolume,exec,${pulsemixer} --change-volume -6
+    bind=,XF86AudioMute,exec,${pulsemixer} --toggle-mute
 
-    bind=,XF86MonBrightnessUp,exec,light -A 5
-    bind=,XF86MonBrightnessDown,exec,light -U 5
+    bind=,XF86MonBrightnessUp,exec,${light} -A 5
+    bind=,XF86MonBrightnessDown,exec,${light} -U 5
 
     # screenshot
     # selection

@@ -55,19 +55,19 @@ in {
   };
 
   programs.kitty = {
-    enable = false;
+    enable = true;
     font.name = font;
-    font.size = 12;
+    font.size = 11;
     settings = {
       scrollback_lines = 10000;
-      window_padding_width = 4;
+      placement_strategy = "center";
 
       allow_remote_control = "yes";
 
       # colors
-      background_opacity = "0.7";
-      foreground = xcolors.base00;
-      background = xcolors.base05;
+      background_opacity = "0.9";
+      foreground = xcolors.base05;
+      background = xcolors.base00;
       # black
       color0 = xcolors.base02;
       color8 = xcolors.base03;
@@ -75,8 +75,8 @@ in {
       color1 = xcolors.base08;
       color9 = xcolors.base08;
       # green
-      color2 = xcolors.baseOB;
-      color10 = xcolors.baseOB;
+      color2 = xcolors.base0B;
+      color10 = xcolors.base0B;
       # yellow
       color3 = xcolors.base0A;
       color11 = xcolors.base0A;

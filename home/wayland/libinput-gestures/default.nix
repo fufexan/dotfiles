@@ -12,13 +12,14 @@ in {
     # see https://github.com/bulletmark/libinput-gestures/blob/master/libinput-gestures.conf
 
     gesture swipe up 3 ${wofi} --show drun --allow-images
-    gesture swipe down 3 ${hyprctl} dispatch killactive
-    gesture swipe left 3 ${hyprctl} workspace m+1
-    gesture swipe right 3 ${hyprctl} workspace m+1
-    gesture swipe left 4 ${hyprctl} focusmonitor l
-    gesture swipe right 4 ${hyprctl} focusmonitor r
+    gesture swipe left 3 ${hyprctl} dispatch workspace m+1
+    gesture swipe right 3 ${hyprctl} dispatch workspace m+1
+    gesture swipe left 4 ${hyprctl} dispatch focusmonitor l
+    gesture swipe right 4 ${hyprctl} dispatch focusmonitor r
+    gesture pinch in 4 ${hyprctl} dispatch fullscreen 1
+    gesture pinch out 4 ${hyprctl} dispatch fullscreen 0
 
-    swipe_threshold 100
+    swipe_threshold 0
   '';
 
   systemd.user.services.libinput-gestures = {
