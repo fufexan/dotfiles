@@ -60,10 +60,9 @@ in {
   };
 
   services = {
-    wlsunset = {
+    gammastep = {
       enable = true;
-      latitude = "46.0";
-      longitude = "23.0";
+      provider = "geoclue2";
     };
   };
 

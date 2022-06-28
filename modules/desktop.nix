@@ -88,9 +88,17 @@
   programs.dconf.enable = true;
 
   services = {
+    # needed for gnome3 pinentry
     dbus.packages = [pkgs.gcr];
 
-    geoclue2.enable = true;
+    # provide location
+    geoclue2 = {
+      enable = true;
+      appConfig.gammastep = {
+        isAllowed = true;
+        isSystem = false;
+      };
+    };
 
     kmonad = {
       enable = true;
