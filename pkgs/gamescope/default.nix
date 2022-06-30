@@ -1,4 +1,5 @@
 {
+  lib,
   stdenv,
   fetchFromGitHub,
   meson,
@@ -26,14 +27,14 @@
   libliftoff,
 }: let
 in
-  stdenv.mkDerivation {
+  stdenv.mkDerivation rec {
     pname = "gamescope";
-    version = "3.11.28-beta4";
+    version = "3.11.33-beta1";
     src = fetchFromGitHub {
       owner = "Plagman";
       repo = "gamescope";
-      rev = "refs/tags/3.11.28-beta4";
-      hash = "sha256-3L3bQIPPfScvtN1dduh10dQu/AuTmD4dHNp3JjBIBLA=";
+      rev = version;
+      hash = "sha256-KAvOmxYSwLA6/zOppDzgI7z8+XCMMEPol1vo/SDuRXE=";
     };
 
     buildInputs = [
