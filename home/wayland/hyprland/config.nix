@@ -19,7 +19,7 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,2560x1600@60,1366x0,1.75
+    monitor=eDP-1,2560x1600@60,1366x0,1.6
     workspace=eDP-1,1
     monitor=DP-1,1366x768@60,0x0,1
     workspace=DP-1,10
