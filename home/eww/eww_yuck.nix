@@ -26,20 +26,20 @@
 
     (defpoll brightness_percent :interval "5s" "${pkgs.light}/bin/light -G")
 
-    (defpoll bat_perc :interval "15s" "${battery} bat")
-    (defpoll bat_text :interval "15s" "${battery} bat-text")
-    (defpoll bat_status :interval "15s" "${battery} bat-remaining")
+    (defpoll bat_perc :interval "1s" "${battery} bat")
+    (defpoll bat_text :interval "1s" "${battery} bat-text")
+    (defpoll bat_status :interval "1s" "${battery} bat-remaining")
 
-    (defpoll mem_perc :interval "15s" "${memory} percentage")
-    (defpoll mem_used :interval "15s" "${memory} used")
-    (defpoll mem_total :interval "15s" "${memory} total")
-    (defpoll mem_free :interval "15s" "${memory} free")
+    (defpoll mem_perc :interval "2s" "${memory} percentage")
+    (defpoll mem_used :interval "2s" "${memory} used")
+    (defpoll mem_total :interval "2s" "${memory} total")
+    (defpoll mem_free :interval "2s" "${memory} free")
 
     (defpoll cpu_perc :interval "1s" "${cpu}")
 
-    (defpoll net_color :interval "1m" "${net} color")
-    (defpoll net_ssid :interval "1m" "${net} essid")
-    (defpoll net_icon :interval "1m" "${net} icon")
+    (defpoll net_color :interval "10s" "${net} color")
+    (defpoll net_ssid :interval "10s" "${net} essid")
+    (defpoll net_icon :interval "10s" "${net} icon")
 
     (defpoll song_title :interval "1s" "${music} song")
     (defpoll song_artist :interval "1s" "${music} artist")
@@ -234,7 +234,7 @@
             :halign "start"
             :class "sys_text_cpu_sub"
             :limit-width 22
-            :wrap false)))      
+            :wrap false)))
       (label :text "" :class "sys_sep" :halign "center")
       ; memory
       (box :class "sys_mem_box"  :space-evenly "false" :halign "start"
