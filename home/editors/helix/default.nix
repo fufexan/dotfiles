@@ -6,7 +6,7 @@
 } @ args: {
   programs.helix = {
     enable = true;
-    package = inputs.helix.defaultPackage.${pkgs.system};
+    package = inputs.helix.packages.${pkgs.system}.default;
 
     languages = import ./languages.nix args;
 
