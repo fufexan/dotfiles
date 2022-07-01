@@ -30,14 +30,25 @@ in rec {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  hyprland = hp.default.override {
-    wlroots =
-      (hp.wlroots-hyprland.overrideAttrs (
-        _: {patches = wlroots-patches;}
-      ))
-      .override {inherit (final) xwayland;};
-    inherit (final) xwayland;
-  };
+  mako = prev.mako.overrideAttrs (_: {
+    src = prev.fetchFromGitHub {
+      owner = "emersion";
+      repo = "mako";
+      rev = "405588468807d4f4d855b71afdc52ff5f88f0efc";
+      sha256 = "sha256-KVVobXSGWDm+4TC8eLq4+SuM9avD1Ex3bk6Ma9lk6gw=";
+    };
+  });
+
+  hyprland =
+    (hp.default.override {
+      wlroots =
+        (hp.wlroots-hyprland.overrideAttrs (
+          _: {patches = wlroots-patches;}
+        ))
+        .override {inherit (final) xwayland;};
+      inherit (final) xwayland;
+    })
+    .overrideAttrs (_: {NIX_CXXFLAGS_COMPILE = "-O3";});
 
   technic-launcher = prev.callPackage ./technic.nix {};
 
@@ -46,6 +57,10 @@ in rec {
   waveform = prev.callPackage ./waveform {};
 
   wlroots = prev.wlroots.overrideAttrs (_: {patches = wlroots-patches;});
+
+  xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
+    patches = [./patches/xdpw-crash.patch];
+  });
 
   xwayland = prev.xwayland.overrideAttrs (_: {
     patches = [
