@@ -82,14 +82,9 @@
         pseudotile=0 # enable pseudotiling on dwindle
     }
 
-    # example window rules
-    # for windows named/classed as abc and xyz
-    #windowrule=move 69 420,abc
-    #windowrule=size 420 69,abc
-    #windowrule=tile,xyz
-    #windowrule=float,abc
-    #windowrule=pseudo,abc
-    #windowrule=monitor 0,xyz
+    windowrule=float,title:^(Picture-in-Picture)$
+    windowrule=float,title:^(Firefox — Sharing Indicator)$
+    windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
 
     bind=SUPER,RETURN,exec,${term}
     bind=SUPER,Space,exec,${launcher}
