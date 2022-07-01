@@ -7,6 +7,9 @@
 }: {
   imports = [./hardware-configuration.nix];
 
+  # binfmt
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+
   # kernel
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
   boot.kernelModules = ["acpi_call" "amdgpu"];
@@ -104,4 +107,7 @@
     xserver.displayManager.startx.enable = true;
     xserver.videoDrivers = ["amdgpu"];
   };
+
+  # https://github.com/NixOS/nixpkgs/issues/114222
+  systemd.user.services.telephony_client.enable = false;
 }
