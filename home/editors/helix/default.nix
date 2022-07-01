@@ -23,6 +23,8 @@
       keys.normal.space.u = {
         f = ":format"; # format using LSP formatter
         a = ["select_all" ":pipe alejandra"]; # format Nix with Alejandra
+        w = ":set whitespace.render all";
+        W = ":set whitespace.render none";
       };
     };
   };

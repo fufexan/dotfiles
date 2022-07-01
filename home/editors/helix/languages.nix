@@ -5,6 +5,11 @@
 }:
 with pkgs; [
   {
+    language-server = {command = "${nodePackages.bash-language-server}/bin/bash-language-server";};
+    name = "bash";
+    auto-format = true;
+  }
+  {
     language-server = {command = "${clang-tools}/bin/clangd";};
     name = "c";
     auto-format = true;
