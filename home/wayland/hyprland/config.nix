@@ -7,7 +7,7 @@
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = "${pkgs.wofi}/bin/wofi --show drun --allow-images";
+  launcher = "${pkgs.wofi}/bin/wofi --show drun -Iiq";
   term = "${pkgs.kitty}/bin/kitty";
 
   grim = "${pkgs.grim}/bin/grim";

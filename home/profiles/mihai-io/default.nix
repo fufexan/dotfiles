@@ -10,12 +10,13 @@
           outputs = [
             {
               criteria = "eDP-1";
+              position = "0,0";
               scale = 1.6;
             }
           ];
         };
         docked-all = {
-          exec = "us restart eww";
+          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";

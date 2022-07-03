@@ -59,6 +59,14 @@ in {
     xournalpp
   ];
 
+  home.pointerCursor = {
+    package = pkgs.quintom-cursor-theme;
+    name = "Quintom_Ink";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   manual = {
     html.enable = false;
     json.enable = false;
@@ -87,11 +95,6 @@ in {
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-
-    cursorTheme = {
-      name = "Quintom_Ink";
-      package = pkgs.quintom-cursor-theme;
-    };
 
     iconTheme = {
       name = "Papirus-Dark";
