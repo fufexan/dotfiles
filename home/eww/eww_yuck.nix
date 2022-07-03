@@ -1,62 +1,57 @@
 {pkgs, ...}: let
-  awk = "${pkgs.gawk}/bin/awk";
-  awkf = "${pkgs.gawk}/bin/awk '{ print $1 }'";
-  awks = "${pkgs.gawk}/bin/awk -F'[][]' '{ print $2 }' | tr -d '%'";
-  amixer = "${pkgs.alsa-utils}/bin/amixer -D pipewire";
-  bc = "${pkgs.bc}/bin/bc";
-  grep = "${pkgs.gnugrep}/bin/grep";
-  pm = "${pkgs.pulsemixer}/bin/pulsemixer";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-
   battery = import ./scripts/battery.nix pkgs;
+  brightness = import ./scripts/brightness.nix pkgs;
   cpu = import ./scripts/cpu.nix pkgs;
   memory = import ./scripts/memory.nix pkgs;
   music = import ./scripts/music.nix pkgs;
   net = import ./scripts/net.nix pkgs;
   pop = import ./scripts/pop.nix pkgs;
+  volume = import ./scripts/volume.nix pkgs;
 
   eww_yuck = ''
     ;; Variables
+    (defpoll clock_date :interval "1h" "date '+%d/%m'")
     (defpoll clock_hour :interval "1m" "date '+%H'")
     (defpoll clock_minute :interval "5s" "date '+%M'")
-    (defpoll clock_date :interval "1h" "date '+%d/%m'")
 
-    (defpoll vol_percent :interval "3s" "${pm} --get-volume | ${awkf}")
-    (defpoll mic_percent :interval "3s" "${amixer} sget Capture | ${grep} 'Left:' | ${awks}")
+    (defpoll mic_percent :interval "3s" "${volume} getvol SOURCE")
+    (defpoll vol_icon :interval "1s" "${volume} icon")
+    (defpoll vol_percent :interval "1s" "${volume} getvol")
 
-    (defpoll brightness_percent :interval "5s" "${pkgs.light}/bin/light -G")
+    (defpoll brightness_icon :interval "1s" "${brightness} icon")
+    (defpoll brightness_percent :interval "1s" "${brightness} level")
 
     (defpoll bat_perc :interval "1s" "${battery} bat")
-    (defpoll bat_text :interval "1s" "${battery} bat-text")
     (defpoll bat_status :interval "1s" "${battery} bat-remaining")
+    (defpoll bat_text :interval "1s" "${battery} bat-text")
 
-    (defpoll mem_perc :interval "2s" "${memory} percentage")
-    (defpoll mem_used :interval "2s" "${memory} used")
-    (defpoll mem_total :interval "2s" "${memory} total")
     (defpoll mem_free :interval "2s" "${memory} free")
+    (defpoll mem_perc :interval "2s" "${memory} percentage")
+    (defpoll mem_total :interval "2s" "${memory} total")
+    (defpoll mem_used :interval "2s" "${memory} used")
 
     (defpoll cpu_perc :interval "1s" "${cpu}")
 
     (defpoll net_color :interval "10s" "${net} color")
-    (defpoll net_ssid :interval "10s" "${net} essid")
     (defpoll net_icon :interval "10s" "${net} icon")
+    (defpoll net_ssid :interval "10s" "${net} essid")
 
-    (defpoll song_title :interval "1s" "${music} song")
-    (defpoll song_artist :interval "1s" "${music} artist")
-    (defpoll song_pos_perc :interval "1s" "${music} time")
-    (defpoll song_pos :interval "1s" "date -d@`${playerctl} position` +%M:%S")
-    (defpoll song_total :interval "1s" "date -d@`${music} ctime` +%M:%S")
-    (defpoll song_status :interval "1s" "${music} status")
     (defpoll cover_art :interval "1s" "${music} cover")
+    (defpoll song_artist :interval "1s" "${music} artist")
+    (defpoll song_length :interval "1s" "${music} length_time")
+    (defpoll song_pos :interval "1s" "${music} position_time")
+    (defpoll song_pos_perc :interval "1s" "${music} position")
+    (defpoll song_status :interval "1s" "${music} status")
+    (defpoll song_title :interval "1s" "${music} title")
 
     (defpoll cal_day :interval "20h" "date '+%d'")
     (defpoll cal_year :interval "20h" "date '+%Y'")
 
-    (defvar vol_reveal false)
     (defvar bright_reveal false)
     (defvar music_reveal false)
     (defvar net_rev false)
     (defvar time_rev false)
+    (defvar vol_reveal false)
 
     ;; widgets
 
@@ -127,7 +122,7 @@
       (eventbox :onhover "eww update vol_reveal=true"
         :onhoverlost "eww update vol_reveal=false"
         (box :class "module-2" :space-evenly "false" :spacing "3"
-          (button :onclick "${pop} audio" :class "vol_icon" "")
+          (button :onclick "${pop} audio" :class "vol_icon" vol_icon)
           (revealer :transition "slideleft"
             :reveal vol_reveal
             :duration "350ms"
@@ -136,12 +131,12 @@
               :tooltip "''${vol_percent}%"
               :max 100
               :min 0
-              :onchange "${pm} --set-volume $(printf %.0f '{}')" )))))
+              :onchange "${volume} setvol SINK {}" )))))
 
     (defwidget bright []
       (eventbox :onhover "eww update bright_reveal=true" :onhoverlost "eww update bright_reveal=false"
       (box :class "module-2" :space-evenly "false" :spacing "3"
-        (label :text "" :class "bright_icon" :tooltip "brightness")
+        (label :text brightness_icon :class "bright_icon" :tooltip "brightness")
         (revealer :transition "slideleft"
           :reveal bright_reveal
           :duration "350ms"
@@ -163,9 +158,9 @@
             :reveal music_reveal
             :duration "350ms"
               (box
-                (button :class "song_button" :onclick "${playerctl} previous" "")
-                (button :class "song_button" :onclick "${playerctl} play-pause" song_status)
-                (button :class "song_button" :onclick "${playerctl} next" ""))))))
+                (button :class "song_button" :onclick "${music} prev" "")
+                (button :class "song_button" :onclick "${music} toggle" song_status)
+                (button :class "song_button" :onclick "${music} next" ""))))))
 
     (defwidget left []
       (box :class "left_modules"
@@ -308,9 +303,7 @@
             (label :class "speaker_text" :text "speaker" :valign "center" :halign "left" )
             (box :class "speaker_bar" :halign "center" :hexpand "false"
               (scale :value vol_percent
-                :space-evenly "false"
-
-                :onchange "${pm} --set-volume $(printf %.0f '{}')"
+                :onchange "${volume} setvol SINK {}"
                 :tooltip "volume on ''${vol_percent}%"
                 :max 100
                 :min 0))))
@@ -323,10 +316,8 @@
             (label :class "mic_text" :text "mic" :valign "center" :halign "left" )
             (box :class "mic_bar" :halign "center" :hexpand "false"
               (scale :value mic_percent
-                :space-evenly "false"
-
                 :tooltip "mic on ''${mic_percent}%"
-                :onchange "${amixer} sset Capture {}%"
+                :onchange "${volume} setvol SOURCE {}"
                 :max 100
                 :min 0))))))
 
@@ -372,11 +363,11 @@
               :halign "center"
               :class "music_button_box"
               (button :class "music_button"
-                :onclick "${playerctl} previous" "")
+                :onclick "${music} prev" "")
               (button :class "music_button"
-                :onclick "${playerctl} toggle" song_status)
+                :onclick "${music} toggle" song_status)
               (button :class "music_button"
-                :onclick "${playerctl} next" ""))
+                :onclick "${music} next" ""))
             (centerbox
               (label :xalign 0
                 :class "music_time"
@@ -384,7 +375,7 @@
               (label)
               (label :xalign 1
                 :class "music_time"
-                :text song_total))
+                :text song_length))
         (box :class "music_bar"
           :space-evenly "false"
             (scale

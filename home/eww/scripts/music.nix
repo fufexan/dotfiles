@@ -1,68 +1,77 @@
 pkgs: let
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
-  curl = "${pkgs.curl}/bin/curl";
-  music = pkgs.writeShellScript "music" ''
-    ## Get data
-    STATUS="$(${playerctl} status)"
-    MUSIC_DIR="$HOME/Music"
+  programs = with pkgs; [
+    bc
+    curl
+    playerctl
+  ];
 
-    ## Get status
+  music = pkgs.writeShellScript "music" ''
+    export PATH=$PATH:${pkgs.lib.makeBinPath programs}
+
     get_status() {
-    	if [[ $STATUS == "Playing" ]]; then
+      status=`playerctl status`
+
+    	if [[ $status == "Playing" ]]; then
     		echo ""
     	else
     		echo ""
     	fi
     }
 
-    ## Get song
-    get_song() {
-    	song=`${playerctl} metadata title`
-    	if [[ -z "$song" ]]; then
+    get_title() {
+    	title=`playerctl metadata title`
+
+    	if [[ -z $title ]]; then
     		echo ""
     	else
-    		echo "$song"
+    		echo $title
     	fi
     }
 
-    ## Get artist
     get_artist() {
-    	artist=`${playerctl} metadata artist`
-    	if [[ -z "$artist" ]]; then
+    	artist=`playerctl metadata artist`
+
+    	if [[ -z $artist ]]; then
     		echo ""
     	else
-    		echo "$artist"
+    		echo $artist
     	fi
     }
 
-    ## Get time
-    get_ctime() {
-    	len=`${playerctl} metadata mpris:length`
+    get_length() {
+    	length=`playerctl metadata mpris:length`
 
-    	if [[ -z "$len" ]]; then
-    		echo "0"
+    	if [[ -z $length ]]; then
+    		echo 0
     	else
-    		echo "''${len::-6}"
+    		echo "''${length::-6}"
     	fi
     }
-    get_time() {
-    	ctime=`${playerctl} position`
-    	if [[ -z "$ctime" ]]; then
+    get_length_time() {
+      echo `date -d@$(get_length) +%M:%S`
+    }
+
+    get_position() {
+    	position=`playerctl position`
+
+    	if [[ -z $position ]]; then
     		echo "0:00"
     	else
-    		echo `${pkgs.bc}/bin/bc -l <<< "''${ctime%.*} / $(get_ctime) * 100"`
+    		echo `bc -l <<< "''${position%.*} / $(get_length) * 100"`
     	fi
     }
+    get_position_time() {
+      echo `date -d@$(get_position) +%M:%S`
+    }
 
-    ## Get cover
     get_cover() {
-    	COVER_URL=`${playerctl} metadata mpris:artUrl`
+    	COVER_URL=`playerctl metadata mpris:artUrl`
     	STATUS=$?
 
     	# Check if the file has a embbeded album art
     	if [ "$STATUS" -eq 0 ]; then
         if [[ $COVER_URL = https* ]]; then
-          ${curl} $COVER_URL -o /tmp/cover_art.png
+          curl $COVER_URL -o /tmp/cover_art.png
           echo "/tmp/cover_art.png"
         else
       		echo "$COVER_URL"
@@ -73,24 +82,28 @@ pkgs: let
     }
 
     ## Execute accordingly
-    if [[ "$1" == "song" ]]; then
-    	get_song
-    elif [[ "$1" == "artist" ]]; then
+    if [[ $1 == "title" ]]; then
+    	get_title
+    elif [[ $1 == "artist" ]]; then
     	get_artist
-    elif [[ "$1" == "status" ]]; then
+    elif [[ $1 == "status" ]]; then
     	get_status
-    elif [[ "$1" == "time" ]]; then
-    	get_time
-    elif [[ "$1" == "ctime" ]]; then
-    	get_ctime
-    elif [[ "$1" == "cover" ]]; then
+    elif [[ $1 == "length" ]]; then
+    	get_length
+    elif [[ $1 == "length_time" ]]; then
+    	get_length_time
+    elif [[ $1 == "position" ]]; then
+    	get_position
+    elif [[ $1 == "position_time" ]]; then
+    	get_position_time
+    elif [[ $1 == "cover" ]]; then
     	get_cover
-    elif [[ "$1" == "toggle" ]]; then
-    	${playerctl} play-pause
-    elif [[ "$1" == "next" ]]; then
-    	{ ${playerctl} next; get_cover; }
-    elif [[ "$1" == "prev" ]]; then
-    	{ ${playerctl} previous; get_cover; }
+    elif [[ $1 == "toggle" ]]; then
+    	playerctl play-pause
+    elif [[ $1 == "next" ]]; then
+    	{ playerctl next; get_cover; }
+    elif [[ $1 == "prev" ]]; then
+    	{ playerctl previous; get_cover; }
     fi
   '';
 in

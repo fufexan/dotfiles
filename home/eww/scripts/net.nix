@@ -1,17 +1,27 @@
 pkgs: let
-  nmcli = "${pkgs.networkmanager}/bin/nmcli";
-  net = pkgs.writeShellScript "net" ''
-    status=$(${nmcli} g | grep -oE "disconnected")
-    essid=$(${nmcli} -t -f NAME connection show --active | head -n1)
+  programs = with pkgs; [
+    gawk
+    gnugrep
+    networkmanager
+  ];
 
-    if [ $status ] ; then
+  net = pkgs.writeShellScript "net" ''
+    export PATH=$PATH:${pkgs.lib.makeBinPath programs}
+
+    status=$(nmcli g | tail -n 1 | awk '{print $1}')
+    signal=$(nmcli dev wifi | grep \* | awk '{ print $8 }')
+    essid=$(nmcli -t -f NAME connection show --active | head -n1)
+
+    icons=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
+
+    if [[ $status == "disconnected" ]] ; then
       icon=""
       text=""
-      color="#575268"
+      color="#988BA2"
     else
-      icon=""
+      icon=''${icons[$(awk -v n=$signal 'BEGIN{print int(n/21)}')]}
       text="''${essid}"
-      color="#a1bdce"
+      color="#C9CBFF"
     fi
 
     if [[ "$1" == "color" ]]; then
