@@ -49,7 +49,7 @@
     packages = lib.genAttrs ["x86_64-linux"] (system: {
       inherit
         (pkgs.${system})
-        discord-canary-electron
+        discord-electron-openasar
         gamescope
         gdb-frontend
         hyprland

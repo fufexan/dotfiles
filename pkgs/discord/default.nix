@@ -4,8 +4,8 @@
   src,
   binaryName,
   desktopName,
-  isWayland ? true,
-  enableVulkan ? true,
+  isWayland ? false,
+  enableVulkan ? false,
   extraOptions ? [],
   autoPatchelfHook,
   makeDesktopItem,
@@ -19,9 +19,8 @@
   cairo,
   cups,
   dbus,
-  electron_15,
+  electron,
   expat,
-  ffmpeg_5,
   fontconfig,
   freetype,
   gdk-pixbuf,
@@ -48,15 +47,16 @@
   mesa,
   nspr,
   nss,
+  openasar,
   pango,
   systemd,
   libappindicator-gtk3,
   libdbusmenu,
-  nodePackages,
   vulkan-loader,
   vulkan-extension-layer,
   writeScript,
   common-updater-scripts,
+  makeShellWrapper,
 }: let
   inherit binaryName;
 in
@@ -64,7 +64,6 @@ in
     inherit pname version src;
 
     nativeBuildInputs = [
-      nodePackages.asar
       alsa-lib
       autoPatchelfHook
       cups
@@ -79,6 +78,7 @@ in
       mesa
       nss
       wrapGAppsHook
+      makeShellWrapper
     ];
 
     dontWrapGApps = true;
@@ -98,7 +98,6 @@ in
       cups
       dbus
       expat
-      ffmpeg_5
       fontconfig
       freetype
       gdk-pixbuf
@@ -120,7 +119,6 @@ in
       nss
       libxcb
       pango
-      systemd
       libXScrnSaver
       libappindicator-gtk3
       libdbusmenu
@@ -140,36 +138,50 @@ in
       )
       ++ extraOptions;
 
-    installPhase =
-      ''
-        mkdir -p $out/{bin,usr/lib/${pname},share/pixmaps}
-        ln -s discord.png $out/share/pixmaps/${pname}.png
-        ln -s "${desktopItem}/share/applications" $out/share/
+    installPhase = ''
+      runHook preInstall
 
-        # HACKS FOR SYSTEM ELECTRON
-        asar e resources/app.asar resources/app
-        rm resources/app.asar
-        sed -i "s|process.resourcesPath|'$out/usr/lib/${pname}'|" resources/app/app_bootstrap/buildInfo.js
-        sed -i "s|exeDir,|'$out/share/pixmaps',|" resources/app/app_bootstrap/autoStart/linux.js
-        asar p resources/app resources/app.asar --unpack-dir '**'
-        rm -rf resources/app
+      mkdir -p $out/{bin,opt/${binaryName},share/pixmaps,share/icons/hicolor/256x256/apps}
+      mv * $out/opt/${binaryName}
 
-        # Copy Relevant data
-        cp -r resources/*  $out/usr/lib/${pname}/
-        mkdir -p $out/opt/${binaryName}
-        cp -r resources $out/opt/${binaryName}/
+      chmod +x $out/opt/${binaryName}/${binaryName}
+      patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} \
+          $out/opt/${binaryName}/${binaryName}
 
-        # Create starter script for discord
-        echo "#!${stdenv.shell}" > $out/bin/${binaryName}
-        echo "exec ${electron_15}/bin/electron ${lib.concatStringsSep " " flags} $out/usr/lib/${pname}/app.asar \$@" >> $out/bin/${binaryName}
-        chmod 755 $out/bin/${binaryName}
-      ''
-      + ''
-        wrapProgram $out/bin/${binaryName} \
-            "''${gappsWrapperArgs[@]}" \
-            --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
-            --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${pname}
-      '';
+      wrapProgramShell $out/opt/${binaryName}/${binaryName} \
+          "''${gappsWrapperArgs[@]}" \
+          --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--enable-features=UseOzonePlatform --ozone-platform=wayland}}" \
+          --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
+          --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${binaryName}
+
+      ln -s $out/opt/${binaryName}/${binaryName} $out/bin/
+      # Without || true the install would fail on case-insensitive filesystems
+      ln -s $out/opt/${binaryName}/${binaryName} $out/bin/${
+        lib.strings.toLower binaryName
+      } || true
+
+      ln -s $out/opt/${binaryName}/discord.png $out/share/pixmaps/${pname}.png
+      ln -s $out/opt/${binaryName}/discord.png $out/share/icons/hicolor/256x256/apps/${pname}.png
+
+      ln -s "${desktopItem}/share/applications" $out/share/
+
+      runHook postInstall
+    '';
+
+    postInstall = ''
+      cp -f ${openasar} $out/opt/${binaryName}/resources/app.asar
+
+      # Create starter script for discord
+      echo "#!${stdenv.shell}" > $out/bin/${binaryName}
+      echo "exec ${electron}/bin/electron ${lib.concatStringsSep " " flags} $out/opt/${binaryName}/resources/app.asar \$@" >> $out/bin/${binaryName}
+      chmod 755 $out/bin/${binaryName}
+
+      wrapProgram $out/bin/${binaryName} \
+        "''${gappsWrapperArgs[@]}" \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--enable-features=UseOzonePlatform --ozone-platform=wayland}}" \
+        --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
+        --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${pname}
+    '';
 
     desktopItem = makeDesktopItem {
       name = pname;
@@ -178,7 +190,7 @@ in
       inherit desktopName;
       genericName = meta.description;
       categories = ["Network" "InstantMessaging"];
-      #mimeType = "x-scheme-handler/discord";
+      mimeTypes = ["x-scheme-handler/discord"];
     };
 
     meta = with lib; {
