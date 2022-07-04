@@ -9,6 +9,7 @@ inputs: let
     ../games.nix
     ../media.nix
     ../editors/helix
+    inputs.discocss.hmModule
   ];
 
   homeImports = {

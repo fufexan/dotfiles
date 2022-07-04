@@ -17,7 +17,6 @@
         overlays = [
           inputs.devshell.overlay
           inputs.emacs-overlay.overlay
-          inputs.powercord.overlay
           overlays.default
         ];
         config.allowUnfree = true;
@@ -75,6 +74,12 @@
     # flakes
     devshell.url = "github:numtide/devshell";
 
+    discocss = {
+      url = "github:mlvzk/discocss/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
+    };
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     eww = {
@@ -114,23 +119,6 @@
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming.url = "github:fufexan/nix-gaming/testing";
-
-    powercord = {
-      url = "github:LavaDesu/powercord-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    catppuccin-discord = {
-      url = "github:catppuccin/discord";
-      flake = false;
-    };
-    discord-tweaks = {
-      url = "github:NurMarvin/discord-tweaks";
-      flake = false;
-    };
-    powercord-image-tools = {
-      url = "github:powerfart-plugins/image-tools";
-      flake = false;
-    };
 
     catppuccin-helix = {
       url = "github:catppuccin/helix";

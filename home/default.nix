@@ -25,15 +25,6 @@ in {
       categories = ["Network" "InstantMessaging"];
       mimeTypes = ["x-scheme-handler/teams"];
     };
-    discord-chromium = makeDesktopItem {
-      name = "discord";
-      desktopName = "Discord";
-      genericName = "Discord";
-      exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://discord.com/channels/@me\"";
-      icon = "discord";
-      categories = ["Network" "InstantMessaging"];
-      mimeTypes = ["x-scheme-handler/discord"];
-    };
   in [
     # archives
     p7zip
@@ -44,11 +35,6 @@ in {
     file
     gh
     # messaging
-    (discord-plugged.override {
-      plugins = [inputs.discord-tweaks inputs.powercord-image-tools];
-      themes = [inputs.catppuccin-discord];
-    })
-    discord-chromium
     tdesktop
     teams
     teams-chromium
@@ -112,6 +98,15 @@ in {
       enable = true;
       commandLineArgs = ["--ozone-platform-hint=auto"];
       extensions = [{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}];
+    };
+
+    discocss = {
+      enable = true;
+      discord = pkgs.discord.override {withOpenASAR = true;};
+      css = builtins.readFile (builtins.fetchurl {
+        url = "https://raw.githubusercontent.com/catppuccin/discord/main/main.css";
+        sha256 = "1cwln6jx83priz5qlbjk1j413yhj7nn2zryxfgdhy30k9wj7mjpf";
+      });
     };
 
     firefox = {

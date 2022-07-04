@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "catppuccin-discord": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1655764491,
-        "narHash": "sha256-5TKT6mMzaYBJoGPGGujnvwfplWj+ppqEWwcDZULOi0Q=",
-        "owner": "catppuccin",
-        "repo": "discord",
-        "rev": "96be27575ed2be06fbc79b63e85afa00f9cf039c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "discord",
-        "type": "github"
-      }
-    },
     "catppuccin-helix": {
       "flake": false,
       "locked": {
@@ -123,19 +107,27 @@
         "type": "github"
       }
     },
-    "discord-tweaks": {
-      "flake": false,
+    "discocss": {
+      "inputs": {
+        "flake-utils": [
+          "fu"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1627600834,
-        "narHash": "sha256-xSzbP86w5OUy1ZO1iHgv1drbujtlPQAgJmLA3x7UOFc=",
-        "owner": "NurMarvin",
-        "repo": "discord-tweaks",
-        "rev": "bc28b090f9ed706d7f8271aeaa64bdcb886fd0ef",
+        "lastModified": 1620525524,
+        "narHash": "sha256-CUGovwgpSUmseoeOPt222ncS00jTcUJQfz3+ZJgWFNE=",
+        "owner": "mlvzk",
+        "repo": "discocss",
+        "rev": "5d14737ae943a67a6791ba2107a820122cbf0174",
         "type": "github"
       },
       "original": {
-        "owner": "NurMarvin",
-        "repo": "discord-tweaks",
+        "owner": "mlvzk",
+        "ref": "flake",
+        "repo": "discocss",
         "type": "github"
       }
     },
@@ -606,59 +598,6 @@
         "type": "github"
       }
     },
-    "powercord": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "powercord": "powercord_2"
-      },
-      "locked": {
-        "lastModified": 1655600610,
-        "narHash": "sha256-aqMv4vYmkamQEPjOoqOboLOhxMKGxmtcC4O7BOLxAQc=",
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "rev": "a642094eaf06121c723095b0c25c28d605d484e3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LavaDesu",
-        "repo": "powercord-overlay",
-        "type": "github"
-      }
-    },
-    "powercord-image-tools": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1654765748,
-        "narHash": "sha256-XYU1b1NJZAaA+MxNHVctpa6SdwAR3/kVcoz1GLxKhyU=",
-        "owner": "powerfart-plugins",
-        "repo": "image-tools",
-        "rev": "3f8b2130c01064e80839ea8d77879728abc1a1c7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "powerfart-plugins",
-        "repo": "image-tools",
-        "type": "github"
-      }
-    },
-    "powercord_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1655592510,
-        "narHash": "sha256-01TH83E5gfYGYwlFPCWp7hJ/spvrEajJNefLNgFLUUw=",
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "rev": "794f8c60aba250a655233901e07cd721853774ab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "powercord-org",
-        "repo": "powercord",
-        "type": "github"
-      }
-    },
     "rnix-lsp": {
       "inputs": {
         "naersk": [
@@ -688,11 +627,10 @@
     },
     "root": {
       "inputs": {
-        "catppuccin-discord": "catppuccin-discord",
         "catppuccin-helix": "catppuccin-helix",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
-        "discord-tweaks": "discord-tweaks",
+        "discocss": "discocss",
         "emacs-overlay": "emacs-overlay",
         "eww": "eww",
         "fu": "fu",
@@ -704,8 +642,6 @@
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_4",
-        "powercord": "powercord",
-        "powercord-image-tools": "powercord-image-tools",
         "rnix-lsp": "rnix-lsp"
       }
     },
