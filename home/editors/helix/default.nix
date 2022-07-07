@@ -19,7 +19,9 @@
           normal = "block";
           select = "underline";
         };
+        indent-guides.render = true;
       };
+
       keys.normal.space.u = {
         f = ":format"; # format using LSP formatter
         a = ["select_all" ":pipe alejandra"]; # format Nix with Alejandra
@@ -27,10 +29,10 @@
         W = ":set whitespace.render none";
       };
     };
-  };
 
-  xdg.configFile = let
-    variants = ["catppuccin_latte" "catppuccin_frappe" "catppuccin_macchiato" "catppuccin_mocha"];
-  in
-    lib.mapAttrs' (n: v: lib.nameValuePair "helix/themes/${n}.toml" v) (lib.genAttrs variants (n: {source = "${inputs.catppuccin-helix}/italics/${n}.toml";}));
+    themes = let
+      variants = ["catppuccin_latte" "catppuccin_frappe" "catppuccin_macchiato" "catppuccin_mocha"];
+    in
+      lib.genAttrs variants (n: builtins.fromTOML (builtins.readFile "${inputs.catppuccin-helix}/italics/${n}.toml"));
+  };
 }
