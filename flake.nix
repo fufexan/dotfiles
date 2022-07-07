@@ -49,6 +49,7 @@
       inherit
         (pkgs.${system})
         discord-electron-openasar
+        dwarfs
         gamescope
         gdb-frontend
         hyprland

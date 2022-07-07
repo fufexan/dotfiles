@@ -11,6 +11,8 @@ in rec {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
+  dwarfs = prev.callPackage ./dwarfs {};
+
   discord-electron-openasar = prev.callPackage ./discord rec {
     inherit (prev.discord) src version pname;
     openasar = prev.callPackage "${inputs.nixpkgs}/pkgs/applications/networking/instant-messengers/discord/openasar.nix" {};
