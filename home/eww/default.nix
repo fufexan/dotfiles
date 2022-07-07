@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 } @ args: let
   package = inputs.eww.packages.${pkgs.system}.eww-wayland;
@@ -14,7 +15,7 @@ in {
   home.packages = [package];
 
   xdg.configFile."eww/eww.yuck".text = import ./eww_yuck.nix args;
-  xdg.configFile."eww/eww.scss".text = import ./eww_scss.nix args;
+  xdg.configFile."eww/eww.scss".source = ./eww.scss;
   xdg.configFile."eww/images".source = ./images;
 
   systemd.user.services.eww = {
@@ -28,7 +29,7 @@ in {
 
     Service = {
       Type = "forking";
-      Environment = "PATH=${package}/bin:${pkgs.gawk}/bin:${pkgs.ripgrep}/bin:/run/wrappers/bin:/${pkgs.coreutils}/bin";
+      Environment = "PATH=${lib.makeBinPath [package pkgs.coreutils]}:/run/wrappers/bin";
       ExecStart = let
         scriptPkg = pkgs.writeShellScriptBin "eww-start" startscript;
       in "${scriptPkg}/bin/eww-start";

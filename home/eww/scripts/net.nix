@@ -17,11 +17,16 @@ pkgs: let
     if [[ $status == "disconnected" ]] ; then
       icon=""
       text=""
-      color="#988BA2"
+      color="#988ba2"
     else
-      icon=''${icons[$(awk -v n=$signal 'BEGIN{print int(n/21)}')]}
+      level=$(awk -v n=$signal 'BEGIN{print int(n/20)}')
+      if [[ $level -gt 4 ]]; then
+        level=4
+      fi
+
+      icon=''${icons[$level]}
       text="''${essid}"
-      color="#C9CBFF"
+      color="#cba6f7"
     fi
 
     if [[ "$1" == "color" ]]; then

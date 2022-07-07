@@ -48,20 +48,24 @@ pkgs: let
     	fi
     }
     get_length_time() {
-      echo `date -d@$(get_length) +%M:%S`
+      if [[ ! $(get_length) -eq 0 ]]; then
+        echo `date -d@$(get_length) +%M:%S`
+      fi
     }
 
     get_position() {
     	position=`playerctl position`
 
     	if [[ -z $position ]]; then
-    		echo "0:00"
+    		echo 0
     	else
     		echo `bc -l <<< "''${position%.*} / $(get_length) * 100"`
     	fi
     }
     get_position_time() {
-      echo `date -d@$(get_position) +%M:%S`
+      if [[ ! $(get_position) -eq 0 ]]; then
+        echo `date -d@$(get_position) +%M:%S`
+      fi
     }
 
     get_cover() {

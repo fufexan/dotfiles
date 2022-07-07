@@ -13,28 +13,42 @@ pkgs: let
 
     	echo "''${PERCENTAGE%\%}"
     }
-    battery_text() {
-    	PERCENTAGE=`upower -d | grep percentage | awk '{ print $2 }' | head -n 1`
+
+    wattage() {
     	RATE=`upower -d | grep rate | awk '{ print $2 }' | head -n 1`
 
-    	echo "$PERCENTAGE   $RATE W"
+    	echo "$RATE W"
     }
-    battery_remaining() {
-    	TIME=`upower -d | grep time | awk '{ print $4 " " $5 }' | head -n 1`
 
-      if [[ $TIME ]]; then
+    status() {
+    	TIME=`upower -d | grep time | awk '{ print $4 " " $5 }' | head -n 1`
+      STATE=`upower -d | grep state | awk '{ print $2 }' | head -n 1`
+
+      if [[ $STATE == "charging" ]]; then
+      	echo "charging, $TIME left"
+      elif [[ $STATE == "discharging" ]]; then
       	echo "$TIME left"
       else
         echo "fully charged"
       fi
     }
 
+    color() {
+      if [[ $(battery) -le 20 ]]; then
+        echo '#f38ba8'
+      else
+        echo '#a6e3a1'
+      fi
+    }
+
     if [[ "$1" == "bat" ]]; then
     	battery
-    elif [[ "$1" == "bat-text" ]]; then
-    	battery_text
-    elif [[ "$1" == "bat-remaining" ]]; then
-    	battery_remaining
+    elif [[ "$1" == "wattage" ]]; then
+    	wattage
+    elif [[ "$1" == "status" ]]; then
+    	status
+    elif [[ "$1" == "color" ]]; then
+    	color
     fi
   '';
 in
