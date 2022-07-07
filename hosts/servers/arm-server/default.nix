@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
   ];
 
-  boot.cleanTmpDir = true;
+  boot.binfmt.emulatedSystems = ["riscv64-linux"];
 
   # used by tailscale for exit node
   boot.kernel.sysctl = {

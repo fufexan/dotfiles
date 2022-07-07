@@ -15,9 +15,8 @@
   boot.kernelModules = ["acpi_call" "amdgpu"];
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-  # watchdog - supposedly conserves battery
   # dcfeaturemask - PSR support
-  boot.kernelParams = ["nmi_watchdog=0" "amdgpu.dcfeaturemask=0x8"];
+  boot.kernelParams = ["amdgpu.dcfeaturemask=0x8"];
 
   # bootloader
   boot.loader = {
@@ -25,7 +24,9 @@
     systemd-boot.enable = true;
   };
 
-  boot.plymouth.enable = true;
+  # boot.plymouth.enable = true;
+
+  environment.systemPackages = [config.boot.kernelPackages.cpupower];
 
   hardware = {
     bluetooth = {
@@ -58,8 +59,6 @@
 
   networking.hostName = "io";
 
-  powerManagement.powertop.enable = true;
-
   programs = {
     adb.enable = true;
     light.enable = true;
@@ -84,8 +83,6 @@
 
     pipewire.lowLatency.enable = true;
 
-    power-profiles-daemon.enable = false;
-
     printing.enable = true;
 
     ratbagd.enable = true;
@@ -103,9 +100,7 @@
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
     '';
 
-    xserver.displayManager.gdm.enable = lib.mkForce false;
-    xserver.displayManager.startx.enable = true;
-    xserver.videoDrivers = ["amdgpu"];
+    xserver.enable = lib.mkForce false;
   };
 
   # https://github.com/NixOS/nixpkgs/issues/114222

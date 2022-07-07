@@ -7,6 +7,7 @@ inputs: {
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.arm-server;
       };
       sshOpts = ["-i" "/home/mihai/.ssh/arm-server.key"];
+      sshUser = "root";
     };
     io = {
       hostname = "io";
