@@ -6,7 +6,7 @@
       enable = true;
       profiles = {
         undocked = {
-          exec = "us restart eww";
+          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
@@ -35,7 +35,7 @@
         };
 
         docked1 = {
-          exec = "us restart eww";
+          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
@@ -50,7 +50,7 @@
         };
 
         docked2 = {
-          exec = "us restart eww";
+          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";

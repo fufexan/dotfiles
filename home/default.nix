@@ -7,9 +7,7 @@
 }:
 # graphical session configuration
 # includes programs and services that work on both Wayland and X
-let
-  inherit (colors) xcolors;
-in {
+{
   imports = [
     ./cli.nix # base config
     ./terminals.nix
@@ -27,7 +25,7 @@ in {
     };
   in [
     # archives
-    p7zip
+    unzip
     unrar
     # file downloaders
     yt-dlp
@@ -147,7 +145,9 @@ in {
       ];
     };
 
-    zathura = {
+    zathura = let
+      inherit (colors) xcolors;
+    in {
       enable = true;
       options = {
         recolor = true;
@@ -163,8 +163,6 @@ in {
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      defaultCacheTtl = 3600;
-      defaultCacheTtlSsh = 3600;
       pinentryFlavor = "gnome3";
       sshKeys = ["73D1C4271E8C508E1E55259660C94BE828B07738"];
     };
