@@ -12,8 +12,6 @@ in {
     # see https://github.com/bulletmark/libinput-gestures/blob/master/libinput-gestures.conf
 
     gesture swipe up 3 ${wofi} --show drun --allow-images
-    gesture swipe left 3 ${hyprctl} dispatch workspace m+1
-    gesture swipe right 3 ${hyprctl} dispatch workspace m-1
     gesture swipe left 4 ${hyprctl} dispatch focusmonitor l
     gesture swipe right 4 ${hyprctl} dispatch focusmonitor r
     gesture pinch in 4 ${hyprctl} dispatch fullscreen 1
