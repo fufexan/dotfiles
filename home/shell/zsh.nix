@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   home.packages = [pkgs.pure-prompt];
@@ -62,6 +63,15 @@
       export SSH_AUTH_SOCK="/run/user/1000/gnupg/$gnupg_path/S.gpg-agent.ssh"
 
       ${builtins.readFile ./nix-completions.sh}
+
+      ${lib.optionalString config.programs.kitty.enable ''
+        if test -n "$KITTY_INSTALLATION_DIR"; then
+            export KITTY_SHELL_INTEGRATION="enabled"
+            autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+            kitty-integration
+            unfunction kitty-integration
+        fi
+      ''}
     '';
     shellAliases = {
       grep = "grep --color";

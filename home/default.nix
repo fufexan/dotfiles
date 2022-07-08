@@ -13,6 +13,15 @@
     ./terminals.nix
   ];
 
+  home.sessionVariables = {
+    # make java apps work in tiling WMs
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    # make apps aware of ibus
+    GTK_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
+    QT_IM_MODULE = "ibus";
+  };
+
   home.packages = with pkgs; let
     teams-chromium = makeDesktopItem {
       name = "Teams";
