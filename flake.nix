@@ -76,7 +76,7 @@
     devshell.url = "github:numtide/devshell";
 
     discocss = {
-      url = "github:mlvzk/discocss/flake";
+      url = "github:fufexan/discocss/flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "fu";
     };
@@ -97,7 +97,7 @@
     };
 
     hm = {
-      url = "github:nix-community/home-manager";
+      url = "github:fufexan/home-manager/discocss";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
