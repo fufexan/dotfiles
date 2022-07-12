@@ -7,6 +7,8 @@
 {
   home.packages = with inputs.nix-gaming.packages.${pkgs.system};
     [
+      inputs.self.packages.${pkgs.system}.gamescope
+
       (osu-stable.override {location = "$HOME/Games/osu!stable";})
       osu-lazer-bin
 
@@ -36,7 +38,7 @@
         source = builtins.fetchurl rec {
           url = "https://mc-launcher.com/files/unc/Technic.jar";
           name = "technic-${sha256}";
-          sha256 = "1yhgyimdhja0aggssd2l0fc50nfdfisfj0ix6qha9g644ag78h5r";
+          sha256 = "1hd5kfvkz3x0vral28n1d0srclp82blb2kx63sn10w06qz3pbzsf";
         };
       })
     ]);
