@@ -184,6 +184,5 @@
         chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
       };
     };
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }

@@ -10,7 +10,7 @@ with pkgs; [
     auto-format = true;
   }
   {
-    language-server = {command = "${clang-tools}/bin/clangd";};
+    language-server = {command = "${clang-tools_14}/bin/clangd";};
     name = "c";
     auto-format = true;
   }

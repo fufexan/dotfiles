@@ -94,6 +94,9 @@
     windowrule=float,title:^(Firefox — Sharing Indicator)$
     windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
 
+    windowrule=workspace 9,title:^(Spotify)$
+    windowrule=workspace 2,title:^(Discord)$
+
     bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
     bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
     bind=SUPER,Escape,exec,${run-as-service "manual"} wlogout -p layer-shell
