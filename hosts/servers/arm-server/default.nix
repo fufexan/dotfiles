@@ -12,7 +12,7 @@
     "net.ipv6.conf.all.forwarding" = true;
   };
 
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   hardware.opengl.enable = lib.mkForce false;
 

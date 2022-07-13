@@ -14,11 +14,6 @@
     pkgs = genSystems (system:
       import nixpkgs {
         inherit system;
-        overlays = [
-          inputs.devshell.overlay
-          inputs.emacs-overlay.overlay
-          overlays.default
-        ];
         config.allowUnfree = true;
       });
   in {
@@ -33,13 +28,13 @@
     nixosConfigurations = import ./hosts inputs;
 
     devShells = genSystems (system: {
-      default = pkgs.${system}.devshell.mkShell {
+      default = inputs.devshell.legacyPackages.${system}.mkShell {
         packages = with pkgs.${system}; [
           alejandra
           git
           inputs.rnix-lsp.defaultPackage.${system}
           inputs.deploy-rs.defaultPackage.${system}
-          repl
+          (overlays.default null pkgs.${system}).repl
         ];
         name = "dots";
       };
@@ -47,7 +42,7 @@
 
     packages = lib.genAttrs ["x86_64-linux"] (system: {
       inherit
-        (pkgs.${system})
+        (overlays.default null pkgs.${system})
         discord-electron-openasar
         dwarfs
         gamescope
@@ -121,11 +116,6 @@
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming.url = "github:fufexan/nix-gaming/testing";
-
-    catppuccin-helix = {
-      url = "github:catppuccin/helix";
-      flake = false;
-    };
 
     rnix-lsp = {
       url = "github:mtoohey31/rnix-lsp/feat/improved-format-edits";

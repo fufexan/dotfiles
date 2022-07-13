@@ -101,10 +101,7 @@
     };
   };
 
-  nixpkgs = {
-    pkgs = inputs.self.pkgs.${config.nixpkgs.system};
-    config.allowUnfree = true;
-  };
+  nixpkgs.pkgs = inputs.self.pkgs.${config.nixpkgs.system};
 
   # enable programs
   programs.less.enable = true;

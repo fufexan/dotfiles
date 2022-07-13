@@ -34,7 +34,7 @@
     ++ (with pkgs; [
       legendary-gl
 
-      (technic-launcher.override {
+      (inputs.self.packages.${pkgs.system}.technic-launcher.override {
         source = builtins.fetchurl rec {
           url = "https://mc-launcher.com/files/unc/Technic.jar";
           name = "technic-${sha256}";

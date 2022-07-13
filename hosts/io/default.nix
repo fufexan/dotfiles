@@ -48,7 +48,7 @@
 
     cpu.amd.updateMicrocode = true;
 
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
 
     opentabletdriver.enable = true;
 

@@ -64,7 +64,7 @@
 
     cpu.intel.updateMicrocode = true;
 
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
 
     opentabletdriver.enable = true;
 

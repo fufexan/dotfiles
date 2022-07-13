@@ -16,22 +16,6 @@
         "type": "github"
       }
     },
-    "catppuccin-helix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1655911215,
-        "narHash": "sha256-JfTS1Kgcdd/Gu05QXWwztHlr9zrIy73YXLvx7iaYAqM=",
-        "owner": "catppuccin",
-        "repo": "helix",
-        "rev": "dc1d236f610fa9573fa59194c79dd3a5a9c8a639",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "helix",
-        "type": "github"
-      }
-    },
     "crane": {
       "flake": false,
       "locked": {
@@ -627,7 +611,6 @@
     },
     "root": {
       "inputs": {
-        "catppuccin-helix": "catppuccin-helix",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
         "discocss": "discocss",

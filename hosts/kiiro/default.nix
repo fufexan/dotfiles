@@ -20,7 +20,7 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
 
-    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
   };
 
   networking.hostName = "kiiro";

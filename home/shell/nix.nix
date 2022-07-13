@@ -1,13 +1,17 @@
-{pkgs, ...}:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 # nix tooling
 {
   home.packages = with pkgs; [
     alejandra
     deadnix
     nix-index
-    repl
-    rnix-lsp
     statix
+    inputs.rnix-lsp.defaultPackage.${pkgs.system}
+    inputs.self.packages.${pkgs.system}.repl
   ];
 
   programs.direnv = {
