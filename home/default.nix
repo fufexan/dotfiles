@@ -109,7 +109,7 @@
 
     discocss = {
       enable = true;
-      discordPackage = pkgs.discord.override {withOpenASAR = true;};
+      discord = pkgs.discord.override {withOpenASAR = true;};
       css = builtins.readFile (builtins.fetchurl {
         url = "https://raw.githubusercontent.com/catppuccin/discord/main/main.css";
         sha256 = "1cwln6jx83priz5qlbjk1j413yhj7nn2zryxfgdhy30k9wj7mjpf";

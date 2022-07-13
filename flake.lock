@@ -398,16 +398,15 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1657379054,
-        "narHash": "sha256-W+hGW9/he0dR5eHureGXdA919SGh2kNDE7ZE0uFwxcA=",
-        "owner": "fufexan",
+        "lastModified": 1657621596,
+        "narHash": "sha256-lRd1RHpuSaCvkXSLBV/eTW0cKt4pj51yW0d62Yg9dAs=",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ccd0ac52d73e6d02fe796951fc5ef25ae022c3c8",
+        "rev": "1e66e035e18ca02d72ebbbc83e4e75fa0acdf1af",
         "type": "github"
       },
       "original": {
-        "owner": "fufexan",
-        "ref": "discocss",
+        "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
       }
@@ -420,11 +419,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1657633302,
-        "narHash": "sha256-mQOBa8H8WtIhBGFL8543mgQjOi/WtNHQgI5AWPn67vg=",
+        "lastModified": 1657660294,
+        "narHash": "sha256-ZG3etG6HDy83Pr8MvN55lS9KWlruNhfyolDhPJ6IBL4=",
         "owner": "vaxerski",
         "repo": "hyprland",
-        "rev": "3914672dd586d0e842e9113026bb6874c9b29ffa",
+        "rev": "bf762f566f1c8c5e9c636f0d1ad4e485ad322da9",
         "type": "github"
       },
       "original": {

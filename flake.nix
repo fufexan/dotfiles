@@ -54,6 +54,7 @@
         gdb-frontend
         hyprland
         repl
+        sway-hidpi
         technic-launcher
         tlauncher
         waveform
@@ -97,7 +98,7 @@
     };
 
     hm = {
-      url = "github:fufexan/home-manager/discocss";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
