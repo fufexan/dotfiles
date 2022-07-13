@@ -10,8 +10,6 @@
   # speed fix for Intel CPUs
   boot.kernelParams = ["intel_pstate=active"];
 
-  console.font = "Lat2-Terminus16";
-
   # enable zsh autocompletion for system packages (systemd, etc)
   environment = {
     etc = {

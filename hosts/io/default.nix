@@ -7,23 +7,46 @@
 }: {
   imports = [./hardware-configuration.nix];
 
-  # binfmt
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  boot = {
+    binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 
-  # kernel
-  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
-  boot.kernelModules = ["acpi_call" "amdgpu"];
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    # kernel
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    kernelModules = ["acpi_call" "amdgpu"];
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-  # dcfeaturemask - PSR support
-  boot.kernelParams = ["amdgpu.dcfeaturemask=0x8"];
+    # dcfeaturemask - PSR support
+    kernelParams = ["amdgpu.dcfeaturemask=0x8"];
 
-  # bootloader
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
+    # bootloader
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
+
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+        "dm_mod"
+        "tpm"
+      ];
+      kernelModules = [
+        "btrfs"
+        "kvm-amd"
+        "sd_mod"
+        "dm_mod"
+      ];
+      supportedFilesystems = ["btrfs"];
+      # systemd = {
+      #   enable = true;
+      #   emergencyAccess = true;
+      # };
+    };
   };
-
   # boot.plymouth.enable = true;
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
@@ -65,8 +88,15 @@
     steam.enable = true;
   };
 
+  security.tpm2 = {
+    enable = true;
+    abrmd.enable = true;
+  };
+
   services = {
     btrfs.autoScrub.enable = true;
+
+    fwupd.enable = true;
 
     kmonad.keyboards = {
       io = {
