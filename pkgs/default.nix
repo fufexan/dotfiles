@@ -59,6 +59,5 @@ in rec {
     patches = [./patches/xwayland-vsync.patch];
   });
 
-  # inherit (import ./sway-hidpi.nix prev) sway-hidpi;
   sway-hidpi = import ./sway-hidpi.nix prev;
 }

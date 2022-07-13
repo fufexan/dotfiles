@@ -40,21 +40,7 @@
       };
     });
 
-    packages = lib.genAttrs ["x86_64-linux"] (system: {
-      inherit
-        (overlays.default null pkgs.${system})
-        discord-electron-openasar
-        dwarfs
-        gamescope
-        gdb-frontend
-        hyprland
-        repl
-        sway-hidpi
-        technic-launcher
-        tlauncher
-        waveform
-        ;
-    });
+    packages = lib.genAttrs ["x86_64-linux"] (system: overlays.default null pkgs.${system});
 
     formatter = genSystems (system: pkgs.${system}.alejandra);
   };
