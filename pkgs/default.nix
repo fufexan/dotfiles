@@ -1,17 +1,8 @@
 inputs: final: prev: let
-  wlroots-patches = [
-    (prev.fetchpatch {
-      url = "https://gitlab.freedesktop.org/lilydjwg/wlroots/-/commit/6c5ffcd1fee9e44780a6a8792f74ecfbe24a1ca7.diff";
-      sha256 = "sha256-Eo1pTa/PIiJsRZwIUnHGTIFFIedzODVf0ZeuXb0a3TQ=";
-    })
-  ];
-
   hp = inputs.hyprland.packages.${prev.system};
 in rec {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
-
-  dwarfs = prev.callPackage ./dwarfs {};
 
   discord-electron-openasar = prev.callPackage ./discord rec {
     inherit (prev.discord) src version pname;
@@ -32,6 +23,10 @@ in rec {
     # ];
   };
 
+  dwarfs = prev.callPackage ./dwarfs {
+    libdwarf = prev.libdwarf_0_4;
+  };
+
   gamescope = prev.callPackage ./gamescope {};
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
@@ -45,16 +40,10 @@ in rec {
     };
   });
 
-  hyprland =
-    (hp.default.override {
-      wlroots =
-        (hp.wlroots-hyprland.overrideAttrs (
-          _: {patches = wlroots-patches;}
-        ))
-        .override {inherit (final) xwayland;};
-      inherit (final) xwayland;
-    })
-    .overrideAttrs (_: {NIX_CXXFLAGS_COMPILE = "-O3";});
+  hyprland = hp.default.override {
+    wlroots = hp.wlroots-hyprland.override {inherit xwayland;};
+    inherit xwayland;
+  };
 
   technic-launcher = prev.callPackage ./technic.nix {};
 
@@ -62,16 +51,14 @@ in rec {
 
   waveform = prev.callPackage ./waveform {};
 
-  wlroots = prev.wlroots.overrideAttrs (_: {patches = wlroots-patches;});
-
   xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
     patches = [./patches/xdpw-crash.patch];
   });
 
   xwayland = prev.xwayland.overrideAttrs (_: {
-    patches = [
-      ./patches/xwayland-vsync.patch
-      ./patches/xwayland-hidpi.patch
-    ];
+    patches = [./patches/xwayland-vsync.patch];
   });
+
+  # inherit (import ./sway-hidpi.nix prev) sway-hidpi;
+  sway-hidpi = import ./sway-hidpi.nix prev;
 }

@@ -2,10 +2,9 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
-  #imports = [./waybar];
-
   services.swayidle = {
     enable = true;
     events = [
@@ -33,21 +32,10 @@
 
   wayland.windowManager.sway = {
     enable = true;
+    package = inputs.self.packages.${pkgs.system}.sway-hidpi;
     config = {
-      assigns = {
-        "1: web" = [{class = "^Firefox$";}];
-        "2: chat" = [{class = "^Discord$";}];
-        "0: media" = [
-          {class = "^Spotify$";}
-          {class = "^mpv$";}
-        ];
-      };
-
       keybindings = let
         sway = config.wayland.windowManager.sway.config;
-        grim = "${pkgs.grim}/bin/grim";
-        slurp = "${pkgs.slurp}/bin/slurp";
-        wl-copy = "${pkgs.wl-clipboard}/bin/wl-copy";
         m = sway.modifier;
 
         # toggle output scaling
@@ -62,28 +50,34 @@
           "${m}+Return" = "exec ${sway.terminal}";
           "${m}+q" = "kill";
           "${m}+space" = "exec ${sway.menu}";
+
+          "${m}+t" = "floating toggle";
+
           # Fn + F7
           # "${m}+semicolon" = "exec ${toggle-scaling}";
+
           # screenshots
-          "Print" = ''exec ${grim} -g $(${slurp}) - | ${wl-copy} -t image/png'';
-          "${m}+Shift+r" = ''exec ${grim} -g $(${slurp}) - | ${wl-copy} -t image/png'';
-          "Ctrl+Print" = "exec ${grim} -c - ~/Pictures/Screenshots/$(date '+%F_%T').png";
-          "${m}+Ctrl+Shift+r" = ''exec ${grim} -c - ~/Pictures/Screenshots/$(date '+%F_%T').png'';
+          "Print" = "screenshot area";
+          "${m}+Shift+r" = "screenshot area";
+          "Ctrl+Print" = "screenshot monitor";
+          "${m}+Ctrl+Shift+r" = "screenshot monitor";
+          "Alt+Print" = "screenshot all";
+          "${m}+Alt+Shift+r" = "screenshot all";
         };
 
       keycodebindings = {
-        "--locked --no-repeat 121" = "exec pulsemixer --toggle-mute"; # mute
+        "--locked --no-repeat 121" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; # mute
         "--locked 122" = "exec pulsemixer --change-volume -6"; # vol-
         "--locked 123" = "exec pulsemixer --change-volume +6"; # vol+
         "--locked 171" = "exec playerctl next"; # next song
         "--locked --no-repeat 172" = "exec playerctl play-pause"; # play/pause
         "--locked 173" = "exec playerctl previous"; # prev song
-        "--locked --no-repeat 198" = "exec amixer set Capture toggle"; # mic mute
+        "--locked --no-repeat 198" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; # mic mute
         "--locked 232" = "exec light -U 5"; # brightness-
         "--locked 233" = "exec light -A 5"; # brightness+
       };
 
-      menu = "${pkgs.wofi}/bin/wofi --show drun --allow-images";
+      menu = "${pkgs.wofi}/bin/wofi --show drun --allow-images -iq";
       terminal = "alacritty";
       modifier = "Mod4";
       bars = [];
@@ -96,8 +90,8 @@
       };
 
       startup = [
-        {command = "dbus-update-activation-environment --systemd";}
-        {command = "eww daemon; eww open bar";}
+        {command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY";}
+        {command = "systemctl --user start graphical-session{-pre,}.target";}
         {command = "mako";}
       ];
 
@@ -117,16 +111,18 @@
       output = {
         "*" = {
           bg = "~/.config/wallpaper.jpg fill";
-          max_render_time = "7";
+          # max_render_time = "7";
         };
       };
     };
 
     extraConfig = ''
-      smart_borders on
-      smart_gaps on
+      xwayland force scale 2
+      exec xsettingsd
     '';
 
     wrapperFeatures = {gtk = true;};
   };
+
+  xdg.configFile."xsettingsd/xsettingsd.conf".text = "Gdk/WindowScalingFactor 2";
 }
