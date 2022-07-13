@@ -8,6 +8,13 @@
 # Wayland config
 let
   xcolors = colors.xcolors;
+
+  _ = lib.getExe;
+
+  ocrScript = pkgs.writeShellScriptBin "wl-ocr" ''
+    ${_ pkgs.grim} -g "$(${_ pkgs.slurp})" -t ppm - | ${_ pkgs.tesseract5} - - | ${pkgs.wl-clipboard}/bin/wl-copy
+    ${_ pkgs.libnotify} "$(${pkgs.wl-clipboard}/bin/wl-paste)"
+  '';
 in {
   imports = [
     ../eww
@@ -29,6 +36,7 @@ in {
     wayfire
 
     # utils
+    ocrScript
     wl-clipboard
     wlr-randr
     wlogout

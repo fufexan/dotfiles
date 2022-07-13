@@ -61,7 +61,7 @@
   '';
 in {
   home.packages = with pkgs; [
-    hyprland
+    inputs.self.packages.${pkgs.system}.hyprland
 
     grim
     libnotify

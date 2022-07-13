@@ -108,6 +108,7 @@
     bind=SUPER,T,togglefloating,
     bind=SUPER,P,pseudo,
     bind=SUPER,L,exec,swaylock
+    bind=SUPER,O,exec,wl-ocr
 
     bind=,XF86AudioPlay,exec,playerctl play-pause
     bind=,XF86AudioPrev,exec,playerctl previous
@@ -151,7 +152,7 @@
             builtins.toString (x + 1 - (c * 10));
           shiftedNumbers = ["exclam" "at" "numbersign" "dollar" "percent" "asciicircum" "ampersand" "asterisk" "parenleft" "parenright"];
         in ''
-          bind=SUPER,${ws},workspace,${ws}
+          bind=SUPER,${ws},workspace,${toString (x + 1)}
           bind=SHIFTSUPER,${builtins.elemAt shiftedNumbers x},movetoworkspace,${builtins.toString (x + 1)}
         ''
       )
