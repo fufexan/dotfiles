@@ -81,7 +81,7 @@
       enabled=1
       animation=borders,1,2,default
       animation=fadein,1,2,default
-      animation=windows,1,2,default
+      animation=windows,1,3,default
       animation=workspaces,1,2,slide
     }
 

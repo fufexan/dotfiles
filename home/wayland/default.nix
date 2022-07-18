@@ -3,6 +3,7 @@
   pkgs,
   lib,
   colors,
+  inputs,
   ...
 }:
 # Wayland config
@@ -55,6 +56,8 @@ in {
 
     mako = {
       enable = true;
+      package = inputs.self.packages.${pkgs.system}.mako;
+
       borderRadius = 16;
       borderSize = 0;
       defaultTimeout = 5000;
