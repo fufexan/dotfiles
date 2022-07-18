@@ -20,7 +20,8 @@ with pkgs; [
     auto-format = true;
   }
   {
-    language-server = {command = "${inputs.rnix-lsp.defaultPackage.${pkgs.system}}/bin/rnix-lsp";};
+    # language-server = {command = "${inputs.rnix-lsp.defaultPackage.${pkgs.system}}/bin/rnix-lsp";};
+    language-server = {command = "${rnix-lsp}/bin/rnix-lsp";};
     name = "nix";
   }
   {

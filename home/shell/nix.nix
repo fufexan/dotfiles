@@ -10,7 +10,8 @@
     deadnix
     nix-index
     statix
-    inputs.rnix-lsp.defaultPackage.${pkgs.system}
+    rnix-lsp
+    # inputs.rnix-lsp.defaultPackage.${pkgs.system}
     inputs.self.packages.${pkgs.system}.repl
   ];
 

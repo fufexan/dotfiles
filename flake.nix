@@ -32,7 +32,8 @@
         packages = with pkgs.${system}; [
           alejandra
           git
-          inputs.rnix-lsp.defaultPackage.${system}
+          rnix-lsp
+          # inputs.rnix-lsp.defaultPackage.${system}
           inputs.deploy-rs.defaultPackage.${system}
           (overlays.default null pkgs.${system}).repl
         ];
