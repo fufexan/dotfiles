@@ -4,7 +4,7 @@
   src,
   binaryName,
   desktopName,
-  isWayland ? false,
+  webRTC ? false,
   enableVulkan ? false,
   extraOptions ? [],
   autoPatchelfHook,
@@ -128,11 +128,10 @@ in
 
     flags =
       (
-        lib.optionals isWayland [
+        lib.optionals webRTC [
           "--flag-switches-begin"
-          "--enable-features=UseOzonePlatform,WebRTCPipeWireCapturer${lib.optionalString enableVulkan ",Vulkan"}"
+          "--enable-features=WebRTCPipeWireCapturer${lib.optionalString enableVulkan ",Vulkan"}"
           "--flag-switches-end"
-          "--ozone-platform=wayland"
           "--enable-webrtc-pipewire-capturer"
         ]
       )

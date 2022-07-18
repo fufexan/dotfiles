@@ -10,17 +10,15 @@ in rec {
     binaryName = "Discord";
     desktopName = "Discord";
 
-    isWayland = true;
-    # enableVulkan = true;
-    # extraOptions = [
-    #   "--disable-gpu-memory-buffer-video-frames"
-    #   "--enable-accelerated-mjpeg-decode"
-    #   "--enable-accelerated-video"
-    #   "--enable-gpu-rasterization"
-    #   "--enable-native-gpu-memory-buffers"
-    #   "--enable-zero-copy"
-    #   "--ignore-gpu-blocklist"
-    # ];
+    extraOptions = [
+      "--disable-gpu-memory-buffer-video-frames"
+      "--enable-accelerated-mjpeg-decode"
+      "--enable-accelerated-video"
+      "--enable-gpu-rasterization"
+      "--enable-native-gpu-memory-buffers"
+      "--enable-zero-copy"
+      "--ignore-gpu-blocklist"
+    ];
   };
 
   dwarfs = prev.callPackage ./dwarfs {
