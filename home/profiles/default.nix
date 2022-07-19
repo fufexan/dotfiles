@@ -13,7 +13,7 @@ inputs: let
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [../wayland ./mihai-io ../editors/neovim];
+    "mihai@io" = sharedModules ++ [../dunst.nix ../wayland ./mihai-io ../editors/neovim];
     "mihai@rog" = sharedModules ++ [../wayland ./mihai-rog ../editors/neovim];
     "mihai@tosh" = sharedModules ++ [../wayland ./mihai-tosh];
     server = [../cli.nix];

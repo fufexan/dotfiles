@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  colors,
+  ...
+}: let
+  x = colors.xcolors;
+in {
   # notification daemon
   services.dunst = {
     enable = true;
@@ -9,17 +15,17 @@
     settings = {
       global = {
         alignment = "center";
-        corner_radius = 10;
+        corner_radius = 16;
         follow = "mouse";
-        font = "Noto Sans 10";
+        font = "Roboto 10";
         format = "<b>%s</b>\\n%b";
-        frame_width = 2;
-        geometry = "400x5-4+32";
+        frame_width = 1;
+        offset = "5x5";
         horizontal_padding = 8;
         icon_position = "left";
         indicate_hidden = "yes";
         markup = "yes";
-        max_icon_size = 96;
+        max_icon_size = 64;
         mouse_left_click = "do_action";
         mouse_middle_click = "close_all";
         mouse_right_click = "close_current";
@@ -31,21 +37,23 @@
         shrink = "no";
         word_wrap = "yes";
       };
+
       fullscreen_delay_everything = {fullscreen = "delay";};
+
       urgency_critical = {
-        background = "#16161c";
-        foreground = "#fdf0ed";
-        frame_color = "#e95678";
+        background = x.base00;
+        foreground = x.base06;
+        frame_color = x.base08;
       };
       urgency_low = {
-        background = "#16161c";
-        foreground = "#fdf0ed";
-        frame_color = "#29d398";
+        background = x.base00;
+        foreground = x.base06;
+        frame_color = x.base05;
       };
       urgency_normal = {
-        background = "#16161c";
-        foreground = "#fdf0ed";
-        frame_color = "#fab795";
+        background = x.base00;
+        foreground = x.base06;
+        frame_color = x.base06;
       };
     };
   };

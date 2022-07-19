@@ -10,7 +10,6 @@ let
 in {
   imports = [
     #./autorandr.nix
-    ./dunst.nix
     ./picom.nix
     ./polybar
     ./rofi

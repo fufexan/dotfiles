@@ -55,7 +55,7 @@ in {
     firefox.package = pkgs.firefox-wayland;
 
     mako = {
-      enable = true;
+      # enable = true;
       package = inputs.self.packages.${pkgs.system}.mako;
 
       borderRadius = 16;
