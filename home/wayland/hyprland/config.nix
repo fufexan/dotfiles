@@ -31,7 +31,7 @@
     workspace=DP-2,10
 
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
-    exec-once=systemctl --user start graphical-session-pre.target graphical-session.target
+    exec-once=systemctl --user start hyprland-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
     exec-once=mako
 
@@ -94,6 +94,7 @@
     windowrule=float,title:^(Firefox — Sharing Indicator)$
     windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
 
+    windowrule=tile,title:^(Spotify)$
     windowrule=workspace 9,title:^(Spotify)$
     windowrule=workspace 2,title:^(Discord)$
 
