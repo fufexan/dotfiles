@@ -61,27 +61,19 @@ in {
     system = "x86_64-linux";
   };
 
-  /*
-   iso = makeOverridable nixosSystem {
-   system = "x86_64-linux";
-   
-   modules = [
-   ../modules/iso.nix
-   {
-   home-manager = {
-   extraSpecialArgs = { inherit inputs; };
-   useGlobalPkgs = true;
-   users.mihai.imports = [
-   ../home/cli.nix
-   ../home/editors/helix
-   ];
-   };
-   }
-   ];
-   
-   specialArgs = { inherit inputs; };
-   };
-   */
+  iso = makeOverridable nixosSystem {
+    system = "x86_64-linux";
+
+    modules = [
+      ("${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix")
+      {
+        home-manager.users.mihai.imports = [
+            ../home/cli.nix
+            ../home/editors/helix
+        ];
+      }
+    ] ++ sharedModules ++ desktopModules;
+  };
 
   kiiro = nixosSystem {
     modules =
