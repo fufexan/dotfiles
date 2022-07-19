@@ -49,10 +49,6 @@ in rec {
 
   waveform = prev.callPackage ./waveform {};
 
-  xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
-    patches = [./patches/xdpw-crash.patch];
-  });
-
   xwayland = prev.xwayland.overrideAttrs (_: {
     patches = [./patches/xwayland-vsync.patch];
   });

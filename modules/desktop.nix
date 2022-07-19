@@ -174,6 +174,15 @@
     services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce []; # Normally ["network-online.target"]
   };
 
+  nixpkgs.overlays = [
+    (
+      _: prev: {
+        xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
+          patches = [../pkgs/patches/xdpw-crash.patch];
+        });
+      }
+    )
+  ];
   # wlroots screensharing
   xdg.portal = {
     enable = true;
