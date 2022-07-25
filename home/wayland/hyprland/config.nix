@@ -33,7 +33,10 @@
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
     exec-once=systemctl --user start hyprland-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
-    exec-once=mako
+
+    misc {
+      no_vfr=0
+    }
 
     gestures {
       workspace_swipe=1
@@ -41,6 +44,7 @@
 
     input {
       kb_layout=ro
+      sensitivity=0
 
       follow_mouse=1
       force_no_accel=1
@@ -48,6 +52,10 @@
       touchpad {
         natural_scroll=1
       }
+    }
+
+    device:MSFT0001:00 04F3:31EB Touchpad {
+      sensitivity=0.5
     }
 
     general {
@@ -59,8 +67,6 @@
       border_size=2
       col.active_border=0x${xargb.base06}
       col.inactive_border=0x${xargb.base02}
-
-      damage_tracking=full
     }
 
     decoration {
@@ -90,6 +96,8 @@
       preserve_split=1
     }
 
+
+    windowrule=float,title:^(Media viewer)$
     windowrule=float,title:^(Picture-in-Picture)$
     windowrule=float,title:^(Firefox — Sharing Indicator)$
     windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$

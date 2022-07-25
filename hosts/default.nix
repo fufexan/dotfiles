@@ -64,15 +64,18 @@ in {
   iso = makeOverridable nixosSystem {
     system = "x86_64-linux";
 
-    modules = [
-      ("${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix")
-      {
-        home-manager.users.mihai.imports = [
+    modules =
+      [
+        "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
+        {
+          home-manager.users.mihai.imports = [
             ../home/cli.nix
             ../home/editors/helix
-        ];
-      }
-    ] ++ sharedModules ++ desktopModules;
+          ];
+        }
+      ]
+      ++ sharedModules
+      ++ desktopModules;
   };
 
   kiiro = nixosSystem {
