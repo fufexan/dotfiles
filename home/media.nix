@@ -22,5 +22,8 @@
     obs-studio.enable = true;
   };
 
-  services.playerctld.enable = true;
+  services = {
+    easyeffects.enable = true;
+    playerctld.enable = true;
+  };
 }
