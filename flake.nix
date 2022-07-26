@@ -28,20 +28,16 @@
     nixosConfigurations = import ./hosts inputs;
 
     devShells = genSystems (system: {
-      default =
-        /*
-        inputs.devshell.legacyPackages.${system}.mkShell
-        */
-        pkgs.${system}.mkShell {
-          packages = with pkgs.${system}; [
-            alejandra
-            git
-            inputs.rnix-lsp.defaultPackage.${system}
-            inputs.deploy-rs.defaultPackage.${system}
-            (overlays.default null pkgs.${system}).repl
-          ];
-          name = "dots";
-        };
+      default = inputs.devshell.legacyPackages.${system}.mkShell {
+        packages = with pkgs.${system}; [
+          alejandra
+          git
+          inputs.rnix-lsp.defaultPackage.${system}
+          inputs.deploy-rs.defaultPackage.${system}
+          (overlays.default null pkgs.${system}).repl
+        ];
+        name = "dots";
+      };
     });
 
     packages = lib.genAttrs ["x86_64-linux"] (system: overlays.default null pkgs.${system});
@@ -105,10 +101,11 @@
 
     nix-colors.url = "github:Misterio77/nix-colors";
 
-    nix-gaming.url = "github:fufexan/nix-gaming/testing";
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
+      # uncomment when https://github.com/nix-community/rnix-lsp/pull/94 lands
       # inputs.naersk.follows = "naersk";
       # inputs.nixpkgs.follows = "nixpkgs";
       # inputs.utils.follows = "fu";
