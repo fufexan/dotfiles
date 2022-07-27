@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{pkgs, ...}: {
+  screenWidth,
+  scale,
+  gaps,
+  radius,
+}: let
   battery = import ./scripts/battery.nix pkgs;
   brightness = import ./scripts/brightness.nix pkgs;
   memory = import ./scripts/memory.nix pkgs;
@@ -229,6 +234,7 @@
     (defwidget bar []
       (centerbox
         :class "bar"
+        ; :style "border-radius: ${builtins.toString (builtins.floor (radius / scale))}px;"
         (left)
         (center)
         (right)))
@@ -237,14 +243,13 @@
         :monitor 0
         :geometry (geometry :x "0%"
           :y "5px"
-          :width "99%"
+          :width "${builtins.toString (builtins.floor (screenWidth / scale - gaps * 2 * scale))}px"
           :height "32px"
           :anchor "top center")
         :stacking "fg"
         :windowtype "dock"
         :exclusive true
         :wm-ignore false
-        :focusable false
       (bar))
 
     (defwidget system []
