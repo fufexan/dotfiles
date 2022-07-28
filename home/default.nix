@@ -49,6 +49,7 @@
     transmission-remote-gtk
     # misc
     libnotify
+    timewarrior
     xournalpp
   ];
 

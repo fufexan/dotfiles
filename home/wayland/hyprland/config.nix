@@ -1,8 +1,6 @@
 {
-  config,
   pkgs,
   colors,
-  lib,
   ...
 }: let
   xargb = colors.xargbColors;
@@ -23,7 +21,7 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,2560x1600@60,1366x0,1.6
+    monitor=eDP-1,2560x1600@60,0x0,1.6
     workspace=eDP-1,1
     monitor=DP-1,1366x768@60,0x0,1
     workspace=DP-1,10
@@ -55,11 +53,15 @@
     }
 
     device:MSFT0001:00 04F3:31EB Touchpad {
-      sensitivity=0.5
+      sensitivity=-1
+    }
+
+    device:MSFT0001:00 04F3:31EB Mouse {
+      sensitivity=-1
     }
 
     general {
-      sensitivity=1
+      sensitivity=0.6
       main_mod=SUPER
 
       gaps_in=5
@@ -85,8 +87,8 @@
 
     animations {
       enabled=1
-      animation=borders,1,2,default
-      animation=fadein,1,2,default
+      animation=border,1,2,default
+      animation=fade,1,2,default
       animation=windows,1,3,default
       animation=workspaces,1,2,slide
     }
@@ -95,7 +97,6 @@
       pseudotile=1
       preserve_split=1
     }
-
 
     windowrule=float,title:^(Media viewer)$
     windowrule=float,title:^(Picture-in-Picture)$
