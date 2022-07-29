@@ -84,6 +84,7 @@
 
   programs = {
     adb.enable = true;
+    hyprland.enable = true;
     light.enable = true;
     steam.enable = true;
   };

@@ -5,8 +5,6 @@
   pkgs,
   ...
 } @ args: let
-  swayidleCfg = config.systemd.user.services.swayidle.Install.WantedBy;
-
   apply-hm-env = pkgs.writeShellScriptBin "apply-hm-env" ''
     ${lib.optionalString (config.home.sessionPath != []) ''
       export PATH=${builtins.concatStringsSep ":" config.home.sessionPath}:$PATH
@@ -22,16 +20,13 @@
   screenshot = import ../screenshot.nix args;
 in {
   home.packages = with pkgs; [
-    inputs.self.packages.${pkgs.system}.hyprland
-
-    grim
-    libnotify
     light
+
     playerctl
     pulsemixer
+
     screenshot
-    slurp
-    swappy
+
     wf-recorder
     wl-clipboard
     wlogout
@@ -41,20 +36,12 @@ in {
 
   home.sessionVariables.XCURSOR_SIZE = builtins.toString config.home.pointerCursor.size;
 
-  xdg.configFile."hypr/hyprland.conf".text = import ./config.nix args;
-
   # allow swayidle to be started along with Hyprland
-  systemd.user = {
-    services.swayidle.Install.WantedBy = lib.mkForce ["sway-session.target" "hyprland-session.target"];
+  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["sway-session.target" "hyprland-session.target"];
 
-    targets.hyprland-session = {
-      Unit = {
-        Description = "hyprland compositor session";
-        Documentation = ["man:systemd.special(7)"];
-        BindsTo = ["graphical-session.target"];
-        Wants = ["graphical-session-pre.target"];
-        After = ["graphical-session-pre.target"];
-      };
-    };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = inputs.self.packages.${pkgs.system}.hyprland;
+    extraConfig = import ./config.nix args;
   };
 }

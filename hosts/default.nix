@@ -15,6 +15,7 @@ inputs: let
   ];
 
   desktopModules = [
+    inputs.hyprland.nixosModules.default
     inputs.kmonad.nixosModules.default
     inputs.nix-gaming.nixosModules.default
   ];

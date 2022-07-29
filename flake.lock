@@ -403,16 +403,36 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1659045300,
-        "narHash": "sha256-bpwkMH95VgFUEhfFrS3vsF9wrrKkE1M1r7W+JC1gl+U=",
-        "owner": "vaxerski",
-        "repo": "hyprland",
-        "rev": "233bad5011830923bd4fa72926415d0e5c7a2298",
+        "lastModified": 1659109150,
+        "narHash": "sha256-XDSEinneNtgJ7hbcysteuOqpw0y6tqrDOWX2ENp2oEw=",
+        "owner": "hyprwm",
+        "repo": "Hyprland",
+        "rev": "66680a1149be22d36cfd623cf5bbb7f9746e3fa6",
         "type": "github"
       },
       "original": {
-        "owner": "vaxerski",
-        "repo": "hyprland",
+        "owner": "hyprwm",
+        "repo": "Hyprland",
+        "type": "github"
+      }
+    },
+    "hyprland-contrib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1658948680,
+        "narHash": "sha256-0A2ZKxCXmnkMzlaveS+nKVCntIXrHKHMGZDEqVqlwOk=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "1b3af7422e971507538e692b28877bf58349475a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
         "type": "github"
       }
     },
@@ -665,6 +685,7 @@
         "helix": "helix",
         "hm": "hm",
         "hyprland": "hyprland",
+        "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
         "naersk": "naersk",
         "nix-colors": "nix-colors",

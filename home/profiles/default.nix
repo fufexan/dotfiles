@@ -10,6 +10,7 @@ inputs: let
     ../media.nix
     ../editors/helix
     inputs.discocss.hmModule
+    inputs.hyprland.homeManagerModules.default
   ];
 
   homeImports = {

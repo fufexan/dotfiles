@@ -1,5 +1,14 @@
 {pkgs, ...}: let
+  programs = with pkgs; [
+    grim
+    libnotify
+    slurp
+    swappy
+  ];
+
   screenshot = pkgs.writeShellScriptBin "screenshot" ''
+    export PATH=$PATH:${pkgs.lib.makeBinPath programs}
+
     ICON="/run/current-system/sw/share/icons/Adwaita/48x48/legacy/applets-screenshooter-symbolic.symbolic.png"
     COPY="wl-copy -t image/png"
 
