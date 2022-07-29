@@ -1,8 +1,3 @@
-{
-  config,
-  lib,
-  ...
-}:
 # security tweaks borrowed from @hlissner
 {
   boot.kernel.sysctl = {

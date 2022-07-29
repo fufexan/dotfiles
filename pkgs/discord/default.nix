@@ -54,8 +54,6 @@
   libdbusmenu,
   vulkan-loader,
   vulkan-extension-layer,
-  writeScript,
-  common-updater-scripts,
   makeShellWrapper,
 }: let
   inherit binaryName;

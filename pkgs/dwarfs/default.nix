@@ -4,7 +4,6 @@
   bison,
   double-conversion,
   cmake,
-  lib,
   git,
   fetchFromGitHub,
   fmt_8,

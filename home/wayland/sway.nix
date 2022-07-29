@@ -39,7 +39,7 @@
         m = sway.modifier;
 
         # toggle output scaling
-        output = "eDP-1";
+        # output = "eDP-1";
         # toggle-scaling = pkgs.writeShellScript "sway-scale-toggle" ''
         #   S=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '.[] | select(any(. == "${output}")).scale')
         #   [ $S = 2 ] && S=1 || S=2

@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   services = {
     kanshi = {
       # use 1.6 scaling: 2560 : 1.6 = 1600, exact division. good for offsets

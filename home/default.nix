@@ -2,7 +2,6 @@
   pkgs,
   config,
   colors,
-  inputs,
   ...
 }:
 # graphical session configuration

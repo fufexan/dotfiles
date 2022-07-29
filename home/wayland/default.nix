@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   colors,
@@ -8,7 +7,7 @@
 }:
 # Wayland config
 let
-  xcolors = colors.xcolors;
+  inherit (colors) xcolors;
 
   _ = lib.getExe;
 

@@ -6,7 +6,6 @@
   python3,
   gdb,
   tmux,
-  writeShellScript,
 }:
 stdenv.mkDerivation rec {
   pname = "gdb-frontend";

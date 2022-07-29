@@ -72,7 +72,10 @@ pkgs: let
         })
       ];
     }))
-    .override {wayland = wayland-sway;};
+    .override {
+      inherit xwayland;
+      wayland = wayland-sway;
+    };
 
   xwayland = pkgs.xwayland.overrideAttrs (_: {
     patches = [

@@ -38,7 +38,6 @@
   nss,
   pango,
   stdenv,
-  systemd,
   at-spi2-atk,
   at-spi2-core,
   autoPatchelfHook,

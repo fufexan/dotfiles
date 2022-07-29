@@ -1,4 +1,4 @@
-inputs: final: prev: let
+inputs: _: prev: let
   hp = inputs.hyprland.packages.${prev.system};
 in rec {
   # instant repl with automatic flake loading

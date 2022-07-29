@@ -78,7 +78,7 @@
       options = "--delete-older-than 7d";
     };
 
-    registry = lib.mapAttrs (n: v: {flake = v;}) inputs;
+    registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
 
     nixPath = [
       "nixpkgs=/etc/nix/flake-channels/nixpkgs"

@@ -1,6 +1,5 @@
 {
   colors,
-  pkgs,
   ...
 }:
 # manage files in ~

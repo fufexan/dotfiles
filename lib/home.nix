@@ -7,15 +7,15 @@ inputs: let
   colors = with self.lib; rec {
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
     # normal hex values
-    xcolors = mapAttrs (n: x) baseColors;
+    xcolors = mapAttrs (_: x) baseColors;
     # rgba hex values
-    xrgbaColors = mapAttrs (n: xrgba) baseColors;
+    xrgbaColors = mapAttrs (_: xrgba) baseColors;
     # argb hex values
-    xargbColors = mapAttrs (n: xargb) baseColors;
+    xargbColors = mapAttrs (_: xargb) baseColors;
     # 0xABCDEF colors (alacritty)
-    x0Colors = mapAttrs (n: x0) baseColors;
+    x0Colors = mapAttrs (_: x0) baseColors;
     # rgba(,,,) colors (css)
-    rgbaColors = mapAttrs (n: rgba) baseColors;
+    rgbaColors = mapAttrs (_: rgba) baseColors;
   };
 
   extraSpecialArgs = {inherit colors inputs;};
