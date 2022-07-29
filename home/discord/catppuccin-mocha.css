@@ -1,0 +1,215 @@
+.theme-dark,
+.theme-light {
+  --brand-experiment: #f5e0dc;
+  --brand-experiment-560: #f5e0dc;
+  --brand-experiment-200: #cdd6f4;
+  --brand-experiment-15a: #585b70;
+  --brand-experiment-600: #efcec8;
+  --header-primary: #a6adc8;
+  --header-secondary: #bac2de;
+  --text-normal: #cdd6f4;
+  --text-muted: #a6adc8;
+  --text-link: #f5e0dc;
+  --text-positive: #a6e3a1;
+  --text-warning: #f9e2af;
+  --text-danger: #f38ba8;
+  --text-brand: #89b4fa;
+  --interactive-normal: #9399b2;
+  --interactive-hover: #9399b2;
+  --interactive-active: #cdd6f4;
+  --interactive-muted: #45475a;
+  --background-primary: #1e1e2e;
+  --background-secondary: #181825;
+  --background-secondary-alt: #11111b;
+  --background-tertiary: #11111b;
+  --background-accent: #45475a;
+  --background-floating: #181825;
+  --background-nested-floating: #2f3136;
+  --background-mobile-primary: #36393f;
+  --background-mobile-secondary: #2f3136;
+  --chat-background: #36393f;
+  --chat-border: #202225;
+  --chat-input-container-background: #36393f;
+  --background-modifier-hover: #45475a;
+  --background-modifier-active: #585b70;
+  --background-modifier-selected: #585b70;
+  --background-modifier-accent: rgba(79,84,92,0.48);
+  --info-warning-background: rgba(249,226,175,0.1);
+  --info-warning-foreground: #f9e2af;
+/*--info-warning-text: #fff;
+    --info-danger-background: hsla(359,calc(var(--saturation-factor, 1)*82.6%),59.4%,0.1);
+    --info-danger-foreground: hsl(359,calc(var(--saturation-factor, 1)*82.6%),59.4%);
+    --info-danger-text: #fff;
+    --info-help-background: hsla(197,calc(var(--saturation-factor, 1)*100%),47.8%,0.1);
+    --info-help-foreground: hsl(197,calc(var(--saturation-factor, 1)*100%),47.8%);
+    --info-help-text: #fff;
+    --status-positive-background: hsl(139,calc(var(--saturation-factor, 1)*47.1%),33.3%);
+    --status-positive-text: #fff;
+    --status-warning-background: hsl(38,calc(var(--saturation-factor, 1)*95.7%),54.1%);
+    --status-warning-text: #000;*/
+  --status-danger-background: #f38ba8;
+  --status-danger-text: #cdd6f4;
+  --status-danger: #f38ba8;
+  --status-positive: #a6e3a1;
+  --status-warning: #fab387;
+  --button-danger-background: #f38ba8;
+  --button-danger-background-hover: #f5a2b9;
+  --button-danger-background-active: #f17497;
+  --button-danger-background-disabled: #532c37;
+  --button-positive-background: #a6e3a1;
+  --button-positive-background-hover: #b9e9b5;
+  --button-positive-background-active: #93dd8d;
+  --button-positive-background-disabled: #404540;
+  --button-secondary-background: #313244;
+  --button-secondary-background-hover: #45475a;
+  --button-secondary-background-active: #585b70;
+  --button-secondary-background-disabled: #f00;
+  --button-outline-danger-text: #cdd6f4;
+  --button-outline-danger-border: #f38ba8;
+  --button-outline-danger-background: #f38ba8;
+  --button-outline-danger-background-hover: #f5a2b9;
+  --button-outline-danger-text-hover: #1e1e2e;
+  --button-outline-danger-border-hover: #f5a2b9;
+  --button-outline-danger-background-active: #f17497;
+  --button-outline-danger-text-active: #1e1e2e;
+  --button-outline-danger-border-active: #f17497;
+  --button-outline-positive-text: #fff;
+/*--button-outline-positive-border: hsl(139,calc(var(--saturation-factor, 1)*47.3%),43.9%);
+    --button-outline-positive-background: hsla(0,0%,100%,0);
+    --button-outline-positive-background-hover: hsl(139,calc(var(--saturation-factor, 1)*47.1%),33.3%);
+    --button-outline-positive-text-hover: #fff;
+    --button-outline-positive-border-hover: hsl(139,calc(var(--saturation-factor, 1)*47.1%),33.3%);
+    --button-outline-positive-background-active: hsl(138,calc(var(--saturation-factor, 1)*46.8%),24.3%);
+    --button-outline-positive-text-active: #fff;
+    --button-outline-positive-border-active: hsl(138,calc(var(--saturation-factor, 1)*46.8%),24.3%);
+    --button-outline-brand-text: #fff;
+    --button-outline-brand-border: hsl(235,calc(var(--saturation-factor, 1)*85.6%),64.7%);
+    --button-outline-brand-background: hsla(0,0%,100%,0);
+    --button-outline-brand-background-hover: hsl(235,calc(var(--saturation-factor, 1)*85.6%),64.7%);
+    --button-outline-brand-text-hover: #fff;
+    --button-outline-brand-border-hover: hsl(235,calc(var(--saturation-factor, 1)*85.6%),64.7%);
+    --button-outline-brand-background-active: hsl(235,calc(var(--saturation-factor, 1)*51.4%),52.4%);
+    --button-outline-brand-text-active: #fff;
+    --button-outline-brand-border-active: hsl(235,calc(var(--saturation-factor, 1)*51.4%),52.4%);*/
+  --button-outline-primary-text: #fff;
+  --button-outline-primary-border: #4f545c;
+  --button-outline-primary-background: rgba(255,255,255,0);
+  --button-outline-primary-background-hover: #4f545c;
+  --button-outline-primary-text-hover: #fff;
+  --button-outline-primary-border-hover: #4f545c;
+  --button-outline-primary-background-active: #686d73;
+  --button-outline-primary-text-active: #fff;
+  --button-outline-primary-border-active: #686d73;
+  --modal-background: #181825;
+  --modal-footer-background: #11111b;
+  --scrollbar-thin-thumb: #313244;
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: #313244;
+  --scrollbar-auto-track: transparent;
+  --scrollbar-auto-scrollbar-color-thumb: #313244;
+  --scrollbar-auto-scrollbar-color-track: transparent;
+  --input-background: #313244;
+  --input-placeholder-text: #7f849c;
+  --elevation-stroke: 0 0 0 1px rgba(4,4,5,0.15);
+  --elevation-low: 0 1px 0 rgba(4,4,5,0.2), 0 1.5px 0 rgba(6,6,7,0.05), 0 2px 0 rgba(4,4,5,0.05);
+  --elevation-medium: 0 4px 4px rgba(0,0,0,0.16);
+  --elevation-high: 0 8px 16px rgba(0,0,0,0.24);
+  --logo-primary: #fff;
+  --background-mentioned: rgba(249,226,175,0.1);
+  --background-mentioned-hover: rgba(249,226,175,0.08);
+  --background-message-hover: rgba(24,24,37,0.25);
+  --channels-default: #7f849c;
+  --channel-icon: #a6adc8;
+  --channel-text-area-placeholder: #72767d;
+  --guild-header-text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  --channeltextarea-background: #313244;
+  --activity-card-background: #202225;
+  --textbox-markdown-syntax: #8e9297;
+  --spoiler-revealed-background: #292b2f;
+  --spoiler-hidden-background: #202225;
+  --android-navigation-bar-background: #121315;
+  --deprecated-card-bg: #181825;
+  --deprecated-card-editable-bg: rgba(32,34,37,0.3);
+  --deprecated-store-bg: #36393f;
+  --deprecated-quickswitcher-input-background: #72767d;
+  --deprecated-quickswitcher-input-placeholder: rgba(255,255,255,0.3);
+  --deprecated-text-input-bg: #202225;
+  --deprecated-text-input-border: rgba(0,0,0,0.3);
+  --deprecated-text-input-border-hover: #040405;
+  --deprecated-text-input-border-disabled: #202225;
+  --deprecated-text-input-prefix: #dcddde;
+}
+/* Reactions */
+.reaction-3vwAF2 {
+  background-color: #313244;
+}
+.reaction-3vwAF2:hover {
+  background-color: #45475a;
+}
+/* Buttons */
+.lookFilled-yCfaCM.colorBrand-I6CyqQ,
+.lookFilled-yCfaCM.colorRed-rQXKgM,
+.lookFilled-yCfaCM.colorGreen-3y-Z79,
+.selected-2Uns2B,
+.colorDefault-CDqZdO.focused-3qFvc8,
+.barButtonBase-Sk2mdB {
+  color: #1e1e2e;
+}
+.colorDanger-3n-KnP:active:not(.hideInteraction-2jPGL_) {
+  background-color: #f38ba8;
+  color: #1e1e2e;
+}
+.lookFilled-yCfaCM.colorPrimary-2AuQVo {
+  background-color: #313244;
+  color: #cdd6f4;
+}
+/* Checkbox */
+.checked-25WXMf {
+  background-color: #a6e3a1 !important;
+}
+/* Bot tag */
+.botTagRegular-kpctgU {
+  color: #1e1e2e;
+}
+/* Message hover buttons */
+.wrapper-2vIMkT {
+  background-color: #313244;
+}
+/* DMs page */
+.container-2cd8Mz {
+  background-color: #1e1e2e !important;
+}
+/* Delete message pupup */
+.theme-dark .message-G6O-Wv {
+  background-color: #11111b;
+}
+.autocomplete-3NRXG8 {
+  background: #1e1e2e !important;
+}
+.categoryHeader-OpJ1Ly {
+  background: #181825;
+}
+rect[fill^="hsl(139"] {
+  fill: #a6e3a1;
+}
+rect[fill^="hsl(38"] {
+  fill: #f9e2af;
+}
+rect[fill^="hsl(359"] {
+  fill: #f38ba8;
+}
+rect[fill^="hsl(214"] {
+  fill: #a6adc8;
+}
+div[style^="background-color: hsl(139"] {
+  background-color: #a6e3a1 !important;
+}
+div[style^="background-color: hsl(38"] {
+  background-color: #f9e2af !important;
+}
+div[style^="background-color: hsl(359"] {
+  background-color: #f38ba8 !important;
+}
+div[style^="background-color: hsl(214"] {
+  background-color: #a6adc8 !important;
+}

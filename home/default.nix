@@ -10,6 +10,7 @@
 {
   imports = [
     ./cli.nix # base config
+    ./discord
     ./terminals.nix
   ];
 
@@ -106,15 +107,6 @@
       enable = true;
       commandLineArgs = ["--ozone-platform-hint=auto"];
       extensions = [{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}];
-    };
-
-    discocss = {
-      enable = true;
-      discord = inputs.self.packages.${pkgs.system}.discord-electron-openasar;
-      css = builtins.readFile (builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/catppuccin/discord/main/main.css";
-        sha256 = "1cwln6jx83priz5qlbjk1j413yhj7nn2zryxfgdhy30k9wj7mjpf";
-      });
     };
 
     firefox = {
