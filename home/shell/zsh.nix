@@ -89,6 +89,7 @@
       gd = "git diff";
       gds = "git diff --staged";
       gp = "git push";
+      gpf = "git push --force-with-lease";
       gpl = "git pull";
       gl = "git log";
       gr = "git rebase";

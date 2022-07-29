@@ -1,6 +1,11 @@
 -- set colorscheme
 vim.cmd 'set termguicolors'
-vim.cmd 'colorscheme horizon'
+
+vim.g.catppuccin_flavour = "mocha"
+
+require("catppuccin").setup()
+
+vim.cmd [[colorscheme catppuccin]]
 
 -- enable colorizer
 require'colorizer'.setup()
@@ -12,4 +17,4 @@ vim.cmd 'sign define DiagnosticSignInfo text=  linehl= texthl=DiagnosticSignI
 vim.cmd 'sign define DiagnosticSignWarn text=  linehl= texthl=DiagnosticSignWarn numhl='
 
 -- set lightline theme to horizon
-vim.g.lightline = { colorscheme = 'horizon' }
+vim.g.lightline = { colorscheme = "catppuccin" }

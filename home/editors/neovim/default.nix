@@ -1,23 +1,4 @@
-{pkgs, ...}: let
-  vim-horizon = pkgs.vimUtils.buildVimPlugin rec {
-    pname = "vim-horizon";
-    version = "unstable-2022-03-17";
-    src = pkgs.fetchFromGitHub {
-      owner = "ntk148v";
-      repo = pname;
-      rev = "44826ccfa9319e0dd114ee97784b1e1e53efee40";
-      sha256 = "sha256-YVOPb8ehWMdvQi/3WkCsRijP8VE627E1TD4LrLw7hfg=";
-    };
-  };
-  null-ls = pkgs.vimPlugins.null-ls-nvim.overrideAttrs (_: {
-    src = pkgs.fetchFromGitHub {
-      owner = "jose-elias-alvarez";
-      repo = "null-ls.nvim";
-      rev = "708aa256d769ddfca474d48330890e7b71e423fd";
-      sha256 = "sha256-gTIYyO7S9FIWMzP6PUzmF7G6HKJah2W6q6B2Px60kAE=";
-    };
-  });
-in {
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
 
@@ -26,6 +7,7 @@ in {
     vimdiffAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+      catppuccin-nvim
       cmp-buffer
       cmp-nvim-lsp
       cmp-path
@@ -37,7 +19,7 @@ in {
       lightline-vim
       lspkind-nvim
       neogit
-      null-ls
+      null-ls-nvim
       nvim-autopairs
       nvim-cmp
       nvim-colorizer-lua
@@ -49,7 +31,6 @@ in {
       telescope-fzy-native-nvim
       telescope-nvim
       vim-floaterm
-      vim-horizon
       vim-sneak
       vim-vsnip
       which-key-nvim
