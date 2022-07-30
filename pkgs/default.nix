@@ -1,6 +1,4 @@
-inputs: _: prev: let
-  hp = inputs.hyprland.packages.${prev.system};
-in rec {
+inputs: _: prev: rec {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
@@ -38,10 +36,7 @@ in rec {
     };
   });
 
-  hyprland = hp.default.override {
-    wlroots = hp.wlroots-hyprland.override {inherit xwayland;};
-    inherit xwayland;
-  };
+  hyprland = import ./hyprland inputs prev;
 
   technic-launcher = prev.callPackage ./technic.nix {};
 

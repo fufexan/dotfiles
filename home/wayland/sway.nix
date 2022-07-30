@@ -37,7 +37,6 @@
       keybindings = let
         sway = config.wayland.windowManager.sway.config;
         m = sway.modifier;
-
         # toggle output scaling
         # output = "eDP-1";
         # toggle-scaling = pkgs.writeShellScript "sway-scale-toggle" ''
@@ -92,7 +91,6 @@
       startup = [
         {command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY";}
         {command = "systemctl --user start graphical-session{-pre,}.target";}
-        {command = "mako";}
       ];
 
       input = {
@@ -111,18 +109,14 @@
       output = {
         "*" = {
           bg = "~/.config/wallpaper.jpg fill";
-          # max_render_time = "7";
         };
       };
     };
 
     extraConfig = ''
-      xwayland force scale 2
-      exec xsettingsd
+      ${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     '';
 
     wrapperFeatures = {gtk = true;};
   };
-
-  xdg.configFile."xsettingsd/xsettingsd.conf".text = "Gdk/WindowScalingFactor 2";
 }

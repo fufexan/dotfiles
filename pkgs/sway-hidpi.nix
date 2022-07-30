@@ -1,59 +1,25 @@
-pkgs: let
-  sway-hidpi = pkgs.sway.override {
+prev: let
+  sway-hidpi = prev.sway.override {
     inherit sway-unwrapped;
     withGtkWrapper = true;
   };
 
   sway-unwrapped =
-    (pkgs.sway-unwrapped.overrideAttrs (oa: {
-      src = pkgs.fetchFromGitHub {
+    (prev.sway-unwrapped.overrideAttrs (oa: {
+      src = prev.fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
         rev = "8d8a21c9c321fa41b033caf9b5b62cdd584483c1";
         sha256 = "sha256-WRvJsSvDv2+qirqkpaV2c7fFOgJAT3sXxPtKLure580=";
       };
 
-      buildInputs = oa.buildInputs ++ [pkgs.pcre2 pkgs.xorg.xcbutilwm];
-
-      patches =
-        oa.patches
-        ++ [
-          (pkgs.fetchpatch {
-            url = "https://patch-diff.githubusercontent.com/raw/swaywm/sway/pull/5090.diff";
-            sha256 = "sha256-m6g+mZCQSrebwXdBgUPIatdt8nLlfmOpbqCvJ4BML4w=";
-          })
-        ];
+      buildInputs = oa.buildInputs ++ [prev.pcre2 prev.xorg.xcbutilwm];
     }))
-    .override {
-      wayland = wayland-sway;
-      wlroots = wlroots-sway;
-    };
-
-  wayland-sway = pkgs.wayland.overrideAttrs (_: rec {
-    version = "1.21.0";
-
-    src = pkgs.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "wayland";
-      repo = "wayland";
-      rev = version;
-      sha256 = "sha256-nvNDONDdpoYNDD5q29IisvUY2lHsEcgJYGJUWbhpijs=";
-    };
-
-    patches = [
-      (pkgs.substituteAll {
-        src = pkgs.fetchpatch {
-          url = "https://raw.githubusercontent.com/primeos/nixpkgs/257a8075681b514e4e4821509672de34bd5267f7/pkgs/development/libraries/wayland/add-placeholder-for-nm.patch";
-          sha256 = "sha256-L23c12q6x5ttqk4IA6b6thU4JHmJ7sOJ5rUauAtfOKU=";
-        };
-        nm = "${pkgs.stdenv.cc.targetPrefix}nm";
-      })
-    ];
-  });
+    .override {wlroots = wlroots-sway;};
 
   wlroots-sway =
-    (pkgs.wlroots.overrideAttrs (_: {
-      src = pkgs.fetchFromGitLab {
+    (prev.wlroots.overrideAttrs (_: {
+      src = prev.fetchFromGitLab {
         domain = "gitlab.freedesktop.org";
         owner = "wlroots";
         repo = "wlroots";
@@ -62,28 +28,18 @@ pkgs: let
       };
 
       patches = [
-        (pkgs.fetchpatch {
-          url = "https://aur.archlinux.org/cgit/aur.git/plain/0001-xwayland-add-support-for-global-scale-factor.patch?h=wlroots-hidpi-git";
-          sha256 = "sha256-sSG3ParCsJxIH7tF+4wt715lrAmBC4iVLJUB+icfDes=";
-        })
-        (pkgs.fetchpatch {
-          url = "https://aur.archlinux.org/cgit/aur.git/plain/0002-xwayland-add-support-for-changing-global-scale-facto.patch?h=wlroots-hidpi-git";
-          sha256 = "sha256-59S9Wu2yxUe3RzgFzykSvH1K+858CWn+MvUW6892Vyc=";
+        (prev.fetchpatch {
+          url = "https://gitlab.freedesktop.org/lilydjwg/wlroots/-/commit/6c5ffcd1fee9e44780a6a8792f74ecfbe24a1ca7.diff";
+          sha256 = "sha256-Eo1pTa/PIiJsRZwIUnHGTIFFIedzODVf0ZeuXb0a3TQ=";
         })
       ];
     }))
-    .override {
-      inherit xwayland;
-      wayland = wayland-sway;
-    };
+    .override {inherit xwayland;};
 
-  xwayland = pkgs.xwayland.overrideAttrs (_: {
+  xwayland = prev.xwayland.overrideAttrs (_: {
     patches = [
       ./patches/xwayland-vsync.patch
-      (pkgs.fetchpatch {
-        url = "https://aur.archlinux.org/cgit/aur.git/plain/xwlScaling.diff?h=xorg-xwayland-hidpi-git";
-        sha256 = "sha256-xj/iw7zvWz9XMF6Q4rIY9IAQkXRClwdWyek4DwEmfFI=";
-      })
+      ./patches/xwayland-hidpi.patch
     ];
   });
 in

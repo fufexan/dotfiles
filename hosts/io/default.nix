@@ -10,15 +10,13 @@
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 
-    # kernel
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelModules = ["acpi_call" "amdgpu"];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-    # dcfeaturemask - PSR support
+    # Panel Self Refresh support
     kernelParams = ["amdgpu.dcfeaturemask=0x8"];
 
-    # bootloader
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
@@ -84,7 +82,10 @@
 
   programs = {
     adb.enable = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      package = null;
+    };
     light.enable = true;
     steam.enable = true;
   };

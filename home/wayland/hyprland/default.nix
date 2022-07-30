@@ -20,17 +20,9 @@
   screenshot = import ../screenshot.nix args;
 in {
   home.packages = with pkgs; [
-    light
-
-    playerctl
-    pulsemixer
-
     screenshot
-
     wf-recorder
-    wl-clipboard
-    wlogout
-
+    xorg.xprop
     apply-hm-env
   ];
 
