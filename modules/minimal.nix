@@ -50,6 +50,8 @@
       # for direnv GC roots
       keep-outputs = true
       keep-derivations = true
+
+      flake-registry = /etc/nix/registry.json
     '';
 
     buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
