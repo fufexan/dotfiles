@@ -21,19 +21,16 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,2560x1600@60,0x0,1.6
+    monitor=eDP-1,preferred,0x0,1.6
     workspace=eDP-1,1
-    monitor=DP-1,1366x768@60,-1366x0,1
+    monitor=DP-1,preferred,-1366x0,1
     workspace=DP-1,10
-    monitor=DP-2,1366x768@60,-1366x0,1
+    monitor=DP-2,preferred,-1366x0,1
     workspace=DP-2,10
 
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
     exec-once=systemctl --user start hyprland-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
-    exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
-
-    exec-once=spotify; sleep 0.5; hyprctl --batch 'dispatch focuswindow title:Spotify ; dispatch moveworkspacesilent 9'
 
     misc {
       no_vfr=0

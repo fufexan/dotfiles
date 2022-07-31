@@ -8,6 +8,9 @@ inputs: _: prev: rec {
     binaryName = "Discord";
     desktopName = "Discord";
 
+    webRTC = true;
+    enableVulkan = true;
+
     extraOptions = [
       "--disable-gpu-memory-buffer-video-frames"
       "--enable-accelerated-mjpeg-decode"
@@ -36,7 +39,12 @@ inputs: _: prev: rec {
     };
   });
 
-  hyprland = import ./hyprland inputs prev;
+  hyprland = inputs.hyprland.packages.${prev.system}.hyprland.override {
+    wlroots = inputs.hyprland.packages.${prev.system}.wlroots-hyprland.override {inherit xwayland;};
+    inherit xwayland;
+  };
+
+  hyprland-xwayland-hidpi = import ./hyprland inputs prev;
 
   technic-launcher = prev.callPackage ./technic.nix {};
 
