@@ -104,16 +104,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nil = {
+      url = "github:fufexan/nil/flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+      inputs.utils.follows = "fu";
+    };
+
     nix-colors.url = "github:Misterio77/nix-colors";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
-      # uncomment when https://github.com/nix-community/rnix-lsp/pull/94 lands
-      # inputs.naersk.follows = "naersk";
-      # inputs.nixpkgs.follows = "nixpkgs";
-      # inputs.utils.follows = "fu";
+      inputs.naersk.follows = "naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "fu";
     };
   };
 }

@@ -15,11 +15,12 @@ with pkgs; [
     auto-format = true;
   }
   {
-    language-server = {command = "${clang-tools}/bin/clangd";};
+    language-server = {command = "${clang-tools_14}/bin/clangd";};
     name = "cpp";
     auto-format = true;
   }
   {
+    # language-server = {command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";};
     language-server = {command = "${inputs.rnix-lsp.defaultPackage.${pkgs.system}}/bin/rnix-lsp";};
     name = "nix";
   }

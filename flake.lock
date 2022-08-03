@@ -478,24 +478,30 @@
         "type": "github"
       }
     },
-    "naersk_2": {
+    "nil": {
       "inputs": {
+        "naersk": [
+          "naersk"
+        ],
         "nixpkgs": [
-          "rnix-lsp",
           "nixpkgs"
+        ],
+        "utils": [
+          "fu"
         ]
       },
       "locked": {
-        "lastModified": 1655042882,
-        "narHash": "sha256-9BX8Fuez5YJlN7cdPO63InoyBy7dm3VlJkkmTt6fS1A=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "cddffb5aa211f50c4b8750adbec0bbbdfb26bb9f",
+        "lastModified": 1659527262,
+        "narHash": "sha256-IvZya/uCDJ8FaadRearfEaX1DiSGdAECgfxl/PMfGro=",
+        "owner": "fufexan",
+        "repo": "nil",
+        "rev": "5aa1d97ae030e36b67de706b1201f656db7508e2",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "naersk",
+        "owner": "fufexan",
+        "ref": "flake",
+        "repo": "nil",
         "type": "github"
       }
     },
@@ -638,34 +644,24 @@
         "type": "github"
       }
     },
-    "nixpkgs_5": {
-      "locked": {
-        "lastModified": 1656753965,
-        "narHash": "sha256-BCrB3l0qpJokOnIVc3g2lHiGhnjUi0MoXiw6t1o8H1E=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "0ea7a8f1b939d74e5df8af9a8f7342097cdf69eb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "rnix-lsp": {
       "inputs": {
-        "naersk": "naersk_2",
-        "nixpkgs": "nixpkgs_5",
-        "utils": "utils_2"
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "fu"
+        ]
       },
       "locked": {
-        "lastModified": 1658492037,
-        "narHash": "sha256-i4TL1Tb/q7Y+Jk5JWk6FRWWei6yH0WtYVTnmmAr9B0c=",
+        "lastModified": 1658963292,
+        "narHash": "sha256-4OIpATLdPQvryyhRQPELeqNYC0n6PCyjD6LCPdwOztc=",
         "owner": "nix-community",
         "repo": "rnix-lsp",
-        "rev": "e6a41cbd317a21763ba61a19e594a3e1bf1023ca",
+        "rev": "ff18e04551a39ccdab0ff9c83926db3807b23478",
         "type": "github"
       },
       "original": {
@@ -688,6 +684,7 @@
         "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
         "naersk": "naersk",
+        "nil": "nil",
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_4",
@@ -740,21 +737,6 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
-      "locked": {
-        "lastModified": 1656928814,
-        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
         "type": "github"
       },
       "original": {
