@@ -41,6 +41,8 @@
     quintom-cursor-theme
   ];
 
+  environment.variables.NIXOS_OZONE_WL = "1";
+
   # Japanese input using fcitx
   i18n.inputMethod = {
     enabled = "ibus";
