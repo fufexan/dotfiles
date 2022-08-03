@@ -2,6 +2,7 @@
 {lib, ...}: {
   imports = [
     ./hardware-configuration.nix
+    ./minecraft.nix
   ];
 
   boot.binfmt.emulatedSystems = ["riscv64-linux"];
@@ -23,9 +24,9 @@
   system.stateVersion = lib.mkForce "21.11";
 
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIerY8yuoW7svJYuRbLa63nHCD7A4KIwa/rRHXGO5iY+w90RCUtRwVsnJxHkYXQcCSAC60PeOBp9Um2E0TtkNsDl3pvcLU4A1yEDlTemTmmXP86T4AVmsVcs6wPdiuEcCN1PRmgiN25NMyz0y4oyFho+Qboy0K2BNr9EkVBmtdWZfXQc/7p7f7y24xY9M1lDJCltGpmc2TBKfWZH6iKtRQPN+ZP474+b+tQw7Hbi+xC1q0uTVdlA0ZKyYZm2+e3ILPvr8M9m293mV1fqSiYRBujtvhWaKagiFMXA4VEd7GRqg6Mj6pKNS9J4KAgFmyc2Dham69EY/5P48VpmLiG6uD ssh-key-2022-03-31"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMRDsoSresP7/VnrQOYsWWO/5V+EdPEx5PwI0DxW9H00 root@io"
   ];
   users.users.mihai.openssh.authorizedKeys.keys = [
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIerY8yuoW7svJYuRbLa63nHCD7A4KIwa/rRHXGO5iY+w90RCUtRwVsnJxHkYXQcCSAC60PeOBp9Um2E0TtkNsDl3pvcLU4A1yEDlTemTmmXP86T4AVmsVcs6wPdiuEcCN1PRmgiN25NMyz0y4oyFho+Qboy0K2BNr9EkVBmtdWZfXQc/7p7f7y24xY9M1lDJCltGpmc2TBKfWZH6iKtRQPN+ZP474+b+tQw7Hbi+xC1q0uTVdlA0ZKyYZm2+e3ILPvr8M9m293mV1fqSiYRBujtvhWaKagiFMXA4VEd7GRqg6Mj6pKNS9J4KAgFmyc2Dham69EY/5P48VpmLiG6uD ssh-key-2022-03-31"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEYe25Lbgm8IuhOLO5fPSVtJK+avw48yIq/rE1bOb7dl mihai@io"
   ];
 }
