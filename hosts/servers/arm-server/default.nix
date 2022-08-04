@@ -18,8 +18,8 @@
   hardware.opengl.enable = lib.mkForce false;
 
   networking.hostName = "arm-server";
-  networking.firewall.allowedTCPPorts = [25565];
-  networking.firewall.allowedUDPPorts = [25565];
+  networking.firewall.allowedTCPPorts = [25575];
+  networking.firewall.allowedUDPPorts = [25575];
 
   system.stateVersion = lib.mkForce "21.11";
 
