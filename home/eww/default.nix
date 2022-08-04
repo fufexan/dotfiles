@@ -16,7 +16,6 @@
     screenWidth = 2560;
     scale = 1.6;
     gaps = 5;
-    radius = 16;
   };
 in {
   home.packages = [package];

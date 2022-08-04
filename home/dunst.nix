@@ -15,7 +15,7 @@ in {
     settings = {
       global = {
         alignment = "center";
-        corner_radius = 16;
+        corner_radius = 12;
         follow = "mouse";
         font = "Roboto 10";
         format = "<b>%s</b>\\n%b";

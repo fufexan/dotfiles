@@ -2,7 +2,6 @@
   screenWidth,
   scale,
   gaps,
-  radius,
 }: let
   battery = import ./scripts/battery.nix pkgs;
   brightness = import ./scripts/brightness.nix pkgs;
@@ -11,6 +10,7 @@
   net = import ./scripts/net.nix pkgs;
   pop = import ./scripts/pop.nix pkgs;
   volume = import ./scripts/volume.nix pkgs;
+  workspaces = import ./scripts/workspaces.nix pkgs;
 
   eww_yuck = ''
     ;; Variables
@@ -51,6 +51,8 @@
     (defvar net_rev false)
     (defvar time_rev false)
     (defvar vol_reveal false)
+
+    (deflisten workspace "${workspaces}")
 
     ;; widgets
 
@@ -205,11 +207,15 @@
               (button :class "song_button" :onclick "${music} toggle" song_status)
               (button :class "song_button" :onclick "${music} next" ""))))))
 
+    (defwidget workspaces []
+      (literal
+        :content workspace))
+
     (defwidget left []
       (box
         :space-evenly false
         :halign "start"
-      ))
+        (workspaces)))
 
     (defwidget right []
       (box
@@ -234,7 +240,6 @@
     (defwidget bar []
       (centerbox
         :class "bar"
-        ; :style "border-radius: ${builtins.toString (builtins.floor (radius / scale))}px;"
         (left)
         (center)
         (right)))
