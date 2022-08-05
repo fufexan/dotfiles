@@ -120,7 +120,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
     };
-    
+
     spicetify-nix = {
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";

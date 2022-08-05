@@ -115,7 +115,7 @@
 
     git = {
       enable = true;
-      delta.enable = true;
+      difftastic.enable = true;
       aliases = {
         forgor = "commit --amend --no-edit";
         graph = "log --all --decorate --graph --oneline";

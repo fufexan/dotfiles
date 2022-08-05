@@ -24,7 +24,7 @@
 
     theme = "catppuccin-mocha";
     colorScheme = "flamingo";
-    
+
     injectCss = true;
     replaceColors = true;
     overwriteAssets = true;
@@ -36,10 +36,12 @@
       "catppuccin-mocha.js"
     ];
 
-    thirdPartyExtensions = {
-      hidePodcasts = "${hidePodcasts}/hidePodcasts.js";
-    } // lib.genAttrs variants (n: "${catppuccin}/js/${n}.js");
-    
+    thirdPartyExtensions =
+      {
+        hidePodcasts = "${hidePodcasts}/hidePodcasts.js";
+      }
+      // lib.genAttrs variants (n: "${catppuccin}/js/${n}.js");
+
     thirdPartyThemes = lib.genAttrs variants (n: "${catppuccin}/${n}");
   };
 }
