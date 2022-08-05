@@ -15,10 +15,10 @@ inputs: let
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [../dunst.nix ../wayland ./mihai-io ../editors/neovim];
-    "mihai@rog" = sharedModules ++ [../wayland ./mihai-rog ../editors/neovim];
-    "mihai@tosh" = sharedModules ++ [../wayland ./mihai-tosh];
-    server = [../cli.nix];
+    "mihai@io" = sharedModules ++ [../dunst.nix ../wayland ./io ../editors/neovim];
+    "mihai@rog" = sharedModules ++ [../wayland ./rog ../editors/neovim];
+    "mihai@tosh" = sharedModules ++ [../wayland ./tosh];
+    server = [../cli.nix ./server];
   };
 in {
   inherit homeImports extraSpecialArgs;
