@@ -116,6 +116,11 @@
     git = {
       enable = true;
       delta.enable = true;
+      aliases = {
+        forgor = "commit --amend --no-edit";
+        graph = "log --all --decorate --graph --oneline";
+        oops = "checkout --";
+      };
       ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
       signing = {
         key = "5899325F2F120900";

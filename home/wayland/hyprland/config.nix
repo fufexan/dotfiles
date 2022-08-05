@@ -23,9 +23,9 @@
     # should be configured per-profile
     monitor=eDP-1,preferred,0x0,1.6
     workspace=eDP-1,1
-    monitor=DP-1,preferred,-1366x0,1
+    monitor=DP-1,preferred,0x0,1
     workspace=DP-1,10
-    monitor=DP-2,preferred,-1366x0,1
+    monitor=DP-2,preferred,0x0,1
     workspace=DP-2,10
 
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE

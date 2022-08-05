@@ -59,8 +59,10 @@
 
       prompt pure
 
-      gnupg_path=$(ls /run/user/1000/gnupg)
-      export SSH_AUTH_SOCK="/run/user/1000/gnupg/$gnupg_path/S.gpg-agent.ssh"
+      ${lib.optionalString config.services.gpg-agent.enable ''
+        gnupg_path=$(ls /run/user/1000/gnupg)
+        export SSH_AUTH_SOCK="/run/user/1000/gnupg/$gnupg_path/S.gpg-agent.ssh"
+      ''}
 
       ${builtins.readFile ./nix-completions.sh}
 

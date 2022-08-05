@@ -34,6 +34,8 @@
     ++ (with pkgs; [
       legendary-gl
 
+      inputs.self.packages.${pkgs.system}.tlauncher
+
       (inputs.self.packages.${pkgs.system}.technic-launcher.override {
         source = builtins.fetchurl rec {
           url = "https://mc-launcher.com/files/unc/Technic.jar";
