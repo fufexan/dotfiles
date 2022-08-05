@@ -1,13 +1,15 @@
 {pkgs, ...}:
 # media - control and enjoy audio/video
 {
+  imports = [
+    ./spicetify.nix
+  ];
+
   home.packages = with pkgs; [
     # audio control
     pavucontrol
     playerctl
     pulsemixer
-    # music
-    spotify
     # images
     imv
   ];

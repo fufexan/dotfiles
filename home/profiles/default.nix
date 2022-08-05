@@ -10,6 +10,7 @@ inputs: let
     ../media.nix
     ../editors/helix
     inputs.discocss.hmModule
+    inputs.spicetify-nix.homeManagerModule
     inputs.hyprland.homeManagerModules.default
   ];
 

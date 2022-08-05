@@ -105,10 +105,9 @@
     };
 
     nil = {
-      url = "github:fufexan/nil/flake";
+      url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
-      inputs.utils.follows = "fu";
+      inputs.flake-utils.follows = "fu";
     };
 
     nix-colors.url = "github:Misterio77/nix-colors";
@@ -120,6 +119,11 @@
       inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
+    };
+    
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

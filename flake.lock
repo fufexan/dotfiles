@@ -480,27 +480,24 @@
     },
     "nil": {
       "inputs": {
-        "naersk": [
-          "naersk"
+        "flake-utils": [
+          "fu"
         ],
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": [
-          "fu"
-        ]
+        "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1659527262,
-        "narHash": "sha256-IvZya/uCDJ8FaadRearfEaX1DiSGdAECgfxl/PMfGro=",
-        "owner": "fufexan",
+        "lastModified": 1659614301,
+        "narHash": "sha256-YR4zUayyNRYapgUa2BaWHSQv/ejWzd5nkTkeQJoxcTk=",
+        "owner": "oxalica",
         "repo": "nil",
-        "rev": "5aa1d97ae030e36b67de706b1201f656db7508e2",
+        "rev": "35d2bac1fb7646a913ae61e56e0a46a5ff0f2e25",
         "type": "github"
       },
       "original": {
-        "owner": "fufexan",
-        "ref": "flake",
+        "owner": "oxalica",
         "repo": "nil",
         "type": "github"
       }
@@ -688,7 +685,8 @@
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_4",
-        "rnix-lsp": "rnix-lsp"
+        "rnix-lsp": "rnix-lsp",
+        "spicetify-nix": "spicetify-nix"
       }
     },
     "rust-analyzer-src": {
@@ -727,6 +725,51 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "flake-utils": [
+          "nil",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nil",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1659667938,
+        "narHash": "sha256-ksO5NaV+rJZR9Q9kA4wuhjPpUr/x4cUid66rpL6AtZw=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "e7def78377b4eb3713ab6ec2446aff821d83f698",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "spicetify-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1659659527,
+        "narHash": "sha256-Y6kCp2cYTwd0XnO1GL0CSCpaby5GCxC6O1IQCUUHRzg=",
+        "owner": "the-argus",
+        "repo": "spicetify-nix",
+        "rev": "ec6831247177ed518f77a5ac7c04b17a08fccce4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "the-argus",
+        "repo": "spicetify-nix",
         "type": "github"
       }
     },
