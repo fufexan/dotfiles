@@ -21,11 +21,11 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,preferred,0x0,1.6
+    monitor=eDP-1,preferred,auto,1.6
     workspace=eDP-1,1
-    monitor=DP-1,preferred,0x0,1
+    monitor=DP-1,preferred,auto,1
     workspace=DP-1,10
-    monitor=DP-2,preferred,0x0,1
+    monitor=DP-2,preferred,auto,1
     workspace=DP-2,10
 
     exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
@@ -68,6 +68,7 @@
       blur=1
       blur_size=3
       blur_passes=3
+      blur_new_optimizations=1
 
       drop_shadow=1
       shadow_ignore_window=1
@@ -81,7 +82,7 @@
       enabled=1
       animation=border,1,2,default
       animation=fade,1,2,default
-      animation=windows,1,3,default
+      animation=windows,1,3,default,popin 80%
       animation=workspaces,1,2,slide
     }
 
