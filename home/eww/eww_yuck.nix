@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   screenWidth,
   scale,
   gaps,
@@ -10,7 +10,7 @@
   net = import ./scripts/net.nix pkgs;
   pop = import ./scripts/pop.nix pkgs;
   volume = import ./scripts/volume.nix pkgs;
-  workspaces = import ./scripts/workspaces.nix pkgs;
+  workspaces = import ./scripts/workspaces.nix pkgs inputs;
 
   eww_yuck = ''
     ;; Variables

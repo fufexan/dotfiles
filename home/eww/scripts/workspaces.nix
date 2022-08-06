@@ -1,57 +1,58 @@
-pkgs: let
+pkgs: inputs: let
   programs = with pkgs; [
-    gawk
-    gnugrep
+    coreutils
+    findutils
+    gnused
+    jq
     socat
+    inputs.self.packages.${pkgs.system}.hyprland
   ];
 
-  ws = pkgs.writeShellScriptBin "ws" ''
-    export PATH=$PATH:${pkgs.lib.makeBinPath programs}
-
-    activemonitor=$(hyprctl monitors | grep -B 6 "active: yes" | awk 'NR==1 {print $2}')
-    passivemonitor=$(hyprctl monitors | grep  -B 2 "($1)" | awk 'NR==1 {print $2}')
-    activews=$(hyprctl monitors | grep -A 2 "$activemonitor" | awk 'NR==3 {print $1}' RS='(' FS=')')
-    passivews=$(hyprctl monitors | grep -A 2 "$passivemonitor" | awk 'NR==3 {print $1}' RS='(' FS=')')
-
-    [[ $1 -eq $passivews ]] && [[ $activemonitor != "$passivemonitor" ]] && (hyprctl dispatch moveworkspacetomonitor "$activews $passivemonitor")
-    hyprctl dispatch moveworkspacetomonitor "$1 $activemonitor" && hyprctl dispatch workspace "$1"
-    [[ $1 -eq $passivews ]] && [[ $activemonitor != "$passivemonitor" ]] && (hyprctl dispatch focusmonitor $passivemonitor && hyprctl dispatch workspace $activews && hyprctl dispatch focusmonitor $activemonitor)
-
-    exit 0
-  '';
-
   workspaces = pkgs.writeShellScript "workspaces" ''
-    export PATH=$PATH:${pkgs.lib.makeBinPath (programs ++ [ws])}
+    export PATH=$PATH:${pkgs.lib.makeBinPath programs}
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls /tmp/hypr/ | sort | tail -n 1)
+
+    colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
+    dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
+    export empty="#302d41"
+
+    # set -euxo pipefail
+
+    status() {
+      if [[ ''${o[$1]} -eq 1 ]]; then
+        mon=''${monitormap[''${workspaces[$1]}]}
+        if [[ $focusedws -eq $1 ]]; then
+          echo -n "color: ''${colors[$mon]};"
+        else
+          echo -n "color: ''${dimmed[$mon]};"
+        fi
+      else
+        echo -n "color: $empty;"
+      fi
+    }
 
     workspaces() {
-    unset -v \
-      o1 o2 o3 o4 o5 o6 o7 o8 o9 o10 \
-      f1 f2 f3 f4 f5 f6 f7 f8 f9 f10
+      declare -A o=([1]=0 [2]=0 [3]=0 [4]=0 [5]=0 [6]=0 [7]=0 [8]=0 [9]=0 [10]=0)
 
-    # check if occupied
-    for num in $(hyprctl workspaces | grep ID | awk '{print $3}'); do
-      export o"$num"="$num"
-    done
+      monitors=$(hyprctl -j monitors)
+  
+      declare -A monitormap
+      while read -r k v; do monitormap[$k]=$v; done < <(jq -r '.[]|"\(.name) \(.id) "' <<< $monitors)
+      declare -A workspaces
+      while read -r k v; do workspaces[$k]=$v; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
 
-    #check if focused
-    for num in $(hyprctl monitors | grep -B 4 "active: yes" | awk 'NR==1{print $3}'); do
-      export f"$num"="$num"
-    done
+      focusedws=$(jq -r '.[] | select(.active).activeWorkspace.id' <<< $monitors)
+  
+      # check if occupied
+      for num in ''${!workspaces[@]}; do
+        o[$num]="1"
+      done
 
-    echo '(eventbox :onscroll "echo {} | sed -e "s/up/-1/g" -e "s/down/+1/g" | xargs hyprctl dispatch workspace" \
-            (box :class "works"	:orientation "h" :spacing 5 :space-evenly "true" \
-              (button :onclick "ws 1" :class "0$o1$f1" "•") \
-              (button :onclick "ws 2" :class "0$o2$f2" "•") \
-              (button :onclick "ws 3" :class "0$o3$f3" "•") \
-              (button :onclick "ws 4" :class "0$o4$f4" "•") \
-              (button :onclick "ws 5" :class "0$o5$f5" "•") \
-              (button :onclick "ws 6" :class "0$o6$f6" "•") \
-              (button :onclick "ws 7" :class "0$o7$f7" "•") \
-              (button :onclick "ws 8" :class "0$o8$f8" "•") \
-              (button :onclick "ws 9" :class "0$o9$f9" "•") \
-              (button :onclick "ws 10" :class "0$o10$f10" "•") \
-            )\
-          )'
+      echo -n '(eventbox :onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace" (box :orientation "h" :class "module" :spacing 5 :space-evenly "true" '
+      for i in {1..10}; do
+        echo -n "(button :onclick \"hyprctl dispatch workspace $i\" :class \"ws\" :style \"$(status $i)\" \"●\") "
+      done
+      echo '))'
     }
 
     workspaces
