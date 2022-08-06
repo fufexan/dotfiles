@@ -63,9 +63,7 @@ pkgs: let
     	fi
     }
     get_position_time() {
-      if [[ ! $(get_position) -eq 0 ]]; then
-        echo `date -d@$(get_position) +%M:%S`
-      fi
+      echo `date -d@$(playerctl position) +%M:%S`
     }
 
     get_cover() {
