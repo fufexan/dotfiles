@@ -35,14 +35,14 @@ pkgs: inputs: let
       declare -A o=([1]=0 [2]=0 [3]=0 [4]=0 [5]=0 [6]=0 [7]=0 [8]=0 [9]=0 [10]=0)
 
       monitors=$(hyprctl -j monitors)
-  
+
       declare -A monitormap
       while read -r k v; do monitormap[$k]=$v; done < <(jq -r '.[]|"\(.name) \(.id) "' <<< $monitors)
       declare -A workspaces
       while read -r k v; do workspaces[$k]=$v; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
 
       focusedws=$(jq -r '.[] | select(.active).activeWorkspace.id' <<< $monitors)
-  
+
       # check if occupied
       for num in ''${!workspaces[@]}; do
         o[$num]="1"

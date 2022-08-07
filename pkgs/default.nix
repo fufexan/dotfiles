@@ -52,6 +52,8 @@ inputs: _: prev: rec {
 
   waveform = prev.callPackage ./waveform {};
 
+  webcord = prev.callPackage ./webcord {};
+
   xwayland = prev.xwayland.overrideAttrs (_: {
     patches = [./patches/xwayland-vsync.patch];
   });
