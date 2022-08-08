@@ -58,7 +58,7 @@
       {
         system = "aarch64-linux";
         sshUser = "root";
-        sshKey = "/root/.ssh/arm-server.key";
+        sshKey = "/etc/ssh/ssh_host_ed25519_key";
         maxJobs = 4;
         hostName = "arm-server";
         supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];

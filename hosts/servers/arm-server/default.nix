@@ -5,8 +5,6 @@
     ./minecraft.nix
   ];
 
-  boot.binfmt.emulatedSystems = ["riscv64-linux"];
-
   # used by tailscale for exit node
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = true;
