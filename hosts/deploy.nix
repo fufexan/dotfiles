@@ -29,7 +29,7 @@ inputs: {
         user = "root";
         path = activate.nixos inputs.self.nixosConfigurations.homesv;
       };
-      sshOpts = ["-i" "/home/mihai/.ssh/homesv.key"];
+      sshOpts = ["-i" "/etc/ssh/ssh_host_ed25519_key"];
       sshUser = "root";
     };
     kiiro = {

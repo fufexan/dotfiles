@@ -51,17 +51,6 @@ in {
     system = "x86_64-linux";
   };
 
-  homesv = nixosSystem {
-    modules =
-      [
-        ./homesv
-        {home-manager.users.mihai.imports = homeImports.server;}
-      ]
-      ++ sharedModules;
-
-    system = "x86_64-linux";
-  };
-
   iso = makeOverridable nixosSystem {
     system = "x86_64-linux";
 
@@ -113,5 +102,16 @@ in {
       ++ sharedModules;
 
     system = "aarch64-linux";
+  };
+
+  homesv = nixosSystem {
+    modules =
+      [
+        ./servers/homesv
+        {home-manager.users.mihai.imports = homeImports.server;}
+      ]
+      ++ sharedModules;
+
+    system = "x86_64-linux";
   };
 }
