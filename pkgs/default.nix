@@ -22,27 +22,19 @@ inputs: _: prev: rec {
     ];
   };
 
-  dwarfs = prev.callPackage ./dwarfs {
-    libdwarf = prev.libdwarf_0_4;
-  };
-
   gamescope = prev.callPackage ./gamescope {};
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  mako = prev.mako.overrideAttrs (_: {
-    src = prev.fetchFromGitHub {
-      owner = "emersion";
-      repo = "mako";
-      rev = "405588468807d4f4d855b71afdc52ff5f88f0efc";
-      sha256 = "sha256-KVVobXSGWDm+4TC8eLq4+SuM9avD1Ex3bk6Ma9lk6gw=";
+  hyprland = let
+    xwayland = prev.xwayland.overrideAttrs (_: {
+      patches = [./patches/xwayland-vsync.patch];
+    });
+  in
+    inputs.hyprland.packages.${prev.system}.hyprland.override {
+      wlroots = inputs.hyprland.packages.${prev.system}.wlroots-hyprland.override {inherit xwayland;};
+      inherit xwayland;
     };
-  });
-
-  hyprland = inputs.hyprland.packages.${prev.system}.hyprland.override {
-    wlroots = inputs.hyprland.packages.${prev.system}.wlroots-hyprland.override {inherit xwayland;};
-    inherit xwayland;
-  };
 
   hyprland-xwayland-hidpi = import ./hyprland inputs prev;
 
@@ -53,10 +45,6 @@ inputs: _: prev: rec {
   waveform = prev.callPackage ./waveform {};
 
   webcord = prev.callPackage ./webcord {};
-
-  xwayland = prev.xwayland.overrideAttrs (_: {
-    patches = [./patches/xwayland-vsync.patch];
-  });
 
   sway-hidpi = import ./sway-hidpi.nix prev;
 }
