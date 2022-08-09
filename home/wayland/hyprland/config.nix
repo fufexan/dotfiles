@@ -7,7 +7,7 @@
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = pkgs.writeShellScript "launcher" "${pkgs.wofi}/bin/wofi --show drun,run -t ${term} --allow-images --insensitive --parse-search";
-  term = "${pkgs.kitty}/bin/kitty";
+  term = "wezterm";
 
   run-as-service = slice:
     pkgs.writeShellScript "as-systemd-transient" ''
