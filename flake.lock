@@ -403,11 +403,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1659998105,
-        "narHash": "sha256-2lI4/YhC/nzxFbF1Pn4TbMms7GszxHTY01uQKjKyc4Y=",
+        "lastModified": 1660070181,
+        "narHash": "sha256-R4TtOzvVMRzYoWc/O3mK9wQSdJt7LgLywMPAAgFGlEk=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "2d33d4aebc535f17765fae27a998e5e1b4c3ca9c",
+        "rev": "8e5985d70e3370bc2c6155b58488499d5f6f067d",
         "type": "github"
       },
       "original": {
@@ -760,11 +760,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1659659527,
-        "narHash": "sha256-Y6kCp2cYTwd0XnO1GL0CSCpaby5GCxC6O1IQCUUHRzg=",
+        "lastModified": 1660056496,
+        "narHash": "sha256-m7hREOZD/A2NIP970NsNG65NRMg+qpKqhLqRvjL4Kgs=",
         "owner": "the-argus",
         "repo": "spicetify-nix",
-        "rev": "ec6831247177ed518f77a5ac7c04b17a08fccce4",
+        "rev": "ba37a751fb8a8d8b29271b354b6abb5d709b280e",
         "type": "github"
       },
       "original": {
