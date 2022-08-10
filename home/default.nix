@@ -16,6 +16,8 @@
   home.sessionVariables = {
     # make java apps work in tiling WMs
     _JAVA_AWT_WM_NONREPARENTING = "1";
+    # enable scrolling in git diff
+    DELTA_PAGER = "less -R";
     # make apps aware of ibus
     GTK_IM_MODULE = "ibus";
     XMODIFIERS = "@im=ibus";
@@ -34,12 +36,10 @@
     };
   in [
     # archives
+    zip
     unzip
     unrar
-    # file downloaders
-    yt-dlp
-    # file managers
-    file
+
     gh
     # messaging
     tdesktop
@@ -60,6 +60,8 @@
     gtk.enable = true;
     x11.enable = true;
   };
+  # ensures consistent behaviour
+  home.sessionVariables.XCURSOR_SIZE = builtins.toString config.home.pointerCursor.size;
 
   manual = {
     html.enable = false;
@@ -115,7 +117,7 @@
 
     git = {
       enable = true;
-      difftastic.enable = true;
+      delta.enable = true;
       aliases = {
         forgor = "commit --amend --no-edit";
         graph = "log --all --decorate --graph --oneline";

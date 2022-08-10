@@ -1,5 +1,5 @@
 {pkgs, ...}:
-# minimal config, suitable for servers
+# cli utilities
 {
   imports = [./shell/zsh.nix];
 
@@ -10,21 +10,29 @@
   };
 
   home.packages = with pkgs; [
-    # modern coreutils
-    bat
-    bottom
+    file
     du-dust
     duf
-    exa
     fd
     ripgrep
 
     joshuto
     ranger
   ];
-  home.extraOutputsToInstall = ["doc" "info" "devdoc"];
+  home.extraOutputsToInstall = ["doc" "devdoc"];
 
-  programs.home-manager.enable = true;
+  programs = {
+    bat = {
+      enable = true;
+      config = {
+        pager = "less -FR";
+        theme = "ansi";
+      };
+    };
 
-  programs.ssh.enable = true;
+    bottom.enable = true;
+    exa.enable = true;
+    home-manager.enable = true;
+    ssh.enable = true;
+  };
 }
