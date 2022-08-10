@@ -1,7 +1,6 @@
 {pkgs, ...}:
 # cli utilities
 {
-
   home.packages = with pkgs; [
     file
     du-dust
