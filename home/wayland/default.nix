@@ -18,7 +18,6 @@ let
 in {
   imports = [
     ../eww
-    ./libinput-gestures
     ./hyprland
     ./sway.nix
   ];
@@ -31,9 +30,6 @@ in {
     # idle/lock
     swaybg
     swaylock-effects
-
-    # wm
-    wayfire
 
     # utils
     ocrScript
@@ -51,22 +47,15 @@ in {
   };
 
   programs = {
-    firefox.package = pkgs.firefox-wayland;
-
-    mako = {
-      # enable = true;
-      package = inputs.self.packages.${pkgs.system}.mako;
-
-      borderRadius = 16;
-      borderSize = 0;
-      defaultTimeout = 5000;
-      font = "Roboto Regular 12";
-      margin = "4,4";
-      backgroundColor = xcolors.base01;
-      textColor = xcolors.base06;
-    };
-
     obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
+
+    swaylock.settings = {
+      ignore-empty-password = true;
+      clock = true;
+      effect-blur = "30x3";
+      font = "Roboto";
+      screenshot = true;
+    };
   };
 
   services = {

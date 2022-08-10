@@ -9,8 +9,6 @@
 {
   imports = [
     ./cli.nix # base config
-    ./discord
-    ./terminals.nix
   ];
 
   home.sessionVariables = {
@@ -118,6 +116,7 @@
     git = {
       enable = true;
       delta.enable = true;
+      delta.options.colorMoved = "default";
       aliases = {
         forgor = "commit --amend --no-edit";
         graph = "log --all --decorate --graph --oneline";

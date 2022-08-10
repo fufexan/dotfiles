@@ -1,7 +1,13 @@
-colors: let
+{
+  pkgs,
+  colors,
+  ...
+}: let
   inherit (colors) xrgbaColors;
+in {
+  home.packages = [pkgs.wayfire];
 
-  wayfire-config = ''
+  xdg.configFile."wayfire.ini".text = ''
     [alpha]
     min_value = 0.100000
     modifier = <alt> <super>
@@ -16,17 +22,9 @@ colors: let
     fade_duration = 400
     fade_enabled_for = type equals "overlay"
 
-    fire_duration = 300
-    fire_enabled_for = none
-    fire_particle_size = 16.000000
-    fire_particles = 2000
-
-    zoom_duration = 300
-    zoom_enabled_for = none
-
     [autostart]
     0_environment = dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY
-    1_hm = systemctl --user start hm-graphical-session.target
+    1_hm = systemctl --user start graphical-session.target
     2_eww = eww daemon
 
     autostart_wf_shell = false
@@ -72,19 +70,19 @@ colors: let
     binding_screenshot_interactive = <ctrl> KEY_PRINT | <super> <shift> <ctrl> KEY_R
     binding_terminal = <super> KEY_ENTER
 
-    command_launcher = wofi --show=drun --allow-images
+    command_launcher = wofi --show=drun -I
     command_light_down = light -U 5
     command_light_up = light -A 5
     command_lock = swaylock
-    command_logout = wlogout
-    command_mute = pulsemixer --toggle-mute
-    command_mic_mute = amixer set Capture toggle
+    command_logout = wlogout -p layer-shell
+    command_mute = wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    command_mic_mute = wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
     command_next = playerctl next
     command_pause = playerctl play-pause
     command_prev = playerctl previous
-    command_screenshot = grim -g "$(slurp -d)" - | wl-copy -t image/png
-    command_screenshot_interactive = grim -g "$(slurp -d)" - ~/Pictures/ss/$(date '+%F_%T').png | wl-copy -t image/png
-    command_terminal = alacritty
+    command_screenshot = screenshot area
+    command_screenshot_interactive = screenshot monitor
+    command_terminal = ${default.terminal.name}
     command_volume_down = pulsemixer --change-volume -6
     command_volume_up = pulsemixer --change-volume +6
 
@@ -99,7 +97,6 @@ colors: let
     focus_button_with_modifiers = false
     focus_buttons = BTN_LEFT | BTN_MIDDLE | BTN_RIGHT
     focus_buttons_passthrough = true
-    max_render_time = 7
     plugins = autostart \
       blur \
       command \
@@ -340,5 +337,4 @@ colors: let
     tile_by_default = type is "toplevel"
     #wm-actions.toggle_always_on_top
   '';
-in
-  wayfire-config
+}
