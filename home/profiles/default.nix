@@ -24,24 +24,9 @@ in {
   inherit homeImports extraSpecialArgs;
 
   homeConfigurations = {
-    "mihai@io" = mkHome {
-      username = "mihai";
-      extraModules = homeImports."mihai@io";
-    };
-
-    "mihai@rog" = mkHome {
-      username = "mihai";
-      extraModules = homeImports."mihai@rog";
-    };
-
-    "mihai@tosh" = mkHome {
-      username = "mihai";
-      extraModules = homeImports."mihai@tosh";
-    };
-
-    "server" = mkHome {
-      username = "mihai";
-      extraModules = homeImports.server;
-    };
+    "mihai@io" = mkHome {modules = homeImports."mihai@io";};
+    "mihai@rog" = mkHome {modules = homeImports."mihai@rog";};
+    "mihai@tosh" = mkHome {modules = homeImports."mihai@tosh";};
+    "server" = mkHome {modules = homeImports.server;};
   };
 }

@@ -1,16 +1,17 @@
 inputs: let
   inherit (inputs) self;
-  inherit (inputs.hm.lib) homeManagerConfiguration;
 
   theme = "catppuccin";
 
-  colors = with self.lib; rec {
+  colors = with self.lib; let
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
-    # normal hex values
+  in {
+    inherit baseColors;
+    # #RRGGBB
     xcolors = mapAttrs (_: x) baseColors;
-    # rgba hex values
+    # #RRGGBBAA
     xrgbaColors = mapAttrs (_: xrgba) baseColors;
-    # argb hex values
+    # #AARRGGBB
     xargbColors = mapAttrs (_: xargb) baseColors;
     # 0xABCDEF colors (alacritty)
     x0Colors = mapAttrs (_: x0) baseColors;
@@ -18,19 +19,18 @@ inputs: let
     rgbaColors = mapAttrs (_: rgba) baseColors;
   };
 
-  extraSpecialArgs = {inherit colors inputs;};
+  extraSpecialArgs = {inherit colors inputs default;};
 
-  defArgs = rec {
-    configuration = {};
-    system = "x86_64-linux";
+  defArgs = {
     inherit extraSpecialArgs;
+    pkgs = inputs.self.pkgs.x86_64-linux;
   };
 
   mkHome = args:
-    homeManagerConfiguration (defArgs
-      // args
-      // {
-        homeDirectory = "/home/${args.username}";
-        pkgs = inputs.self.pkgs.${args.system or defArgs.system};
-      });
+    inputs.hm.lib.homeManagerConfiguration (defArgs // args);
+
+  default = {
+    browser = "firefox";
+    terminal = "wezterm";
+  };
 in {inherit mkHome extraSpecialArgs;}
