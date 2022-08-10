@@ -17,7 +17,7 @@ let
   '';
 in {
   imports = [
-    ../eww
+    ../graphical/eww
     ./hyprland
     ./sway.nix
   ];

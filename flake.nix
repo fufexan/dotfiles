@@ -40,7 +40,7 @@
       };
     });
 
-    packages = lib.genAttrs ["x86_64-linux"] (system: overlays.default null pkgs.${system});
+    packages = genSystems (system: overlays.default null pkgs.${system});
 
     formatter = genSystems (system: pkgs.${system}.alejandra);
   };

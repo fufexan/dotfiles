@@ -4,13 +4,12 @@ inputs: let
 
   sharedModules = [
     ../.
-    ../files
     ../shell
   ];
 
   homeImports = {
     "mihai@io" = sharedModules ++ [./io];
-    server = [../cli.nix ./server];
+    server = sharedModules ++ [./server];
   };
 in {
   inherit homeImports extraSpecialArgs;

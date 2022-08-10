@@ -5,6 +5,7 @@
   cache = config.xdg.cacheHome;
 in {
   imports = [
+    ./cli.nix
     ./nix.nix
     ./zsh.nix
   ];

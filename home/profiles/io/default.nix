@@ -1,11 +1,9 @@
 {inputs, ...}: {
   imports = [
-    ../../discord
-    ../../dunst.nix
     ../../editors/helix
     ../../editors/neovim
-    ../../games.nix
-    ../../media.nix
+    ../../graphical
+    ../../graphical/dunst.nix
     ../../wayland
     ../../terminals/wezterm.nix
     inputs.discocss.hmModule
