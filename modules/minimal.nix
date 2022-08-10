@@ -7,11 +7,8 @@
 }:
 # configuration shared by all hosts
 {
-  # speed fix for Intel CPUs
-  boot.kernelParams = ["intel_pstate=active"];
-
-  # enable zsh autocompletion for system packages (systemd, etc)
   environment = {
+    # set channels
     etc = {
       "nix/flake-channels/system".source = inputs.self;
       "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
@@ -20,19 +17,21 @@
 
     systemPackages = [pkgs.git];
 
+    # enable zsh autocompletion for system packages (systemd, etc)
     pathsToLink = ["/share/zsh"];
   };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
     # saves space
-    supportedLocales = ["en_US.UTF-8/UTF-8"];
+    supportedLocales = ["en_US.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" "ro_RO.UTF-8/UTF-8"];
   };
 
   # OpenGL
   hardware.opengl.enable = true;
 
   networking = {
+    # required to connect to Tailscale exit nodes
     firewall.checkReversePath = "loose";
 
     networkmanager = {
@@ -110,9 +109,6 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
   };
-
-  # enable realtime capabilities to user processes
-  security.rtkit.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 

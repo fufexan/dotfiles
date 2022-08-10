@@ -41,12 +41,13 @@
     quintom-cursor-theme
   ];
 
+  # use wayland where possible
   environment.variables.NIXOS_OZONE_WL = "1";
 
   # Japanese input using fcitx
   i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [mozc];
+    enabled = "fcitx";
+    fcitx.engines = with pkgs.fcitx-engines; [mozc];
   };
 
   location.provider = "geoclue2";
@@ -130,43 +131,13 @@
 
     upower.enable = true;
 
-    xserver = {
-      enable = true;
-
-      displayManager.gdm.enable = true;
-
-      displayManager.session = [
-        {
-          manage = "window";
-          name = "home-manager";
-          start = "exec $HOME/.xsession-hm";
-        }
-        {
-          manage = "window";
-          name = "Sway";
-          start = "exec sway";
-        }
-      ];
-
-      libinput = {
-        enable = true;
-        # disable mouse acceleration
-        mouse.accelProfile = "flat";
-        mouse.accelSpeed = "0";
-        mouse.middleEmulation = false;
-        # touchpad settings
-        touchpad.naturalScrolling = true;
-      };
-    };
-
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
-  # allow swaylock to unlock the screen
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
-    '';
+  security = {
+    # allow swaylock to unlock the screen
+    pam.services.swaylock.text = "auth include login";
+    rtkit.enable = true;
   };
 
   # Don't wait for network startup
@@ -186,14 +157,11 @@
     )
   ];
   # wlroots screensharing
-  xdg.portal = {
+  xdg.portal.wlr = {
     enable = true;
-    wlr = {
-      enable = true;
-      settings.screencast = {
-        chooser_type = "simple";
-        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
-      };
+    settings.screencast = {
+      chooser_type = "simple";
+      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
     };
   };
 }

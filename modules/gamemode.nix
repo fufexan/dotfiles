@@ -1,12 +1,18 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   startscript = pkgs.writeShellScript "gamemode-start" ''
-    hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:no_vfr 1'
-    systemctl --user stop easyeffects
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls /tmp/hypr | sort | tail -n 1)
+    ${inputs.self.packages.${pkgs.system}.hyprland}/bin/hyprctl --batch 'keyword decoration:blur 0 ; keyword animations:enabled 0 ; keyword misc:no_vfr 1'
+    ${pkgs.systemd}/bin/systemctl --user stop easyeffects
   '';
 
   endscript = pkgs.writeShellScript "gamemode-end" ''
-    hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:no_vfr 0'
-    systemctl --user start easyeffects
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls /tmp/hypr | sort | tail -n 1)
+    ${inputs.self.packages.${pkgs.system}.hyprland}/bin/hyprctl --batch 'keyword decoration:blur 1 ; keyword animations:enabled 1 ; keyword misc:no_vfr 0'
+    ${pkgs.systemd}/bin/systemctl --user start easyeffects
   '';
 in {
   programs.gamemode = {
