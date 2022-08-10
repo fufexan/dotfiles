@@ -8,7 +8,6 @@ Name         | Description
 `kiiro`      | Previous main machine, retired and rarely used server now
 `arm-server` | Oracle ARM server
 `homesv`     | Old Dell laptop used as a local homeserver
-`tosh`       | Old Toshiba laptop, no longer used
 
 All the hosts have a shared config in `modules/minimal.nix`.
 Host specific configs are stored inside the specific host dir.
