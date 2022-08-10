@@ -6,18 +6,10 @@ inputs: let
     ../.
     ../files
     ../shell
-    ../games.nix
-    ../media.nix
-    ../editors/helix
-    inputs.discocss.hmModule
-    inputs.spicetify-nix.homeManagerModule
-    inputs.hyprland.homeManagerModules.default
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [../dunst.nix ../wayland ./io ../editors/neovim];
-    "mihai@rog" = sharedModules ++ [../wayland ./rog ../editors/neovim];
-    "mihai@tosh" = sharedModules ++ [../wayland ./tosh];
+    "mihai@io" = sharedModules ++ [./io];
     server = [../cli.nix ./server];
   };
 in {
@@ -25,8 +17,6 @@ in {
 
   homeConfigurations = {
     "mihai@io" = mkHome {modules = homeImports."mihai@io";};
-    "mihai@rog" = mkHome {modules = homeImports."mihai@rog";};
-    "mihai@tosh" = mkHome {modules = homeImports."mihai@tosh";};
     "server" = mkHome {modules = homeImports.server;};
   };
 }

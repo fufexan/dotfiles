@@ -37,32 +37,13 @@ in {
     system = "x86_64-linux";
   };
 
-  rog = nixosSystem {
-    modules =
-      [
-        ./rog
-        ../modules/desktop.nix
-        ../modules/gamemode.nix
-        {home-manager.users.mihai.imports = homeImports."mihai@rog";}
-      ]
-      ++ sharedModules
-      ++ desktopModules;
-
-    system = "x86_64-linux";
-  };
-
   iso = makeOverridable nixosSystem {
     system = "x86_64-linux";
 
     modules =
       [
         "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
-        {
-          home-manager.users.mihai.imports = [
-            ../home/cli.nix
-            ../home/editors/helix
-          ];
-        }
+        {home-manager.users.mihai.imports = homeImports."mihai@io";}
       ]
       ++ sharedModules
       ++ desktopModules;
@@ -75,19 +56,6 @@ in {
         {home-manager.users.mihai.imports = homeImports.server;}
       ]
       ++ sharedModules;
-
-    system = "x86_64-linux";
-  };
-
-  tosh = nixosSystem {
-    modules =
-      [
-        ./tosh
-        ../modules/desktop.nix
-        {home-manager.users.mihai.imports = homeImports."mihai@tosh";}
-      ]
-      ++ sharedModules
-      ++ desktopModules;
 
     system = "x86_64-linux";
   };

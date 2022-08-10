@@ -31,6 +31,11 @@ inputs: let
 
   default = {
     browser = "firefox";
-    terminal = "wezterm";
+    terminal = {
+      font = "JetBrainsMono Nerd Font";
+      name = "wezterm";
+      opacity = 0.9;
+      size = 11;
+    };
   };
 in {inherit mkHome extraSpecialArgs;}

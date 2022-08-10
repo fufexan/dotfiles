@@ -1,4 +1,18 @@
-{
+{inputs, ...}: {
+  imports = [
+    ../../discord
+    ../../dunst.nix
+    ../../editors/helix
+    ../../editors/neovim
+    ../../games.nix
+    ../../media.nix
+    ../../wayland
+    ../../terminals/wezterm.nix
+    inputs.discocss.hmModule
+    inputs.spicetify-nix.homeManagerModule
+    inputs.hyprland.homeManagerModules.default
+  ];
+
   services = {
     kanshi = {
       # use 1.6 scaling: 2560 : 1.6 = 1600, exact division. good for offsets
@@ -6,7 +20,6 @@
       enable = true;
       profiles = {
         undocked = {
-          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
@@ -16,7 +29,6 @@
           ];
         };
         docked-all = {
-          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
@@ -35,7 +47,6 @@
         };
 
         docked1 = {
-          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
@@ -50,7 +61,6 @@
         };
 
         docked2 = {
-          exec = "systemctl --user restart eww";
           outputs = [
             {
               criteria = "eDP-1";
