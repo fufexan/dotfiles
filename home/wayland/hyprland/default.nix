@@ -26,8 +26,31 @@ in {
     apply-hm-env
   ];
 
-  # allow swayidle to be started along with Hyprland
-  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["sway-session.target" "hyprland-session.target"];
+  services.swayidle = {
+    enable = true;
+    events = [
+      {
+        event = "before-sleep";
+        command = "swaylock -fF";
+      }
+      {
+        event = "lock";
+        command = "swaylock -fF";
+      }
+    ];
+    timeouts = [
+      {
+        timeout = 20;
+        command = "hyprctl dispatch dpms off";
+        resumeCommand = "hyprctl dispatch dpms on";
+      }
+      {
+        timeout = 30;
+        command = "swaylock -fF";
+      }
+    ];
+  };
+  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 
   wayland.windowManager.hyprland = {
     enable = true;

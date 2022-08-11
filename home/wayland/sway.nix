@@ -5,31 +5,6 @@
   inputs,
   ...
 }: {
-  services.swayidle = {
-    enable = true;
-    events = [
-      {
-        event = "before-sleep";
-        command = "swaylock -fF";
-      }
-      {
-        event = "lock";
-        command = "swaylock -fF";
-      }
-    ];
-    timeouts = [
-      {
-        timeout = 300;
-        command = "swaymsg output * dpms off";
-        resumeCommand = "swaymsg output * dpms on";
-      }
-      {
-        timeout = 360;
-        command = "swaylock -fF";
-      }
-    ];
-  };
-
   wayland.windowManager.sway = {
     enable = true;
     package = inputs.self.packages.${pkgs.system}.sway-hidpi;
