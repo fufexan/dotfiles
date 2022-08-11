@@ -12,6 +12,7 @@
     ./files
     ./media.nix
     ./spicetify.nix
+    ./xdg.nix
   ];
 
   home.sessionVariables = {
