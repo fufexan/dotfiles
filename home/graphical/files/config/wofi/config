@@ -1,3 +1,8 @@
-width=800
-height=400
-filter_rate=100
+width=40%
+height=30%
+show=drun
+prompt=Search
+allow_images=true
+allow_markup=true
+matching=fuzzy
+insensitive=true

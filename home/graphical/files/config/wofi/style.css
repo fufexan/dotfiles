@@ -1,7 +1,8 @@
 window {
     margin: 0px;
-    border: 1px solid #1A1826;
+    border: 2px solid #1A1826;
     background-color: #161320;
+    border-radius: 16px;
 }
 
 #input {
@@ -9,18 +10,20 @@ window {
     border: none;
     color: #f8f8f2;
     background-color: #161320;
+    border-radius: 16px;
 }
 
 #inner-box {
     margin: 5px;
     border: none;
     background-color: #1E1D2F;
+    border-radius: 16px;
 }
 
 #outer-box {
-    margin: 5px;
+    margin: 5px 5px 10px 5px;
     border: none;
-    background-color: #1E1E2E;
+    border-radius: 16px;
 }
 
 #scroll {
@@ -30,10 +33,13 @@ window {
 
 #text {
     margin: 5px;
-    border: none;
     color: #f8f8f2;
 } 
 
+#entry {
+    border-radius: 16px;
+}
 #entry:selected {
     background-color: #302D41;
 }
+
