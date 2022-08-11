@@ -3,6 +3,8 @@
   inputs,
   ...
 }: {
+  home.packages = [inputs.webcord.packages.${pkgs.system}.default];
+
   programs.discocss = {
     enable = true;
     # discord = pkgs.discord.override {withOpenASAR = true;};

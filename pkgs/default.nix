@@ -44,7 +44,5 @@ inputs: _: prev: rec {
 
   waveform = prev.callPackage ./waveform {};
 
-  webcord = prev.callPackage ./webcord {};
-
   sway-hidpi = import ./sway-hidpi.nix prev;
 }

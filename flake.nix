@@ -63,8 +63,6 @@
       inputs.flake-utils.follows = "fu";
     };
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -125,5 +123,7 @@
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    webcord.url = "github:fufexan/webcord-flake";
   };
 }
