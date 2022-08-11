@@ -8,25 +8,13 @@ top. Using [flakes](https://nixos.wiki/wiki/Flakes).
 See an overview of the flake outputs by running
 `nix flake show github:fufexan/dotfiles`.
 
-## Contents
+## 🗃️  Contents
 
 - [modules](modules): NixOS common configs
 - [hosts](hosts): host-specific configuration
 - [home](home): my [Home-Manager](https://github.com/nix-community/home-manager) config
 - [lib](lib): helper functions
 - [pkgs](pkgs): package definitions
-
-# 💾 Resources
-
-Other configurations from where I learned and copied:
-
-- [flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus)
-- [gytis-ivaskevicius/nixfiles](https://github.com/gytis-ivaskevicius/nixfiles)
-- [viperML/dotfiles](https://github.com/viperML/dotfiles)
-- [privatevoid-net/privatevoid-infrastructure](https://github.com/privatevoid-net/privatevoid-infrastructure)
-- [Mic92/dotfiles](https://github.com/Mic92/dotfiles)
-- [colemickens/nixcfg](https://github.com/colemickens/nixcfg)
-- [NobbZ/nixos-config](https://github.com/NobbZ/nixos-config)
 
 # 📦 Exported packages
 
@@ -55,7 +43,19 @@ Or install from the `packages` output. For example:
 }
 ```
 
-## People
+# 💾 Resources
+
+Other configurations from where I learned and copied:
+
+- [flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus)
+- [gytis-ivaskevicius/nixfiles](https://github.com/gytis-ivaskevicius/nixfiles)
+- [viperML/dotfiles](https://github.com/viperML/dotfiles)
+- [privatevoid-net/privatevoid-infrastructure](https://github.com/privatevoid-net/privatevoid-infrastructure)
+- [Mic92/dotfiles](https://github.com/Mic92/dotfiles)
+- [colemickens/nixcfg](https://github.com/colemickens/nixcfg)
+- [NobbZ/nixos-config](https://github.com/NobbZ/nixos-config)
+
+# 👥 People
 
 These are the people whom I've taken inspiration from while writing these
 configs. There surely are more but I tend to forget. Regardless, I am thankful
