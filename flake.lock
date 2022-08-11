@@ -525,11 +525,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1660148977,
-        "narHash": "sha256-eR/qlC8eDY7A+bkkiF28xCG0cPJr4HilMcD3/QJ05TQ=",
+        "lastModified": 1660242815,
+        "narHash": "sha256-To+uCU7ZLX2Qb8/BeV15IrLrBzqXrTCtxNw2u0kCihw=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "f64f94ca565a2ec9f174f57a20fcfbfddb762cb8",
+        "rev": "37442db20ee9ad03960d5bf337efb5716cc28985",
         "type": "github"
       },
       "original": {
@@ -997,11 +997,11 @@
         "webcord": "webcord_2"
       },
       "locked": {
-        "lastModified": 1660226744,
-        "narHash": "sha256-o3i+n9h3SoIF7w2rpyDSRWxhNGaIzrMh21b8GRLZW+U=",
+        "lastModified": 1660242753,
+        "narHash": "sha256-M9ibcsDzWHp/678lTyxwwgXgdFx2d1YCevoGEIBVnxc=",
         "owner": "fufexan",
         "repo": "webcord-flake",
-        "rev": "7361d468bf2d68d61ece83cdffca074d605731a6",
+        "rev": "0892178832a090f0b9ab1a61e20f5d1389cfb23e",
         "type": "github"
       },
       "original": {
