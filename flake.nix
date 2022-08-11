@@ -40,7 +40,10 @@
       };
     });
 
-    packages = genSystems (system: overlays.default null pkgs.${system});
+    packages =
+      # I don't like this
+      lib.genAttrs ["x86_64-linux"] (system: overlays.default null pkgs.${system})
+      // {aarch64-linux.repl = (overlays.default null pkgs.aarch64-linux).repl;};
 
     formatter = genSystems (system: pkgs.${system}.alejandra);
   };
@@ -123,7 +126,7 @@
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     webcord.url = "github:fufexan/webcord-flake";
   };
 }
