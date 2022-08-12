@@ -28,7 +28,8 @@
     monitor=DP-2,preferred,auto,1
     workspace=DP-2,10
 
-    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE
+    exec-once=export XDG_SESSION_TYPE=wayland
+    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE XDG_SESSION_TYPE
     exec-once=systemctl --user start hyprland-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
 
@@ -102,7 +103,7 @@
 
     bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
     bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
-    bind=SUPER,Escape,exec,${run-as-service "manual"} wlogout -p layer-shell
+    bind=SUPER,Escape,exec,wlogout -p layer-shell
     bind=SUPER,E,exec,${emoji}
     bind=SUPER,Q,killactive,
     bind=SUPERSHIFT,E,exec,pkill Hyprland

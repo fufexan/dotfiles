@@ -4,5 +4,4 @@ show=drun
 prompt=Search
 allow_images=true
 allow_markup=true
-matching=fuzzy
 insensitive=true
