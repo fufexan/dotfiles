@@ -7,8 +7,6 @@
 }:
 # Wayland config
 let
-  inherit (colors) xcolors;
-
   _ = lib.getExe;
 
   ocrScript = pkgs.writeShellScriptBin "wl-ocr" ''

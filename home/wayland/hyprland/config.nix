@@ -6,7 +6,7 @@
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = pkgs.writeShellScript "launcher" "${pkgs.wofi}/bin/wofi --show drun,run -t ${term} --allow-images --insensitive --parse-search";
+  launcher = pkgs.writeShellScript "launcher" "${pkgs.wofi}/bin/wofi --show drun,run -t ${term}";
   term = "wezterm";
 
   run-as-service = slice:
@@ -28,9 +28,6 @@
     monitor=DP-2,preferred,auto,1
     workspace=DP-2,10
 
-    exec-once=export XDG_SESSION_TYPE=wayland
-    exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY HYPRLAND_INSTANCE_SIGNATURE XDG_SESSION_TYPE
-    exec-once=systemctl --user start hyprland-session.target
     exec-once=swaybg -i ~/.config/wallpaper.jpg
 
     misc {

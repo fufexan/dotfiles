@@ -31,22 +31,22 @@ in {
     events = [
       {
         event = "before-sleep";
-        command = "swaylock -fF";
+        command = "swaylock";
       }
       {
         event = "lock";
-        command = "swaylock -fF";
+        command = "swaylock";
       }
     ];
     timeouts = [
       {
-        timeout = 20;
+        timeout = 300;
         command = "hyprctl dispatch dpms off";
         resumeCommand = "hyprctl dispatch dpms on";
       }
       {
-        timeout = 30;
-        command = "swaylock -fF";
+        timeout = 310;
+        command = "loginctl lock-session";
       }
     ];
   };
