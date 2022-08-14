@@ -30,7 +30,6 @@ in {
       # not yet implemented
       # PartOf = ["tray.target"];
       PartOf = ["graphical-session.target"];
-      X-Restart-Triggers = ["${config.xdg.configFile."eww/eww.yuck".source}"];
     };
 
     Service = {
