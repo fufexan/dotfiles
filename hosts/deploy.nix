@@ -6,6 +6,8 @@ inputs: {
         user = "root";
         path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.arm-server;
       };
+      sshOpts = ["-i" "/etc/ssh/ssh_host_ed25519_key"];
+      sshUser = "root";
     };
     io = {
       hostname = "io";

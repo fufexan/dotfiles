@@ -3,6 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     ./minecraft.nix
+    ./synapse.nix
   ];
 
   # used by tailscale for exit node
