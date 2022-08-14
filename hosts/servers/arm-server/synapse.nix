@@ -19,6 +19,8 @@
     add_header Access-Control-Allow-Origin *;
     return 200 '${builtins.toJSON data}';
   '';
+
+  registration-shared-secret = config.age.secrets.synapse-registration-shared-secret.path;
 in {
   networking.firewall.allowedTCPPorts = [80 443];
 
@@ -76,5 +78,6 @@ in {
         ];
       }
     ];
+    extraConfigFiles = [registration-shared-secret];
   };
 }

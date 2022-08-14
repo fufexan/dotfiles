@@ -5,6 +5,7 @@ inputs: let
     {_module.args = {inherit inputs;};}
     ../modules/minimal.nix
     ../modules/security.nix
+    inputs.agenix.nixosModule
     inputs.hm.nixosModule
     {
       home-manager = {
