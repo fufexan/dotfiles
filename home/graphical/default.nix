@@ -8,6 +8,7 @@
 # includes programs and services that work on both Wayland and X
 {
   imports = [
+    ./cinny.nix
     ./discord
     ./files
     ./media.nix
