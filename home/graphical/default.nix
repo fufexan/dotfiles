@@ -95,7 +95,7 @@
     };
 
     theme = {
-      name = "Catppuccin-orange-dark-compact";
+      name = "Catppuccin-Orange-Dark-Compact";
       package = pkgs.catppuccin-gtk.override {size = "compact";};
     };
   };
