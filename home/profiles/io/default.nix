@@ -3,6 +3,7 @@
     ../../editors/helix
     ../../editors/neovim
     ../../graphical
+    ../../graphical/games.nix
     ../../graphical/dunst.nix
     ../../wayland
     ../../terminals/wezterm.nix

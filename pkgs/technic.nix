@@ -14,7 +14,7 @@
       sha256 = "sha256-NyWHCvz1CrCET8DZ40Y7qXZZTSBuL1bpoou/1Rc05Eg=";
     },
 }: let
-  version = "680";
+  version = "757";
 
   desktopItems = makeDesktopItem {
     name = pname;
