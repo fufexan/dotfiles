@@ -8,6 +8,7 @@
   gaps,
 }: let
   battery = import ./scripts/battery.nix pkgs;
+  bluetooth = import ./scripts/bluetooth.nix pkgs;
   brightness = import ./scripts/brightness.nix pkgs;
   memory = import ./scripts/memory.nix pkgs;
   music = import ./scripts/music.nix pkgs;
@@ -42,6 +43,10 @@
     (defpoll net_icon :interval "10s" "${net} icon")
     (defpoll net_ssid :interval "10s" "${net} essid")
 
+    (defpoll bt_color :interval "2s" "${bluetooth} color")
+    (defpoll bt_icon :interval "2s" "${bluetooth} icon")
+    (defpoll bt_text :interval "2s" "${bluetooth} text")
+
     (defpoll cover_art :interval "1s" "${music} cover")
     (defpoll song_artist :interval "1s" "${music} artist")
     (defpoll song_length :interval "1s" "${music} length_time")
@@ -53,6 +58,7 @@
     (defvar bright_reveal false)
     (defvar music_reveal false)
     (defvar net_rev false)
+    (defvar bt_rev false)
     (defvar time_rev false)
     (defvar vol_reveal false)
 
@@ -79,6 +85,26 @@
             :onclick "networkmanager_dmenu"
             :style "color: ''${net_color};"
             net_icon))))
+
+    (defwidget bluetooth []
+      (eventbox
+        :onhover "''${EWW_CMD} update bt_rev=true"
+        :onhoverlost "''${EWW_CMD} update bt_rev=false"
+        (box
+          :space-evenly "false"
+          (revealer
+            :transition "slideright"
+            :reveal bt_rev
+            :duration "350ms"
+            (label
+              :class "module_bt module"
+              :style "color: ''${bt_color};"
+              :text bt_text))
+          (button
+            :class "module_bt module"
+            :onclick "blueman"
+            :style "color: ''${bt_color};"
+            bt_icon))))
 
     (defwidget bat []
       (circular-progress
@@ -228,6 +254,7 @@
         (bright)
         (volume)
         (net)
+        (bluetooth)
         (sep)
         (cpu)
         (mem)
