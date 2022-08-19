@@ -1,13 +1,17 @@
-name: Check
+name: CI
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-
-  checks:
-    name: Check expressions
+  cachix:
+    name: Build Configurations
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        config:
+        - arm-server
+        - homesv
+        - io
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v17
@@ -16,4 +20,8 @@ jobs:
           extra_nix_config: |
             auto-optimise-store = true
             experimental-features = nix-command flakes
-      - run: nix flake check
+      - uses: cachix/cachix-action@v10
+        with:
+          name: nix-gaming
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix build -L .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel
