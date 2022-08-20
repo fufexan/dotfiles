@@ -1,13 +1,14 @@
 {
   pkgs,
   colors,
+  default,
   ...
 }: let
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = pkgs.writeShellScript "launcher" "${pkgs.wofi}/bin/wofi --show drun,run -t ${term}";
-  term = "wezterm";
+  term = default.terminal.name;
 
   run-as-service = slice:
     pkgs.writeShellScript "as-systemd-transient" ''
@@ -71,7 +72,7 @@
       drop_shadow=1
       shadow_ignore_window=1
       shadow_offset=2 2
-      shadow_range=2
+      shadow_range=4
       shadow_render_power=1
       col.shadow=0x55000000
     }
@@ -114,8 +115,8 @@
     bind=,XF86AudioPlay,exec,playerctl play-pause
     bind=,XF86AudioPrev,exec,playerctl previous
     bind=,XF86AudioNext,exec,playerctl next
-    bind=,XF86AudioRaiseVolume,exec,pulsemixer --change-volume +6
-    bind=,XF86AudioLowerVolume,exec,pulsemixer --change-volume -6
+    bind=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
+    bind=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
     bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     bind=,XF86AudioMicMute,exec,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 

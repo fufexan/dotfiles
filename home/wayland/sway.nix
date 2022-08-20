@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  default,
   ...
 }: {
   wayland.windowManager.sway = {
@@ -41,8 +42,8 @@
 
       keycodebindings = {
         "--locked --no-repeat 121" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; # mute
-        "--locked 122" = "exec pulsemixer --change-volume -6"; # vol-
-        "--locked 123" = "exec pulsemixer --change-volume +6"; # vol+
+        "--locked 122" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-"; # vol-
+        "--locked 123" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+"; # vol+
         "--locked 171" = "exec playerctl next"; # next song
         "--locked --no-repeat 172" = "exec playerctl play-pause"; # play/pause
         "--locked 173" = "exec playerctl previous"; # prev song
@@ -52,7 +53,7 @@
       };
 
       menu = "${pkgs.wofi}/bin/wofi --show drun --allow-images -iq";
-      terminal = "alacritty";
+      terminal = default.terminal.name;
       modifier = "Mod4";
       bars = [];
 
@@ -63,10 +64,7 @@
         inner = 5;
       };
 
-      startup = [
-        {command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY";}
-        {command = "systemctl --user start graphical-session{-pre,}.target";}
-      ];
+      startup = [{command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY";}];
 
       input = {
         "type:pointer" = {
@@ -81,15 +79,11 @@
         };
       };
 
-      output = {
-        "*" = {
-          bg = "~/.config/wallpaper.jpg fill";
-        };
-      };
+      output."*".bg = "~/.config/wallpaper.jpg fill";
     };
 
     extraConfig = ''
-      ${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+      exec ${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     '';
 
     wrapperFeatures = {gtk = true;};
