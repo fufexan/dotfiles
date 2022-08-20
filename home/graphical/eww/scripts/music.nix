@@ -4,8 +4,8 @@ pkgs: let
     curl
     playerctl
   ];
-
-  music = pkgs.writeShellScript "music" ''
+in
+  pkgs.writeShellScript "music" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     get_status() {
@@ -107,6 +107,4 @@ pkgs: let
     elif [[ $1 == "prev" ]]; then
     	{ playerctl previous; get_cover; }
     fi
-  '';
-in
-  music
+  ''

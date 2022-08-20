@@ -7,10 +7,10 @@ pkgs: inputs: let
     socat
     inputs.self.packages.${pkgs.system}.hyprland
   ];
-
-  workspaces = pkgs.writeShellScript "workspaces" ''
+in
+  pkgs.writeShellScript "workspaces" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
-    export HYPRLAND_INSTANCE_SIGNATURE=$(ls /tmp/hypr/ | sort | tail -n 1)
+    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w 1 /tmp/hypr | tail -1)
 
     colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
     dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
@@ -74,7 +74,7 @@ pkgs: inputs: let
         "workspace")
           focusedws=''${line#*>>}
           ;;
-        "activemon")
+        "focusedmon")
           focusedws=''${line#*,}
           ;;
         "createworkspace")
@@ -89,6 +89,4 @@ pkgs: inputs: let
       esac
       generate
     done
-  '';
-in
-  workspaces
+  ''

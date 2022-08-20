@@ -5,8 +5,8 @@ pkgs: let
     gnugrep
     wireplumber
   ];
-
-  volume = pkgs.writeShellScript "volume" ''
+in
+  pkgs.writeShellScript "volume" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     volicons=("󰕿" "󰖀" "󰕾")
@@ -45,6 +45,4 @@ pkgs: let
     elif [[ $1 == "getvol" ]]; then
       getvol $2
     fi
-  '';
-in
-  volume
+  ''

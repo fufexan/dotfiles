@@ -1,22 +1,20 @@
-pkgs: let
-  pop = pkgs.writeShellScript "pop" ''
-    set -euxo pipefail
-    window() {
-      NAME=$1
-      LOCK_FILE="$XDG_CACHE_HOME/eww_''${NAME}.lock"
+pkgs:
+pkgs.writeShellScript "pop" ''
+  set -euxo pipefail
+  window() {
+    NAME=$1
+    LOCK_FILE="$XDG_CACHE_HOME/eww_''${NAME}.lock"
 
-      if [[ ! -f $LOCK_FILE ]]; then
-        eww open "''${NAME}_win"
-        touch $LOCK_FILE
-        echo "opened $NAME"
-      else
-        eww close "''${NAME}_win"
-        rm $LOCK_FILE
-        echo "closed $NAME"
-      fi
-    }
+    if [[ ! -f $LOCK_FILE ]]; then
+      eww open "''${NAME}_win"
+      touch $LOCK_FILE
+      echo "opened $NAME"
+    else
+      eww close "''${NAME}_win"
+      rm $LOCK_FILE
+      echo "closed $NAME"
+    fi
+  }
 
-    window $1
-  '';
-in
-  pop
+  window $1
+''

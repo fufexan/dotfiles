@@ -3,8 +3,8 @@ pkgs: let
     gawk
     light
   ];
-
-  brightness = pkgs.writeShellScript "brightness" ''
+in
+  pkgs.writeShellScript "brightness" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     level=$(light)
@@ -16,6 +16,4 @@ pkgs: let
     elif [[ "$1" == "level" ]]; then
     	echo $level
     fi
-  '';
-in
-  brightness
+  ''

@@ -4,8 +4,8 @@ pkgs: let
     gnugrep
     upower
   ];
-
-  battery = pkgs.writeShellScript "battery" ''
+in
+  pkgs.writeShellScript "battery" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     battery() {
@@ -50,6 +50,4 @@ pkgs: let
     elif [[ "$1" == "color" ]]; then
     	color
     fi
-  '';
-in
-  battery
+  ''

@@ -5,8 +5,8 @@ pkgs: let
     gnugrep
     procps
   ];
-
-  memory = pkgs.writeShellScript "memory" ''
+in
+  pkgs.writeShellScript "memory" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     # human-readable
@@ -28,6 +28,4 @@ pkgs: let
     elif [[ "$1" == "percentage" ]]; then
         printf '%.1f' $(free -m | grep Mem | awk '{print ($3/$2)*100}')
     fi
-  '';
-in
-  memory
+  ''

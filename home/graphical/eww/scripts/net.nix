@@ -4,8 +4,8 @@ pkgs: let
     gnugrep
     networkmanager
   ];
-
-  net = pkgs.writeShellScript "net" ''
+in
+  pkgs.writeShellScript "net" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
 
     status=$(nmcli g | tail -n 1 | awk '{print $1}')
@@ -36,6 +36,4 @@ pkgs: let
     elif [[ "$1" == "icon" ]]; then
     	echo $icon
     fi
-  '';
-in
-  net
+  ''
