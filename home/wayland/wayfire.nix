@@ -28,7 +28,7 @@ in {
     2_eww = eww daemon
 
     autostart_wf_shell = false
-    background = swaybg -i ~/.config/wallpaper.jpg
+    background = swaybg -i ~/.config/wallpaper.png
     idle = swayidle -w \
              timeout 360 'swaylock' \
              before-sleep 'swaylock'

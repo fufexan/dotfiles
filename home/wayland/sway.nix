@@ -79,7 +79,7 @@
         };
       };
 
-      output."*".bg = "~/.config/wallpaper.jpg fill";
+      output."*".bg = "~/.config/wallpaper.png fill";
     };
 
     extraConfig = ''

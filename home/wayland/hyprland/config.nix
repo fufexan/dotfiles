@@ -29,7 +29,7 @@
     monitor=DP-2,preferred,auto,1
     workspace=DP-2,10
 
-    exec-once=swaybg -i ~/.config/wallpaper.jpg
+    exec-once=swaybg -i ~/.config/wallpaper.png
 
     misc {
       no_vfr=0
