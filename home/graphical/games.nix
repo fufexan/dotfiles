@@ -7,8 +7,6 @@
 {
   home.packages = with inputs.nix-gaming.packages.${pkgs.system};
     [
-      inputs.self.packages.${pkgs.system}.gamescope
-
       (osu-stable.override {location = "$HOME/Games/osu!stable";})
       osu-lazer-bin
 
@@ -32,6 +30,7 @@
       .rocket-league
     ]
     ++ (with pkgs; [
+      gamescope
       legendary-gl
 
       inputs.self.packages.${pkgs.system}.tlauncher

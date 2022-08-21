@@ -1,8 +1,8 @@
-inputs: _: prev: rec {
+inputs: _: prev: {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
-  discord-electron-openasar = prev.callPackage ./discord rec {
+  discord-electron-openasar = prev.callPackage ./discord {
     inherit (prev.discord) src version pname;
     openasar = prev.callPackage "${inputs.nixpkgs}/pkgs/applications/networking/instant-messengers/discord/openasar.nix" {};
     binaryName = "Discord";
@@ -21,8 +21,6 @@ inputs: _: prev: rec {
       "--ignore-gpu-blocklist"
     ];
   };
-
-  gamescope = prev.callPackage ./gamescope {};
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
