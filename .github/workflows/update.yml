@@ -2,7 +2,7 @@ name: "Nix: update lockfile"
 
 on:
   schedule:
-  - cron: '0 2 * * *'
+  - cron: '0 0 * * 0' # every Sunday
   workflow_dispatch: {}
 
 jobs:

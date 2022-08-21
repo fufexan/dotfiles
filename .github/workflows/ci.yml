@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, workflow_dispatch]
 
 jobs:
   cachix:
@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         config:
-        - arm-server
         - homesv
         - io
     steps:
@@ -22,6 +21,6 @@ jobs:
             experimental-features = nix-command flakes
       - uses: cachix/cachix-action@v10
         with:
-          name: nix-gaming
+          name: fufexan
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: nix build -L .#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel
