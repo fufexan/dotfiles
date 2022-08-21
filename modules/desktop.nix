@@ -149,13 +149,45 @@
 
   nixpkgs.overlays = [
     (
-      _: prev: {
+      _: prev: rec {
         xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
           patches = [../pkgs/patches/xdpw-crash.patch];
         });
+
+        zathuraPkgs = rec {
+          inherit
+            (prev.zathuraPkgs)
+            gtk
+            zathura_djvu
+            zathura_pdf_poppler
+            zathura_ps
+            zathura_core
+            zathura_cb
+            ;
+
+          zathura_pdf_mupdf = prev.zathuraPkgs.zathura_pdf_mupdf.overrideAttrs (o: {
+            patches = [../pkgs/patches/zathura-mupdf.patch];
+          });
+
+          zathuraWrapper = prev.zathuraPkgs.zathuraWrapper.overrideAttrs (o: {
+            paths = [
+              zathura_core.man
+              zathura_core.dev
+              zathura_core.out
+              zathura_djvu
+              zathura_ps
+              zathura_cb
+              zathura_pdf_mupdf
+            ];
+          });
+        };
+
+        zathura = zathuraPkgs.zathuraWrapper;
       }
     )
   ];
+
+  xdg.portal.enable = true;
   # wlroots screensharing
   xdg.portal.wlr = {
     enable = true;
