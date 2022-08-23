@@ -152,10 +152,9 @@
             c = (x + 1) / 10;
           in
             builtins.toString (x + 1 - (c * 10));
-          shiftedNumbers = ["exclam" "at" "numbersign" "dollar" "percent" "asciicircum" "ampersand" "asterisk" "parenleft" "parenright"];
         in ''
           bind=SUPER,${ws},workspace,${toString (x + 1)}
-          bind=SHIFTSUPER,${builtins.elemAt shiftedNumbers x},movetoworkspace,${builtins.toString (x + 1)}
+          bind=SHIFTSUPER,${ws},movetoworkspace,${toString (x + 1)}
         ''
       )
       10)}
