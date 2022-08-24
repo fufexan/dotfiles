@@ -1,4 +1,4 @@
-pkgs:
+{pkgs, ...}:
 pkgs.writeShellScript "pop" ''
   set -euxo pipefail
   window() {

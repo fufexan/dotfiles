@@ -1,4 +1,4 @@
-pkgs: let
+{pkgs, ...}: let
   programs = with pkgs; [
     bc
     gawk

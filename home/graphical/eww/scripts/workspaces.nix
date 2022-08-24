@@ -1,8 +1,9 @@
-pkgs: inputs: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   programs = with pkgs; [
-    coreutils
-    findutils
-    gnused
     jq
     socat
     inputs.self.packages.${pkgs.system}.hyprland
