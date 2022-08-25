@@ -7,7 +7,7 @@
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = pkgs.writeShellScript "launcher" "${pkgs.wofi}/bin/wofi --show drun,run -t ${term}";
+  launcher = "wofi";
   term = default.terminal.name;
 
   run-as-service = slice:
@@ -29,6 +29,8 @@
     monitor=DP-2,preferred,auto,1
     workspace=DP-2,10
 
+    exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+    exec-once=export GDK_SCALE=2
     exec-once=swaybg -i ~/.config/wallpaper.png
 
     misc {
