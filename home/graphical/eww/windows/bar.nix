@@ -18,6 +18,7 @@
       (bright)
       (volume)
       (net)
+      (bluetooth)
       (sep)
       (cpu)
       (mem)

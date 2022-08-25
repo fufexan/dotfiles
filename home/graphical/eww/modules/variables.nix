@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   battery,
+  bluetooth,
   brightness,
   memory,
   music,
@@ -20,6 +21,10 @@
 
   (defpoll brightness_icon :interval "1s" "${brightness} icon")
   (defpoll brightness_percent :interval "1s" "${brightness} level")
+
+  (defpoll bt_color :interval "2s" "${bluetooth} color")
+  (defpoll bt_icon :interval "2s" "${bluetooth} icon")
+  (defpoll bt_text :interval "2s" "${bluetooth} text")
 
   (defpoll bat_wattage :interval "2s" "${battery} wattage")
   (defpoll bat_status :interval "1s" "${battery} status")
@@ -43,6 +48,7 @@
   (defpoll song_title :interval "1s" "${music} title")
 
   (defvar bright_reveal false)
+  (defvar bt_rev false)
   (defvar music_reveal false)
   (defvar net_rev false)
   (defvar time_rev false)
