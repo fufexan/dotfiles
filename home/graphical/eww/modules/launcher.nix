@@ -1,0 +1,9 @@
+{pkgs, ...}: ''
+  (defwidget launcher []
+    (button
+      :tooltip "launcher"
+      :hexpand true
+      :class "launcher"
+      :onclick "wofi"
+      ""))
+''

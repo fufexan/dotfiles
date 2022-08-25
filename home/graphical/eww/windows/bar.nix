@@ -8,6 +8,7 @@
     (box
       :space-evenly false
       :halign "start"
+      (launcher)
       (workspaces)))
 
   (defwidget right []

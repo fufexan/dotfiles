@@ -112,7 +112,7 @@ tooltip label { margin: 5px; }
 scale trough {
   background-color: $bg1;
   border-radius: 24px;
-  margin: 1rem;
+  margin: 0 1rem;
   min-height: 10px;
   min-width: 70px;
 }
@@ -120,10 +120,10 @@ scale trough {
 .song_cover_art {
   background-size: cover;
   background-position: center;
-  min-height: 25px;
-  min-width: 25px;
-  margin: 5px;
-  border-radius: 100%;
+  min-height: 24px;
+  min-width: 24px;
+  margin: 4px 5px 4px 0;
+  border-radius: 16px;
 }
 .song_module {
   color: $fg;
@@ -159,7 +159,7 @@ calendar.highlight {
   margin-left: 2rem;
 }
 .sys_icon_mem, .sys_icon_cpu, .sys_icon_bat {
-  font-size: 30;
+  font-size: 30px;
   margin: 25px;
 }
 .sys_win {
@@ -264,5 +264,20 @@ calendar.highlight {
 }
 
 .ws {
-  margin: 5px 0 0 5px;
+  margin-left: 4px;
+
+  label {
+    margin-top: 5px;
+    font-size: 16px;
+  }
+}
+
+.launcher label {
+  font-size: 1.5rem;
+  font-family: monospace;  
+  color: $bg;
+  background-color: $blue;
+  margin: 2px;
+  padding: 0 0.9rem 0 0.3rem;
+  border-radius: 16px;
 }
