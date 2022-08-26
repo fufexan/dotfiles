@@ -1,6 +1,5 @@
 {pkgs, ...}:
 pkgs.writeShellScript "pop" ''
-  set -euxo pipefail
   window() {
     NAME=$1
     LOCK_FILE="$XDG_CACHE_HOME/eww_''${NAME}.lock"

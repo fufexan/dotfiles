@@ -7,7 +7,7 @@
 } @ args: let
   package = inputs.eww.packages.${pkgs.system}.eww-wayland;
 
-  startscript = ''
+  startscript = pkgs.writeShellScriptBin "eww-start" ''
     eww daemon
     eww open bar
   '';
@@ -65,11 +65,9 @@ in {
     };
 
     Service = {
-      Type = "forking";
-      Environment = "PATH=${lib.makeBinPath [package pkgs.coreutils]}:/run/wrappers/bin";
-      ExecStart = let
-        scriptPkg = pkgs.writeShellScriptBin "eww-start" startscript;
-      in "${scriptPkg}/bin/eww-start";
+      Type = "simple";
+      Environment = "PATH=$PATH:${lib.makeBinPath [package pkgs.coreutils]}:/run/wrappers/bin";
+      ExecStart = "${startscript}/bin/eww-start";
       ExecStop = "${pkgs.procps}/bin/pkill eww";
       Restart = "on-failure";
     };

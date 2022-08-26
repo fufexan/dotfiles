@@ -5,7 +5,7 @@
       :class "cpubar module"
       :thickness 3
       (button
-        :tooltip "using ''${EWW_CPU.avg}% cpu"
+        :tooltip "using ''${round(EWW_CPU.avg,0)}% cpu"
         :onclick "${pop} system"
         (label :class "icon_text" :text ""))))
 ''

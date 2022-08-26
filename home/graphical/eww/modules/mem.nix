@@ -5,7 +5,7 @@
       :class "membar module"
       :thickness 3
       (button
-        :tooltip "using ''${mem_perc}% ram"
+        :tooltip "using ''${round(mem_perc,0)}% ram"
         :onclick "${pop} system"
         (label :class "icon_text" :text ""))))
 ''

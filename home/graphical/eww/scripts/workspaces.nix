@@ -13,6 +13,8 @@ in
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
     export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w 1 /tmp/hypr | tail -1)
 
+    set -euxo pipefail
+
     colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
     dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
     empty="#302d41"
@@ -41,11 +43,11 @@ in
     # handles workspace create/destroy
     workspace_event() {
       o[$1]=$2
-      while read -r k v; do workspaces[$k]=$v; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
+      while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
     }
     # handles monitor (dis)connects
     monitor_event() {
-      while read -r k v; do monitormap[$k]=$v; done < <(hyprctl -j monitors | jq -r '.[]|"\(.name) \(.id) "')
+      while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | jq -r '.[]|"\(.name) \(.id) "')
     }
 
     # generates the eww widget

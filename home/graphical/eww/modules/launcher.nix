@@ -1,9 +1,13 @@
-{pkgs, ...}: ''
+{
+  pkgs,
+  lib,
+  ...
+}: ''
   (defwidget launcher []
     (button
       :tooltip "launcher"
       :hexpand true
       :class "launcher"
-      :onclick "wofi"
+      :onclick "${lib.getExe pkgs.wofi}"
       ""))
 ''
