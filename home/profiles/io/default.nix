@@ -6,6 +6,7 @@
     ../../graphical/games.nix
     ../../graphical/dunst.nix
     ../../wayland
+    ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
     inputs.discocss.hmModule
     inputs.spicetify-nix.homeManagerModule

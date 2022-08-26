@@ -33,7 +33,7 @@ inputs: let
     browser = "firefox";
     terminal = {
       font = "JetBrainsMono Nerd Font";
-      name = "wezterm";
+      name = "alacritty";
       opacity = 0.9;
       size = 11;
     };
