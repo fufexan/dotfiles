@@ -75,7 +75,7 @@
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     fu.url = "github:numtide/flake-utils";
@@ -106,11 +106,6 @@
       inputs.flake-utils.follows = "fu";
     };
 
-    naersk = {
-      url = "github:nmattia/naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -123,9 +118,14 @@
 
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
-      inputs.naersk.follows = "naersk";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "fu";
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
     };
 
     spicetify-nix = {
