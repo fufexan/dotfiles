@@ -11,9 +11,6 @@
 in
   pkgs.writeShellScript "workspaces" ''
     export PATH=$PATH:${pkgs.lib.makeBinPath programs}
-    export HYPRLAND_INSTANCE_SIGNATURE=$(ls -w 1 /tmp/hypr | tail -1)
-
-    set -euxo pipefail
 
     colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
     dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
@@ -54,7 +51,7 @@ in
     generate() {
       echo -n '(eventbox :onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace" (box :orientation "h" :class "module" :spacing 5 :space-evenly "true" '
       for i in {1..10}; do
-        echo -n "(button :onclick \"hyprctl dispatch workspace $i\" :class \"ws\" :style \"$(status $i)\" \"●\") "
+        echo -n "(button :onclick \"hyprctl dispatch workspace $i\" :class \"ws\" :style \"$(status "$i")\" \"●\") "
       done
       echo '))'
     }
@@ -65,7 +62,7 @@ in
     # add workspaces
     workspace_event 1 1
     # check occupied workspaces
-    for num in ''${!workspaces[@]}; do
+    for num in "''${!workspaces[@]}"; do
       o[$num]=1
     done
     # generate initial widget
@@ -77,14 +74,14 @@ in
         "workspace")
           focusedws=''${line#*>>}
           ;;
-        "focusedmon")
+        "activemon")
           focusedws=''${line#*,}
           ;;
         "createworkspace")
-          workspace_event ''${line#*>>} 1
+          workspace_event "''${line#*>>}" 1
           ;;
         "destroyworkspace")
-          workspace_event ''${line#*>>} 0
+          workspace_event "''${line#*>>}" 0
           ;;
         "monitor"*)
           monitor_event
