@@ -91,6 +91,34 @@
     steam.enable = true;
   };
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    steam = pkgs.steam.override {
+      extraPkgs = pkgs:
+        with pkgs; [
+          keyutils
+          libkrb5
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+        ];
+      extraProfile = "export GDK_SCALE=2";
+    };
+
+    gamescope = pkgs.gamescope.overrideAttrs (_: rec {
+      version = "3.11.43";
+      src = pkgs.fetchFromGitHub {
+        owner = "Plagman";
+        repo = "gamescope";
+        rev = "refs/tags/${version}";
+        hash = "sha256-XxOVM7xWeE2pF4U34jLvil5+vj+jePHPWHIfw0e/mnM=";
+      };
+    });
+  };
   security.tpm2 = {
     enable = true;
     abrmd.enable = true;
