@@ -24,18 +24,6 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  hyprland = let
-    xwayland = prev.xwayland.overrideAttrs (_: {
-      patches = [./patches/xwayland-vsync.patch];
-    });
-  in
-    inputs.hyprland.packages.${prev.system}.hyprland.override {
-      wlroots = inputs.hyprland.packages.${prev.system}.wlroots-hyprland.override {inherit xwayland;};
-      inherit xwayland;
-    };
-
-  hyprland-xwayland-hidpi = import ./hyprland inputs prev;
-
   technic-launcher = prev.callPackage ./technic.nix {};
 
   tlauncher = prev.callPackage ./tlauncher.nix {};

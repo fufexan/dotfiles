@@ -41,7 +41,7 @@
     quintom-cursor-theme
   ];
 
-  # use wayland where possible
+  # use Wayland where possible
   environment.variables.NIXOS_OZONE_WL = "1";
 
   # Japanese input using fcitx
@@ -131,11 +131,12 @@
 
     upower.enable = true;
 
+    # needed for GNOME services outside of GNOME Desktop
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
   security = {
-    # allow swaylock to unlock the screen
+    # allow wayland lockers to unlock the screen
     pam.services.swaylock.text = "auth include login";
     rtkit.enable = true;
   };
@@ -146,46 +147,6 @@
     targets.network-online.wantedBy = pkgs.lib.mkForce []; # Normally ["multi-user.target"]
     services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce []; # Normally ["network-online.target"]
   };
-
-  nixpkgs.overlays = [
-    (
-      _: prev: rec {
-        xdg-desktop-portal-wlr = prev.xdg-desktop-portal-wlr.overrideAttrs (_: {
-          patches = [../pkgs/patches/xdpw-crash.patch];
-        });
-
-        zathuraPkgs = rec {
-          inherit
-            (prev.zathuraPkgs)
-            gtk
-            zathura_djvu
-            zathura_pdf_poppler
-            zathura_ps
-            zathura_core
-            zathura_cb
-            ;
-
-          zathura_pdf_mupdf = prev.zathuraPkgs.zathura_pdf_mupdf.overrideAttrs (o: {
-            patches = [../pkgs/patches/zathura-mupdf.patch];
-          });
-
-          zathuraWrapper = prev.zathuraPkgs.zathuraWrapper.overrideAttrs (o: {
-            paths = [
-              zathura_core.man
-              zathura_core.dev
-              zathura_core.out
-              zathura_djvu
-              zathura_ps
-              zathura_cb
-              zathura_pdf_mupdf
-            ];
-          });
-        };
-
-        zathura = zathuraPkgs.zathuraWrapper;
-      }
-    )
-  ];
 
   xdg.portal.enable = true;
   # wlroots screensharing

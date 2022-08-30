@@ -6,7 +6,7 @@
   programs = with pkgs; [
     jq
     socat
-    inputs.self.packages.${pkgs.system}.hyprland
+    inputs.hyprland.packages.${pkgs.system}.default
   ];
 in
   pkgs.writeShellScript "workspaces" ''

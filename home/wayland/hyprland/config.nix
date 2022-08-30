@@ -104,10 +104,13 @@
     bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
     bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
     bind=SUPER,Escape,exec,wlogout -p layer-shell
-    bind=SUPER,E,exec,${emoji}
-    bind=SUPER,Q,killactive,
     bind=SUPERSHIFT,E,exec,pkill Hyprland
+    bind=SUPER,Q,killactive,
+    bind=SUPER,E,exec,${emoji}
     bind=SUPER,F,fullscreen,
+    bind=SUPER,G,togglegroup,
+    bind=SUPERSHIFT,N,changegroupactive,f
+    bind=SUPERSHIFT,P,changegroupactive,b
     bind=SUPER,R,togglesplit,
     bind=SUPER,T,togglefloating,
     bind=SUPER,P,pseudo,

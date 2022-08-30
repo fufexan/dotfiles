@@ -54,7 +54,6 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.self.packages.${pkgs.system}.hyprland-xwayland-hidpi;
     extraConfig = import ./config.nix args;
   };
 }
