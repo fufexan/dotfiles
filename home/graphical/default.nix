@@ -22,23 +22,9 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
-    # make apps aware of ibus
-    GTK_IM_MODULE = "ibus";
-    XMODIFIERS = "@im=ibus";
-    QT_IM_MODULE = "ibus";
   };
 
-  home.packages = with pkgs; let
-    teams-chromium = makeDesktopItem {
-      name = "Teams";
-      desktopName = "Teams";
-      genericName = "Microsoft Teams";
-      exec = "${config.programs.chromium.package}/bin/chromium --app=\"https://teams.live.com\"";
-      icon = "teams";
-      categories = ["Network" "InstantMessaging"];
-      mimeTypes = ["x-scheme-handler/teams"];
-    };
-  in [
+  home.packages = with pkgs; [
     # archives
     zip
     unzip
@@ -48,7 +34,6 @@
     # messaging
     tdesktop
     teams
-    teams-chromium
     # torrents
     transmission-remote-gtk
     # misc
@@ -66,19 +51,6 @@
   };
   # ensures consistent behaviour
   home.sessionVariables.XCURSOR_SIZE = builtins.toString config.home.pointerCursor.size;
-
-  xdg.configFile = let
-    gtkconf = ''
-      decoration, decoration:backdrop, window {
-        box-shadow: none;
-        border: none;
-        margin: 0;
-      }
-    '';
-  in {
-    "gtk-3.0/gtk.css".text = gtkconf;
-    "gtk-4.0/gtk.css".text = gtkconf;
-  };
 
   gtk = {
     enable = true;
@@ -104,7 +76,6 @@
   programs = {
     chromium = {
       enable = true;
-      commandLineArgs = ["--ozone-platform-hint=auto"];
       extensions = [{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}];
     };
 
