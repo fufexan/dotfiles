@@ -30,7 +30,6 @@
     workspace=DP-2,10
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
-    exec-once=export GDK_SCALE=2
     exec-once=swaybg -i ~/.config/wallpaper.png
 
     misc {
@@ -53,8 +52,11 @@
       }
     }
 
+    device:MSFT0001:00 04F3:31EB Touchpad {
+      sensitivity=-1
+    }
+
     general {
-      sensitivity=0.6
       main_mod=SUPER
 
       gaps_in=5
@@ -116,6 +118,7 @@
     bind=SUPER,P,pseudo,
     bind=SUPER,L,exec,swaylock
     bind=SUPER,O,exec,wl-ocr
+    bind=SUPERALT,,resizeactive,
 
     bind=,XF86AudioPlay,exec,playerctl play-pause
     bind=,XF86AudioPrev,exec,playerctl previous
@@ -159,7 +162,7 @@
             builtins.toString (x + 1 - (c * 10));
         in ''
           bind=SUPER,${ws},workspace,${toString (x + 1)}
-          bind=SHIFTSUPER,${ws},movetoworkspace,${toString (x + 1)}
+          bind=SHIFTSUPER,${ws},movetoworkspacesilent,${toString (x + 1)}
         ''
       )
       10)}

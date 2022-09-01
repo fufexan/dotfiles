@@ -20,11 +20,17 @@
   screenshot = import ../screenshot.nix args;
 in {
   home.packages = with pkgs; [
+    apply-hm-env
     screenshot
     wf-recorder
     xorg.xprop
-    apply-hm-env
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
+
+  home.sessionVariables = {
+    XDG_SESSION_TYPE = "wayland";
+    GDK_SCALE = "2";
+  };
 
   services.swayidle = {
     enable = true;
