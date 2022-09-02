@@ -35,8 +35,8 @@
       zle -N history-beginning-search-forward-end history-search-end
 
       # bind functions to up and down arrow keys
-      bindkey "^[OA" history-beginning-search-backward-end
-      bindkey "^[OB" history-beginning-search-forward-end
+      bindkey "^[[A" history-beginning-search-backward-end
+      bindkey "^[[B" history-beginning-search-forward-end
 
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
