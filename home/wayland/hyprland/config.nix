@@ -42,18 +42,14 @@
 
     input {
       kb_layout=ro
-      sensitivity=0
 
       follow_mouse=1
       force_no_accel=1
-
-      touchpad {
-        natural_scroll=1
-      }
     }
 
     device:MSFT0001:00 04F3:31EB Touchpad {
-      sensitivity=-1
+      # sensitivity=-1
+      natural_scroll=1
     }
 
     general {
@@ -103,12 +99,9 @@
     windowrule=workspace 9,title:^(Spotify)$
     windowrule=workspace 2,title:^(Discord)$
 
-    bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
-    bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
-    bind=SUPER,Escape,exec,wlogout -p layer-shell
+    # compositor commands
     bind=SUPERSHIFT,E,exec,pkill Hyprland
     bind=SUPER,Q,killactive,
-    bind=SUPER,E,exec,${emoji}
     bind=SUPER,F,fullscreen,
     bind=SUPER,G,togglegroup,
     bind=SUPERSHIFT,N,changegroupactive,f
@@ -116,44 +109,45 @@
     bind=SUPER,R,togglesplit,
     bind=SUPER,T,togglefloating,
     bind=SUPER,P,pseudo,
-    bind=SUPER,L,exec,swaylock
-    bind=SUPER,O,exec,wl-ocr
     bind=SUPERALT,,resizeactive,
 
-    bind=,XF86AudioPlay,exec,playerctl play-pause
-    bind=,XF86AudioPrev,exec,playerctl previous
-    bind=,XF86AudioNext,exec,playerctl next
-    bind=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
-    bind=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
-    bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-    bind=,XF86AudioMicMute,exec,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-
-    bind=,XF86MonBrightnessUp,exec,light -A 5
-    bind=,XF86MonBrightnessDown,exec,light -U 5
-
-    # screenshot
-
-    bind=,Print,exec,screenshot area
-    bind=SUPERSHIFT,R,exec,screenshot area
-
-    # monitor
-    bind=CTRL,Print,exec,screenshot monitor
-    bind=SUPERSHIFTCTRL,R,exec,screenshot monitor
-
-    # all-monitors
-    bind=ALT,Print,exec,screenshot all
-    bind=SUPERSHIFTALT,R,exec,screenshot all
-
-    # screenrec
-    # bind=ALT,Print,exec,screenshot rec area
-    # bind=SUPERSHIFTALT,R,exec,screenshot rec area
-
+    # utility
+    bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
+    bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
+    bind=SUPER,Escape,exec,wlogout -p layer-shell
+    bind=SUPER,L,exec,swaylock
+    bind=SUPER,E,exec,${emoji}
+    bind=SUPER,O,exec,wl-ocr
     # move focus
     bind=SUPER,left,movefocus,l
     bind=SUPER,right,movefocus,r
     bind=SUPER,up,movefocus,u
     bind=SUPER,down,movefocus,d
 
+    # media controls
+    bind=,XF86AudioPlay,exec,playerctl play-pause
+    bind=,XF86AudioPrev,exec,playerctl previous
+    bind=,XF86AudioNext,exec,playerctl next
+
+    # volume
+    bindle=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
+    bindle=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
+    bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    bind=,XF86AudioMicMute,exec,wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+    # backlight
+    bindle=,XF86MonBrightnessUp,exec,light -A 5
+    bindle=,XF86MonBrightnessDown,exec,light -U 5
+
+    # screenshot
+    bind=,Print,exec,grimblast --notify copysave area
+    bind=SUPERSHIFT,R,exec,grimblast --notify copysave area
+    bind=CTRL,Print,exec,grimblast --notify --cursor copysave output
+    bind=SUPERSHIFTCTRL,R,exec,grimblast --notify --cursor copysave output
+    bind=ALT,Print,exec,grimblast --notify --cursor copysave screen
+    bind=SUPERSHIFTALT,R,exec,grimblast --notify --cursor copysave screen
+
+    # workspaces
     ${builtins.concatStringsSep "\n" (builtins.genList (
         x: let
           ws = let
@@ -167,6 +161,7 @@
       )
       10)}
 
+    # special workspace
     bind=SUPERSHIFT,asciitilde,movetoworkspace,special
     bind=SUPER,grave,togglespecialworkspace,eDP-1
 

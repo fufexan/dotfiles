@@ -5,7 +5,9 @@
   inputs,
   default,
   ...
-}: {
+} @ args: {
+  home.packages = [(import ./screenshot.nix args)];
+
   wayland.windowManager.sway = {
     enable = true;
     package = inputs.self.packages.${pkgs.system}.sway-hidpi;

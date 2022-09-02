@@ -16,12 +16,9 @@
     ${config.home.sessionVariablesExtra}
     exec "$@"
   '';
-
-  screenshot = import ../screenshot.nix args;
 in {
   home.packages = with pkgs; [
     apply-hm-env
-    screenshot
     wf-recorder
     xorg.xprop
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
