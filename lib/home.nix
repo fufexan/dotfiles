@@ -13,8 +13,6 @@ inputs: let
     xrgbaColors = mapAttrs (_: xrgba) baseColors;
     # #AARRGGBB
     xargbColors = mapAttrs (_: xargb) baseColors;
-    # 0xABCDEF colors (alacritty)
-    x0Colors = mapAttrs (_: x0) baseColors;
     # rgba(,,,) colors (css)
     rgbaColors = mapAttrs (_: rgba) baseColors;
   };

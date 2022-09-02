@@ -5,9 +5,6 @@ with lib; rec {
   # convert rrggbb hex to #rrggbb
   x = c: "#${c}";
 
-  # convert rrggbb hex to 0xrrggbb (mostly for alacritty)
-  x0 = c: "0x${c}";
-
   # same as x but adds an alpha channel for transparency
   xrgba = c: "${c}88";
   xargb = c: "88${c}";

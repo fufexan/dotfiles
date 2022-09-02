@@ -6,7 +6,7 @@
 }:
 # terminals
 let
-  inherit (colors) x0Colors;
+  inherit (colors) xcolors;
   inherit (default.terminal) font size;
 in {
   programs.alacritty = {
@@ -34,24 +34,24 @@ in {
       draw_bold_text_with_bright_colors = true;
       colors = rec {
         primary = {
-          background = x0Colors.base00;
-          foreground = x0Colors.base05;
+          background = xcolors.base00;
+          foreground = xcolors.base05;
         };
         normal = {
-          black = x0Colors.base02;
-          red = x0Colors.base08;
-          green = x0Colors.base0B;
-          yellow = x0Colors.base0A;
-          blue = x0Colors.base0D;
-          magenta = x0Colors.base0E;
-          cyan = x0Colors.base0C;
-          white = x0Colors.base05;
+          black = xcolors.base02;
+          red = xcolors.base08;
+          green = xcolors.base0B;
+          yellow = xcolors.base0A;
+          blue = xcolors.base0D;
+          magenta = xcolors.base0E;
+          cyan = xcolors.base0C;
+          white = xcolors.base05;
         };
         bright =
           normal
           // {
-            black = x0Colors.base03;
-            white = x0Colors.base06;
+            black = xcolors.base03;
+            white = xcolors.base06;
           };
       };
       window.opacity = default.terminal.opacity;
