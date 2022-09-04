@@ -493,6 +493,26 @@
         "type": "github"
       }
     },
+    "homeage": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1662242203,
+        "narHash": "sha256-fd8y/fgJ/QELcVysVAHBDc0/wQI6TuvAXCHNUbYuSVo=",
+        "owner": "jordanisaacs",
+        "repo": "homeage",
+        "rev": "7d09b3e0256dc1fb82d5d5d3d4772a4459105b81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jordanisaacs",
+        "repo": "homeage",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "nixpkgs": [
@@ -836,6 +856,7 @@
         "fu": "fu",
         "helix": "helix",
         "hm": "hm",
+        "homeage": "homeage",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
