@@ -4,7 +4,7 @@
   pkgs,
   inputs,
   ...
-}: {
+} @ args: {
   imports = [./hardware-configuration.nix];
 
   boot = {
@@ -142,9 +142,15 @@
       };
     };
 
-    udev.extraRules = ''
+    udev.extraRules = let
+      inherit (import ./plugged.nix args) plugged unplugged;
+    in ''
       # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+
+      # start/stop services on power (un)plug
+      SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${plugged}"
+      SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${unplugged}"
     '';
 
     xserver.enable = lib.mkForce false;
