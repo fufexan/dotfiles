@@ -127,8 +127,6 @@
       pulse.enable = true;
     };
 
-    udisks2.enable = true;
-
     upower.enable = true;
 
     # needed for GNOME services outside of GNOME Desktop

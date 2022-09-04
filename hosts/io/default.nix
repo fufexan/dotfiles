@@ -72,8 +72,6 @@
 
     enableRedistributableFirmware = true;
 
-    opentabletdriver.enable = true;
-
     video.hidpi.enable = true;
 
     xpadneo.enable = true;
@@ -116,8 +114,6 @@
 
   services = {
     btrfs.autoScrub.enable = true;
-
-    fwupd.enable = true;
 
     kmonad.keyboards = {
       io = {
