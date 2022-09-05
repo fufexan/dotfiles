@@ -1,0 +1,70 @@
+(include "./modules/bat.yuck")
+(include "./modules/bluetooth.yuck")
+(include "./modules/bright.yuck")
+(include "./modules/clock.yuck")
+(include "./modules/cpu.yuck")
+(include "./modules/launcher.yuck")
+(include "./modules/mem.yuck")
+(include "./modules/music.yuck")
+(include "./modules/net.yuck")
+(include "./modules/variables.yuck")
+(include "./modules/volume.yuck")
+
+(include "./windows/calendar.yuck")
+(include "./windows/music_win.yuck")
+(include "./windows/system.yuck")
+(include "./windows/volume_win.yuck")
+
+(defwidget sep []
+  (label :class "separ module" :text "|"))
+
+(defwidget workspaces []
+  (literal :content workspace))
+
+(defwidget left []
+  (box
+    :space-evenly false
+    :halign "start"
+    (launcher)
+    (workspaces)))
+
+(defwidget right []
+  (box
+    :space-evenly false
+    :halign "end"
+    (bright)
+    (volume)
+    (net)
+    (bluetooth)
+    (sep)
+    (cpu)
+    (mem)
+    (bat)
+    (sep)
+    (clock_module)))
+
+(defwidget center []
+  (box
+    :space-evenly false
+    :halign "center"
+    (music)))
+
+(defwidget bar []
+  (centerbox
+    :class "bar"
+    (left)
+    (center)
+    (right)))
+
+(defwindow bar
+    :monitor 0
+    :geometry (geometry :x "0%"
+      :y "5px"
+      :width "1584px"
+      :height "32px"
+      :anchor "top center")
+    :stacking "fg"
+    :windowtype "dock"
+    :exclusive true
+    :wm-ignore false
+  (bar))

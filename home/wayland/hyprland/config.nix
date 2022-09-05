@@ -23,14 +23,15 @@
   config = ''
     # should be configured per-profile
     monitor=eDP-1,preferred,auto,1.6
-    workspace=eDP-1,1
     monitor=DP-1,preferred,auto,1
-    workspace=DP-1,10
     monitor=DP-2,preferred,auto,1
+    workspace=eDP-1,1
+    workspace=DP-1,10
     workspace=DP-2,10
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     exec-once=swaybg -i ~/.config/wallpaper.png
+    exec-once=eww open bar
 
     misc {
       no_vfr=0

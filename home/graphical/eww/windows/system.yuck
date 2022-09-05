@@ -1,0 +1,93 @@
+(defwidget system []
+  (box
+    :class "sys_win"
+    :orientation "v"
+
+    ; cpu
+    (box
+      :class "sys_box"
+      :space-evenly "false"
+      :halign "start"
+      (circular-progress
+        :value "${EWW_CPU.avg}"
+        :class "sys_cpu"
+        :thickness "3"
+        (label
+          :text ""
+          :class "sys_icon_cpu"))
+      (box
+        :orientation "v"
+        :vexpand "false"
+        (label
+          :text "cpu"
+          :halign "start"
+          :class "sys_text_cpu")
+        (label
+          :text "${round(EWW_CPU.avg,2)}%"
+          :halign "start"
+          :class "sys_text_sub")
+        (label
+          :text "${EWW_CPU.cores[0].freq} MHz"
+          :halign "start"
+          :class "sys_text_sub")))
+
+    ; memory
+    (box
+      :class "sys_box"
+      :space-evenly "false"
+      :halign "start"
+      (circular-progress
+        :value mem_perc
+        :class "sys_mem"
+        :thickness "3"
+        (label
+          :text ""
+          :class "sys_icon_mem"))
+      (box
+        :orientation "v"
+        (label
+          :text "memory"
+          :halign "start"
+          :class "sys_text_mem" )
+        (label
+          :text "${mem_used} | ${mem_total}"
+          :halign "start"
+          :class "sys_text_sub" )))
+
+    ; battery
+    (box
+      :class "sys_box"
+      :space-evenly "false"
+      (circular-progress
+        :value "${EWW_BATTERY["BAT0"].capacity}"
+        :class "sys_bat"
+        :style "color: ${bat_color};"
+        :thickness 3
+        (label
+          :text ""
+          :style "color: ${bat_color};"
+          :class "sys_icon_bat" ))
+      (box
+        :orientation "v"
+        (label
+          :text "battery"
+          :halign "start"
+          :class "sys_text_bat" )
+        (label
+          :text "${EWW_BATTERY["BAT0"].capacity}% | ${bat_wattage}"
+          :halign "start"
+          :class "sys_text_sub" )
+        (label
+          :text "${bat_status}"
+          :halign "start"
+          :class "sys_text_sub" )))))
+
+(defwindow system_win
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "1%"
+    :anchor "top right"
+    :width "0"
+    :height "0")
+  (system))
