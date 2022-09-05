@@ -15,6 +15,7 @@
       editor = {
         true-color = true;
         color-modes = true;
+        cursorline = true;
         cursor-shape = {
           insert = "bar";
           normal = "block";
