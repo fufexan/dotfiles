@@ -37,7 +37,7 @@
         (box
           :class "music_bar"
           (scale
-            :active "false"
+            :onchange "playerctl position `bc <<< \"{} * $(playerctl metadata mpris:length) / 1000000 / 100\"`"
             :value song_pos_perc))))))
 
 (defwindow music_win
