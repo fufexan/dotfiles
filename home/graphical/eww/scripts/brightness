@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 icons=("" "" "")
 
-if [[ "$1" == "icon" ]]; then
-  echo ${icons[$(awk -v n=$(light) 'BEGIN{print int(n/34)}')]}
-elif [[ "$1" == "level" ]]; then
-	echo $(light)
+if [ "$1" = "icon" ]; then
+  echo "${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}"
+elif [ "$1" = "level" ]; then
+	light
 fi  

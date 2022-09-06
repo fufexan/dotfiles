@@ -1,24 +1,24 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 battery() {
-	PERCENTAGE=`upower -d | grep percentage | awk '{ print $2 }' | head -n 1`
+	PERCENTAGE=$(upower -d | grep percentage | awk '{ print $2 }' | head -1)
 
 	echo "${PERCENTAGE%\%}"
 }
 
 wattage() {
-	RATE=`upower -d | grep rate | awk '{ print $2 }' | head -n 1`
+	RATE=$(upower -d | grep rate | awk '{ print $2 }' | head -1)
 
 	echo "$RATE W"
 }
 
 status() {
-	TIME=`upower -d | grep time | awk '{ print $4 " " $5 }' | head -n 1`
-  STATE=`upower -d | grep state | awk '{ print $2 }' | head -n 1`
+	TIME=$(upower -d | grep time | awk '{ print $4 " " $5 }' | head -1)
+  STATE=$(upower -d | grep state | awk '{ print $2 }' | head -1)
 
-  if [[ $STATE == "charging" ]]; then
+  if [ "$STATE" = "charging" ]; then
   	echo "charging, $TIME left"
-  elif [[ $STATE == "discharging" ]]; then
+  elif [ "$STATE" = "discharging" ]; then
   	echo "$TIME left"
   else
     echo "fully charged"
@@ -26,19 +26,19 @@ status() {
 }
 
 color() {
-  if [[ $(battery) -le 20 ]]; then
+  if [ "$(battery)" -le 20 ]; then
     echo '#f38ba8'
   else
     echo '#a6e3a1'
   fi
 }
 
-if [[ "$1" == "bat" ]]; then
+if [ "$1" = "bat" ]; then
 	battery
-elif [[ "$1" == "wattage" ]]; then
+elif [ "$1" = "wattage" ]; then
 	wattage
-elif [[ "$1" == "status" ]]; then
+elif [ "$1" = "status" ]; then
 	status
-elif [[ "$1" == "color" ]]; then
+elif [ "$1" = "color" ]; then
 	color
 fi

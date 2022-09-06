@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
 dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
@@ -12,10 +12,10 @@ declare -A workspaces
 
 # sets color
 status() {
-  if [[ ${o[$1]} -eq 1 ]]; then
+  if [ "${o[$1]}" -eq 1 ]; then
     mon=${monitormap[${workspaces[$1]}]}
 
-    if [[ $focusedws -eq $1 ]]; then
+    if [ $focusedws -eq "$1" ]; then
       echo -n "color: ${colors[$mon]};"
     else
       echo -n "color: ${dimmed[$mon]};"

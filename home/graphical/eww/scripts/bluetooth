@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 declare -A baticon=([10]="󰁺" [20]="󰁻" [30]="󰁼" [40]="󰁽" [50]="󰁾" [60]="󰁿" [70]="󰂀" [80]="󰂁" [90]="󰂂" [100]="󰁹")
 
@@ -7,10 +7,9 @@ status=$(bluetoothctl info)
 battery=$(echo "$status" | tail -1 | awk '{print $4 }' | tr -d '()')
 name=$(echo "$status" | rg Name | cut -f 2- -d ' ')
 
-
-if [[ $powered == "yes" ]]; then
-  if [[ $status != "Missing device address argument" ]]; then
-    if [[ $battery -le 100 && $battery -ge 0 ]]; then
+if [ "$powered" = "yes" ]; then
+  if [ "$status" != "Missing device address argument" ]; then
+    if [ "$battery" -le 100 ] && [ "$battery" -ge 0 ]; then
       text="$name ${baticon[$battery]}"
     else
       text="$name"
@@ -29,10 +28,10 @@ else
   color="#45475a"
 fi
 
-if [[ $1 == "color" ]]; then
+if [ "$1" = "color" ]; then
   echo $color
-elif [[ $1 == "text" ]]; then
-	echo $text
-elif [[ $1 == "icon" ]]; then
+elif [ "$1" = "text" ]; then
+	echo "$text"
+elif [ "$1" = "icon" ]; then
 	echo $icon
 fi
