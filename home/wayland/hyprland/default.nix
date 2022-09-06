@@ -20,6 +20,7 @@ in {
   home.packages = with pkgs; [
     apply-hm-env
     wf-recorder
+    swayidle
     xorg.xprop
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];

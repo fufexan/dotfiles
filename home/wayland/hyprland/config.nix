@@ -31,6 +31,8 @@
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     exec-once=swaybg -i ~/.config/wallpaper.png
+    exec-once=swayidle -w timeout 300 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpms on" timeout 310 "loginctl lock-session" before-sleep swaylock lock swaylock
+    exec-once=eww daemon
     exec-once=eww open bar
 
     misc {
