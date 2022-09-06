@@ -24,6 +24,7 @@
     ripgrep
     socat
     upower
+    wget
     wireplumber
     wofi
   ]);

@@ -1,89 +1,84 @@
 #!/bin/sh
 
 get_status() {
-  status=`playerctl status`
-
-	if [[ $status == "Playing" ]]; then
-		echo ""
-	else
-		echo ""
-	fi
+	playerctl -F status | while read -r s; do
+		if [[ $s == "Playing" ]]; then
+			echo ""
+		else
+			echo ""
+		fi
+	done
 }
 
-get_title() {
-	title=`playerctl metadata title`
-
-	if [[ -z $title ]]; then
-		echo ""
-	else
-		echo $title
-	fi
+get_length_sec() {
+	playerctl -F metadata mpris:length | while read -r len; do
+		if [[ -z $len ]]; then
+			echo 0
+		else
+			len=`bc <<< "$len / 1000000"`
+			echo "$len"
+		fi
+	done
 }
 
-get_artist() {
-	artist=`playerctl metadata artist`
-
-	if [[ -z $artist ]]; then
-		echo ""
-	else
-		echo $artist
-	fi
-}
-
-get_length() {
-	length=`playerctl metadata mpris:length`
-
-	if [[ -z $length ]]; then
-		echo 0
-	else
-		echo "${length::-6}"
-	fi
-}
 get_length_time() {
-  if [[ ! $(get_length) -eq 0 ]]; then
-    echo `date -d@$(get_length) +%M:%S`
-  fi
+	playerctl -F metadata mpris:length | while read -r len; do
+		if [[ -n $len ]]; then
+			len=`bc <<< "$len / 1000000"`
+			echo `date -d@$len +%M:%S`
+		else
+			echo ""
+		fi
+	done
 }
 
 get_position() {
-	position=`playerctl position`
-
-	if [[ -z $position ]]; then
-		echo 0
-	else
-		echo `bc -l <<< "${position%.*} / $(get_length) * 100"`
-	fi
+	playerctl -F metadata -f '{{position}} {{mpris:length}}' 2>/dev/null | while read -r pos len; do
+		if [[ -n $pos ]]; then
+			echo `bc -l <<< "$pos / $len * 100"`
+		else
+			echo 0
+		fi
+	done
 }
+
 get_position_time() {
-  echo `date -d@$(playerctl position) +%M:%S`
+	playerctl -F metadata -f '{{position}} {{mpris:length}}' 2>/dev/null | while read -r pos len; do
+		if [[ -n $pos ]]; then
+			echo `date -d@$(bc -l <<< "$pos / 1000000") +%M:%S`
+		else
+			echo 0
+		fi
+	done
 }
 
 get_cover() {
-	COVER_URL=`playerctl metadata mpris:artUrl`
-	STATUS=$?
+	mkdir -p "$XDG_CACHE_HOME/eww_covers"
+	cd "$XDG_CACHE_HOME/eww_covers"
 
-	# Check if the file has a embbeded album art
-	if [ "$STATUS" -eq 0 ]; then
-    if [[ $COVER_URL = https* ]]; then
-      curl $COVER_URL -o /tmp/cover_art.png
-      echo "/tmp/cover_art.png"
-    else
-  		echo "$COVER_URL"
-    fi
-	else
-		echo "images/music.png"
-	fi
+	IMGPATH="$XDG_CACHE_HOME/eww_covers/cover_art.png"
+
+	playerctl -F metadata mpris:artUrl | while read -r COVER_URL; do
+		if [[ $COVER_URL = https* ]]; then
+			wget -N $COVER_URL -o /dev/null
+
+			rm $IMGPATH
+			ln -s $(basename $COVER_URL) $IMGPATH
+
+			echo $IMGPATH
+		elif [[ $COVER_URL == "" ]]; then
+			echo "images/music.png"
+		else
+			echo "$COVER_URL"
+		fi
+	done
 }
 
 ## Execute accordingly
-if [[ $1 == "title" ]]; then
-	get_title
-elif [[ $1 == "artist" ]]; then
-	get_artist
-elif [[ $1 == "status" ]]; then
+if [[ $1 == "status" ]]; then
 	get_status
 elif [[ $1 == "length" ]]; then
-	get_length
+	get_length_sec
 elif [[ $1 == "length_time" ]]; then
 	get_length_time
 elif [[ $1 == "position" ]]; then
@@ -92,10 +87,4 @@ elif [[ $1 == "position_time" ]]; then
 	get_position_time
 elif [[ $1 == "cover" ]]; then
 	get_cover
-elif [[ $1 == "toggle" ]]; then
-	playerctl play-pause
-elif [[ $1 == "next" ]]; then
-	{ playerctl next; get_cover; }
-elif [[ $1 == "prev" ]]; then
-	{ playerctl previous; get_cover; }
 fi
