@@ -2,26 +2,21 @@
 
 volicons=("󰕿" "󰖀" "󰕾")
 
-vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}')
-mic=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | awk '{print int($2*100)}')
-
+vol() {
+  wpctl get-volume @DEFAULT_AUDIO_"$1"@ | awk '{print int($2*100)}'
+}
+ismuted() {
+  wpctl get-volume @DEFAULT_AUDIO_"$1"@ | rg -i muted
+  echo $?
+}
 setvol() {
   wpctl set-volume @DEFAULT_AUDIO_"$1"@ "$(awk -v n="$2" 'BEGIN{print (n / 100)}')"
 }
 setmute() {
   wpctl set-mute @DEFAULT_AUDIO_"$1"@ toggle
 }
-getvol() {
-  if [ "$1" = "SOURCE" ]; then
-    printf "%.1f" "$mic"
-  else
-    printf "%.1f" "$vol"
-  fi
-}
 
-if [ "$1" = "icon" ]; then
-	echo "${volicons[$(awk -v n="$vol" 'BEGIN{print int(n/34)}')]}"
-elif [ "$1" = "mute" ]; then
+if [ "$1" = "mute" ]; then
   if [ "$2" != "SOURCE" ] && [ "$2" != "SINK" ]; then
     echo "Can only mute SINK or SOURCE"; exit 1
   fi
@@ -33,6 +28,28 @@ elif [ "$1" = "setvol" ]; then
     echo "Volume must be between 1 and 100"; exit 1
   fi
   setvol "$2" "$3"
-elif [ "$1" = "getvol" ]; then
-  getvol "$2"
+else
+  # initial values
+  lvl=$(awk -v n="$(vol "SINK")" 'BEGIN{print int(n/34)}')
+  ismuted=$(ismuted "SINK")
+
+  if [ "$ismuted" = 1 ]; then
+  	icon="${volicons[$lvl]}"
+  else
+    icon=""
+  fi
+  echo '{ "icon": "'"$icon"'", "percent": "'"$(vol "SINK")"'", "microphone": "'"$(vol "SOURCE")"'" }'
+
+  # event loop
+  pactl subscribe | rg --line-buffered "change" | while read -r _; do
+    lvl=$(awk -v n="$(vol "SINK")" 'BEGIN{print int(n/34)}')
+    ismuted=$(ismuted "SINK")
+
+    if [ "$ismuted" = 1 ]; then
+    	icon="${volicons[$lvl]}"
+    else
+      icon=""
+    fi
+    echo '{ "icon": "'"$icon"'", "percent": "'"$(vol "SINK")"'", "microphone": "'"$(vol "SOURCE")"'" }'
+  done
 fi

@@ -12,12 +12,10 @@
         :duration "350ms"
         (scale
           :class "brightbar"
-          :min 0
-          :max 100
-          :value brightness_percent
-          :tooltip "${brightness_percent}%"
+          :value {brightness.level}
+          :tooltip "${brightness.level}%"
           :onchange "light -S {}"))
       (label
-        :text brightness_icon
+        :text {brightness.icon}
         :class "bright_icon"
-        :tooltip "brightness"))))
+        :tooltip "brightness ${brightness.level}%"))))

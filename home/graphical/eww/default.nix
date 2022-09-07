@@ -11,16 +11,15 @@
     bc
     bluez
     coreutils
-    curl
     findutils
     gawk
-    gnugrep
     gnused
     jq
     light
     networkmanager
     playerctl
     procps
+    pulseaudio
     ripgrep
     socat
     upower

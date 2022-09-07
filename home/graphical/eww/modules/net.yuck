@@ -10,10 +10,10 @@
         :duration "350ms"
         (label
           :class "module_ssid module"
-          :style "color: ${net_color};"
-          :text net_ssid))
+          :style "color: ${net.color};"
+          :text {net.essid}))
       (button
         :class "module_net module"
         :onclick "networkmanager_dmenu"
-        :style "color: ${net_color};"
-        net_icon))))
+        :style "color: ${net.color};"
+        {net.icon}))))

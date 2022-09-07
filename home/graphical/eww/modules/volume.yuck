@@ -12,12 +12,12 @@
         :duration "350ms"
         (scale
           :class "volbar"
-          :value vol_percent
-          :tooltip "${vol_percent}%"
+          :value {volume.percent}
+          :tooltip "${volume.percent}%"
           :max 100
           :min 0
           :onchange "./scripts/volume setvol SINK {}"))
       (button
         :onclick "./scripts/pop volume"
         :class "vol_icon"
-        vol_icon))))
+        {volume.icon}))))

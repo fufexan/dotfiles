@@ -1,21 +1,20 @@
 #!/usr/bin/env bash
 
-# human-readable
-total="$(free -h --si | grep Mem: | awk '{ print $2 }')"
-used="$(free -h --si | grep Mem: | awk '{ print $3 }')"
+while true; do    
+  # human-readable
+  freeH=$(free -h --si | rg "Mem:")
+  # non-human-readable
+  freeN=$(free --mega | rg "Mem:")
 
-# non-human-readable
-t="$(free --mega | grep Mem: | awk '{ print $2 }')"
-u="$(free --mega | grep Mem: | awk '{ print $3 }')"
+  total="$(echo $freeH | awk '{ print $2 }')"
+  used="$(echo $freeH | awk '{ print $3 }')"
+  t="$(echo $freeN | awk '{ print $2 }')"
+  u="$(echo $freeN | awk '{ print $3 }')"
 
-free=$(printf '%.1fG' "$(bc -l <<< "($t - $u) / 1000")")
+  free=$(printf '%.1fG' "$(bc -l <<< "($t - $u) / 1000")")
+  perc=$(printf '%.1f' "$(free -m | rg Mem | awk '{print ($3/$2)*100}')")
 
-if [ "$1" = "total" ]; then
-    echo "$total"
-elif [ "$1" = "used" ]; then
-    echo "$used"
-elif [ "$1" = "free" ]; then
-    echo "$free"
-elif [ "$1" = "percentage" ]; then
-    printf '%.1f' "$(free -m | grep Mem | awk '{print ($3/$2)*100}')"
-fi
+  echo '{ "total": "'"$total"'", "used": "'"$used"'", "free": "'"$free"'", "percentage": '"$perc"' }'
+
+  sleep 3
+done

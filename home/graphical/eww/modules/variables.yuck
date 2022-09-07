@@ -7,29 +7,12 @@
 
 (defpoll time :interval "5s" `date +'{"date": "%d/%m", "hour": "%H", "minute": "%M"}'`)
 
-(defpoll mic_percent :interval "3s" "scripts/volume getvol SOURCE")
-(defpoll vol_icon :interval "1s" "scripts/volume icon")
-(defpoll vol_percent :interval "1s" "scripts/volume getvol")
-
-(defpoll brightness_icon :interval "3s" "scripts/brightness icon")
-(defpoll brightness_percent :interval "3s" "scripts/brightness level")
-
-(defpoll bt_color :interval "2s" "scripts/bluetooth color")
-(defpoll bt_icon :interval "2s" "scripts/bluetooth icon")
-(defpoll bt_text :interval "2s" "scripts/bluetooth text")
-
-(defpoll bat_wattage :interval "3s" "scripts/battery wattage")
-(defpoll bat_status :interval "3s" "scripts/battery status")
-(defpoll bat_color :interval "3s" "scripts/battery color")
-
-(defpoll mem_free :interval "3s" "scripts/memory free")
-(defpoll mem_perc :interval "3s" "scripts/memory percentage")
-(defpoll mem_total :interval "3s" "scripts/memory total")
-(defpoll mem_used :interval "3s" "scripts/memory used")
-
-(defpoll net_color :interval "10s" "scripts/net color")
-(defpoll net_icon :interval "10s" "scripts/net icon")
-(defpoll net_ssid :interval "10s" "scripts/net essid")
+(deflisten battery "scripts/battery")
+(deflisten bluetooth "scripts/bluetooth")
+(deflisten brightness "scripts/brightness")
+(deflisten memory "scripts/memory")
+(deflisten net "scripts/net")
+(deflisten volume "scripts/volume")
 
 (deflisten song_artist "playerctl -F metadata artist || true")
 (deflisten song_title "playerctl -F metadata title || true")
@@ -41,4 +24,3 @@
 (deflisten song_pos_perc :initial "0" "scripts/music position")
 
 (deflisten workspace "scripts/workspaces")
-

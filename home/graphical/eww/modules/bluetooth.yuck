@@ -10,10 +10,10 @@
         :duration "350ms"
         (label
           :class "module_bt module"
-          :style "color: ${bt_color};"
-          :text bt_text))
+          :style "color: ${bluetooth.color};"
+          :text {bluetooth.text}))
       (button
         :class "module_bt module"
         :onclick "blueman"
-        :style "color: ${bt_color};"
-        bt_icon))))
+        :style "color: ${bluetooth.color};"
+        {bluetooth.icon}))))

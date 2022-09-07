@@ -37,7 +37,7 @@
       :space-evenly "false"
       :halign "start"
       (circular-progress
-        :value mem_perc
+        :value {memory.percentage}
         :class "sys_mem"
         :thickness "3"
         (label
@@ -50,7 +50,7 @@
           :halign "start"
           :class "sys_text_mem" )
         (label
-          :text "${mem_used} | ${mem_total}"
+          :text "${memory.used} | ${memory.total}"
           :halign "start"
           :class "sys_text_sub" )))
 
@@ -61,11 +61,11 @@
       (circular-progress
         :value "${EWW_BATTERY["BAT0"].capacity}"
         :class "sys_bat"
-        :style "color: ${bat_color};"
+        :style "color: ${battery.color};"
         :thickness 3
         (label
           :text ""
-          :style "color: ${bat_color};"
+          :style "color: ${battery.color};"
           :class "sys_icon_bat" ))
       (box
         :orientation "v"
@@ -74,11 +74,11 @@
           :halign "start"
           :class "sys_text_bat" )
         (label
-          :text "${EWW_BATTERY["BAT0"].capacity}% | ${bat_wattage}"
+          :text "${EWW_BATTERY["BAT0"].capacity}% | ${battery.wattage}"
           :halign "start"
           :class "sys_text_sub" )
         (label
-          :text "${bat_status}"
+          :text "${battery.status}"
           :halign "start"
           :class "sys_text_sub" )))))
 

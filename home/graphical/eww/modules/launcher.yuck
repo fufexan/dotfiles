@@ -3,5 +3,5 @@
     :tooltip "launcher"
     :hexpand true
     :class "launcher"
-    :onclick "wofi"
+    :onclick "wofi &"
     ""))

@@ -1,44 +1,52 @@
 #!/usr/bin/env bash
 
-battery() {
-	PERCENTAGE=$(upower -d | grep percentage | awk '{ print $2 }' | head -1)
-
-	echo "${PERCENTAGE%\%}"
-}
-
-wattage() {
-	RATE=$(upower -d | grep rate | awk '{ print $2 }' | head -1)
-
-	echo "$RATE W"
-}
-
 status() {
-	TIME=$(upower -d | grep time | awk '{ print $4 " " $5 }' | head -1)
-  STATE=$(upower -d | grep state | awk '{ print $2 }' | head -1)
+	if [ "$STATE" = "Charging" ]; then
+		echo -n "charging"
 
-  if [ "$STATE" = "charging" ]; then
-  	echo "charging, $TIME left"
-  elif [ "$STATE" = "discharging" ]; then
-  	echo "$TIME left"
-  else
-    echo "fully charged"
-  fi
+		if [ "$RATE" -gt 0 ]; then
+			echo ", $(gettime) left"
+		else
+			echo ""
+		fi
+	elif [ "$STATE" = "Discharging" ]; then
+		echo "$(gettime)h left"
+	else
+		echo "fully charged"
+	fi
 }
 
 color() {
-  if [ "$(battery)" -le 20 ]; then
-    echo '#f38ba8'
-  else
-    echo '#a6e3a1'
-  fi
+	if [ "$CAPACITY" -le 20 ]; then
+		echo '#f38ba8'
+	else
+		echo '#a6e3a1'
+	fi
 }
 
-if [ "$1" = "bat" ]; then
-	battery
-elif [ "$1" = "wattage" ]; then
-	wattage
-elif [ "$1" = "status" ]; then
-	status
-elif [ "$1" = "color" ]; then
-	color
-fi
+wattage() {
+	echo "$(bc -l <<< "scale=1; $RATE / 1000000") W"
+}
+
+gettime() {
+	FULL=$(cat /sys/class/power_supply/BAT0/energy_full)
+	NOW=$(cat /sys/class/power_supply/BAT0/energy_now)
+
+	if [ "$RATE" -gt 0 ]; then
+		if [ "$STATE" = "Discharging" ]; then
+			EX="$FULL / $RATE"
+		else
+			EX="($FULL - $NOW) / $RATE"
+		fi
+		date -u -d@$(bc -l <<< "$EX * 3600") +%H:%M
+	fi
+}
+
+while true; do
+	RATE=$(cat /sys/class/power_supply/BAT0/power_now)
+	CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
+	STATE=$(cat /sys/class/power_supply/BAT0/status)
+
+	echo '{ "percentage": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
+	sleep 3
+done
