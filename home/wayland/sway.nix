@@ -5,41 +5,25 @@
   inputs,
   default,
   ...
-} @ args: {
-  home.packages = [(import ./screenshot.nix args)];
-
+}: {
   wayland.windowManager.sway = {
     enable = true;
     package = inputs.self.packages.${pkgs.system}.sway-hidpi;
     config = {
       keybindings = let
-        sway = config.wayland.windowManager.sway.config;
-        m = sway.modifier;
-        # toggle output scaling
-        # output = "eDP-1";
-        # toggle-scaling = pkgs.writeShellScript "sway-scale-toggle" ''
-        #   S=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '.[] | select(any(. == "${output}")).scale')
-        #   [ $S = 2 ] && S=1 || S=2
-        #   swaymsg output "${output}" scale $S
-        # '';
+        m = config.wayland.windowManager.sway.config.modifier;
       in
         lib.mkOptionDefault {
-          "${m}+Return" = "exec ${sway.terminal}";
+          "${m}+Return" = "exec ${default.terminal.name}";
           "${m}+q" = "kill";
-          "${m}+space" = "exec ${sway.menu}";
-
+          "${m}+space" = "exec wofi";
           "${m}+t" = "floating toggle";
 
-          # Fn + F7
-          # "${m}+semicolon" = "exec ${toggle-scaling}";
-
           # screenshots
-          "Print" = "screenshot area";
-          "${m}+Shift+r" = "screenshot area";
-          "Ctrl+Print" = "screenshot monitor";
-          "${m}+Ctrl+Shift+r" = "screenshot monitor";
-          "Alt+Print" = "screenshot all";
-          "${m}+Alt+Shift+r" = "screenshot all";
+          "Print" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
+          "${m}+Shift+r" = "grim -g \"$(slurp)\" - | wl-copy -t image/png";
+          "Alt+Print" = "grim - | wl-copy -t image/png";
+          "${m}+Alt+Shift+r" = "grim - | wl-copy -t image/png";
         };
 
       keycodebindings = {
@@ -54,13 +38,12 @@
         "--locked 233" = "exec light -A 5"; # brightness+
       };
 
-      menu = "${pkgs.wofi}/bin/wofi --show drun --allow-images -iq";
+      menu = "wofi";
       terminal = default.terminal.name;
       modifier = "Mod4";
       bars = [];
 
       gaps = {
-        smartGaps = true;
         smartBorders = "on";
         outer = 5;
         inner = 5;
@@ -74,13 +57,11 @@
           pointer_accel = "0";
         };
         "type:touchpad" = {
-          click_method = "clickfinger";
           middle_emulation = "enabled";
           natural_scroll = "enabled";
           tap = "enabled";
         };
       };
-
       output."*".bg = "~/.config/wallpaper.png fill";
     };
 
@@ -88,6 +69,6 @@
       exec ${pkgs.xorg.xprop}/bin/xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     '';
 
-    wrapperFeatures = {gtk = true;};
+    wrapperFeatures.gtk = true;
   };
 }

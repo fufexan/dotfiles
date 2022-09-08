@@ -20,7 +20,6 @@
         theme = "ansi";
       };
     };
-
     bottom.enable = true;
     exa.enable = true;
     ssh.enable = true;

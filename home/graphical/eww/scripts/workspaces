@@ -62,7 +62,7 @@ socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - |
     "workspace")
       focusedws=${line#*>>}
       ;;
-    "activemon")
+    "focusedmon")
       focusedws=${line#*,}
       ;;
     "createworkspace")

@@ -29,7 +29,7 @@ in {
 
   xdg = {
     enable = true;
-    cacheHome = __toPath (h + "/.local/cache");
+    cacheHome = h + "/.local/cache";
     userDirs = {
       enable = true;
       createDirectories = true;

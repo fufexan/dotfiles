@@ -2,6 +2,7 @@
   pkgs,
   config,
   colors,
+  inputs,
   ...
 }:
 # graphical session configuration
@@ -10,7 +11,6 @@
   imports = [
     ../shell/nix.nix
     ./cinny.nix
-    ./discord
     ./files
     ./media.nix
     ./spicetify.nix
@@ -18,8 +18,6 @@
   ];
 
   home.sessionVariables = {
-    # make java apps work in tiling WMs
-    _JAVA_AWT_WM_NONREPARENTING = "1";
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
   };
@@ -34,11 +32,13 @@
     # messaging
     tdesktop
     teams
+    inputs.webcord.packages.${pkgs.system}.default
     # torrents
     transmission-remote-gtk
     # misc
     libnotify
     timewarrior
+    taskwarrior
     xournalpp
   ];
 
@@ -49,8 +49,6 @@
     gtk.enable = true;
     x11.enable = true;
   };
-  # ensures consistent behaviour
-  home.sessionVariables.XCURSOR_SIZE = builtins.toString config.home.pointerCursor.size;
 
   gtk = {
     enable = true;
@@ -87,7 +85,10 @@
     git = {
       enable = true;
       delta.enable = true;
-      delta.options.colorMoved = "default";
+      extraConfig = {
+        diff.colorMoved = "default";
+        merge.conflictstyle = "diff3";
+      };
       aliases = {
         forgor = "commit --amend --no-edit";
         graph = "log --all --decorate --graph --oneline";
@@ -110,7 +111,7 @@
     password-store = {
       enable = true;
       package = pkgs.pass.withExtensions (exts: [exts.pass-otp]);
-      settings = {PASSWORD_STORE_DIR = "$HOME/.local/share/password-store";};
+      settings.PASSWORD_STORE_DIR = "${config.xdg.dataHome}/password-store";
     };
 
     skim = {

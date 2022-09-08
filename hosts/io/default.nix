@@ -7,6 +7,12 @@
 } @ args: {
   imports = [./hardware-configuration.nix];
 
+  age.secrets.spotify = {
+    file = "${inputs.self}/secrets/spotify.age";
+    owner = "mihai";
+    group = "mihai";
+  };
+
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 

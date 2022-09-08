@@ -24,19 +24,14 @@
       expireDuplicatesFirst = true;
       path = "${config.xdg.dataHome}/zsh_history";
     };
+
     initExtra = ''
-      # autoloads
-      autoload -U history-search-end
-
       # search history based on what's typed in the prompt
-
-      # group functions
+      autoload -U history-search-end
       zle -N history-beginning-search-backward-end history-search-end
       zle -N history-beginning-search-forward-end history-search-end
-
-      # bind functions to up and down arrow keys
-      bindkey "^[[A" history-beginning-search-backward-end
-      bindkey "^[[B" history-beginning-search-forward-end
+      bindkey "^[OA" history-beginning-search-backward-end
+      bindkey "^[OB" history-beginning-search-forward-end
 
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
@@ -60,21 +55,20 @@
       prompt pure
 
       ${lib.optionalString config.services.gpg-agent.enable ''
-        gnupg_path=$(ls /run/user/1000/gnupg)
-        export SSH_AUTH_SOCK="/run/user/1000/gnupg/$gnupg_path/S.gpg-agent.ssh"
+        gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
+        export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
       ''}
-
-      ${builtins.readFile ./nix-completions.sh}
 
       ${lib.optionalString config.programs.kitty.enable ''
         if test -n "$KITTY_INSTALLATION_DIR"; then
-            export KITTY_SHELL_INTEGRATION="enabled"
-            autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-            kitty-integration
-            unfunction kitty-integration
+          export KITTY_SHELL_INTEGRATION="enabled"
+          autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+          kitty-integration
+          unfunction kitty-integration
         fi
       ''}
     '';
+
     shellAliases = {
       grep = "grep --color";
       ip = "ip --color";

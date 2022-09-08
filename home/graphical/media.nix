@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  config,
-  ...
-}:
+{pkgs, ...}:
 # media - control and enjoy audio/video
 {
   imports = [
@@ -20,15 +15,6 @@
 
     spotify-tui
   ];
-
-  homeage = {
-    isRage = true;
-    identityPaths = ["~/.ssh/id_ed25519"];
-    file.spotify = {
-      source = "${inputs.self}/secrets/spotify.age";
-      path = "spotify";
-    };
-  };
 
   programs = {
     mpv = {
@@ -49,8 +35,8 @@
       settings = {
         device_type = "computer";
         use_mpris = true;
-        username-cmd = "head -1 ${config.homeage.mount}/${config.homeage.file.spotify.path}";
-        password-cmd = "tail -1 ${config.homeage.mount}/${config.homeage.file.spotify.path}";
+        username_cmd = "head -1 $XDG_RUNTIME_DIR/secrets/spotify";
+        password_cmd = "tail -1 $XDG_RUNTIME_DIR/secrets/spotify";
       };
     };
   };
