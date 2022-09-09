@@ -84,7 +84,10 @@
 
     git = {
       enable = true;
-      delta.enable = true;
+      delta = {
+        enable = true;
+        options.map-styles = "bold purple => syntax #8839ef, bold cyan => syntax #1e66f5";
+      };
       extraConfig = {
         diff.colorMoved = "default";
         merge.conflictstyle = "diff3";

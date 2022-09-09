@@ -22,9 +22,9 @@
 
   config = ''
     # should be configured per-profile
-    monitor=eDP-1,preferred,auto,1.6
     monitor=DP-1,preferred,auto,1
     monitor=DP-2,preferred,auto,1
+    monitor=eDP-1,preferred,auto,1.6
     workspace=eDP-1,1
     workspace=DP-1,10
     workspace=DP-2,10
