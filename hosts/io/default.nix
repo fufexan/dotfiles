@@ -10,7 +10,7 @@
   age.secrets.spotify = {
     file = "${inputs.self}/secrets/spotify.age";
     owner = "mihai";
-    group = "mihai";
+    group = "users";
   };
 
   boot = {
@@ -83,7 +83,13 @@
     xpadneo.enable = true;
   };
 
-  networking.hostName = "io";
+  networking = {
+    hostName = "io";
+    firewall = {
+      allowedTCPPorts = [42355];
+      allowedUDPPorts = [5353];
+    };
+  };
 
   programs = {
     adb.enable = true;
