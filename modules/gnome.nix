@@ -35,6 +35,7 @@
   };
 
   services.gnome.games.enable = true;
+  services.power-profiles-daemon.enable = lib.mkForce false;
   services.xserver = {
     desktopManager.gnome = {
       enable = true;
