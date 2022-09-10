@@ -1,33 +1,38 @@
-// Catppuccin theme
 $rosewater:   #f5e0dc;
 $flamingo:    #f2cdcd;
-$mauve:       #ddb6f2;
 $pink:        #f5c2e7;
-$maroon:      #e8a2af;
-$red:         #f28fad;
-$peach:       #f8bd96;
-$yellow:      #fae3b0;
-$green:       #abe9b3;
-$teal:        #b5e8e0;
-$blue:        #96cdfb;
+$mauve:       #cba6f7;
+$red:         #f38ba8;
+$maroon:      #eba0ac;
+$peach:       #fab387;
+$yellow:      #f9e2af;
+$green:       #a6e3a1;
+$teal:        #94e2d5;
 $sky:         #89dceb;
-$lavender:    #c9cbff;
+$sapphire:    #74c7ec;
+$blue:        #89b4fa;
+$lavender:    #b4befe;
 
+$text:        #cdd6f4;
+$subtext1:    #bac2de;
+$subtext0:    #a6adc8;
+$overlay2:    #9399b2;
+$overlay1:    #7f849c;
+$overlay0:    #6c7086;
+
+$surface2:    #585b70;
+$surface1:    #45475a;
+$surface0:    #313244;
+
+$base:        #1e1e2e;
+$mantle:      #181825;
 $crust:       #11111b;
-$black0:      #161320;
-$black1:      #1a1826;
-$black2:      #1e1e2e;
-$black3:      #302d41;
-$black4:      #575268;
-$gray0:       #6e6c7e;
-$gray1:       #988ba2;
-$gray2:       #c3bac6;
-$white:       #d9e0ee;
 
-$fg: $white;
-$bg: $crust;
-$bg1: $black1;
-$shadow: $black4;
+$fg: $text;
+$bg: $base;
+$bg1: $surface0;
+$border: #28283d;
+$shadow: $surface1;
 
 * {
   all: unset;
@@ -61,12 +66,12 @@ tooltip label { margin: 5px; }
 }
 
 .clock-minute-class {
-  color: $white;
+  color: $text;
   margin-right: 5px;
 }
 
 .clock-time-class {
-  color: $white;
+  color: $text;
   font-weight: bold;
 }
 
@@ -104,7 +109,7 @@ tooltip label { margin: 5px; }
 }
 
 .module-bt { font-size: 1.2rem; }
-.separ { color: $black4; }
+.separ { color: $surface0; }
 
 scale trough {
   background-color: $bg1;
@@ -141,7 +146,7 @@ calendar:selected {
 }
 
 calendar.header {
-  color: $gray2;
+  color: $subtext1;
 }
 
 calendar.highlight {
@@ -150,7 +155,7 @@ calendar.highlight {
 }
 
 .sys-text-sub {
-  color: $white;
+  color: $text;
   font-size: 1.2rem;
   margin-left: 2rem;
 }
@@ -200,13 +205,13 @@ calendar.highlight {
 }
 
 .music-artist {
-  color: $gray2;
+  color: $subtext1;
   font-size: 1.1rem;
 }
 
 .music-button { color: $fg; }
 .music-time {
-  color: $gray2;
+  color: $subtext1;
   font-size: 1rem;
   margin: 0 10px;
 }

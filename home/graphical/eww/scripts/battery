@@ -34,7 +34,7 @@ gettime() {
 
 	if [ "$RATE" -gt 0 ]; then
 		if [ "$STATE" = "Discharging" ]; then
-			EX="$FULL / $RATE"
+			EX="$NOW / $RATE"
 		else
 			EX="($FULL - $NOW) / $RATE"
 		fi
