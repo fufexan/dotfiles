@@ -1,20 +1,20 @@
 (defwidget volume_window []
   (box
-    :class "volume_window"
+    :class "volume-window"
     :orientation "v"
     (box
       :halign "v"
       :space-evenly "false"
       (box
-        :class "volume_icon speaker_icon"
+        :class "volume-icon speaker-icon"
         :orientation "v")
       (box
         :orientation "v"
         (label
-          :class "volume_text"
+          :class "volume-text"
           :text "speaker")
         (box
-          :class "volume_bar"
+          :class "volume-bar"
           (scale
             :value {volume.percent}
             :onchange "volume setvol SINK {}"
@@ -23,15 +23,15 @@
       :halign "v"
       :space-evenly "false"
       (box
-        :class "volume_icon mic_icon"
+        :class "volume_icon mic-icon"
         :orientation "v")
         (box
           :orientation "v"
           (label
-            :class "volume_text"
+            :class "volume-text"
             :text "mic")
           (box
-            :class "volume_bar"
+            :class "volume-bar"
             (scale
               :value {volume.microphone}
               :tooltip "mic on ${volume.microphone}%"

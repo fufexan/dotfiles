@@ -1,41 +1,41 @@
 (defwidget music_window []
   (box
-    :class "music_window"
+    :class "music-window"
     (box
-      :class "music_cover_art"
+      :class "music-cover-art"
       :style "background-image: url(\"${cover_art}\");")
     (box
       :orientation "v"
-      :class "music_box"
+      :class "music-box"
       (label
-        :class "music_title"
+        :class "music-title"
         :limit-width 18
         :text song_title)
       (label
-        :class "music_artist"
+        :class "music-artist"
         :wrap "true"
         :limit-width 30
         :text song_artist)
       (centerbox
         :halign "center"
-        :class "music_button_box"
-        (button :class "music_button" :onclick "playerctl previous" "")
-        (button :class "music_button" :onclick "playerctl play-pause" song_status)
-        (button :class "music_button" :onclick "playerctl next" ""))
+        :class "music-button-box"
+        (button :class "music-button" :onclick "playerctl previous" "")
+        (button :class "music-button" :onclick "playerctl play-pause" song_status)
+        (button :class "music-button" :onclick "playerctl next" ""))
       (box
         :orientation "v"
         (centerbox
           (label
             :xalign 0
-            :class "music_time"
+            :class "music-time"
             :text song_pos)
           (label)
           (label
             :xalign 1
-            :class "music_time"
+            :class "music-time"
             :text song_length))
         (box
-          :class "music_bar"
+          :class "music-bar"
           (scale
             :onchange "playerctl position `bc <<< \"{} * $(playerctl metadata mpris:length) / 1000000 / 100\"`"
             :value song_pos_perc))))))

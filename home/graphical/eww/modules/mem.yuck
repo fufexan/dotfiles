@@ -6,4 +6,4 @@
     (button
       :tooltip "using ${round(memory.percentage,0)}% ram"
       :onclick "./scripts/pop system"
-      (label :class "icon_text" :text ""))))
+      (label :class "icon-text" :text ""))))

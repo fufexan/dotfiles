@@ -6,10 +6,10 @@
       :class "module"
       :space-evenly "false"
       (box
-        :class "song_cover_art"
+        :class "song-cover-art"
         :style "background-image: url(\"${cover_art}\");")
       (button
-        :class "song_module"
+        :class "song-module"
         :onclick "./scripts/pop music"
         song_title)
       (revealer
@@ -17,6 +17,6 @@
         :reveal music_reveal
         :duration "350ms"
         (box
-          (button :class "song_button" :onclick "playerctl previous" "")
-          (button :class "song_button" :onclick "playerctl play-pause" song_status)
-          (button :class "song_button" :onclick "playerctl next" ""))))))
+          (button :class "song-button" :onclick "playerctl previous" "")
+          (button :class "song-button" :onclick "playerctl play-pause" song_status)
+          (button :class "song-button" :onclick "playerctl next" ""))))))

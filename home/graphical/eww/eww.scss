@@ -50,22 +50,22 @@ tooltip.background {
 
 tooltip label { margin: 5px; }
 
-.clock_time_sep {
+.clock-time-sep {
   color: $fg;
   font-weight: bold;
 }
 
-.clock_date_class {
+.clock-date-class {
   color: $flamingo;
   margin-right: 10px;
 }
 
-.clock_minute_class {
+.clock-minute-class {
   color: $white;
   margin-right: 5px;
 }
 
-.clock_time_class {
+.clock-time-class {
   color: $white;
   font-weight: bold;
 }
@@ -81,29 +81,29 @@ tooltip label { margin: 5px; }
 .iconmem { color: $peach; }
 .iconbat { color: $green; }
 .iconcpu { color: $blue; }
-.icon_text {
+.icon-text {
   font-size: 3rem;
   padding: .7rem;
 }
 
-.bright_icon { color: $yellow; }
+.bright-icon { color: $yellow; }
 .brightbar trough highlight {
   background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
   border-radius: 10px;
 }
 
-.vol_icon { color: $teal; }
+.vol-icon { color: $teal; }
 .volbar trough highlight {
   background-image: linear-gradient(to right, $teal 30%, $sky 100%);
   border-radius: 10px;
 }
 
-.module_ssid, .module_net {
+.module-ssid, .module-net {
   color: $lavender;
   font-size: 1.2rem;
 }
 
-.module_bt { font-size: 1.2rem; }
+.module-bt { font-size: 1.2rem; }
 .separ { color: $black4; }
 
 scale trough {
@@ -114,7 +114,7 @@ scale trough {
   min-width: 70px;
 }
 
-.song_cover_art {
+.song-cover-art {
   background-position: center;
   background-size: cover;
   border-radius: 16px;
@@ -123,7 +123,7 @@ scale trough {
   min-width: 24px;
 }
 
-.song_module {
+.song-module {
   color: $fg;
   margin: 0 5px;
 }
@@ -149,39 +149,39 @@ calendar.highlight {
   font-weight: bold;
 }
 
-.sys_text_sub {
+.sys-text-sub {
   color: $white;
   font-size: 1.2rem;
   margin-left: 2rem;
 }
 
-.sys_text_mem, .sys_text_cpu, .sys_text_bat {
+.sys-text-mem, .sys-text-cpu, .sys-text-bat {
   font-weight: bold;
   margin-left: 2rem;
 }
 
-.sys_icon_mem, .sys_icon_cpu, .sys_icon_bat {
+.sys-icon-mem, .sys-icon-cpu, .sys-icon-bat {
   font-size: 30px;
   margin: 25px;
 }
 
-.sys_win {
+.sys-win {
   background-color: $bg;
   border-radius: 16px 0 0 16px;
 }
 
-.sys_mem, .sys_cpu, .sys_bat { background-color: $bg1; }
-.sys_icon_mem, .sys_text_mem, .sys_mem { color: $peach; }
-.sys_icon_cpu, .sys_text_cpu, .sys_cpu { color: $blue; }
-.sys_icon_bat, .sys_text_bat, .sys_bat { color: $green; }
-.sys_box { margin: 1em; }
+.sys-mem, .sys-cpu, .sys-bat { background-color: $bg1; }
+.sys-icon-mem, .sys-text-mem, .sys-mem { color: $peach; }
+.sys-icon-cpu, .sys-text-cpu, .sys-cpu { color: $blue; }
+.sys-icon-bat, .sys-text-bat, .sys-bat { color: $green; }
+.sys-box { margin: 1em; }
 
-.music_window {
+.music-window {
   background-color: $bg;
   border-radius: 16px;
 }
 
-.music_cover_art {
+.music-cover-art {
   background-position: center;
   background-size: cover;
   border-radius: 8px;
@@ -190,33 +190,33 @@ calendar.highlight {
   min-width: 170px;
 }
 
-.music_box {
+.music-box {
   margin: 1rem 1rem 1rem 0;
 }
 
-.music_title {
+.music-title {
   color: $fg;
   font-weight: bold;
 }
 
-.music_artist {
+.music-artist {
   color: $gray2;
   font-size: 1.1rem;
 }
 
-.music_button { color: $fg; }
-.music_time {
+.music-button { color: $fg; }
+.music-time {
   color: $gray2;
   font-size: 1rem;
   margin: 0 10px;
 }
 
-.music_bar scale trough highlight {
+.music-bar scale trough highlight {
   background-image: linear-gradient(to right, $teal 30%, $sky 100%);
   border-radius: 24px;
 }
 
-.music_bar scale trough {
+.music-bar scale trough {
   background-color: $bg1;
   border-radius: 24px;
   margin-top: 0;
@@ -224,22 +224,22 @@ calendar.highlight {
   min-width: 170px;
 }
 
-.volume_window {
+.volume-window {
   background-color: $bg;
   border-radius: 16px 0 0 16px;
   padding-right: 1rem;
 }
 
-.volume_text {
+.volume-text {
   color: $teal;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.mic_icon { background-image: url('images/mic.png'); }
-.speaker_icon { background-image: url('images/speaker.png'); }
+.mic-icon { background-image: url('images/mic.png'); }
+.speaker-icon { background-image: url('images/speaker.png'); }
 
-.volume_icon {
+.volume-icon {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50px 50px;
@@ -248,7 +248,7 @@ calendar.highlight {
   min-width: 50px;
 }
 
-.volume_bar scale trough {
+.volume-bar scale trough {
   background-color: $bg1;
   border-radius: 24px;
   min-height: 13px;

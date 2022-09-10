@@ -1,86 +1,86 @@
 (defwidget system []
   (box
-    :class "sys_win"
+    :class "sys-win"
     :orientation "v"
 
     ; cpu
     (box
-      :class "sys_box"
+      :class "sys-box"
       :space-evenly "false"
       :halign "start"
       (circular-progress
         :value "${EWW_CPU.avg}"
-        :class "sys_cpu"
+        :class "sys-cpu"
         :thickness "3"
         (label
           :text ""
-          :class "sys_icon_cpu"))
+          :class "sys-icon-cpu"))
       (box
         :orientation "v"
         :vexpand "false"
         (label
           :text "cpu"
           :halign "start"
-          :class "sys_text_cpu")
+          :class "sys-text-cpu")
         (label
           :text "${round(EWW_CPU.avg,2)}%"
           :halign "start"
-          :class "sys_text_sub")
+          :class "sys-text-sub")
         (label
           :text "${EWW_CPU.cores[0].freq} MHz"
           :halign "start"
-          :class "sys_text_sub")))
+          :class "sys-text-sub")))
 
     ; memory
     (box
-      :class "sys_box"
+      :class "sys-box"
       :space-evenly "false"
       :halign "start"
       (circular-progress
         :value {memory.percentage}
-        :class "sys_mem"
+        :class "sys-mem"
         :thickness "3"
         (label
           :text ""
-          :class "sys_icon_mem"))
+          :class "sys-icon-mem"))
       (box
         :orientation "v"
         (label
           :text "memory"
           :halign "start"
-          :class "sys_text_mem" )
+          :class "sys-text-mem" )
         (label
           :text "${memory.used} | ${memory.total}"
           :halign "start"
-          :class "sys_text_sub" )))
+          :class "sys-text-sub" )))
 
     ; battery
     (box
-      :class "sys_box"
+      :class "sys-box"
       :space-evenly "false"
       (circular-progress
         :value "${EWW_BATTERY["BAT0"].capacity}"
-        :class "sys_bat"
+        :class "sys-bat"
         :style "color: ${battery.color};"
         :thickness 3
         (label
           :text ""
           :style "color: ${battery.color};"
-          :class "sys_icon_bat" ))
+          :class "sys-icon-bat" ))
       (box
         :orientation "v"
         (label
           :text "battery"
           :halign "start"
-          :class "sys_text_bat" )
+          :class "sys-text-bat" )
         (label
           :text "${EWW_BATTERY["BAT0"].capacity}% | ${battery.wattage}"
           :halign "start"
-          :class "sys_text_sub" )
+          :class "sys-text-sub" )
         (label
           :text "${battery.status}"
           :halign "start"
-          :class "sys_text_sub" )))))
+          :class "sys-text-sub" )))))
 
 (defwindow system_win
   :monitor 0

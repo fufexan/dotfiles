@@ -8,18 +8,18 @@
       :class "module"
       (label
         :text {time.hour}
-        :class "clock_time_class")
+        :class "clock-time-class")
       (label
         :text ":"
-        :class "clock_time_sep")
+        :class "clock-time-sep")
       (label
         :text {time.minute}
-        :class "clock_minute_class")
+        :class "clock-minute-class")
       (revealer
         :transition "slideleft"
         :reveal time_rev
         :duration "350ms"
         (button
-          :class "clock_date_class module"
+          :class "clock-date-class module"
           :onclick "./scripts/pop calendar"
           {time.date})))))

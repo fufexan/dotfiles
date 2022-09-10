@@ -6,4 +6,4 @@
     (button
       :tooltip "using ${round(EWW_CPU.avg,0)}% cpu"
       :onclick "./scripts/pop system"
-      (label :class "icon_text" :text ""))))
+      (label :class "icon-text" :text ""))))

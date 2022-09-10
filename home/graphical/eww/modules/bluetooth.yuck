@@ -9,11 +9,11 @@
         :reveal bt_rev
         :duration "350ms"
         (label
-          :class "module_bt module"
+          :class "module-bt module"
           :style "color: ${bluetooth.color};"
           :text {bluetooth.text}))
       (button
-        :class "module_bt module"
+        :class "module-bt module"
         :onclick "blueman"
         :style "color: ${bluetooth.color};"
         {bluetooth.icon}))))

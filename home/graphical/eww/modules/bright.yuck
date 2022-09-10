@@ -17,5 +17,5 @@
           :onchange "light -S {}"))
       (label
         :text {brightness.icon}
-        :class "bright_icon"
+        :class "bright-icon"
         :tooltip "brightness ${brightness.level}%"))))

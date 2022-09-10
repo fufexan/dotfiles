@@ -9,11 +9,11 @@
         :reveal net_rev
         :duration "350ms"
         (label
-          :class "module_ssid module"
+          :class "module-ssid module"
           :style "color: ${net.color};"
           :text {net.essid}))
       (button
-        :class "module_net module"
+        :class "module-net module"
         :onclick "networkmanager_dmenu"
         :style "color: ${net.color};"
         {net.icon}))))

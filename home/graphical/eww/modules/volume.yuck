@@ -19,5 +19,5 @@
           :onchange "./scripts/volume setvol SINK {}"))
       (button
         :onclick "./scripts/pop volume"
-        :class "vol_icon"
+        :class "vol-icon"
         {volume.icon}))))

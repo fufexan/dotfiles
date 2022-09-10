@@ -7,4 +7,4 @@
     (button
       :tooltip "battery on ${EWW_BATTERY["BAT0"].capacity}%"
       :onclick "./scripts/pop system"
-      (label :class "icon_text" :text ""))))
+      (label :class "icon-text" :text ""))))
