@@ -7,16 +7,20 @@
   padding: .2em;
 }
 
-calendar:selected {
-  color: $mauve;
-  font-weight: bold;
-}
+calendar {
+  padding: 5px;
 
-calendar.header {
-  color: $subtext1;
-}
+  :selected {
+    color: $mauve;
+    font-weight: bold;
+  }
 
-calendar.highlight {
-  color: $maroon;
-  font-weight: bold;
+  .header {
+    color: $subtext1;
+  }
+
+  .highlight {
+    color: $maroon;
+    font-weight: bold;
+  }
 }

@@ -5,10 +5,10 @@
 }
 
 .volume-window {
+  @include wshadow;
   background-color: $bg;
   border: 1px solid $border;
   border-radius: 16px;
-  @include wshadow;
   padding-right: 1rem;
 }
 
@@ -30,7 +30,7 @@
   min-width: 50px;
 }
 
-.volume-bar scale trough {
+.volume-bar {
   background-color: $bg1;
   border-radius: 24px;
   min-height: 13px;

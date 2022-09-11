@@ -9,7 +9,7 @@
         :class "song-cover-art"
         :style "background-image: url(\"${cover_art}\");")
       (button
-        :class "song-module"
+        :class "module"
         :onclick "./scripts/pop music"
         song_title)
       (revealer

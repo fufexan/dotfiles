@@ -7,16 +7,12 @@
   min-width: 24px;
 }
 
-.song-module {
-  color: $fg;
-  margin: 0 5px;
-}
-
 .music-window {
+  @include wshadow;
   background-color: $bg;
   border: 1px solid $border;
   border-radius: 16px;
-  @include wshadow;
+  color: $fg;
 }
 
 .music-cover-art {
@@ -33,31 +29,36 @@
 }
 
 .music-title {
-  color: $fg;
   font-weight: bold;
 }
 
 .music-artist {
   color: $subtext1;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
-.music-button { color: $fg; }
+.music-button label {
+  color: $subtext1;
+  font-size: 2rem;
+}
+
 .music-time {
   color: $subtext1;
   font-size: 1rem;
-  margin: 0 10px;
+  margin: 0 1rem;
 }
 
-.music-bar scale trough highlight {
-  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
-  border-radius: 24px;
-}
+.music-bar scale {
+  highlight {
+    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+    border-radius: 24px;
+  }
 
-.music-bar scale trough {
-  background-color: $bg1;
-  border-radius: 24px;
-  margin-top: 0;
-  min-height: 10px;
-  min-width: 170px;
+  trough {
+    background-color: $bg1;
+    border-radius: 24px;
+    margin-top: 0;
+    min-height: 10px;
+    min-width: 170px;
+  }
 }

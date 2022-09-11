@@ -2,7 +2,7 @@
 
 @mixin wshadow {
   box-shadow: 0 5px 10px $shadow;
-  margin: 15px 20px 25px 20px;
+  margin: 15px 20px 25px;
 }
 
 @import 'css/calendar';
@@ -19,17 +19,18 @@
 .bar {
   background-color: $bg;
   border-radius: 16px;
+  color: $fg;
 }
 
 .module { margin: 0 5px; }
-tooltip.background {
+tooltip {
   background-color: $bg;
   border: 1px solid $border;
   border-radius: 10px;
   color: $fg;
-}
 
-tooltip label { margin: 5px; }
+  label { margin: 5px; }
+}
 
 .clock-time-sep {
   color: $fg;
@@ -57,7 +58,8 @@ tooltip label { margin: 5px; }
   border-radius: 10px;
 }
 
-.module-ssid, .module-net {
+.module-ssid,
+.module-net {
   color: $lavender;
   font-size: 1.2rem;
 }
