@@ -3,39 +3,37 @@
     :class "volume-window"
     :orientation "v"
     (box
-      :halign "v"
       :space-evenly "false"
-      (box
-        :class "volume-icon speaker-icon"
-        :orientation "v")
+      (label
+        :class "volume-icon"
+        :text "")
       (box
         :orientation "v"
+        :class "volume-info"
         (label
           :class "volume-text"
           :text "speaker")
-        (box
+        (scale
           :class "volume-bar"
-          (scale
-            :value {volume.percent}
-            :onchange "volume setvol SINK {}"
-            :tooltip "volume on ${volume.percent}%"))))
+          :value {volume.percent}
+          :tooltip "volume on ${volume.percent}%"
+          :onchange "scripts/volume setvol SINK {}")))
     (box
-      :halign "v"
       :space-evenly "false"
+      (label
+        :class "volume-icon"
+        :text "")
       (box
-        :class "volume_icon mic-icon"
-        :orientation "v")
-        (box
-          :orientation "v"
-          (label
-            :class "volume-text"
-            :text "mic")
-          (box
-            :class "volume-bar"
-            (scale
-              :value {volume.microphone}
-              :tooltip "mic on ${volume.microphone}%"
-              :onchange "volume setvol SOURCE {}"))))))
+        :orientation "v"
+        :class "volume-info"
+        (label
+          :class "volume-text"
+          :text "mic")
+        (scale
+          :class "volume-bar"
+          :value {volume.microphone}
+          :tooltip "mic on ${volume.microphone}%"
+          :onchange "scripts/volume setvol SOURCE {}")))))
 
 (defwindow volume_win
   :monitor 0
