@@ -31,15 +31,15 @@ in {
   };
 
   services.swayidle = {
-    enable = true;
+    enable = false;
     events = [
       {
         event = "before-sleep";
-        command = "swaylock";
+        command = "gtklock";
       }
       {
         event = "lock";
-        command = "swaylock";
+        command = "gtklock";
       }
     ];
     timeouts = [

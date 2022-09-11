@@ -17,6 +17,7 @@ let
 in {
   imports = [
     ../graphical/eww
+    ./gtklock.nix
     ./hyprland
     ./sway.nix
   ];
@@ -29,6 +30,7 @@ in {
     # idle/lock
     swaybg
     swaylock-effects
+    inputs.self.packages.${pkgs.system}.gtklock
 
     # utils
     ocrScript

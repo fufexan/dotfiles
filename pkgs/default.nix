@@ -24,6 +24,8 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
+  gtklock = prev.callPackage ./gtklock {};
+
   technic-launcher = prev.callPackage ./technic.nix {};
 
   tlauncher = prev.callPackage ./tlauncher.nix {};

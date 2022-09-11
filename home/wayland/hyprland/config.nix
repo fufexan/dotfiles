@@ -31,13 +31,7 @@
 
     exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
     exec-once=swaybg -i ~/.config/wallpaper.png
-    exec-once=swayidle \
-      timeout 300 "hyprctl dispatch dpms off" \
-      resume "hyprctl dispatch dpms on" \
-      timeout 310 "loginctl lock-session" \
-      timeout 600 "systemctl suspend" \
-      before-sleep swaylock \
-      lock swaylock
+    exec-once=swayidle timeout 300 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpms on" timeout 310 "loginctl lock-session" timeout 600 "systemctl suspend" before-sleep gtklock lock gtklock
     exec-once=eww daemon
     exec-once=eww open bar
 
@@ -124,7 +118,7 @@
     bind=SUPER,Return,exec,${run-as-service "manual"} ${term}
     bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
     bind=SUPER,Escape,exec,wlogout -p layer-shell
-    bind=SUPER,L,exec,swaylock
+    bind=SUPER,L,exec,gtklock
     bind=SUPER,E,exec,${emoji}
     bind=SUPER,O,exec,wl-ocr
     # move focus
