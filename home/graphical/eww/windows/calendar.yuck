@@ -1,9 +1,13 @@
+(defwidget calendar-win []
+  (box
+    :class "calendar-window"
+    (calendar)))
 (defwindow calendar_win
   :monitor 0
   :geometry (geometry
     :x "0%"
-    :y "1%"
+    :y "0%"
   	:anchor "top right"
     :width "0px"
     :height "0px")
-  (calendar))
+  (calendar-win))

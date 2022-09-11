@@ -34,6 +34,11 @@ $bg1: $surface0;
 $border: #28283d;
 $shadow: $surface1;
 
+@mixin wshadow {
+  box-shadow: 0 5px 10px $shadow;
+  margin: 15px 20px 25px 20px;
+}
+
 * {
   all: unset;
   font-family: Roboto;
@@ -49,6 +54,7 @@ $shadow: $surface1;
 .module { margin: 0 5px; }
 tooltip.background {
   background-color: $bg;
+  border: 1px solid $border;
   border-radius: 10px;
   color: $fg;
 }
@@ -133,9 +139,11 @@ scale trough {
   margin: 0 5px;
 }
 
-calendar {
+.calendar-window {
+  @include wshadow;
   background-color: $bg;
-  border-radius: 16px 0 0 16px;
+  border: 1px solid $border;
+  border-radius: 16px;
   color: $fg;
   padding: .2em;
 }
@@ -172,7 +180,9 @@ calendar.highlight {
 
 .sys-win {
   background-color: $bg;
-  border-radius: 16px 0 0 16px;
+  border: 1px solid $border;
+  border-radius: 16px;
+  @include wshadow;
 }
 
 .sys-mem, .sys-cpu, .sys-bat { background-color: $bg1; }
@@ -183,7 +193,9 @@ calendar.highlight {
 
 .music-window {
   background-color: $bg;
+  border: 1px solid $border;
   border-radius: 16px;
+  @include wshadow;
 }
 
 .music-cover-art {
@@ -231,7 +243,9 @@ calendar.highlight {
 
 .volume-window {
   background-color: $bg;
-  border-radius: 16px 0 0 16px;
+  border: 1px solid $border;
+  border-radius: 16px;
+  @include wshadow;
   padding-right: 1rem;
 }
 
