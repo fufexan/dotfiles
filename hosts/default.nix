@@ -30,6 +30,7 @@ in {
         ./io
         ../modules/desktop.nix
         ../modules/gamemode.nix
+        ../modules/greetd.nix
         {home-manager.users.mihai.imports = homeImports."mihai@io";}
       ]
       ++ sharedModules
