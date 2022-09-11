@@ -1,0 +1,91 @@
+.membar {
+  color: $peach;
+}
+
+.cpubar {
+  color: $blue;
+}
+
+.batbar {
+  color: $green;
+}
+
+.membar,
+.cpubar,
+.batbar {
+  background-color: $bg1;
+}
+
+.iconmem {
+  color: $peach;
+}
+
+.iconbat {
+  color: $green;
+}
+
+.iconcpu {
+  color: $blue;
+}
+
+.icon-text {
+  font-size: 3rem;
+  padding: .7rem;
+}
+
+.sys-text-sub {
+  color: $text;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+}
+
+.sys-text-mem,
+.sys-text-cpu,
+.sys-text-bat {
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.sys-icon-mem,
+.sys-icon-cpu,
+.sys-icon-bat {
+  font-size: 30px;
+  margin: 25px;
+}
+
+.sys-win {
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: 16px;
+  @include wshadow;
+}
+
+.sys-mem,
+.sys-cpu,
+.sys-bat {
+  background-color: $bg1;
+}
+
+.sys-icon-mem,
+.sys-text-mem,
+.sys-mem {
+  color: $peach;
+}
+
+.sys-icon-cpu,
+.sys-text-cpu,
+.sys-cpu {
+  color: $blue;
+}
+
+.sys-icon-bat,
+.sys-text-bat,
+.sys-bat {
+  color: $green;
+}
+
+.sys-box {
+  margin: 1em;
+}
+
+

@@ -1,0 +1,42 @@
+.vol-icon { color: $teal; }
+.volbar trough highlight {
+  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+  border-radius: 10px;
+}
+
+.volume-window {
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: 16px;
+  @include wshadow;
+  padding-right: 1rem;
+}
+
+.volume-text {
+  color: $teal;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.mic-icon { background-image: url('images/mic.png'); }
+.speaker-icon { background-image: url('images/speaker.png'); }
+
+.volume-icon {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  margin: 1rem;
+  min-height: 50px;
+  min-width: 50px;
+}
+
+.volume-bar scale trough {
+  background-color: $bg1;
+  border-radius: 24px;
+  min-height: 13px;
+  min-width: 120px;
+
+  highlight {
+    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+  }
+}

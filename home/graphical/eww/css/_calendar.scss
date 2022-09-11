@@ -1,0 +1,22 @@
+.calendar-window {
+  @include wshadow;
+  background-color: $bg;
+  border: 1px solid $border;
+  border-radius: 16px;
+  color: $fg;
+  padding: .2em;
+}
+
+calendar:selected {
+  color: $mauve;
+  font-weight: bold;
+}
+
+calendar.header {
+  color: $subtext1;
+}
+
+calendar.highlight {
+  color: $maroon;
+  font-weight: bold;
+}

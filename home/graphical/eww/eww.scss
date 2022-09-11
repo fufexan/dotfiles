@@ -1,43 +1,14 @@
-$rosewater:   #f5e0dc;
-$flamingo:    #f2cdcd;
-$pink:        #f5c2e7;
-$mauve:       #cba6f7;
-$red:         #f38ba8;
-$maroon:      #eba0ac;
-$peach:       #fab387;
-$yellow:      #f9e2af;
-$green:       #a6e3a1;
-$teal:        #94e2d5;
-$sky:         #89dceb;
-$sapphire:    #74c7ec;
-$blue:        #89b4fa;
-$lavender:    #b4befe;
-
-$text:        #cdd6f4;
-$subtext1:    #bac2de;
-$subtext0:    #a6adc8;
-$overlay2:    #9399b2;
-$overlay1:    #7f849c;
-$overlay0:    #6c7086;
-
-$surface2:    #585b70;
-$surface1:    #45475a;
-$surface0:    #313244;
-
-$base:        #1e1e2e;
-$mantle:      #181825;
-$crust:       #11111b;
-
-$fg: $text;
-$bg: $base;
-$bg1: $surface0;
-$border: #28283d;
-$shadow: $surface1;
+@import 'css/colors';
 
 @mixin wshadow {
   box-shadow: 0 5px 10px $shadow;
   margin: 15px 20px 25px 20px;
 }
+
+@import 'css/calendar';
+@import 'css/music';
+@import 'css/system';
+@import 'css/volume';
 
 * {
   all: unset;
@@ -45,7 +16,6 @@ $shadow: $surface1;
   font-size: 1.3rem;
 }
 
-// General
 .bar {
   background-color: $bg;
   border-radius: 16px;
@@ -81,31 +51,9 @@ tooltip label { margin: 5px; }
   font-weight: bold;
 }
 
-// system
-.membar { color: $peach; }
-.cpubar { color: $blue; }
-.batbar { color: $green; }
-.membar, .cpubar, .batbar {
-  background-color: $bg1;
-}
-
-.iconmem { color: $peach; }
-.iconbat { color: $green; }
-.iconcpu { color: $blue; }
-.icon-text {
-  font-size: 3rem;
-  padding: .7rem;
-}
-
 .bright-icon { color: $yellow; }
 .brightbar trough highlight {
   background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
-  border-radius: 10px;
-}
-
-.vol-icon { color: $teal; }
-.volbar trough highlight {
-  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
   border-radius: 10px;
 }
 
@@ -123,159 +71,6 @@ scale trough {
   margin: 0 1rem;
   min-height: 10px;
   min-width: 70px;
-}
-
-.song-cover-art {
-  background-position: center;
-  background-size: cover;
-  border-radius: 16px;
-  margin: 4px 5px 4px 0;
-  min-height: 24px;
-  min-width: 24px;
-}
-
-.song-module {
-  color: $fg;
-  margin: 0 5px;
-}
-
-.calendar-window {
-  @include wshadow;
-  background-color: $bg;
-  border: 1px solid $border;
-  border-radius: 16px;
-  color: $fg;
-  padding: .2em;
-}
-
-calendar:selected {
-  color: $mauve;
-  font-weight: bold;
-}
-
-calendar.header {
-  color: $subtext1;
-}
-
-calendar.highlight {
-  color: $maroon;
-  font-weight: bold;
-}
-
-.sys-text-sub {
-  color: $text;
-  font-size: 1.2rem;
-  margin-left: 2rem;
-}
-
-.sys-text-mem, .sys-text-cpu, .sys-text-bat {
-  font-weight: bold;
-  margin-left: 2rem;
-}
-
-.sys-icon-mem, .sys-icon-cpu, .sys-icon-bat {
-  font-size: 30px;
-  margin: 25px;
-}
-
-.sys-win {
-  background-color: $bg;
-  border: 1px solid $border;
-  border-radius: 16px;
-  @include wshadow;
-}
-
-.sys-mem, .sys-cpu, .sys-bat { background-color: $bg1; }
-.sys-icon-mem, .sys-text-mem, .sys-mem { color: $peach; }
-.sys-icon-cpu, .sys-text-cpu, .sys-cpu { color: $blue; }
-.sys-icon-bat, .sys-text-bat, .sys-bat { color: $green; }
-.sys-box { margin: 1em; }
-
-.music-window {
-  background-color: $bg;
-  border: 1px solid $border;
-  border-radius: 16px;
-  @include wshadow;
-}
-
-.music-cover-art {
-  background-position: center;
-  background-size: cover;
-  border-radius: 8px;
-  margin: 1em;
-  min-height: 170px;
-  min-width: 170px;
-}
-
-.music-box {
-  margin: 1rem 1rem 1rem 0;
-}
-
-.music-title {
-  color: $fg;
-  font-weight: bold;
-}
-
-.music-artist {
-  color: $subtext1;
-  font-size: 1.1rem;
-}
-
-.music-button { color: $fg; }
-.music-time {
-  color: $subtext1;
-  font-size: 1rem;
-  margin: 0 10px;
-}
-
-.music-bar scale trough highlight {
-  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
-  border-radius: 24px;
-}
-
-.music-bar scale trough {
-  background-color: $bg1;
-  border-radius: 24px;
-  margin-top: 0;
-  min-height: 10px;
-  min-width: 170px;
-}
-
-.volume-window {
-  background-color: $bg;
-  border: 1px solid $border;
-  border-radius: 16px;
-  @include wshadow;
-  padding-right: 1rem;
-}
-
-.volume-text {
-  color: $teal;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.mic-icon { background-image: url('images/mic.png'); }
-.speaker-icon { background-image: url('images/speaker.png'); }
-
-.volume-icon {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 50px 50px;
-  margin: 1rem;
-  min-height: 50px;
-  min-width: 50px;
-}
-
-.volume-bar scale trough {
-  background-color: $bg1;
-  border-radius: 24px;
-  min-height: 13px;
-  min-width: 120px;
-
-  highlight {
-    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
-  }
 }
 
 .ws {
