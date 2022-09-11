@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   colors,
   inputs,
   ...
@@ -48,11 +49,11 @@ in {
     obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
 
     swaylock.settings = {
+      image = "${config.xdg.configHome}/wallpaper.png";
       ignore-empty-password = true;
       clock = true;
       effect-blur = "30x3";
       font = "Roboto";
-      screenshot = true;
     };
   };
 
