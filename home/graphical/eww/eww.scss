@@ -12,8 +12,7 @@
 
 * {
   all: unset;
-  font-family: Roboto;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .bar {
@@ -22,34 +21,10 @@
 }
 
 .module { margin: 0 5px; }
-tooltip {
-  background-color: $bg;
-  border: 1px solid $border;
-  border-radius: 10px;
-  color: $fg;
-
-  label { margin: 5px; }
-}
-
-.clock-time-sep {
-  color: $fg;
-  font-weight: bold;
-}
-
-.clock-date-class {
-  color: $flamingo;
-  margin-right: 10px;
-}
-
-.clock-minute-class {
-  color: $text;
-  margin-right: 5px;
-}
-
-.clock-time-class {
-  color: $text;
-  font-weight: bold;
-}
+.clock { font-size: 1.4rem; }
+.hour { font-weight: bold; }
+.date { color: $flamingo; }
+.minute { margin-right: 5px; }
 
 .bright-icon { color: $yellow; }
 .brightbar trough highlight {
@@ -58,16 +33,13 @@ tooltip {
 }
 
 .module-ssid,
-.module-net {
-  color: $lavender;
-  font-size: 1.2rem;
-}
-
+.module-net { color: $lavender; }
 .module-bt { font-size: 1.2rem; }
 
 .separ {
   color: $surface0;
   padding-bottom: 2px;
+  font-size: 1.5rem;
 }
 
 scale trough {
@@ -78,19 +50,13 @@ scale trough {
   min-width: 70px;
 }
 
-.ws {
-  margin-left: 4px;
-
-  label {
-    font-size: 16px;
-    margin-top: 5px;
-  }
-}
+.ws { margin-top: .4rem; }
+.workspaces { margin-left: 10px; }
 
 .launcher label {
   background-color: $blue;
   color: $bg;
   font-family: monospace;
   font-size: 1.5rem;
-  padding: 0 1rem 0 .4rem;
+  padding: 0 1.1rem 0 .5rem;
 }
