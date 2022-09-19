@@ -167,30 +167,6 @@
         "type": "github"
       }
     },
-    "discocss": {
-      "inputs": {
-        "flake-utils": [
-          "fu"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1657375072,
-        "narHash": "sha256-kaRGVoiJJOAAvqlO++1yNexJHCBtCK3ROkAtAAZKt2s=",
-        "owner": "fufexan",
-        "repo": "discocss",
-        "rev": "ca08c085637061366ed41c6f282d086e24dbf2ec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "fufexan",
-        "ref": "flake",
-        "repo": "discocss",
-        "type": "github"
-      }
-    },
     "dream2nix": {
       "inputs": {
         "alejandra": [
@@ -459,11 +435,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1663556631,
-        "narHash": "sha256-jfo3LbdZJ7uWr6VDK5Pd7Bg/jtATpCBk/1fidCnXbZg=",
+        "lastModified": 1663594700,
+        "narHash": "sha256-o6TpHgjK4KcXXRPhfqvPRizVkHLdTNmH6XCltBAuDTY=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "5ea7855977aa281206c9c540aa88ce9384619b87",
+        "rev": "08b2ecc99a1ac1c461117bf6c79b77484eb433e4",
         "type": "github"
       },
       "original": {
@@ -493,26 +469,6 @@
         "type": "github"
       }
     },
-    "homeage": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1662769985,
-        "narHash": "sha256-zGk10O4osXxf1n9RafSMpPBsEibAGzx4OL4MLmlodB4=",
-        "owner": "jordanisaacs",
-        "repo": "homeage",
-        "rev": "dd98c460175a0781ad0b51f4392de97c5454a5c4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jordanisaacs",
-        "repo": "homeage",
-        "type": "github"
-      }
-    },
     "hyprland": {
       "inputs": {
         "nixpkgs": [
@@ -521,11 +477,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1663584251,
-        "narHash": "sha256-ep1/IgA6kVkA6DQ4qNOCVFgz/Jh3J8RCVzp5XvmSZ3A=",
+        "lastModified": 1663610961,
+        "narHash": "sha256-vbMeYviptodtgBVeOGLRU3t/ga8IAlzf0VBbumAFG+4=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "abb6db9c379737bf36009f0de35cfd8f1198852f",
+        "rev": "ec6144e5da3e7a0efc7579c0e5948d13eb776407",
         "type": "github"
       },
       "original": {
@@ -589,27 +545,6 @@
       "original": {
         "id": "mach-nix",
         "type": "indirect"
-      }
-    },
-    "naersk": {
-      "inputs": {
-        "nixpkgs": [
-          "rnix-lsp",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1655042882,
-        "narHash": "sha256-9BX8Fuez5YJlN7cdPO63InoyBy7dm3VlJkkmTt6fS1A=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "cddffb5aa211f50c4b8750adbec0bbbdfb26bb9f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "naersk",
-        "type": "github"
       }
     },
     "nci": {
@@ -687,11 +622,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1663588092,
-        "narHash": "sha256-DUtDTW8PJklisaSPJGNiIKyGMcIo8M5EUgUqieyPTHw=",
+        "lastModified": 1663594116,
+        "narHash": "sha256-ZeQp58YNgPyl2qV+oBc/zjSxe23qvx6dIuCH2Wf7aMM=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "45ddfabed04a479366e2240f0abe9fb29844a05a",
+        "rev": "387e2f02db13f2932489add396ac514d0a222d57",
         "type": "github"
       },
       "original": {
@@ -763,21 +698,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1661764827,
-        "narHash": "sha256-Egl04VI8AZM6v8+itBcZQa+6v1hWZCT5ELaxdiMbrOw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "9634ca8deaa3b79032debbcade7ef8910edf811e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "poetry2nix": {
       "flake": false,
       "locked": {
@@ -822,41 +742,15 @@
         "type": "github"
       }
     },
-    "rnix-lsp": {
-      "inputs": {
-        "naersk": "naersk",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "fu"
-        ]
-      },
-      "locked": {
-        "lastModified": 1663380950,
-        "narHash": "sha256-OKLyIXIXhUnRB3Xw+7zI3u6XkwF7Mrbfz1XaasV6i7Q=",
-        "owner": "nix-community",
-        "repo": "rnix-lsp",
-        "rev": "6925256babec4307479a4080b44f2be38056f210",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "rnix-lsp",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
-        "discocss": "discocss",
         "eww": "eww",
         "fu": "fu",
         "helix": "helix",
         "hm": "hm",
-        "homeage": "homeage",
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
@@ -864,7 +758,6 @@
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_3",
-        "rnix-lsp": "rnix-lsp",
         "rust-overlay": "rust-overlay_3",
         "spicetify-nix": "spicetify-nix",
         "webcord": "webcord"
@@ -995,7 +888,9 @@
     "webcord": {
       "inputs": {
         "dream2nix": "dream2nix_2",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "webcord": "webcord_2"
       },
       "locked": {

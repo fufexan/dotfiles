@@ -5,7 +5,6 @@ inputs: let
   sharedModules = [
     ../.
     ../shell
-    inputs.homeage.homeManagerModules.homeage
   ];
 
   homeImports = {

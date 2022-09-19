@@ -32,7 +32,6 @@
         packages = with pkgs.${system}; [
           alejandra
           git
-          inputs.rnix-lsp.defaultPackage.${system}
           inputs.deploy-rs.defaultPackage.${system}
           (overlays.default null pkgs.${system}).repl
         ];
@@ -66,12 +65,6 @@
 
     devshell.url = "github:numtide/devshell";
 
-    discocss = {
-      url = "github:fufexan/discocss/flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
-    };
-
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,11 +80,6 @@
 
     hm = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    homeage = {
-      url = "github:jordanisaacs/homeage";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -120,12 +108,6 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "fu";
-    };
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -137,6 +119,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    webcord.url = "github:fufexan/webcord-flake";
+    webcord = {
+      url = "github:fufexan/webcord-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

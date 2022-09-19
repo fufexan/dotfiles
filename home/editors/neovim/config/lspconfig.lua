@@ -1,12 +1,6 @@
 local lspc = require'lspconfig'
 
-lspc.rnix.setup{
-    on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-    end,
-}
-
+lspc.nil_ls.setup{}
 lspc.clangd.setup{}
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
