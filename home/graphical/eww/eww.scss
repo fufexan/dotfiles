@@ -18,7 +18,6 @@
 
 .bar {
   background-color: $bg;
-  border-radius: 16px;
   color: $fg;
 }
 
@@ -65,7 +64,11 @@ tooltip {
 }
 
 .module-bt { font-size: 1.2rem; }
-.separ { color: $surface0; }
+
+.separ {
+  color: $surface0;
+  padding-bottom: 2px;
+}
 
 scale trough {
   background-color: $bg1;
@@ -86,10 +89,8 @@ scale trough {
 
 .launcher label {
   background-color: $blue;
-  border-radius: 16px;
   color: $bg;
   font-family: monospace;
   font-size: 1.5rem;
-  margin: 2px;
-  padding: 0 .3rem;
+  padding: 0 1rem 0 .4rem;
 }
