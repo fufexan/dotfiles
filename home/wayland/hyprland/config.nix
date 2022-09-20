@@ -29,8 +29,6 @@ in ''
 
   exec-once=xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
   exec-once=swaybg -i ~/.config/wallpaper.png
-  exec-once=swayidle timeout 300 "hyprctl dispatch dpms off" resume "hyprctl dispatch dpms on" timeout 310 "loginctl lock-session" timeout 600 "systemctl suspend" before-sleep swayidle lock swayidle
-  exec-once=eww daemon
   exec-once=eww open bar
 
   misc {
@@ -54,8 +52,6 @@ in ''
   }
 
   general {
-    main_mod=SUPER
-
     gaps_in=5
     gaps_out=5
     border_size=2
@@ -101,6 +97,11 @@ in ''
   windowrule=workspace 9,title:^(Spotify)$
   windowrule=workspace 2,title:^(Discord)$
 
+  # mouse movements
+  bindm=SUPER,mouse:272,movewindow
+  bindm=SUPER,mouse:273,resizewindow
+  bindm=SUPERALT,mouse:272,resizewindow
+
   # compositor commands
   bind=SUPERSHIFT,E,exec,pkill Hyprland
   bind=SUPER,Q,killactive,
@@ -117,7 +118,7 @@ in ''
   bind=SUPER,Return,exec,${run-as-service "manual"} ${default.terminal.name}
   bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
   bind=SUPER,Escape,exec,wlogout -p layer-shell
-  bind=SUPER,L,exec,gtklock
+  bind=SUPER,L,exec,swaylock
   bind=SUPER,E,exec,${emoji}
   bind=SUPER,O,exec,wl-ocr
   # move focus

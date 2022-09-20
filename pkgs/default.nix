@@ -24,7 +24,6 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  gtklock = prev.callPackage ./gtklock {};
   lapce = prev.lapce.overrideAttrs (old: rec {
     pname = "lapce";
     version = "0.2.0";

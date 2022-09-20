@@ -17,7 +17,6 @@ let
 in {
   imports = [
     ../graphical/eww
-    ./gtklock.nix
     ./hyprland
     ./sway.nix
   ];
@@ -30,7 +29,6 @@ in {
     # idle/lock
     swaybg
     swaylock-effects
-    inputs.self.packages.${pkgs.system}.gtklock
 
     # utils
     ocrScript
@@ -50,12 +48,24 @@ in {
   programs = {
     obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
 
-    swaylock.settings = {
-      image = "${config.xdg.configHome}/wallpaper.png";
-      ignore-empty-password = true;
+    swaylock.settings = let
+      inherit (colors) xcolors;
+    in {
       clock = true;
       effect-blur = "30x3";
       font = "Roboto";
+      ignore-empty-password = true;
+      image = "${config.xdg.configHome}/wallpaper.png";
+      indicator = true;
+      bs-hl-color = xcolors.base0E;
+      key-hl-color = xcolors.base07;
+      inside-clear-color = xcolors.base0B;
+      inside-color = xcolors.base0A;
+      inside-ver-color = xcolors.base0C;
+      inside-wrong-color = xcolors.base08;
+      line-color = xcolors.base00;
+      ring-color = xcolors.base09;
+      separator-color = xcolors.base0F;
     };
   };
 
