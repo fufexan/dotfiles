@@ -3,24 +3,24 @@
     :class "music-window"
     (box
       :class "music-cover-art"
-      :style "background-image: url(\"${cover_art}\");")
+      :style "background-image: url(\"${music_cover}\");")
     (box
       :orientation "v"
       :class "music-box"
       (label
         :class "music-title"
         :limit-width 18
-        :text song_title)
+        :text {music.title})
       (label
         :class "music-artist"
         :wrap "true"
         :limit-width 30
-        :text song_artist)
+        :text {music.artist})
       (centerbox
         :halign "center"
         :class "music-button-box"
         (button :class "music-button" :onclick "playerctl previous" "")
-        (button :class "music-button" :onclick "playerctl play-pause" song_status)
+        (button :class "music-button" :onclick "playerctl play-pause" {music.status})
         (button :class "music-button" :onclick "playerctl next" ""))
       (box
         :orientation "v"
@@ -28,17 +28,17 @@
           (label
             :xalign 0
             :class "music-time"
-            :text song_pos)
+            :text {music.position_time})
           (label)
           (label
             :xalign 1
             :class "music-time"
-            :text song_length))
+            :text {music.length}))
         (box
           :class "music-bar"
           (scale
             :onchange "playerctl position `bc <<< \"{} * $(playerctl metadata mpris:length) / 1000000 / 100\"`"
-            :value song_pos_perc))))))
+            :value {music.position}))))))
 
 (defwindow music_win
   :stacking "fg"
