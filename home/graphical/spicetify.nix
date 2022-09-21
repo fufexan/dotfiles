@@ -1,12 +1,8 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   programs.spicetify = {
     enable = true;
 
-    spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (oa: rec {
+    spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (_oa: rec {
       pname = "spicetify-cli";
       version = "2.9.9";
       src = pkgs.fetchgit {

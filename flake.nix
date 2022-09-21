@@ -1,11 +1,7 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     lib = import ./lib inputs;
     inherit (lib) genSystems;
 

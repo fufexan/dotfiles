@@ -1,7 +1,6 @@
 {
   colors,
   default,
-  pkgs,
   ...
 }:
 # terminals

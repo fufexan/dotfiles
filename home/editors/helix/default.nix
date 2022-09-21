@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   pkgs,
   ...
 } @ args: {

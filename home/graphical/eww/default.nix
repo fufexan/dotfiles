@@ -35,7 +35,7 @@ in {
 
     # remove nix files
     configDir = lib.cleanSourceWith {
-      filter = name: type: let
+      filter = name: _type: let
         baseName = baseNameOf (toString name);
       in
         !(lib.hasSuffix ".nix" baseName);

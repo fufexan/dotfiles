@@ -3,7 +3,6 @@
   lib,
   config,
   colors,
-  inputs,
   ...
 }:
 # Wayland config
