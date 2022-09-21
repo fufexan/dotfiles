@@ -89,13 +89,18 @@ in ''
   }
 
   windowrule=float,title:^(Media viewer)$
+
   windowrule=float,title:^(Picture-in-Picture)$
+  windowrule=pin,title:^(Picture-in-Picture)$
+
   windowrule=float,title:^(Firefox — Sharing Indicator)$
   windowrule=move 0 0,title:^(Firefox — Sharing Indicator)$
 
   windowrule=tile,title:^(Spotify)$
   windowrule=workspace 9,title:^(Spotify)$
+
   windowrule=workspace 2,title:^(Discord)$
+  windowrule=workspace 2,title:^(WebCord)$
 
   # mouse movements
   bindm=SUPER,mouse:272,movewindow
