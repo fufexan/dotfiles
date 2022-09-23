@@ -120,12 +120,13 @@ in ''
   bind=SUPERALT,,resizeactive,
 
   # utility
+  bindr=SUPER,SUPER_L,exec,${run-as-service "manual"} ${launcher}
   bind=SUPER,Return,exec,${run-as-service "manual"} ${default.terminal.name}
-  bind=SUPER,Space,exec,${run-as-service "manual"} ${launcher}
   bind=SUPER,Escape,exec,wlogout -p layer-shell
   bind=SUPER,L,exec,swaylock
   bind=SUPER,E,exec,${emoji}
   bind=SUPER,O,exec,wl-ocr
+
   # move focus
   bind=SUPER,left,movefocus,l
   bind=SUPER,right,movefocus,r
