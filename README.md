@@ -43,6 +43,13 @@ Or install from the `packages` output. For example:
 }
 ```
 
+## 💻 Desktop preview
+
+<a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
+  <img src="https://user-images.githubusercontent.com/36706276/192147190-cf9cf4df-94cb-4a3b-b9d8-137ed0c2538f.png" alt="Desktop Preview">
+</a>
+*Hint: click to go to a video showcase*
+
 # 💾 Resources
 
 Other configurations from where I learned and copied:
