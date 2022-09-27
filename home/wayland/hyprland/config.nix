@@ -3,11 +3,11 @@
   colors,
   default,
   ...
-}: let
+} @ args: let
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = "wofi";
+  launcher = import ./launcher.nix args;
 
   run-as-service = slice:
     pkgs.writeShellScript "as-systemd-transient" ''
