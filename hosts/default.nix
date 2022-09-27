@@ -61,27 +61,4 @@ in {
 
     system = "x86_64-linux";
   };
-
-  # servers
-  arm-server = nixosSystem {
-    modules =
-      [
-        ./servers/arm-server
-        {home-manager.users.mihai.imports = homeImports.server;}
-      ]
-      ++ sharedModules;
-
-    system = "aarch64-linux";
-  };
-
-  homesv = nixosSystem {
-    modules =
-      [
-        ./servers/homesv
-        {home-manager.users.mihai.imports = homeImports.server;}
-      ]
-      ++ sharedModules;
-
-    system = "x86_64-linux";
-  };
 }
