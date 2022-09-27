@@ -3,11 +3,11 @@
   colors,
   default,
   ...
-} @ args: let
+}: let
   xargb = colors.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = import ./launcher.nix args;
+  launcher = "wofi";
 
   run-as-service = slice:
     pkgs.writeShellScript "as-systemd-transient" ''
@@ -120,7 +120,7 @@ in ''
   bind=SUPERALT,,resizeactive,
 
   # utility
-  bindr=SUPER,SUPER_L,exec,${run-as-service "manual"} ${launcher}
+  bindr=SUPER,SUPER_L,exec,pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
   bind=SUPER,Return,exec,${run-as-service "manual"} ${default.terminal.name}
   bind=SUPER,Escape,exec,wlogout -p layer-shell
   bind=SUPER,L,exec,swaylock
