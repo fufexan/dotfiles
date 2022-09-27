@@ -21,33 +21,13 @@
     ];
 
     # use fonts specified by user rather than default ones
-    enableDefaultFonts = false;
-
-    # user defined fonts
-    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
-    # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
-    };
+    enableDefaultFonts = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    glib
-    gsettings-desktop-schemas
-    quintom-cursor-theme
-  ];
+  environment.systemPackages = with pkgs; [glib];
 
   # use Wayland where possible
   environment.variables.NIXOS_OZONE_WL = "1";
-
-  # Japanese input using fcitx
-  i18n.inputMethod = {
-    enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [mozc];
-  };
 
   location.provider = "geoclue2";
 
@@ -81,7 +61,6 @@
     };
   };
 
-  # add gaming cache
   nix.settings = {
     substituters = [
       "https://nix-gaming.cachix.org"
@@ -141,7 +120,6 @@
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.swaylock.text = "auth include login";
-    pam.services.gtklock.text = "auth include login";
     rtkit.enable = true;
   };
 

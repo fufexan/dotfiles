@@ -41,36 +41,26 @@
   };
 
   nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      builders-use-substitutes = true
-      experimental-features = nix-command flakes
-
-      # for direnv GC roots
-      keep-outputs = true
-      keep-derivations = true
-
-      flake-registry = /etc/nix/registry.json
-    '';
-
-    buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
-      {
-        system = "aarch64-linux";
-        sshUser = "root";
-        sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 4;
-        hostName = "arm-server";
-        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-      }
-      {
-        system = "x86_64-linux";
-        sshUser = "root";
-        sshKey = "/root/.ssh/id_ed25519";
-        maxJobs = 8;
-        hostName = "io";
-        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-      }
-    ];
+    buildMachines =
+      #lib.filter (x: x.hostName != config.networking.hostName) [
+      [
+        {
+          system = "aarch64-linux";
+          sshUser = "root";
+          sshKey = "/etc/ssh/ssh_host_ed25519_key";
+          maxJobs = 4;
+          hostName = "arm-server";
+          supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
+        }
+        {
+          system = "x86_64-linux";
+          sshUser = "root";
+          sshKey = "/root/.ssh/id_ed25519";
+          maxJobs = 8;
+          hostName = "io";
+          supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
+        }
+      ];
     distributedBuilds = true;
 
     gc = {
@@ -88,6 +78,13 @@
 
     settings = {
       auto-optimise-store = true;
+      builders-use-substitutes = true;
+      experimental-features = ["nix-command" "flakes"];
+      flake-registry = "/etc/nix/registry.json";
+
+      # for direnv GC roots
+      keep-derivations = true;
+      keep-outputs = true;
 
       substituters = [
         "https://nix-community.cachix.org"
@@ -99,6 +96,8 @@
         "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
         "fufexan.cachix.org-1:LwCDjCJNJQf5XD2BV+yamQIMZfcKWR9ISIFy5curUsY="
       ];
+
+      trusted-users = ["root" "@wheel"];
     };
   };
 
@@ -134,7 +133,7 @@
     tailscale.enable = true;
   };
 
-  system.stateVersion = "20.09";
+  system.stateVersion = lib.mkDefault "20.09";
 
   # Don't wait for network startup
   # https://old.reddit.com/r/NixOS/comments/vdz86j/how_to_remove_boot_dependency_on_network_for_a
@@ -143,7 +142,7 @@
     services.NetworkManager-wait-online.wantedBy = pkgs.lib.mkForce []; # Normally ["network-online.target"]
   };
 
-  time.timeZone = "Europe/Bucharest";
+  time.timeZone = lib.mkDefault "Europe/Bucharest";
 
   users.users.mihai = {
     isNormalUser = true;
