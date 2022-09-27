@@ -48,12 +48,6 @@ in {
     # to be able to use system-configured sessions alongside HM ones
     scriptPath = ".xsession-hm";
 
-    pointerCursor = {
-      package = pkgs.quintom-cursor-theme;
-      name = "Quintom_Ink";
-      size = 24;
-    };
-
     preferStatusNotifierItems = true;
 
     windowManager.bspwm = {

@@ -17,14 +17,11 @@
     export XDG_DATA_DIRS=${datadir schema}:${datadir pkgs.gtk3}:$XDG_DATA_DIRS
 
     gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Orange-Dark-Compact'
-    # gsettings set org.gnome.desktop.interface cursor-theme 'Quintom_Ink'
-    # gsettings set org.gnome.desktop.interface font-name 'Roboto'
   '';
 in {
   environment.systemPackages = with pkgs; [
     catppuccin-gtk
     greetd.gtkgreet
-    quintom-cursor-theme
   ];
 
   services.greetd = {

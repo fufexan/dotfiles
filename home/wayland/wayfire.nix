@@ -199,7 +199,7 @@ in {
     [input]
     click_method = default
     cursor_size = 24
-    cursor_theme = "Quintom_Ink"
+    cursor_theme = "Bibata-Modern-Classic"
     disable_touchpad_while_mouse = false
     disable_touchpad_while_typing = false
     gesture_sensitivity = 1.000000
