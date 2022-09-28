@@ -24,7 +24,16 @@
 .module { margin: 0 5px; }
 .clock { font-size: 1.4rem; }
 .hour { font-weight: bold; }
-.date { color: $flamingo; }
+.date {
+  label {
+    font-size: 1.4rem;
+  }
+
+  background: $bg;
+  color: $flamingo;
+  margin-left: -1rem;
+  padding: 0 1rem;
+}
 
 .bright-icon { color: $yellow; }
 .brightbar trough highlight {
