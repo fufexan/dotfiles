@@ -12,11 +12,20 @@
 
 (include "./windows/calendar.yuck")
 (include "./windows/music_win.yuck")
+(include "./windows/notifications.yuck")
 (include "./windows/system.yuck")
 (include "./windows/volume_win.yuck")
 
 (defwidget sep []
   (label :class "separ module" :text "|"))
+
+(defwidget notif-toggle []
+  (button
+    :class "notif-toggle"
+    :onclick "scripts/reveal_toggle notification_rev ${EWW_CMD}";
+    {notif_icons.icon}))
+
+; clipboard 󰅌 󰅍 󰄷
 
 (defwidget workspaces []
   (literal :content workspace))
@@ -41,7 +50,8 @@
     (mem)
     (bat)
     (sep)
-    (clock_module)))
+    (clock_module)
+    (notif-toggle)))
 
 (defwidget center []
   (box

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+tmp=$XDG_CACHE_HOME/dunst-history.json
+declare ids
+export toggle_icon=""
+
+get_ids() {
+  mapfile -t ids < <(dunstctl history | jq -r ".data[] | .[] | select(.appname.data != \"Spotify\") | .id.data")
+}
+
+get_notif() {
+
+  echo -n "(box :orientation \"v\" :space-evenly \"false\" :spacing \"10\" :halign \"start\" "
+
+  for id in "${ids[@]}"; do
+      mapfile -t n < <(jq -r ".data[] | .[] | select(.id.data == $id) | .appname.data, .summary.data, .body.data" "$tmp" | sed -r '/^\s*$/d' | sed -e 's/\%/ percent/g')
+      echo -n "(eventbox :onclick \"dunstctl history-pop $id && dunstctl action 0 && dunstctl close\" \
+        (box :class \"notification\" :orientation \"h\" :width 300 :space-evenly \"false\" \
+          (box :orientation \"v\" :space-evenly \"false\" :valign \"start\" :width 300 :spacing 10 \
+            (box :orientation \"h\" :space-evenly \"false\" :width 300 :spacing 10 \
+              (label :xalign 0 :wrap \"true\" :class \"summary\" :text \"${n[1]}\") \
+              (label :xalign 1 :wrap \"true\" :class \"appname\" :text \"${n[0]}\")) \
+            (label :xalign 0 :wrap \"true\" :class \"body\" :text \"${n[2]}\"))))"
+  done
+  echo ")"
+}
+
+toggle() {
+  dunstctl set-paused toggle
+  lock="$XDG_CACHE_HOME/dunst-toggle.lock"
+
+  if [ ! -f "$lock" ]; then
+    export toggle_icon=""
+    touch "$lock"
+  else
+    export toggle_icon=""
+    rm "$lock"
+  fi  
+}
+
+clear() {
+  get_ids
+  for id in "${ids[@]}"; do
+    dunstctl history-pop "$id"
+  done
+  get_ids
+}
+
+get_icon() {
+  if [ ${#ids[@]} -eq 0 ]; then
+    echo "󰆂"
+  else
+    echo "󰆄"
+  fi
+}
+
+if [ "$1" == "toggle" ]; then
+  toggle
+  dunstctl history > "$tmp"
+elif [ "$1" == "clear" ]; then
+  clear
+  dunstctl history > "$tmp"
+elif [ "$1" == "icons" ]; then
+  get_notif
+  tail -f "$tmp" 2>/dev/null | rg --line-buffered "aa\{sv\}" | while read -r; do
+    get_ids
+    echo '{"toggle_icon": "'"$toggle_icon"'", "icon": "'"$(get_icon)"'"}'
+  done
+else
+  get_notif
+  tail -f "$tmp" 2>/dev/null | rg --line-buffered "aa\{sv\}" | while read -r; do
+    get_ids
+    get_notif
+  done
+fi

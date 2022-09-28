@@ -5,15 +5,16 @@
   margin: 15px 20px 25px;
 }
 
-@import 'css/calendar';
-@import 'css/music';
-@import 'css/system';
-@import 'css/volume';
-
 * {
   all: unset;
   font-size: 1.2rem;
 }
+
+@import 'css/calendar';
+@import 'css/music';
+@import 'css/notification';
+@import 'css/system';
+@import 'css/volume';
 
 .bar {
   background-color: $bg;
@@ -24,7 +25,6 @@
 .clock { font-size: 1.4rem; }
 .hour { font-weight: bold; }
 .date { color: $flamingo; }
-.minute { margin-right: 5px; }
 
 .bright-icon { color: $yellow; }
 .brightbar trough highlight {
@@ -59,4 +59,8 @@ scale trough {
   font-family: monospace;
   font-size: 1.5rem;
   padding: 0 1.1rem 0 .5rem;
+}
+
+.notif-toggle {
+  padding: 0 5px;
 }

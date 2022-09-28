@@ -12,6 +12,8 @@
     bc
     bluez
     coreutils
+    dbus
+    dunst
     findutils
     gawk
     gnused
@@ -23,16 +25,18 @@
     pulseaudio
     ripgrep
     socat
+    udev
     upower
     wget
     wireplumber
     wofi
   ];
 in {
+  # home.packages = [inputs.eww.packages.${pkgs.system}.eww-wayland];
+  # home.file.".config/eww".source = config.lib.file.mkOutOfStoreSymlink ./.;
   programs.eww = {
     enable = true;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;
-
     # remove nix files
     configDir = lib.cleanSourceWith {
       filter = name: _type: let

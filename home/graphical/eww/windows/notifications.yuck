@@ -1,0 +1,55 @@
+(defwindow notifications_win
+  :geometry
+    (geometry
+      :x "0px"
+      :y "0px"
+      :width "0px"
+      :height "0px"
+      :anchor "right center")
+  :stacking "fg"
+  :monitor "0"
+(rightside))
+
+(defwidget rightside [] 
+  (revealer
+    :transition "slideleft"
+    :reveal notification_rev
+    :duration "350ms"
+  (box
+    :class "side" 
+    :orientation "v" 
+    :space-evenly "false" 
+    :spacing "10"
+    :halign "center"
+    (box
+      :class "notification-header"
+      :orientation "h" 
+      :space-evenly "false" 
+      (label
+        :class "notification-label"
+        :halign "start"
+        :text "Notifications")
+      (box
+        :orientation "h" 
+        :space-evenly "false" 
+        :halign "end"
+        (button
+          :class "notification-action"
+          :tooltip "Refresh"
+          :onclick "dunstctl history > $XDG_CACHE_HOME/dunst-history.json" "")
+        (button
+          :class "notification-action"
+          :tooltip "Pause/Resume Notifications"
+          :onclick "scripts/notifications toggle" {notif_icons.toggle_icon})
+        (button
+          :class "notification-action"
+          :tooltip "Clear Notifications"
+          :onclick "scripts/notifications clear" "󰅙"))); 󰅖
+    (scroll
+      :vscroll "true"
+      :hscroll "false"
+      :height 840
+      :width 200
+      (literal
+        :content notifications)
+))))

@@ -1,0 +1,42 @@
+.side {
+  padding: 1em;
+  background: $bg;
+  border-radius: 16px;
+  @include wshadow;
+}
+
+.notification {
+  background-color: $crust;
+  padding: 1rem;
+  border-radius: 8px;
+  :hover {
+    border: 1px solid $border;
+  }
+
+  .appname {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: $peach;
+  }
+
+  .summary {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: $text;
+  }
+
+  .body {
+    color: $text;
+  }
+}
+
+.notification-label {
+  font-size: 1.5rem;
+  color: $blue;
+}
+
+.notification-action {
+  font-size: 2rem;
+  color: $text;
+  margin-left: 1rem;
+}
