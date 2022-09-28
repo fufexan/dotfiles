@@ -9,7 +9,6 @@ while true; do
 
   if [ "$status" = "disconnected" ] ; then
     icon=""
-    text=""
     color="#988ba2"
   else
     level=$(awk -v n="$signal" 'BEGIN{print int(n/20)}')

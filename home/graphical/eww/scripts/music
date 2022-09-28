@@ -57,7 +57,7 @@ get_cover() {
 
 	playerctl -F metadata mpris:artUrl 2>/dev/null | while read -r COVER_URL; do
 		if [[ "$COVER_URL" = https* ]]; then
-			if [ ! -e "$XDG_CACHE_HOME/eww_covers/$(basename $COVER_URL)" ]; then
+			if [ ! -e "$XDG_CACHE_HOME/eww_covers/$(basename "$COVER_URL")" ]; then
 				wget -N "$COVER_URL" -o /dev/null
 			fi
 
@@ -76,7 +76,7 @@ get_cover() {
 if [ "$1" = "cover" ]; then
 	get_cover
 else
-	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="\\" read -r title artist status position len art; do
-		echo '{"artist": "'"$artist"'", "title": "'"$title"'", "status": "'"$(get_status $status)"'", "position": "'$(get_position $position $len)'", "position_time": "'$(get_position_time $position $len)'", "length": "'$(get_length_time $len)'"}' #, "cover": "'"$(get_cover $art)"'"
+	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
+		echo '{"artist": "'"$artist"'", "title": "'"$title"'", "status": "'"$(get_status "$status")"'", "position": "'"$(get_position "$position" "$len")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$(get_length_time "$len")"'"}' #, "cover": "'"$(get_cover $art)"'"
 	done
 fi

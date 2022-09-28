@@ -38,7 +38,7 @@ gettime() {
 		else
 			EX="($FULL - $NOW) / $RATE"
 		fi
-		date -u -d@$(bc -l <<< "$EX * 3600") +%H:%M
+		date -u -d@"$(bc -l <<< "$EX * 3600")" +%H:%M
 	fi
 }
 
