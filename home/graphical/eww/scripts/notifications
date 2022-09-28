@@ -61,12 +61,16 @@ elif [ "$1" == "clear" ]; then
   clear
   dunstctl history > "$tmp"
 elif [ "$1" == "icons" ]; then
-  get_notif
+  dunstctl history > "$tmp"
+  get_ids
+  echo '{"toggle_icon": "'"$toggle_icon"'", "icon": "'"$(get_icon)"'"}'
   tail -f "$tmp" 2>/dev/null | rg --line-buffered "aa\{sv\}" | while read -r; do
     get_ids
     echo '{"toggle_icon": "'"$toggle_icon"'", "icon": "'"$(get_icon)"'"}'
   done
 else
+  dunstctl history > "$tmp"
+  get_ids
   get_notif
   tail -f "$tmp" 2>/dev/null | rg --line-buffered "aa\{sv\}" | while read -r; do
     get_ids

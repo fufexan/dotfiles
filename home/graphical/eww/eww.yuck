@@ -21,7 +21,7 @@
 
 (defwidget notif-toggle []
   (button
-    :class "notif-toggle"
+    :class "notif-toggle module"
     :onclick "scripts/reveal_toggle notification_rev ${EWW_CMD}";
     {notif_icons.icon}))
 
