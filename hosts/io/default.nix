@@ -58,10 +58,7 @@
   hardware = {
     bluetooth = {
       enable = true;
-      disabledPlugins = ["sap"];
       hsphfpd.enable = true;
-      package = pkgs.bluezFull;
-      powerOnBoot = false;
       settings = {
         # make Xbox Series X controller work
         General = {
@@ -133,6 +130,7 @@
       settings = {
         PCIE_ASPM_ON_BAT = "powersupersave";
         DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
+        NMI_WATCHDOG = 0;
       };
     };
 
