@@ -899,11 +899,11 @@
         "webcord": "webcord_2"
       },
       "locked": {
-        "lastModified": 1663692072,
-        "narHash": "sha256-W9y2ow4tkjFhIsPHvUuaOvawxRgxvr9hb6IMwpMoFlM=",
+        "lastModified": 1664817607,
+        "narHash": "sha256-1c9doRBUy61lrkA5MTRF4xIE9VcnBxfWUGzXMnMm0CM=",
         "owner": "fufexan",
         "repo": "webcord-flake",
-        "rev": "9578b63fe42746fdbf80a0364781946c8c35aca9",
+        "rev": "6fdcb79b9aa692acf95c2c9e05b7cd7fa426a385",
         "type": "github"
       },
       "original": {

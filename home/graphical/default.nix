@@ -22,7 +22,17 @@
     DELTA_PAGER = "less -R";
   };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let
+    catppuccin = fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "discord";
+      rev = "159aac939d8c18da2e184c6581f5e13896e11697";
+      sha256 = "sha256-cWpog52Ft4hqGh8sMWhiLUQp/XXipOPnSTG6LwUAGGA=";
+      sparseCheckout = "themes";
+    };
+
+    theme = "${catppuccin}/themes/mocha.theme.css";
+  in [
     # archives
     zip
     unzip
@@ -32,7 +42,7 @@
     # messaging
     tdesktop
     teams
-    inputs.webcord.packages.${pkgs.system}.default
+    (inputs.webcord.packages.${pkgs.system}.default.override {flags = "--add-css-theme=${theme}";})
     # torrents
     transmission-remote-gtk
     # misc
