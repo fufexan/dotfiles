@@ -145,7 +145,7 @@
       SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${unplugged}"
     '';
 
-    xserver.enable = lib.mkForce false;
+    xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
   };
 
   # https://github.com/NixOS/nixpkgs/issues/114222

@@ -28,9 +28,10 @@ in {
     modules =
       [
         ./io
+        ../modules/gnome.nix
+        ../modules/xserver.nix
         ../modules/desktop.nix
         ../modules/gamemode.nix
-        ../modules/greetd.nix
         {home-manager.users.mihai.imports = homeImports."mihai@io";}
       ]
       ++ sharedModules
