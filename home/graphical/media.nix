@@ -31,7 +31,6 @@
   };
 
   services = {
-    easyeffects.enable = true;
     playerctld.enable = true;
     spotifyd = {
       enable = true;
