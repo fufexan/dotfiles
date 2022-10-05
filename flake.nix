@@ -127,9 +127,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    webcord = {
-      url = "github:fufexan/webcord-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    webcord.url = "github:fufexan/webcord-flake";
   };
 }
