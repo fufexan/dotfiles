@@ -43,11 +43,11 @@ in ''
     kb_layout=ro
 
     follow_mouse=1
-    force_no_accel=1
+    accel_profile=flat
   }
 
   device:MSFT0001:00 04F3:31EB Touchpad {
-    # sensitivity=-1
+    accel_profile=adaptive
     natural_scroll=1
   }
 

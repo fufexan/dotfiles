@@ -473,11 +473,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1664910441,
-        "narHash": "sha256-TIhY37rQgfle2jYrMDQpEKsrGnsTh1SvnS8iduIua70=",
+        "lastModified": 1665003520,
+        "narHash": "sha256-CIEXnmwTjf8AkfhFcGaGZHzFTvNyLe2ucG0DoM5wVmY=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "0d702b556d0a52f1df53ac1e52fac11b8302783b",
+        "rev": "32e8eda40a93f9c4a304faa54a3996087eae86e4",
         "type": "github"
       },
       "original": {
@@ -682,11 +682,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1664687381,
-        "narHash": "sha256-9czSuDzS+OGGwq2kC4KXBLXWfYaup+oLB+AA1Md25U4=",
+        "lastModified": 1664780719,
+        "narHash": "sha256-Oxe6la5dSqRfJogjtY4sRzJjDDqvroJIVkcGEOT87MA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "59d2991d4256cdca1c0cda45d876c80a0fe45c31",
+        "rev": "fd54651f5ffb4a36e8463e0c327a78442b26cbe7",
         "type": "github"
       },
       "original": {
