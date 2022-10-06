@@ -13,6 +13,13 @@ with pkgs; [
     auto-format = true;
   }
   {
+    name = "cpp";
+    language-server = {
+      command = "${clang-tools}/bin/clangd";
+      clangd.fallbackFlags = ["-std=c++2b"];
+    };
+  }
+  {
     name = "nix";
     language-server = {command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";};
   }
