@@ -44,6 +44,9 @@ in ''
 
     follow_mouse=1
     accel_profile=flat
+    touchpad {
+      scroll_factor=0.3
+    }
   }
 
   device:MSFT0001:00 04F3:31EB Touchpad {
