@@ -43,6 +43,7 @@
     tdesktop
     teams
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = "--add-css-theme=${theme}";})
+    inputs.nix-matlab.defaultPackage.${pkgs.system}
     # torrents
     transmission-remote-gtk
     # misc

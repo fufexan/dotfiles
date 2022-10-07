@@ -334,6 +334,22 @@
         "type": "github"
       }
     },
+    "flake-compat_3": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1650374568,
+        "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "b4a34015c698c7793d592d66adbab377907a2be8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1642700792,
@@ -473,11 +489,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1665087971,
-        "narHash": "sha256-cMnXUVbI1bRiuNlyYqacVdbHc5TsXLvHRsE21zW0MFg=",
+        "lastModified": 1665177900,
+        "narHash": "sha256-KP+RgRkxnhZVRbSLitM8POjwU5/j05/kmqxhm73jBZM=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "c4487534d2230077ee6c61b248602effcbb4df45",
+        "rev": "1964bcb13f770b8344510549aa9924fe908bac60",
         "type": "github"
       },
       "original": {
@@ -633,6 +649,27 @@
         "type": "github"
       }
     },
+    "nix-matlab": {
+      "inputs": {
+        "flake-compat": "flake-compat_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1665154954,
+        "narHash": "sha256-fift65mUpCTEDw0Ttbj7ofBvRdeAe739dn8yX5izpIs=",
+        "owner": "doronbehar",
+        "repo": "nix-matlab",
+        "rev": "fcb5389dd42983ce9f5d8487e77663d6188036ab",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "doronbehar",
+        "repo": "nix-matlab",
+        "type": "gitlab"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643381941,
@@ -682,11 +719,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1664780719,
-        "narHash": "sha256-Oxe6la5dSqRfJogjtY4sRzJjDDqvroJIVkcGEOT87MA=",
+        "lastModified": 1664989420,
+        "narHash": "sha256-Q8IxomUjjmewsoJgO3htkXLfCckQ7HkDJ/ZhdYVf/fA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fd54651f5ffb4a36e8463e0c327a78442b26cbe7",
+        "rev": "37bd39839acf99c5b738319f42478296f827f274",
         "type": "github"
       },
       "original": {
@@ -802,6 +839,7 @@
         "nil": "nil",
         "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
+        "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs_5",
         "rust-overlay": "rust-overlay_2",
         "spicetify-nix": "spicetify-nix",
@@ -945,11 +983,11 @@
       "flake": false,
       "locked": {
         "host": "gitlab.freedesktop.org",
-        "lastModified": 1664816798,
-        "narHash": "sha256-oLJyFT1Fc4UNNaDSN+EYUAWL4CufCBpuS5AV4Z4XANo=",
+        "lastModified": 1663507239,
+        "narHash": "sha256-LISZtkPVe8lQ2N8YwVe+KxCkXWLP9mdw6Q2kG93wE8A=",
         "owner": "wlroots",
         "repo": "wlroots",
-        "rev": "50cc1ef4d3791d86854dd83c15fff17e5ea1a5b6",
+        "rev": "2ad25b1460400e66ea26bd6489b04072be7d9dbb",
         "type": "gitlab"
       },
       "original": {
