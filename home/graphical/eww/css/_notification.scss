@@ -1,7 +1,7 @@
 .side {
   padding: 1em;
   background: $bg;
-  border-radius: 16px;
+  @include rounding;
   @include wshadow;
 }
 

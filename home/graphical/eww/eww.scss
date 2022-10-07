@@ -1,8 +1,12 @@
 @import 'css/colors';
 
 @mixin wshadow {
-  box-shadow: 0 5px 10px $shadow;
-  margin: 15px 20px 25px;
+  box-shadow: 0 2px 3px $shadow;
+  margin: 5px 5px 10px;
+}
+
+@mixin rounding {
+  border-radius: 16px;
 }
 
 * {

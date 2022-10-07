@@ -5,9 +5,9 @@
 }
 
 .volume-window {
+  @include rounding;
   @include wshadow;
   background-color: $bg;
-  border-radius: 16px;
   padding-right: 1rem;
 }
 
@@ -34,6 +34,6 @@
 
   highlight {
     background-image: linear-gradient(to right, $teal 30%, $sky 100%);
-    border-radius: 16px;
+    @include rounding;
   }
 }

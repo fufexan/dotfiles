@@ -1,8 +1,8 @@
 .calendar-window {
+  @include rounding;
   @include wshadow;
   background-color: $bg;
   border: 1px solid $border;
-  border-radius: 16px;
   color: $fg;
   padding: .2em;
 }
