@@ -16,9 +16,9 @@
             desktopName = "Rocket League";
             tricks = ["dxvk" "win10"];
             icon = builtins.fetchurl {
-              url = "https://www.pngkey.com/png/full/16-160666_rocket-league-png.png";
+              url = "https://img.favpng.com/21/12/21/rocket-league-video-game-psyonix-logo-decal-png-favpng-yYh6A3FRCJNh7JYgYZchHxAia.jpg";
               name = "rocket-league.png";
-              sha256 = "09n90zvv8i8bk3b620b6qzhj37jsrhmxxf7wqlsgkifs4k2q8qpf";
+              sha256 = "0ymisjgcmw8mkarnkm95dsndii2aw9yn5i3vfximi2dchy4ng8ab";
             };
             discordIntegration = false;
           };
