@@ -18,6 +18,6 @@
           :min 0
           :onchange "./scripts/volume setvol SINK {}"))
       (button
-        :onclick "./scripts/pop volume"
+        :onclick "${EWW_CMD} open --toggle volume_win"
         :class "vol-icon"
         {volume.icon}))))

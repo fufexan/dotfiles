@@ -2,8 +2,8 @@
 
 (defwidget clock_module []
   (eventbox
-    :onhover "${EWW_CMD} update time_rev=false; ${EWW_CMD} update date_rev=true"
-    :onhoverlost "${EWW_CMD} update time_rev=false; ${EWW_CMD} update date_rev=false"
+    :onhover "${EWW_CMD} update date_rev=true"
+    :onhoverlost "${EWW_CMD} update date_rev=false"
     (overlay
       :class "module"
       (box
@@ -21,5 +21,5 @@
         :reveal date_rev
         (button
           :class "date clock"
-          :onclick "./scripts/pop calendar"
+          :onclick "${EWW_CMD} open --toggle calendar_win"
           {time.date})))))

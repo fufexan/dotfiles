@@ -5,7 +5,7 @@ declare -A baticon=([10]="󰁺" [20]="󰁻" [30]="󰁼" [40]="󰁽" [50]="󰁾" 
 while true; do
   powered=$(bluetoothctl show | rg Powered | cut -f 2- -d ' ')
   status=$(bluetoothctl info)
-  battery=$(echo "$status" | tail -1 | awk '{print $4 }' | tr -d '()')
+  battery=$(echo "$status" | tail -1 | awk '{print $4}' | tr -d '()')
   name=$(echo "$status" | rg Name | cut -f 2- -d ' ')
 
   if [ "$powered" = "yes" ]; then

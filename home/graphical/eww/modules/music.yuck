@@ -10,7 +10,7 @@
         :style "background-image: url(\"${music_cover}\");")
       (button
         :class "module"
-        :onclick "./scripts/pop music"
+        :onclick "${EWW_CMD} open --toggle music_win"
         {music.title})
       (revealer
         :transition "slideright"

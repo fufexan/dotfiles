@@ -5,5 +5,5 @@
     :thickness 3
     (button
       :tooltip "using ${round(memory.percentage,0)}% ram"
-      :onclick "./scripts/pop system"
+      :onclick "${EWW_CMD} open --toggle system_win"
       (label :class "icon-text" :text ""))))
