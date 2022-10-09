@@ -1,22 +1,22 @@
-(defwindow notifications_win
+(defwindow sidebar_win
   :geometry
     (geometry
       :x "0px"
       :y "0px"
       :width "0px"
       :height "0px"
-      :anchor "right center")
+      :anchor "right top")
   :stacking "fg"
   :monitor "0"
-(rightside))
+(sidebar))
 
-(defwidget rightside [] 
+(defwidget sidebar [] 
   (revealer
     :transition "slideleft"
-    :reveal notification_rev
+    :reveal notif_rev
     :duration "350ms"
   (box
-    :class "side" 
+    :class "notifications" 
     :orientation "v" 
     :space-evenly "false" 
     :spacing "10"
@@ -49,7 +49,6 @@
       :vscroll "true"
       :hscroll "false"
       :height 840
-      :width 200
+      :width 300
       (literal
-        :content notifications)
-))))
+        :content notifications)))))

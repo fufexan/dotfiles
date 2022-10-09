@@ -1,7 +1,7 @@
 (defvar bright_reveal false)
 (defvar bt_rev false)
 (defvar music_reveal false)
-(defvar notification_rev false)
+(defvar notif_rev false)
 (defvar net_rev false)
 (defvar time_rev false)
 (defvar vol_reveal false)

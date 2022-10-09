@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ "$($2 get "$1")" == "true" ]; then
-  state="false"
-else
-  state="true"
-fi
-
-$2 update "$1=$state"

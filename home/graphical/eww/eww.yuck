@@ -22,7 +22,7 @@
 (defwidget notif-toggle []
   (button
     :class "notif-toggle module"
-    :onclick "scripts/reveal_toggle notification_rev ${EWW_CMD}";
+    :onclick "[ $(${EWW_CMD} get notif_rev) = \"false\" ] && ${EWW_CMD} update notif_rev=true || ${EWW_CMD} update notif_rev=false";
     {notif_icons.icon}))
 
 ; clipboard 󰅌 󰅍 󰄷
