@@ -1,4 +1,4 @@
-(defwidget volume_window []
+(defwidget volume []
   (box
     :class "volume-window"
     :orientation "v"
@@ -35,7 +35,7 @@
           :tooltip "mic on ${volume.microphone}%"
           :onchange "scripts/volume setvol SOURCE {}")))))
 
-(defwindow volume_win
+(defwindow volume
   :monitor 0
   :geometry (geometry
     :x "0%"
@@ -43,4 +43,4 @@
     :anchor "top right"
     :width "0"
     :height "0")
-  (volume_window))
+  (volume))

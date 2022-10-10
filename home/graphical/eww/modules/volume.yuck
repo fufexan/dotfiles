@@ -1,4 +1,4 @@
-(defwidget volume []
+(defwidget volume-module []
   (eventbox
     :onhover "${EWW_CMD} update vol_reveal=true"
     :onhoverlost "${EWW_CMD} update vol_reveal=false"
@@ -18,6 +18,6 @@
           :min 0
           :onchange "./scripts/volume setvol SINK {}"))
       (button
-        :onclick "${EWW_CMD} open --toggle volume_win"
+        :onclick "${EWW_CMD} open --toggle volume"
         :class "vol-icon"
         {volume.icon}))))

@@ -1,4 +1,4 @@
-(defwindow sidebar_win
+(defwindow sidebar
   :geometry
     (geometry
       :x "0px"

@@ -1,4 +1,4 @@
-.calendar-window {
+.calendar-win {
   @include rounding;
   @include wshadow;
   background-color: $bg;
@@ -12,7 +12,6 @@ calendar {
 
   :selected {
     color: $mauve;
-    font-weight: bold;
   }
 
   .header {
@@ -22,5 +21,13 @@ calendar {
   .highlight {
     color: $maroon;
     font-weight: bold;
+  }
+
+  .button {
+    color: $sapphire;
+  }
+
+  :indeterminate {
+    color: $overlay0;
   }
 }

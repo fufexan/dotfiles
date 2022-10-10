@@ -5,5 +5,5 @@
     :thickness 3
     (button
       :tooltip "using ${round(EWW_CPU.avg,0)}% cpu"
-      :onclick "${EWW_CMD} open --toggle system_win"
+      :onclick "${EWW_CMD} open --toggle system"
       (label :class "icon-text" :text ""))))

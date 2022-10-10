@@ -82,7 +82,7 @@
           :halign "start"
           :class "sys-text-sub" )))))
 
-(defwindow system_win
+(defwindow system
   :monitor 0
   :geometry (geometry
     :x "0%"

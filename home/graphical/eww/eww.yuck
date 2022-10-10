@@ -11,10 +11,10 @@
 (include "./modules/volume.yuck")
 
 (include "./windows/calendar.yuck")
-(include "./windows/music_win.yuck")
+(include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
 (include "./windows/system.yuck")
-(include "./windows/volume_win.yuck")
+(include "./windows/volume.yuck")
 
 (defwidget sep []
   (label :class "separ module" :text "|"))
@@ -42,7 +42,7 @@
     :space-evenly false
     :halign "end"
     (bright)
-    (volume)
+    (volume-module)
     (net)
     (bluetooth)
     (sep)
@@ -57,7 +57,7 @@
   (box
     :space-evenly false
     :halign "center"
-    (music)))
+    (music-module)))
 
 (defwidget bar []
   (centerbox

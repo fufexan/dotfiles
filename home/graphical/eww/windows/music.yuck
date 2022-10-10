@@ -1,4 +1,4 @@
-(defwidget music_window []
+(defwidget music []
   (box
     :class "music-window"
     (box
@@ -40,7 +40,7 @@
             :onchange "playerctl position `bc <<< \"{} * $(playerctl metadata mpris:length) / 1000000 / 100\"`"
             :value {music.position}))))))
 
-(defwindow music_win
+(defwindow music
   :stacking "fg"
   :focusable "false"
   :monitor 0
@@ -50,4 +50,4 @@
     :width "0%"
     :height "0%"
     :anchor "top center")
-  (music_window))
+  (music))
