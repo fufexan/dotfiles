@@ -1,0 +1,116 @@
+.system-menu-box {
+  background-color: $bg;
+  @include wshadow;
+  @include rounding;
+  color: $text;
+  
+  transition: 200ms ease;
+}
+
+.separator {
+  font-size: 1rem;
+}
+
+.top-row {
+  margin: 1rem 1rem .5rem;
+}
+
+.system-row {
+  margin: 0 .7rem;
+  
+  .element {
+    background: $surface0;
+    margin: .3rem;
+    @include rounding;
+    
+    button {
+      padding: 1rem;
+      @include rounding;
+
+      label {
+        font-size: 1.5rem;
+      }
+
+      &:hover {
+        background: $overlay0;
+      }
+    }
+  }
+  
+  .airplane-box box button {
+    padding: 1rem 3rem;
+  }
+
+  label {
+    font-size: 1.1rem;
+    margin: 0 .1rem;
+  }
+}
+
+.sliders {
+  background-color: $surface0;
+  @include rounding;
+  margin: 1rem;
+  padding: 1rem;
+  
+  scale {
+    margin-right: -1rem;
+    min-width: 21.5rem;
+  }
+
+  box {
+    margin-left: .2rem;
+  }
+}
+
+.volume-bar {
+  highlight {
+    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
+    @include rounding;
+  }
+}
+
+.brightness-slider-box {
+  scale highlight {
+    background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
+    @include rounding;
+  }
+}
+
+.time {
+  font-size: 2.5rem;
+}
+
+.date-box {
+  margin: 0 1rem;
+
+  label {
+    font-size: 1.5rem;
+  }
+}
+
+.battery-box {
+  margin: 0 0 1rem 1rem;
+}
+
+.battery-icon {
+  font-size: 2rem;
+}
+
+.side-options-box {
+  margin: 0 1rem 1rem 0;
+}
+
+.side-options-box button {
+  background-color: $surface0;  
+  border-radius: 50%;
+  padding: .5rem;
+
+  label {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background: $overlay0;
+  }
+}

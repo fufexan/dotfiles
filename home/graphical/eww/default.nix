@@ -10,6 +10,7 @@
     config.programs.eww.package
     bash
     bc
+    blueberry
     bluez
     coreutils
     dbus
@@ -27,13 +28,12 @@
     socat
     udev
     upower
+    util-linux
     wget
     wireplumber
     wofi
   ];
 in {
-  # home.packages = [inputs.eww.packages.${pkgs.system}.eww-wayland];
-  # home.file.".config/eww".source = config.lib.file.mkOutOfStoreSymlink ./.;
   programs.eww = {
     enable = true;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;

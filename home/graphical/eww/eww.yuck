@@ -13,6 +13,7 @@
 (include "./windows/calendar.yuck")
 (include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
+(include "./windows/sidebar.yuck")
 (include "./windows/system.yuck")
 (include "./windows/volume.yuck")
 

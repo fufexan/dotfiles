@@ -1,0 +1,160 @@
+(defwidget system-menu []
+  (box
+    :class "system-menu-box"
+    :space-evenly "false"
+    :orientation "v"
+    (box
+      :class "top-row"
+      :space-evenly false
+      (label
+        :class "time"
+        :text "${time.hour}:${time.minute}")
+      (box
+        :class "date-box"
+        :space-evenly "false"
+        (label
+          :class "date"
+          :text {time.date})
+        (label
+          :class "day"
+          :text {time.day})))
+
+    (centerbox
+      :class "system-row"
+      (box
+        :class "wifi-box"
+        :space-evenly "false"
+        :orientation "v"
+        (box
+          :class "element"
+          :space-evenly "false"
+          (button
+            :class "wifi-button"
+            :onclick "scripts/net toggle"
+            {net.icon})
+          (label
+            :class "separator"
+            :text "|")
+          (button
+            :class "wifi-arrow-btn"
+            :onclick "eww close system-menu && scripts/launchApps network"
+            ""))
+        (label
+          :text {net.essid}
+          :xalign 0.5
+          :wrap true))
+
+      (box
+        :class "bluetooth-box"
+        :space-evenly "false"
+        :orientation "v"
+        (box
+          :class "element"
+          :space-evenly "false"
+          (button
+            :class "bluetooth-button"
+            :onclick "scripts/bluetooth toggle"
+            {bluetooth.icon})
+          (label
+            :class "separator"
+            :text "|")
+          (button
+            :class "bluetooth-arrow-btn"
+            :onclick "eww close system-menu && blueberry"
+            ""))
+        (label
+          :text {bluetooth.text}
+          :xalign 0.5
+          :wrap true))
+
+      (box
+        :class "airplane-box"
+        :space-evenly "false"
+        :orientation "v"
+        (box
+          :class "element"
+          (button
+            :class "airplane-button"
+            :onclick "scripts/airplane toggle"
+            airplane))
+        (label
+          :text "Airplane Mode"
+          :xalign 0.5
+          :wrap true)))
+
+    (box
+      :class "sliders"
+      :orientation "v"
+      (box
+        :class "volume-slider-box"
+        :space-evenly "false"
+        :orientation "h"
+        (button
+          :class "volume-icon"
+          :onclick "scripts/volume setmute"
+          "")
+        (scale
+          :class "volume-bar"
+          :value {volume.percent}
+          :tooltip "volume on ${volume.percent}%"
+          :onchange "scripts/volume setvol SINK {}"))
+      (box
+        :class "volume-slider-box"
+        :space-evenly "false"
+        :orientation "h"
+        (button
+          :class "volume-icon"
+          :onclick "scripts/volume setmute SOURCE"
+          "")
+        (scale
+          :class "volume-bar"
+          :value {volume.microphone}
+          :tooltip "mic on ${volume.microphone}%"
+          :onchange "scripts/volume setvol SOURCE {}"))
+      (box
+        :orientation "h"
+        :class "brightness-slider-box"
+        :space-evenly "false"
+        (button
+          :class "brightness-slider-icon"
+          {brightness.icon})
+        (scale
+          :class "brightness-slider" 
+          :value {brightness.level} 
+          :marks true 
+          :onchange "light -S {}")))
+
+    (box
+      :class "bottom-row"
+      ; :space-evenly "true"
+      (box
+        :class "battery-box"
+        :space-evenly "false"
+        (label
+          :class "battery-icon"
+          :text "")
+        (label
+          :class "battery-text"
+          :text {EWW_BATTERY["BAT0"].capacity}))
+      (box
+        :class "side-options-box"
+        :space-evenly "false"
+        :spacing 5
+        :halign "end"
+        (button
+          :class "power-button"
+          :onclick "eww open --toggle powermenu" "")))))
+
+;; windows
+(defwindow system-menu
+  :stacking "fg" 
+  :windowtype "dock" 
+  :wm-ignore true 
+  :monitor "0"
+  :geometry (geometry
+    :x "0"
+    :y "0"
+    :width "0%"
+    :height "0%"
+    :anchor "right top")
+  (system-menu))
