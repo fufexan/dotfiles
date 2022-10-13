@@ -1,5 +1,6 @@
 .system-menu-box {
   background-color: $bg;
+  border: 1px solid $border;
   @include wshadow;
   @include rounding;
   color: $text;
@@ -12,11 +13,11 @@
 }
 
 .top-row {
-  margin: 1rem 1rem .5rem;
+  margin: 1rem 1.5rem 0rem;
 }
 
 .system-row {
-  margin: 0 .7rem;
+  margin: .5rem .7rem;
   
   .element {
     background: $surface0;
@@ -50,8 +51,8 @@
 .sliders {
   background-color: $surface0;
   @include rounding;
-  margin: 1rem;
-  padding: 1rem;
+  margin: .5rem 1rem;
+  padding: .6rem 1rem;
   
   scale {
     margin-right: -1rem;
@@ -59,7 +60,7 @@
   }
 
   box {
-    margin-left: .2rem;
+    margin: .2rem 0;
   }
 }
 
@@ -90,7 +91,7 @@
 }
 
 .battery-box {
-  margin: 0 0 1rem 1rem;
+  margin: .5rem 1rem;
 }
 
 .battery-icon {
@@ -98,19 +99,19 @@
 }
 
 .side-options-box {
-  margin: 0 1rem 1rem 0;
-}
+  margin: .5rem 1rem;
 
-.side-options-box button {
-  background-color: $surface0;  
-  border-radius: 50%;
-  padding: .5rem;
+  button {
+    background-color: $surface0;  
+    border-radius: 50%;
+    padding: .5rem;
 
-  label {
-    font-size: 1.5rem;
-  }
+    label {
+      font-size: 1.5rem;
+    }
 
-  &:hover {
-    background: $overlay0;
+    &:hover {
+      background: $overlay0;
+    }
   }
 }

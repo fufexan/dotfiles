@@ -31,6 +31,7 @@
     util-linux
     wget
     wireplumber
+    wlogout
     wofi
   ];
 in {

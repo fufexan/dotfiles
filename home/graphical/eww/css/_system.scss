@@ -35,13 +35,14 @@
 
 .sys-text-sub {
   color: $text;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-left: 2rem;
 }
 
 .sys-text-mem,
 .sys-text-cpu,
 .sys-text-bat {
+  font-size: 1rem;
   font-weight: bold;
   margin-left: 2rem;
 }
@@ -49,21 +50,21 @@
 .sys-icon-mem,
 .sys-icon-cpu,
 .sys-icon-bat {
-  font-size: 30px;
-  margin: 25px;
+  font-size: 1.5rem;
+  margin: 1.5rem;
 }
 
-.sys-win {
+.system-info-box {
   @include rounding;
-  @include wshadow;
-  background-color: $bg;
-  border: 1px solid $border;
+  background-color: $surface0;
+  margin: .5rem 1rem;
+  padding: .5rem
 }
 
 .sys-mem,
 .sys-cpu,
 .sys-bat {
-  background-color: $bg1;
+  background-color: $bg;
 }
 
 .sys-icon-mem,
@@ -85,7 +86,5 @@
 }
 
 .sys-box {
-  margin: 1em;
+  margin: .3em;
 }
-
-

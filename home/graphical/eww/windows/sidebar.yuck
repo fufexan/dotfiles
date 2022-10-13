@@ -42,7 +42,7 @@
         (label
           :text {net.essid}
           :xalign 0.5
-          :wrap true))
+          :limit-width 13))
 
       (box
         :class "bluetooth-box"
@@ -65,7 +65,7 @@
         (label
           :text {bluetooth.text}
           :xalign 0.5
-          :wrap true))
+          :limit-width 13))
 
       (box
         :class "airplane-box"
@@ -80,7 +80,7 @@
         (label
           :text "Airplane Mode"
           :xalign 0.5
-          :wrap true)))
+          :limit-width 14)))
 
     (box
       :class "sliders"
@@ -125,8 +125,90 @@
           :onchange "light -S {}")))
 
     (box
+      :class "system-info-box"
+      :orientation "v"
+
+      ; cpu
+      (box
+        :class "sys-box"
+        :space-evenly "false"
+        :halign "start"
+        (circular-progress
+          :value "${EWW_CPU.avg}"
+          :class "sys-cpu"
+          :thickness "3"
+          (label
+            :text ""
+            :class "sys-icon-cpu"))
+        (box
+          :orientation "v"
+          :vexpand "false"
+          (label
+            :text "cpu"
+            :halign "start"
+            :class "sys-text-cpu")
+          (label
+            :text "${round(EWW_CPU.avg,2)}%"
+            :halign "start"
+            :class "sys-text-sub")
+          (label
+            :text "${EWW_CPU.cores[0].freq} MHz"
+            :halign "start"
+            :class "sys-text-sub")))
+
+      ; memory
+      (box
+        :class "sys-box"
+        :space-evenly "false"
+        :halign "start"
+        (circular-progress
+          :value {memory.percentage}
+          :class "sys-mem"
+          :thickness "3"
+          (label
+            :text ""
+            :class "sys-icon-mem"))
+        (box
+          :orientation "v"
+          (label
+            :text "memory"
+            :halign "start"
+            :class "sys-text-mem" )
+          (label
+            :text "${memory.used} | ${memory.total}"
+            :halign "start"
+            :class "sys-text-sub" )))
+
+      ; battery
+      (box
+        :class "sys-box"
+        :space-evenly "false"
+        (circular-progress
+          :value "${EWW_BATTERY["BAT0"].capacity}"
+          :class "sys-bat"
+          :style "color: ${battery.color};"
+          :thickness 3
+          (label
+            :text ""
+            :style "color: ${battery.color};"
+            :class "sys-icon-bat" ))
+        (box
+          :orientation "v"
+          (label
+            :text "battery"
+            :halign "start"
+            :class "sys-text-bat" )
+          (label
+            :text "${EWW_BATTERY["BAT0"].capacity}% | ${battery.wattage}"
+            :halign "start"
+            :class "sys-text-sub" )
+          (label
+            :text "${battery.status}"
+            :halign "start"
+            :class "sys-text-sub" ))))
+
+    (box
       :class "bottom-row"
-      ; :space-evenly "true"
       (box
         :class "battery-box"
         :space-evenly "false"
@@ -143,7 +225,9 @@
         :halign "end"
         (button
           :class "power-button"
-          :onclick "eww open --toggle powermenu" "")))))
+          :onclick "wlogout" "")))))
+          ; will add when I implement the powermenu
+          ; :onclick "${EWW_CMD} open --toggle powermenu" "")))))
 
 ;; windows
 (defwindow system-menu

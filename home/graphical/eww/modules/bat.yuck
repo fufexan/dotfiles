@@ -6,5 +6,5 @@
     :thickness 3
     (button
       :tooltip "battery on ${EWW_BATTERY["BAT0"].capacity}%"
-      :onclick "${EWW_CMD} open --toggle system"
+      :onclick "${EWW_CMD} open --toggle system-menu"
       (label :class "icon-text" :text ""))))
