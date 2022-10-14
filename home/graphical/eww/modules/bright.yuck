@@ -1,20 +1,8 @@
 (defwidget bright []
-  (eventbox
-    :onhover "${EWW_CMD} update bright_reveal=true"
-    :onhoverlost "${EWW_CMD} update bright_reveal=false"
-    (box
-      :class "module"
-      :space-evenly "false"
-      :spacing "3"
-      (revealer
-        :transition "slideleft"
-        :reveal bright_reveal
-        :duration "350ms"
-        (scale
-          :class "brightbar"
-          :value {brightness.level}
-          :tooltip "${brightness.level}%"
-          :onchange "light -S {}"))
+  (box
+    :class "module"
+    (eventbox
+      :onscroll "echo {} | sed -e 's/up/-U 1/g' -e 's/down/-A 1/g' | xargs light"
       (label
         :text {brightness.icon}
         :class "bright-icon"

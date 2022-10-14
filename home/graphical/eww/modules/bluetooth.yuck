@@ -1,19 +1,6 @@
 (defwidget bluetooth []
-  (eventbox
-    :onhover "${EWW_CMD} update bt_rev=true"
-    :onhoverlost "${EWW_CMD} update bt_rev=false"
-    (box
-      :space-evenly "false"
-      (revealer
-        :transition "slideright"
-        :reveal bt_rev
-        :duration "350ms"
-        (label
-          :class "module-bt module"
-          :style "color: ${bluetooth.color};"
-          :text {bluetooth.text}))
-      (button
-        :class "module-bt module"
-        :onclick "blueman"
-        :style "color: ${bluetooth.color};"
-        {bluetooth.icon}))))
+  (button
+    :class "module-bt module"
+    :onclick "blueman"
+    :style "color: ${bluetooth.color};"
+    {bluetooth.icon}))

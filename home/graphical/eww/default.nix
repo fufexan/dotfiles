@@ -21,6 +21,7 @@
     jq
     light
     networkmanager
+    pavucontrol
     playerctl
     procps
     pulseaudio

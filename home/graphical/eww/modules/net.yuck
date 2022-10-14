@@ -1,19 +1,6 @@
 (defwidget net []
-  (eventbox
-    :onhover "${EWW_CMD} update net_rev=true"
-    :onhoverlost "${EWW_CMD} update net_rev=false"
-    (box
-      :space-evenly "false"
-      (revealer
-        :transition "slideright"
-        :reveal net_rev
-        :duration "350ms"
-        (label
-          :class "module-ssid module"
-          :style "color: ${net.color};"
-          :text {net.essid}))
-      (button
-        :class "module-net module"
-        :onclick "networkmanager_dmenu"
-        :style "color: ${net.color};"
-        {net.icon}))))
+  (button
+    :class "module-net module"
+    :onclick "networkmanager_dmenu"
+    :style "color: ${net.color};"
+    {net.icon}))

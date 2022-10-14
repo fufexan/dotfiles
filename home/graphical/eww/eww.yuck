@@ -14,7 +14,6 @@
 (include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
 (include "./windows/sidebar.yuck")
-(include "./windows/volume.yuck")
 
 (defwidget sep []
   (label :class "separ module" :text "|"))
