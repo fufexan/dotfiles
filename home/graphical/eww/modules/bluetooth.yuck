@@ -1,6 +1,6 @@
 (defwidget bluetooth []
   (button
     :class "module-bt module"
-    :onclick "blueman"
+    :onclick "blueberry"
     :style "color: ${bluetooth.color};"
     {bluetooth.icon}))

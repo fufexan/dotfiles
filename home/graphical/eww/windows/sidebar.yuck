@@ -91,8 +91,8 @@
         :orientation "h"
         (button
           :class "volume-icon"
-          :onclick "scripts/volume setmute"
-          "")
+          :onclick "scripts/volume mute SINK"
+          {volume.icon})
         (scale
           :class "volume-bar"
           :value {volume.percent}
@@ -104,7 +104,7 @@
         :orientation "h"
         (button
           :class "volume-icon"
-          :onclick "scripts/volume setmute SOURCE"
+          :onclick "scripts/volume mute SOURCE"
           "")
         (scale
           :class "volume-bar"
@@ -225,7 +225,7 @@
         :halign "end"
         (button
           :class "power-button"
-          :onclick "wlogout" "")))))
+          :onclick "wlogout -p layer-shell &" "")))))
           ; will add when I implement the powermenu
           ; :onclick "${EWW_CMD} open --toggle powermenu" "")))))
 

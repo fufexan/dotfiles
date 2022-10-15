@@ -21,7 +21,7 @@
 (defwidget notif-toggle []
   (button
     :class "notif-toggle module"
-    :onclick "[ $(${EWW_CMD} get notif_rev) = \"false\" ] && ${EWW_CMD} update notif_rev=true || ${EWW_CMD} update notif_rev=false";
+    :onclick "${EWW_CMD} open --toggle notifications";
     {notif_icons.icon}))
 
 ; clipboard 󰅌 󰅍 󰄷

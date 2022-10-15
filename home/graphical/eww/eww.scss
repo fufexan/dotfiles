@@ -1,17 +1,19 @@
 @import 'css/colors';
 
-@mixin wshadow {
-  box-shadow: 0 2px 3px $shadow;
-  margin: 5px 5px 10px;
-}
-
 @mixin rounding {
   border-radius: 16px;
 }
 
+@mixin window {
+  border: 1px solid $border;
+  box-shadow: 0 2px 3px $shadow;
+  margin: 5px 5px 10px;
+  @include rounding;
+}
+
 * {
   all: unset;
-  font-size: 1.2rem;
+  transition: 200ms ease;
 }
 
 @import 'css/calendar';
@@ -24,36 +26,46 @@
 .bar {
   background-color: $bg;
   color: $fg;
+
+  label {
+    font-size: 1.2rem;
+  }
+}
+
+tooltip {
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: 8px;
+
+  label {
+    font-size: 1rem;
+  }
 }
 
 .module { margin: 0 5px; }
-.clock { font-size: 1.4rem; }
 .hour { font-weight: bold; }
 .date {
-  label {
-    font-size: 1.4rem;
-  }
-
   background: $bg;
   color: $flamingo;
-  margin-left: -1rem;
+  margin-left: -1.2rem;
   padding: 0 1rem;
+
+  label {
+    font-size: 1.2rem;
+  }
 }
 
 .bright-icon { color: $yellow; }
-.brightbar trough highlight {
-  background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
-  border-radius: 10px;
-}
 
 .module-ssid,
 .module-net { color: $lavender; }
+
 .module-bt { font-size: 1.2rem; }
 
 .separ {
   color: $surface0;
-  padding-bottom: 2px;
   font-size: 1.5rem;
+  padding-bottom: 2px;
 }
 
 scale trough {

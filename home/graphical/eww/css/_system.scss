@@ -35,7 +35,6 @@
 
 .sys-text-sub {
   color: $text;
-  font-size: 1.1rem;
   margin-left: 2rem;
 }
 
@@ -48,9 +47,13 @@
 }
 
 .sys-icon-mem,
-.sys-icon-cpu,
-.sys-icon-bat {
+.sys-icon-cpu {
   font-size: 1.5rem;
+  margin: 1.5rem;
+}
+
+.sys-icon-bat {
+  font-size: 1rem;
   margin: 1.5rem;
 }
 
@@ -58,7 +61,7 @@
   @include rounding;
   background-color: $surface0;
   margin: .5rem 1rem;
-  padding: .5rem
+  padding: .5rem;
 }
 
 .sys-mem,

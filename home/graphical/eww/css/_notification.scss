@@ -1,42 +1,59 @@
-.notifications {
-  padding: 1em;
+.notifications-box {
+  @include window;
   background: $bg;
-  @include rounding;
-  @include wshadow;
+  padding: 1rem;
 }
 
 .notification {
-  background-color: $crust;
-  padding: 1rem;
-  border-radius: 8px;
-  :hover {
+  background-color: $surface0;
+  border-bottom: 1px solid $bg;
+  padding: .5rem;
+
+  box { margin-bottom: .5rem; }
+
+  label { font-size: 1rem; }
+
+  &:hover {
     border: 1px solid $border;
   }
 
   .appname {
-    font-size: 0.9rem;
-    font-weight: bold;
     color: $peach;
+    font-weight: bold;
   }
 
   .summary {
-    font-size: 1.1rem;
-    font-weight: bold;
     color: $text;
+    font-weight: bold;
   }
 
-  .body {
-    color: $text;
-  }
+  .body { color: $text; }
+}
+
+.container {
+  &:first-child { border-radius: 8px 8px 0 0; };
+  &:last-child { border-radius: 0 0 8px 8px; };
+}
+
+.notification-header {
+  margin-bottom: 1rem;
 }
 
 .notification-label {
-  font-size: 1.5rem;
   color: $blue;
+  font-size: 1.5rem;
 }
 
 .notification-action {
-  font-size: 2rem;
-  color: $text;
-  margin-left: 1rem;
+  border-radius: 50%;
+  padding: .3rem .5rem;
+
+  label {
+    color: $text;
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background: $surface0;
+  }
 }

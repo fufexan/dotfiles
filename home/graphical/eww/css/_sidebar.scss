@@ -1,11 +1,8 @@
 .system-menu-box {
+  @include window;
   background-color: $bg;
   border: 1px solid $border;
-  @include wshadow;
-  @include rounding;
   color: $text;
-  
-  transition: 200ms ease;
 }
 
 .separator {
@@ -13,96 +10,82 @@
 }
 
 .top-row {
-  margin: 1rem 1.5rem 0rem;
+  margin: 1rem 1.5rem 0;
 }
 
 .system-row {
   margin: .5rem .7rem;
-  
-  .element {
-    background: $surface0;
-    margin: .3rem;
-    @include rounding;
-    
-    button {
-      padding: 1rem;
-      @include rounding;
 
-      label {
-        font-size: 1.5rem;
-      }
-
-      &:hover {
-        background: $overlay0;
-      }
-    }
-  }
-  
-  .airplane-box box button {
+  .airplane-box button {
     padding: 1rem 3rem;
   }
 
   label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 0 .1rem;
   }
 }
 
-.sliders {
-  background-color: $surface0;
+.element {
   @include rounding;
+  background: $surface0;
+  margin: .3rem;
+
+  button {
+    @include rounding;
+    padding: 1rem;
+
+    label {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      background: $overlay0;
+    }
+  }
+}
+
+.sliders {
+  @include rounding;
+  background-color: $surface0;
   margin: .5rem 1rem;
   padding: .6rem 1rem;
-  
+
   scale {
     margin-right: -1rem;
     min-width: 21.5rem;
   }
 
-  box {
-    margin: .2rem 0;
-  }
+  box { margin: .2rem 0; }
+
+  label { font-size: 1.2rem; }
 }
 
-.volume-bar {
-  highlight {
-    background-image: linear-gradient(to right, $teal 30%, $sky 100%);
-    @include rounding;
-  }
+.volume-bar highlight {
+  @include rounding;
+  background-image: linear-gradient(to right, $teal 30%, $sky 100%);
 }
 
-.brightness-slider-box {
-  scale highlight {
-    background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
-    @include rounding;
-  }
+.brightness-slider-box scale highlight {
+  @include rounding;
+  background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
 }
 
-.time {
-  font-size: 2.5rem;
-}
-
+.time { font-size: 2.5rem; }
 .date-box {
   margin: 0 1rem;
 
-  label {
-    font-size: 1.5rem;
-  }
+  label { font-size: 1.5rem; }
 }
 
-.battery-box {
-  margin: .5rem 1rem;
-}
-
-.battery-icon {
-  font-size: 2rem;
-}
+.battery-box { margin: .5rem 1rem; }
+.battery-icon { font-size: 2rem; }
 
 .side-options-box {
   margin: .5rem 1rem;
 
   button {
-    background-color: $surface0;  
+    background-color: $surface0;
     border-radius: 50%;
     padding: .5rem;
 
