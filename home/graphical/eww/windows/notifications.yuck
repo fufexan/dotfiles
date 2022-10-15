@@ -1,4 +1,4 @@
-(defwindow sidebar
+(defwindow notifications
   :geometry
     (geometry
       :x "0px"
@@ -8,31 +8,23 @@
       :anchor "right top")
   :stacking "fg"
   :monitor "0"
-(sidebar))
+(notifications))
 
-(defwidget sidebar [] 
-  (revealer
-    :transition "slideleft"
-    :reveal notif_rev
-    :duration "350ms"
+(defwidget notifications [] 
   (box
-    :class "notifications" 
+    :class "notifications-box" 
     :orientation "v" 
-    :space-evenly "false" 
-    :spacing "10"
-    :halign "center"
+    :space-evenly "false"
     (box
       :class "notification-header"
-      :orientation "h" 
-      :space-evenly "false" 
       (label
         :class "notification-label"
         :halign "start"
         :text "Notifications")
       (box
-        :orientation "h" 
-        :space-evenly "false" 
         :halign "end"
+        :space-evenly "false" 
+        :spacing 10
         (button
           :class "notification-action"
           :tooltip "Refresh"
@@ -44,11 +36,11 @@
         (button
           :class "notification-action"
           :tooltip "Clear Notifications"
-          :onclick "scripts/notifications clear" "󰅙"))); 󰅖
+          :onclick "scripts/notifications clear" "󰅙"))) ; 󰅖
     (scroll
       :vscroll "true"
       :hscroll "false"
-      :height 840
+      :height 500
       :width 300
       (literal
-        :content notifications)))))
+        :content notifications))))

@@ -14,20 +14,19 @@ get_ids() {
 }
 
 get_notif() {
-
-  echo -n "(box :orientation \"v\" :space-evenly \"false\" :spacing \"10\" :halign \"start\" "
+  echo -n '(box :class "container" :orientation "v" :space-evenly false '
 
   for id in "${ids[@]}"; do
       mapfile -t n < <(jq -r ".data[] | .[] | select(.id.data == $id) | .appname.data, .summary.data, .body.data" "$tmp" | sed -r '/^\s*$/d' | sed -e 's/\%/ percent/g')
-      echo -n "(eventbox :onclick \"dunstctl history-pop $id && dunstctl action 0 && dunstctl close\" \
-        (box :class \"notification\" :orientation \"h\" :width 300 :space-evenly \"false\" \
-          (box :orientation \"v\" :space-evenly \"false\" :valign \"start\" :width 300 :spacing 10 \
-            (box :orientation \"h\" :space-evenly \"false\" :width 300 :spacing 10 \
-              (label :xalign 0 :wrap \"true\" :class \"summary\" :text \"${n[1]}\") \
-              (label :xalign 1 :wrap \"true\" :class \"appname\" :text \"${n[0]}\")) \
-            (label :xalign 0 :wrap \"true\" :class \"body\" :text \"${n[2]}\"))))"
+      echo -n '(eventbox :onclick "dunstctl history-pop '"$id"' && dunstctl action 0 && dunstctl close" '
+        echo -n '(box :class "notification" :orientation "v" :width 300 :space-evenly false '
+          echo -n '(box :space-evenly false :spacing 10 '
+            echo -n '(label :halign "start" :xalign 0 :wrap true :class "summary" :text "'"${n[1]}"'")'
+            echo -n '(label :halign "end" :xalign 1 :wrap true :class "appname" :text "'"${n[0]}"'"))'
+          echo -n '(label :halign "start" :wrap true :class "body" :text "'"${n[2]}"'")))'
   done
-  echo ")"
+
+  echo ')'
 }
 
 toggle() {
