@@ -115,15 +115,15 @@ in ''
 
   # compositor commands
   bind = SUPERSHIFT, E, exec, pkill Hyprland
-  bind = SUPER, Q, killactive, 
-  bind = SUPER, F, fullscreen, 
-  bind = SUPER, G, togglegroup, 
+  bind = SUPER, Q, killactive,
+  bind = SUPER, F, fullscreen,
+  bind = SUPER, G, togglegroup,
   bind = SUPERSHIFT, N, changegroupactive, f
   bind = SUPERSHIFT, P, changegroupactive, b
-  bind = SUPER, R, togglesplit, 
-  bind = SUPER, T, togglefloating, 
-  bind = SUPER, P, pseudo, 
-  bind = SUPERALT, ,resizeactive, 
+  bind = SUPER, R, togglesplit,
+  bind = SUPER, T, togglefloating,
+  bind = SUPER, P, pseudo,
+  bind = SUPERALT, ,resizeactive,
 
   # utility
   bindr = SUPER, SUPER_L, exec, pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
