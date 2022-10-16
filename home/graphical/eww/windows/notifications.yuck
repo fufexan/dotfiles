@@ -28,7 +28,7 @@
         (button
           :class "notification-action"
           :tooltip "Refresh"
-          :onclick "dunstctl history > $XDG_CACHE_HOME/dunst-history.json" "")
+          :onclick "dunstctl history > $XDG_CACHE_HOME/dunst-history.json" "")
         (button
           :class "notification-action"
           :tooltip "Pause/Resume Notifications"
@@ -36,7 +36,7 @@
         (button
           :class "notification-action"
           :tooltip "Clear Notifications"
-          :onclick "scripts/notifications clear" "󰅙"))) ; 󰅖
+          :onclick "scripts/notifications clear" ""))) ; 󰅖
     (scroll
       :vscroll "true"
       :hscroll "false"
