@@ -1,6 +1,7 @@
 (defwidget music []
   (box
     :class "music-window"
+    :space-evenly false
     (box
       :class "music-cover-art"
       :style "background-image: url(\"${music_cover}\");")
@@ -9,11 +10,12 @@
       :class "music-box"
       (label
         :class "music-title"
-        :limit-width 18
+        :wrap true
+        :limit-width 30
         :text {music.title})
       (label
         :class "music-artist"
-        :wrap "true"
+        :wrap true
         :limit-width 30
         :text {music.artist})
       (centerbox
@@ -24,12 +26,11 @@
         (button :class "music-button" :onclick "playerctl next" ""))
       (box
         :orientation "v"
-        (centerbox
+        (box
           (label
             :xalign 0
             :class "music-time"
             :text {music.position_time})
-          (label)
           (label
             :xalign 1
             :class "music-time"
