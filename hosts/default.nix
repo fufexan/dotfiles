@@ -16,6 +16,8 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
+          ../modules/howdy
+          ../modules/linux-enable-ir-emitter.nix
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
           inputs.waveforms-flake.nixosModule
         ]

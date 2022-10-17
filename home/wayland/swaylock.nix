@@ -4,7 +4,6 @@
   in {
     clock = true;
     font = "Jost *";
-    ignore-empty-password = true;
     image = default.wallpaper;
     indicator = true;
 

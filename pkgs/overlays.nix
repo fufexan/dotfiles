@@ -14,6 +14,10 @@ inputs: _: prev: {
 
   regreet = prev.callPackage ./regreet {};
 
+  howdy = prev.callPackage ./howdy {};
+
+  linux-enable-ir-emitter = prev.callPackage ./linux-enable-ir-emitter {};
+
   waveform = prev.callPackage ./waveform {};
 
   spotify = prev.callPackage ./spotify {};

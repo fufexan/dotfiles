@@ -1,0 +1,11 @@
+diff --git a/sources/command/configure.py b/sources/command/configure.py
+index 68b4e31..f4f3f52 100644
+--- a/sources/command/configure.py
++++ b/sources/command/configure.py
+@@ -25,6 +25,5 @@ def execute(device: str, neg_answer_limit: int) -> NoReturn:
+         logging.info("Do not hesitate to visit the GitHub ! https://github.com/EmixamPP/linux-enable-ir-emitter/wiki")
+     else:
+         logging.info("The driver has been successfully generated.")
+-        boot.execute("enable")
+ 
+     exit(exit_code)

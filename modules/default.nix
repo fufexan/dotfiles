@@ -18,9 +18,11 @@ in {
 
         sharedModules = [
           {home-manager.useGlobalPkgs = true;}
+          {disabledModules = ["security/pam.nix"];}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
           ./minimal.nix
+          ./pam.nix
           module_args
           ./nix.nix
           ./security.nix
