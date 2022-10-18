@@ -15,7 +15,7 @@ if [ "$1" = "toggle" ]; then
 else
   while true; do
     status=$(nmcli g | tail -n 1 | awk '{print $1}')
-    signal=$(nmcli dev wifi | rg "\*" | awk '{ print $8 }')
+    signal=$(nmcli -f in-use,signal dev wifi | rg "\*" | awk '{ print $2 }')
     essid=$(nmcli -t -f NAME connection show --active | head -n1)
 
     icons=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
@@ -24,7 +24,7 @@ else
       icon=""
       color="#988ba2"
     else
-      level=$(awk -v n="$signal" 'BEGIN{print int(n/20)}')
+      level=$(awk -v n="$signal" 'BEGIN{print int((n-1)/20)}')
       if [ "$level" -gt 4 ]; then
         level=4
       fi
