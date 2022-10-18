@@ -18,9 +18,11 @@
     findutils
     gawk
     gnused
+    iwgtk
     jq
     light
     networkmanager
+    networkmanagerapplet
     pavucontrol
     playerctl
     procps

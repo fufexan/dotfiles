@@ -1,6 +1,6 @@
 (defwidget net []
   (button
     :class "module-net module"
-    :onclick "networkmanager_dmenu"
+    :onclick "iwgtk &"
     :style "color: ${net.color};"
     {net.icon}))

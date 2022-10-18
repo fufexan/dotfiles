@@ -37,7 +37,7 @@
             :text "|")
           (button
             :class "wifi-arrow-btn"
-            :onclick "eww close system-menu && scripts/launchApps network"
+            :onclick "eww close system-menu && nm-connection-editor &"
             ""))
         (label
           :text {net.essid}
