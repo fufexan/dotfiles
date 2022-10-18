@@ -1,7 +1,7 @@
 (defwidget system-menu []
   (box
     :class "system-menu-box"
-    :space-evenly "false"
+    :space-evenly false
     :orientation "v"
     (box
       :class "top-row"
@@ -11,7 +11,7 @@
         :text "${time.hour}:${time.minute}")
       (box
         :class "date-box"
-        :space-evenly "false"
+        :space-evenly false
         (label
           :class "date"
           :text {time.date})
@@ -23,11 +23,11 @@
       :class "system-row"
       (box
         :class "wifi-box"
-        :space-evenly "false"
+        :space-evenly false
         :orientation "v"
         (box
           :class "element"
-          :space-evenly "false"
+          :space-evenly false
           (button
             :class "wifi-button"
             :onclick "scripts/net toggle"
@@ -42,15 +42,15 @@
         (label
           :text {net.essid}
           :xalign 0.5
-          :limit-width 13))
+          :limit-width 15))
 
       (box
         :class "bluetooth-box"
-        :space-evenly "false"
+        :space-evenly false
         :orientation "v"
         (box
           :class "element"
-          :space-evenly "false"
+          :space-evenly false
           (button
             :class "bluetooth-button"
             :onclick "scripts/bluetooth toggle"
@@ -65,11 +65,12 @@
         (label
           :text {bluetooth.text}
           :xalign 0.5
-          :limit-width 13))
+          :tooltip "${bluetooth.text} ${bluetooth.batt_icon}"
+          :limit-width 15))
 
       (box
         :class "airplane-box"
-        :space-evenly "false"
+        :space-evenly false
         :orientation "v"
         (box
           :class "element"
@@ -80,15 +81,14 @@
         (label
           :text "Airplane Mode"
           :xalign 0.5
-          :limit-width 14)))
+          :limit-width 16)))
 
     (box
       :class "sliders"
       :orientation "v"
       (box
         :class "volume-slider-box"
-        :space-evenly "false"
-        :orientation "h"
+        :space-evenly false
         (button
           :class "volume-icon"
           :onclick "scripts/volume mute SINK"
@@ -100,8 +100,7 @@
           :onchange "scripts/volume setvol SINK {}"))
       (box
         :class "volume-slider-box"
-        :space-evenly "false"
-        :orientation "h"
+        :space-evenly false
         (button
           :class "volume-icon"
           :onclick "scripts/volume mute SOURCE"
@@ -112,9 +111,8 @@
           :tooltip "mic on ${volume.microphone}%"
           :onchange "scripts/volume setvol SOURCE {}"))
       (box
-        :orientation "h"
         :class "brightness-slider-box"
-        :space-evenly "false"
+        :space-evenly false
         (button
           :class "brightness-slider-icon"
           {brightness.icon})
@@ -126,17 +124,16 @@
 
     (box
       :class "system-info-box"
-      :orientation "v"
 
       ; cpu
       (box
         :class "sys-box"
-        :space-evenly "false"
+        :space-evenly false
         :halign "start"
         (circular-progress
           :value "${EWW_CPU.avg}"
           :class "sys-cpu"
-          :thickness "3"
+          :thickness 3
           (label
             :text ""
             :class "sys-icon-cpu"))
@@ -159,12 +156,12 @@
       ; memory
       (box
         :class "sys-box"
-        :space-evenly "false"
-        :halign "start"
+        :space-evenly false
+        :halign "end"
         (circular-progress
           :value {memory.percentage}
           :class "sys-mem"
-          :thickness "3"
+          :thickness 3
           (label
             :text ""
             :class "sys-icon-mem"))
@@ -173,61 +170,35 @@
           (label
             :text "memory"
             :halign "start"
-            :class "sys-text-mem" )
+            :class "sys-text-mem")
           (label
             :text "${memory.used} | ${memory.total}"
             :halign "start"
-            :class "sys-text-sub" )))
-
-      ; battery
-      (box
-        :class "sys-box"
-        :space-evenly "false"
-        (circular-progress
-          :value "${EWW_BATTERY["BAT0"].capacity}"
-          :class "sys-bat"
-          :style "color: ${battery.color};"
-          :thickness 3
-          (label
-            :text ""
-            :style "color: ${battery.color};"
-            :class "sys-icon-bat" ))
-        (box
-          :orientation "v"
-          (label
-            :text "battery"
-            :halign "start"
-            :class "sys-text-bat" )
-          (label
-            :text "${EWW_BATTERY["BAT0"].capacity}% | ${battery.wattage}"
-            :halign "start"
-            :class "sys-text-sub" )
-          (label
-            :text "${battery.status}"
-            :halign "start"
-            :class "sys-text-sub" ))))
+            :class "sys-text-sub"))))
 
     (box
       :class "bottom-row"
       (box
         :class "battery-box"
-        :space-evenly "false"
+        :space-evenly false
+        :halign "start"
         (label
           :class "battery-icon"
-          :text "")
+          :style "color: ${battery.color}"
+          :text {battery.icon})
         (label
-          :class "battery-text"
-          :text {EWW_BATTERY["BAT0"].capacity}))
-      (box
-        :class "side-options-box"
-        :space-evenly "false"
-        :spacing 5
+          :class "battery-percentage"
+          :text {EWW_BATTERY["BAT0"].capacity})
+        (label
+          :class "battery-status"
+          :text {battery.status})
+        (label
+          :class "battery-wattage"
+          :text {battery.wattage}))
+      (button
+        :class "power-button"
         :halign "end"
-        (button
-          :class "power-button"
-          :onclick "wlogout -p layer-shell &" "")))))
-          ; will add when I implement the powermenu
-          ; :onclick "${EWW_CMD} open --toggle powermenu" "")))))
+        :onclick "wlogout -p layer-shell &" ""))))
 
 ;; windows
 (defwindow system-menu

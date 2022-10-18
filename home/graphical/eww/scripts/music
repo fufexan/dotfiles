@@ -66,7 +66,7 @@ get_cover() {
 
 			echo "$IMGPATH"
 		elif [ "$COVER_URL" = "" ]; then
-			echo "images/music.png"
+			echo ""
 		else
 			echo "$COVER_URL"
 		fi

@@ -20,10 +20,6 @@
   color: $peach;
 }
 
-.iconbat {
-  color: $green;
-}
-
 .iconcpu {
   color: $blue;
 }
@@ -35,25 +31,17 @@
 
 .sys-text-sub {
   color: $text;
-  margin-left: 2rem;
 }
 
 .sys-text-mem,
-.sys-text-cpu,
-.sys-text-bat {
+.sys-text-cpu {
   font-size: 1rem;
   font-weight: bold;
-  margin-left: 2rem;
 }
 
 .sys-icon-mem,
 .sys-icon-cpu {
   font-size: 1.5rem;
-  margin: 1.5rem;
-}
-
-.sys-icon-bat {
-  font-size: 1rem;
   margin: 1.5rem;
 }
 
@@ -65,8 +53,7 @@
 }
 
 .sys-mem,
-.sys-cpu,
-.sys-bat {
+.sys-cpu {
   background-color: $bg;
 }
 
@@ -82,12 +69,8 @@
   color: $blue;
 }
 
-.sys-icon-bat,
-.sys-text-bat,
-.sys-bat {
-  color: $green;
-}
-
 .sys-box {
   margin: .3em;
+
+  box { margin-left: 1rem; }
 }
