@@ -42,26 +42,24 @@
   };
 
   nix = {
-    buildMachines =
-      #lib.filter (x: x.hostName != config.networking.hostName) [
-      [
-        {
-          system = "aarch64-linux";
-          sshUser = "root";
-          sshKey = "/etc/ssh/ssh_host_ed25519_key";
-          maxJobs = 4;
-          hostName = "arm-server";
-          supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-        }
-        {
-          system = "x86_64-linux";
-          sshUser = "root";
-          sshKey = "/root/.ssh/id_ed25519";
-          maxJobs = 8;
-          hostName = "io";
-          supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-        }
-      ];
+    buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
+      {
+        system = "aarch64-linux";
+        sshUser = "root";
+        sshKey = "/etc/ssh/ssh_host_ed25519_key";
+        maxJobs = 4;
+        hostName = "arm-server";
+        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
+      }
+      {
+        system = "x86_64-linux";
+        sshUser = "root";
+        sshKey = "/root/.ssh/id_ed25519";
+        maxJobs = 8;
+        hostName = "io";
+        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
+      }
+    ];
     distributedBuilds = true;
 
     gc = {

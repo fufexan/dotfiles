@@ -28,8 +28,7 @@ in {
     modules =
       [
         ./io
-        ../modules/gnome.nix
-        ../modules/xserver.nix
+        ../modules/greetd.nix
         ../modules/desktop.nix
         ../modules/gamemode.nix
         {home-manager.users.mihai.imports = homeImports."mihai@io";}
