@@ -91,19 +91,19 @@ in ''
     no_gaps_when_only = 1
   }
 
-  windowrule = float, title:^(Media viewer)$
+  windowrulev2 = float, title:^(Media viewer)$
 
-  windowrule = float, title:^(Picture-in-Picture)$
-  windowrule = pin, title:^(Picture-in-Picture)$
+  windowrulev2 = float, title:^(Picture-in-Picture)$
+  windowrulev2 = pin, title:^(Picture-in-Picture)$
 
-  windowrule = float, title:^(Firefox — Sharing Indicator)$
-  windowrule = move 0 0, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = float, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = move 0 0, title:^(Firefox — Sharing Indicator)$
 
-  windowrule = tile, title:^(Spotify)$
-  windowrule = workspace 9, title:^(Spotify)$
+  windowrulev2 = tile, class:^(Spotify)$
+  windowrulev2 = workspace 9, class:^(Spotify)$
 
-  windowrule = workspace 2, title:^(Discord)$
-  windowrule = workspace 2, title:^(WebCord)$
+  windowrulev2 = workspace 2, title:^(Discord)$
+  windowrulev2 = workspace 2, title:^(WebCord)$
 
   # make blueberry device-specific window proper size
   windowrulev2  =  tile,  class:^(blueberry.py)$,  title:^(?!Sound).+$

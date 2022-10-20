@@ -1,8 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.spicetify = {
     enable = true;
 
-    spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (_oa: rec {
+    spotifyPackage = inputs.self.packages.${pkgs.system}.spotify-wrapped-wm;
+
+    spicetifyPackage = pkgs.spicetify-cli.overrideAttrs (_: rec {
       pname = "spicetify-cli";
       version = "2.9.9";
       src = pkgs.fetchgit {
