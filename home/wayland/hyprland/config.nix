@@ -19,6 +19,8 @@
         bash -lc "exec apply-hm-env $@"
     '';
 in ''
+  $mod = SUPER
+
   # should be configured per-profile
   monitor = DP-1, preferred, auto, 1
   monitor = DP-2, preferred, auto, 1
@@ -96,51 +98,51 @@ in ''
   windowrulev2 = float, title:^(Picture-in-Picture)$
   windowrulev2 = pin, title:^(Picture-in-Picture)$
 
-  windowrulev2 = float, title:^(Firefox — Sharing Indicator)$
-  windowrulev2 = move 0 0, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = workspacesilent special, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = workspacesilent 10, title:^(.*is sharing your screen\.)$
 
   windowrulev2 = tile, class:^(Spotify)$
-  windowrulev2 = workspace 9, class:^(Spotify)$
+  windowrulev2 = workspacesilent special, class:^(Spotify)$
 
   windowrulev2 = workspace 2, title:^(Discord)$
   windowrulev2 = workspace 2, title:^(WebCord)$
 
   # make blueberry device-specific window proper size
-  windowrulev2  =  tile,  class:^(blueberry.py)$,  title:^(?!Sound).+$
+  windowrulev2 = tile, class:^(blueberry.py)$, title:^(?!Sound).+$
 
   # mouse movements
-  bindm = SUPER, mouse:272, movewindow
-  bindm = SUPER, mouse:273, resizewindow
-  bindm = SUPERALT, mouse:272, resizewindow
+  bindm = $mod, mouse:272, movewindow
+  bindm = $mod, mouse:273, resizewindow
+  bindm = $mod ALT, mouse:272, resizewindow
 
   # compositor commands
-  bind = SUPERSHIFT, E, exec, pkill Hyprland
-  bind = SUPER, Q, killactive,
-  bind = SUPER, F, fullscreen,
-  bind = SUPER, G, togglegroup,
-  bind = SUPERSHIFT, N, changegroupactive, f
-  bind = SUPERSHIFT, P, changegroupactive, b
-  bind = SUPER, R, togglesplit,
-  bind = SUPER, T, togglefloating,
-  bind = SUPER, P, pseudo,
-  bind = SUPERALT, ,resizeactive,
+  bind = $mod SHIFT, E, exec, pkill Hyprland
+  bind = $mod, Q, killactive,
+  bind = $mod, F, fullscreen,
+  bind = $mod, G, togglegroup,
+  bind = $mod SHIFT, N, changegroupactive, f
+  bind = $mod SHIFT, P, changegroupactive, b
+  bind = $mod, R, togglesplit,
+  bind = $mod, T, togglefloating,
+  bind = $mod, P, pseudo,
+  bind = $mod ALT, ,resizeactive,
 
   # utility
-  bindr = SUPER, SUPER_L, exec, pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
-  bind = SUPER, Return, exec, ${run-as-service "manual"} ${default.terminal.name}
-  bind = SUPER, Escape, exec, wlogout -p layer-shell
-  bind = SUPER, L, exec, swaylock
-  bind = SUPER, E, exec, ${emoji}
-  bind = SUPER, O, exec, wl-ocr
+  bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
+  bind = $mod, Return, exec, ${run-as-service "manual"} ${default.terminal.name}
+  bind = $mod, Escape, exec, wlogout -p layer-shell
+  bind = $mod, L, exec, swaylock
+  bind = $mod, E, exec, ${emoji}
+  bind = $mod, O, exec, wl-ocr
 
   # move focus
-  bind = SUPER, left, movefocus, l
-  bind = SUPER, right, movefocus, r
-  bind = SUPER, up, movefocus, u
-  bind = SUPER, down, movefocus, d
+  bind = $mod, left, movefocus, l
+  bind = $mod, right, movefocus, r
+  bind = $mod, up, movefocus, u
+  bind = $mod, down, movefocus, d
 
   # window resize
-  bind = SUPER, S, submap, resize
+  bind = $mod, S, submap, resize
 
   submap = resize
   binde = , right, resizeactive, 10 0
@@ -151,27 +153,28 @@ in ''
   submap = reset
 
   # media controls
-  bind = , XF86AudioPlay, exec, playerctl play-pause
-  bind = , XF86AudioPrev, exec, playerctl previous
-  bind = , XF86AudioNext, exec, playerctl next
+  bindl = , XF86AudioPlay, exec, playerctl play-pause
+  bindl = , XF86AudioPrev, exec, playerctl previous
+  bindl = , XF86AudioNext, exec, playerctl next
 
   # volume
   bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
   bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
-  bind = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  bind = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+  bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
   # backlight
   bindle = , XF86MonBrightnessUp, exec, light -A 5
   bindle = , XF86MonBrightnessDown, exec, light -U 5
 
   # screenshot
-  bind = , Print, exec, grimblast --notify copysave area
-  bind = SUPERSHIFT, R, exec, grimblast --notify copysave area
+  $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
+  bind = , Print, exec, $screenshotarea
+  bind = $mod SHIFT, R, exec, $screenshotarea
   bind = CTRL, Print, exec, grimblast --notify --cursor copysave output
-  bind = SUPERSHIFTCTRL, R, exec, grimblast --notify --cursor copysave output
+  bind = $mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output
   bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
-  bind = SUPERSHIFTALT, R, exec, grimblast --notify --cursor copysave screen
+  bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
 
   # workspaces
   ${builtins.concatStringsSep "\n" (builtins.genList (
@@ -181,20 +184,20 @@ in ''
         in
           builtins.toString (x + 1 - (c * 10));
       in ''
-        bind = SUPER, ${ws}, workspace, ${toString (x + 1)}
-        bind = SHIFTSUPER, ${ws}, movetoworkspace, ${toString (x + 1)}
+        bind = $mod, ${ws}, workspace, ${toString (x + 1)}
+        bind = $mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}
       ''
     )
     10)}
 
   # special workspace
-  bind = SUPERSHIFT, asciitilde, movetoworkspace, special
-  bind = SUPER, grave, togglespecialworkspace, eDP-1
+  bind = $mod SHIFT, asciitilde, movetoworkspace, special
+  bind = $mod, grave, togglespecialworkspace, eDP-1
 
   # cycle workspaces
-  bind = SUPER, bracketleft, workspace, m-1
-  bind = SUPER, bracketright, workspace, m+1
+  bind = $mod, bracketleft, workspace, m-1
+  bind = $mod, bracketright, workspace, m+1
   # cycle monitors
-  bind = SUPERSHIFT, braceleft, focusmonitor, l
-  bind = SUPERSHIFT, braceright, focusmonitor, r
+  bind = $mod SHIFT, braceleft, focusmonitor, l
+  bind = $mod SHIFT, braceright, focusmonitor, r
 ''
