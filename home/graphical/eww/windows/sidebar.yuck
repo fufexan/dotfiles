@@ -176,7 +176,7 @@
             :halign "start"
             :class "sys-text-sub"))))
 
-    (box
+    (centerbox
       :class "bottom-row"
       (box
         :class "battery-box"
@@ -195,10 +195,14 @@
         (label
           :class "battery-wattage"
           :text {battery.wattage}))
-      (button
-        :class "power-button"
+      (label)
+      (box
+        :space-evenly false
         :halign "end"
-        :onclick "wlogout -p layer-shell &" ""))))
+        (button
+          :halign "end"
+          :class "power-button"
+          :onclick "wlogout -p layer-shell &" "")))))
 
 ;; windows
 (defwindow system-menu

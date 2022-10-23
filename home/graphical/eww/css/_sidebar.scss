@@ -11,6 +11,20 @@
 
 .top-row {
   margin: 1rem 1.5rem 0;
+
+  .time { font-size: 2rem; }
+
+  .date-box {
+    margin: 0 1rem;
+
+    label { font-size: 1.1rem; }
+
+    .date {
+      background: unset;
+      margin: 0 .5rem 0 0;
+      padding: 0;
+    }
+  }
 }
 
 .system-row {
@@ -71,39 +85,23 @@
   background-image: linear-gradient(to right, $yellow 30%, $peach 100%);
 }
 
-.time { font-size: 2rem; }
-.date-box {
-  margin: 0 1rem;
-
-  label { font-size: 1.1rem; }
-
-  .date {
-    background: unset;
-    margin: 0 .5rem 0 0;
-    padding: 0;
-  }
-}
-
-.battery-box { margin: .5rem 1rem; }
-.battery-icon { font-size: 2rem; }
-.battery-wattage { color: $mauve; }
-
-.battery-status {
-  color: $subtext0;
-  margin: 0 .5rem;
-}
-
-.bottom-row button {
-  background-color: $surface0;
-  border-radius: 50%;
-  padding: .5rem;
+.bottom-row {
   margin: .5rem 1rem;
 
-  label {
-    font-size: 1.5rem;
+  .battery-icon { font-size: 2rem; }
+  .battery-wattage { color: $mauve; }
+
+  .battery-status {
+    color: $subtext0;
+    margin: 0 .5rem;
   }
 
-  &:hover {
-    background: $overlay0;
+  button {
+    background-color: $surface0;
+    border-radius: 50%;
+    padding: .5rem;
+
+    label { font-size: 1.5rem; }
+    &:hover { background: $overlay0; }
   }
 }
