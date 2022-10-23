@@ -97,7 +97,7 @@
 
     fu.url = "github:numtide/flake-utils";
 
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:SoraTenshi/helix/experimental";
 
     hm = {
       url = "github:nix-community/home-manager";

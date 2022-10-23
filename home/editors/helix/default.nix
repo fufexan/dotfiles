@@ -20,7 +20,11 @@
           normal = "block";
           select = "underline";
         };
-        indent-guides.render = true;
+        indent-guides = {
+          render = true;
+          rainbow = true;
+        };
+        rainbow-brackets = true;
       };
 
       keys.normal.space.u = {
