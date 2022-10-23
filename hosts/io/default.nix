@@ -14,11 +14,9 @@
   };
 
   boot = {
-    binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
-
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
-    kernelModules = ["acpi_call" "amdgpu"];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
+    kernelPackages = pkgs.linux_latest_amd_pstate;
 
     # Panel Self Refresh support
     kernelParams = ["amdgpu.dcfeaturemask=0x8"];
