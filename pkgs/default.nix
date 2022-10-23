@@ -41,6 +41,6 @@ inputs: _: prev: rec {
       sha256 = "sha256-AsXqcoqUXUFxTG+G+31lm45gjP6qGohEnUSUtKypew0=";
     };
   });
-  
+
   spotify-wrapped-wm = import ./spotify prev spotifywm;
 }
