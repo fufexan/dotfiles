@@ -16,9 +16,9 @@
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
-    kernelPackages = pkgs.linux_latest_amd_pstate;
+    kernelPackages = pkgs.linuxPackages_latest;
 
-    # Panel Self Refresh support
+    # Panel Self Refresh
     kernelParams = ["amdgpu.dcfeaturemask=0x8"];
 
     loader = {
@@ -28,6 +28,7 @@
 
     initrd = {
       availableKernelModules = [
+        "amd_pstate"
         "xhci_pci"
         "nvme"
         "usb_storage"
@@ -37,6 +38,7 @@
         "tpm"
       ];
       kernelModules = [
+        "amd_pstate"
         "btrfs"
         "kvm-amd"
         "sd_mod"
@@ -89,7 +91,8 @@
   };
 
   programs = {
-    adb.enable = true;
+    # currently broken
+    # adb.enable = true;
     hyprland = {
       enable = true;
       package = null;

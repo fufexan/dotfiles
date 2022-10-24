@@ -42,6 +42,7 @@
     # messaging
     tdesktop
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
+    inputs.self.packages.${pkgs.system}.discord-electron-openasar
     inputs.nix-matlab.defaultPackage.${pkgs.system}
     # torrents
     transmission-remote-gtk

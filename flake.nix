@@ -29,16 +29,6 @@
             extraProfile = "export GDK_SCALE=2";
           };
         };
-        overlays = [
-          (final: prev: {
-            linux_latest_amd_pstate = prev.linuxPackagesFor (prev.linux_latest.override {
-              structuredExtraConfig = with prev.lib.kernel; {
-                X86_AMD_PSTATE = yes;
-              };
-              ignoreConfigErrors = true;
-            });
-          })
-        ];
       });
   in {
     inherit lib overlays pkgs;
