@@ -9,6 +9,7 @@
 (include "./modules/net.yuck")
 (include "./modules/variables.yuck")
 (include "./modules/volume.yuck")
+(include "./modules/workspaces.yuck")
 
 (include "./windows/calendar.yuck")
 (include "./windows/music.yuck")
@@ -25,9 +26,6 @@
     {notif_icons.icon}))
 
 ; clipboard 󰅌 󰅍 󰄷
-
-(defwidget workspaces []
-  (literal :content workspace))
 
 (defwidget left []
   (box
