@@ -14,19 +14,16 @@ get_ids() {
 }
 
 get_notif() {
-  echo -n '(box :class "container" :orientation "v" :space-evenly false '
+  echo -n '['
 
   for id in "${ids[@]}"; do
       mapfile -t n < <(gojq -r ".data[] | .[] | select(.id.data == $id) | .appname.data, .summary.data, .body.data" "$tmp" | sed -r '/^\s*$/d' | sed -e 's/\%/ percent/g')
-      echo -n '(eventbox :onclick "dunstctl history-pop '"$id"' && dunstctl action 0 && dunstctl close" '
-        echo -n '(box :class "notification" :orientation "v" :width 300 :space-evenly false '
-          echo -n '(box :space-evenly false :spacing 10 '
-            echo -n '(label :halign "start" :xalign 0 :wrap true :class "summary" :text "'"${n[1]}"'")'
-            echo -n '(label :halign "end" :xalign 1 :wrap true :class "appname" :text "'"${n[0]}"'"))'
-          echo -n '(label :halign "start" :wrap true :class "body" :text "'"${n[2]}"'")))'
+      echo -n ''$([ $id -eq ${ids[0]} ] || echo ,)' { '
+      echo -n '"id": "'"$id"'", "appname": "'"${n[0]}"'", "summary": "'"${n[1]}"'", "body": "'"${n[2]}"'"'
+      echo -n '}' 
   done
 
-  echo ')'
+  echo ']'
 }
 
 toggle() {
