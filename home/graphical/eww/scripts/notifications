@@ -10,14 +10,14 @@ declare ids
 export toggle_icon=""
 
 get_ids() {
-  mapfile -t ids < <(dunstctl history | jq -r ".data[] | .[] | select(.appname.data != \"Spotify\") | .id.data")
+  mapfile -t ids < <(dunstctl history | gojq -r ".data[] | .[] | select(.appname.data != \"Spotify\") | .id.data")
 }
 
 get_notif() {
   echo -n '(box :class "container" :orientation "v" :space-evenly false '
 
   for id in "${ids[@]}"; do
-      mapfile -t n < <(jq -r ".data[] | .[] | select(.id.data == $id) | .appname.data, .summary.data, .body.data" "$tmp" | sed -r '/^\s*$/d' | sed -e 's/\%/ percent/g')
+      mapfile -t n < <(gojq -r ".data[] | .[] | select(.id.data == $id) | .appname.data, .summary.data, .body.data" "$tmp" | sed -r '/^\s*$/d' | sed -e 's/\%/ percent/g')
       echo -n '(eventbox :onclick "dunstctl history-pop '"$id"' && dunstctl action 0 && dunstctl close" '
         echo -n '(box :class "notification" :orientation "v" :width 300 :space-evenly false '
           echo -n '(box :space-evenly false :spacing 10 '

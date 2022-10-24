@@ -28,11 +28,11 @@ status() {
 # handles workspace create/destroy
 workspace_event() {
   o[$1]=$2
-  while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | jq -r '.[]|"\(.id) \(.monitor)"')
+  while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | gojq -r '.[]|"\(.id) \(.monitor)"')
 }
 # handles monitor (dis)connects
 monitor_event() {
-  while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | jq -r '.[]|"\(.name) \(.id) "')
+  while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | gojq -r '.[]|"\(.name) \(.id) "')
 }
 
 # generates the eww widget

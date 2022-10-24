@@ -18,8 +18,8 @@
     findutils
     gawk
     gnused
+    gojq
     iwgtk
-    jq
     light
     networkmanager
     networkmanagerapplet
