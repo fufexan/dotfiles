@@ -22,7 +22,7 @@
         };
         indent-guides = {
           render = true;
-          rainbow = true;
+          rainbow = "dim";
         };
         rainbow-brackets = true;
       };
