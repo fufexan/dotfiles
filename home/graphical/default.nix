@@ -38,6 +38,8 @@
     unzip
     unrar
 
+    libreoffice
+
     gh
     # messaging
     tdesktop

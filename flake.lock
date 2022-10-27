@@ -449,11 +449,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1666533192,
-        "narHash": "sha256-a1OaGNQzw0+q55P6aM710HSicNJmB+m/YNq2VlcCG0U=",
+        "lastModified": 1666904843,
+        "narHash": "sha256-6UDe6L0Q0jkRWRA0kWps71ExegJHG0fpmeXyxQmUDIU=",
         "owner": "SoraTenshi",
         "repo": "helix",
-        "rev": "5c89bc7bf9ad6b5b412a87ea59e81f022cf4d1ab",
+        "rev": "38208ab74e915794902e762f773a6d327f999012",
         "type": "github"
       },
       "original": {
@@ -490,11 +490,11 @@
         "wlroots": "wlroots"
       },
       "locked": {
-        "lastModified": 1666566882,
-        "narHash": "sha256-SLMhZKityEEnhuc8Kb8MH+MmNiW169mec6T6XiIB4AY=",
+        "lastModified": 1666907458,
+        "narHash": "sha256-GOUwoBBr1jCbbU/Wu/bBWZ5Tb19WEdmxRoFZA9RQ4II=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "c6a3092b45da325ee41e39a76fd527d04580a65e",
+        "rev": "c21808dd2dfa85a50d256d975ebee213ab7804ae",
         "type": "github"
       },
       "original": {
@@ -637,11 +637,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1665951041,
-        "narHash": "sha256-YK4cWVHsP/OhMWhO/n9s7QkziAVetPkNHtIEhwlBmGc=",
+        "lastModified": 1666796809,
+        "narHash": "sha256-5Dxf7CDw/cuUyQcm38QRCEuzREOtJ1W0O3n0jCxGTHo=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "05534322548e7bd6b2318bad0fbf2ae904a30c11",
+        "rev": "dd90d50b2e2ee7dee77d5b90308bb5f5958bd2ff",
         "type": "github"
       },
       "original": {

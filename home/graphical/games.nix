@@ -9,6 +9,7 @@
     [
       (osu-stable.override {location = "$HOME/Games/osu!stable";})
       osu-lazer-bin
+      roblox-player
 
       (inputs.nix-gaming.lib.legendaryBuilder {
         games = {
