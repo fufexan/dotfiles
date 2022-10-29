@@ -32,6 +32,7 @@ in {
         ../modules/desktop.nix
         ../modules/gamemode.nix
         {home-manager.users.mihai.imports = homeImports."mihai@io";}
+        inputs.waveforms-flake.nixosModule
       ]
       ++ sharedModules
       ++ desktopModules;

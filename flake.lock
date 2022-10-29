@@ -844,6 +844,7 @@
         "nixpkgs": "nixpkgs_5",
         "rust-overlay": "rust-overlay_2",
         "spicetify-nix": "spicetify-nix",
+        "waveforms-flake": "waveforms-flake",
         "webcord": "webcord"
       }
     },
@@ -941,6 +942,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "waveforms-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1666073884,
+        "narHash": "sha256-M1TLgr3/u0QGDG6+mf6GhIFRDI2jFGbk319SpAo4BdE=",
+        "owner": "liff",
+        "repo": "waveforms-flake",
+        "rev": "5b7197bf355d346e2ea761d08907b0439fdc0a15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "liff",
+        "repo": "waveforms-flake",
         "type": "github"
       }
     },

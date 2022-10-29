@@ -132,6 +132,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    waveforms-flake = {
+      url = "github:liff/waveforms-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     webcord.url = "github:fufexan/webcord-flake";
   };
 }
