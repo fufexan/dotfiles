@@ -45,7 +45,12 @@
     tdesktop
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
     inputs.self.packages.${pkgs.system}.discord-electron-openasar
+
+    # school stuff
     inputs.nix-matlab.defaultPackage.${pkgs.system}
+    inputs.nix-xilinx.packages.${pkgs.system}.vivado
+    inputs.nix-xilinx.packages.${pkgs.system}.vitis_hls
+    inputs.nix-xilinx.packages.${pkgs.system}.model_composer
     # torrents
     transmission-remote-gtk
     # misc
