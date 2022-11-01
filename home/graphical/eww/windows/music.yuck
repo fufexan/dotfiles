@@ -11,12 +11,10 @@
       (label
         :class "music-title"
         :wrap true
-        :limit-width 30
         :text {music.title})
       (label
         :class "music-artist"
         :wrap true
-        :limit-width 30
         :text {music.artist})
       (centerbox
         :halign "center"

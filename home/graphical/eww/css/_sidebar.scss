@@ -30,6 +30,11 @@
 .system-row {
   margin: .5rem .7rem;
 
+  .wifi-box label {
+    // font issue
+    margin-top: -.1rem;
+  }
+
   .airplane-box button {
     padding: 1rem 3rem;
   }
