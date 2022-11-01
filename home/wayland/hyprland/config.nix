@@ -110,6 +110,10 @@ in ''
   # make blueberry device-specific window proper size
   windowrulev2 = tile, class:^(blueberry.py)$, title:^(?!Sound).+$
 
+  # idle inhibit
+  windowrulev2 = idleinhibit focus, class:^(mpv)$
+  windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
+
   # mouse movements
   bindm = $mod, mouse:272, movewindow
   bindm = $mod, mouse:273, resizewindow
