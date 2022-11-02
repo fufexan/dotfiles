@@ -44,7 +44,7 @@
     # messaging
     tdesktop
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
-    inputs.self.packages.${pkgs.system}.discord-electron-openasar
+    (discord-canary.override {withOpenASAR = true; })
 
     # school stuff
     inputs.nix-matlab.defaultPackage.${pkgs.system}
