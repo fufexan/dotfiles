@@ -27,7 +27,7 @@
 
   icon = builtins.fetchurl {
     url = "https://worldvectorlogo.com/download/technic-launcher.svg";
-    sha256 = "sha256-hZpqxNGCPWDGw1v2y1vMnvo6qGfqI9AfcmU+Q2u/KBc=";
+    sha256 = "16838gq5a014byy04q80dzak39s74cwlbwz5r7c6w3n4hgljlsgj";
   };
 
   script = writeShellScriptBin pname ''
