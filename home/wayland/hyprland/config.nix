@@ -30,7 +30,6 @@ in ''
   workspace = DP-2, 10
 
   exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
-  exec-once = swaybg -i ~/.config/wallpaper.png
   exec-once = eww open bar
 
   misc {

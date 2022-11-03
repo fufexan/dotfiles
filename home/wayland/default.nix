@@ -18,6 +18,7 @@ in {
     ../graphical/eww
     ./hyprland
     ./sway.nix
+    ./swaybg.nix
   ];
 
   home.packages = with pkgs; [
