@@ -2,7 +2,12 @@ inputs: let
   inherit (inputs) self;
 
   sharedModules = [
-    {_module.args = {inherit inputs;};}
+    {
+      _module.args = {
+        inherit inputs;
+        inherit (self.lib) default;
+      };
+    }
     ../modules/minimal.nix
     ../modules/security.nix
     inputs.agenix.nixosModule

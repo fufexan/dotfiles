@@ -1,14 +1,9 @@
 {
   pkgs,
   inputs,
+  default,
   ...
-}: let
-  wall = builtins.fetchurl rec {
-    name = "wallpaper-${sha256}.png";
-    url = "https://9to5mac.com/wp-content/uploads/sites/6/2014/08/yosemite-4.jpg?quality100&strip=all";
-    sha256 = "1hvpphvrdnlrdij2armq5zpi5djg2wj7hxhg148cgm9fs9m3z1vq";
-  };
-in {
+}: {
   environment.systemPackages = with pkgs; [
     catppuccin-gtk
     bibata-cursors
@@ -17,7 +12,7 @@ in {
     greetd.gtkgreet
   ];
 
-  environment.etc."xdg/gtk-3.0/settings.ini".text = ''
+  environment.etc."gtk-3.0/settings.ini".text = ''
     [Settings]
     gtk-cursor-theme-name=Bibata-Modern-Classic
     gtk-cursor-theme-size=24
@@ -32,7 +27,7 @@ in {
       default_session.command = let
         gtkgreetStyle = pkgs.writeText "greetd-gtkgreet.css" ''
           window {
-            background-image: url("${wall}");
+            background-image: url("${default.wallpaper}");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;

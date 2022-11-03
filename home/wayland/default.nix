@@ -3,6 +3,7 @@
   lib,
   config,
   colors,
+  default,
   ...
 }:
 # Wayland config
@@ -56,7 +57,7 @@ in {
       effect-blur = "30x3";
       font = "Roboto";
       ignore-empty-password = true;
-      image = "${config.xdg.configHome}/wallpaper.png";
+      image = default.wallpaper;
       indicator = true;
       bs-hl-color = xcolors.base0E;
       key-hl-color = xcolors.base07;
