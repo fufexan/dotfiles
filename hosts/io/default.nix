@@ -109,6 +109,16 @@
   services = {
     btrfs.autoScrub.enable = true;
 
+    clight = {
+      enable = true;
+      settings = {
+        dpms.disabled = true;
+        gamma.disabled = true;
+        inhibit.disabled = true;
+        screen.disabled = true;
+      };
+    };
+
     kmonad.keyboards = {
       io = {
         name = "io";
