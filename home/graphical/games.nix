@@ -16,9 +16,9 @@
           rocket-league = {
             desktopName = "Rocket League";
             tricks = ["dxvk" "win10"];
-            icon = builtins.fetchurl {
+            icon = builtins.fetchurl rec {
               url = "https://img.favpng.com/21/12/21/rocket-league-video-game-psyonix-logo-decal-png-favpng-yYh6A3FRCJNh7JYgYZchHxAia.jpg";
-              name = "rocket-league.png";
+              name = "rocket-league-${sha256}.png";
               sha256 = "0ymisjgcmw8mkarnkm95dsndii2aw9yn5i3vfximi2dchy4ng8ab";
             };
             discordIntegration = false;
@@ -33,15 +33,6 @@
     ++ (with pkgs; [
       gamescope
       legendary-gl
-
       inputs.self.packages.${pkgs.system}.tlauncher
-
-      (inputs.self.packages.${pkgs.system}.technic-launcher.override {
-        source = builtins.fetchurl rec {
-          url = "https://mc-launcher.com/files/unc/Technic.jar";
-          name = "technic-${sha256}";
-          sha256 = "1hd5kfvkz3x0vral28n1d0srclp82blb2kx63sn10w06qz3pbzsf";
-        };
-      })
     ]);
 }
