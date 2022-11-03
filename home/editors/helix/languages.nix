@@ -21,7 +21,8 @@ with pkgs; [
   }
   {
     name = "nix";
-    language-server = {command = "${inputs.nil.packages.${pkgs.system}.default}/bin/nil";};
+    language-server = {command = lib.getExe inputs.nil.packages.${pkgs.system}.default;};
+    config.nil.formatting.command = ["alejandra" "-q"];
   }
   {
     name = "clojure";
