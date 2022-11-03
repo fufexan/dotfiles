@@ -4,8 +4,6 @@ inputs: _: prev: rec {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  technic-launcher = prev.callPackage ./technic.nix {};
-
   tlauncher = prev.callPackage ./tlauncher.nix {};
 
   waveform = prev.callPackage ./waveform {};
