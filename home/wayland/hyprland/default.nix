@@ -26,8 +26,9 @@ in {
   ];
 
   home.sessionVariables = {
-    XDG_SESSION_TYPE = "wayland";
     GDK_SCALE = "2";
+    XDG_SESSION_TYPE = "wayland";
+    WLR_DRM_NO_MODIFIERS = "1";
   };
 
   services.swayidle = {
