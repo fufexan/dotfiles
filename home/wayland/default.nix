@@ -20,7 +20,6 @@ in {
     ./hyprland
     ./sway.nix
     ./swaybg.nix
-    ./wluma.nix
   ];
 
   home.packages = with pkgs; [
