@@ -107,7 +107,16 @@
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      patterns = {
+        "rm -rf *" = "fg=white,bg=red";
+      };
+      styles = {
+        "alias" = "fg=magenta";
+      };
+      highlighters = ["main" "brackets" "pattern"];
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
