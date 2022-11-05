@@ -39,6 +39,7 @@ in ''
 
   gestures {
     workspace_swipe = 1
+    workspace_swipe_forever = 1
   }
 
   input {
@@ -98,17 +99,15 @@ in ''
   windowrulev2 = float, title:^(Picture-in-Picture)$
   windowrulev2 = pin, title:^(Picture-in-Picture)$
 
-  windowrulev2 = workspacesilent special, title:^(Firefox — Sharing Indicator)$
-  windowrulev2 = workspacesilent 10, title:^(.*is sharing your screen\.)$
+  windowrulev2 = workspace silent special, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = tile, title:^(.*is sharing (your screen|a window)\.)$
+  windowrulev2 = workspace silent 10, title:^(.*is sharing (your screen|a window)\.)$
 
   windowrulev2 = tile, class:^(Spotify)$
-  windowrulev2 = workspacesilent special, class:^(Spotify)$
+  windowrulev2 = workspace silent special, class:^(Spotify)$
 
   windowrulev2 = workspace 2, title:^(Discord)$
   windowrulev2 = workspace 2, title:^(WebCord)$
-
-  # make blueberry device-specific window proper size
-  windowrulev2 = tile, class:^(blueberry.py)$, title:^(?!Sound).+$
 
   # idle inhibit
   windowrulev2 = idleinhibit focus, class:^(mpv)$
