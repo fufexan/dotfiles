@@ -45,18 +45,6 @@ in {
     system = "x86_64-linux";
   };
 
-  iso = makeOverridable nixosSystem {
-    system = "x86_64-linux";
-
-    modules =
-      [
-        "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
-        {home-manager.users.mihai.imports = homeImports."mihai@io";}
-      ]
-      ++ sharedModules
-      ++ desktopModules;
-  };
-
   kiiro = nixosSystem {
     modules =
       [

@@ -4,6 +4,37 @@ inputs: _: prev: rec {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
+  iso = inputs.nixos-generators.nixosGenerate {
+    format = "iso";
+    system = "x86_64-linux";
+
+    modules = let
+      inherit (import "${inputs.self}/home/profiles" inputs) homeImports;
+    in [
+      "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
+      {home-manager.users.mihai.imports = homeImports."mihai@io";}
+      {
+        _module.args = {
+          inherit inputs;
+          inherit (inputs.self.lib) default;
+        };
+      }
+      ../modules/minimal.nix
+      ../modules/security.nix
+      inputs.agenix.nixosModule
+      inputs.hm.nixosModule
+      {
+        home-manager = {
+          inherit (inputs.self.lib) extraSpecialArgs;
+          useGlobalPkgs = true;
+        };
+      }
+      inputs.hyprland.nixosModules.default
+      inputs.kmonad.nixosModules.default
+      inputs.nix-gaming.nixosModules.default
+    ];
+  };
+
   tlauncher = prev.callPackage ./tlauncher.nix {};
 
   waveform = prev.callPackage ./waveform {};
