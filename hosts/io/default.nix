@@ -119,6 +119,8 @@
       };
     };
 
+    fstrim.enable = true;
+
     kmonad.keyboards = {
       io = {
         name = "io";
