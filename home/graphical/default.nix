@@ -56,6 +56,7 @@
     transmission-remote-gtk
     # misc
     libnotify
+    obsidian
     timewarrior
     taskwarrior
     xournalpp
