@@ -3,15 +3,19 @@
   inputs,
   default,
   ...
-}: {
+}:
+# greetd display manager
+{
   environment.systemPackages = with pkgs; [
-    catppuccin-gtk
+    # theme packages
+    (catppuccin-gtk.override {size = "compact";})
     bibata-cursors
     papirus-icon-theme
 
     greetd.gtkgreet
   ];
 
+  # set gtk theme
   environment.etc."gtk-3.0/settings.ini".text = ''
     [Settings]
     gtk-cursor-theme-name=Bibata-Modern-Classic
@@ -53,24 +57,22 @@
 
           .text-button { border-radius: 16px; }
         '';
-
-        greetdSwayConfig = pkgs.writeText "greetd-sway-config" ''
-          exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${gtkgreetStyle}; swaymsg exit"
-
-          bindsym Mod4+shift+e exec swaynag \
-            -t warning \
-            -m 'What do you want to do?' \
-            -b 'Poweroff' 'systemctl poweroff' \
-            -b 'Reboot' 'systemctl reboot'
-
-          seat seat0 xcursor_theme Bibata-Modern-Classic 24
-
-          exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-        '';
-      in "${inputs.self.packages.${pkgs.system}.sway-hidpi}/bin/sway --config ${greetdSwayConfig}";
+        #   greetdSwayConfig = pkgs.writeText "greetd-sway-config" ''
+        #     exec "${pkgs.greetd.gtkgreet}/bin/gtkgreet -l -s ${gtkgreetStyle}; swaymsg exit"
+        #     bindsym Mod4+shift+e exec swaynag \
+        #       -t warning \
+        #       -m 'What do you want to do?' \
+        #       -b 'Poweroff' 'systemctl poweroff' \
+        #       -b 'Reboot' 'systemctl reboot'
+        #     seat seat0 xcursor_theme Bibata-Modern-Classic 24
+        #     exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+        #   '';
+        # in "${inputs.self.packages.${pkgs.system}.sway-hidpi}/bin/sway --config ${greetdSwayConfig}";
+      in "${pkgs.dbus}/bin/dbus-run-session ${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.gtkgreet} -l -s ${gtkgreetStyle}";
     };
   };
 
+  # selectable options
   environment.etc."greetd/environments".text = ''
     Hyprland
     sway

@@ -34,11 +34,10 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [glib];
-
-  # use Wayland where possible
+  # use Wayland where possible (electron)
   environment.variables.NIXOS_OZONE_WL = "1";
 
+  # enable location service
   location.provider = "geoclue2";
 
   networking = {
@@ -66,7 +65,7 @@
         }
       ];
 
-      # Spotify downloaded track sync with other devices
+      # Spotify track sync with other devices
       allowedTCPPorts = [57621];
     };
   };
@@ -82,12 +81,10 @@
     ];
   };
 
+  # make HM-managed GTK stuff work
   programs.dconf.enable = true;
 
   services = {
-    # needed for gnome3 pinentry
-    dbus.packages = [pkgs.gcr];
-
     # provide location
     geoclue2 = {
       enable = true;
@@ -97,6 +94,7 @@
       };
     };
 
+    # keyboard remapping
     kmonad = {
       enable = true;
       package = inputs.kmonad.packages.${pkgs.system}.default;
@@ -121,15 +119,19 @@
       pulse.enable = true;
     };
 
+    # battery info & stuff
     upower.enable = true;
 
     # needed for GNOME services outside of GNOME Desktop
+    dbus.packages = [pkgs.gcr];
     udev.packages = with pkgs; [gnome.gnome-settings-daemon];
   };
 
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.swaylock.text = "auth include login";
+
+    # userland niceness
     rtkit.enable = true;
   };
 

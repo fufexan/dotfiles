@@ -14,43 +14,25 @@
   };
 
   boot = {
+    # make modules available to modprobe
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+
+    # load modules on boot
     kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
+
+    # use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
 
     # Panel Self Refresh
     kernelParams = ["amdgpu.dcfeaturemask=0x8"];
 
     loader = {
+      # systemd-boot on UEFI
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
-
-    initrd = {
-      availableKernelModules = [
-        "amd_pstate"
-        "xhci_pci"
-        "nvme"
-        "usb_storage"
-        "usbhid"
-        "sd_mod"
-        "dm_mod"
-        "tpm"
-      ];
-      kernelModules = [
-        "amd_pstate"
-        "btrfs"
-        "kvm-amd"
-        "sd_mod"
-        "dm_mod"
-      ];
-      supportedFilesystems = ["btrfs"];
-      # systemd = {
-      #   enable = true;
-      #   emergencyAccess = true;
-      # };
-    };
   };
+  # currently doesn't work without services.xserver enabled
   # boot.plymouth.enable = true;
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
@@ -58,7 +40,9 @@
   hardware = {
     bluetooth = {
       enable = true;
+      # battery info support
       package = pkgs.bluez5-experimental;
+      # HSP/HFP support
       hsphfpd.enable = true;
       settings = {
         # make Xbox Series X controller work
@@ -93,11 +77,17 @@
   programs = {
     # currently broken
     # adb.enable = true;
+
+    # enable hyprland and required options
     hyprland = {
       enable = true;
+      # enabled in home/wayland/hyprland
       package = null;
     };
+
+    # backlight control
     light.enable = true;
+
     steam.enable = true;
   };
 
@@ -109,6 +99,7 @@
   services = {
     btrfs.autoScrub.enable = true;
 
+    # use Ambient Light Sensors for auto brightness adjustment
     clight = {
       enable = true;
       settings = {
@@ -119,6 +110,7 @@
       };
     };
 
+    # for SSD/NVME
     fstrim.enable = true;
 
     kmonad.keyboards = {
@@ -134,12 +126,15 @@
       };
     };
 
+    # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
     pipewire.lowLatency.enable = true;
 
     printing.enable = true;
 
+    # configure mice
     ratbagd.enable = true;
 
+    # power saving
     tlp = {
       enable = true;
       settings = {
@@ -160,6 +155,7 @@
       SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${unplugged}"
     '';
 
+    # add hyprland to display manager sessions
     xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
   };
 

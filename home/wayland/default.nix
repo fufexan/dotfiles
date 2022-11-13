@@ -10,10 +10,14 @@
 let
   _ = lib.getExe;
 
-  ocrScript = pkgs.writeShellScriptBin "wl-ocr" ''
-    ${_ pkgs.grim} -g "$(${_ pkgs.slurp})" -t ppm - | ${_ pkgs.tesseract5} - - | ${pkgs.wl-clipboard}/bin/wl-copy
-    ${_ pkgs.libnotify} "$(${pkgs.wl-clipboard}/bin/wl-paste)"
-  '';
+  # use OCR and copy to clipboard
+  ocrScript = let
+    inherit (pkgs) grim libnotify slurp tesseract5 wl-clipboard;
+  in
+    pkgs.writeShellScriptBin "wl-ocr" ''
+      ${_ grim} -g "$(${_ slurp})" -t ppm - | ${_ tesseract5} - - | ${wl-clipboard}/bin/wl-copy
+      ${_ libnotify} "$(${wl-clipboard}/bin/wl-paste)"
+    '';
 in {
   imports = [
     ../graphical/eww
@@ -39,6 +43,7 @@ in {
     wofi
   ];
 
+  # make stuff work on wayland
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     SDL_VIDEODRIVER = "wayland";
@@ -70,6 +75,7 @@ in {
     };
   };
 
+  # enable blue light tinting
   services = {
     gammastep = {
       enable = true;
@@ -77,6 +83,8 @@ in {
     };
   };
 
+  # fake a tray to let apps start
+  # https://github.com/nix-community/home-manager/issues/2064
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";

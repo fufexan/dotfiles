@@ -3,6 +3,7 @@
   inputs,
   ...
 }: {
+  # themable spotify
   programs.spicetify = {
     enable = true;
 

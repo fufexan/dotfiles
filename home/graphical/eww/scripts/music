@@ -76,7 +76,7 @@ get_cover() {
 if [ "$1" = "cover" ]; then
 	get_cover
 else
-	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
+	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
 		echo '{"artist": "'"$artist"'", "title": "'"$title"'", "status": "'"$(get_status "$status")"'", "position": "'"$(get_position "$position" "$len")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$(get_length_time "$len")"'"}' #, "cover": "'"$(get_cover $art)"'"
 	done
 fi

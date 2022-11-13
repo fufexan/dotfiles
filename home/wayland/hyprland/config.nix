@@ -9,6 +9,7 @@
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
 
+  # runs processes as systemd transient services
   run-as-service = slice:
     pkgs.writeShellScript "as-systemd-transient" ''
       exec ${pkgs.systemd}/bin/systemd-run \
@@ -29,14 +30,18 @@ in ''
   workspace = DP-1, 10
   workspace = DP-2, 10
 
+  # scale apps
   exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+
   exec-once = systemctl --user start clight
   exec-once = eww open bar
 
   misc {
+    # enable Variable Frame Rate
     no_vfr = 0
   }
 
+  # touchpad gestures
   gestures {
     workspace_swipe = 1
     workspace_swipe_forever = 1
@@ -45,6 +50,7 @@ in ''
   input {
     kb_layout = ro
 
+    # focus change on cursor move
     follow_mouse = 1
     accel_profile = flat
     touchpad {
@@ -89,27 +95,34 @@ in ''
   }
 
   dwindle {
+    # keep floating dimentions while tiling
     pseudotile = 1
     preserve_split = 1
+    # aka monocle mode
     no_gaps_when_only = 1
   }
 
+  # telegram media viewer
   windowrulev2 = float, title:^(Media viewer)$
 
+  # make Firefox PiP window floating and sticky
   windowrulev2 = float, title:^(Picture-in-Picture)$
   windowrulev2 = pin, title:^(Picture-in-Picture)$
 
-  windowrulev2 = workspace silent special, title:^(Firefox — Sharing Indicator)$
+  # throw sharing indicators away
+  windowrulev2 = workspacesilent special, title:^(Firefox — Sharing Indicator)$
   windowrulev2 = tile, title:^(.*is sharing (your screen|a window)\.)$
-  windowrulev2 = workspace silent 10, title:^(.*is sharing (your screen|a window)\.)$
+  windowrulev2 = workspacesilent 10, title:^(.*is sharing (your screen|a window)\.)$
 
+  # start spotify tiled in ws9
   windowrulev2 = tile, class:^(Spotify)$
-  windowrulev2 = workspace silent special, class:^(Spotify)$
+  windowrulev2 = workspacesilent 9, class:^(Spotify)$
 
-  windowrulev2 = workspace 2, title:^(Discord)$
+  # start Discord/WebCord in ws2
+  windowrulev2 = workspace 2, title:^(.*Discord.*)$
   windowrulev2 = workspace 2, title:^(WebCord)$
 
-  # idle inhibit
+  # idle inhibit while watching videos
   windowrulev2 = idleinhibit focus, class:^(mpv)$
   windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
@@ -131,11 +144,17 @@ in ''
   bind = $mod ALT, ,resizeactive,
 
   # utility
+  # launcher
   bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
+  # terminal
   bind = $mod, Return, exec, ${run-as-service "manual"} ${default.terminal.name}
+  # logout menu
   bind = $mod, Escape, exec, wlogout -p layer-shell
+  # lock screen
   bind = $mod, L, exec, swaylock
+  # emoji picker
   bind = $mod, E, exec, ${emoji}
+  # select area to perform OCR on
   bind = $mod, O, exec, wl-ocr
 
   # move focus
@@ -171,15 +190,19 @@ in ''
   bindle = , XF86MonBrightnessDown, exec, light -U 5
 
   # screenshot
+  # stop animations while screenshotting; makes black border go away
   $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
   bind = , Print, exec, $screenshotarea
   bind = $mod SHIFT, R, exec, $screenshotarea
+
   bind = CTRL, Print, exec, grimblast --notify --cursor copysave output
   bind = $mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output
+
   bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
   bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
 
   # workspaces
+  # binds mod + [shift +] {1..10} to [move to] ws {1..10}
   ${builtins.concatStringsSep "\n" (builtins.genList (
       x: let
         ws = let
@@ -194,7 +217,7 @@ in ''
     10)}
 
   # special workspace
-  bind = $mod SHIFT, asciitilde, movetoworkspace, special
+  bind = $mod SHIFT, grave, movetoworkspace, special
   bind = $mod, grave, togglespecialworkspace, eDP-1
 
   # cycle workspaces

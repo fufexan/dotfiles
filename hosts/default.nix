@@ -1,5 +1,7 @@
 inputs: let
   inherit (inputs) self;
+  inherit (self.lib) nixosSystem;
+  inherit (import "${self}/home/profiles" inputs) homeImports;
 
   sharedModules = [
     {
@@ -25,9 +27,6 @@ inputs: let
     inputs.kmonad.nixosModules.default
     inputs.nix-gaming.nixosModules.default
   ];
-
-  inherit (self.lib) nixosSystem makeOverridable;
-  inherit (import "${self}/home/profiles" inputs) homeImports;
 in {
   io = nixosSystem {
     modules =

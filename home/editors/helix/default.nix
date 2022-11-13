@@ -25,6 +25,7 @@
           rainbow = "dim";
         };
         rainbow-brackets = true;
+        statusline.center = ["position-percentage"];
       };
 
       keys.normal.space.u = {

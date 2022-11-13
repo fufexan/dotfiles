@@ -8,5 +8,5 @@ let
   home = import ./home.nix inputs;
 in
   lib // colors // home // system
-# adding lib is ugly but easier to keep track of things
+# adding nixpkgs lib is ugly but easier to keep track of things
 
