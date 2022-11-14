@@ -107,6 +107,7 @@
         gamma.disabled = true;
         inhibit.disabled = true;
         screen.disabled = true;
+        dimmer.timeouts = [290 290];
       };
     };
 
