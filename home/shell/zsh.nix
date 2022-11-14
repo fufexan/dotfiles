@@ -67,6 +67,10 @@
           unfunction kitty-integration
         fi
       ''}
+
+      command_not_found_handler() {
+        ${pkgs.comma}/bin/comma "$@"
+      }
     '';
 
     shellAliases = {
