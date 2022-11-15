@@ -6,6 +6,7 @@
 in {
   imports = [
     ./cli.nix
+    ./starship.nix
     ./zsh.nix
   ];
 

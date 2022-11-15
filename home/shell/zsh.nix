@@ -4,8 +4,6 @@
   lib,
   ...
 }: {
-  home.packages = [pkgs.pure-prompt];
-
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -42,17 +40,6 @@
       zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
       zstyle ':completion:*' verbose true
       _comp_options+=(globdots)
-
-      # pure prompt
-      autoload -U promptinit; promptinit
-
-      PURE_PROMPT_SYMBOL=›
-      PURE_PROMPT_VICMD_SYMBOL=‹
-
-      zstyle :prompt:pure:git:stash show yes
-      zstyle :prompt:pure:prompt:success color green
-
-      prompt pure
 
       ${lib.optionalString config.services.gpg-agent.enable ''
         gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
