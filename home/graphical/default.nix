@@ -44,8 +44,12 @@
     # messaging
     tdesktop
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
+
+    # currently broken
     # (discord-canary.override {withOpenASAR = true;})
-    discord-canary
+    (discord-canary.override { nss = pkgs.nss_latest;})
+    # let discord open links
+    xdg-utils
 
     # school stuff
     inputs.nix-matlab.defaultPackage.${pkgs.system}
