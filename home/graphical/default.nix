@@ -47,7 +47,7 @@
 
     # currently broken
     # (discord-canary.override {withOpenASAR = true;})
-    (discord-canary.override { nss = pkgs.nss_latest;})
+    (discord-canary.override {nss = pkgs.nss_latest;})
     # let discord open links
     xdg-utils
 
