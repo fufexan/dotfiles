@@ -11,6 +11,7 @@ inputs: let
       };
     }
     ../modules/minimal.nix
+    ../modules/nix.nix
     ../modules/security.nix
     inputs.agenix.nixosModule
     inputs.hm.nixosModule
