@@ -42,7 +42,7 @@ inputs: _: prev: rec {
   sway-hidpi = import ./sway-hidpi.nix prev;
 
   spotifywm = prev.spotifywm.overrideAttrs (old: {
-    version = "2022-09-21-unstable";
+    version = "2022-09-21";
     src = prev.fetchFromGitHub {
       owner = "amurzeau";
       repo = "spotifywm";

@@ -44,23 +44,6 @@
         "type": "github"
       }
     },
-    "all-cabal-json": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665552503,
-        "narHash": "sha256-r14RmRSwzv5c+bWKUDaze6pXM7nOsiz1H8nvFHJvufc=",
-        "owner": "nix-community",
-        "repo": "all-cabal-json",
-        "rev": "d7c0434eebffb305071404edcf9d5cd99703878e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "hackage",
-        "repo": "all-cabal-json",
-        "type": "github"
-      }
-    },
     "base16-schemes": {
       "flake": false,
       "locked": {
@@ -155,11 +138,11 @@
     "devshell_2": {
       "flake": false,
       "locked": {
-        "lastModified": 1666548262,
-        "narHash": "sha256-4DyN4KXqQQsCw0vCXkMThw4b5Q4/q87ZZgRb4st8COc=",
+        "lastModified": 1667210711,
+        "narHash": "sha256-IoErjXZAkzYWHEpQqwu/DeRNJGFdR7X2OGbkhMqMrpw=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "c8ce8ed81726079c398f5f29c4b68a7d6a3c2fa2",
+        "rev": "96a9dd12b8a447840cc246e17a47b81a4268bba7",
         "type": "github"
       },
       "original": {
@@ -188,10 +171,12 @@
       "inputs": {
         "alejandra": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ],
-        "all-cabal-json": "all-cabal-json",
+        "all-cabal-json": [
+          "helix",
+          "nci"
+        ],
         "crane": "crane",
         "devshell": [
           "helix",
@@ -200,19 +185,19 @@
         ],
         "flake-utils-pre-commit": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ],
-        "ghc-utils": "ghc-utils",
+        "ghc-utils": [
+          "helix",
+          "nci"
+        ],
         "gomod2nix": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ],
         "mach-nix": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ],
         "nixpkgs": [
           "helix",
@@ -221,21 +206,19 @@
         ],
         "poetry2nix": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ],
         "pre-commit-hooks": [
           "helix",
-          "nci",
-          "nixpkgs"
+          "nci"
         ]
       },
       "locked": {
-        "lastModified": 1666993587,
-        "narHash": "sha256-4cLrs+CwWnceYXnCpL5gO3bybS9CjLxUoTEKjB2QFtg=",
+        "lastModified": 1668794409,
+        "narHash": "sha256-co+RtudWse5HozC69bbfvnAFkqocI/QesKpOBPv+J6A=",
         "owner": "nix-community",
         "repo": "dream2nix",
-        "rev": "2b7456e3d2f0053bc2474fb0c461dd468545277f",
+        "rev": "c17875d97f330ce1ed0c2e54ea964ce05e4c1d3c",
         "type": "github"
       },
       "original": {
@@ -461,22 +444,6 @@
         "type": "github"
       }
     },
-    "ghc-utils": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1662774800,
-        "narHash": "sha256-1Rd2eohGUw/s1tfvkepeYpg8kCEXiIot0RijapUjAkE=",
-        "ref": "refs/heads/master",
-        "rev": "bb3a2d3dc52ff0253fb9c2812bd7aa2da03e0fea",
-        "revCount": 1072,
-        "type": "git",
-        "url": "https://gitlab.haskell.org/bgamari/ghc-utils"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://gitlab.haskell.org/bgamari/ghc-utils"
-      }
-    },
     "gomod2nix": {
       "flake": false,
       "locked": {
@@ -500,11 +467,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1667337850,
-        "narHash": "sha256-FWO73QuBzu3EewT6690n+IVEt1JeYtFCeDx7jC7fSjM=",
+        "lastModified": 1668976703,
+        "narHash": "sha256-lj4LMS2QtNBjoo1PrsBF11ugULlTz/a4oCETX1Bx6PM=",
         "owner": "SoraTenshi",
         "repo": "helix",
-        "rev": "d510e0cfa2b2347ddafc852a4c7f342eea53efb8",
+        "rev": "e0e1ee64221f94b8ec1d2d68e0b04946f8a9b019",
         "type": "github"
       },
       "original": {
@@ -625,11 +592,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1667232647,
-        "narHash": "sha256-cFo7G8BqYShgL9m7yD6p+SHAZ+aIt2guuF69LV235n8=",
+        "lastModified": 1668871650,
+        "narHash": "sha256-jXNn1sTMDcJhx9L/tXejk00Lb+rHZzj1S0oxEB9omjw=",
         "owner": "yusdacra",
         "repo": "nix-cargo-integration",
-        "rev": "16082f7b4e42ce140a562fa630bcf8e96eadeb59",
+        "rev": "0121135dcd9d9a9c6bf1e89194b49c84bf4627ef",
         "type": "github"
       },
       "original": {
@@ -812,11 +779,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1667142599,
-        "narHash": "sha256-OLJxsg9VqfKjFkerOxWtNIkibsCvxsv5A8wNWO1MeWk=",
+        "lastModified": 1668596599,
+        "narHash": "sha256-rhHyZTGI31/OfgYa9xF49UTchDXTI94pEsSNa0fOkpk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "412b9917cea092f3d39f9cd5dead4effd5bc4053",
+        "rev": "b457130e8a21608675ddf12c7d85227b22a27112",
         "type": "github"
       },
       "original": {
@@ -984,11 +951,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1667184938,
-        "narHash": "sha256-/kuCiXuAxiD0c0zrfDvJ1Yba3FuVdRk/ROfb393AeX4=",
+        "lastModified": 1668652668,
+        "narHash": "sha256-kkl0U9OXMfzSKZX8rF/zSDMBHwzt7st32dyUqJGYNwU=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "8f81faec35508647ced65c44fd3e8648a5518afb",
+        "rev": "c91265a3f0d28b3b1ad60a47c4764a45b111ed4b",
         "type": "github"
       },
       "original": {
