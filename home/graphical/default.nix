@@ -45,9 +45,10 @@
     tdesktop
     (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
 
-    # currently broken
-    # (discord-canary.override {withOpenASAR = true;})
-    (discord-canary.override {nss = pkgs.nss_latest;})
+    (discord-canary.override {
+      nss = pkgs.nss_latest;
+      withOpenASAR = true;
+    })
     # let discord open links
     xdg-utils
 
