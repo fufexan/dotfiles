@@ -1,44 +1,56 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    lib = import ./lib inputs;
-    inherit (lib) genSystems pkgs;
-  in {
-    inherit lib pkgs;
-    overlays.default = import ./pkgs inputs;
+  outputs = {nixpkgs, ...} @ inputs:
+    inputs.flake-parts.lib.mkFlake {inherit (inputs) self;} {
+      systems = ["x86_64-linux"];
 
-    # standalone home-manager config
-    inherit (import ./home/profiles inputs) homeConfigurations;
+      flake = {
+        lib = import ./lib inputs;
+        inherit (inputs.self.lib) pkgs;
 
-    # nixos-configs with home-manager
-    nixosConfigurations = import ./hosts inputs;
+        # standalone home-manager config
+        inherit (import ./home/profiles inputs) homeConfigurations;
 
-    devShells = genSystems (system: {
-      default = inputs.devshell.legacyPackages.${system}.mkShell {
-        packages = with pkgs.${system}; [
-          alejandra
-          git
-          (self.overlays.default null pkgs.${system}).repl
-        ];
-        name = "dots";
+        # nixos-configs with home-manager
+        nixosConfigurations = import ./hosts inputs;
+
+        overlays.default = import ./pkgs inputs;
       };
-    });
 
-    packages =
-      # I don't like this
-      lib.genAttrs ["x86_64-linux"] (system: self.overlays.default null pkgs.${system})
-      // {aarch64-linux.repl = (self.overlays.default null pkgs.aarch64-linux).repl;};
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
+        imports = [
+          {
+            _module.args.pkgs = inputs.self.pkgs.${system};
+          }
+        ];
 
-    formatter = genSystems (system: pkgs.${system}.alejandra);
-  };
+        devShells.default = inputs'.devshell.legacyPackages.mkShell {
+          packages = [
+            pkgs.alejandra
+            pkgs.git
+            config.packages.repl
+          ];
+          name = "dots";
+        };
+
+        formatter = pkgs.alejandra;
+
+        packages = inputs.self.overlays.default null pkgs;
+      };
+    };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
     agenix = {
       url = "github:ryantm/agenix";
