@@ -3,7 +3,8 @@
 # 🗒 About
 
 In-house baked configs for Home-Manager and NixOS. Borrowed bits sprinkled on
-top. Using [flakes](https://nixos.wiki/wiki/Flakes).
+top. Using [flakes](https://nixos.wiki/wiki/Flakes) and
+[flake-parts](https://github.com/hercules-ci/flake-parts).
 
 See an overview of the flake outputs by running
 `nix flake show github:fufexan/dotfiles`.
@@ -12,7 +13,7 @@ See an overview of the flake outputs by running
 
 - [modules](modules): NixOS common configs
 - [hosts](hosts): host-specific configuration
-- [home](home): my [Home-Manager](https://github.com/nix-community/home-manager) config
+- [home](home): my [Home Manager](https://github.com/nix-community/home-manager) config
 - [lib](lib): helper functions
 - [pkgs](pkgs): package definitions
 
@@ -35,8 +36,7 @@ Or install from the `packages` output. For example:
 }
 
 # configuration.nix
-{ pkgs, inputs, ... }:
-{
+{pkgs, inputs, ...}: {
   environment.systemPackages = [
     inputs.fufexan-dotfiles.packages."x86_64-linux".packageName
   ];
@@ -54,13 +54,13 @@ Or install from the `packages` output. For example:
 
 Other configurations from where I learned and copied:
 
+- [colemickens/nixcfg](https://github.com/colemickens/nixcfg)
 - [flake-utils-plus](https://github.com/gytis-ivaskevicius/flake-utils-plus)
 - [gytis-ivaskevicius/nixfiles](https://github.com/gytis-ivaskevicius/nixfiles)
-- [viperML/dotfiles](https://github.com/viperML/dotfiles)
-- [privatevoid-net/privatevoid-infrastructure](https://github.com/privatevoid-net/privatevoid-infrastructure)
 - [Mic92/dotfiles](https://github.com/Mic92/dotfiles)
-- [colemickens/nixcfg](https://github.com/colemickens/nixcfg)
 - [NobbZ/nixos-config](https://github.com/NobbZ/nixos-config)
+- [privatevoid-net/privatevoid-infrastructure](https://github.com/privatevoid-net/privatevoid-infrastructure)
+- [viperML/dotfiles](https://github.com/viperML/dotfiles)
 
 # 👥 People
 
@@ -68,6 +68,6 @@ These are the people whom I've taken inspiration from while writing these
 configs. There surely are more but I tend to forget. Regardless, I am thankful
 to all of them.
 
-gytis-ivaskevicius - DieracDelta - NobbZ - hlissner - tadeokondrak - viperML -
-max-privatevoid - pnotequalnp - Xe - keksbg - Misterio77 - OPNA2608 -
-yusdacra - matthewcroughan - Kranzes
+DieracDelta - gytis-ivaskevicius - hlissner - keksbg - Kranzes -
+matthewcroughan - max-privatevoid - Misterio77 - NobbZ - OPNA2608 -
+pnotequalnp - tadeokondrak - viperML - Xe - yusdacra 

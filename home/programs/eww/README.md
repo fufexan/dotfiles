@@ -18,20 +18,21 @@ The same daemon runs multiple windows which interact with each other:
 
 ### calendar
 
-![calendar](https://user-images.githubusercontent.com/36706276/192146093-217f68ac-fde9-400e-ade1-e9078139d327.png)
+![calendar](https://user-images.githubusercontent.com/36706276/204923748-f5c7db3a-5000-40cf-ba41-cd2d5f14146a.png)
 
 ### system info
 
-![system](https://user-images.githubusercontent.com/36706276/192146100-133b195c-d348-4fe4-a29b-ad8fc39f3b0b.png)
-
-### volume control
-
-![volume](https://user-images.githubusercontent.com/36706276/192146111-77d7c92d-defd-4cfa-9d26-7e6fb6b40f86.png)
+![system](https://user-images.githubusercontent.com/36706276/204923681-13c6e1d6-45e8-4f23-aec9-dcd8b96203da.png)
 
 ## ❔ Usage
 
 To quickly install this config, grab all the files in this directory and put
 them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
+
+Dependencies:
+- Icon fonts: `material-design-icons`, `material-icons`
+- Text font: Product Sans
+- Script deps: everything in `default.nix`'s `dependencies` list.
 
 ## 🎨 Theme
 
