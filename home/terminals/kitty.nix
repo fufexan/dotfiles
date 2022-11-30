@@ -1,7 +1,4 @@
-{
-  default,
-  ...
-}: let
+{default, ...}: let
   inherit (default) xcolors;
 in {
   programs.kitty = {
