@@ -6,7 +6,7 @@ Name            | Description
 --------------- | -----------
 `default.nix`   | Home-Manager specific configuration
 `editors`       | Helix, Kakoune, Neovim, Emacs
-`graphical`     | GUI stuff, display server agnostic
+`programs`      | Programs
 `shell`         | Zsh, Nix options, etc.
 `terminals`     | Terminal configs
 `wayland`       | Wayland-specific options, including Sway and Waybar configs

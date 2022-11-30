@@ -7,11 +7,10 @@
 }:
 # Wayland config
 let
-  _ = lib.getExe;
-
   # use OCR and copy to clipboard
   ocrScript = let
     inherit (pkgs) grim libnotify slurp tesseract5 wl-clipboard;
+    _ = lib.getExe;
   in
     pkgs.writeShellScriptBin "wl-ocr" ''
       ${_ grim} -g "$(${_ slurp})" -t ppm - | ${_ tesseract5} - - | ${wl-clipboard}/bin/wl-copy
@@ -19,10 +18,11 @@ let
     '';
 in {
   imports = [
-    ../graphical/eww
+    ../programs/eww
     ./hyprland
     ./sway.nix
     ./swaybg.nix
+    ./swaylock.nix
   ];
 
   home.packages = with pkgs; [
@@ -32,47 +32,27 @@ in {
 
     # idle/lock
     swaybg
-    swaylock-effects
 
     # utils
     ocrScript
+    wf-recorder
     wl-clipboard
-    wlr-randr
     wlogout
+    wlr-randr
     wofi
   ];
 
   # make stuff work on wayland
   home.sessionVariables = {
+    _JAVA_AWT_WM_NONREPARENTING = "1";
     MOZ_ENABLE_WAYLAND = "1";
-    SDL_VIDEODRIVER = "wayland";
     QT_QPA_PLATFORM = "wayland";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
-  programs = {
-    obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
-
-    swaylock.settings = let
-      inherit (default) xcolors;
-    in {
-      clock = true;
-      effect-blur = "30x3";
-      font = "Roboto";
-      ignore-empty-password = true;
-      image = default.wallpaper;
-      indicator = true;
-      bs-hl-color = xcolors.red;
-      key-hl-color = xcolors.peach;
-      inside-clear-color = xcolors.red;
-      inside-color = xcolors.yellow;
-      inside-ver-color = xcolors.blue;
-      inside-wrong-color = xcolors.red;
-      line-color = xcolors.crust;
-      ring-color = xcolors.base;
-      separator-color = xcolors.subtext1;
-    };
-  };
+  programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
 
   # enable blue light tinting
   services = {

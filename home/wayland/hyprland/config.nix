@@ -7,17 +7,6 @@
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
-
-  # runs processes as systemd transient services
-  run-as-service = slice:
-    pkgs.writeShellScript "as-systemd-transient" ''
-      exec ${pkgs.systemd}/bin/systemd-run \
-        --slice=app-${slice}.slice \
-        --property=ExitType=cgroup \
-        --user \
-        --wait \
-        bash -lc "exec apply-hm-env $@"
-    '';
 in ''
   $mod = SUPER
 
@@ -124,6 +113,10 @@ in ''
   windowrulev2 = idleinhibit focus, class:^(mpv)$
   windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
+  # fix Matlab
+  windowrulev2 = rounding 0, class:^(MATLAB.*)$
+  windowrulev2 = tile, class:^(MATLAB.*)$
+
   # mouse movements
   bindm = $mod, mouse:272, movewindow
   bindm = $mod, mouse:273, resizewindow
@@ -143,17 +136,17 @@ in ''
 
   # utility
   # launcher
-  bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || ${run-as-service "manual"} ${launcher}
+  bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || run-as-service ${launcher}
   # terminal
-  bind = $mod, Return, exec, ${run-as-service "manual"} ${default.terminal.name}
+  bind = $mod, Return, exec, run-as-service ${default.terminal.name}
   # logout menu
   bind = $mod, Escape, exec, wlogout -p layer-shell
   # lock screen
-  bind = $mod, L, exec, swaylock
+  bind = $mod, L, exec, loginctl lock-session
   # emoji picker
   bind = $mod, E, exec, ${emoji}
   # select area to perform OCR on
-  bind = $mod, O, exec, wl-ocr
+  bind = $mod, O, exec, run-as-service wl-ocr
 
   # move focus
   bind = $mod, left, movefocus, l

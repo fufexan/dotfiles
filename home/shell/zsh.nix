@@ -55,6 +55,7 @@
         fi
       ''}
 
+      # run programs that are not in PATH with comma
       command_not_found_handler() {
         ${pkgs.comma}/bin/comma "$@"
       }

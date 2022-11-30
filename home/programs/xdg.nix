@@ -1,4 +1,4 @@
-let
+{config, ...}: let
   browser = ["firefox.desktop"];
 
   # XDG MIME types
@@ -27,8 +27,21 @@ let
     "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
   };
 in {
-  xdg.mimeApps = {
+  xdg = {
     enable = true;
-    defaultApplications = associations;
+    cacheHome = config.home.homeDirectory + "/.local/cache";
+
+    mimeApps = {
+      enable = true;
+      defaultApplications = associations;
+    };
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+      extraConfig = {
+        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
+      };
+    };
   };
 }

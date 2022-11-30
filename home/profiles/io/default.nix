@@ -2,9 +2,9 @@
   imports = [
     ../../editors/helix
     ../../editors/neovim
-    ../../graphical
-    ../../graphical/games.nix
-    ../../graphical/dunst.nix
+    ../../programs
+    ../../programs/games.nix
+    ../../programs/dunst.nix
     ../../wayland
     ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
