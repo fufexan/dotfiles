@@ -110,13 +110,12 @@ in ''
   windowrulev2 = pin, title:^(Picture-in-Picture)$
 
   # throw sharing indicators away
-  windowrulev2 = workspacesilent special, title:^(Firefox — Sharing Indicator)$
-  windowrulev2 = tile, title:^(.*is sharing (your screen|a window)\.)$
-  windowrulev2 = workspacesilent 10, title:^(.*is sharing (your screen|a window)\.)$
+  windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
+  windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
 
   # start spotify tiled in ws9
   windowrulev2 = tile, class:^(Spotify)$
-  windowrulev2 = workspacesilent 9, class:^(Spotify)$
+  windowrulev2 = workspace 9 silent, class:^(Spotify)$
 
   # start Discord/WebCord in ws2
   windowrulev2 = workspace 2, title:^(.*Discord.*)$
