@@ -22,17 +22,7 @@
     DELTA_PAGER = "less -R";
   };
 
-  home.packages = with pkgs; let
-    catppuccin = fetchFromGitHub {
-      owner = "catppuccin";
-      repo = "discord";
-      rev = "159aac939d8c18da2e184c6581f5e13896e11697";
-      sha256 = "sha256-cWpog52Ft4hqGh8sMWhiLUQp/XXipOPnSTG6LwUAGGA=";
-      sparseCheckout = "themes";
-    };
-
-    theme = "${catppuccin}/themes/mocha.theme.css";
-  in [
+  home.packages = with pkgs; [
     # archives
     zip
     unzip
@@ -43,12 +33,20 @@
     gh
     # messaging
     tdesktop
-    (inputs.webcord.packages.${pkgs.system}.default.override {flags = ["--add-css-theme=${theme}"];})
+    (inputs.webcord.packages.${pkgs.system}.default.override {
+      flags = let
+        catppuccin = fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "discord";
+          rev = "159aac939d8c18da2e184c6581f5e13896e11697";
+          sha256 = "sha256-cWpog52Ft4hqGh8sMWhiLUQp/XXipOPnSTG6LwUAGGA=";
+        };
 
-    (discord-canary.override {
-      nss = pkgs.nss_latest;
-      withOpenASAR = true;
+        theme = "${catppuccin}/themes/mocha.theme.css";
+      in ["--add-css-theme=${theme}"];
     })
+    inputs.self.packages.${pkgs.system}.discord-canary
+
     # let discord open links
     xdg-utils
 
