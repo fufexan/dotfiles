@@ -22,7 +22,7 @@ inputs: _: prev: rec {
       {
         _module.args = {
           inherit inputs;
-          inherit (inputs.self.lib) default;
+          inherit (import "${inputs.self}/theme" inputs) default;
         };
       }
       ../modules/minimal.nix
@@ -31,7 +31,7 @@ inputs: _: prev: rec {
       inputs.hm.nixosModule
       {
         home-manager = {
-          inherit (inputs.self.lib) extraSpecialArgs;
+          inherit (import "${inputs.self}/theme" inputs) extraSpecialArgs;
           useGlobalPkgs = true;
         };
       }

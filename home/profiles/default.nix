@@ -1,6 +1,6 @@
 inputs: let
   inherit (inputs) self;
-  inherit (self.lib) extraSpecialArgs;
+  inherit (import "${self}/theme" inputs) extraSpecialArgs;
 
   sharedModules = [
     ../.

@@ -7,7 +7,11 @@ inputs: let
     {
       _module.args = {
         inherit inputs;
-        inherit (self.lib) default;
+        inherit (import "${self}/theme" inputs) default;
+      };
+      home-manager = {
+        inherit (import "${self}/theme" inputs) extraSpecialArgs;
+        useGlobalPkgs = true;
       };
     }
     ../modules/minimal.nix
@@ -15,12 +19,6 @@ inputs: let
     ../modules/security.nix
     inputs.agenix.nixosModule
     inputs.hm.nixosModule
-    {
-      home-manager = {
-        inherit (inputs.self.lib) extraSpecialArgs;
-        useGlobalPkgs = true;
-      };
-    }
   ];
 
   desktopModules = [

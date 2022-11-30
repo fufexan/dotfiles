@@ -1,12 +1,9 @@
 inputs:
 # personal lib
 let
-  inherit (inputs.nixpkgs) lib;
-
-  colors = import ./colors.nix lib;
+  colors = import ./colors.nix inputs.nixpkgs.lib;
   system = import ./system.nix inputs;
-  home = import ./home.nix inputs;
 in
-  lib // colors // home // system
+  inputs.nixpkgs.lib // colors // system
 # adding nixpkgs lib is ugly but easier to keep track of things
 
