@@ -5,18 +5,14 @@
     inputs.flake-parts.lib.mkFlake {inherit (inputs) self;} {
       systems = ["x86_64-linux"];
 
-      flake = {
-        lib = import ./lib inputs;
-        inherit (inputs.self.lib) pkgs;
-
-        # standalone home-manager config
-        inherit (import ./home/profiles inputs) homeConfigurations;
-
-        # nixos-configs with home-manager
-        nixosConfigurations = import ./hosts inputs;
-
-        overlays.default = import ./pkgs inputs;
-      };
+      imports = [
+        ./home/profiles
+        ./hosts
+        ./modules
+        ./pkgs
+        ./lib
+        {config._module.args._inputs = inputs // {inherit (inputs) self;};}
+      ];
 
       perSystem = {
         config,
@@ -28,7 +24,7 @@
       }: {
         imports = [
           {
-            _module.args.pkgs = inputs.self.pkgs.${system};
+            _module.args.pkgs = inputs.self.legacyPackages.${system};
           }
         ];
 
@@ -42,8 +38,6 @@
         };
 
         formatter = pkgs.alejandra;
-
-        packages = inputs.self.overlays.default null pkgs;
       };
     };
 

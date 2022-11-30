@@ -5,6 +5,8 @@
   pkgs,
   ...
 } @ args: {
+  imports = [./config.nix];
+
   home.packages = with pkgs; [
     xorg.xprop
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
@@ -45,8 +47,5 @@
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 
   # enable hyprland
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = import ./config.nix args;
-  };
+  wayland.windowManager.hyprland.enable = true;
 }

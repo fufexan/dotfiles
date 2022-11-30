@@ -31,7 +31,7 @@
   };
 
   # pickup pkgs from flake export
-  nixpkgs.pkgs = inputs.self.pkgs.${config.nixpkgs.system};
+  nixpkgs.pkgs = inputs.self.legacyPackages.${config.nixpkgs.system};
 
   # enable programs
   programs = {

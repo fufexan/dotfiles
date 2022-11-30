@@ -1,38 +1,43 @@
-inputs: let
+{
+  inputs,
+  self,
+  withSystem,
+  module_args,
+  ...
+}: let
   sharedModules = [
     ../.
     ../shell
-    {
-      _module.args = {
-        inherit inputs;
-        default = import "${inputs.self}/theme" inputs;
-      };
-    }
+    module_args
   ];
 
   homeImports = {
-    "mihai@io" = sharedModules ++ [./io];
+    "mihai@io" =
+      [
+        ./io
+        inputs.spicetify-nix.homeManagerModule
+        inputs.hyprland.homeManagerModules.default
+      ]
+      ++ sharedModules;
     server = sharedModules ++ [./server];
   };
 
-  extraSpecialArgs = {
-    inherit inputs;
-    inherit (import "${inputs.self}/theme" inputs) default;
-  };
-
-  pkgs = inputs.self.pkgs.x86_64-linux;
-  inherit (inputs.hm.lib) homeConfiguration;
+  inherit (inputs.hm.lib) homeManagerConfiguration;
 in {
-  inherit homeImports;
+  imports = [
+    {_module.args = {inherit homeImports;};}
+  ];
 
-  homeConfigurations = {
-    "mihai@io" = homeConfiguration {
-      modules = homeImports."mihai@io";
-      inherit pkgs extraSpecialArgs;
-    };
-    "server" = homeConfiguration {
-      modules = homeImports.server;
-      inherit pkgs extraSpecialArgs;
-    };
+  flake = {
+    homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
+      "mihai@io" = homeManagerConfiguration {
+        modules = homeImports."mihai@io" ++ module_args;
+        inherit pkgs;
+      };
+      server = homeManagerConfiguration {
+        modules = homeImports.server ++ module_args;
+        inherit pkgs;
+      };
+    });
   };
 }

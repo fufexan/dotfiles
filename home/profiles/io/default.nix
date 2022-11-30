@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   imports = [
     ../../editors/helix
     ../../editors/neovim
@@ -8,8 +8,6 @@
     ../../wayland
     ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
-    inputs.spicetify-nix.homeManagerModule
-    inputs.hyprland.homeManagerModules.default
   ];
 
   services = {

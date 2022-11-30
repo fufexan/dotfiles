@@ -7,214 +7,216 @@
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
-in ''
-  $mod = SUPER
+in {
+  wayland.windowManager.hyprland.extraConfig = ''
+    $mod = SUPER
 
-  # should be configured per-profile
-  monitor = DP-1, preferred, auto, 1
-  monitor = DP-2, preferred, auto, 1
-  monitor = eDP-1, preferred, auto, 2
-  workspace = eDP-1, 1
-  workspace = DP-1, 10
-  workspace = DP-2, 10
+    # should be configured per-profile
+    monitor = DP-1, preferred, auto, 1
+    monitor = DP-2, preferred, auto, 1
+    monitor = eDP-1, preferred, auto, 2
+    workspace = eDP-1, 1
+    workspace = DP-1, 10
+    workspace = DP-2, 10
 
-  # scale apps
-  exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+    # scale apps
+    exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
 
-  exec-once = systemctl --user start clight
-  exec-once = eww open bar
+    exec-once = systemctl --user start clight
+    exec-once = eww open bar
 
-  misc {
-    # enable Variable Frame Rate
-    no_vfr = 0
-  }
-
-  # touchpad gestures
-  gestures {
-    workspace_swipe = 1
-    workspace_swipe_forever = 1
-  }
-
-  input {
-    kb_layout = ro
-
-    # focus change on cursor move
-    follow_mouse = 1
-    accel_profile = flat
-    touchpad {
-      scroll_factor = 0.3
+    misc {
+      # enable Variable Frame Rate
+      no_vfr = 0
     }
-  }
 
-  device:MSFT0001:00 04F3:31EB Touchpad {
-    accel_profile = adaptive
-    natural_scroll = 1
-  }
+    # touchpad gestures
+    gestures {
+      workspace_swipe = 1
+      workspace_swipe_forever = 1
+    }
 
-  general {
-    gaps_in = 5
-    gaps_out = 5
-    border_size = 2
-    col.active_border = rgb(${colors.yellow}) rgb(${colors.peach}) 45deg
-    col.inactive_border = rgb(${colors.teal}) rgb(${colors.sapphire}) 45deg
-  }
+    input {
+      kb_layout = ro
 
-  decoration {
-    rounding = 16
-    blur = 1
-    blur_size = 3
-    blur_passes = 3
-    blur_new_optimizations = 1
+      # focus change on cursor move
+      follow_mouse = 1
+      accel_profile = flat
+      touchpad {
+        scroll_factor = 0.3
+      }
+    }
 
-    drop_shadow = 1
-    shadow_ignore_window = 1
-    shadow_offset = 2 2
-    shadow_range = 4
-    shadow_render_power = 1
-    col.shadow = 0x55000000
-  }
+    device:MSFT0001:00 04F3:31EB Touchpad {
+      accel_profile = adaptive
+      natural_scroll = 1
+    }
 
-  animations {
-    enabled = 1
-    animation = border, 1, 2, default
-    animation = fade, 1, 4, default
-    animation = windows, 1, 3, default, popin 80%
-    animation = workspaces, 1, 2, default, slide
-  }
+    general {
+      gaps_in = 5
+      gaps_out = 5
+      border_size = 2
+      col.active_border = rgb(${colors.yellow}) rgb(${colors.peach}) 45deg
+      col.inactive_border = rgb(${colors.teal}) rgb(${colors.sapphire}) 45deg
+    }
 
-  dwindle {
-    # keep floating dimentions while tiling
-    pseudotile = 1
-    preserve_split = 1
-    # aka monocle mode
-    no_gaps_when_only = 1
-  }
+    decoration {
+      rounding = 16
+      blur = 1
+      blur_size = 3
+      blur_passes = 3
+      blur_new_optimizations = 1
 
-  # telegram media viewer
-  windowrulev2 = float, title:^(Media viewer)$
+      drop_shadow = 1
+      shadow_ignore_window = 1
+      shadow_offset = 2 2
+      shadow_range = 4
+      shadow_render_power = 1
+      col.shadow = 0x55000000
+    }
 
-  # make Firefox PiP window floating and sticky
-  windowrulev2 = float, title:^(Picture-in-Picture)$
-  windowrulev2 = pin, title:^(Picture-in-Picture)$
+    animations {
+      enabled = 1
+      animation = border, 1, 2, default
+      animation = fade, 1, 4, default
+      animation = windows, 1, 3, default, popin 80%
+      animation = workspaces, 1, 2, default, slide
+    }
 
-  # throw sharing indicators away
-  windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
-  windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
+    dwindle {
+      # keep floating dimentions while tiling
+      pseudotile = 1
+      preserve_split = 1
+      # aka monocle mode
+      no_gaps_when_only = 1
+    }
 
-  # start spotify tiled in ws9
-  windowrulev2 = tile, class:^(Spotify)$
-  windowrulev2 = workspace 9 silent, class:^(Spotify)$
+    # telegram media viewer
+    windowrulev2 = float, title:^(Media viewer)$
 
-  # start Discord/WebCord in ws2
-  windowrulev2 = workspace 2, title:^(.*Discord.*)$
-  windowrulev2 = workspace 2, title:^(WebCord)$
+    # make Firefox PiP window floating and sticky
+    windowrulev2 = float, title:^(Picture-in-Picture)$
+    windowrulev2 = pin, title:^(Picture-in-Picture)$
 
-  # idle inhibit while watching videos
-  windowrulev2 = idleinhibit focus, class:^(mpv)$
-  windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
+    # throw sharing indicators away
+    windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
+    windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
 
-  # fix Matlab
-  windowrulev2 = rounding 0, class:^(MATLAB.*)$
-  windowrulev2 = tile, class:^(MATLAB.*)$
+    # start spotify tiled in ws9
+    windowrulev2 = tile, class:^(Spotify)$
+    windowrulev2 = workspace 9 silent, class:^(Spotify)$
 
-  # mouse movements
-  bindm = $mod, mouse:272, movewindow
-  bindm = $mod, mouse:273, resizewindow
-  bindm = $mod ALT, mouse:272, resizewindow
+    # start Discord/WebCord in ws2
+    windowrulev2 = workspace 2, title:^(.*Discord.*)$
+    windowrulev2 = workspace 2, title:^(WebCord)$
 
-  # compositor commands
-  bind = $mod SHIFT, E, exec, pkill Hyprland
-  bind = $mod, Q, killactive,
-  bind = $mod, F, fullscreen,
-  bind = $mod, G, togglegroup,
-  bind = $mod SHIFT, N, changegroupactive, f
-  bind = $mod SHIFT, P, changegroupactive, b
-  bind = $mod, R, togglesplit,
-  bind = $mod, T, togglefloating,
-  bind = $mod, P, pseudo,
-  bind = $mod ALT, ,resizeactive,
+    # idle inhibit while watching videos
+    windowrulev2 = idleinhibit focus, class:^(mpv)$
+    windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
-  # utility
-  # launcher
-  bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || run-as-service ${launcher}
-  # terminal
-  bind = $mod, Return, exec, run-as-service ${default.terminal.name}
-  # logout menu
-  bind = $mod, Escape, exec, wlogout -p layer-shell
-  # lock screen
-  bind = $mod, L, exec, loginctl lock-session
-  # emoji picker
-  bind = $mod, E, exec, ${emoji}
-  # select area to perform OCR on
-  bind = $mod, O, exec, run-as-service wl-ocr
+    # fix Matlab
+    windowrulev2 = rounding 0, class:^(MATLAB.*)$
+    windowrulev2 = tile, class:^(MATLAB.*)$
 
-  # move focus
-  bind = $mod, left, movefocus, l
-  bind = $mod, right, movefocus, r
-  bind = $mod, up, movefocus, u
-  bind = $mod, down, movefocus, d
+    # mouse movements
+    bindm = $mod, mouse:272, movewindow
+    bindm = $mod, mouse:273, resizewindow
+    bindm = $mod ALT, mouse:272, resizewindow
 
-  # window resize
-  bind = $mod, S, submap, resize
+    # compositor commands
+    bind = $mod SHIFT, E, exec, pkill Hyprland
+    bind = $mod, Q, killactive,
+    bind = $mod, F, fullscreen,
+    bind = $mod, G, togglegroup,
+    bind = $mod SHIFT, N, changegroupactive, f
+    bind = $mod SHIFT, P, changegroupactive, b
+    bind = $mod, R, togglesplit,
+    bind = $mod, T, togglefloating,
+    bind = $mod, P, pseudo,
+    bind = $mod ALT, ,resizeactive,
 
-  submap = resize
-  binde = , right, resizeactive, 10 0
-  binde = , left, resizeactive, -10 0
-  binde = , up, resizeactive, 0 -10
-  binde = , down, resizeactive, 0 10
-  bind = , escape, submap, reset
-  submap = reset
+    # utility
+    # launcher
+    bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || run-as-service ${launcher}
+    # terminal
+    bind = $mod, Return, exec, run-as-service ${default.terminal.name}
+    # logout menu
+    bind = $mod, Escape, exec, wlogout -p layer-shell
+    # lock screen
+    bind = $mod, L, exec, loginctl lock-session
+    # emoji picker
+    bind = $mod, E, exec, ${emoji}
+    # select area to perform OCR on
+    bind = $mod, O, exec, run-as-service wl-ocr
 
-  # media controls
-  bindl = , XF86AudioPlay, exec, playerctl play-pause
-  bindl = , XF86AudioPrev, exec, playerctl previous
-  bindl = , XF86AudioNext, exec, playerctl next
+    # move focus
+    bind = $mod, left, movefocus, l
+    bind = $mod, right, movefocus, r
+    bind = $mod, up, movefocus, u
+    bind = $mod, down, movefocus, d
 
-  # volume
-  bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
-  bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
-  bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+    # window resize
+    bind = $mod, S, submap, resize
 
-  # backlight
-  bindle = , XF86MonBrightnessUp, exec, light -A 5
-  bindle = , XF86MonBrightnessDown, exec, light -U 5
+    submap = resize
+    binde = , right, resizeactive, 10 0
+    binde = , left, resizeactive, -10 0
+    binde = , up, resizeactive, 0 -10
+    binde = , down, resizeactive, 0 10
+    bind = , escape, submap, reset
+    submap = reset
 
-  # screenshot
-  # stop animations while screenshotting; makes black border go away
-  $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
-  bind = , Print, exec, $screenshotarea
-  bind = $mod SHIFT, R, exec, $screenshotarea
+    # media controls
+    bindl = , XF86AudioPlay, exec, playerctl play-pause
+    bindl = , XF86AudioPrev, exec, playerctl previous
+    bindl = , XF86AudioNext, exec, playerctl next
 
-  bind = CTRL, Print, exec, grimblast --notify --cursor copysave output
-  bind = $mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output
+    # volume
+    bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
+    bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
+    bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
-  bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
-  bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
+    # backlight
+    bindle = , XF86MonBrightnessUp, exec, light -A 5
+    bindle = , XF86MonBrightnessDown, exec, light -U 5
 
-  # workspaces
-  # binds mod + [shift +] {1..10} to [move to] ws {1..10}
-  ${builtins.concatStringsSep "\n" (builtins.genList (
-      x: let
-        ws = let
-          c = (x + 1) / 10;
-        in
-          builtins.toString (x + 1 - (c * 10));
-      in ''
-        bind = $mod, ${ws}, workspace, ${toString (x + 1)}
-        bind = $mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}
-      ''
-    )
-    10)}
+    # screenshot
+    # stop animations while screenshotting; makes black border go away
+    $screenshotarea = hyprctl keyword animation "fadeOut,0,0,default"; grimblast --notify copysave area; hyprctl keyword animation "fadeOut,1,4,default"
+    bind = , Print, exec, $screenshotarea
+    bind = $mod SHIFT, R, exec, $screenshotarea
 
-  # special workspace
-  bind = $mod SHIFT, grave, movetoworkspace, special
-  bind = $mod, grave, togglespecialworkspace, eDP-1
+    bind = CTRL, Print, exec, grimblast --notify --cursor copysave output
+    bind = $mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output
 
-  # cycle workspaces
-  bind = $mod, bracketleft, workspace, m-1
-  bind = $mod, bracketright, workspace, m+1
-  # cycle monitors
-  bind = $mod SHIFT, braceleft, focusmonitor, l
-  bind = $mod SHIFT, braceright, focusmonitor, r
-''
+    bind = ALT, Print, exec, grimblast --notify --cursor copysave screen
+    bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
+
+    # workspaces
+    # binds mod + [shift +] {1..10} to [move to] ws {1..10}
+    ${builtins.concatStringsSep "\n" (builtins.genList (
+        x: let
+          ws = let
+            c = (x + 1) / 10;
+          in
+            builtins.toString (x + 1 - (c * 10));
+        in ''
+          bind = $mod, ${ws}, workspace, ${toString (x + 1)}
+          bind = $mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}
+        ''
+      )
+      10)}
+
+    # special workspace
+    bind = $mod SHIFT, grave, movetoworkspace, special
+    bind = $mod, grave, togglespecialworkspace, eDP-1
+
+    # cycle workspaces
+    bind = $mod, bracketleft, workspace, m-1
+    bind = $mod, bracketright, workspace, m+1
+    # cycle monitors
+    bind = $mod SHIFT, braceleft, focusmonitor, l
+    bind = $mod SHIFT, braceright, focusmonitor, r
+  '';
+}
