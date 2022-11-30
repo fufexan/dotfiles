@@ -1,9 +1,6 @@
 inputs: let
-  inherit (inputs) self;
-
-  theme = "catppuccin";
-
-  colors = with self.lib; let
+  colors = with inputs.self.lib; let
+    theme = "catppuccin";
     baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
   in {
     inherit baseColors;
@@ -18,14 +15,6 @@ inputs: let
   };
 
   extraSpecialArgs = {inherit colors inputs default;};
-
-  defArgs = {
-    inherit extraSpecialArgs;
-    pkgs = inputs.self.pkgs.x86_64-linux;
-  };
-
-  mkHome = args:
-    inputs.hm.lib.homeManagerConfiguration (defArgs // args);
 
   default = {
     browser = "firefox";
@@ -43,4 +32,4 @@ inputs: let
       sha256 = "0f7q0aj1q6mjfh248j8dflfbkbcpfvh5wl75r3bfhr8p6015jkwq";
     };
   };
-in {inherit mkHome extraSpecialArgs default;}
+in {inherit extraSpecialArgs default;}

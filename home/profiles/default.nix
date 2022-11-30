@@ -1,6 +1,6 @@
 inputs: let
   inherit (inputs) self;
-  inherit (self.lib) mkHome extraSpecialArgs;
+  inherit (self.lib) extraSpecialArgs;
 
   sharedModules = [
     ../.
@@ -11,11 +11,21 @@ inputs: let
     "mihai@io" = sharedModules ++ [./io];
     server = sharedModules ++ [./server];
   };
+
+  inherit (inputs.hm.lib) homeConfiguration;
 in {
   inherit homeImports extraSpecialArgs;
 
   homeConfigurations = {
-    "mihai@io" = mkHome {modules = homeImports."mihai@io";};
-    "server" = mkHome {modules = homeImports.server;};
+    "mihai@io" = homeConfiguration {
+      modules = homeImports."mihai@io";
+      pkgs = inputs.self.pkgs.x86_64-linux;
+      inherit extraSpecialArgs;
+    };
+    "server" = homeConfiguration {
+      modules = homeImports.server;
+      pkgs = inputs.self.pkgs.x86_64-linux;
+      inherit extraSpecialArgs;
+    };
   };
 }
