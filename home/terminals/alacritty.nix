@@ -1,11 +1,10 @@
 {
-  colors,
   default,
   ...
 }:
 # terminals
 let
-  inherit (colors) xcolors;
+  inherit (default) xcolors;
   inherit (default.terminal) font size;
 in {
   programs.alacritty = {

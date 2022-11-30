@@ -1,7 +1,4 @@
 inputs: let
-  inherit (inputs) self;
-  inherit (import "${self}/theme" inputs) extraSpecialArgs;
-
   sharedModules = [
     ../.
     ../shell
@@ -12,20 +9,24 @@ inputs: let
     server = sharedModules ++ [./server];
   };
 
+  extraSpecialArgs = {
+    inherit inputs;
+    inherit (import "${inputs.self}/theme" inputs) default;
+  };
+
+  pkgs = inputs.self.pkgs.x86_64-linux;
   inherit (inputs.hm.lib) homeConfiguration;
 in {
-  inherit homeImports extraSpecialArgs;
+  inherit homeImports;
 
   homeConfigurations = {
     "mihai@io" = homeConfiguration {
       modules = homeImports."mihai@io";
-      pkgs = inputs.self.pkgs.x86_64-linux;
-      inherit extraSpecialArgs;
+      inherit pkgs extraSpecialArgs;
     };
     "server" = homeConfiguration {
       modules = homeImports.server;
-      pkgs = inputs.self.pkgs.x86_64-linux;
-      inherit extraSpecialArgs;
+      inherit pkgs extraSpecialArgs;
     };
   };
 }

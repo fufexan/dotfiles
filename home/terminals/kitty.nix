@@ -1,9 +1,8 @@
 {
   default,
-  colors,
   ...
 }: let
-  inherit (colors) xcolors;
+  inherit (default) xcolors;
 in {
   programs.kitty = {
     enable = true;

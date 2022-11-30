@@ -2,15 +2,13 @@ inputs: let
   inherit (inputs) self;
   inherit (self.lib) nixosSystem;
   inherit (import "${self}/home/profiles" inputs) homeImports;
+  inherit (import "${self}/theme" inputs) default;
 
   sharedModules = [
     {
-      _module.args = {
-        inherit inputs;
-        inherit (import "${self}/theme" inputs) default;
-      };
+      _module.args = {inherit inputs default;};
       home-manager = {
-        inherit (import "${self}/theme" inputs) extraSpecialArgs;
+        extraSpecialArgs = {inherit inputs default;};
         useGlobalPkgs = true;
       };
     }

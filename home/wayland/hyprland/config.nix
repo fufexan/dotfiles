@@ -1,10 +1,9 @@
 {
   pkgs,
-  colors,
   default,
   ...
 }: let
-  xargb = colors.xargbColors;
+  xargb = default.xargbColors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";

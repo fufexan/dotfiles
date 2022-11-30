@@ -1,9 +1,9 @@
 {
   pkgs,
-  colors,
+  default,
   ...
 }: let
-  inherit (colors) xrgbaColors;
+  inherit (default) xrgbaColors;
 in {
   home.packages = [pkgs.wayfire];
 

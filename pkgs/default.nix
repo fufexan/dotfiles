@@ -16,14 +16,12 @@ inputs: _: prev: rec {
 
     modules = let
       inherit (import "${inputs.self}/home/profiles" inputs) homeImports;
+      inherit (import "${inputs.self}/theme" inputs) default;
     in [
       "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
       {home-manager.users.mihai.imports = homeImports."mihai@io";}
       {
-        _module.args = {
-          inherit inputs;
-          inherit (import "${inputs.self}/theme" inputs) default;
-        };
+        _module.args = {inherit inputs default;};
       }
       ../modules/minimal.nix
       ../modules/security.nix
@@ -31,7 +29,7 @@ inputs: _: prev: rec {
       inputs.hm.nixosModule
       {
         home-manager = {
-          inherit (import "${inputs.self}/theme" inputs) extraSpecialArgs;
+          extraSpecialArgs = {inherit inputs default;};
           useGlobalPkgs = true;
         };
       }

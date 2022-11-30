@@ -1,8 +1,8 @@
 {
   pkgs,
   config,
-  colors,
   inputs,
+  default,
   ...
 }:
 # graphical session configuration
@@ -151,7 +151,7 @@
     };
 
     zathura = let
-      inherit (colors) xcolors;
+      inherit (default) xcolors;
     in {
       enable = true;
       options = {

@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  colors,
   default,
   ...
 }:
@@ -55,7 +54,7 @@ in {
     obs-studio.plugins = with pkgs.obs-studio-plugins; [wlrobs];
 
     swaylock.settings = let
-      inherit (colors) xcolors;
+      inherit (default) xcolors;
     in {
       clock = true;
       effect-blur = "30x3";

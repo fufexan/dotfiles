@@ -1,9 +1,9 @@
 {
   pkgs,
-  colors,
+  default,
   ...
 }: let
-  x = colors.xcolors;
+  x = default.xcolors;
 in {
   # notification daemon
   services.dunst = {

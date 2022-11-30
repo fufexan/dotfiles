@@ -1,22 +1,15 @@
-inputs: let
-  colors = with inputs.self.lib; let
-    theme = "catppuccin";
-    baseColors = inputs.nix-colors.colorSchemes.${theme}.colors;
-  in {
-    inherit baseColors;
+inputs: {
+  default = with inputs.self.lib; rec {
+    colors = inputs.nix-colors.colorSchemes.catppuccin.colors;
     # #RRGGBB
-    xcolors = mapAttrs (_: x) baseColors;
+    xcolors = mapAttrs (_: x) colors;
     # #RRGGBBAA
-    xrgbaColors = mapAttrs (_: xrgba) baseColors;
+    xrgbaColors = mapAttrs (_: xrgba) colors;
     # #AARRGGBB
-    xargbColors = mapAttrs (_: xargb) baseColors;
+    xargbColors = mapAttrs (_: xargb) colors;
     # rgba(,,,) colors (css)
-    rgbaColors = mapAttrs (_: rgba) baseColors;
-  };
+    rgbaColors = mapAttrs (_: rgba) colors;
 
-  extraSpecialArgs = {inherit colors inputs default;};
-
-  default = {
     browser = "firefox";
 
     terminal = {
@@ -32,4 +25,4 @@ inputs: let
       sha256 = "0f7q0aj1q6mjfh248j8dflfbkbcpfvh5wl75r3bfhr8p6015jkwq";
     };
   };
-in {inherit extraSpecialArgs default;}
+}
