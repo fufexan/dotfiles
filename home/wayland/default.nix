@@ -62,15 +62,15 @@ in {
       ignore-empty-password = true;
       image = default.wallpaper;
       indicator = true;
-      bs-hl-color = xcolors.base0E;
-      key-hl-color = xcolors.base07;
-      inside-clear-color = xcolors.base0B;
-      inside-color = xcolors.base0A;
-      inside-ver-color = xcolors.base0C;
-      inside-wrong-color = xcolors.base08;
-      line-color = xcolors.base00;
-      ring-color = xcolors.base09;
-      separator-color = xcolors.base0F;
+      bs-hl-color = xcolors.red;
+      key-hl-color = xcolors.peach;
+      inside-clear-color = xcolors.red;
+      inside-color = xcolors.yellow;
+      inside-ver-color = xcolors.blue;
+      inside-wrong-color = xcolors.red;
+      line-color = xcolors.crust;
+      ring-color = xcolors.base;
+      separator-color = xcolors.subtext1;
     };
   };
 

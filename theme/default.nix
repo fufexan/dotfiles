@@ -1,12 +1,10 @@
 inputs: {
   default = with inputs.self.lib; rec {
-    colors = inputs.nix-colors.colorSchemes.catppuccin.colors;
+    colors = import ./colors.nix;
     # #RRGGBB
     xcolors = mapAttrs (_: x) colors;
     # #RRGGBBAA
     xrgbaColors = mapAttrs (_: xrgba) colors;
-    # #AARRGGBB
-    xargbColors = mapAttrs (_: xargb) colors;
     # rgba(,,,) colors (css)
     rgbaColors = mapAttrs (_: rgba) colors;
 

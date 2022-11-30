@@ -3,7 +3,7 @@
   default,
   ...
 }: let
-  xargb = default.xargbColors;
+  inherit (default) colors;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
@@ -66,8 +66,8 @@ in ''
     gaps_in = 5
     gaps_out = 5
     border_size = 2
-    col.active_border = 0x${xargb.base06} # white
-    col.inactive_border = 0x${xargb.base02} # black
+    col.active_border = rgb(${colors.yellow}) rgb(${colors.peach}) 45deg
+    col.inactive_border = rgb(${colors.teal}) rgb(${colors.sapphire}) 45deg
   }
 
   decoration {

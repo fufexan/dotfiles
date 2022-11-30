@@ -17,7 +17,7 @@ in {
       allow_remote_control = "yes";
       enable_audio_bell = "no";
       visual_bell_duration = "0.1";
-      visual_bell_color = xcolors.base05;
+      visual_bell_color = xcolors.rosewater;
 
       copy_on_select = "clipboard";
 
@@ -26,32 +26,32 @@ in {
 
       # colors
       background_opacity = toString default.terminal.opacity;
-      foreground = xcolors.base05;
-      background = xcolors.base00;
+      foreground = xcolors.fg;
+      background = xcolors.crust;
       # black
-      color0 = xcolors.base02;
-      color8 = xcolors.base03;
+      color0 = xcolors.mantle;
+      color8 = xcolors.base;
       # red
-      color1 = xcolors.base08;
-      color9 = xcolors.base08;
+      color1 = xcolors.red;
+      color9 = xcolors.red;
       # green
-      color2 = xcolors.base0B;
-      color10 = xcolors.base0B;
+      color2 = xcolors.green;
+      color10 = xcolors.green;
       # yellow
-      color3 = xcolors.base0A;
-      color11 = xcolors.base0A;
+      color3 = xcolors.yellow;
+      color11 = xcolors.yellow;
       # blue
-      color4 = xcolors.base0D;
-      color12 = xcolors.base0D;
+      color4 = xcolors.blue;
+      color12 = xcolors.blue;
       # magenta
-      color5 = xcolors.base0E;
-      color13 = xcolors.base0E;
+      color5 = xcolors.pink;
+      color13 = xcolors.pink;
       # cyan
-      color6 = xcolors.base0C;
-      color14 = xcolors.base0C;
+      color6 = xcolors.sky;
+      color14 = xcolors.sky;
       # white
-      color7 = xcolors.base05;
-      color15 = xcolors.base06;
+      color7 = xcolors.text;
+      color15 = xcolors.rosewater;
     };
   };
 }

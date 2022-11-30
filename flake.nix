@@ -80,8 +80,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    nix-colors.url = "github:Misterio77/nix-colors";
-
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     nix-matlab = {

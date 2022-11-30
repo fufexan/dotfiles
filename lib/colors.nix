@@ -5,16 +5,12 @@ with lib; rec {
   # convert rrggbb hex to #rrggbb
   x = c: "#${c}";
 
-  # same as x but adds an alpha channel for transparency
-  xrgba = c: "${c}88";
-  xargb = c: "88${c}";
-
   # convert rrggbb hex to rgba(r, g, b, a) css
   rgba = c: let
     r = toString (hexToDec (__substring 0 2 c));
     g = toString (hexToDec (__substring 2 2 c));
     b = toString (hexToDec (__substring 4 2 c));
-    res = "rgba(${r}, ${g}, ${b}, 0.5)";
+    res = "rgba(${r}, ${g}, ${b}, .5)";
   in
     res;
 

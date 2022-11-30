@@ -2,9 +2,7 @@
   pkgs,
   default,
   ...
-}: let
-  x = default.xcolors;
-in {
+}: {
   # notification daemon
   services.dunst = {
     enable = true;
@@ -41,19 +39,19 @@ in {
       fullscreen_delay_everything = {fullscreen = "delay";};
 
       urgency_critical = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base08;
+        background = default.xcolors.bg;
+        foreground = default.xcolors.fg;
+        frame_color = default.xcolors.rosewater;
       };
       urgency_low = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base05;
+        background = default.xcolors.bg;
+        foreground = default.xcolors.fg;
+        frame_color = default.xcolors.blue;
       };
       urgency_normal = {
-        background = x.base00;
-        foreground = x.base06;
-        frame_color = x.base06;
+        background = default.xcolors.bg;
+        foreground = default.xcolors.fg;
+        frame_color = default.xcolors.red;
       };
     };
   };

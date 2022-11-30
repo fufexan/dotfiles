@@ -20,9 +20,7 @@ inputs: _: prev: rec {
     in [
       "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/iso-image.nix"
       {home-manager.users.mihai.imports = homeImports."mihai@io";}
-      {
-        _module.args = {inherit inputs default;};
-      }
+      {_module.args = {inherit inputs default;};}
       ../modules/minimal.nix
       ../modules/security.nix
       inputs.agenix.nixosModule

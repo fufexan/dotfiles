@@ -2,6 +2,12 @@ inputs: let
   sharedModules = [
     ../.
     ../shell
+    {
+      _module.args = {
+        inherit inputs;
+        default = import "${inputs.self}/theme" inputs;
+      };
+    }
   ];
 
   homeImports = {

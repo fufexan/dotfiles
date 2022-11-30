@@ -44,22 +44,6 @@
         "type": "github"
       }
     },
-    "base16-schemes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665690101,
-        "narHash": "sha256-J2ZvNaVFkqaTXzYO5L+jyRORfIOavFPKvWItP6UTMKs=",
-        "owner": "tinted-theming",
-        "repo": "base16-schemes",
-        "rev": "a3dc916cf90471a422c0bfe1bb4b1bdd12185ced",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tinted-theming",
-        "repo": "base16-schemes",
-        "type": "github"
-      }
-    },
     "crane": {
       "flake": false,
       "locked": {
@@ -591,25 +575,6 @@
         "type": "github"
       }
     },
-    "nix-colors": {
-      "inputs": {
-        "base16-schemes": "base16-schemes",
-        "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1669296560,
-        "narHash": "sha256-W7Hqq1gWlPO54M79+olt+cl2wodq8/B9K9gDHXl99jc=",
-        "owner": "Misterio77",
-        "repo": "nix-colors",
-        "rev": "01c5aea7d6724723f3deca4dfde6d916b7bdbe50",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Misterio77",
-        "repo": "nix-colors",
-        "type": "github"
-      }
-    },
     "nix-gaming": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
@@ -719,21 +684,6 @@
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib": {
-      "locked": {
-        "lastModified": 1655599917,
-        "narHash": "sha256-kjZbt5WdTrnjMxL79okg9TCoRUdADG50x/TWozbyTsE=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "5fb55578aa2f1a502d636a8ac71aece57cb730bb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
         "type": "github"
       }
     },
@@ -872,7 +822,6 @@
         "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
         "nil": "nil",
-        "nix-colors": "nix-colors",
         "nix-gaming": "nix-gaming",
         "nix-matlab": "nix-matlab",
         "nix-xilinx": "nix-xilinx",
