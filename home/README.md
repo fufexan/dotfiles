@@ -5,7 +5,7 @@ Home-Manager configurations for different hosts.
 Name            | Description
 --------------- | -----------
 `default.nix`   | Home-Manager specific configuration
-`editors`       | Helix, Kakoune, Neovim, Emacs
+`editors`       | Helix & Neovim
 `programs`      | Programs
 `shell`         | Zsh, Nix options, etc.
 `terminals`     | Terminal configs
