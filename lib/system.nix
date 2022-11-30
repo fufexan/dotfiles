@@ -1,12 +1,33 @@
-inputs: let
-  inherit (inputs.nixpkgs) lib;
-in rec {
+inputs: rec {
   supportedSystems = ["aarch64-linux" "x86_64-linux"];
 
-  genSystems = lib.genAttrs supportedSystems;
+  genSystems = inputs.nixpkgs.lib.genAttrs supportedSystems;
 
-  nixpkgsFor = genSystems (system: overlays:
+  pkgs = genSystems (system:
     import inputs.nixpkgs {
-      inherit system overlays;
+      inherit system;
+      config.allowUnfree = true;
+      config.overlays = [
+        (
+          _: prev: {
+            steam = prev.steam.override {
+              extraPkgs = pkgs:
+                with pkgs; [
+                  keyutils
+                  libkrb5
+                  libpng
+                  libpulseaudio
+                  libvorbis
+                  stdenv.cc.cc.lib
+                  xorg.libXcursor
+                  xorg.libXi
+                  xorg.libXinerama
+                  xorg.libXScrnSaver
+                ];
+              extraProfile = "export GDK_SCALE=2";
+            };
+          }
+        )
+      ];
     });
 }

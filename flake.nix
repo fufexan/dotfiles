@@ -1,42 +1,19 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = {nixpkgs, ...} @ inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
     lib = import ./lib inputs;
-    inherit (lib) genSystems;
-
-    overlays.default = import ./pkgs inputs;
-
-    pkgs = genSystems (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        config.packageOverrides = pkgs: {
-          steam = pkgs.steam.override {
-            extraPkgs = pkgs:
-              with pkgs; [
-                keyutils
-                libkrb5
-                libpng
-                libpulseaudio
-                libvorbis
-                stdenv.cc.cc.lib
-                xorg.libXcursor
-                xorg.libXi
-                xorg.libXinerama
-                xorg.libXScrnSaver
-              ];
-            extraProfile = "export GDK_SCALE=2";
-          };
-        };
-      });
+    inherit (lib) genSystems pkgs;
   in {
-    inherit lib overlays pkgs;
+    inherit lib pkgs;
+    overlays.default = import ./pkgs inputs;
 
     # standalone home-manager config
     inherit (import ./home/profiles inputs) homeConfigurations;
-
-    deploy = import ./hosts/deploy.nix inputs;
 
     # nixos-configs with home-manager
     nixosConfigurations = import ./hosts inputs;
@@ -46,8 +23,7 @@
         packages = with pkgs.${system}; [
           alejandra
           git
-          inputs.deploy-rs.defaultPackage.${system}
-          (overlays.default null pkgs.${system}).repl
+          (self.overlays.default null pkgs.${system}).repl
         ];
         name = "dots";
       };
@@ -55,22 +31,14 @@
 
     packages =
       # I don't like this
-      lib.genAttrs ["x86_64-linux"] (system: overlays.default null pkgs.${system})
-      // {aarch64-linux.repl = (overlays.default null pkgs.aarch64-linux).repl;};
+      lib.genAttrs ["x86_64-linux"] (system: self.overlays.default null pkgs.${system})
+      // {aarch64-linux.repl = (self.overlays.default null pkgs.aarch64-linux).repl;};
 
     formatter = genSystems (system: pkgs.${system}.alejandra);
   };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.utils.follows = "fu";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # flakes
 
     agenix = {
       url = "github:ryantm/agenix";
