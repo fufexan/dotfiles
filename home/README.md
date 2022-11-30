@@ -10,7 +10,6 @@ Name            | Description
 `shell`         | Zsh, Nix options, etc.
 `terminals`     | Terminal configs
 `wayland`       | Wayland-specific options, including Sway and Waybar configs
-`x11`           | Xorg-specific options, including BSPWM and other programs
 
 `profiles` is a special dir where `homeConfigurations` are set up. They're
 basically the entrypoints of the configs.
