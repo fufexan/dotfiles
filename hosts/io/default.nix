@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   inputs,
   ...
@@ -78,11 +77,7 @@
     # adb.enable = true;
 
     # enable hyprland and required options
-    hyprland = {
-      enable = true;
-      # enabled in home/wayland/hyprland
-      package = null;
-    };
+    hyprland.enable = true; 
 
     # backlight control
     light.enable = true;
