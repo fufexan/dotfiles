@@ -77,7 +77,7 @@
     # adb.enable = true;
 
     # enable hyprland and required options
-    hyprland.enable = true; 
+    hyprland.enable = true;
 
     # backlight control
     light.enable = true;
