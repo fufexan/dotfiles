@@ -41,7 +41,7 @@
       urgency_critical = {
         background = default.xcolors.bg;
         foreground = default.xcolors.fg;
-        frame_color = default.xcolors.rosewater;
+        frame_color = default.xcolors.red;
       };
       urgency_low = {
         background = default.xcolors.bg;
@@ -51,7 +51,7 @@
       urgency_normal = {
         background = default.xcolors.bg;
         foreground = default.xcolors.fg;
-        frame_color = default.xcolors.red;
+        frame_color = default.xcolors.green;
       };
     };
   };
