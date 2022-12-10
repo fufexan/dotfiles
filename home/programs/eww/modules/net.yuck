@@ -1,6 +1,6 @@
 (defwidget net []
   (button
-    :class "module-net module"
+    :class "module"
     :onclick "iwgtk &"
     :tooltip {net.essid}
     :style "color: ${net.color};"

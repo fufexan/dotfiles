@@ -44,12 +44,14 @@ tooltip {
 }
 
 .module { margin: 0 5px; }
-.hour { font-weight: bold; }
+.hour {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
 .date {
   background: $bg;
   color: $flamingo;
-  margin-left: -1.15rem;
-  padding: 0 1rem;
 
   label {
     font-size: 1.2rem;
@@ -57,17 +59,7 @@ tooltip {
 }
 
 .bright-icon { color: $yellow; }
-
-.module-ssid,
-.module-net { color: $lavender; }
-
 .module-bt { font-size: 1.2rem; }
-
-.separ {
-  color: $surface0;
-  font-size: 1.5rem;
-  padding-bottom: 2px;
-}
 
 scale trough {
   background-color: $bg1;
@@ -78,14 +70,6 @@ scale trough {
 }
 
 .workspaces { margin-left: 10px; }
-
-.launcher label {
-  background-color: $blue;
-  color: $bg;
-  font-family: monospace;
-  font-size: 1.5rem;
-  padding: 0 1.1rem 0 .5rem;
-}
 
 .notif-toggle {
   padding: 0 5px;

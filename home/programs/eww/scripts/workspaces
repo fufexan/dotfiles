@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
-colors=("#f38ba8" "#a6e3a1" "#89b4fa" "#fab387")
-dimmed=("#794554" "#537150" "#445a7d" "#7d5943")
-empty="#302d41"
+# define colors
+#        red       peach     green     blue
+colors=("#f38ba8" "#fab387" "#a6e3a1" "#89b4fa")
+#        pink      yellow    teal      lavender
+dimmed=("#f5c2e7" "#f9e2af" "#94e2d5" "#b4befe")
+empty="#313244"
 
-focusedws=1
+# get initial focused workspace
+focusedws=$(hyprctl -j monitors | jaq -r '.[] | select(.focused == true) | .activeWorkspace.id')
 
 declare -A o=([1]=0 [2]=0 [3]=0 [4]=0 [5]=0 [6]=0 [7]=0 [8]=0 [9]=0 [10]=0)
 declare -A monitormap
 declare -A workspaces
 
-# sets color
+# set color for each workspace
 status() {
   if [ "${o[$1]}" -eq 1 ]; then
     mon=${monitormap[${workspaces[$1]}]}
@@ -25,17 +29,17 @@ status() {
   fi
 }
 
-# handles workspace create/destroy
+# handle workspace create/destroy
 workspace_event() {
   o[$1]=$2
   while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | gojq -r '.[]|"\(.id) \(.monitor)"')
 }
-# handles monitor (dis)connects
+# handle monitor (dis)connects
 monitor_event() {
   while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | gojq -r '.[]|"\(.name) \(.id) "')
 }
 
-# generates the eww widget
+# generate the json for eww
 generate() {
   echo -n '['
 
@@ -47,10 +51,13 @@ generate() {
 }
 
 # setup
+
 # add monitors
 monitor_event
+
 # add workspaces
 workspace_event 1 1
+
 # check occupied workspaces
 for num in "${!workspaces[@]}"; do
   o[$num]=1

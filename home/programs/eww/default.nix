@@ -20,6 +20,7 @@
     gnused
     gojq
     iwgtk
+    jaq
     light
     networkmanager
     networkmanagerapplet

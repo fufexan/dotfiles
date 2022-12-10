@@ -1,12 +1,9 @@
-(include "./modules/bat.yuck")
 (include "./modules/bluetooth.yuck")
 (include "./modules/bright.yuck")
 (include "./modules/clock.yuck")
-(include "./modules/cpu.yuck")
-(include "./modules/launcher.yuck")
-(include "./modules/mem.yuck")
 (include "./modules/music.yuck")
 (include "./modules/net.yuck")
+(include "./modules/sys.yuck")
 (include "./modules/variables.yuck")
 (include "./modules/volume.yuck")
 (include "./modules/workspaces.yuck")
@@ -15,9 +12,6 @@
 (include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
 (include "./windows/system-menu.yuck")
-
-(defwidget sep []
-  (label :class "separ module" :text "|"))
 
 (defwidget notif-toggle []
   (button
@@ -31,7 +25,6 @@
   (box
     :space-evenly false
     :halign "start"
-    (launcher)
     (workspaces)))
 
 (defwidget right []
@@ -40,13 +33,9 @@
     :halign "end"
     (bright)
     (volume-module)
-    (net)
     (bluetooth)
-    (sep)
-    (cpu)
-    (mem)
-    (bat)
-    (sep)
+    (net)
+    (sys)
     (clock_module)
     (notif-toggle)))
 
@@ -71,7 +60,5 @@
       :height "32px"
       :anchor "top center")
     :stacking "fg"
-    :windowtype "dock"
     :exclusive true
-    :wm-ignore false
   (bar))
