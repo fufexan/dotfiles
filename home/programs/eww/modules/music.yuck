@@ -4,7 +4,7 @@
     :onhoverlost "${EWW_CMD} update music_reveal=false"
     (box
       :class "module"
-      :space-evenly "false"
+      :space-evenly false
       (box
         :class "song-cover-art"
         :style "background-image: url(\"${music_cover}\");")

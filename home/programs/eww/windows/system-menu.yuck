@@ -139,7 +139,7 @@
             :class "sys-icon-cpu"))
         (box
           :orientation "v"
-          :vexpand "false"
+          :vexpand false
           (label
             :text "cpu"
             :halign "start"
@@ -207,9 +207,7 @@
 ;; windows
 (defwindow system-menu
   :stacking "fg" 
-  :windowtype "dock" 
-  :wm-ignore true 
-  :monitor "0"
+  :monitor 0
   :geometry (geometry
     :x "0"
     :y "0"

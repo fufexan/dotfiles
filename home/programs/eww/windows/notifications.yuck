@@ -1,20 +1,19 @@
 (defwindow notifications
-  :geometry
-    (geometry
-      :x "0px"
-      :y "0px"
-      :width "0px"
-      :height "0px"
-      :anchor "right top")
+  :geometry (geometry
+    :x "0px"
+    :y "0px"
+    :width "0px"
+    :height "0px"
+    :anchor "right top")
   :stacking "fg"
-  :monitor "0"
+  :monitor 0
 (notifications))
 
 (defwidget notifications [] 
   (box
     :class "notifications-box" 
     :orientation "v" 
-    :space-evenly "false"
+    :space-evenly false
     (box
       :class "notification-header"
       (label
@@ -23,7 +22,7 @@
         :text "Notifications")
       (box
         :halign "end"
-        :space-evenly "false" 
+        :space-evenly false 
         :spacing 10
         (button
           :class "notification-action"
@@ -38,8 +37,8 @@
           :tooltip "Clear Notifications"
           :onclick "scripts/notifications clear" ""))) ; 󰅖
     (scroll
-      :vscroll "true"
-      :hscroll "false"
+      :vscroll true
+      :hscroll false
       :height 500
       :width 300
       (box

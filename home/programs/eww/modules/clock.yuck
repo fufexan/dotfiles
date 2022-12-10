@@ -7,7 +7,7 @@
     (overlay
       :class "module"
       (box
-        :space-evenly "false"
+        :space-evenly false
         (label
           :text {time.hour}
           :class "clock hour")
