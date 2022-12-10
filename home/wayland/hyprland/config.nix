@@ -56,8 +56,8 @@ in {
       gaps_in = 5
       gaps_out = 5
       border_size = 2
-      col.active_border = rgb(${colors.yellow}) rgb(${colors.peach}) 45deg
-      col.inactive_border = rgb(${colors.teal}) rgb(${colors.sapphire}) 45deg
+      col.active_border = rgb(${colors.blue}) rgb(${colors.mauve}) 270deg
+      col.inactive_border = rgb(${colors.crust}) rgb(${colors.lavender}) 270deg
     }
 
     decoration {
@@ -134,6 +134,9 @@ in {
     bind = $mod, T, togglefloating,
     bind = $mod, P, pseudo,
     bind = $mod ALT, ,resizeactive,
+    # toggle "monocle" (no_gaps_when_only)
+    $kw = dwindle:no_gaps_when_only 
+    bind = $mod, M, exec, hyprctl keyword $kw $(($(hyprctl getoption $kw -j | jaq -r '.int') ^ 1))
 
     # utility
     # launcher
