@@ -1,4 +1,4 @@
-prev: spotifywm:
+prev:
 with prev; let
   deps = with prev; [
     alsa-lib
