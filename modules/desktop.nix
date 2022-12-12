@@ -9,6 +9,7 @@
       # icon fonts
       material-icons
       material-design-icons
+      inputs.self.packages.${pkgs.system}.material-symbols
 
       # normal fonts
       noto-fonts

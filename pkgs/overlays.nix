@@ -10,6 +10,8 @@ inputs: _: prev: rec {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
+  material-symbols = prev.callPackage ./material-symbols.nix {};
+
   tlauncher = prev.callPackage ./tlauncher.nix {};
 
   waveform = prev.callPackage ./waveform {};
