@@ -87,8 +87,10 @@ in {
       # keep floating dimentions while tiling
       pseudotile = 1
       preserve_split = 1
-      # aka monocle mode
-      no_gaps_when_only = 1
+
+      # group borders
+      col.group_border_active = rgb(${colors.pink})
+      col.group_border = rgb(${colors.surface0})
     }
 
     # telegram media viewer
@@ -107,8 +109,7 @@ in {
     windowrulev2 = workspace 9 silent, class:^(Spotify)$
 
     # start Discord/WebCord in ws2
-    windowrulev2 = workspace 2, title:^(.*Discord.*)$
-    windowrulev2 = workspace 2, title:^(WebCord)$
+    windowrulev2 = workspace 2, title:^(.*(Disc|WebC)ord.*)$
 
     # idle inhibit while watching videos
     windowrulev2 = idleinhibit focus, class:^(mpv)$
@@ -135,7 +136,7 @@ in {
     bind = $mod, P, pseudo,
     bind = $mod ALT, ,resizeactive,
     # toggle "monocle" (no_gaps_when_only)
-    $kw = dwindle:no_gaps_when_only 
+    $kw = dwindle:no_gaps_when_only
     bind = $mod, M, exec, hyprctl keyword $kw $(($(hyprctl getoption $kw -j | jaq -r '.int') ^ 1))
 
     # utility
