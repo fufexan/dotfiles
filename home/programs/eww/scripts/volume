@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-volicons=("󰕿" "󰖀" "󰕾")
+volicons=("" "" "")
 
 vol() {
   wpctl get-volume @DEFAULT_AUDIO_$1@ | awk '{print int($2*100)}'

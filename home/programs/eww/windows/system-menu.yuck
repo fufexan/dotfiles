@@ -26,7 +26,7 @@
         :space-evenly false
         :orientation "v"
         (box
-          :class "element"
+          :class "element icon"
           :space-evenly false
           (button
             :class "wifi-button"
@@ -49,7 +49,7 @@
         :space-evenly false
         :orientation "v"
         (box
-          :class "element"
+          :class "element icon"
           :space-evenly false
           (button
             :class "bluetooth-button"
@@ -90,7 +90,7 @@
         :class "volume-slider-box"
         :space-evenly false
         (button
-          :class "volume-icon"
+          :class "volume-icon icon"
           :onclick "scripts/volume mute SINK"
           {volume.icon})
         (scale
@@ -102,7 +102,7 @@
         :class "volume-slider-box"
         :space-evenly false
         (button
-          :class "volume-icon"
+          :class "volume-icon icon"
           :onclick "scripts/volume mute SOURCE"
           "")
         (scale
@@ -114,7 +114,7 @@
         :class "brightness-slider-box"
         :space-evenly false
         (button
-          :class "brightness-slider-icon"
+          :class "brightness-slider-icon icon"
           {brightness.icon})
         (scale
           :class "brightness-slider" 
@@ -135,8 +135,8 @@
           :class "sys-cpu"
           :thickness 3
           (label
-            :text ""
-            :class "sys-icon-cpu"))
+            :text ""
+            :class "sys-icon-cpu icon"))
         (box
           :orientation "v"
           :vexpand false
@@ -163,8 +163,8 @@
           :class "sys-mem"
           :thickness 3
           (label
-            :text ""
-            :class "sys-icon-mem"))
+            :text ""
+            :class "sys-icon-mem icon"))
         (box
           :orientation "v"
           (label
@@ -183,7 +183,7 @@
         :space-evenly false
         :halign "start"
         (label
-          :class "battery-icon"
+          :class "battery-icon icon"
           :style "color: ${battery.color}"
           :text {battery.icon})
         (label
@@ -201,8 +201,9 @@
         :halign "end"
         (button
           :halign "end"
-          :class "power-button"
-          :onclick "wlogout -p layer-shell &" "")))))
+          :class "power-button icon"
+          :onclick "wlogout -p layer-shell &"
+          "")))))
 
 ;; windows
 (defwindow system-menu

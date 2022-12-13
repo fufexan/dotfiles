@@ -18,7 +18,7 @@
         :text {music.artist})
       (centerbox
         :halign "center"
-        :class "music-button-box"
+        :class "music-button-box icon"
         (button :class "music-button" :onclick "playerctl previous" "")
         (button :class "music-button" :onclick "playerctl play-pause" {music.status})
         (button :class "music-button" :onclick "playerctl next" ""))

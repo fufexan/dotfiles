@@ -30,7 +30,7 @@ toggle() {
   dunstctl set-paused toggle
 
   if [ ! -f "$lock" ]; then
-    export toggle_icon=""
+    export toggle_icon=""
     touch "$lock"
   else
     export toggle_icon=""
@@ -47,9 +47,9 @@ clear() {
 
 get_icon() {
   if [ ${#ids[@]} -eq 0 ]; then
-    echo "󰆂"
+    echo ""
   else
-    echo "󰆄"
+    echo ""
   fi
 }
 

@@ -21,6 +21,7 @@
         :halign "start"
         :text "Notifications")
       (box
+        :class "icon"
         :halign "end"
         :space-evenly false 
         :spacing 10

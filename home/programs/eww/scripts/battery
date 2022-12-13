@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-icons=("󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹")
-icons_charging=("󰂆" "󰂇" "󰂈" "󰂉" "󰂅")
-
-# declare -A baticon=([10]="󰁺" [20]="󰁻" [30]="󰁼" [40]="󰁽" [50]="󰁾" [60]="󰁿" [70]="󰂀" [80]="󰂁" [90]="󰂂" [100]="󰁹")
+icons=("" "" "" "" "" "" "" "")
 
 geticon() {
 	if [ "$STATE" = "Charging" ]; then
-    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/20)}')
-		echo "${icons_charging[$level]}"
+    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/12)}')
+		echo "${icons[$level]}"
 	else
-    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/10)}')
+    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/12)}')
 		echo "${icons[$level]}"
 	fi
 }

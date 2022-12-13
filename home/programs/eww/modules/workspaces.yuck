@@ -7,6 +7,6 @@
 		  (for i in workspace
 		    (button
 					:onclick "hyprctl dispatch workspace ${i.number}"
-					:class "ws"
+					:class "ws icon"
 					:style "color: ${i.color};"
 					"●")))))
