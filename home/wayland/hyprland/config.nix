@@ -12,9 +12,9 @@ in {
     $mod = SUPER
 
     # should be configured per-profile
-    monitor = DP-1, preferred, auto, 1
-    monitor = DP-2, preferred, auto, 1
-    monitor = eDP-1, preferred, auto, 2
+    monitor = DP-1, preferred, auto, auto
+    monitor = DP-2, preferred, auto, auto
+    monitor = eDP-1, preferred, auto, auto
     workspace = eDP-1, 1
     workspace = DP-1, 10
     workspace = DP-2, 10

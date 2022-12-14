@@ -21,7 +21,6 @@
             {
               criteria = "eDP-1";
               position = "0,0";
-              scale = 2.0;
             }
           ];
         };
@@ -29,7 +28,6 @@
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
               position = "1366,0";
             }
             {
@@ -47,7 +45,6 @@
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
               position = "1366,0";
             }
             {
@@ -61,7 +58,6 @@
           outputs = [
             {
               criteria = "eDP-1";
-              scale = 2.0;
               position = "1366,0";
             }
             {
