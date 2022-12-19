@@ -40,8 +40,6 @@
       enable = true;
       # battery info support
       package = pkgs.bluez5-experimental;
-      # HSP/HFP support
-      hsphfpd.enable = true;
       settings = {
         # make Xbox Series X controller work
         General = {

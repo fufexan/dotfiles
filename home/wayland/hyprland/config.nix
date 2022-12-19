@@ -28,6 +28,8 @@ in {
     misc {
       # enable Variable Frame Rate
       no_vfr = 0
+      # disable auto polling for config file changes
+      disable_autoreload = 0
     }
 
     # touchpad gestures

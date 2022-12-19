@@ -2,7 +2,7 @@
   description = "fufexan's NixOS and Home-Manager flake";
 
   outputs = {nixpkgs, ...} @ inputs:
-    inputs.flake-parts.lib.mkFlake {inherit (inputs) self;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
       imports = [

@@ -4,18 +4,21 @@
   ...
 }: {
   # themable spotify
-  programs.spicetify = {
+  programs.spicetify = let
+    spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+  in {
     enable = true;
 
     spotifyPackage = inputs.self.packages.${pkgs.system}.spotify-wrapped-wm;
 
-    theme = "catppuccin-mocha";
+    theme = spicePkgs.themes.catppuccin-mocha;
+
     colorScheme = "flamingo";
 
-    enabledExtensions = [
-      "fullAppDisplay.js"
-      "shuffle+.js"
-      "hidePodcasts.js"
+    enabledExtensions = with spicePkgs.extensions; [
+      fullAppDisplay
+      hidePodcasts
+      shuffle
     ];
   };
 }
