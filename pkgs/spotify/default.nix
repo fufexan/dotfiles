@@ -1,6 +1,59 @@
-prev:
-with prev; let
-  deps = with prev; [
+{
+  fetchurl,
+  lib,
+  stdenv,
+  squashfsTools,
+  xorg,
+  alsa-lib,
+  makeWrapper,
+  wrapGAppsHook,
+  openssl,
+  freetype,
+  glib,
+  pango,
+  cairo,
+  atk,
+  gdk-pixbuf,
+  gtk3,
+  cups,
+  nspr,
+  nss,
+  libpng,
+  libnotify,
+  libgcrypt,
+  systemd,
+  fontconfig,
+  dbus,
+  expat,
+  ffmpeg,
+  curlWithGnuTls,
+  zlib,
+  gnome,
+  at-spi2-atk,
+  at-spi2-core,
+  libpulseaudio,
+  libdrm,
+  mesa,
+  libxkbcommon,
+  # High-DPI support: Spotify's --force-device-scale-factor argument
+  # not added if `null`, otherwise, should be a number.
+  deviceScaleFactor ? null,
+}: let
+  # TO UPDATE: just execute the ./update.sh script (won't do anything if there is no update)
+  # "rev" decides what is actually being downloaded
+  # If an update breaks things, one of those might have valuable info:
+  # https://aur.archlinux.org/packages/spotify/
+  # https://community.spotify.com/t5/Desktop-Linux
+  version = "1.1.99.878.g1e4ccc6e";
+  # To get the latest stable revision:
+  # curl -H 'X-Ubuntu-Series: 16' 'https://api.snapcraft.io/api/v1/snaps/details/spotify?channel=stable' | jq '.download_url,.version,.last_updated'
+  # To get general information:
+  # curl -H 'Snap-Device-Series: 16' 'https://api.snapcraft.io/v2/snaps/info/spotify' | jq '.'
+  # More examples of api usage:
+  # https://github.com/canonical-websites/snapcraft.io/blob/master/webapp/publisher/snaps/views.py
+  rev = "62";
+
+  deps = [
     alsa-lib
     at-spi2-atk
     at-spi2-core
@@ -45,7 +98,53 @@ with prev; let
     zlib
   ];
 in
-  spotify-unwrapped.overrideAttrs (old: {
+  stdenv.mkDerivation {
+    pname = "spotify";
+    inherit version;
+
+    # fetch from snapcraft instead of the debian repository most repos fetch from.
+    # That is a bit more cumbersome. But the debian repository only keeps the last
+    # two versions, while snapcraft should provide versions indefinately:
+    # https://forum.snapcraft.io/t/how-can-a-developer-remove-her-his-app-from-snap-store/512
+
+    # This is the next-best thing, since we're not allowed to re-distribute
+    # spotify ourselves:
+    # https://community.spotify.com/t5/Desktop-Linux/Redistribute-Spotify-on-Linux-Distributions/td-p/1695334
+    src = fetchurl {
+      url = "https://api.snapcraft.io/api/v1/snaps/download/pOBIoZ2LrCB3rDohMxoYGnbN14EHOgD7_${rev}.snap";
+      sha512 = "9b8f63c067632f15f5abf6449d09d28fd56839decfc9801d4526cf5b97b9cb5933ede179bcd0b0f2d8b6d4c7e72f55c7fc13dfb0ae4293ef447ead1d018b9cc6";
+    };
+
+    nativeBuildInputs = [makeWrapper wrapGAppsHook squashfsTools];
+
+    dontStrip = true;
+    dontPatchELF = true;
+
+    unpackPhase = ''
+      runHook preUnpack
+      unsquashfs "$src" '/usr/share/spotify' '/usr/bin/spotify' '/meta/snap.yaml'
+      cd squashfs-root
+      if ! grep -q 'grade: stable' meta/snap.yaml; then
+        # Unfortunately this check is not reliable: At the moment (2018-07-26) the
+        # latest version in the "edge" channel is also marked as stable.
+        echo "The snap package is marked as unstable:"
+        grep 'grade: ' meta/snap.yaml
+        echo "You probably chose the wrong revision."
+        exit 1
+      fi
+      if ! grep -q '${version}' meta/snap.yaml; then
+        echo "Package version differs from version found in snap metadata:"
+        grep 'version: ' meta/snap.yaml
+        echo "While the nix package specifies: ${version}."
+        echo "You probably chose the wrong revision or forgot to update the nix version."
+        exit 1
+      fi
+      runHook postUnpack
+    '';
+
+    # Prevent double wrapping
+    dontWrapGApps = true;
+
     installPhase = ''
       runHook preInstall
 
@@ -75,8 +174,10 @@ in
       librarypath="${lib.makeLibraryPath deps}:$libdir"
       wrapProgram $out/share/spotify/spotify \
         ''${gappsWrapperArgs[@]} \
+        ${lib.optionalString (deviceScaleFactor != null) ''
+        --add-flags "--force-device-scale-factor=${toString deviceScaleFactor}" \
+      ''} \
         --prefix LD_LIBRARY_PATH : "$librarypath" \
-        --prefix LD_PRELOAD : "${spotifywm}/lib/spotifywm.so" \
         --prefix PATH : "${gnome.zenity}/bin"
 
       # fix Icon line in the desktop file (#48062)
@@ -96,4 +197,13 @@ in
 
       runHook postInstall
     '';
-  })
+
+    meta = with lib; {
+      homepage = "https://www.spotify.com/";
+      description = "Play music from the Spotify music service";
+      sourceProvenance = with sourceTypes; [binaryNativeCode];
+      license = licenses.unfree;
+      maintainers = with maintainers; [eelco ftrvxmtrx sheenobu mudri timokau ma27];
+      platforms = ["x86_64-linux"];
+    };
+  }

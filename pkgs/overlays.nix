@@ -1,4 +1,4 @@
-inputs: _: prev: rec {
+inputs: _: prev: {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
@@ -16,7 +16,7 @@ inputs: _: prev: rec {
 
   waveform = prev.callPackage ./waveform {};
 
-  sway-hidpi = import ./sway-hidpi.nix prev;
+  spotify = prev.callPackage ./spotify {};
 
-  spotify-wrapped-wm = import ./spotify prev;
+  sway-hidpi = import ./sway-hidpi.nix prev;
 }

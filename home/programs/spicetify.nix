@@ -9,7 +9,7 @@
   in {
     enable = true;
 
-    spotifyPackage = inputs.self.packages.${pkgs.system}.spotify-wrapped-wm;
+    spotifyPackage = inputs.self.packages.${pkgs.system}.spotify;
 
     theme = spicePkgs.themes.catppuccin-mocha;
 
