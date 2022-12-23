@@ -73,10 +73,22 @@ get_cover() {
 	done
 }
 
+sanitize() {
+	echo "$1" | sed 's/"/\"/g'
+}
+
 if [ "$1" = "cover" ]; then
 	get_cover
 else
 	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
-		echo '{"artist": "'"$artist"'", "title": "'"$title"'", "status": "'"$(get_status "$status")"'", "position": "'"$(get_position "$position" "$len")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$(get_length_time "$len")"'"}' #, "cover": "'"$(get_cover $art)"'"
+		jaq --null-input \
+			-r -c \
+			--arg artist "$(sanitize "$artist")" \
+			--arg title "$(sanitize "$title")" \
+			--arg status "$(get_status "$status")" \
+			--arg pos "$(get_position "$position" "$len")" \
+			--arg pos_time "$(get_position_time "$position" "$len")" \
+			--arg length "$(get_length_time "$len")" \
+			'{"artist": $artist, "title": $title, "status": $status, "position": $pos, "position_time": $pos_time, "length": $length}'
 	done
 fi
