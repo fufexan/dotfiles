@@ -11,6 +11,7 @@
 (include "./windows/calendar.yuck")
 (include "./windows/music.yuck")
 (include "./windows/notifications.yuck")
+(include "./windows/osd.yuck")
 (include "./windows/system-menu.yuck")
 
 (defwidget notif-toggle []
