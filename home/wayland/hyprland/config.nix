@@ -1,9 +1,12 @@
 {
+  config,
   pkgs,
   default,
   ...
 }: let
   inherit (default) colors;
+
+  pointer = config.home.pointerCursor;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
@@ -21,6 +24,9 @@ in {
 
     # scale apps
     exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
+
+    # set cursor for HL itself
+    exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
 
     exec-once = systemctl --user start clight
     exec-once = eww open bar
