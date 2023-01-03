@@ -42,7 +42,7 @@
 
 .element {
   @include rounding;
-  background: $surface0;
+  background-color: $surface0;
   margin: .3rem;
 
   button {
@@ -54,7 +54,7 @@
     }
 
     &:hover {
-      background: $overlay0;
+      background-color: $overlay0;
     }
   }
 }
@@ -75,6 +75,9 @@
   label { font-size: 1.2rem; }
 }
 
+.volume-slider-box, .brightness-slider-box {
+  trough { background-color: $base; }
+}
 .volume-bar highlight {
   @include rounding;
   background-image: linear-gradient(to right, $teal 30%, $sky 100%);
@@ -103,6 +106,6 @@
     padding: 0 .5rem;
 
     label { font-size: 1.5rem; }
-    &:hover { background: $overlay0; }
+    &:hover { background-color: $overlay0; }
   }
 }
