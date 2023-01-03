@@ -16,6 +16,11 @@
     # make modules available to modprobe
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
+    initrd = {
+      systemd.enable = true;
+      supportedFilesystems = ["btrfs"];
+    };
+
     # load modules on boot
     kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
 
@@ -29,6 +34,8 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
     };
+
+    plymouth.enable = true;
   };
   # currently doesn't work without services.xserver enabled
   # boot.plymouth.enable = true;
