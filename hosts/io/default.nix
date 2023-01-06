@@ -25,9 +25,9 @@
     kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
 
     # use latest kernel
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
     # Panel Self Refresh
-    kernelParams = ["amdgpu.dcfeaturemask=0x8"];
+    kernelParams = ["amdgpu.dcfeaturemask=0x8" "initcall_blacklist=acpi_cpufreq_init" "amd_pstate=passive" "amd_pstate.shared_mem=1"];
 
     loader = {
       # systemd-boot on UEFI
@@ -37,8 +37,6 @@
 
     plymouth.enable = true;
   };
-  # currently doesn't work without services.xserver enabled
-  # boot.plymouth.enable = true;
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
 

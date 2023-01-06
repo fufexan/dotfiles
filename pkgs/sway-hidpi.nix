@@ -15,7 +15,7 @@ prev: let
 
       buildInputs = oa.buildInputs ++ [prev.pcre2 prev.xorg.xcbutilwm];
     }))
-    .override {wlroots = wlroots-sway;};
+    .override {wlroots_0_16 = wlroots-sway;};
 
   wlroots-sway =
     (prev.wlroots.overrideAttrs (_: {
