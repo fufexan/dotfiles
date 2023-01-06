@@ -19,7 +19,6 @@
 
 @import 'css/calendar';
 @import 'css/music';
-@import 'css/notification';
 @import 'css/osd';
 @import 'css/sidebar';
 @import 'css/system';
@@ -47,9 +46,14 @@ tooltip {
 .icon, .icon label { font-family: Material Symbols Outlined; }
 
 .module { margin: 0 5px; }
+
 .hour {
   font-weight: bold;
-  margin-left: 5px;
+  padding-left: 5px;
+}
+
+.minute {
+  padding-right: .7rem;  
 }
 
 .date {
@@ -73,7 +77,3 @@ scale trough {
 }
 
 .workspaces { margin-left: 10px; }
-
-.notif-toggle {
-  padding: 0 5px;
-}

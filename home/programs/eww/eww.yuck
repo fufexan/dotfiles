@@ -10,17 +10,8 @@
 
 (include "./windows/calendar.yuck")
 (include "./windows/music.yuck")
-(include "./windows/notifications.yuck")
 (include "./windows/osd.yuck")
 (include "./windows/system-menu.yuck")
-
-(defwidget notif-toggle []
-  (button
-    :class "notif-toggle module"
-    :onclick "${EWW_CMD} open --toggle notifications";
-    {notif_icons.icon}))
-
-; clipboard 󰅌 󰅍 󰄷
 
 (defwidget left []
   (box
@@ -37,8 +28,7 @@
     (bluetooth)
     (net)
     (sys)
-    (clock_module)
-    (notif-toggle)))
+    (clock_module)))
 
 (defwidget center []
   (box

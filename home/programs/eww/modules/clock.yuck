@@ -10,16 +10,15 @@
         :space-evenly false
         (label
           :text {time.hour}
-          :class "clock hour")
+          :class "hour")
         (label
-          :text ":"
-          :class "clock")
+          :text ":")
         (label
           :text {time.minute}
-          :class "clock minute"))
+          :class "minute"))
       (revealer
         :reveal date_rev
         (button
-          :class "date clock"
+          :class "date"
           :onclick "${EWW_CMD} open --toggle calendar"
           {time.date})))))
