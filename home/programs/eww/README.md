@@ -30,7 +30,7 @@ To quickly install this config, grab all the files in this directory and put
 them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
 
 Dependencies:
-- Icon fonts: `material-design-icons`, `material-icons`
+- Icon fonts: `material-symbols` (any variation)
 - Text font: Product Sans
 - Script deps: everything in `default.nix`'s `dependencies` list.
 
