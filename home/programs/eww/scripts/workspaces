@@ -56,7 +56,7 @@ generate() {
 monitor_event
 
 # add workspaces
-workspace_event 1 1
+while read -r k v; do workspaces[$k]="$v"; done < <(hyprctl -j workspaces | gojq -r '.[]|"\(.id) \(.monitor)"')
 
 # check occupied workspaces
 for num in "${!workspaces[@]}"; do
