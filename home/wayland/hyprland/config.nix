@@ -35,7 +35,8 @@ in {
       # enable Variable Frame Rate
       no_vfr = 0
       # disable auto polling for config file changes
-      disable_autoreload = 0
+      disable_autoreload = 1
+      focus_on_activate = 1
     }
 
     # touchpad gestures
@@ -126,6 +127,8 @@ in {
     # fix Matlab
     windowrulev2 = rounding 0, class:^(MATLAB.*)$
     windowrulev2 = tile, class:^(MATLAB.*)$
+
+    windowrulev2 = dimaround, class:^(gcr-prompter)$
 
     # mouse movements
     bindm = $mod, mouse:272, movewindow
