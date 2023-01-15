@@ -49,7 +49,6 @@ get_position_time() {
 }
 
 get_cover() {
-	# COVER_URL=$1
 	mkdir -p "$XDG_CACHE_HOME/eww_covers"
 	cd "$XDG_CACHE_HOME/eww_covers" || exit
 
@@ -64,12 +63,27 @@ get_cover() {
 			rm "$IMGPATH"
 			ln -s "$(basename "$COVER_URL")" "$IMGPATH"
 
-			echo "$IMGPATH"
+			IMG="${IMGPATH}"
 		elif [ "$COVER_URL" = "" ]; then
-			echo ""
+			IMG=""
 		else
-			echo "$COVER_URL"
+			IMG="$COVER_URL"
 		fi
+
+		if [ "$IMG" != "" ]; then
+			cols=$(convert "$IMG" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
+			color1=$(echo "$cols" | head -1)
+			color2=$(echo "$cols" | tail -1)
+		else
+			color1="#94e2d5"
+			color2="#89b4fa"
+		fi
+
+		jaq --null-input -r -c \
+			--arg cover "$IMGPATH" \
+			--arg color1 "$color1" \
+			--arg color2 "$color2" \
+			'{"cover": $cover, "color1": $color1, "color2": $color2}'
 	done
 }
 
@@ -81,8 +95,7 @@ if [ "$1" = "cover" ]; then
 	get_cover
 else
 	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
-		jaq --null-input \
-			-r -c \
+		jaq --null-input -r -c \
 			--arg artist "$(sanitize "$artist")" \
 			--arg title "$(sanitize "$title")" \
 			--arg status "$(get_status "$status")" \

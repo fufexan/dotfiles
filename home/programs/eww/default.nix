@@ -19,6 +19,7 @@
     gawk
     gnused
     gojq
+    imagemagick
     iwgtk
     jaq
     light

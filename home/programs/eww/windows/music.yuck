@@ -2,9 +2,10 @@
   (box
     :class "music-window"
     :space-evenly false
+    :style "background-color: ${music_cover.color1}; border: 1px solid ${music_cover.color2};"
     (box
       :class "music-cover-art"
-      :style "background-image: url(\"${music_cover}\");")
+      :style "background-image: url(\"${music_cover.cover}\");")
     (box
       :orientation "v"
       :class "music-box"
@@ -36,6 +37,8 @@
         (box
           :class "music-bar"
           (scale
+            ; doesn't work, looking for other ways
+            ; :style "background: linear-gradient(to right, ${music_cover.color1}, ${music_cover.color2});"
             :onchange "playerctl position `bc <<< \"{} * $(playerctl metadata mpris:length) / 1000000 / 100\"`"
             :value {music.position}))))))
 
