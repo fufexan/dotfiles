@@ -22,9 +22,9 @@
 }
 
 .osd_vol highlight {
-  background-image: linear-gradient(to top, $teal 30%, $sky 100%);
+  background-image: linear-gradient(to top, $teal, $sky);
 }
 
 .osd_brightness highlight {
-  background-image: linear-gradient(to top, $yellow 30%, $peach 100%);
+  background-image: linear-gradient(to top, $yellow, $peach);
 }
