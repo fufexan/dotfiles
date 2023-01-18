@@ -22,6 +22,7 @@ in {
     ./hyprland
     ./sway.nix
     ./swaybg.nix
+    ./swayidle.nix
     ./swaylock.nix
   ];
 
