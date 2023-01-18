@@ -1,8 +1,4 @@
-{
-  pkgs,
-  default,
-  ...
-}: {
+{default, ...}: {
   programs.swaylock.settings = let
     inherit (default) xcolors;
   in {

@@ -1,7 +1,6 @@
 {
   _inputs,
   inputs,
-  self,
   default,
   ...
 }: let

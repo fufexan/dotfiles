@@ -1,8 +1,4 @@
-{
-  pkgs,
-  default,
-  ...
-}: {
+{default, ...}: {
   programs. zathura = let
     inherit (default) xcolors;
   in {

@@ -1,7 +1,7 @@
 {
   description = "fufexan's NixOS and Home-Manager flake";
 
-  outputs = {nixpkgs, ...} @ inputs:
+  outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
@@ -16,7 +16,6 @@
 
       perSystem = {
         config,
-        self',
         inputs',
         pkgs,
         system,

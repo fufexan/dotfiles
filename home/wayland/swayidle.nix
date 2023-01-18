@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     ${pkgs.pipewire}/bin/pw-cli i all | ${pkgs.ripgrep}/bin/rg running
     # only suspend if audio isn't running

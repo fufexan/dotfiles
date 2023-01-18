@@ -1,6 +1,5 @@
 {
   inputs,
-  self,
   withSystem,
   module_args,
   ...
