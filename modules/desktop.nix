@@ -86,13 +86,7 @@
 
   services = {
     # provide location
-    geoclue2 = {
-      enable = true;
-      appConfig.gammastep = {
-        isAllowed = true;
-        isSystem = false;
-      };
-    };
+    geoclue2.enable = true; 
 
     # keyboard remapping
     kmonad = {

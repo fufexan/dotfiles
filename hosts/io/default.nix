@@ -100,11 +100,9 @@
     clight = {
       enable = true;
       settings = {
-        dpms.disabled = true;
-        gamma.disabled = true;
-        inhibit.disabled = true;
-        screen.disabled = true;
-        dimmer.timeouts = [290 290];
+        verbose = true;
+        dpms.timeouts = [300 180];
+        dimmer.timeouts = [290 170]; 
       };
     };
 
