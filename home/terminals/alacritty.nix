@@ -33,11 +33,8 @@ in {
           foreground = xcolors.fg;
         };
         normal = {
+          inherit (xcolors) red green yellow blue;
           black = xcolors.mantle;
-          red = xcolors.red;
-          green = xcolors.green;
-          yellow = xcolors.yellow;
-          blue = xcolors.blue;
           magenta = xcolors.mauve;
           cyan = xcolors.sky;
           white = xcolors.text;
