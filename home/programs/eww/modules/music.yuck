@@ -7,7 +7,7 @@
       :space-evenly false
       (box
         :class "song-cover-art"
-        :style "background-image: url(\"${music_cover.cover}\");")
+        :style "background-image: url(\"${music.cover}\");")
       (button
         :class "module"
         :onclick "${EWW_CMD} open --toggle music"

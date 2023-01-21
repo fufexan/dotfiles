@@ -54,54 +54,57 @@ get_cover() {
 
 	IMGPATH="$XDG_CACHE_HOME/eww_covers/cover_art.png"
 
-	playerctl -F metadata mpris:artUrl 2>/dev/null | while read -r COVER_URL; do
-		if [[ "$COVER_URL" = https* ]]; then
-			if [ ! -e "$XDG_CACHE_HOME/eww_covers/$(basename "$COVER_URL")" ]; then
-				wget -N "$COVER_URL" -o /dev/null
-			fi
+	COVER_URL="$1"
 
-			rm "$IMGPATH"
-			ln -s "$(basename "$COVER_URL")" "$IMGPATH"
-
-			IMG="${IMGPATH}"
-		elif [ "$COVER_URL" = "" ]; then
-			IMG=""
-		else
-			IMG="$COVER_URL"
+	if [[ "$COVER_URL" = https* ]]; then
+		if [ ! -e "$XDG_CACHE_HOME/eww_covers/$(basename "$COVER_URL")" ]; then
+			wget -N "$COVER_URL" -o /dev/null
 		fi
 
-		if [ "$IMG" != "" ]; then
-			cols=$(convert "$IMG" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
-			color1=$(echo "$cols" | head -1)
-			color2=$(echo "$cols" | tail -1)
-		else
-			color1="#94e2d5"
-			color2="#89b4fa"
-		fi
+		rm "$IMGPATH"
+		ln -s "$(basename "$COVER_URL")" "$IMGPATH"
 
-		jaq --null-input -r -c \
-			--arg cover "$IMGPATH" \
-			--arg color1 "$color1" \
-			--arg color2 "$color2" \
-			'{"cover": $cover, "color1": $color1, "color2": $color2}'
-	done
+		IMG="${IMGPATH}"
+	elif [ "$COVER_URL" = "" ]; then
+		IMG=""
+	else
+		IMG="$COVER_URL"
+	fi
+
+	echo "$IMG"
 }
 
 sanitize() {
 	echo "$1" | sed 's/"/\"/g'
 }
 
-if [ "$1" = "cover" ]; then
-	get_cover
-else
-	playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\' 2>/dev/null | while IFS="$(printf '\\')" read -r title artist status position len; do
-		jaq --null-input -r -c \
-			--arg artist "$(sanitize "$artist")" \
-			--arg title "$(sanitize "$title")" \
-			--arg status "$(get_status "$status")" \
-			--arg pos "$(get_position "$position" "$len")" \
-			--arg pos_time "$(get_position_time "$position" "$len")" \
-			--arg length "$(get_length_time "$len")" \
-			'{"artist": $artist, "title": $title, "status": $status, "position": $pos, "position_time": $pos_time, "length": $length}'
-	done
-fi
+prevCover=''
+
+playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="$(printf '\')" read -r title artist status position len cover; do
+	if [[ "$cover" != "$prevCover" ]]; then
+		COVER=$(get_cover "$cover")
+
+		if [ "$COVER" != "" ]; then
+			cols=$(convert "$COVER" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
+			color1=$(echo "$cols" | head -1)
+			color2=$(echo "$cols" | tail -1)
+		else
+			color1="#1e1e2e"
+			color2="#28283d"
+		fi
+	fi
+
+	jaq --null-input -r -c \
+		--arg artist "$(sanitize "$artist")" \
+		--arg title "$(sanitize "$title")" \
+		--arg status "$(get_status "$status")" \
+		--arg pos "$(get_position "$position" "$len")" \
+		--arg pos_time "$(get_position_time "$position" "$len")" \
+		--arg length "$(get_length_time "$len")" \
+		--arg cover "$COVER" \
+		--arg color1 "$color1" \
+		--arg color2 "$color2" \
+		'{"artist": $artist, "title": $title, "status": $status, "position": $pos, "position_time": $pos_time, "length": $length, "cover": $cover, "color1": $color1, "color2": $color2}'
+
+	prevCover=$cover
+done

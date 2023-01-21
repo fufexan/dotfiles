@@ -13,7 +13,6 @@
 (deflisten brightness "scripts/brightness")
 (deflisten memory "scripts/memory")
 (deflisten music "scripts/music")
-(deflisten music_cover "scripts/music cover")
 (deflisten net "scripts/net")
 (deflisten volume "scripts/volume")
 (deflisten workspace "scripts/workspaces")
