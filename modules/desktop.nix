@@ -86,7 +86,7 @@
 
   services = {
     # provide location
-    geoclue2.enable = true; 
+    geoclue2.enable = true;
 
     # keyboard remapping
     kmonad = {

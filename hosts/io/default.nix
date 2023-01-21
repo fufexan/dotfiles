@@ -96,7 +96,7 @@
       settings = {
         verbose = true;
         dpms.timeouts = [300 180];
-        dimmer.timeouts = [290 170]; 
+        dimmer.timeouts = [290 170];
       };
     };
 
