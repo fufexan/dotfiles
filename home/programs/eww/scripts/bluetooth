@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-declare -A baticon=([10]="󰤾" [20]="󰤿" [30]="󰥀" [40]="󰥁" [50]="󰥂" [60]="󰥃" [70]="󰥄" [80]="󰥅" [90]="󰥆" [100]="󰥈")
-
 toggle() {
   status=$(rfkill -J | jaq -r '.rfkilldevices[] | select(.type == "bluetooth") | .soft' | head -1)
 
@@ -22,10 +20,9 @@ else
     mac=$(echo "$status" | head -1 | awk '{print $2}' | tr ':' '_')
 
     if [[ "$(echo "$status" | rg Percentage)" != "" ]]; then
-      battery=$(upower -i /org/freedesktop/UPower/devices/headset_dev_"$mac" | rg percentage | awk '{print $2}' | cut -f 1 -d '%')
-      batt_icon=${baticon[$battery]}
+      battery="$(upower -i /org/freedesktop/UPower/devices/headset_dev_"$mac" | rg percentage | awk '{print $2}' | cut -f 1 -d '%')%"
     else
-      batt_icon=""
+      battery=""
     fi
 
     if [ "$powered" = "yes" ]; then
@@ -44,7 +41,7 @@ else
       color="#45475a"
     fi
 
-    echo '{ "icon": "'"$icon"'", "batt_icon": "'"$batt_icon"'", "text": "'"$text"'", "color": "'"$color"'" }'
+    echo '{ "icon": "'"$icon"'", "battery": "'"$battery"'", "text": "'"$text"'", "color": "'"$color"'" }'
 
     sleep 3
   done

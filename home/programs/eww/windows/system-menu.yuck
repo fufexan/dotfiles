@@ -65,7 +65,7 @@
         (label
           :text {bluetooth.text}
           :xalign 0.5
-          :tooltip "${bluetooth.text} ${bluetooth.batt_icon}"
+          :tooltip "${bluetooth.text} ${bluetooth.battery}"
           :limit-width 15))
 
       (box
