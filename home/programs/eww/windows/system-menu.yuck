@@ -99,18 +99,6 @@
           :tooltip "volume on ${volume.percent}%"
           :onchange "scripts/volume setvol SINK {}"))
       (box
-        :class "volume-slider-box"
-        :space-evenly false
-        (button
-          :class "volume-icon icon"
-          :onclick "scripts/volume mute SOURCE"
-          "")
-        (scale
-          :class "volume-bar"
-          :value {volume.microphone}
-          :tooltip "mic on ${volume.microphone}%"
-          :onchange "scripts/volume setvol SOURCE {}"))
-      (box
         :class "brightness-slider-box"
         :space-evenly false
         (button

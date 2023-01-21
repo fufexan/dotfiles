@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 icons=("" "" "" "" "" "" "" "")
+num_icons=$(bc <<< "100 / ${#icons[@]}")
+
 
 geticon() {
-	if [ "$STATE" = "Charging" ]; then
-    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/12)}')
-		echo "${icons[$level]}"
-	else
-    level=$(awk -v n="$CAPACITY" 'BEGIN{print int((n-1)/12)}')
-		echo "${icons[$level]}"
+  level=$(awk -v n="$CAPACITY" -v c="$num_icons" 'BEGIN{print int(n/c-1)}')
+	if [[ "$level" -lt 0 ]]; then
+		level=0
 	fi
+	echo "${icons[$level]}"
 }
 
 status() {
@@ -37,7 +37,8 @@ color() {
 }
 
 wattage() {
-	echo "$(bc -l <<< "scale=1; $RATE / 1000000") W"
+	microwatts=1000000
+	echo "$(bc -l <<< "scale=1; $RATE / $microwatts") W"
 }
 
 gettime() {
