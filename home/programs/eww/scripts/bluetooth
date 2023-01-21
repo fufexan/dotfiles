@@ -35,11 +35,13 @@ else
         icon=""
         text="Disconnected"
         color="#45475a"
+        class=""
       fi
     else
       icon=""
       text="Bluetooth off"
       color="#45475a"
+      class=""
     fi
 
     echo '{ "icon": "'"$icon"'", "battery": "'"$battery"'", "text": "'"$text"'", "color": "'"$color"'", "class": "'"$class"'" }'

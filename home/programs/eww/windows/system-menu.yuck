@@ -34,7 +34,7 @@
             {net.icon})
           (label
             :class "separator"
-            :text "|")
+            :text "│")
           (button
             :class "wifi-arrow-btn"
             :onclick "eww close system-menu && nm-connection-editor &"
@@ -57,7 +57,7 @@
             {bluetooth.icon})
           (label
             :class "separator"
-            :text "|")
+            :text "│")
           (button
             :class "bluetooth-arrow-btn"
             :onclick "eww close system-menu && blueberry"
