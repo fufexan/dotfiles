@@ -109,3 +109,17 @@
     &:hover { background-color: $overlay0; }
   }
 }
+
+.bt-connected {
+  background-color: #89b4fa;
+  color: #11111b;
+
+  button:hover { background-color: #7ba2e1; }
+}
+
+.wifi-connected {
+  background-color: #cba6f7;  
+  color: #11111b;
+
+  button:hover { background-color: #b695de; }
+}

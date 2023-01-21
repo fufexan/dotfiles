@@ -23,6 +23,7 @@ else
     if [ "$status" = "disconnected" ] ; then
       icon=""
       color="#988ba2"
+      class=""
     else
       level=$(awk -v n="$signal" 'BEGIN{print int((n-1)/20)}')
       if [ "$level" -gt 4 ]; then
@@ -31,9 +32,10 @@ else
 
       icon=${icons[$level]}
       color="#cba6f7"
+      class="wifi-connected"
     fi
 
-    echo '{ "essid": "'"$essid"'", "icon": "'"$icon"'", "color": "'"$color"'" }'
+    echo '{ "essid": "'"$essid"'", "icon": "'"$icon"'", "color": "'"$color"'", "class": "'"$class"'" }'
 
     sleep 3
   done

@@ -30,6 +30,7 @@ else
         text="$name"
         icon=""
         color="#89b4fa"
+        class="bt-connected"
       else
         icon=""
         text="Disconnected"
@@ -41,7 +42,7 @@ else
       color="#45475a"
     fi
 
-    echo '{ "icon": "'"$icon"'", "battery": "'"$battery"'", "text": "'"$text"'", "color": "'"$color"'" }'
+    echo '{ "icon": "'"$icon"'", "battery": "'"$battery"'", "text": "'"$text"'", "color": "'"$color"'", "class": "'"$class"'" }'
 
     sleep 3
   done

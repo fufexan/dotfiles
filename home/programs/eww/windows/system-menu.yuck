@@ -26,7 +26,7 @@
         :space-evenly false
         :orientation "v"
         (box
-          :class "element icon"
+          :class "element icon ${net.class}"
           :space-evenly false
           (button
             :class "wifi-button"
@@ -49,7 +49,7 @@
         :space-evenly false
         :orientation "v"
         (box
-          :class "element icon"
+          :class "element icon ${bluetooth.class}"
           :space-evenly false
           (button
             :class "bluetooth-button"
