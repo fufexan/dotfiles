@@ -64,7 +64,7 @@
 
     openssh = {
       enable = true;
-      useDns = true;
+      settings.UseDns = true;
     };
 
     # DNS resolver
