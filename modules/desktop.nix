@@ -10,6 +10,7 @@
       inputs.self.packages.${pkgs.system}.material-symbols
 
       # normal fonts
+      jost
       lexend
       noto-fonts
       noto-fonts-cjk
