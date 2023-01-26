@@ -93,6 +93,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-super.url = "github:privatevoid-net/nix-super";
+
     nix-xilinx = {
       url = "gitlab:doronbehar/nix-xilinx";
       inputs.nixpkgs.follows = "nixpkgs";
