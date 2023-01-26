@@ -3,19 +3,30 @@
     inherit (default) xcolors;
   in {
     clock = true;
-    effect-blur = "30x3";
-    font = "Roboto";
+    font = "Jost *";
     ignore-empty-password = true;
     image = default.wallpaper;
     indicator = true;
+
     bs-hl-color = xcolors.red;
-    key-hl-color = xcolors.peach;
-    inside-clear-color = xcolors.red;
-    inside-color = xcolors.yellow;
-    inside-ver-color = xcolors.blue;
-    inside-wrong-color = xcolors.red;
-    line-color = xcolors.crust;
+    key-hl-color = xcolors.text;
+    separator-color = xcolors.base;
+    text-color = xcolors.base;
+
+    inside-color = xcolors.mauve;
+    line-color = xcolors.mauve;
     ring-color = xcolors.base;
-    separator-color = xcolors.subtext1;
+
+    inside-clear-color = xcolors.yellow;
+    line-clear-color = xcolors.yellow;
+    ring-clear-color = xcolors.base;
+
+    inside-ver-color = xcolors.lavender;
+    line-ver-color = xcolors.lavender;
+    ring-ver-color = xcolors.base;
+
+    inside-wrong-color = xcolors.red;
+    line-wrong-color = xcolors.red;
+    ring-wrong-color = xcolors.base;
   };
 }
