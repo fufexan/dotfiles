@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     jaq
     xorg.xprop
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+    inputs.hyprland-contrib.packages.${pkgs.hostPlatform.system}.grimblast
   ];
 
   home.sessionVariables = {

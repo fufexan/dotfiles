@@ -7,7 +7,7 @@
   fonts = {
     fonts = with pkgs; [
       # icon fonts
-      inputs.self.packages.${pkgs.system}.material-symbols
+      inputs.self.packages.${pkgs.hostPlatform.system}.material-symbols
 
       # normal fonts
       jost
@@ -92,7 +92,7 @@
     # keyboard remapping
     kmonad = {
       enable = true;
-      package = inputs.kmonad.packages.${pkgs.system}.default;
+      package = inputs.kmonad.packages.${pkgs.hostPlatform.system}.default;
       keyboards = {
         one2mini = {
           device = "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd";

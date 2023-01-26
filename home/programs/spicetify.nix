@@ -5,11 +5,11 @@
 }: {
   # themable spotify
   programs.spicetify = let
-    spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+    spicePkgs = inputs.spicetify-nix.packages.${pkgs.hostPlatform.system}.default;
   in {
     enable = true;
 
-    spotifyPackage = inputs.self.packages.${pkgs.system}.spotify;
+    spotifyPackage = inputs.self.packages.${pkgs.hostPlatform.system}.spotify;
 
     theme = spicePkgs.themes.catppuccin-mocha;
 

@@ -10,7 +10,7 @@
     deadnix
     nix-index
     statix
-    inputs.self.packages.${pkgs.system}.repl
+    inputs.self.packages.${pkgs.hostPlatform.system}.repl
   ];
 
   programs.direnv = {

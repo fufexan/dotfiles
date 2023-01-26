@@ -14,8 +14,8 @@
 
     # messaging
     tdesktop
-    inputs.self.packages.${pkgs.system}.discord-canary
-    (inputs.webcord.packages.${pkgs.system}.default.override {
+    inputs.self.packages.${pkgs.hostPlatform.system}.discord-canary
+    (inputs.webcord.packages.${pkgs.hostPlatform.system}.default.override {
       flags = let
         catppuccin = fetchFromGitHub {
           owner = "catppuccin";
@@ -31,10 +31,10 @@
     xdg-utils
 
     # school stuff
-    inputs.nix-matlab.defaultPackage.${pkgs.system}
-    inputs.nix-xilinx.packages.${pkgs.system}.model_composer
-    inputs.nix-xilinx.packages.${pkgs.system}.vitis_hls
-    inputs.nix-xilinx.packages.${pkgs.system}.vivado
+    inputs.nix-matlab.defaultPackage.${pkgs.hostPlatform.system}
+    inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.model_composer
+    inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.vitis_hls
+    inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.vivado
 
     # torrents
     transmission-remote-gtk

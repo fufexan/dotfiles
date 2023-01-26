@@ -42,7 +42,7 @@
 in {
   programs.eww = {
     enable = true;
-    package = inputs.eww.packages.${pkgs.system}.eww-wayland;
+    package = inputs.eww.packages.${pkgs.hostPlatform.system}.eww-wayland;
     # remove nix files
     configDir = lib.cleanSourceWith {
       filter = name: _type: let

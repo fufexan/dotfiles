@@ -21,7 +21,7 @@ with pkgs; [
   }
   {
     name = "nix";
-    language-server = {command = lib.getExe inputs.nil.packages.${pkgs.system}.default;};
+    language-server = {command = lib.getExe inputs.nil.packages.${pkgs.hostPlatform.system}.default;};
     config.nil.formatting.command = ["alejandra" "-q"];
   }
   {

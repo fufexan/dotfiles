@@ -147,7 +147,7 @@
     '';
 
     # add hyprland to display manager sessions
-    xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
+    xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.hostPlatform.system}.default];
   };
 
   # https://github.com/NixOS/nixpkgs/issues/114222
