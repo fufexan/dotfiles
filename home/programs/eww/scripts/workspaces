@@ -39,12 +39,20 @@ monitor_event() {
   while read -r k v; do monitormap["$k"]=$v; done < <(hyprctl -j monitors | gojq -r '.[]|"\(.name) \(.id) "')
 }
 
+# get all apps titles in a workspace
+applist() {
+  ws="$1"
+
+  apps=$(hyprctl -j clients | jaq -jr '.[] | select(.workspace.id == '"$ws"') | .title + "\\n"')
+  echo -En ${apps%"\n"}
+}
+
 # generate the json for eww
 generate() {
   echo -n '['
 
   for i in {1..10}; do
-    echo -n ''$([ $i -eq 1 ] || echo ,) '{ "number": "'"$i"'", "color": "'$(status "$i")'" }'
+    echo -n ''$([ $i -eq 1 ] || echo ,) '{ "number": "'"$i"'", "color": "'$(status "$i")'" }' #, "tooltip": "'$(applist "$i")'" }'
   done
 
   echo ']'

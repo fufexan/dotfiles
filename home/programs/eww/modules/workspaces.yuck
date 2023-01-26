@@ -4,9 +4,10 @@
 		(box
 			:class "module workspaces"
 			:spacing 5
-		  (for i in workspace
+		  (for ws in workspace
 		    (button
-					:onclick "hyprctl dispatch workspace ${i.number}"
+					:onclick "hyprctl dispatch workspace ${ws.number}"
 					:class "ws icon"
-					:style "color: ${i.color};"
+					:style "color: ${ws.color};"
+					; :tooltip {ws.tooltip}
 					"●")))))
