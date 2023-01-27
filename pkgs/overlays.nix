@@ -12,7 +12,7 @@ inputs: _: prev: {
 
   material-symbols = prev.callPackage ./material-symbols.nix {};
 
-  tlauncher = prev.callPackage ./tlauncher.nix {};
+  TL = prev.callPackage ./TL {};
 
   waveform = prev.callPackage ./waveform {};
 

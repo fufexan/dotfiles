@@ -33,6 +33,6 @@
     ++ (with pkgs; [
       gamescope
       legendary-gl
-      inputs.self.packages.${pkgs.hostPlatform.system}.tlauncher
+      inputs.self.packages.${pkgs.hostPlatform.system}.TL
     ]);
 }
