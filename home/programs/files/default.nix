@@ -9,6 +9,7 @@
   imports = [
     ./nix-index-update-db.nix
     ./wlogout.nix
+    ./wofi-style.nix
   ];
 
   home.file.".config" = {
