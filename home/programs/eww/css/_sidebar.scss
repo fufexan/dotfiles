@@ -73,13 +73,14 @@
   }
 
   box { margin: .2rem 0; }
-
   label { font-size: 1.2rem; }
 }
 
-.volume-slider-box, .brightness-slider-box {
+.volume-slider-box,
+.brightness-slider-box {
   trough { background-color: $base; }
 }
+
 .volume-bar highlight {
   @include rounding;
   background-image: linear-gradient(to right, $teal, $sky);
@@ -113,15 +114,15 @@
 }
 
 .bt-connected {
-  background-color: #89b4fa;
-  color: #11111b;
+  background-color: $blue;
+  color: $crust;
 
   button:hover { background-color: #7ba2e1; }
 }
 
 .wifi-connected {
-  background-color: #cba6f7;  
-  color: #11111b;
+  background-color: $mauve;
+  color: $crust;
 
   button:hover { background-color: #b695de; }
 }

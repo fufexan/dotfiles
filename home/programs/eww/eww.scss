@@ -13,8 +13,8 @@
 
 * {
   all: unset;
-  transition: 200ms ease;
   font-family: "Jost *", Roboto, sans-serif;
+  transition: 200ms ease;
 }
 
 @import 'css/calendar';
@@ -43,7 +43,8 @@ tooltip {
   }
 }
 
-.icon, .icon label { font-family: Material Symbols Outlined; }
+.icon,
+.icon label { font-family: Material Symbols Outlined; }
 
 .module { margin: 0 5px; }
 
@@ -53,7 +54,7 @@ tooltip {
 }
 
 .minute {
-  padding-right: .7rem;  
+  padding-right: .7rem;
 }
 
 .date {
