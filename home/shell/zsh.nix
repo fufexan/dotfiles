@@ -68,22 +68,6 @@
       la = "exa -la";
       md = "mkdir -p";
 
-      ga = "git add";
-      gb = "git branch";
-      gc = "git commit";
-      gca = "git commit --amend";
-      gcm = "git commit -m";
-      gco = "git checkout";
-      gd = "git diff";
-      gds = "git diff --staged";
-      gp = "git push";
-      gpf = "git push --force-with-lease";
-      gpl = "git pull";
-      gl = "git log";
-      gr = "git rebase";
-      gs = "git status --short";
-      gss = "git status";
-
       us = "systemctl --user";
       rs = "sudo systemctl";
     };

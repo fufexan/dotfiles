@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, default, ...}: {
   home.packages = [pkgs.gh];
 
   programs.git = {
@@ -6,7 +6,7 @@
 
     delta = {
       enable = true;
-      options.map-styles = "bold purple => syntax #8839ef, bold cyan => syntax #1e66f5";
+      options.map-styles = "bold purple => syntax ${default.xcolors.mauve}, bold cyan => syntax ${default.xcolors.blue}";
     };
 
     extraConfig = {
@@ -15,6 +15,21 @@
     };
 
     aliases = {
+      a = "add";
+      b = "branch";
+      c = "commit";
+      ca = "commit --amend";
+      cm = "commit -m";
+      co = "checkout";
+      d = "diff";
+      ds = "diff --staged";
+      p = "push";
+      pf = "push --force-with-lease";
+      pl = "pull";
+      l = "log";
+      r = "rebase";
+      s = "status --short";
+      ss = "status";
       forgor = "commit --amend --no-edit";
       graph = "log --all --decorate --graph --oneline";
       oops = "checkout --";
