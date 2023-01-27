@@ -3,6 +3,8 @@
   pkgs,
   ...
 } @ args: {
+  home.packages = [pkgs.shellcheck];
+
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.hostPlatform.system}.default;
