@@ -19,7 +19,7 @@ status() {
   if [ "${o[$1]}" -eq 1 ]; then
     mon=${monitormap[${workspaces[$1]}]}
 
-    if [ $focusedws -eq "$1" ]; then
+    if [ "$focusedws" -eq "$1" ]; then
       echo -n "${colors[$mon]}"
     else
       echo -n "${dimmed[$mon]}"
@@ -44,7 +44,7 @@ applist() {
   ws="$1"
 
   apps=$(hyprctl -j clients | jaq -jr '.[] | select(.workspace.id == '"$ws"') | .title + "\\n"')
-  echo -En ${apps%"\n"}
+  echo -En "${apps%"\n"}"
 }
 
 # generate the json for eww
@@ -52,7 +52,7 @@ generate() {
   echo -n '['
 
   for i in {1..10}; do
-    echo -n ''$([ $i -eq 1 ] || echo ,) '{ "number": "'"$i"'", "color": "'$(status "$i")'" }' #, "tooltip": "'$(applist "$i")'" }'
+    echo -n ''"$([ "$i" -eq 1 ] || echo ,)" '{ "number": "'"$i"'", "color": "'"$(status "$i")"'" }' #, "tooltip": "'$(applist "$i")'" }'
   done
 
   echo ']'
@@ -74,7 +74,7 @@ done
 generate
 
 # main loop
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read -r line; do
+socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | rg --line-buffered "workspace|mon(itor)?" | while read -r line; do
   case ${line%>>*} in
     "workspace")
       focusedws=${line#*>>}
