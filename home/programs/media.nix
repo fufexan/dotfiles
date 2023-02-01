@@ -41,10 +41,11 @@
         bitrate = 320;
         cache_path = "${config.xdg.cacheHome}/spotifyd";
         device_type = "computer";
+        initial_volume = "100";
         password_cmd = "tail -1 /run/agenix/spotify";
         use_mpris = true;
         username_cmd = "head -1 /run/agenix/spotify";
-        volume_normalisation = true;
+        volume_normalisation = false;
       };
     };
   };

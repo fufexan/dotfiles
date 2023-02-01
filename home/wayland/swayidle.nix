@@ -13,7 +13,7 @@ in {
     events = [
       {
         event = "before-sleep";
-        command = "${pkgs.swaylock-effects}/bin/swaylock -fF";
+        command = "${pkgs.systemd}/bin/loginctl lock-session";
       }
       {
         event = "lock";
