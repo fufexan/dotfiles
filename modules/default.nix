@@ -18,7 +18,7 @@ in {
 
         sharedModules = [
           {home-manager.useGlobalPkgs = true;}
-          inputs.agenix.nixosModule
+          inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
           ./minimal.nix
           module_args
