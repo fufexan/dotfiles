@@ -38,7 +38,7 @@ with pkgs; [
     };
   }
   {
-    name= "css";
+    name = "css";
     language-server = {
       command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
       args = ["--stdio"];

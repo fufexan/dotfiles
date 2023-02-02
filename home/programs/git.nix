@@ -1,4 +1,8 @@
-{pkgs, default, ...}: {
+{
+  pkgs,
+  default,
+  ...
+}: {
   home.packages = [pkgs.gh];
 
   programs.git = {
