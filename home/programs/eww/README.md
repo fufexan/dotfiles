@@ -10,7 +10,7 @@ The same daemon runs multiple windows which interact with each other:
 
 ### bar
 
-![bar](https://user-images.githubusercontent.com/36706276/192146060-9913d571-abee-4683-9f77-ea1951680cc1.gif)
+![bar](https://user-images.githubusercontent.com/36706276/216402839-0f8ec9b0-dc4b-4cb8-9834-db59b61db97f.png)
 
 ### music window
 
@@ -22,7 +22,7 @@ The same daemon runs multiple windows which interact with each other:
 
 ### system info
 
-![system](https://user-images.githubusercontent.com/36706276/204923681-13c6e1d6-45e8-4f23-aec9-dcd8b96203da.png)
+![system](https://user-images.githubusercontent.com/36706276/216403137-a3231c60-976a-4e5d-85c0-899679ab0a92.png)
 
 ## ❔ Usage
 
