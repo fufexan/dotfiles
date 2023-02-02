@@ -46,7 +46,7 @@ Or install from the `packages` output. For example:
 ## 💻 Desktop preview
 
 <a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
-  <img src="https://user-images.githubusercontent.com/36706276/192147190-cf9cf4df-94cb-4a3b-b9d8-137ed0c2538f.png" alt="Desktop Preview">
+  <img src="https://user-images.githubusercontent.com/36706276/216402032-ff32fcad-ca21-49d3-9c29-6ff0d2d8b1d8.png" alt="Desktop Preview">
 </a>
 *Hint: click to go to a video showcase*
 
@@ -60,6 +60,7 @@ Other configurations from where I learned and copied:
 - [Mic92/dotfiles](https://github.com/Mic92/dotfiles)
 - [NobbZ/nixos-config](https://github.com/NobbZ/nixos-config)
 - [privatevoid-net/privatevoid-infrastructure](https://github.com/privatevoid-net/privatevoid-infrastructure)
+- [RicArch97/nixos-config](https://github.com/RicArch97/nixos-config)
 - [viperML/dotfiles](https://github.com/viperML/dotfiles)
 
 # 👥 People
@@ -70,4 +71,4 @@ to all of them.
 
 DieracDelta - gytis-ivaskevicius - hlissner - keksbg - Kranzes -
 matthewcroughan - max-privatevoid - Misterio77 - NobbZ - OPNA2608 -
-pnotequalnp - tadeokondrak - viperML - Xe - yusdacra 
+pnotequalnp - RicArch97 - tadeokondrak - viperML - Xe - yusdacra
