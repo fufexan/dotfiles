@@ -106,7 +106,7 @@
           {brightness.icon})
         (scale
           :class "brightness-slider" 
-          :value {brightness.level} 
+          :value {brightness.percent} 
           :marks true 
           :onchange "light -S {}")))
 
@@ -147,7 +147,7 @@
         :space-evenly false
         :halign "end"
         (circular-progress
-          :value {memory.percentage}
+          :value {memory.percent}
           :class "sys-mem"
           :thickness 3
           (label
@@ -175,7 +175,6 @@
           :style "color: ${battery.color}"
           :text {battery.icon})
         (label
-          :class "battery-percentage"
           :text {EWW_BATTERY["BAT0"].capacity})
         (label
           :class "battery-status"
@@ -193,7 +192,6 @@
           :onclick "wlogout -p layer-shell &"
           "")))))
 
-;; windows
 (defwindow system-menu
   :stacking "fg" 
   :monitor 0

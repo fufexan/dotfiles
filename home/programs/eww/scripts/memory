@@ -14,7 +14,7 @@ while true; do
   free=$(printf '%.1fG' "$(bc -l <<< "($t - $u) / 1000")")
   perc=$(printf '%.1f' "$(free -m | rg Mem | awk '{print ($3/$2)*100}')")
 
-  echo '{ "total": "'"$total"'", "used": "'"$used"'", "free": "'"$free"'", "percentage": '"$perc"' }'
+  echo '{ "total": "'"$total"'", "used": "'"$used"'", "free": "'"$free"'", "percent": '"$perc"' }'
 
   sleep 3
 done

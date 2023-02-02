@@ -36,4 +36,4 @@
     :anchor "center left")
   (osd
     :icon {brightness.icon}
-    :value {brightness.level}))
+    :value {brightness.percent}))

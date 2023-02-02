@@ -1,7 +1,7 @@
 #!/bin/sh
 
 icon() {
-  if [[ $STATUS == "no" ]]; then
+  if [ "$STATUS" = "no" ]; then
     echo ""
   else
     echo ""
@@ -9,7 +9,7 @@ icon() {
 }
 
 toggle() {
-  if [[ $STATUS == "no" ]]; then
+  if [ "$STATUS" = "no" ]; then
     rfkill block all
     notify-send --urgency=normal -i airplane-mode-symbolic "Airplane Mode" "Airplane mode has been turned on!"
   else
@@ -18,7 +18,7 @@ toggle() {
   fi
 }
 
-if [[ $1 == "toggle" ]]; then
+if [ "$1" = "toggle" ]; then
   toggle
 else
   while true; do

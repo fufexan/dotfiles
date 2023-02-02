@@ -6,4 +6,4 @@
       (label
         :text {brightness.icon}
         :class "bright-icon icon"
-        :tooltip "brightness ${round(brightness.level, 0)}%"))))
+        :tooltip "brightness ${round(brightness.percent, 0)}%"))))

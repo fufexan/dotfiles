@@ -60,6 +60,6 @@ while true; do
 	CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
 	STATE=$(cat /sys/class/power_supply/BAT0/status)
 
-	echo '{ "icon": "'"$(geticon)"'", "percentage": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
+	echo '{ "icon": "'"$(geticon)"'", "percent": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
 	sleep 3
 done
