@@ -1,13 +1,54 @@
 #!/usr/bin/env bash
 
 icons=("" "" "")
+date="$XDG_CACHE_HOME/eww/osd_brightness.date"
 
-# initial
-icon=${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}
-echo '{ "percent": '"$(light)"', "icon": "'"$icon"'" }'
+osd() {
+  if [ ! -f "$date" ]; then
+    mkdir -p "$XDG_CACHE_HOME/eww"
+  fi
+  date +%s > "$date"
+}
 
-udevadm monitor | rg --line-buffered "backlight" | while read -r _; do
-  icon="${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}"
+osd_handler() {
+  lock=0
+  rundate=0
+  if [ ! -f "$date" ]; then
+    mkdir -p "$XDG_CACHE_HOME/eww"
+    echo 0 > "$date"
+  fi
 
+  while true; do
+    # get dates
+    rundate=$(cat "$date")
+    currentdate=$(date +%s)
+
+    # handle showing
+    if [ "$rundate" = "$currentdate" ] && [ "$lock" -eq 0 ]; then
+      eww open osd_brightness
+      lock=1
+    elif [ "$((currentdate - rundate))" = "2" ] && [ "$lock" -eq 1 ]; then
+      eww close osd_brightness
+      lock=0
+    fi
+
+    sleep 0.5
+  done
+
+  eww close osd_brightness
+}
+
+if [ "$1" = "osd" ]; then
+  osd
+else
+  osd_handler &
+  # initial
+  icon=${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}
   echo '{ "percent": '"$(light)"', "icon": "'"$icon"'" }'
-done
+
+  udevadm monitor | rg --line-buffered "backlight" | while read -r _; do
+    icon="${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}"
+
+    echo '{ "percent": '"$(light)"', "icon": "'"$icon"'" }'
+  done
+fi

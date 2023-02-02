@@ -187,14 +187,14 @@ in {
     bindl = , XF86AudioNext, exec, playerctl next
 
     # volume
-    bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+
-    bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%-
-    bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%+ ; $HOME/.config/eww/scripts/volume osd
+    bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 6%- ; $HOME/.config/eww/scripts/volume osd
+    bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ; $HOME/.config/eww/scripts/volume osd
     bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     # backlight
-    bindle = , XF86MonBrightnessUp, exec, light -A 5
-    bindle = , XF86MonBrightnessDown, exec, light -U 5
+    bindle = , XF86MonBrightnessUp, exec, light -A 5 ; $HOME/.config/eww/scripts/brightness osd
+    bindle = , XF86MonBrightnessDown, exec, light -U 5 ; $HOME/.config/eww/scripts/brightness osd
 
     # screenshot
     # stop animations while screenshotting; makes black border go away
