@@ -5,17 +5,8 @@
   lib,
   ...
 }: {
-  environment = {
-    # set channels (backwards compatibility)
-    etc = {
-      "nix/flake-channels/system".source = inputs.self;
-      "nix/flake-channels/nixpkgs".source = inputs.nixpkgs;
-      "nix/flake-channels/home-manager".source = inputs.hm;
-    };
-
-    # we need git for flakes
-    systemPackages = [pkgs.git];
-  };
+  # we need git for flakes
+  environment.systemPackages = [pkgs.git];
 
   nix = {
     # extra builders to offload work onto
@@ -51,10 +42,7 @@
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
 
     # set the path for channels compat
-    nixPath = [
-      "nixpkgs=/etc/nix/flake-channels/nixpkgs"
-      "home-manager=/etc/nix/flake-channels/home-manager"
-    ];
+    nixPath = lib.mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
 
     settings = {
       auto-optimise-store = true;
