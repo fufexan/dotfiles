@@ -92,16 +92,6 @@
   services = {
     btrfs.autoScrub.enable = true;
 
-    # use Ambient Light Sensors for auto brightness adjustment
-    clight = {
-      enable = true;
-      settings = {
-        verbose = true;
-        dpms.timeouts = [300 180];
-        dimmer.timeouts = [290 170];
-      };
-    };
-
     # for SSD/NVME
     fstrim.enable = true;
 
