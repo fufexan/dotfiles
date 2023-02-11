@@ -1,10 +1,16 @@
-.osd {
+.osd-part {
   @include window;
   background: $base;
+  margin: 0 .5rem .5rem;
 
   label {
     color: $text;
     font-size: 2rem;
+    margin: 0 .1rem 0 .2rem;
+  }
+
+  scale {
+    margin: -.2rem 0;
   }
 
   trough {
@@ -12,7 +18,7 @@
     background-color: $bg1;
     margin: 1rem 0 .5rem;
     min-height: 10rem;
-    min-width: 3px;
+    min-width: .7rem;
 
     highlight {
       @include rounding;
@@ -21,10 +27,10 @@
   }
 }
 
-.osd_vol highlight {
+.osd-volume highlight {
   background-image: linear-gradient(to top, $teal, $sky);
 }
 
-.osd_brightness highlight {
+.osd-brightness highlight {
   background-image: linear-gradient(to top, $yellow, $peach);
 }

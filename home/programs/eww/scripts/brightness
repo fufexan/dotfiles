@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 icons=("" "" "")
+if [ ! "$XDG_CACHE_HOME" ]; then
+  XDG_CACHE_HOME="/home/mihai/.local/cache"
+fi
 date="$XDG_CACHE_HOME/eww/osd_brightness.date"
 
 osd() {
@@ -25,17 +28,21 @@ osd_handler() {
 
     # handle showing
     if [ "$rundate" = "$currentdate" ] && [ "$lock" -eq 0 ]; then
-      eww open osd_brightness
+      eww open osd
+      eww update osd-brightness=true
       lock=1
     elif [ "$((currentdate - rundate))" = "2" ] && [ "$lock" -eq 1 ]; then
-      eww close osd_brightness
+      eww update osd-brightness=false
       lock=0
+      if [ "$(eww get osd-brightness)" = "false" ] && [ "$(eww get osd-volume)" = "false" ]; then
+        eww close osd
+      fi
     fi
 
-    sleep 0.5
+    sleep 0.1
   done
 
-  eww close osd_brightness
+  eww close osd
 }
 
 if [ "$1" = "osd" ]; then

@@ -7,6 +7,7 @@
   inherit (default) colors;
 
   pointer = config.home.pointerCursor;
+  homeDir = config.home.homeDirectory;
 
   emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   launcher = "wofi";
@@ -187,14 +188,19 @@ in {
     bindl = , XF86AudioNext, exec, playerctl next
 
     # volume
-    bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 6%+ ; $HOME/.config/eww/scripts/volume osd
-    bindle = , XF86AudioLowerVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 6%- ; $HOME/.config/eww/scripts/volume osd
-    bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ; $HOME/.config/eww/scripts/volume osd
+    bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%+
+    binde = , XF86AudioRaiseVolume, exec, ${homeDir}/.config/eww/scripts/volume osd
+    bindle = , XF86AudioLowerVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%-
+    binde = , XF86AudioLowerVolume, exec, ${homeDir}/.config/eww/scripts/volume osd
+    bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    bind = , XF86AudioMute, exec, ${homeDir}/.config/eww/scripts/volume osd
     bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     # backlight
-    bindle = , XF86MonBrightnessUp, exec, light -A 5 ; $HOME/.config/eww/scripts/brightness osd
-    bindle = , XF86MonBrightnessDown, exec, light -U 5 ; $HOME/.config/eww/scripts/brightness osd
+    bindle = , XF86MonBrightnessUp, exec, light -A 5
+    binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
+    bindle = , XF86MonBrightnessDown, exec, light -U 5
+    binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
 
     # screenshot
     # stop animations while screenshotting; makes black border go away

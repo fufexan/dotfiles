@@ -4,6 +4,8 @@
 (defvar net_rev false)
 (defvar time_rev false)
 (defvar vol_reveal false)
+(defvar osd-brightness false)
+(defvar osd-volume false)
 
 (defpoll time :interval "5s" `date +'{"date": "%d/%m", "hour": "%H", "minute": "%M", "day": "%A"}'`)
 
