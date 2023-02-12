@@ -7,7 +7,7 @@
 }: let
   dependencies = with pkgs; [
     config.wayland.windowManager.hyprland.package
-    config.programs.eww.package
+    cfg.package
     bash
     bc
     blueberry
@@ -21,7 +21,6 @@
     gnused
     gojq
     imagemagick
-    iwgtk
     jaq
     light
     networkmanager
@@ -38,32 +37,80 @@
     wireplumber
     wlogout
   ];
+
+  cfg = config.programs.eww-hyprland;
 in {
-  programs.eww = {
-    enable = true;
-    package = inputs.eww.packages.${pkgs.hostPlatform.system}.eww-wayland;
-    # remove nix files
-    configDir = lib.cleanSourceWith {
-      filter = name: _type: let
-        baseName = baseNameOf (toString name);
-      in
-        !(lib.hasSuffix ".nix" baseName);
-      src = lib.cleanSource ./.;
+  options.programs.eww-hyprland = {
+    enable = lib.mkEnableOption "eww Hyprland config";
+
+    package = lib.mkOption {
+      type = with lib.types; nullOr package;
+      default = inputs.eww.packages.${pkgs.hostPlatform.system}.eww-wayland;
+      defaultText = lib.literalExpression "inputs.eww.packages.\${pkgs.hostPlatform.system}.eww-wayland";
+      description = "Eww package to use.";
+    };
+
+    autoReload = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      defaultText = lib.literalExpression "false";
+      description = "Whether to restart the eww daemon on change.";
+    };
+
+    colors = lib.mkOption {
+      type = with lib.types; nullOr lines;
+      default = null;
+      defaultText = lib.literalExpression "null";
+      description = ''
+        SCSS file with colors defined in the same way as Catppuccin colors are,
+        to be used by eww.
+
+        Defaults to Catppuccin Mocha.
+      '';
     };
   };
 
-  systemd.user.services.eww = {
-    Unit = {
-      Description = "Eww Daemon";
-      # not yet implemented
-      # PartOf = ["tray.target"];
-      PartOf = ["graphical-session.target"];
+  config = lib.mkIf cfg.enable {
+    home.packages = [cfg.package];
+
+    # remove nix files
+    xdg.configFile."eww" = {
+      source = lib.cleanSourceWith {
+        filter = name: _type: let
+          baseName = baseNameOf (toString name);
+        in
+          !(lib.hasSuffix ".nix" baseName) && !(baseName == "_colors.scss");
+        src = lib.cleanSource ./.;
+      };
+
+      # links each file individually, which lets us insert the colors file separately
+      recursive = true;
+
+      onChange =
+        if cfg.autoReload
+        then "systemctl --user restart eww.service"
+        else "";
     };
-    Service = {
-      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
-      ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
-      Restart = "on-failure";
+
+    # colors file
+    xdg.configFile."eww/css/_colors.scss".text =
+      if cfg.colors != null
+      then cfg.colors
+      else (builtins.readFile ./css/_colors.scss);
+
+    systemd.user.services.eww = {
+      Unit = {
+        Description = "Eww Daemon";
+        # not yet implemented
+        # PartOf = ["tray.target"];
+        PartOf = ["graphical-session.target"];
+      };
+      Service = {
+        Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
+        ExecStart = "${cfg.package}/bin/eww daemon --no-daemonize";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = ["graphical-session.target"];
     };
-    Install.WantedBy = ["graphical-session.target"];
   };
 }

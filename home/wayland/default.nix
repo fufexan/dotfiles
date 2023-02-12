@@ -24,6 +24,8 @@ in {
     ./swaylock.nix
   ];
 
+  programs.eww-hyprland.enable = true;
+
   home.packages = with pkgs; [
     # screenshot
     grim

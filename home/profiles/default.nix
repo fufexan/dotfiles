@@ -38,5 +38,7 @@ in {
         inherit pkgs;
       };
     });
+
+    homeManagerModules.eww-hyprland = import ./programs/eww;
   };
 }
