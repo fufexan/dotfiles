@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 # Wayland config
@@ -24,7 +25,10 @@ in {
     ./swaylock.nix
   ];
 
-  programs.eww-hyprland.enable = true;
+  programs.eww-hyprland = {
+    enable = true;
+    package = inputs.eww.packages.${pkgs.hostPlatform.system}.eww-wayland;
+  };
 
   home.packages = with pkgs; [
     # screenshot

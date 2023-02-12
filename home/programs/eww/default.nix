@@ -38,6 +38,16 @@
     wlogout
   ];
 
+  reload_script = pkgs.writeShellScript "reload_eww" ''
+    windows=$(eww windows | rg '\*' | tr -d '*')
+
+    systemctl --user restart eww.service
+
+    echo $windows | while read -r w; do
+      eww open $w
+    done
+  '';
+
   cfg = config.programs.eww-hyprland;
 in {
   options.programs.eww-hyprland = {
@@ -45,8 +55,8 @@ in {
 
     package = lib.mkOption {
       type = with lib.types; nullOr package;
-      default = inputs.eww.packages.${pkgs.hostPlatform.system}.eww-wayland;
-      defaultText = lib.literalExpression "inputs.eww.packages.\${pkgs.hostPlatform.system}.eww-wayland";
+      default = pkgs.eww-wayland;
+      defaultText = lib.literalExpression "pkgs.eww-wayland";
       description = "Eww package to use.";
     };
 
@@ -54,7 +64,7 @@ in {
       type = lib.types.bool;
       default = false;
       defaultText = lib.literalExpression "false";
-      description = "Whether to restart the eww daemon on change.";
+      description = "Whether to restart the eww daemon and windows on change.";
     };
 
     colors = lib.mkOption {
@@ -88,7 +98,7 @@ in {
 
       onChange =
         if cfg.autoReload
-        then "systemctl --user restart eww.service"
+        then reload_script.outPath
         else "";
     };
 

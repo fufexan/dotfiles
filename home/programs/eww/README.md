@@ -26,6 +26,34 @@ The same daemon runs multiple windows which interact with each other:
 
 ## ❔ Usage
 
+### Home Manager
+
+If you use Home Manager, installing is as simple as adding my flake to your
+inputs, passing `inputs` to `extraSpecialArgs` and importing the relevant
+module:
+```nix
+{inputs, ...}: {
+  imports = [inputs.fufexan.homeManagerModules.eww-hyprland];
+
+  programs.eww-hyprland = {
+    enable = true;
+
+    # default package
+    package = pkgs.eww-wayland;
+
+    # if you want to change colors
+    colors = builtins.readFile ./macchiato.scss;
+
+    # set to true to reload on change
+    autoReload = false; 
+  };
+}
+```
+
+Make sure to also add the fonts listed below.
+
+### Other distros
+
 To quickly install this config, grab all the files in this directory and put
 them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
 
