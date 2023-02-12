@@ -22,7 +22,7 @@
     kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
 
     # use latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     # Panel Self Refresh
     kernelParams = ["amdgpu.dcfeaturemask=0x8" "initcall_blacklist=acpi_cpufreq_init" "amd_pstate=passive" "amd_pstate.shared_mem=1"];
 
