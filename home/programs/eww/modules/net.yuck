@@ -1,7 +1,7 @@
 (defwidget net []
   (button
     :class "module icon"
-    :onclick "iwgtk &"
+    :onclick "gnome-control-center &"
     :tooltip {net.essid}
     :style "color: ${net.color};"
     {net.icon}))

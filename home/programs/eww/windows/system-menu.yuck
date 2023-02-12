@@ -37,7 +37,7 @@
             :text "│")
           (button
             :class "wifi-arrow-btn"
-            :onclick "eww close system-menu && nm-connection-editor &"
+            :onclick "eww close system-menu && gnome-control-center &"
             ""))
         (label
           :text {net.essid}

@@ -17,6 +17,7 @@
     dunst
     findutils
     gawk
+    gnome.gnome-control-center
     gnused
     gojq
     imagemagick
@@ -24,7 +25,6 @@
     jaq
     light
     networkmanager
-    networkmanagerapplet
     pavucontrol
     playerctl
     procps
@@ -37,7 +37,6 @@
     wget
     wireplumber
     wlogout
-    wofi
   ];
 in {
   programs.eww = {
