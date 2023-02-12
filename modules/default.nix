@@ -34,4 +34,12 @@ in {
       };
     }
   ];
+
+  flake.nixosModules = {
+    desktop = import ./desktop.nix;
+    gamemode = import ./gamemode.nix;
+    greetd = import ./greetd.nix;
+    minimal = import ./minimal.nix;
+    nix = import ./nix.nix;
+  };
 }
