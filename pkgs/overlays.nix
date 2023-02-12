@@ -10,8 +10,6 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  material-symbols = prev.callPackage ./material-symbols.nix {};
-
   TL = prev.callPackage ./TL {};
 
   waveform = prev.callPackage ./waveform {};

@@ -7,7 +7,7 @@
   fonts = {
     fonts = with pkgs; [
       # icon fonts
-      inputs.self.packages.${pkgs.hostPlatform.system}.material-symbols
+      material-symbols
 
       # normal fonts
       jost
