@@ -34,16 +34,16 @@ in {
 
     misc {
       # enable Variable Frame Rate
-      no_vfr = 0
+      vfr = true
       # disable auto polling for config file changes
-      disable_autoreload = 1
-      focus_on_activate = 1
+      disable_autoreload = true
+      focus_on_activate = true
     }
 
     # touchpad gestures
     gestures {
-      workspace_swipe = 1
-      workspace_swipe_forever = 1
+      workspace_swipe = true
+      workspace_swipe_forever = true
     }
 
     input {
@@ -59,7 +59,7 @@ in {
 
     device:MSFT0001:00 04F3:31EB Touchpad {
       accel_profile = adaptive
-      natural_scroll = 1
+      natural_scroll = true
     }
 
     general {
@@ -68,17 +68,21 @@ in {
       border_size = 2
       col.active_border = rgb(${colors.blue}) rgb(${colors.mauve}) 270deg
       col.inactive_border = rgb(${colors.crust}) rgb(${colors.lavender}) 270deg
+
+      # group borders
+      col.group_border_active = rgb(${colors.pink})
+      col.group_border = rgb(${colors.surface0})
     }
 
     decoration {
       rounding = 16
-      blur = 1
+      blur = true
       blur_size = 3
       blur_passes = 3
-      blur_new_optimizations = 1
+      blur_new_optimizations = true
 
-      drop_shadow = 1
-      shadow_ignore_window = 1
+      drop_shadow = true
+      shadow_ignore_window = true
       shadow_offset = 2 2
       shadow_range = 4
       shadow_render_power = 1
@@ -86,7 +90,7 @@ in {
     }
 
     animations {
-      enabled = 1
+      enabled = true
       animation = border, 1, 2, default
       animation = fade, 1, 4, default
       animation = windows, 1, 3, default, popin 80%
@@ -95,12 +99,8 @@ in {
 
     dwindle {
       # keep floating dimentions while tiling
-      pseudotile = 1
-      preserve_split = 1
-
-      # group borders
-      col.group_border_active = rgb(${colors.pink})
-      col.group_border = rgb(${colors.surface0})
+      pseudotile = true
+      preserve_split = true
     }
 
     # telegram media viewer
@@ -122,7 +122,7 @@ in {
     windowrulev2 = workspace 2, title:^(.*(Disc|WebC)ord.*)$
 
     # idle inhibit while watching videos
-    windowrulev2 = idleinhibit focus, class:^(mpv)$
+    windowrulev2 = idleinhibit focus, class:^(mpv|.+exe)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
     # fix Matlab
