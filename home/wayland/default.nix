@@ -37,6 +37,7 @@ in {
 
     # idle/lock
     swaybg
+    swaylock-effects
 
     # utils
     ocrScript
