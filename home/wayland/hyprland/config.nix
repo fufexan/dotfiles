@@ -200,7 +200,7 @@ in {
     bindle = , XF86MonBrightnessUp, exec, light -A 5
     binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
     bindle = , XF86MonBrightnessDown, exec, light -U 5
-    binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
+    binde = , XF86MonBrightnessDown, exec, ${homeDir}/.config/eww/scripts/brightness osd
 
     # screenshot
     # stop animations while screenshotting; makes black border go away
