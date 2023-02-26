@@ -60,7 +60,7 @@
 
     fu.url = "github:numtide/flake-utils";
 
-    helix.url = "github:SoraTenshi/helix/experimental-22.12";
+    helix.url = "github:SoraTenshi/helix/daily-driver";
 
     hm = {
       url = "github:nix-community/home-manager";
