@@ -24,10 +24,14 @@
         };
         indent-guides = {
           render = true;
-          rainbow = "dim";
+          rainbow-option = "dim";
         };
         rainbow-brackets = true;
         statusline.center = ["position-percentage"];
+        whitespace.characters = {
+          newline = "↴";
+          tab = "⇥";
+        };
       };
 
       keys.normal.space.u = {
