@@ -39,5 +39,3 @@ in {
     };
   };
 }
-# adding nixpkgs lib is ugly but easier to keep track of things
-

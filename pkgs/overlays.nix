@@ -12,6 +12,8 @@ inputs: _: prev: {
 
   TL = prev.callPackage ./TL {};
 
+  regreet = prev.callPackage ./regreet {};
+
   waveform = prev.callPackage ./waveform {};
 
   spotify = prev.callPackage ./spotify {};
