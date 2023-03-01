@@ -11,6 +11,10 @@ with pkgs; [
       args = ["start"];
     };
     auto-format = true;
+    formatter = {
+      command = "${shfmt}/bin/shfmt";
+      args = ["-i" "2" "-"];
+    };
   }
   {
     name = "cpp";
