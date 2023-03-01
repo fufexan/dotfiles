@@ -131,6 +131,9 @@ in {
 
     windowrulev2 = dimaround, class:^(gcr-prompter)$
 
+    windowrulev2 = rounding 0, class:^(.*jetbrains.*)$, floating:1
+    windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit)$
+
     # mouse movements
     bindm = $mod, mouse:272, movewindow
     bindm = $mod, mouse:273, resizewindow
