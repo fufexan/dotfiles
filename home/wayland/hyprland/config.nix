@@ -60,6 +60,7 @@ in {
     device:MSFT0001:00 04F3:31EB Touchpad {
       accel_profile = adaptive
       natural_scroll = true
+      sensitivity = 0.1
     }
 
     general {
@@ -83,10 +84,10 @@ in {
 
       drop_shadow = true
       shadow_ignore_window = true
-      shadow_offset = 2 2
-      shadow_range = 4
-      shadow_render_power = 1
-      col.shadow = 0x55000000
+      shadow_offset = 0 5
+      shadow_range = 50
+      shadow_render_power = 3
+      col.shadow = rgba(00000099)
     }
 
     animations {
@@ -123,6 +124,7 @@ in {
 
     # idle inhibit while watching videos
     windowrulev2 = idleinhibit focus, class:^(mpv|.+exe)$
+    windowrulev2 = idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
     # fix Matlab
