@@ -33,11 +33,11 @@ in {
     exec-once = eww open bar
 
     misc {
-      # enable Variable Frame Rate
-      vfr = true
       # disable auto polling for config file changes
       disable_autoreload = true
       focus_on_activate = true
+      # disable dragging animation
+      animate_mouse_windowdragging = false      
     }
 
     # touchpad gestures
@@ -127,13 +127,9 @@ in {
     windowrulev2 = idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
-    # fix Matlab
-    windowrulev2 = rounding 0, class:^(MATLAB.*)$
-    windowrulev2 = tile, class:^(MATLAB.*)$
-
+    # fix xwayland apps
     windowrulev2 = dimaround, class:^(gcr-prompter)$
-
-    windowrulev2 = rounding 0, class:^(.*jetbrains.*)$, floating:1
+    windowrulev2 = rounding 0, xwayland:1, floating:1
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit)$
 
     # mouse movements

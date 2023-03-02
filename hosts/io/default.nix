@@ -100,7 +100,7 @@
       package = inputs.self.packages.${pkgs.system}.howdy;
       settings = {
         core.no_confirmation = true;
-        video.dark-threshold = 90;
+        video.dark_threshold = 90;
       };
     };
 

@@ -35,6 +35,7 @@
     inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.model_composer
     inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.vitis_hls
     inputs.nix-xilinx.packages.${pkgs.hostPlatform.system}.vivado
+    jetbrains.idea-community
 
     # torrents
     transmission-remote-gtk
