@@ -1,9 +1,7 @@
-{
-  lib,
-  fetchurl,
-  fetchFromGitHub,
-  python3,
-  ...
+{ fetchurl
+, fetchFromGitHub
+, python3
+, ...
 }: {
   data = {
     "dlib_face_recognition_resnet_model_v1.dat" = fetchurl {
@@ -23,12 +21,12 @@
   src = fetchFromGitHub {
     owner = "boltgolt";
     repo = "howdy";
-    rev = "1c5dab4e1c15a8da4464ff2433e383de53d56009";
-    hash = "sha256-/E50j5JrVz+kCB3sAb3qdyL3QMInQ4Bxhwh6DPTf7kE=";
+    rev = "e881cc25935c7d39a074e9701a06b1fce96cc185";
+    hash = "sha256-BHS1J0SUNbCeAnTXrOQCtBJTaSYa5jtYYtTgfycv7VM=";
   };
 
   py = python3.withPackages (p: [
     p.face_recognition
-    (p.opencv4.override {enableGtk3 = true;})
+    (p.opencv4.override { enableGtk3 = true; })
   ]);
 }

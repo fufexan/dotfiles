@@ -19,17 +19,26 @@
 in
   stdenv.mkDerivation {
     pname = "howdy";
-    version = "unstable-2022-04-18";
+    version = "unstable-2023-02-28";
     inherit (data) src;
 
     # fix paths
     patches = [./howdy.patch];
 
-    postPatch = ''
+    postPatch = let
+      howdypath = "${placeholder "out"}/lib/security/howdy";
+    in ''
+      substituteInPlace howdy/src/cli/add.py --replace "@PATH@" "${howdypath}"
       substituteInPlace howdy/src/cli/config.py --replace '/bin/nano' 'nano'
-      substituteInPlace "howdy/src/pam/main.cc" \
+      substituteInPlace howdy/src/cli/test.py --replace "@PATH@" "${howdypath}"
+
+      substituteInPlace howdy/src/pam/main.cc \
         --replace "python3" "${data.py}/bin/python" \
-        --replace "/lib/security/howdy/compare.py" "$out/lib/security/howdy/compare.py"
+        --replace "/lib/security/howdy/compare.py" "${howdypath}/compare.py"
+
+      substituteInPlace howdy/src/compare.py \
+        --replace "/lib/security/howdy" "${howdypath}" \
+        --replace "@PATH@" "${howdypath}"
     '';
 
     nativeBuildInputs = [bzip2 installShellFiles meson ninja pkg-config];
@@ -50,6 +59,7 @@ in
 
       mkdir -p $out/share/licenses/howdy
       install -Dm644 LICENSE $out/share/licenses/howdy/LICENSE
+      rm -rf howdy/src/pam
       mkdir -p ${libDir}
       cp -r howdy/src/* ${libDir}
 
