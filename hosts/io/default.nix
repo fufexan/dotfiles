@@ -15,7 +15,7 @@
   boot = {
     initrd = {
       systemd.enable = true;
-      supportedFilesystems = ["btrfs"];
+      supportedFilesystems = ["ext4"];
     };
 
     # load modules on boot
@@ -90,8 +90,6 @@
   };
 
   services = {
-    btrfs.autoScrub.enable = true;
-
     # for SSD/NVME
     fstrim.enable = true;
 

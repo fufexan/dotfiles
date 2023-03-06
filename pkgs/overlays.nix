@@ -10,8 +10,6 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  TL = prev.callPackage ./TL {};
-
   regreet = prev.callPackage ./regreet {};
 
   howdy = prev.callPackage ./howdy {};

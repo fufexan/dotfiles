@@ -88,29 +88,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "fu";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
-
     nix-gaming.url = "github:fufexan/nix-gaming";
-
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nix-super.url = "github:privatevoid-net/nix-super";
 
     nix-xilinx = {
       url = "gitlab:doronbehar/nix-xilinx";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -124,12 +107,5 @@
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    waveforms-flake = {
-      url = "github:liff/waveforms-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    webcord.url = "github:fufexan/webcord-flake";
   };
 }

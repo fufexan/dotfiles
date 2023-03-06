@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}:
+{pkgs, ...}:
 with pkgs; [
   {
     name = "bash";
@@ -25,7 +21,7 @@ with pkgs; [
   }
   {
     name = "nix";
-    language-server = {command = lib.getExe inputs.nil.packages.${pkgs.hostPlatform.system}.default;};
+    language-server = {command = lib.getExe nil;};
     config.nil.formatting.command = ["alejandra" "-q"];
   }
   {
@@ -44,7 +40,7 @@ with pkgs; [
   {
     name = "css";
     language-server = {
-      command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+      command = "${nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
       args = ["--stdio"];
     };
   }
