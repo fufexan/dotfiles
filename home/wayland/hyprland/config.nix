@@ -37,7 +37,7 @@ in {
       disable_autoreload = true
       focus_on_activate = true
       # disable dragging animation
-      animate_mouse_windowdragging = false      
+      animate_mouse_windowdragging = false
     }
 
     # touchpad gestures

@@ -1,7 +1,8 @@
-{ fetchurl
-, fetchFromGitHub
-, python3
-, ...
+{
+  fetchurl,
+  fetchFromGitHub,
+  python3,
+  ...
 }: {
   data = {
     "dlib_face_recognition_resnet_model_v1.dat" = fetchurl {
@@ -27,6 +28,6 @@
 
   py = python3.withPackages (p: [
     p.face_recognition
-    (p.opencv4.override { enableGtk3 = true; })
+    (p.opencv4.override {enableGtk3 = true;})
   ]);
 }
