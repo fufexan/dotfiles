@@ -19,10 +19,10 @@
   };
 
   src = fetchFromGitHub {
-    owner = "boltgolt";
+    owner = "fufexan";
     repo = "howdy";
-    rev = "e881cc25935c7d39a074e9701a06b1fce96cc185";
-    hash = "sha256-BHS1J0SUNbCeAnTXrOQCtBJTaSYa5jtYYtTgfycv7VM=";
+    rev = "dceebf0f194e55429baaf9696ed5ae38ab9ddf92";
+    hash = "sha256-6C8AqB83pJ5LMq+0JdsrMfkGNxxn1uv8jfoCe8BAGeY=";
   };
 
   py = python3.withPackages (p: [

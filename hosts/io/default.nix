@@ -97,7 +97,7 @@
       enable = true;
       package = inputs.self.packages.${pkgs.system}.howdy;
       settings = {
-        core.no_confirmation = true;
+        video.device_path = "/dev/video2";
         video.dark_threshold = 90;
       };
     };
@@ -113,11 +113,6 @@
         };
         config = builtins.readFile "${inputs.self}/modules/main.kbd";
       };
-    };
-
-    linux-enable-ir-emitter = {
-      enable = true;
-      package = inputs.self.packages.${pkgs.system}.linux-enable-ir-emitter;
     };
 
     # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency

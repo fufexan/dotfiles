@@ -10,20 +10,19 @@ with lib; let
 in {
   options = {
     services.howdy = {
-      enable = mkEnableOption (mdDoc "Howdy and PAM module for face recognition");
+      enable =
+        mkEnableOption (mdDoc "")
+        // {
+          description = mdDoc ''
+            Howdy and PAM module for face recognition. See
+            `services.linux-enable-ir-emitter` for enabling the IR emitter support.
+          '';
+        };
 
       package = mkPackageOptionMD pkgs "howdy" {};
 
-      device = mkOption {
-        type = types.path;
-        default = "/dev/video2";
-        description = mdDoc ''
-          Device file connected to the IR sensor.
-        '';
-      };
-
       settings = mkOption {
-        type = settingsType.type;
+        inherit (settingsType) type;
         default = import ./config.nix;
         description = mdDoc ''
           Howdy configuration file. Refer to
@@ -34,9 +33,13 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = [cfg.package];
-
-    environment.etc."howdy/config.ini".source = settingsType.generate "howdy-config.ini" (lib.recursiveUpdate (import ./config.nix) cfg.settings);
-  };
+  config = mkMerge [
+    (mkIf cfg.enable {
+      environment.systemPackages = [cfg.package];
+      environment.etc."howdy/config.ini".source = settingsType.generate "howdy-config.ini" cfg.settings;
+    })
+    {
+      services.howdy.settings = mapAttrsRecursive (name: mkDefault) (import ./config.nix);
+    }
+  ];
 }
