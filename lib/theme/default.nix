@@ -19,7 +19,7 @@
 
   wallpaper = builtins.fetchurl rec {
     name = "wallpaper-${sha256}.png";
-    url = "https://files.catbox.moe/wn3b28.png";
-    sha256 = "0f7q0aj1q6mjfh248j8dflfbkbcpfvh5wl75r3bfhr8p6015jkwq";
+    url = "https://raw.githubusercontent.com/catppuccin/wallpapers/main/misc/waves_right_colored.png";
+    sha256 = "1nc78cdnwskkrcvfyj0s85a9sjyldv6fmz6iia08a257j7x89ain";
   };
 }
