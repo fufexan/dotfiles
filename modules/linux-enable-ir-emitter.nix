@@ -30,7 +30,8 @@ in {
         default = "video2";
         defaultText = "video2";
         description = ''
-          Emitter device to depend on.
+          Emitter device to depend on. Find this with the command
+          {command}`realpath /dev/v4l/by-path/<generated-driver-name>`.
         '';
       };
     };
@@ -56,5 +57,9 @@ in {
       wantedBy = targets;
       after = targets ++ ["dev-${cfg.device}.device"];
     };
+
+    systemd.tmpfiles.rules = [
+      "d /etc/linux-enable-ir-emitter 0755 root root - -"
+    ];
   };
 }

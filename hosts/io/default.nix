@@ -102,6 +102,8 @@
       };
     };
 
+    linux-enable-ir-emitter.enable = true;
+
     kmonad.keyboards = {
       io = {
         name = "io";
