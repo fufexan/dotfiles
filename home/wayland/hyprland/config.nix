@@ -127,10 +127,12 @@ in {
     windowrulev2 = idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
-    # fix xwayland apps
     windowrulev2 = dimaround, class:^(gcr-prompter)$
+
+    # fix xwayland apps
     windowrulev2 = rounding 0, xwayland:1, floating:1
-    windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit)$
+    windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|splash)$
+    windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
     # mouse movements
     bindm = $mod, mouse:272, movewindow
