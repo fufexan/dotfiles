@@ -39,8 +39,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [cfg.package];
 
-    powerManagement.resumeCommands = "${lib.getExe cfg.package} run";
-
     systemd.services.linux-enable-ir-emitter = let
       targets = [
         "multi-user.target"
@@ -59,7 +57,8 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d /etc/linux-enable-ir-emitter 0755 root root - -"
+      "d /var/lib/linux-enable-ir-emitter 0755 root root - -"
     ];
+    environment.etc."linux-enable-ir-emitter".source = "/var/lib/linux-enable-ir-emitter";
   };
 }
