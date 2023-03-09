@@ -2,6 +2,8 @@ inputs: _: prev: {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
+  catppuccin-plymouth = prev.callPackage ./catppuccin-plymouth {};
+
   discord-canary = prev.callPackage ./discord.nix {
     pkgs = prev;
     inherit inputs;
