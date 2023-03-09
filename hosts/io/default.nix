@@ -32,7 +32,12 @@
       systemd-boot.enable = true;
     };
 
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      themePackages = [inputs.self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
+      # theme = "catppuccin-mocha";
+      # font = "${pkgs.noto-fonts}/share/fonts/truetype/noto/NotoSans-Light.ttf";
+    };
   };
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
@@ -97,6 +102,7 @@
       enable = true;
       package = inputs.self.packages.${pkgs.system}.howdy;
       settings = {
+        core.workaround = "input";
         video.device_path = "/dev/video2";
         video.dark_threshold = 90;
       };
