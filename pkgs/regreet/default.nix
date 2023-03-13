@@ -9,16 +9,16 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "regreet";
-  version = "unstable-2023-02-27";
+  version = "unstable-2023-03-12";
 
   src = fetchFromGitHub {
     owner = "rharish101";
     repo = "ReGreet";
-    rev = "2bbabe90f112b4feeb0aea516c265daaec8ccf2a";
-    sha256 = "sha256-71ji4x/NUE4qmBuO5PkWTPE1a0uPXqJSwW1Ai1amPJE=";
+    rev = "e06f5aa1477d2f398556b99059a00209f62eca92";
+    sha256 = "sha256-dqzPA3T/k9fCqYa9xbsL8mJ11NSvQQmo06sTmepNgGA=";
   };
 
-  cargoHash = "sha256-rz2eMMhoMtzBXCH6ZJOvGuYLeHSWga+Ebc4+ZO8Kk1g=";
+  cargoHash = "sha256-nZYpb5DR8ntpvzsiCetV192kYbOVayEYkk0BhRStjpQ=";
 
   buildFeatures = ["gtk4_8"];
 
