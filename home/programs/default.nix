@@ -20,7 +20,11 @@
   programs = {
     chromium = {
       enable = true;
-      extensions = [{id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}];
+      commandLineArgs = ["--enable-features=TouchpadOverscrollHistoryNavigation"];
+      extensions = [
+        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
+        {id = "bkkmolkhemgaeaeggcmfbghljjjoofoh";}
+      ];
     };
 
     firefox = {

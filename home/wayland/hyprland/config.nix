@@ -131,7 +131,7 @@ in {
 
     # fix xwayland apps
     windowrulev2 = rounding 0, xwayland:1, floating:1
-    windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|splash)$
+    windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
     # mouse movements
