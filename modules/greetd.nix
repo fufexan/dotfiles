@@ -17,6 +17,9 @@ let
 
     xwayland disable
 
+    bindsym XF86MonBrightnessUp exec light -A 5
+    bindsym XF86MonBrightnessDown exec light -U 5
+    bindsym Print exec ${lib.getExe pkgs.grim} /tmp/regreet.png
     bindsym Mod4+shift+e exec swaynag \
       -t warning \
       -m 'What do you want to do?' \
