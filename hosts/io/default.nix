@@ -102,7 +102,7 @@
       enable = true;
       package = inputs.self.packages.${pkgs.system}.howdy;
       settings = {
-        core.workaround = "input";
+        core.no_confirmation = true;
         video.device_path = "/dev/video2";
         video.dark_threshold = 90;
       };
