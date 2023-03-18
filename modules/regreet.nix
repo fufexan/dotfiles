@@ -5,15 +5,27 @@
   ...
 }: let
   cfg = config.programs.regreet;
-  settingsType = pkgs.formats.toml {};
+  settingsFormat = pkgs.formats.toml {};
 in {
   options.programs.regreet = {
-    enable = lib.mkEnableOption (lib.mdDoc "ReGreet, a greetd greeter");
+    enable =
+      lib.mkEnableOption null
+      // {
+        description = lib.mdDoc ''
+          Enable ReGreet, a clean and customizable greeter for greetd.
 
-    package = lib.mkPackageOptionMD pkgs "regreet" {};
+          To use ReGreet, {option}`services.greetd` has to be enabled and
+          {option}`services.greetd.settings.default_session` should contain the
+          appropriate configuration to launch
+          {option}`config.programs.regreet.package`. For examples, see the
+          [ReGreet Readme](https://github.com/rharish101/ReGreet#set-as-default-session).
+        '';
+      };
+
+    package = lib.mkPackageOptionMD pkgs ["greetd" "regreet"] {};
 
     settings = lib.mkOption {
-      inherit (settingsType) type;
+      type = lib.types.either lib.types.path settingsFormat.type;
       default = {};
       description = lib.mdDoc ''
         ReGreet configuration file. Refer
@@ -34,16 +46,28 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.greetd.enable = true;
-
-    environment.etc = {
-      "greetd/regreet.toml".source = settingsType.generate "regreet.toml" cfg.settings;
-      "greetd/regreet.css".source = pkgs.writeText "regreet.css" cfg.extraCss;
+    services.greetd = {
+      enable = lib.mkDefault true;
+      settings.default_session.command = lib.mkDefault "${lib.getExe pkgs.cage} -s -- ${lib.getExe cfg.package}";
     };
 
-    systemd.tmpfiles.rules = [
-      "d /var/log/regreet 0755 greeter greeter - -"
-      "d /var/cache/regreet 0755 greeter greeter - -"
+    environment.etc = {
+      "greetd/regreet.css" =
+        if lib.isPath cfg.extraCss
+        then {source = cfg.extraCss;}
+        else {text = cfg.extraCss;};
+
+      "greetd/regreet.toml".source =
+        if lib.isPath cfg.settings
+        then cfg.settings
+        else settingsFormat.generate "regreet.toml" cfg.settings;
+    };
+
+    systemd.tmpfiles.rules = let
+      user = config.services.greetd.settings.default_session.user;
+    in [
+      "d /var/log/regreet 0755 greeter ${user} - -"
+      "d /var/cache/regreet 0755 greeter ${user} - -"
     ];
   };
 }

@@ -26,7 +26,7 @@ let
       -b 'Poweroff' 'systemctl poweroff' \
       -b 'Reboot' 'systemctl reboot'
 
-    exec "${lib.getExe config.programs.regreet.package}; swaymsg exit"
+    exec "${lib.getExe config.programs.regreet.package} -l debug; swaymsg exit"
   '';
 in {
   imports = [./regreet.nix];
