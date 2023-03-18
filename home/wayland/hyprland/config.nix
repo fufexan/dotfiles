@@ -15,15 +15,11 @@ in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
 
-    # should be configured per-profile
-    monitor = DP-1, preferred, auto, auto
-    monitor = DP-2, preferred, auto, auto
-    monitor = eDP-1, preferred, auto, auto
-    workspace = eDP-1, 1
-    workspace = DP-1, 10
-    workspace = DP-2, 10
+    env = _JAVA_AWT_WM_NONREPARENTING,1
+    env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 
     # scale apps
+    env = GDK_SCALE,2
     exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
 
     # set cursor for HL itself
