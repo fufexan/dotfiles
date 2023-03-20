@@ -4,10 +4,9 @@ inputs: _: prev: {
 
   catppuccin-plymouth = prev.callPackage ./catppuccin-plymouth {};
 
-  discord-canary = prev.callPackage ./discord.nix {
-    pkgs = prev;
-    inherit inputs;
-    inherit (prev) lib;
+  discord-canary = prev.discord-canary.override {
+    nss = prev.nss_latest;
+    withOpenASAR = true;
   };
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
