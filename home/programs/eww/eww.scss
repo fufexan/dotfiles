@@ -5,8 +5,6 @@
 }
 
 @mixin window {
-  border: 1px solid $border;
-  box-shadow: 0 2px 3px $shadow;
   margin: 5px 5px 10px;
   @include rounding;
 }

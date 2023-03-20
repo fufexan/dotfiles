@@ -1,7 +1,6 @@
 .system-menu-box {
   @include window;
   background-color: $bg;
-  border: 1px solid $border;
   color: $text;
 }
 
@@ -42,7 +41,7 @@
 
 .element {
   @include rounding;
-  background-color: $surface0;
+  background-color: $bg1;
   margin: .3rem;
 
   button {
@@ -54,14 +53,14 @@
     }
 
     &:hover {
-      background-color: $overlay0;
+      background-color: rgba(255, 255, 255, 0.1);
     }
   }
 }
 
 .sliders {
   @include rounding;
-  background-color: $surface0;
+  background-color: $bg1;
   margin: .5rem 1rem;
   padding: .6rem 1rem;
 
@@ -103,13 +102,13 @@
   }
 
   button {
-    background-color: $surface0;
+    background-color: $bg1;
     border-radius: 50%;
     margin-bottom: .1rem;
     padding: 0 .5rem;
 
     label { font-size: 1.5rem; }
-    &:hover { background-color: $overlay0; }
+    &:hover { background-color: $bg1; }
   }
 }
 
@@ -117,12 +116,12 @@
   background-color: $blue;
   color: $crust;
 
-  button:hover { background-color: #7ba2e1; }
+  button:hover { background-color: rgba(0, 0, 0, .1); }
 }
 
 .wifi-connected {
   background-color: $mauve;
   color: $crust;
 
-  button:hover { background-color: #b695de; }
+  button:hover { background-color: rgba(0, 0, 0, .1); }
 }

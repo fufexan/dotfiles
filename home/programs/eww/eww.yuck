@@ -36,9 +36,8 @@
     :halign "center"
     (music-module)))
 
-(defwidget bar []
+(defwidget bar-box []
   (centerbox
-    :class "bar"
     (left)
     (center)
     (right)))
@@ -52,4 +51,4 @@
       :anchor "top center")
     :stacking "fg"
     :exclusive true
-  (bar))
+  (bar-box))

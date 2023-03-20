@@ -100,6 +100,9 @@ in {
       preserve_split = true
     }
 
+    # only allow shadows for floating windows
+    windowrulev2 = noshadow, floating:0
+
     # telegram media viewer
     windowrulev2 = float, title:^(Media viewer)$
 
@@ -129,6 +132,9 @@ in {
     windowrulev2 = rounding 0, xwayland:1, floating:1
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
+
+    layerrule = blur, ^(gtk-layer-shell)$
+    layerrule = ignorezero, ^(gtk-layer-shell)$
 
     # mouse movements
     bindm = $mod, mouse:272, movewindow
