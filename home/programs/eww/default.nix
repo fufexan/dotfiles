@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   ...
 }: let
@@ -89,7 +88,7 @@ in {
         filter = name: _type: let
           baseName = baseNameOf (toString name);
         in
-          !(lib.hasSuffix ".nix" baseName) && !(baseName == "_colors.scss");
+          !(lib.hasSuffix ".nix" baseName) && (baseName != "_colors.scss");
         src = lib.cleanSource ./.;
       };
 

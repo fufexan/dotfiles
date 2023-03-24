@@ -1,4 +1,4 @@
-inputs: _: prev: {
+_: prev: {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 

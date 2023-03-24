@@ -3,7 +3,6 @@
   lib,
   makeWrapper,
   fetchFromGitHub,
-  fetchurl,
   meson,
   ninja,
   pkg-config,

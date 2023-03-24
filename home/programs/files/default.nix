@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{pkgs, ...}:
 # manage files in ~
 {
   imports = [

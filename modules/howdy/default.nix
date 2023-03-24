@@ -39,7 +39,7 @@ in {
       environment.etc."howdy/config.ini".source = settingsType.generate "howdy-config.ini" cfg.settings;
     })
     {
-      services.howdy.settings = mapAttrsRecursive (name: mkDefault) (import ./config.nix);
+      services.howdy.settings = mapAttrsRecursive (_: mkDefault) (import ./config.nix);
     }
   ];
 }
