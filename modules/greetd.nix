@@ -29,7 +29,6 @@ let
     exec "${lib.getExe config.programs.regreet.package} -l debug; swaymsg exit"
   '';
 in {
-  imports = [./regreet.nix];
   environment.systemPackages = with pkgs; [
     # theme packages
     (catppuccin-gtk.override {
@@ -43,7 +42,6 @@ in {
 
   programs.regreet = {
     enable = true;
-    package = inputs.self.packages.${pkgs.hostPlatform.system}.regreet;
     settings = {
       background = default.wallpaper;
       background_fit = "Cover";

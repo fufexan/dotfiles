@@ -50,6 +50,7 @@ in {
 
   # make stuff work on wayland
   home.sessionVariables = {
+    GDK_SCALE = "2";
     QT_QPA_PLATFORM = "wayland";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";

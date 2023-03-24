@@ -22,11 +22,7 @@ in {
     ];
     timeouts = [
       {
-        timeout = 310;
-        command = "${pkgs.systemd}/bin/loginctl lock-session";
-      }
-      {
-        timeout = 310;
+        timeout = 330;
         command = suspendScript.outPath;
       }
     ];

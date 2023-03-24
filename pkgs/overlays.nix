@@ -11,8 +11,6 @@ inputs: _: prev: {
 
   gdb-frontend = prev.callPackage ./gdb-frontend {};
 
-  regreet = prev.callPackage ./regreet {};
-
   howdy = prev.callPackage ./howdy {};
 
   linux-enable-ir-emitter = prev.callPackage ./linux-enable-ir-emitter {};

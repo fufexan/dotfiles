@@ -66,8 +66,6 @@
 
     opentabletdriver.enable = true;
 
-    video.hidpi.enable = true;
-
     xpadneo.enable = true;
   };
 
@@ -81,7 +79,10 @@
 
   programs = {
     # enable hyprland and required options
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.hidpi = true;
+    };
 
     # backlight control
     light.enable = true;
