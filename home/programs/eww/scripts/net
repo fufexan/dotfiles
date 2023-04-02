@@ -14,14 +14,14 @@ if [ "$1" = "toggle" ]; then
   toggle
 else
   while true; do
-    status=$(nmcli -f state g| tail -1)
+    status=$(nmcli -f state g | tail -1)
     wifistatus=$(nmcli -t -f in-use,ssid,signal dev wifi | rg '\*' | sed 's/\"/\\"/g')
     signal=$(echo "$wifistatus" | awk -F: '{print $3}')
     essid=$(echo "$wifistatus" | awk -F: '{print $2}')
 
     icons=("" "" "" "" "")
 
-    if [ "$status" = "disconnected" ] ; then
+    if [ "$status" = "disconnected" ]; then
       icon=""
       color="#988ba2"
       class=""

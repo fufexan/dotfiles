@@ -24,7 +24,7 @@ osd() {
   if [ ! -f "$date" ]; then
     mkdir -p "$XDG_CACHE_HOME/eww"
   fi
-  date +%s > "$date"
+  date +%s >"$date"
 }
 
 osd_handler() {
@@ -32,7 +32,7 @@ osd_handler() {
   rundate=0
   if [ ! -f "$date" ]; then
     mkdir -p "$XDG_CACHE_HOME/eww"
-    echo 0 > "$date"
+    echo 0 >"$date"
   fi
 
   while true; do
@@ -61,14 +61,17 @@ osd_handler() {
 
 if [ "$1" = "mute" ]; then
   if [ "$2" != "SOURCE" ] && [ "$2" != "SINK" ]; then
-    echo "Can only mute SINK or SOURCE"; exit 1
+    echo "Can only mute SINK or SOURCE"
+    exit 1
   fi
   setmute "$2"
 elif [ "$1" = "setvol" ]; then
   if [ "$2" != "SOURCE" ] && [ "$2" != "SINK" ]; then
-    echo "Can only set volume for SINK or SOURCE"; exit 1
+    echo "Can only set volume for SINK or SOURCE"
+    exit 1
   elif [ "$3" -lt 1 ] || [ "$3" -gt 100 ]; then
-    echo "Volume must be between 1 and 100"; exit 1
+    echo "Volume must be between 1 and 100"
+    exit 1
   fi
   setvol "$2" "$3"
 elif [ "$1" = "osd" ]; then
@@ -79,7 +82,7 @@ else
   ismuted=$(ismuted "SINK")
 
   if [ "$ismuted" = 1 ]; then
-  	icon="${volicons[$lvl]}"
+    icon="${volicons[$lvl]}"
   else
     icon=""
   fi
@@ -93,7 +96,7 @@ else
     ismuted=$(ismuted "SINK")
 
     if [ "$ismuted" = 1 ]; then
-    	icon="${volicons[$lvl]}"
+      icon="${volicons[$lvl]}"
     else
       icon=""
     fi

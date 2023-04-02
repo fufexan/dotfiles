@@ -10,7 +10,7 @@ osd() {
   if [ ! -f "$date" ]; then
     mkdir -p "$XDG_CACHE_HOME/eww"
   fi
-  date +%s > "$date"
+  date +%s >"$date"
 }
 
 osd_handler() {
@@ -18,7 +18,7 @@ osd_handler() {
   rundate=0
   if [ ! -f "$date" ]; then
     mkdir -p "$XDG_CACHE_HOME/eww"
-    echo 0 > "$date"
+    echo 0 >"$date"
   fi
 
   while true; do
@@ -48,10 +48,11 @@ osd_handler() {
 if [ "$1" = "osd" ]; then
   osd
 else
-  osd_handler &
   # initial
   icon=${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}
   echo '{ "percent": '"$(light)"', "icon": "'"$icon"'" }'
+
+  osd_handler &
 
   udevadm monitor | rg --line-buffered "backlight" | while read -r _; do
     icon="${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}"
