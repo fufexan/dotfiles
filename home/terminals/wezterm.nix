@@ -5,9 +5,10 @@
       local wezterm = require "wezterm"
 
       return {
-        font = wezterm.font_with_fallback({ "${default.terminal.font}", }, {
-          weight = "Regular",
-        }),
+        font = wezterm.font_with_fallback {
+          "${default.terminal.font}",
+          "Material Symbols Outlined"
+        },
         font_size = ${toString default.terminal.size},
         color_scheme = "Catppuccin Mocha",
         window_background_opacity = ${toString default.terminal.opacity},

@@ -8,7 +8,6 @@
   home.packages = with pkgs; [
     alejandra
     deadnix
-    nix-index
     statix
     inputs.self.packages.${pkgs.hostPlatform.system}.repl
   ];
