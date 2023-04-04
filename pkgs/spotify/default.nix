@@ -5,7 +5,7 @@
   squashfsTools,
   xorg,
   alsa-lib,
-  makeWrapper,
+  makeShellWrapper,
   wrapGAppsHook,
   openssl,
   freetype,
@@ -44,14 +44,14 @@
   # If an update breaks things, one of those might have valuable info:
   # https://aur.archlinux.org/packages/spotify/
   # https://community.spotify.com/t5/Desktop-Linux
-  version = "1.1.99.878.g1e4ccc6e";
+  version = "1.2.8.923.g4f94bf0d";
   # To get the latest stable revision:
   # curl -H 'X-Ubuntu-Series: 16' 'https://api.snapcraft.io/api/v1/snaps/details/spotify?channel=stable' | jq '.download_url,.version,.last_updated'
   # To get general information:
   # curl -H 'Snap-Device-Series: 16' 'https://api.snapcraft.io/v2/snaps/info/spotify' | jq '.'
   # More examples of api usage:
   # https://github.com/canonical-websites/snapcraft.io/blob/master/webapp/publisher/snaps/views.py
-  rev = "62";
+  rev = "63";
 
   deps = [
     alsa-lib
@@ -104,7 +104,7 @@ in
 
     # fetch from snapcraft instead of the debian repository most repos fetch from.
     # That is a bit more cumbersome. But the debian repository only keeps the last
-    # two versions, while snapcraft should provide versions indefinately:
+    # two versions, while snapcraft should provide versions indefinitely:
     # https://forum.snapcraft.io/t/how-can-a-developer-remove-her-his-app-from-snap-store/512
 
     # This is the next-best thing, since we're not allowed to re-distribute
@@ -112,10 +112,10 @@ in
     # https://community.spotify.com/t5/Desktop-Linux/Redistribute-Spotify-on-Linux-Distributions/td-p/1695334
     src = fetchurl {
       url = "https://api.snapcraft.io/api/v1/snaps/download/pOBIoZ2LrCB3rDohMxoYGnbN14EHOgD7_${rev}.snap";
-      sha512 = "9b8f63c067632f15f5abf6449d09d28fd56839decfc9801d4526cf5b97b9cb5933ede179bcd0b0f2d8b6d4c7e72f55c7fc13dfb0ae4293ef447ead1d018b9cc6";
+      hash = "sha256-SygUwyULHE96MIizfoFLj6ccez5S69Rq4IDvwY9SlG8=";
     };
 
-    nativeBuildInputs = [makeWrapper wrapGAppsHook squashfsTools];
+    nativeBuildInputs = [wrapGAppsHook makeShellWrapper squashfsTools];
 
     dontStrip = true;
     dontPatchELF = true;
@@ -172,13 +172,14 @@ in
         --set-rpath $rpath $out/share/spotify/spotify
 
       librarypath="${lib.makeLibraryPath deps}:$libdir"
-      wrapProgram $out/share/spotify/spotify \
+      wrapProgramShell $out/share/spotify/spotify \
         ''${gappsWrapperArgs[@]} \
         ${lib.optionalString (deviceScaleFactor != null) ''
         --add-flags "--force-device-scale-factor=${toString deviceScaleFactor}" \
       ''} \
         --prefix LD_LIBRARY_PATH : "$librarypath" \
-        --prefix PATH : "${gnome.zenity}/bin"
+        --prefix PATH : "${gnome.zenity}/bin" \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--enable-features=UseOzonePlatform --ozone-platform=wayland}}"
 
       # fix Icon line in the desktop file (#48062)
       sed -i "s:^Icon=.*:Icon=spotify-client:" "$out/share/spotify/spotify.desktop"

@@ -115,8 +115,8 @@ in {
     windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
 
     # start spotify tiled in ws9
-    windowrulev2 = tile, class:^(Spotify)$
-    windowrulev2 = workspace 9 silent, class:^(Spotify)$
+    windowrulev2 = tile, title:^(Spotify)$
+    windowrulev2 = workspace 9 silent, title:^(Spotify)$
 
     # start Discord/WebCord in ws2
     windowrulev2 = workspace 2, title:^(.*(Disc|WebC)ord.*)$
