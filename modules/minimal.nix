@@ -7,6 +7,9 @@
 }:
 # configuration shared by all hosts
 {
+  # remove bloat
+  documentation.nixos.enable = false;
+
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = ["/share/zsh"];
 
@@ -42,7 +45,7 @@
       autosuggestions.enable = true;
       syntaxHighlighting = {
         enable = true;
-        patterns = {"rm -rf *" = "fg=white,bg=red";};
+        patterns = {"rm -rf *" = "fg=black,bg=red";};
         styles = {"alias" = "fg=magenta";};
         highlighters = ["main" "brackets" "pattern"];
       };
