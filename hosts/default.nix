@@ -24,6 +24,21 @@
         ++ desktopModules;
     };
 
+    rog = inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+
+      modules =
+        [
+          ./rog
+          ../modules/greetd.nix
+          ../modules/desktop.nix
+          ../modules/gamemode.nix
+          {home-manager.users.mihai.imports = homeImports."mihai@rog";}
+        ]
+        ++ sharedModules
+        ++ desktopModules;
+    };
+
     kiiro = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 

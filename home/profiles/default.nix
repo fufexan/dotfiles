@@ -19,6 +19,14 @@
         inputs.hyprland.homeManagerModules.default
       ]
       ++ sharedModules;
+    "mihai@rog" =
+      [
+        ./rog
+        inputs.nix-index-db.hmModules.nix-index
+        inputs.spicetify-nix.homeManagerModule
+        inputs.hyprland.homeManagerModules.default
+      ]
+      ++ sharedModules;
     server = sharedModules ++ [./server];
   };
 
@@ -32,6 +40,10 @@ in {
     homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
       "mihai@io" = homeManagerConfiguration {
         modules = homeImports."mihai@io" ++ module_args;
+        inherit pkgs;
+      };
+      "mihai@rog" = homeManagerConfiguration {
+        modules = homeImports."mihai@rog" ++ module_args;
         inherit pkgs;
       };
       server = homeManagerConfiguration {
