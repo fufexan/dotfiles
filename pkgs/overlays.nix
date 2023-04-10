@@ -1,4 +1,4 @@
-_: prev: {
+inputs: _: prev: {
   # instant repl with automatic flake loading
   repl = prev.callPackage ./repl {};
 
@@ -19,5 +19,5 @@ _: prev: {
 
   spotify = prev.callPackage ./spotify {};
 
-  sway-hidpi = import ./sway-hidpi.nix prev;
+  sway-hidpi = import ./sway-hidpi.nix inputs prev;
 }
