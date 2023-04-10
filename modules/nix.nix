@@ -20,14 +20,6 @@
         hostName = "arm-server";
         supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
       }
-      {
-        system = "x86_64-linux";
-        sshUser = "root";
-        sshKey = "/root/.ssh/id_ed25519";
-        maxJobs = 8;
-        hostName = "io";
-        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-      }
     ];
     distributedBuilds = true;
 
