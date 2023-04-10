@@ -2,13 +2,12 @@
   config,
   pkgs,
   lib,
-  inputs,
   default,
   ...
 }: {
   wayland.windowManager.sway = {
     enable = true;
-    package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
+
     config = {
       keybindings = let
         m = config.wayland.windowManager.sway.config.modifier;

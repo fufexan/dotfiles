@@ -9,4 +9,6 @@
     ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
   ];
+
+  wayland.windowManager.hyprland.nvidiaPatches = true;
 }

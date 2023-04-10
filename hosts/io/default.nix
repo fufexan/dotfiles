@@ -88,6 +88,11 @@
     light.enable = true;
 
     steam.enable = true;
+
+    sway = {
+      enable = true;
+      package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
+    };
   };
 
   security.tpm2 = {

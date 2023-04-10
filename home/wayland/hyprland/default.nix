@@ -16,8 +16,5 @@
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 
   # enable hyprland
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.hidpi = true;
-  };
+  wayland.windowManager.hyprland.enable = true;
 }

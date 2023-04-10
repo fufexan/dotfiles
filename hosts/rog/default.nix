@@ -12,6 +12,11 @@
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelModules = ["acpi_call"];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
+    # make 3.5mm jack work
+    extraModprobeConfig = ''
+      options snd_hda_intel model=headset-mode
+    '';
   };
 
   # bootloader
@@ -73,13 +78,19 @@
   networking.hostName = "rog";
   networking.firewall.enable = lib.mkForce false;
 
+  nixpkgs.config.allowUnfree = true;
+
   programs = {
     hyprland = {
       enable = true;
-      xwayland.hidpi = true;
+      nvidiaPatches = true;
     };
     light.enable = true;
     steam.enable = true;
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+    };
   };
 
   services = {
@@ -110,8 +121,6 @@
       };
     };
 
-    xserver.displayManager.gdm.enable = lib.mkForce false;
-    xserver.displayManager.startx.enable = true;
     xserver.videoDrivers = ["nvidia"];
 
     udev.extraRules = let

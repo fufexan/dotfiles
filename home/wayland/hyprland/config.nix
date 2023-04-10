@@ -15,6 +15,8 @@ in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
 
+    monitor = eDP-1, preferred, auto, 1
+
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 
@@ -54,6 +56,11 @@ in {
     }
 
     device:MSFT0001:00 04F3:31EB Touchpad {
+      accel_profile = adaptive
+      natural_scroll = true
+      sensitivity = 0.1
+    }
+    device:elan1200:00-04f3:3090-touchpad {
       accel_profile = adaptive
       natural_scroll = true
       sensitivity = 0.1
