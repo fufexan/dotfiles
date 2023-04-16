@@ -42,8 +42,10 @@ in {
   programs.regreet = {
     enable = true;
     settings = {
-      background = default.wallpaper;
-      background_fit = "Cover";
+      background = {
+        path = default.wallpaper;
+        fit = "Cover";
+      };
       GTK = {
         cursor_theme_name = "Bibata-Modern-Classic";
         font_name = "Jost * 12";
