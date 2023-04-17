@@ -1,81 +1,48 @@
 #!/usr/bin/env bash
 
 get_status() {
-  s=$1
-  if [ "$s" = "Playing" ]; then
-    echo ""
-  else
-    echo ""
-  fi
+  echo "$1" | grep -q "Playing" && echo "" || echo ""
 }
 
 get_length_sec() {
-  len=$1
-  if [ -z "$len" ]; then
-    echo 0
-  else
-    bc <<<"$len / 1000000"
-  fi
+  echo "${1:-0}" | awk '{print int($1/1000000)}'
 }
 
 get_length_time() {
-  len=$1
-  if [ -n "$len" ]; then
-    len=$(bc <<<"$len / 1000000 + 1")
-    date -d@"$len" +%M:%S
-  else
-    echo ""
-  fi
+  echo "${len:+$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000 + 1}')}" | xargs -I{} date -d@{} +%M:%S 2>/dev/null || echo ""
 }
 
 get_position() {
-  pos=$1
-  len=$2
-  if [ -n "$pos" ]; then
-    bc -l <<<"$pos / $len * 100"
-  else
-    echo 0
-  fi
+  echo "${1:+$(awk 'BEGIN{printf "%.2f", '"$1"' / '"$2"' * 100}')}" | xargs printf "%.0f\n"
 }
 
 get_position_time() {
-  pos=$1
-  len=$2
-  if [ -n "$pos" ]; then
-    date -d@"$(bc <<<"$pos / 1000000")" +%M:%S
-  else
-    echo ""
-  fi
+  echo "${1:+$(date -d@"$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000}')" +%M:%S)}" | xargs -I{} echo {}
 }
 
 get_cover() {
   mkdir -p "$XDG_CACHE_HOME/eww_covers"
   cd "$XDG_CACHE_HOME/eww_covers" || exit
 
-  IMGPATH="$XDG_CACHE_HOME/eww_covers/cover_art.png"
-
   COVER_URL="$1"
 
   if [[ "$COVER_URL" = https* ]]; then
-    if [ ! -e "$XDG_CACHE_HOME/eww_covers/$(basename "$COVER_URL")" ]; then
+    FILENAME=$(basename "$COVER_URL")
+    if [ ! -e "$FILENAME" ]; then
       wget -N "$COVER_URL" -o /dev/null
     fi
 
-    rm "$IMGPATH"
-    ln -s "$(basename "$COVER_URL")" "$IMGPATH"
-
-    IMG="${IMGPATH}"
-  elif [ "$COVER_URL" = "" ]; then
-    IMG=""
-  else
+    IMG="$XDG_CACHE_HOME/eww_covers/$FILENAME"
+  elif [ -n "$COVER_URL" ]; then
     IMG="$COVER_URL"
+  else
+    IMG=""
   fi
 
   echo "$IMG"
 }
-
 sanitize() {
-  echo "$1" | sed 's/"/\"/g'
+  echo "${1//\"/\\\"}"
 }
 
 prevCover=''
@@ -87,7 +54,7 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     if [ "$COVER" != "" ]; then
       cols=$(convert "$COVER" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
       color1=$(echo "$cols" | head -1)
-      color1=$(printf "rgba(%d, %d, %d, 0.6)" ${color1:1:2} ${color1:3:2} ${color1:5:2})
+      color1=$(printf "rgba(%d, %d, %d, 0.6)" "${color1:1:2}" "${color1:3:2}" "${color1:5:2}")
       color2=$(echo "$cols" | tail -1)
     else
       color1="#1e1e2e"
