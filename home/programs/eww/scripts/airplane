@@ -1,11 +1,7 @@
 #!/bin/sh
 
 icon() {
-  if [ "$STATUS" = "no" ]; then
-    echo ""
-  else
-    echo ""
-  fi
+  [ "$STATUS" = "no" ] && echo "" || echo ""
 }
 
 toggle() {
@@ -21,9 +17,8 @@ toggle() {
 if [ "$1" = "toggle" ]; then
   toggle
 else
-  while true; do
+  rfkill event | while read -r _; do
     STATUS="$(rfkill list | sed -n 2p | awk '{print $3}')"
     icon
-    sleep 3
   done
 fi

@@ -8,12 +8,10 @@
     config.wayland.windowManager.hyprland.package
     cfg.package
     bash
-    bc
     blueberry
     bluez
     coreutils
     dbus
-    dunst
     findutils
     gawk
     gnome.gnome-control-center

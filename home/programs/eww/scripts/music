@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 get_status() {
-  echo "$1" | grep -q "Playing" && echo "" || echo ""
+  echo "$1" | rg -q "Playing" && echo "" || echo ""
 }
 
 get_length_sec() {
@@ -54,7 +54,7 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     if [ "$COVER" != "" ]; then
       cols=$(convert "$COVER" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
       color1=$(echo "$cols" | head -1)
-      color1=$(printf "rgba(%d, %d, %d, 0.6)" "${color1:1:2}" "${color1:3:2}" "${color1:5:2}")
+      color1=$(printf "rgba(%d, %d, %d, 0.6)" "$((16#${color1:1:2}))" "$((16#${color1:3:2}))" "$((16#${color1:5:2}))")
       color2=$(echo "$cols" | tail -1)
     else
       color1="#1e1e2e"
@@ -66,7 +66,7 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     --arg artist "$(sanitize "$artist")" \
     --arg title "$(sanitize "$title")" \
     --arg status "$(get_status "$status")" \
-    --arg pos "$(get_position "$position" "$len")" \
+    --arg pos "$(get_position "$position" "${len:-1}")" \
     --arg pos_time "$(get_position_time "$position" "$len")" \
     --arg length "$(get_length_time "$len")" \
     --arg cover "$COVER" \

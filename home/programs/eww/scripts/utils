@@ -40,6 +40,7 @@ function osd_handler {
       eww update "$OBJ"=false >/dev/null 2>&1
       lock=0
       if [ "$(eww get osd-volume)" = "false" ] && [ "$(eww get osd-brightness)" = "false" ]; then
+        sleep 1
         eww close osd >/dev/null 2>&1
       fi
     fi

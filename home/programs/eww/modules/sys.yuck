@@ -4,7 +4,7 @@
     :space-evenly false
     :spacing 5
     (circular-progress
-      :value "${EWW_CPU.avg}"
+      :value {EWW_CPU.avg}
       :class "cpubar"
       :thickness 3
       (button
@@ -22,11 +22,11 @@
         (label :class "icon-text" :text "")))
 
     (circular-progress
-      :value "${EWW_BATTERY["BAT0"].capacity}"
+      :value {battery.percentage}
       :class "batbar"
       :style "color: ${battery.color};"
       :thickness 3
       (button
-        :tooltip "battery on ${EWW_BATTERY["BAT0"].capacity}%"
+        :tooltip "battery on ${battery.percentage}%"
         :onclick "${EWW_CMD} open --toggle system-menu"
         (label :class "icon-text" :text "")))))

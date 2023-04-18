@@ -175,7 +175,7 @@
           :style "color: ${battery.color}"
           :text {battery.icon})
         (label
-          :text {EWW_BATTERY["BAT0"].capacity})
+          :text {battery.percentage})
         (label
           :class "battery-status"
           :text {battery.status})

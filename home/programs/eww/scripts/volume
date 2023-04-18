@@ -10,7 +10,7 @@ vol() {
   wpctl get-volume @DEFAULT_AUDIO_"$1"@ | awk '{print int($2*100)}'
 }
 ismuted() {
-  wpctl get-volume @DEFAULT_AUDIO_"$1"@ | rg -i muted
+  wpctl get-volume @DEFAULT_AUDIO_"$1"@ | rg -qi muted
   echo -n $?
 }
 setvol() {
@@ -22,7 +22,7 @@ setmute() {
 
 gen_output() {
   if [[ "$event" == *source* ]]; then
-    pactl list sources | rg -A 1 RUNNING >/dev/null 2>&1
+    pactl list sources | rg -q
     [ $? -eq 1 ] && in_use=0 || in_use=1
   else
     lvl=$(awk -v n="$(vol "SINK")" 'BEGIN{print int(n/34)}')

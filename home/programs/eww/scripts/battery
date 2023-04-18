@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
 icons=("" "" "" "" "" "" "" "")
-num_icons=$(bc <<<"100 / ${#icons[@]}")
+num_icons=$(awk -v n="${#icons[@]}" 'BEGIN{print 100 / n}')
 
 geticon() {
   level=$(awk -v n="$CAPACITY" -v c="$num_icons" 'BEGIN{print int(n/c-1)}')
-  if [[ "$level" -lt 0 ]]; then
-    level=0
-  fi
   echo "${icons[$level]}"
 }
 
@@ -28,21 +25,16 @@ status() {
 }
 
 color() {
-  if [ "$CAPACITY" -le 20 ]; then
-    echo '#f38ba8'
-  else
-    echo '#a6e3a1'
-  fi
+  [ "$CAPACITY" -le 20 ] && echo '#f38ba8' || echo '#a6e3a1'
 }
 
 wattage() {
-  microwatts=1000000
-  echo "$(bc -l <<<"scale=1; $RATE / $microwatts") W"
+  awk -v rate="$RATE" -v uw="1000000" 'BEGIN{print sprintf("%.1f W", rate/uw)}'
 }
 
 gettime() {
-  FULL=$(cat /sys/class/power_supply/BAT0/energy_full)
-  NOW=$(cat /sys/class/power_supply/BAT0/energy_now)
+  FULL=$(cat /sys/class/power_supply/BAT1/energy_full)
+  NOW=$(cat /sys/class/power_supply/BAT1/energy_now)
 
   if [ "$RATE" -gt 0 ]; then
     if [ "$STATE" = "Discharging" ]; then
@@ -50,15 +42,15 @@ gettime() {
     else
       EX="($FULL - $NOW) / $RATE"
     fi
-    date -u -d@"$(bc -l <<<"$EX * 3600")" +%H:%M
+    date -u -d@"$(awk -v ex="$EX" 'BEGIN{print ex * 3600}')" +%H:%M
   fi
 }
 
 while true; do
-  RATE=$(cat /sys/class/power_supply/BAT0/power_now)
-  CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity)
-  STATE=$(cat /sys/class/power_supply/BAT0/status)
+  RATE=$(cat /sys/class/power_supply/BAT1/power_now)
+  CAPACITY=$(cat /sys/class/power_supply/BAT1/capacity)
+  STATE=$(cat /sys/class/power_supply/BAT1/status)
 
-  echo '{ "icon": "'"$(geticon)"'", "percent": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
+  echo '{ "icon": "'"$(geticon)"'", "percentage": '"$CAPACITY"', "wattage": "'"$(wattage)"'", "status": "'"$(status)"'", "color": "'"$(color)"'" }'
   sleep 3
 done
