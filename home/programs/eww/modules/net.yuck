@@ -2,6 +2,6 @@
   (button
     :class "module icon"
     :onclick "gnome-control-center &"
-    :tooltip {net.essid}
+    :tooltip {net.name}
     :style "color: ${net.color};"
     {net.icon}))

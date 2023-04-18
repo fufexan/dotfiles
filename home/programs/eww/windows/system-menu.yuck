@@ -22,25 +22,25 @@
     (centerbox
       :class "system-row"
       (box
-        :class "wifi-box"
+        :class "net-box"
         :space-evenly false
         :orientation "v"
         (box
           :class "element icon ${net.class}"
           :space-evenly false
           (button
-            :class "wifi-button"
+            :class "net-button"
             :onclick "scripts/net toggle"
             {net.icon})
           (label
             :class "separator"
             :text "│")
           (button
-            :class "wifi-arrow-btn"
+            :class "net-arrow-btn"
             :onclick "eww close system-menu && gnome-control-center &"
             ""))
         (label
-          :text {net.essid}
+          :text {net.name}
           :xalign 0.5
           :limit-width 15))
 

@@ -21,6 +21,7 @@
     gojq
     imagemagick
     jaq
+    jc
     light
     networkmanager
     pavucontrol
