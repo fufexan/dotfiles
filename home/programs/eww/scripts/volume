@@ -59,7 +59,7 @@ case "$1" in
     echo "Volume must be between 0 and 100"
     exit 1
   fi
-  setvol "$2 $3"
+  setvol "$2" "$3"
   ;;
 
 "osd")
