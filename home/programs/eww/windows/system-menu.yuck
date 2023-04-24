@@ -181,7 +181,7 @@
           :text {battery.status})
         (label
           :class "battery-wattage"
-          :text {battery.wattage}))
+          :text {battery.status != "Fully Charged" ? battery.wattage : ""}))
       (label)
       (box
         :space-evenly false
