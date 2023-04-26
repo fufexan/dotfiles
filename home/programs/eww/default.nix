@@ -20,6 +20,7 @@
     imagemagick
     jaq
     jc
+    libnotify
     light
     networkmanager
     pavucontrol
