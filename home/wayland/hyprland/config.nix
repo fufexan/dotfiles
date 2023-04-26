@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   default,
   ...
 }: let
@@ -8,9 +7,6 @@
 
   pointer = config.home.pointerCursor;
   homeDir = config.home.homeDirectory;
-
-  emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-  launcher = "wofi";
 in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
@@ -165,15 +161,13 @@ in {
 
     # utility
     # launcher
-    bindr = $mod, SUPER_L, exec, pkill .${launcher}-wrapped || run-as-service ${launcher}
+    bindr = $mod, SUPER_L, exec, pkill .${default.launcher}-wrapped || run-as-service ${default.launcher}
     # terminal
     bind = $mod, Return, exec, run-as-service ${default.terminal.name}
     # logout menu
     bind = $mod, Escape, exec, wlogout -p layer-shell
     # lock screen
     bind = $mod, L, exec, loginctl lock-session
-    # emoji picker
-    bind = $mod, E, exec, ${emoji}
     # select area to perform OCR on
     bind = $mod, O, exec, run-as-service wl-ocr
 

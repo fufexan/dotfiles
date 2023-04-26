@@ -15,7 +15,7 @@
         lib.mkOptionDefault {
           "${m}+Return" = "exec ${default.terminal.name}";
           "${m}+q" = "kill";
-          "${m}+space" = "exec wofi";
+          "${m}+space" = "exec ${default.launcher}";
           "${m}+t" = "floating toggle";
 
           # screenshots
@@ -37,7 +37,7 @@
         "--locked 233" = "exec light -A 5"; # brightness+
       };
 
-      menu = "wofi";
+      menu = default.launcher;
       terminal = default.terminal.name;
       modifier = "Mod4";
       bars = [];

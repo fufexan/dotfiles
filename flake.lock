@@ -21,6 +21,27 @@
         "type": "github"
       }
     },
+    "anyrun": {
+      "inputs": {
+        "naersk": "naersk",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682449578,
+        "narHash": "sha256-eaXOhXeRudvuhkS1tSgX3hLahTAcxuyKF8q0Noi8wfk=",
+        "owner": "Kirottu",
+        "repo": "anyrun",
+        "rev": "f56d95fa31f7eecb0dec37d7f7c011210e179c2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kirottu",
+        "repo": "anyrun",
+        "type": "github"
+      }
+    },
     "crane": {
       "flake": false,
       "locked": {
@@ -451,6 +472,27 @@
         "type": "github"
       }
     },
+    "naersk": {
+      "inputs": {
+        "nixpkgs": [
+          "anyrun",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1679567394,
+        "narHash": "sha256-ZvLuzPeARDLiQUt6zSZFGOs+HZmE+3g4QURc8mkBsfM=",
+        "owner": "nmattia",
+        "repo": "naersk",
+        "rev": "88cd22380154a2c36799fe8098888f0f59861a15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nmattia",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
     "nci": {
       "inputs": {
         "dream2nix": "dream2nix",
@@ -679,6 +721,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "anyrun": "anyrun",
         "devshell": "devshell",
         "eww": "eww",
         "flake-parts": "flake-parts",

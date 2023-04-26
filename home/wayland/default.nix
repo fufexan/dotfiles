@@ -18,6 +18,7 @@ let
 in {
   imports = [
     ../programs/eww
+    ./anyrun.nix
     ./hyprland
     ./sway.nix
     ./swaybg.nix
@@ -45,7 +46,6 @@ in {
     wl-clipboard
     wlogout
     wlr-randr
-    wofi
   ];
 
   # make stuff work on wayland

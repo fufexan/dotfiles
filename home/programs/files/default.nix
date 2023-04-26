@@ -3,7 +3,6 @@
 {
   imports = [
     ./wlogout.nix
-    ./wofi-style.nix
   ];
 
   home.file.".config" = {

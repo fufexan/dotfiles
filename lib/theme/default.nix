@@ -10,6 +10,8 @@
 
   browser = "firefox";
 
+  launcher = "anyrun";
+
   terminal = {
     font = "JetBrainsMono Nerd Font";
     name = "wezterm";
