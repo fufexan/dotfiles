@@ -35,7 +35,7 @@
     plymouth = {
       enable = true;
       themePackages = [inputs.self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
-      # theme = "catppuccin-mocha";
+      theme = "catppuccin-mocha";
       # font = "${pkgs.noto-fonts}/share/fonts/truetype/noto/NotoSans-Light.ttf";
     };
   };
@@ -91,7 +91,7 @@
 
     sway = {
       enable = true;
-      package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
+      # package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
     };
   };
 

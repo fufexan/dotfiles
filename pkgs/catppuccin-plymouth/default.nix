@@ -23,6 +23,10 @@ stdenvNoCC.mkDerivation {
     mkdir -p $out/share/plymouth
     cp -r themes $out/share/plymouth/
 
+    for i in frappe latte macchiato mocha; do
+    	cat themes/catppuccin-$i/catppuccin-$i.plymouth | sed "s@\/usr\/@$out\/@" > $out/share/plymouth/themes/catppuccin-$i/catppuccin-$i.plymouth
+    done
+
     runHook postInstall
   '';
 
