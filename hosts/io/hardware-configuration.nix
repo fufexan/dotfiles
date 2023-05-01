@@ -17,12 +17,19 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
+    device = "/dev/disk/by-label/NixOS";
+    fsType = "btrfs";
+    options = ["subvol=root" "noatime" "compress=zstd"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/NixOS";
+    fsType = "btrfs";
+    options = ["subvol=home" "noatime" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-label/EFI";
     fsType = "vfat";
   };
 
