@@ -1,8 +1,4 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   imports = [
     ../../editors/helix
     ../../editors/neovim
@@ -13,6 +9,10 @@
     ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
   ];
+
+  home.sessionVariables = {
+    GDK_SCALE = "2";
+  };
 
   services.kanshi = {
     enable = true;
@@ -71,6 +71,6 @@
     systemdTarget = "graphical-session.target";
   };
 
-  wayland.windowManager.hyprland.nvidiaPatches = true;
-  wayland.windowManager.sway.package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
+  wayland.windowManager.hyprland.xwayland.hidpi = true;
+  # wayland.windowManager.sway.package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
 }

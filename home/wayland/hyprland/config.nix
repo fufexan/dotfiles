@@ -11,13 +11,12 @@ in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
 
-    monitor = eDP-1, preferred, auto, 1
+    monitor = eDP-1, preferred, auto, 1.6
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 
     # scale apps
-    env = GDK_SCALE,2
     exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
 
     # set cursor for HL itself
@@ -136,8 +135,8 @@ in {
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
-    layerrule = blur, ^(gtk-layer-shell)$
-    layerrule = ignorezero, ^(gtk-layer-shell)$
+    layerrule = blur, ^(gtk-layer-shell|anyrun)$
+    layerrule = ignorezero, ^(gtk-layer-shell|anyrun)$
 
     # mouse movements
     bindm = $mod, mouse:272, movewindow
