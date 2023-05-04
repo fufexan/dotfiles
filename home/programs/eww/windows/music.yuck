@@ -12,10 +12,12 @@
       (label
         :class "music-title"
         :wrap true
+        :justify "center"
         :text {music.title})
       (label
         :class "music-artist"
         :wrap true
+        :justify "center"
         :text {music.artist})
       (centerbox
         :halign "center"

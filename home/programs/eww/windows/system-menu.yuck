@@ -42,7 +42,8 @@
         (label
           :text {net.name}
           :xalign 0.5
-          :limit-width 15))
+          :justify "center"
+          :wrap true))
 
       (box
         :class "bluetooth-box"
@@ -65,8 +66,9 @@
         (label
           :text {bluetooth.text}
           :xalign 0.5
-          :tooltip "${bluetooth.text} ${bluetooth.battery}"
-          :limit-width 15))
+          :justify "center"
+          :tooltip {bluetooth.battery}
+          :wrap true))
 
       (box
         :class "airplane-box"
@@ -160,7 +162,11 @@
             :halign "start"
             :class "sys-text-mem")
           (label
-            :text "${memory.used} | ${memory.total}"
+            :text "${memory.used} used"
+            :halign "start"
+            :class "sys-text-sub")
+          (label
+            :text "${memory.total} total"
             :halign "start"
             :class "sys-text-sub"))))
 
