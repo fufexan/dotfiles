@@ -55,6 +55,7 @@ in {
       * {
         transition: 200ms ease-out;
         font-family: Lexend;
+        font-size: 1.3rem;
       }
 
       #window,
