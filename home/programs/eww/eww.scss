@@ -44,6 +44,18 @@ tooltip {
 .icon,
 .icon label { font-family: Material Symbols Outlined; }
 
+.ws {
+  border-radius: 2rem;
+  margin: .7rem .25rem;
+}
+
+.focused {
+  background-color: $bg;
+  border-radius: 1rem;
+  margin: .3rem;
+  padding: .25rem;
+}
+
 .module { margin: 0 5px; }
 
 .hour {

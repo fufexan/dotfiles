@@ -16,7 +16,6 @@
     gawk
     gnome.gnome-control-center
     gnused
-    gojq
     imagemagick
     jaq
     jc
