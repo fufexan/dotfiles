@@ -21,11 +21,12 @@ setmute() {
 }
 
 gen_output() {
+  percent="$(vol "SINK")"
   if [[ "$event" == *source* ]]; then
     pactl list sources | rg -q
     [ $? -eq 1 ] && in_use=0 || in_use=1
   else
-    lvl=$(awk -v n="$(vol "SINK")" 'BEGIN{print int(n/34)}')
+    lvl=$(awk -v n="$percent" 'BEGIN{print int(n/34)}')
     ismuted=$(ismuted "SINK")
 
     if [ "$ismuted" = 1 ]; then
@@ -34,12 +35,8 @@ gen_output() {
       icon=""
     fi
   fi
-  jaq --null-input -r -c \
-    --arg icon "$icon" \
-    --arg percent "$(vol "SINK")" \
-    --arg mic "$(vol "SOURCE")" \
-    --arg in_use "$in_use" \
-    '{"icon": $icon, "percent": $percent, "microphone": $mic, "in_use": $in_use}'
+
+  echo '{"icon": "'"$icon"'", "percent": "'"$percent"'", "microphone": "'"$(vol "SOURCE")"'", "in_use": "'"$in_use"'"}'
 }
 
 case "$1" in

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# shellcheck source=/dev/null
+source "$(dirname "$0")"/utils
+
 toggle() {
   status=$(rfkill -J | jaq -r '.rfkilldevices[] | select(.type == "bluetooth") | .soft' | head -1)
 
@@ -23,12 +26,13 @@ gen_output() {
   fi
 
   if [ "$powered" = "yes" ]; then
-    icon=""
     if [ "$status" != "Missing device address argument" ]; then
+      icon=""
       text="$name"
       color="#89b4fa"
       class="bt-connected"
     else
+      icon=""
       text="Disconnected"
       color="#45475a"
       class=""
@@ -46,7 +50,17 @@ gen_output() {
 if [ "$1" = "toggle" ]; then
   toggle
 else
+  gen_output
+  last_time=$(get_time_ms)
+
   udevadm monitor | while read -r _; do
-    gen_output
+    current_time=$(get_time_ms)
+    delta=$((current_time - last_time))
+    # 50ms debounce
+    if [[ $delta -gt 50 ]]; then
+      gen_output
+      # reset debounce timer
+      last_time=$(get_time_ms)
+    fi
   done
 fi

@@ -46,6 +46,10 @@ sanitize() {
 }
 
 prevCover=''
+prevArtist=''
+prevTitle=''
+prevStatus=''
+prevLength=''
 
 playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="$(printf '\')" read -r title artist status position len cover; do
   if [[ "$cover" != "$prevCover" ]]; then
@@ -62,17 +66,27 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     fi
   fi
 
-  jaq --null-input -r -c \
-    --arg artist "$(sanitize "$artist")" \
-    --arg title "$(sanitize "$title")" \
-    --arg status "$(get_status "$status")" \
-    --arg pos "$(get_position "$position" "${len:-1}")" \
-    --arg pos_time "$(get_position_time "$position" "$len")" \
-    --arg length "$(get_length_time "$len")" \
-    --arg cover "$COVER" \
-    --arg color1 "$color1" \
-    --arg color2 "$color2" \
-    '{"artist": $artist, "title": $title, "status": $status, "position": $pos, "position_time": $pos_time, "length": $length, "cover": $cover, "color1": $color1, "color2": $color2}'
+  if [ "$prevArtist" != "$artist" ]; then
+    prevArtist="$artist"
+    thisArtist="$(sanitize "$artist")"
+  fi
+
+  if [ "$prevTitle" != "$title" ]; then
+    prevTitle="$title"
+    thisTitle="$(sanitize "$title")"
+  fi
+
+  if [ "$prevStatus" != "$status" ]; then
+    prevStatus="$status"
+    thisStatus="$(get_status "$status")"
+  fi
+
+  if [ "$prevLength" != "$len" ]; then
+    prevLength="$len"
+    thisLength="$(get_length_time "$len")"
+  fi
+
+  echo '{"artist": "'"$thisArtist"'", "title": "'"$thisTitle"'", "status": "'"$thisStatus"'", "position": "'"$(get_position "$position" "${len:-1}")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$thisLength"'", "cover": "'"$COVER"'", "color1": "'"$color1"'", "color2": "'"$color2"'"}'
 
   prevCover=$cover
 done

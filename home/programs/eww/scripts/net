@@ -6,6 +6,9 @@
 # Requires: NetworkManager, gawk
 # Usage: networkmanager
 
+# shellcheck source=/dev/null
+source "$(dirname "$0")"/utils
+
 # get initialize network device info and states
 nm="$(nmcli d | jc --nmcli | jaq -r '.[] | select(.type | test("^(wifi|ethernet)$", "ix"))')"
 icons=("" "" "" "" "")
@@ -67,6 +70,16 @@ function make_content() {
 
 # first run
 make_content
+last_time=$(get_time_ms)
+
 nmcli monitor | while read -r _; do
-  make_content
+  current_time=$(get_time_ms)
+  delta=$((current_time - last_time))
+  # 50ms debounce
+  if [[ $delta -gt 50 ]]; then
+    nm="$(nmcli d | jc --nmcli | jaq -r '.[] | select(.type | test("^(wifi|ethernet)$", "ix"))')"
+    make_content
+    # reset debounce timer
+    last_time=$(get_time_ms)
+  fi
 done

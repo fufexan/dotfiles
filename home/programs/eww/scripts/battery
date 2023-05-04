@@ -13,7 +13,7 @@ geticon() {
 BAT="$(upower -e | rg BAT)"
 
 wattage() {
-  echo "$info" | jaq -jr '.energy_rate, " ", .energy_rate_unit'
+  echo "$info" | jaq -jr '(.energy_rate * 10.0 | round / 10.0), " ", .energy_rate_unit'
 }
 
 color() {

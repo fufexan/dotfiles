@@ -7,12 +7,10 @@ icons=("" "" "")
 date="$XDG_CACHE_HOME/eww/osd_brightness.date"
 
 gen_output() {
-  icon="${icons[$(awk -v n="$(light)" 'BEGIN{print int(n/34)}')]}"
+  percent="$(light)"
+  icon="${icons[$(awk -v n="$percent" 'BEGIN{print int(n/34)}')]}"
 
-  jaq --null-input -r -c \
-    --arg percent "$(light)" \
-    --arg icon "$icon" \
-    '{"percent": $percent, "icon": $icon}'
+  echo '{"percent": "'"$percent"'", "icon": "'"$icon"'"}'
 }
 
 if [ "$1" = "osd" ]; then
