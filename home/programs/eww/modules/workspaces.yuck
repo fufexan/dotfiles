@@ -3,7 +3,7 @@
 		:onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace"
 		(box
 			:class "module workspaces"
-		  (for ws in workspace
+		  (for ws in {hyprland.workspaces}
 		    (button
 					:onclick "hyprctl dispatch workspace ${ws.number}"
 					:class "ws icon"

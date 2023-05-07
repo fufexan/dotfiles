@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+prevMic=""
+prevScreen=""
+
+gen_output() {
+  mic=$(eww get volume)
+  # no standard way of getting camera info
+  # camerareveal=$(eww get camerareveal)
+  screen=$(eww get hyprland)
+
+  if [ "$screen" != "$prevScreen" ] || [ "$mic" != "$prevMic" ]; then
+    micreveal=$(echo "$mic" | jaq -r '.in_use')
+    screenreveal=$(echo "$screen" | jaq -r '.screencast')
+
+    json='['
+
+    if [ "$micreveal" -ge 1 ]; then
+      json+='{"name": "Microphone", "icon": "", "class": "micshare"}'
+    fi
+    if [ "$screenreveal" = "true" ]; then
+      json+="$([ "$json" == "[" ] || echo ',')"'{"name": "Screen", "icon": "", "class": "screenshare"}'
+    fi
+    # if [ "$camerareveal" = "true" ]; then
+    #   json+='{"name": "Camera", "icon": "", "class": "camerashare"}'
+    # fi
+
+    json+=']'
+
+    echo "$json"
+    prevMic="$mic"
+    prevScreen="$screen"
+  fi
+}
+
+gen_output
+sleep 1
+while true; do
+  gen_output
+  sleep 1
+done

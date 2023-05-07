@@ -1,6 +1,7 @@
 (include "./modules/bluetooth.yuck")
 (include "./modules/bright.yuck")
 (include "./modules/clock.yuck")
+(include "./modules/indicators.yuck")
 (include "./modules/music.yuck")
 (include "./modules/net.yuck")
 (include "./modules/sys.yuck")
@@ -23,6 +24,7 @@
   (box
     :space-evenly false
     :halign "end"
+    (indicators)
     (bright)
     (volume-module)
     (bluetooth)

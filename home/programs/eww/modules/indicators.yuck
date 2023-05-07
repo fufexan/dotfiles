@@ -1,0 +1,9 @@
+(defwidget indicators []
+  (box
+    :space-evenly: false
+    :class "indicators"
+    (for i in indicators
+      (label
+        :class "icon indicator ${i.class}"
+        :tooltip "${i.name} is being shared"
+        :text {i.icon}))))

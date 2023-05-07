@@ -1,0 +1,26 @@
+.indicators {
+  margin: .3rem;
+
+  * { transition: 500ms ease-out; }
+
+  :first-child {
+    border-radius: 1rem 0 0 1rem;
+  }
+
+  :last-child {
+    border-radius: 0 1rem 1rem 0;
+  }
+
+  :only-child {
+    border-radius: 1rem;
+  }
+}
+
+.indicator {
+  color: $base;
+  padding: 0 .3rem;
+}
+
+.screenshare { background: $red; }
+.micshare { background: $green; }
+.camerashare { background: $blue; }
