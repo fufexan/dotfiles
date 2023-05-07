@@ -46,9 +46,15 @@ Or install from the `packages` output. For example:
 ## 💻 Desktop preview
 
 <a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
-  <img src="https://user-images.githubusercontent.com/36706276/216402032-ff32fcad-ca21-49d3-9c29-6ff0d2d8b1d8.png" alt="Desktop Preview">
+  <img src="https://user-images.githubusercontent.com/36706276/236707086-ea6cb781-8b0c-45d3-b6a1-2c6a4d5e2582.png" alt="Desktop Preview">
 </a>
 *Hint: click to go to a video showcase*
+<details>
+<summary>
+Previous versions
+</summary>
+  <img src="https://user-images.githubusercontent.com/36706276/216402032-ff32fcad-ca21-49d3-9c29-6ff0d2d8b1d8.png" alt="Desktop Preview">
+</details>
 
 # 💾 Resources
 
