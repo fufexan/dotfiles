@@ -37,7 +37,7 @@
             :text "│")
           (button
             :class "net-arrow-btn"
-            :onclick "eww close system-menu && gnome-control-center &"
+            :onclick "eww close system-menu && XDG_CURRENT_DESKTOP=GNOME gnome-control-center &"
             ""))
         (label
           :text {net.name}

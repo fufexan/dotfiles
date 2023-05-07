@@ -1,7 +1,7 @@
 (defwidget net []
   (button
     :class "module icon"
-    :onclick "gnome-control-center &"
+    :onclick "XDG_CURRENT_DESKTOP=GNOME gnome-control-center &"
     :tooltip {net.name}
     :style "color: ${net.color};"
     {net.icon}))

@@ -23,7 +23,7 @@ setmute() {
 gen_output() {
   percent="$(vol "SINK")"
   if [[ "$event" == *source* ]]; then
-    pactl list sources | rg -q
+    pactl list sources | rg -q RUNNING
     [ $? -eq 1 ] && in_use=0 || in_use=1
   else
     lvl=$(awk -v n="$percent" 'BEGIN{print int(n/34)}')
