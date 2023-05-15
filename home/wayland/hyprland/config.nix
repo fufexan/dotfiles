@@ -11,8 +11,6 @@ in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
 
-    monitor = eDP-1, preferred, auto, 1.6
-
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
 
@@ -28,7 +26,6 @@ in {
     misc {
       # disable auto polling for config file changes
       disable_autoreload = true
-      focus_on_activate = true
       # disable dragging animation
       animate_mouse_windowdragging = false
     }

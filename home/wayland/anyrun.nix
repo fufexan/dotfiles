@@ -33,10 +33,16 @@ in {
         layer: Overlay,
 
         // Hide the plugin info panel
-        hide_plugin_info: true,
+        hide_plugin_info: false,
 
         // Close window when a click outside the main box is received
         close_on_click: true,
+
+        // Show search results immediately when Anyrun starts
+        show_results_immediately: false,
+
+        // Limit amount of entries shown in total
+        max_entries: None,
 
         // List of plugins to be loaded by default, can be specified with a relative path to be loaded from the
         // `<anyrun config dir>/plugins` directory or with an absolute path to just load the file the path points to.
@@ -53,7 +59,7 @@ in {
 
     "anyrun/style.css".text = ''
       * {
-        transition: 200ms ease-out;
+        transition: 200ms ease;
         font-family: Lexend;
         font-size: 1.3rem;
       }
@@ -75,7 +81,7 @@ in {
         border-radius: 16px;
       }
 
-      #entry {
+      #entry, #plugin:hover {
         border-radius: 16px;
       }
 
@@ -84,10 +90,6 @@ in {
         border: 1px solid #28283d;
         border-radius: 24px;
         padding: 8px;
-      }
-
-      row:first-child {
-        margin-top: 6px;
       }
     '';
   };
