@@ -7,7 +7,7 @@
       :class "top-row"
       :space-evenly false
       (label
-        :class "time"
+        :class "time text"
         :text "${time.hour}:${time.minute}")
       (box
         :class "date-box"
@@ -40,6 +40,7 @@
             :onclick "eww close system-menu && XDG_CURRENT_DESKTOP=GNOME gnome-control-center &"
             ""))
         (label
+          :class "text"
           :text {net.name}
           :xalign 0.5
           :justify "center"
@@ -64,6 +65,7 @@
             :onclick "eww close system-menu && blueberry"
             ""))
         (label
+          :class "text"
           :text {bluetooth.text}
           :xalign 0.5
           :justify "center"
@@ -81,6 +83,7 @@
             :onclick "scripts/airplane toggle"
             airplane))
         (label
+          :class "text"
           :text "Airplane Mode"
           :xalign 0.5
           :limit-width 16)))
@@ -128,6 +131,7 @@
             :text ""
             :class "sys-icon-cpu icon"))
         (box
+          :class "text"
           :orientation "v"
           :vexpand false
           (label
@@ -156,6 +160,7 @@
             :text ""
             :class "sys-icon-mem icon"))
         (box
+          :class "text"
           :orientation "v"
           (label
             :text "memory"
@@ -181,12 +186,13 @@
           :style "color: ${battery.color}"
           :text {battery.icon})
         (label
+          :class "text"
           :text {battery.percentage})
         (label
-          :class "battery-status"
+          :class "battery-status text"
           :text {battery.status})
         (label
-          :class "battery-wattage"
+          :class "battery-wattage text"
           :text {battery.status != "Fully Charged" ? battery.wattage : ""}))
       (label)
       (box

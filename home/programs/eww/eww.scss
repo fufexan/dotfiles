@@ -43,6 +43,9 @@ tooltip {
   }
 }
 
+.text,
+.text label, { text-shadow: 0 0 .3rem $base; }
+
 .icon,
 .icon label { font-family: Material Symbols Outlined; }
 

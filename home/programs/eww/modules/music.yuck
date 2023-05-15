@@ -9,7 +9,7 @@
         :class "song-cover-art"
         :style "background-image: url(\"${music.cover}\");")
       (button
-        :class "module"
+        :class "module text"
         :onclick "${EWW_CMD} open --toggle music"
         {music.title})
       (revealer
@@ -17,7 +17,7 @@
         :reveal music_reveal
         :duration "350ms"
         (box
-          :class "icon"
+          :class "icon text"
           (button :class "song-button" :onclick "playerctl previous" "")
           (button :class "song-button" :onclick "playerctl play-pause" {music.status})
           (button :class "song-button" :onclick "playerctl next" ""))))))

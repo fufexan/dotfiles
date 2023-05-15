@@ -1,6 +1,6 @@
 (defwidget calendar-win []
   (box
-    :class "calendar-win"
+    :class "calendar-win text"
     (calendar)))
 
 (defwindow calendar

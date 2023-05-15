@@ -11,24 +11,26 @@
       :space-evenly false
       :class "music-box"
       (label
-        :class "music-title"
-        :wrap true
+        :class "music-title text"
+        :limit-width 12
+        :show_truncated true
         :justify "center"
         :text {music.title})
       (label
-        :class "music-artist"
+        :class "music-artist text"
         :wrap true
         :justify "center"
         :text {music.artist})
       (centerbox
         :halign "center"
-        :class "music-button-box icon"
+        :class "music-button-box icon text"
         (button :class "music-button" :onclick "playerctl previous" "")
         (button :class "music-button" :onclick "playerctl play-pause" {music.status})
         (button :class "music-button" :onclick "playerctl next" ""))
       (box
         :orientation "v"
         (box
+          :class "text"
           (label
             :xalign 0
             :class "music-time"

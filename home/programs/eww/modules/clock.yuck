@@ -8,6 +8,7 @@
       :class "module"
       (box
         :space-evenly false
+        :class "text"
         (label
           :text {time.hour}
           :class "hour")

@@ -8,6 +8,7 @@
       :orientation "v"
       :value value)
     (label
+      :class "text"
       :text icon)))
 
 (defwidget osd []
