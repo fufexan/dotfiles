@@ -18,6 +18,7 @@
   background-position: center;
   background-size: cover;
   border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   margin: 1em;
   min-height: 170px;
   min-width: 170px;
@@ -28,17 +29,27 @@
 }
 
 .music-title {
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: bold;
+  margin: .5rem;
 }
 
 .music-artist {
   color: $subtext1;
+  margin: .5rem;
+}
+
+.music-button-box {
+  margin: 1rem 0 0;
 }
 
 .music-button label {
   color: $subtext1;
   font-size: 2rem;
+}
+
+.music-button:hover label {
+  color: $fg;
 }
 
 .music-time {

@@ -2,12 +2,13 @@
   (box
     :class "music-window"
     :space-evenly false
-    :style "background-color: ${music.color1}; border: 1px solid ${music.color2};"
+    :style "background: ${music.bg}; border: 1px solid ${music.border};"
     (box
       :class "music-cover-art"
       :style "background-image: url(\"${music.cover}\");")
     (box
       :orientation "v"
+      :space-evenly false
       :class "music-box"
       (label
         :class "music-title"

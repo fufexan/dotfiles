@@ -56,13 +56,17 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     COVER=$(get_cover "$cover")
 
     if [ "$COVER" != "" ]; then
-      cols=$(convert "$COVER" -colors 2 -format "%c" histogram:info: | awk '{print $3}')
-      color1=$(echo "$cols" | head -1)
-      color1=$(printf "rgba(%d, %d, %d, 0.6)" "$((16#${color1:1:2}))" "$((16#${color1:3:2}))" "$((16#${color1:5:2}))")
-      color2=$(echo "$cols" | tail -1)
+      cols=$(convert "$COVER" -colors 1 -format "%c" histogram:info: | awk '{print $3}')
+      border=$(echo "$cols" | head -1)
+
+      if [ ! -e "$IMG"_bg ]; then
+        convert -scale 10% -blur 0x2.5 -resize 1000% -brightness-contrast -30x10 "$COVER" "$COVER"_bg
+        bg="url('"
+        bg+="$COVER"_bg
+        bg+="')"
+      fi
     else
-      color1="#1e1e2e"
-      color2="#28283d"
+      border="#28283d"
     fi
   fi
 
@@ -86,7 +90,7 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     thisLength="$(get_length_time "$len")"
   fi
 
-  echo '{"artist": "'"$thisArtist"'", "title": "'"$thisTitle"'", "status": "'"$thisStatus"'", "position": "'"$(get_position "$position" "${len:-1}")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$thisLength"'", "cover": "'"$COVER"'", "color1": "'"$color1"'", "color2": "'"$color2"'"}'
+  echo '{"artist": "'"$thisArtist"'", "title": "'"$thisTitle"'", "status": "'"$thisStatus"'", "position": "'"$(get_position "$position" "${len:-1}")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$thisLength"'", "cover": "'"$COVER"'", "border": "'"$border"'", "bg": "'"$bg"'"}'
 
   prevCover=$cover
 done
