@@ -13,18 +13,6 @@ with pkgs; [
     };
   }
   {
-    name = "cpp";
-    language-server = {
-      command = "${clang-tools}/bin/clangd";
-      clangd.fallbackFlags = ["-std=c++2b"];
-    };
-  }
-  {
-    name = "nix";
-    language-server = {command = lib.getExe nil;};
-    config.nil.formatting.command = ["alejandra" "-q"];
-  }
-  {
     name = "clojure";
     scope = "source.clojure";
     injection-regex = "(clojure|clj|edn|boot|yuck)";
@@ -38,10 +26,22 @@ with pkgs; [
     };
   }
   {
+    name = "cpp";
+    language-server = {
+      command = "${clang-tools}/bin/clangd";
+      clangd.fallbackFlags = ["-std=c++2b"];
+    };
+  }
+  {
     name = "css";
     language-server = {
       command = "${nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
       args = ["--stdio"];
     };
+  }
+  {
+    name = "nix";
+    language-server.command = lib.getExe nil;
+    config.nil.formatting.command = ["alejandra" "-q"];
   }
 ]

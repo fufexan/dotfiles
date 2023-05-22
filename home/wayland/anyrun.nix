@@ -33,7 +33,7 @@ in {
         layer: Overlay,
 
         // Hide the plugin info panel
-        hide_plugin_info: false,
+        hide_plugin_info: true,
 
         // Close window when a click outside the main box is received
         close_on_click: true,
