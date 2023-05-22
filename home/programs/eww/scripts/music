@@ -52,19 +52,26 @@ prevStatus=''
 prevLength=''
 
 playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="$(printf '\')" read -r title artist status position len cover; do
-  if [[ "$cover" != "$prevCover" ]]; then
+  if [ "$cover" != "$prevCover" ]; then
     COVER=$(get_cover "$cover")
 
     if [ "$COVER" != "" ]; then
       cols=$(convert "$COVER" -colors 1 -format "%c" histogram:info: | awk '{print $3}')
       border=$(echo "$cols" | head -1)
 
-      if [ ! -e "$IMG"_bg ]; then
-        convert -scale 10% -blur 0x2.5 -resize 1000% -brightness-contrast -30x10 "$COVER" "$COVER"_bg
-        bg="url('"
-        bg+="$COVER"_bg
-        bg+="')"
+      if [ ! -e "$COVER"_bg ]; then
+        brightness=$(convert "$COVER" -colorspace HSI -channel b -separate +channel -scale 1x1 -format "%[fx:100*u]\n" info:)
+        if [ "${brightness%.*}" -lt 25 ]; then
+          darken=false
+        else
+          darken=true
+        fi
+
+        convert -scale 10% -blur 0x2.5 -resize 1000% $([ "$darken" = "true" ] && echo "-brightness-contrast -30x10") "$COVER" "$COVER"_bg
       fi
+      bg="url('"
+      bg+="$COVER"_bg
+      bg+="')"
     else
       border="#28283d"
     fi

@@ -10,6 +10,8 @@
 .music-window {
   @include window;
   background-color: $bg;
+  background-position: center;
+  background-size: cover;
   border: 1px solid $border;
   color: $fg;
 }
