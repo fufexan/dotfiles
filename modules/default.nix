@@ -20,8 +20,9 @@ in {
           {home-manager.useGlobalPkgs = true;}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
-          ./minimal.nix
           module_args
+          ./core.nix
+          ./network.nix
           ./nix.nix
           ./security.nix
         ];
@@ -36,10 +37,12 @@ in {
   ];
 
   flake.nixosModules = {
+    core = import ./core.nix;
     desktop = import ./desktop.nix;
     gamemode = import ./gamemode.nix;
     greetd = import ./greetd.nix;
     minimal = import ./minimal.nix;
+    network = import ./network.nix;
     nix = import ./nix.nix;
   };
 }
