@@ -16,7 +16,7 @@
     font = "JetBrainsMono Nerd Font";
     name = "wezterm";
     opacity = 0.9;
-    size = 11;
+    size = 10;
   };
 
   wallpaper = builtins.fetchurl rec {

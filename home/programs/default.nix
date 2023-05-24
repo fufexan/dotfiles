@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../shell/nix.nix
+    ../terminals/foot.nix
     ./cinny.nix
     ./files
     ./media.nix
