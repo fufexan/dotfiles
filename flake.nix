@@ -73,8 +73,11 @@
     fu.url = "github:numtide/flake-utils";
 
     helix = {
-      url = "github:SoraTenshi/helix/daily-driver";
+      # url = "github:SoraTenshi/helix/new-daily-driver";
+      url = "github:Philipp-M/helix/personal";
       inputs.parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     hm = {
@@ -109,7 +112,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.flake-parts.follows = "flake-parts";
+    };
 
     nix-super.url = "github:privatevoid-net/nix-super";
 
