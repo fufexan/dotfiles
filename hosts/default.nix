@@ -19,6 +19,7 @@
           ../modules/pam.nix
           ../modules/howdy
           ../modules/linux-enable-ir-emitter.nix
+          inputs.lanzaboote.nixosModules.lanzaboote
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
           {disabledModules = ["security/pam.nix"];}
         ]

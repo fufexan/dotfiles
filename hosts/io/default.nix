@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 } @ args: {
   imports = [./hardware-configuration.nix];
@@ -13,6 +14,8 @@
   };
 
   boot = {
+    bootspec.enable = true;
+
     initrd = {
       systemd.enable = true;
       supportedFilesystems = ["ext4"];
@@ -26,21 +29,29 @@
     # Panel Self Refresh
     kernelParams = ["amdgpu.dcfeaturemask=0x8" "initcall_blacklist=acpi_cpufreq_init" "amd_pstate=passive" "amd_pstate.shared_mem=1"];
 
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+
     loader = {
       # systemd-boot on UEFI
       efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
+      systemd-boot.enable = lib.mkForce false;
+      # systemd-boot.enable = true;
     };
 
     plymouth = {
       enable = true;
       themePackages = [inputs.self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
       theme = "catppuccin-mocha";
-      # font = "${pkgs.noto-fonts}/share/fonts/truetype/noto/NotoSans-Light.ttf";
     };
   };
 
-  environment.systemPackages = [config.boot.kernelPackages.cpupower];
+  environment.systemPackages = [
+    config.boot.kernelPackages.cpupower
+    pkgs.sbctl
+  ];
 
   hardware = {
     bluetooth = {
