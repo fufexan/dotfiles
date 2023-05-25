@@ -201,9 +201,9 @@ in {
     bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     # backlight
-    bindle = , XF86MonBrightnessUp, exec, light -A 5
+    bindle = , XF86MonBrightnessUp, exec, brillo -q -u 300000 -A 5
     binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
-    bindle = , XF86MonBrightnessDown, exec, light -U 5
+    bindle = , XF86MonBrightnessDown, exec, brillo -q -u 300000 -U 5
     binde = , XF86MonBrightnessDown, exec, ${homeDir}/.config/eww/scripts/brightness osd
 
     # screenshot

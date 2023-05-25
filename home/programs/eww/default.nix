@@ -10,6 +10,7 @@
     bash
     blueberry
     bluez
+    brillo
     coreutils
     dbus
     findutils
@@ -20,7 +21,6 @@
     jaq
     jc
     libnotify
-    light
     networkmanager
     pavucontrol
     playerctl

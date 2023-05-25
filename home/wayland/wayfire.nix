@@ -71,8 +71,8 @@ in {
     binding_terminal = <super> KEY_ENTER
 
     command_launcher = wofi --show=drun -I
-    command_light_down = light -U 5
-    command_light_up = light -A 5
+    command_light_down = brillo -q -u 300000 -U 5
+    command_light_up = brillo -q -u 300000 -A 5
     command_lock = swaylock
     command_logout = wlogout -p layer-shell
     command_mute = wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle

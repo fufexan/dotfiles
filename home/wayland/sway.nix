@@ -33,8 +33,8 @@
         "--locked --no-repeat 172" = "exec playerctl play-pause"; # play/pause
         "--locked 173" = "exec playerctl previous"; # prev song
         "--locked --no-repeat 198" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; # mic mute
-        "--locked 232" = "exec light -U 5"; # brightness-
-        "--locked 233" = "exec light -A 5"; # brightness+
+        "--locked 232" = "exec brillo -q -u 300000 -U 5"; # brightness-
+        "--locked 233" = "exec brillo -q -u 300000 -A 5"; # brightness+
       };
 
       menu = default.launcher;

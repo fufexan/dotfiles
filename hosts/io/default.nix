@@ -71,6 +71,9 @@
       };
     };
 
+    # smooth backlight control
+    brillo.enable = true;
+
     cpu.amd.updateMicrocode = true;
 
     enableRedistributableFirmware = true;
@@ -94,9 +97,6 @@
       enable = true;
       xwayland.hidpi = true;
     };
-
-    # backlight control
-    light.enable = true;
 
     steam.enable = true;
 
@@ -139,6 +139,10 @@
         config = builtins.readFile "${inputs.self}/modules/main.kbd";
       };
     };
+
+    logind.extraConfig = ''
+      HandlePowerKey=suspend
+    '';
 
     # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
     pipewire.lowLatency.enable = true;

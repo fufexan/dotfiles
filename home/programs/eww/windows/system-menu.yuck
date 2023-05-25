@@ -113,7 +113,7 @@
           :class "brightness-slider" 
           :value {brightness.percent} 
           :marks true 
-          :onchange "light -S {}")))
+          :onchange "brillo -S {}")))
 
     (box
       :class "system-info-box"

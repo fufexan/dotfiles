@@ -2,7 +2,7 @@
   (box
     :class "module"
     (eventbox
-      :onscroll "echo {} | sed -e 's/up/-U 1/g' -e 's/down/-A 1/g' | xargs light"
+      :onscroll "echo {} | sed -e 's/up/-U 1/g' -e 's/down/-A 1/g' | xargs brillo -S"
       (label
         :text {brightness.icon}
         :class "bright-icon icon"
