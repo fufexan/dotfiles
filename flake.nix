@@ -73,8 +73,7 @@
     fu.url = "github:numtide/flake-utils";
 
     helix = {
-      # url = "github:SoraTenshi/helix/new-daily-driver";
-      url = "github:Philipp-M/helix/personal";
+      url = "github:SoraTenshi/helix/new-daily-driver";
       inputs.parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
