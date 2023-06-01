@@ -16,6 +16,7 @@
 (deflisten indicators "scripts/indicators")
 (deflisten memory "scripts/memory")
 (deflisten music "scripts/music")
+(deflisten music_time "scripts/music-time")
 (deflisten net "scripts/net")
 (deflisten volume "scripts/volume")
 (deflisten hyprland "scripts/hyprland")

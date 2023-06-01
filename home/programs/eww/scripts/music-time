@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+get_length_sec() {
+  echo "${1:-0}" | awk '{print int($1/1000000)}'
+}
+
+get_length_time() {
+  echo "${len:+$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000 + 1}')}" | xargs -I{} date -d@{} +%M:%S 2>/dev/null || echo ""
+}
+
+get_position() {
+  echo "${1:+$(awk 'BEGIN{printf "%.2f", '"$1"' / '"$2"' * 100}')}" | xargs printf "%.0f\n"
+}
+
+get_position_time() {
+  echo "${1:+$(date -d@"$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000}')" +%M:%S)}" | xargs -I{} echo {}
+}
+
+prevLength=''
+
+playerctl -F metadata -f '{{mpris:length}}\{{position}}' 2>/dev/null | while IFS="$(printf '\')" read -r len pos; do
+  position="$(get_position "$pos" "${len:-1}")"
+  position_time="$(get_position_time "$pos" "${len:-1}")"
+
+  if [ "$prevLength" != "$len" ]; then
+    prevLength="$len"
+    thisLength="$(get_length_time "$len")"
+  fi
+
+  json='{"position": '"$position"', "position_time": "'"$position_time"'", "length": "'"$thisLength"'"}'
+
+  echo "$json"
+done

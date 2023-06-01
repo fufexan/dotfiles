@@ -34,18 +34,18 @@
           (label
             :xalign 0
             :class "music-time"
-            :text {music.position_time})
+            :text {music_time.position_time})
           (label
             :xalign 1
             :class "music-time"
-            :text {music.length}))
+            :text {music_time.length}))
         (box
           :class "music-bar"
           (scale
             ; doesn't work, looking for other ways
             ; :style "background: linear-gradient(to right, ${music.color1}, ${music.color2});"
             :onchange "playerctl position `awk -v len=$(playerctl metadata mpris:length) 'BEGIN{print {} * len / 1000000 / 100}'`"
-            :value {music.position}))))))
+            :value {music_time.position}))))))
 
 (defwindow music
   :stacking "fg"

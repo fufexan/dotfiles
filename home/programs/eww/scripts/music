@@ -4,22 +4,6 @@ get_status() {
   echo "$1" | rg -q "Playing" && echo "" || echo ""
 }
 
-get_length_sec() {
-  echo "${1:-0}" | awk '{print int($1/1000000)}'
-}
-
-get_length_time() {
-  echo "${len:+$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000 + 1}')}" | xargs -I{} date -d@{} +%M:%S 2>/dev/null || echo ""
-}
-
-get_position() {
-  echo "${1:+$(awk 'BEGIN{printf "%.2f", '"$1"' / '"$2"' * 100}')}" | xargs printf "%.0f\n"
-}
-
-get_position_time() {
-  echo "${1:+$(date -d@"$(awk 'BEGIN{printf "%.0f", '"$1"' / 1000000}')" +%M:%S)}" | xargs -I{} echo {}
-}
-
 get_cover() {
   mkdir -p "$XDG_CACHE_HOME/eww_covers"
   cd "$XDG_CACHE_HOME/eww_covers" || exit
@@ -49,9 +33,8 @@ prevCover=''
 prevArtist=''
 prevTitle=''
 prevStatus=''
-prevLength=''
 
-playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:length}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="$(printf '\')" read -r title artist status position len cover; do
+playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{mpris:artUrl}}' 2>/dev/null | while IFS="$(printf '\')" read -r title artist status cover; do
   if [ "$cover" != "$prevCover" ]; then
     COVER=$(get_cover "$cover")
 
@@ -92,12 +75,7 @@ playerctl -F metadata -f '{{title}}\{{artist}}\{{status}}\{{position}}\{{mpris:l
     thisStatus="$(get_status "$status")"
   fi
 
-  if [ "$prevLength" != "$len" ]; then
-    prevLength="$len"
-    thisLength="$(get_length_time "$len")"
-  fi
-
-  echo '{"artist": "'"$thisArtist"'", "title": "'"$thisTitle"'", "status": "'"$thisStatus"'", "position": "'"$(get_position "$position" "${len:-1}")"'", "position_time": "'"$(get_position_time "$position" "$len")"'", "length": "'"$thisLength"'", "cover": "'"$COVER"'", "border": "'"$border"'", "bg": "'"$bg"'"}'
+  echo '{"artist": "'"$thisArtist"'", "title": "'"$thisTitle"'", "status": "'"$thisStatus"'", "cover": "'"$COVER"'", "border": "'"$border"'", "bg": "'"$bg"'"}'
 
   prevCover=$cover
 done
