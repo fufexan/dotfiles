@@ -30,7 +30,6 @@
     settings = {
       theme = "catppuccin_mocha";
       editor = {
-        true-color = true;
         color-modes = true;
         cursorline = true;
         cursor-shape = {
@@ -42,8 +41,10 @@
           render = true;
           rainbow-option = "dim";
         };
+        lsp.display-inlay-hints = true;
         rainbow-brackets = true;
         statusline.center = ["position-percentage"];
+        true-color = true;
         whitespace.characters = {
           newline = "↴";
           tab = "⇥";
