@@ -16,24 +16,19 @@
 
       perSystem = {
         config,
-        inputs',
         pkgs,
-        system,
         ...
       }: {
-        imports = [
-          {
-            _module.args.pkgs = inputs.self.legacyPackages.${system};
-          }
-        ];
+        imports = [{_module.args.pkgs = config.legacyPackages;}];
 
-        devShells.default = inputs'.devshell.legacyPackages.mkShell {
+        devShells.default = pkgs.mkShell {
           packages = [
             pkgs.alejandra
             pkgs.git
             config.packages.repl
           ];
           name = "dots";
+          DIRENV_LOG_FORMAT = "";
         };
 
         formatter = pkgs.alejandra;
@@ -56,11 +51,6 @@
 
     anyrun = {
       url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    devshell = {
-      url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -114,13 +104,6 @@
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
-    };
-
-    nix-super.url = "github:privatevoid-net/nix-super";
-
-    nix-xilinx = {
-      url = "gitlab:doronbehar/nix-xilinx";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     rust-overlay = {

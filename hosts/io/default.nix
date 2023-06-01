@@ -22,12 +22,12 @@
     };
 
     # load modules on boot
-    kernelModules = ["acpi_call" "amdgpu" "amd_pstate"];
+    kernelModules = ["acpi_call"];
 
     # use latest kernel
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    # Panel Self Refresh
-    kernelParams = ["amdgpu.dcfeaturemask=0x8" "initcall_blacklist=acpi_cpufreq_init" "amd_pstate=passive" "amd_pstate.shared_mem=1"];
+
+    kernelParams = ["amd_pstate=active"];
 
     lanzaboote = {
       enable = true;
@@ -38,7 +38,6 @@
       # systemd-boot on UEFI
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = lib.mkForce false;
-      # systemd-boot.enable = true;
     };
 
     plymouth = {
@@ -149,12 +148,11 @@
 
     printing.enable = true;
 
-    # configure mice
-    ratbagd.enable = true;
+    power-profiles-daemon.enable = true;
 
     # power saving
     tlp = {
-      enable = true;
+      enable = false;
       settings = {
         PCIE_ASPM_ON_BAT = "powersupersave";
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
