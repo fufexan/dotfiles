@@ -1,8 +1,4 @@
-{
-  self,
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   systems = ["x86_64-linux"];
 
   perSystem = {pkgs, ...}: {
@@ -11,6 +7,8 @@
       repl = pkgs.callPackage ./repl {};
 
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
+
+      codeium = pkgs.callPackage ./codeium {};
 
       discord-canary = pkgs.discord-canary.override {
         nss = pkgs.nss_latest;
