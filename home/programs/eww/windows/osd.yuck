@@ -1,3 +1,4 @@
+; shared OSD code for volume/brightnes
 (defwidget osd-part [icon value class]
   (box
     :class "osd-part osd-${class}"
@@ -11,10 +12,12 @@
       :class "text"
       :text icon)))
 
+; osd window widget
 (defwidget osd []
   (box
     :class "osd-container"
     :space-evenly false
+    ; use revealers for both volume and brightness
     (revealer
       :reveal {osd-brightness}
       :transition "slideright"

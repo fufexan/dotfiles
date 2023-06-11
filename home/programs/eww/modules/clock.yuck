@@ -6,19 +6,24 @@
     :onhoverlost "${EWW_CMD} update date_rev=false"
     (overlay
       :class "module"
+      ; the styles make the clock invisible while hovered, and the date is shown instead
       (box
         :space-evenly false
         :class "text"
         (label
           :text {time.hour}
+          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :class "hour")
         (label
+          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :text ":")
         (label
           :text {time.minute}
+          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :class "minute"))
       (revealer
         :reveal date_rev
+        :transition "crossfade"
         (button
           :class "date"
           :onclick "${EWW_CMD} open --toggle calendar"

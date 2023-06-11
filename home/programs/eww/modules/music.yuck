@@ -12,6 +12,7 @@
         :class "module text"
         :onclick "${EWW_CMD} open --toggle music"
         {music.title})
+      ; show buttons when hovering
       (revealer
         :transition "slideright"
         :reveal music_reveal

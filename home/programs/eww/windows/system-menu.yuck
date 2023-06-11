@@ -1,5 +1,5 @@
 (defwidget system-menu []
-  (box
+  (box ; time & date
     :class "system-menu-box"
     :space-evenly false
     :orientation "v"
@@ -19,7 +19,7 @@
           :class "day"
           :text {time.day})))
 
-    (centerbox
+    (centerbox ; wifi/bluetooth/airplane buttons
       :class "system-row"
       (box
         :class "net-box"
@@ -88,7 +88,7 @@
           :xalign 0.5
           :limit-width 16)))
 
-    (box
+    (box ; brightness & volume sliders
       :class "sliders"
       :orientation "v"
       (box
@@ -115,7 +115,7 @@
           :marks true 
           :onchange "brillo -S {}")))
 
-    (box
+    (box ; cpu & memory info
       :class "system-info-box"
 
       ; cpu
@@ -175,7 +175,7 @@
             :halign "start"
             :class "sys-text-sub"))))
 
-    (centerbox
+    (centerbox ; battery info & power button
       :class "bottom-row"
       (box
         :class "battery-box"
@@ -194,8 +194,8 @@
         (label
           :class "battery-wattage text"
           :text {battery.status != "Fully Charged" ? battery.wattage : ""}))
-      (label)
-      (box
+      (label) ; empty element; centerbox requires 3 children but we only need left/right
+      (box ; power button
         :space-evenly false
         :halign "end"
         (button

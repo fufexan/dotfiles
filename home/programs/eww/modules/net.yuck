@@ -1,6 +1,7 @@
 (defwidget net []
   (button
     :class "module icon"
+    ; forcefully open gnome-control-center in a non-GNOME environment
     :onclick "XDG_CURRENT_DESKTOP=GNOME gnome-control-center &"
     :tooltip {net.name}
     :style "color: ${net.color};"

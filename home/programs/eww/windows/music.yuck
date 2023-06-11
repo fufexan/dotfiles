@@ -2,37 +2,38 @@
   (box
     :class "music-window"
     :space-evenly false
+    ; force background position/size, otherwise it is overridden
     :style "
       background-image: ${music.bg};
       background-position: center;
       background-size: cover;
       border: 1px solid ${music.border};
     "
-    (box
+    (box ; cover art, first child
       :class "music-cover-art"
       :style "background-image: url(\"${music.cover}\");")
-    (box
+    (box ; music info, second child
       :orientation "v"
       :space-evenly false
       :class "music-box"
-      (label
+      (label ; title
         :class "music-title text"
         :limit-width 12
         :show_truncated true
         :justify "center"
         :text {music.title})
-      (label
+      (label ; artist
         :class "music-artist text"
         :wrap true
         :justify "center"
         :text {music.artist})
-      (centerbox
+      (centerbox ; buttons
         :halign "center"
         :class "music-button-box icon text"
         (button :class "music-button" :onclick "playerctl previous" "")
         (button :class "music-button" :onclick "playerctl play-pause" {music.status})
         (button :class "music-button" :onclick "playerctl next" ""))
-      (box
+      (box ; time info
         :orientation "v"
         (box
           :class "text"
@@ -44,11 +45,12 @@
             :xalign 1
             :class "music-time"
             :text {music_time.length}))
-        (box
+        (box ; clickable progress bar
           :class "music-bar"
           (scale
-            ; doesn't work, looking for other ways
+            ; sadly we cannot access a child (highlight) from a parent using :style
             ; :style "background: linear-gradient(to right, ${music.color1}, ${music.color2});"
+            ; transform scale position percentage into song position
             :onchange "playerctl position `awk -v len=$(playerctl metadata mpris:length) 'BEGIN{print {} * len / 1000000 / 100}'`"
             :value {music_time.position}))))))
 
