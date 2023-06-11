@@ -1,7 +1,7 @@
+/* screenshare & mic share indicators */
 .indicators {
   margin: .3rem;
-
-  * { transition: 500ms ease-out; }
+  transition: 500ms ease-out;
 
   :first-child {
     border-radius: 1rem 0 0 1rem;

@@ -5,7 +5,11 @@
 }
 
 @mixin window {
+  background-color: $bg;
+  background-position: center;
+  background-size: cover;
   border: 1px solid rgba(0,0,0,0.3);
+  color: $fg;
   margin: 5px 5px 10px;
   @include rounding;
 }
@@ -43,26 +47,17 @@ tooltip {
   }
 }
 
+/* text font */
 .text,
 .text label, { text-shadow: 0 0 .3rem $base; }
 
+/* icon font */
 .icon,
 .icon label { font-family: Material Symbols Outlined; }
 
-.ws {
-  border-radius: 2rem;
-  margin: .7rem .25rem;
-}
-
-.focused {
-  background-color: $bg;
-  border-radius: 1rem;
-  margin: .3rem;
-  padding: .25rem;
-}
-
 .module { margin: 0 5px; }
 
+/* date & time */
 .hour {
   font-weight: bold;
   padding-left: 5px;
@@ -81,9 +76,11 @@ tooltip {
   }
 }
 
+/* right-aligned modules */
 .bright-icon { color: $yellow; }
 .module-bt { font-size: 1.2rem; }
 
+/* scales */
 scale trough {
   background-color: $bg1;
   border-radius: 24px;
@@ -92,4 +89,17 @@ scale trough {
   min-width: 70px;
 }
 
+/* workspaces */
+.focused {
+  background-color: $bg;
+  border-radius: 1rem;
+  margin: .3rem;
+  padding: .25rem;
+}
+
 .workspaces { margin-left: 10px; }
+
+.ws {
+  border-radius: 2rem;
+  margin: .7rem .25rem;
+}

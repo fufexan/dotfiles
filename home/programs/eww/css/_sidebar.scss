@@ -1,13 +1,12 @@
-.system-menu-box {
-  @include window;
-  background-color: $bg;
-  color: $text;
-}
+/* system menu */
+.system-menu-box { @include window; }
 
+/* between net/bt and their arrows */
 .separator {
   font-size: 1rem;
 }
 
+/* date & time */
 .top-row {
   margin: 1rem 1.5rem 0;
 
@@ -26,9 +25,11 @@
   }
 }
 
+/* wifi/bt/airplane button boxes */
 .system-row {
   margin: .5rem .7rem;
 
+  /* the airplane icon is not properly spaced */
   .airplane-box button {
     padding: 1rem 3rem;
   }
@@ -39,6 +40,7 @@
   }
 }
 
+/* wifi/bt/airplane buttons */
 .element {
   @include rounding;
   background-color: $bg1;
@@ -58,6 +60,7 @@
   }
 }
 
+/* volume & brightness sliders */
 .sliders {
   @include rounding;
   background-color: $bg1;
@@ -90,6 +93,7 @@
   background-image: linear-gradient(to right, $yellow, $peach);
 }
 
+/* battery & power button */
 .bottom-row {
   margin: .5rem 1rem;
 
@@ -112,16 +116,17 @@
   }
 }
 
+/* set wifi/bt colors and dim buttons when hovering */
+.element {
+  button:hover { background-color: rgba(0, 0, 0, .1); }
+}
+
 .bt-connected {
   background-color: $blue;
   color: $crust;
-
-  button:hover { background-color: rgba(0, 0, 0, .1); }
 }
 
 .net-connected {
   background-color: $mauve;
   color: $crust;
-
-  button:hover { background-color: rgba(0, 0, 0, .1); }
 }

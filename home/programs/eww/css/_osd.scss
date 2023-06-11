@@ -1,7 +1,6 @@
 .osd-part {
-  @include window;
-  background: $bg;
   margin: 0 .5rem .5rem;
+  @include window;
 
   label {
     color: $text;
@@ -27,6 +26,7 @@
   }
 }
 
+/* scale highlight gradients for volume & brightness */
 .osd-volume highlight {
   background-image: linear-gradient(to top, $teal, $sky);
 }
