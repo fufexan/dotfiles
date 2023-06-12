@@ -38,6 +38,17 @@
   # use Wayland where possible (electron)
   environment.variables.NIXOS_OZONE_WL = "1";
 
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
   # enable location service
   location.provider = "geoclue2";
 
@@ -128,6 +139,11 @@
       alsa.support32Bit = true;
       jack.enable = true;
       pulse.enable = true;
+    };
+
+    psd = {
+      enable = true;
+      resyncTimer = "10m";
     };
 
     # battery info & stuff
