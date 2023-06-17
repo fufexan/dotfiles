@@ -36,7 +36,6 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
-          {disabledModules = ["programs/hyprland.nix"];}
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
         ]
         ++ sharedModules

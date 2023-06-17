@@ -16,7 +16,6 @@
         ./io
         inputs.nix-index-db.hmModules.nix-index
         inputs.spicetify-nix.homeManagerModule
-        inputs.hyprland.homeManagerModules.default
       ]
       ++ sharedModules;
     "mihai@rog" =
@@ -24,7 +23,6 @@
         ./rog
         inputs.nix-index-db.hmModules.nix-index
         inputs.spicetify-nix.homeManagerModule
-        inputs.hyprland.homeManagerModules.default
       ]
       ++ sharedModules;
     server = sharedModules ++ [./server];

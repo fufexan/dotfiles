@@ -407,15 +407,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1686391840,
-        "narHash": "sha256-5S0APl6Mfm6a37taHwvuf11UHnAX0+PnoWQbsYbMUnc=",
-        "owner": "nix-community",
+        "lastModified": 1687026371,
+        "narHash": "sha256-RpIG0wOB+QM4VRfhP6xMhSW9Y6tv/T5tpnmnrKTFLIk=",
+        "owner": "fufexan",
         "repo": "home-manager",
-        "rev": "0144ac418ef633bfc9dbd89b8c199ad3a617c59f",
+        "rev": "550bab598f66d1a5f7b075ef4dc42c43549173e7",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "fufexan",
+        "ref": "hyprland",
         "repo": "home-manager",
         "type": "github"
       }
