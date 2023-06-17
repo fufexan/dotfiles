@@ -8,8 +8,6 @@
 
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
 
-      codeium = pkgs.callPackage ./codeium {};
-
       discord-canary = pkgs.discord-canary.override {
         nss = pkgs.nss_latest;
         withOpenASAR = true;
