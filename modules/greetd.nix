@@ -13,12 +13,8 @@ let
       tap enabled
     }
     seat seat0 xcursor_theme Bibata-Modern-Classic 24
-
     xwayland disable
 
-    bindsym XF86MonBrightnessUp exec brillo -q -u 300000 -A 5
-    bindsym XF86MonBrightnessDown exec brillo -q -u 300000 -U 5
-    bindsym Print exec ${lib.getExe pkgs.grim} /tmp/regreet.png
     bindsym Mod4+shift+e exec swaynag \
       -t warning \
       -m 'What do you want to do?' \
@@ -48,7 +44,7 @@ in {
       };
       GTK = {
         cursor_theme_name = "Bibata-Modern-Classic";
-        font_name = "Jost * 12";
+        font_name = "Lexend 12";
         icon_theme_name = "Papirus-Dark";
         theme_name = "Catppuccin-Mocha-Compact-Mauve-Dark";
       };
