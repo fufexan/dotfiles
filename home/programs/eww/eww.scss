@@ -16,7 +16,7 @@
 
 * {
   all: unset;
-  font-family: "Jost *", Roboto, sans-serif;
+  font-family: "Product Sans", Roboto, sans-serif;
   transition: 200ms ease;
 }
 
@@ -35,6 +35,10 @@
   label {
     font-size: 1.2rem;
   }
+
+  .text {
+    margin-top: .2rem;
+  }
 }
 
 tooltip {
@@ -46,10 +50,6 @@ tooltip {
     font-size: 1rem;
   }
 }
-
-/* text font */
-.text,
-.text label, { text-shadow: 1px 1px 1px rgba(0,0,0,0.2); }
 
 /* icon font */
 .icon,

@@ -25,6 +25,6 @@
         :reveal date_rev
         :transition "crossfade"
         (button
-          :class "date"
+          :class "date text"
           :onclick "${EWW_CMD} open --toggle calendar"
           {time.date})))))
