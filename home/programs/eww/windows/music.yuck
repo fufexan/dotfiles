@@ -4,14 +4,14 @@
     :space-evenly false
     ; force background position/size, otherwise it is overridden
     :style "
-      background-image: ${music.bg};
+      background-image: url('${music.background}');
       background-position: center;
       background-size: cover;
-      border: 1px solid ${music.border};
+      /*border: 1px solid ${music.border};*/
     "
     (box ; cover art, first child
       :class "music-cover-art"
-      :style "background-image: url(\"${music.cover}\");")
+      :style "background-image: url('${music.cover}');")
     (box ; music info, second child
       :orientation "v"
       :space-evenly false
@@ -43,11 +43,11 @@
           (label
             :xalign 0
             :class "music-time"
-            :text {music_time.position_time})
+            :text {music_time.position})
           (label
             :xalign 1
             :class "music-time"
-            :text {music_time.length}))
+            :text {music.duration}))
         (box ; clickable progress bar
           :class "music-bar"
           (scale
@@ -55,7 +55,7 @@
             ; :style "background: linear-gradient(to right, ${music.color1}, ${music.color2});"
             ; transform scale position percentage into song position
             :onchange "playerctl position `awk -v len=$(playerctl metadata mpris:length) 'BEGIN{print {} * len / 1000000 / 100}'`"
-            :value {music_time.position}))))))
+            :value {music_time.position_percent}))))))
 
 (defwindow music
   :stacking "fg"

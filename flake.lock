@@ -372,6 +372,29 @@
         "type": "github"
       }
     },
+    "gross": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1687269414,
+        "narHash": "sha256-yblzKcIWDT4SPP5aVpWiysMydS6eZ4RolESb/MNeCQQ=",
+        "owner": "fufexan",
+        "repo": "gross",
+        "rev": "631d4d8ffe2efc518871f68a42759ca939ed0a2b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fufexan",
+        "repo": "gross",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "nci": "nci",
@@ -760,6 +783,7 @@
         "eww": "eww",
         "flake-parts": "flake-parts",
         "fu": "fu",
+        "gross": "gross",
         "helix": "helix",
         "hm": "hm",
         "hyprland": "hyprland",

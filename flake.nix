@@ -62,6 +62,12 @@
 
     fu.url = "github:numtide/flake-utils";
 
+    gross = {
+      url = "github:fufexan/gross";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     helix = {
       url = "github:SoraTenshi/helix/new-daily-driver";
       inputs.parts.follows = "flake-parts";
