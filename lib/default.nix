@@ -51,6 +51,16 @@ in {
                   });
                 });
               };
+
+            clightd = prev.clightd.overrideAttrs (old: {
+              version = "5.9";
+              src = prev.fetchFromGitHub {
+                owner = "FedeDP";
+                repo = "clightd";
+                rev = "e273868cb728b9fd0f36944f6b789997e6d74323";
+                hash = "sha256-0NYWEJNVDfp8KNyWVY8LkvKIQUTq2MGvKUGcuAcl82U=";
+              };
+            });
           }
         )
       ];
