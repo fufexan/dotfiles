@@ -20,33 +20,33 @@
         :hscroll true
         :vscroll false
         (label ; title
-          :class "music-title text"
+          :class "music-title text ${music.foreground}"
           :justify "center"
           :text {music.title}))
       (scroll
         :hscroll true
         :vscroll false
         (label ; artist
-          :class "music-artist text"
+          :class "music-artist text ${music.foreground}"
           :justify "center"
           :text {music.artist}))
       (centerbox ; buttons
         :halign "center"
         :class "music-button-box icon text"
-        (button :class "music-button" :onclick "playerctl previous" "")
-        (button :class "music-button" :onclick "playerctl play-pause" {music.status})
-        (button :class "music-button" :onclick "playerctl next" ""))
+        (button :class "music-button ${music.foreground}" :onclick "playerctl previous" "")
+        (button :class "music-button ${music.foreground}" :onclick "playerctl play-pause" {music.status})
+        (button :class "music-button ${music.foreground}" :onclick "playerctl next" ""))
       (box ; time info
         :orientation "v"
         (box
           :class "text"
           (label
             :xalign 0
-            :class "music-time"
+            :class "music-time ${music.foreground}"
             :text {music_time.position})
           (label
             :xalign 1
-            :class "music-time"
+            :class "music-time ${music.foreground}"
             :text {music.duration}))
         (box ; clickable progress bar
           :class "music-bar"
