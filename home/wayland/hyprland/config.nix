@@ -23,6 +23,11 @@ in {
     exec-once = systemctl --user start clight
     exec-once = eww open bar
 
+    # use this instead of hidpi patches
+    xwayland {
+      force_zero_scaling = true
+    }
+
     misc {
       # disable auto polling for config file changes
       disable_autoreload = true

@@ -13,6 +13,4 @@
   home.sessionVariables = {
     GDK_SCALE = "2";
   };
-
-  wayland.windowManager.hyprland.xwayland.hidpi = true;
 }

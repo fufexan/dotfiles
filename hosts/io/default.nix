@@ -92,17 +92,9 @@
 
   programs = {
     # enable hyprland and required options
-    hyprland = {
-      enable = true;
-      xwayland.hidpi = true;
-    };
-
+    hyprland.enable = true;
     steam.enable = true;
-
-    sway = {
-      enable = true;
-      # package = inputs.self.packages.${pkgs.hostPlatform.system}.sway-hidpi;
-    };
+    sway.enable = true;
   };
 
   security.tpm2 = {
@@ -113,18 +105,6 @@
   services = {
     # for SSD/NVME
     fstrim.enable = true;
-
-    # howdy = {
-    #   enable = true;
-    #   package = inputs.self.packages.${pkgs.system}.howdy;
-    #   settings = {
-    #     core.no_confirmation = true;
-    #     video.device_path = "/dev/video2";
-    #     video.dark_threshold = 90;
-    #   };
-    # };
-
-    # linux-enable-ir-emitter.enable = true;
 
     kmonad.keyboards = {
       io = {
@@ -149,17 +129,6 @@
     printing.enable = true;
 
     power-profiles-daemon.enable = true;
-
-    # power saving
-    tlp = {
-      enable = false;
-      settings = {
-        PCIE_ASPM_ON_BAT = "powersupersave";
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-        NMI_WATCHDOG = 0;
-      };
-    };
 
     udev.extraRules = let
       inherit (import ./plugged.nix args) plugged unplugged;
