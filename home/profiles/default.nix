@@ -14,6 +14,7 @@
     "mihai@io" =
       [
         ./io
+        inputs.anyrun.homeManagerModules.default
         inputs.nix-index-db.hmModules.nix-index
         inputs.spicetify-nix.homeManagerModule
         inputs.hyprland.homeManagerModules.default
