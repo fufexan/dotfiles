@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   systems = ["x86_64-linux"];
 
   perSystem = {pkgs, ...}: {
@@ -20,12 +20,6 @@
       linux-enable-ir-emitter = pkgs.callPackage ./linux-enable-ir-emitter {};
 
       waveform = pkgs.callPackage ./waveform {};
-
-      spotify = pkgs.callPackage ./spotify {
-        nss = pkgs.nss_latest;
-      };
-
-      sway-hidpi = import ./sway-hidpi.nix inputs pkgs;
     };
   };
 }

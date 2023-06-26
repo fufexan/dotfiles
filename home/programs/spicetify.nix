@@ -9,8 +9,6 @@
   in {
     enable = true;
 
-    spotifyPackage = inputs.self.packages.${pkgs.hostPlatform.system}.spotify;
-
     theme = spicePkgs.themes.catppuccin-mocha;
 
     colorScheme = "flamingo";

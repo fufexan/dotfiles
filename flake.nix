@@ -98,7 +98,6 @@
         flake-parts.follows = "flake-parts";
         flake-utils.follows = "fu";
         nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
       };
     };
 
