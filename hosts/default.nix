@@ -4,6 +4,7 @@
   sharedModules,
   desktopModules,
   homeImports,
+  withSystemInputs,
   ...
 }: {
   flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
@@ -24,7 +25,8 @@
           {disabledModules = ["security/pam.nix"];}
         ]
         ++ sharedModules
-        ++ desktopModules;
+        ++ desktopModules
+        ++ (withSystemInputs system);
     };
 
     rog = inputs.nixpkgs.lib.nixosSystem {
@@ -40,7 +42,8 @@
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
         ]
         ++ sharedModules
-        ++ desktopModules;
+        ++ desktopModules
+        ++ (withSystemInputs system);
     };
 
     kiiro = inputs.nixpkgs.lib.nixosSystem {
@@ -51,7 +54,8 @@
           ./kiiro
           {home-manager.users.mihai.imports = homeImports.server;}
         ]
-        ++ sharedModules;
+        ++ sharedModules
+        ++ (withSystemInputs system);
     };
   });
 }

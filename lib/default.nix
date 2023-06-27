@@ -1,4 +1,8 @@
-{inputs, ...}:
+{
+  inputs,
+  withSystem,
+  ...
+}:
 # personal lib
 let
   inherit (inputs.nixpkgs) lib;
@@ -7,7 +11,18 @@ let
   default = import ./theme {inherit colorlib lib;};
 in {
   imports = [
-    {_module.args = {inherit default;};}
+    {
+      _module.args = {
+        inherit default;
+
+        withSystemInputs = system:
+          withSystem system ({
+            self',
+            inputs',
+            ...
+          }: [{_module.args = {inherit self' inputs';};}]);
+      };
+    }
   ];
 
   perSystem = {system, ...}: {

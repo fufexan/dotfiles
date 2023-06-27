@@ -2,7 +2,7 @@
   pkgs,
   config,
   lib,
-  inputs,
+  self,
   ...
 }:
 # configuration shared by all hosts
@@ -27,7 +27,7 @@
   hardware.opengl.enable = true;
 
   # pickup pkgs from flake export
-  nixpkgs.pkgs = inputs.self.legacyPackages.${config.nixpkgs.system};
+  nixpkgs.pkgs = self.legacyPackages.${config.nixpkgs.system};
 
   # enable programs
   programs = {

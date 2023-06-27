@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  self,
   ...
 } @ args: {
   imports = [./hardware-configuration.nix];
@@ -97,7 +97,7 @@
           fallthrough = true;
           allowCommands = false;
         };
-        config = builtins.readFile "${inputs.self}/modules/main.kbd";
+        config = builtins.readFile "${self}/modules/main.kbd";
       };
     };
 

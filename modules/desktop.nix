@@ -1,7 +1,7 @@
 {
-  config,
-  pkgs,
   inputs,
+  pkgs,
+  self,
   ...
 }: {
   fonts = {
@@ -128,7 +128,7 @@
             fallthrough = true;
             allowCommands = false;
           };
-          config = builtins.readFile "${inputs.self}/modules/main.kbd";
+          config = builtins.readFile "${self}/modules/main.kbd";
         };
       };
     };

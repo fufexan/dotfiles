@@ -3,12 +3,13 @@
   pkgs,
   inputs,
   lib,
+  self,
   ...
 } @ args: {
   imports = [./hardware-configuration.nix];
 
   age.secrets.spotify = {
-    file = "${inputs.self}/secrets/spotify.age";
+    file = "${self}/secrets/spotify.age";
     owner = "mihai";
     group = "users";
   };
@@ -42,7 +43,7 @@
 
     plymouth = {
       enable = true;
-      themePackages = [inputs.self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
+      themePackages = [self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
       theme = "catppuccin-mocha";
     };
   };
@@ -115,7 +116,7 @@
           fallthrough = true;
           allowCommands = false;
         };
-        config = builtins.readFile "${inputs.self}/modules/main.kbd";
+        config = builtins.readFile "${self}/modules/main.kbd";
       };
     };
 

@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  self,
   pkgs,
   ...
 }:
@@ -18,7 +18,7 @@ in {
 
       package = mkOption {
         type = types.package;
-        default = pkgs.linux-enable-ir-emitter or inputs.self.packages.${pkgs.system}.linux-enable-ir-emitter;
+        default = pkgs.linux-enable-ir-emitter or self.packages.${pkgs.system}.linux-enable-ir-emitter;
         defaultText = "pkgs.linux-enable-ir-emitter";
         description = ''
           Package to use for the Linux Enable IR Emitter service.

@@ -8,10 +8,9 @@
       imports = [
         ./home/profiles
         ./hosts
+        ./lib
         ./modules
         ./pkgs
-        ./lib
-        {config._module.args._inputs = inputs // {inherit (inputs) self;};}
       ];
 
       perSystem = {
@@ -19,6 +18,7 @@
         pkgs,
         ...
       }: {
+        # set flake-wide pkgs to the one exported by ./lib
         imports = [{_module.args.pkgs = config.legacyPackages;}];
 
         devShells.default = pkgs.mkShell {

@@ -2,6 +2,7 @@
   inputs,
   withSystem,
   module_args,
+  withSystemInputs,
   ...
 }: let
   sharedModules = [
@@ -39,17 +40,21 @@ in {
   ];
 
   flake = {
-    homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
+    homeConfigurations = withSystem "x86_64-linux" ({
+      pkgs,
+      system,
+      ...
+    }: {
       "mihai@io" = homeManagerConfiguration {
-        modules = homeImports."mihai@io" ++ module_args;
+        modules = homeImports."mihai@io" ++ module_args ++ (withSystemInputs system);
         inherit pkgs;
       };
       "mihai@rog" = homeManagerConfiguration {
-        modules = homeImports."mihai@rog" ++ module_args;
+        modules = homeImports."mihai@rog" ++ module_args ++ (withSystemInputs system);
         inherit pkgs;
       };
       server = homeManagerConfiguration {
-        modules = homeImports.server ++ module_args;
+        modules = homeImports.server ++ module_args ++ (withSystemInputs system);
         inherit pkgs;
       };
     });
