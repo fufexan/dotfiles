@@ -4,10 +4,16 @@
   sharedModules,
   desktopModules,
   homeImports,
-  withSystemInputs,
   ...
 }: {
-  flake.nixosConfigurations = withSystem "x86_64-linux" ({system, ...}: {
+  flake.nixosConfigurations = withSystem "x86_64-linux" ({
+    system,
+    self',
+    inputs',
+    ...
+  }: let
+    systemInputs = [{_module.args = {inherit self' inputs';};}];
+  in {
     io = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
@@ -17,16 +23,12 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
-          ../modules/pam.nix
-          ../modules/howdy
-          ../modules/linux-enable-ir-emitter.nix
           inputs.lanzaboote.nixosModules.lanzaboote
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
-          {disabledModules = ["security/pam.nix"];}
         ]
         ++ sharedModules
         ++ desktopModules
-        ++ (withSystemInputs system);
+        ++ systemInputs;
     };
 
     rog = inputs.nixpkgs.lib.nixosSystem {
@@ -38,12 +40,11 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
-          {disabledModules = ["programs/hyprland.nix"];}
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
         ]
         ++ sharedModules
         ++ desktopModules
-        ++ (withSystemInputs system);
+        ++ systemInputs;
     };
 
     kiiro = inputs.nixpkgs.lib.nixosSystem {
@@ -55,7 +56,7 @@
           {home-manager.users.mihai.imports = homeImports.server;}
         ]
         ++ sharedModules
-        ++ (withSystemInputs system);
+        ++ systemInputs;
     };
   });
 }

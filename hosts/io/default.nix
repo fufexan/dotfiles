@@ -1,9 +1,10 @@
 {
   config,
   pkgs,
-  inputs,
   lib,
   self,
+  self',
+  inputs',
   ...
 } @ args: {
   imports = [./hardware-configuration.nix];
@@ -43,7 +44,7 @@
 
     plymouth = {
       enable = true;
-      themePackages = [self.packages.${pkgs.hostPlatform.system}.catppuccin-plymouth];
+      themePackages = [self'.packages.catppuccin-plymouth];
       theme = "catppuccin-mocha";
     };
   };
@@ -141,9 +142,6 @@
       SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${plugged}"
       SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${unplugged}"
     '';
-
-    # add hyprland to display manager sessions
-    xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.hostPlatform.system}.default];
   };
 
   # https://github.com/NixOS/nixpkgs/issues/114222

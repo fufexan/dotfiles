@@ -14,13 +14,6 @@ in {
     {
       _module.args = {
         inherit default;
-
-        withSystemInputs = system:
-          withSystem system ({
-            self',
-            inputs',
-            ...
-          }: [{_module.args = {inherit self' inputs';};}]);
       };
     }
   ];

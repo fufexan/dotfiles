@@ -1,11 +1,7 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{inputs', ...}: {
   # themable spotify
   programs.spicetify = let
-    spicePkgs = inputs.spicetify-nix.packages.${pkgs.hostPlatform.system}.default;
+    spicePkgs = inputs'.spicetify-nix.packages.default;
   in {
     enable = true;
 
