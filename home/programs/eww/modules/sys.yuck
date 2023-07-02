@@ -22,11 +22,10 @@
         (label :class "icon-text" :text "")))
 
     (circular-progress
-      :value {battery.percentage}
-      :class "batbar"
-      :style "color: ${battery.color};"
+      :value {EWW_BATTERY.total_avg}
+      :class "batbar ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
       :thickness 3
       (button
-        :tooltip "battery on ${battery.percentage}%"
+        :tooltip "battery on ${round(EWW_BATTERY.total_avg,0)}%"
         :onclick "${EWW_CMD} open --toggle system-menu"
         (label :class "icon-text" :text "")))))

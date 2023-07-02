@@ -97,8 +97,13 @@
 .bottom-row {
   margin: .5rem 1rem;
 
-  .battery-icon { font-size: 2rem; }
-  .battery-wattage { color: $mauve; }
+  .battery-icon {
+    color: $green;
+    font-size: 2rem;
+  }
+
+  .battery-icon .low { color: $red; }
+  .battery-rate { color: $mauve; }
 
   .battery-status {
     color: $subtext0;

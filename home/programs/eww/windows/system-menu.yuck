@@ -182,18 +182,17 @@
         :space-evenly false
         :halign "start"
         (label
-          :class "battery-icon icon"
-          :style "color: ${battery.color}"
-          :text {battery.icon})
+          :class "battery-icon icon ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
+          :text {battery_icons[round(EWW_BATTERY.total_avg / (100 / arraylength(battery_icons)) - 1,0)]})
         (label
           :class "text"
-          :text {battery.percentage})
+          :text {round(EWW_BATTERY.total_avg,0)})
         (label
           :class "battery-status text"
           :text {battery.status})
         (label
-          :class "battery-wattage text"
-          :text {battery.status != "Fully Charged" ? battery.wattage : ""}))
+          :class "battery-rate text"
+          :text {battery.rate}))
       (label) ; empty element; centerbox requires 3 children but we only need left/right
       (box ; power button
         :space-evenly false
