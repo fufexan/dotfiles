@@ -50,7 +50,5 @@
         volume_normalisation = false;
       };
     };
-
-    udiskie.enable = true;
   };
 }

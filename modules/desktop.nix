@@ -98,8 +98,12 @@
     };
   };
 
-  # make HM-managed GTK stuff work
-  programs.dconf.enable = true;
+  programs = {
+    # make HM-managed GTK stuff work
+    dconf.enable = true;
+
+    seahorse.enable = true;
+  };
 
   services = {
     # use Ambient Light Sensors for auto brightness adjustment
@@ -115,6 +119,8 @@
 
     # provide location
     geoclue2.enable = true;
+
+    gnome.gnome-keyring.enable = true;
 
     # keyboard remapping
     kmonad = {
