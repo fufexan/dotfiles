@@ -1,3 +1,6 @@
+(defvar GB 1024000000)
+(defvar MB 1024000)
+
 (defwidget system-menu []
   (box ; time & date
     :class "system-menu-box"
@@ -153,7 +156,7 @@
         :space-evenly false
         :halign "end"
         (circular-progress
-          :value {memory.percent}
+          :value {EWW_RAM.used_mem_perc}
           :class "sys-mem"
           :thickness 3
           (label
@@ -167,11 +170,11 @@
             :halign "start"
             :class "sys-text-mem")
           (label
-            :text "${memory.used} used"
+            :text {EWW_RAM.used_mem / GB < 1 ? "${round(EWW_RAM.used_mem / MB, 1)} M used" : "${round(EWW_RAM.used_mem / GB, 1)} G used"}
             :halign "start"
             :class "sys-text-sub")
           (label
-            :text "${memory.total} total"
+            :text {EWW_RAM.total_mem / GB < 1 ? "${round(EWW_RAM.total_mem / MB, 1)} M total" : "${round(EWW_RAM.total_mem / GB, 1)} G total"}
             :halign "start"
             :class "sys-text-sub"))))
 

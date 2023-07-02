@@ -13,7 +13,6 @@
 (deflisten bluetooth "scripts/bluetooth")
 (deflisten brightness "scripts/brightness")
 (deflisten indicators "scripts/indicators")
-(deflisten memory "scripts/memory")
 (deflisten music "gross music")
 (deflisten music_time "gross music-time")
 (deflisten net "scripts/net")

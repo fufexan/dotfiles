@@ -13,11 +13,11 @@
         (label :class "icon-text" :text "")))
 
     (circular-progress
-      :value {memory.percent}
+      :value {EWW_RAM.used_mem_perc}
       :class "membar"
       :thickness 3
       (button
-        :tooltip "using ${round(memory.percent,0)}% ram"
+        :tooltip "using ${round(EWW_RAM.used_mem_perc,0)}% ram"
         :onclick "${EWW_CMD} open --toggle system-menu"
         (label :class "icon-text" :text "")))
 
