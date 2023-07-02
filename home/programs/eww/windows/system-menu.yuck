@@ -8,16 +8,16 @@
       :space-evenly false
       (label
         :class "time text"
-        :text "${time.hour}:${time.minute}")
+        :text {formattime(EWW_TIME, "%H:%M")})
       (box
         :class "date-box"
         :space-evenly false
         (label
           :class "date"
-          :text {time.date})
+          :text {formattime(EWW_TIME, "%d/%m")})
         (label
           :class "day"
-          :text {time.day})))
+          :text {formattime(EWW_TIME, "%A")})))
 
     (centerbox ; wifi/bluetooth/airplane buttons
       :class "system-row"

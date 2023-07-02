@@ -8,8 +8,6 @@
 (defvar osd-volume false)
 (defvar battery_icons `["","","","","","","",""]`)
 
-(defpoll time :interval "5s" `date +'{"date": "%d/%m", "hour": "%H", "minute": "%M", "day": "%A"}'`)
-
 (deflisten airplane "scripts/airplane")
 (deflisten battery "gross battery")
 (deflisten bluetooth "scripts/bluetooth")

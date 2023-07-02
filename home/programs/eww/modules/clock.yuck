@@ -11,14 +11,14 @@
         :space-evenly false
         :class "text"
         (label
-          :text {time.hour}
+          :text {formattime(EWW_TIME, "%H")}
           :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :class "hour")
         (label
           :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :text ":")
         (label
-          :text {time.minute}
+          :text {formattime(EWW_TIME, "%M")}
           :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
           :class "minute"))
       (revealer
@@ -27,4 +27,4 @@
         (button
           :class "date text"
           :onclick "${EWW_CMD} open --toggle calendar"
-          {time.date})))))
+          {formattime(EWW_TIME, "%d/%m")})))))
