@@ -2,11 +2,16 @@
   config,
   pkgs,
   inputs,
+  inputs',
   lib,
   ...
 }: {
-  # we need git for flakes
-  environment.systemPackages = [pkgs.git];
+  environment.systemPackages = [
+    # we need git for flakes
+    pkgs.git
+    inputs'.nh.packages.default
+  ];
+  environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
 
   nix = {
     # extra builders to offload work onto
