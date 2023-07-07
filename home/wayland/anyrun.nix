@@ -13,7 +13,7 @@
       ];
 
       width.fraction = 0.3;
-      verticalOffset.absolute = 15;
+      y.absolute = 15;
       hidePluginInfo = true;
       closeOnClick = true;
     };
