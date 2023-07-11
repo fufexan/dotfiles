@@ -16,6 +16,7 @@
   };
 
   boot = {
+    binfmt.emulatedSystems = ["aarch64-linux"];
     bootspec.enable = true;
 
     initrd = {

@@ -3,7 +3,7 @@
 # define colors
 #        red       peach     green     blue
 colors=("#f38ba8" "#fab387" "#a6e3a1" "#89b4fa")
-empty="#313244"
+empty="rgba(30, 30, 46, 0.6)"
 
 # get initial focused workspace
 focusedws=$(hyprctl -j monitors | jaq -r '.[] | select(.focused == true) | .activeWorkspace.id')
