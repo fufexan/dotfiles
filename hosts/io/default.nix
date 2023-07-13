@@ -4,9 +4,8 @@
   lib,
   self,
   self',
-  inputs',
   ...
-} @ args: {
+}: {
   imports = [./hardware-configuration.nix];
 
   age.secrets.spotify = {
@@ -129,19 +128,11 @@
     # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
     pipewire.lowLatency.enable = true;
 
-    printing.enable = true;
-
     power-profiles-daemon.enable = true;
 
-    udev.extraRules = let
-      inherit (import ./plugged.nix args) plugged unplugged;
-    in ''
+    udev.extraRules = ''
       # add my android device to adbusers
       SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
-
-      # start/stop services on power (un)plug
-      SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${plugged}"
-      SUBSYSTEM=="power_supply", ATTR{online}=="0", RUN+="${unplugged}"
     '';
   };
 

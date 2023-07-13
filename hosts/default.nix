@@ -23,6 +23,7 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
+          ../modules/power-switcher.nix
           inputs.lanzaboote.nixosModules.lanzaboote
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
         ]
@@ -40,6 +41,7 @@
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
+          ../modules/power-switcher.nix
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
         ]
         ++ sharedModules

@@ -56,5 +56,5 @@ in {
     + (lib.optionalString (config.networking.hostName == "rog") " --unsupported-gpu");
 
   # unlock GPG keyring on login
-  security.pam.services.greetd.gnupg.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 }
