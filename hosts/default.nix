@@ -2,7 +2,6 @@
   inputs,
   withSystem,
   sharedModules,
-  desktopModules,
   homeImports,
   ...
 }: {
@@ -12,53 +11,55 @@
     inputs',
     ...
   }: let
-    systemInputs = [{_module.args = {inherit self' inputs';};}];
+    systemInputs = {_module.args = {inherit self' inputs';};};
+    inherit (inputs.nixpkgs.lib) nixosSystem;
   in {
-    io = inputs.nixpkgs.lib.nixosSystem {
+    io = nixosSystem {
       inherit system;
 
       modules =
         [
           ./io
+          ../modules/bluetooth.nix
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
+          ../modules/lanzaboote.nix
           ../modules/power-switcher.nix
-          inputs.lanzaboote.nixosModules.lanzaboote
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
+          systemInputs
         ]
-        ++ sharedModules
-        ++ desktopModules
-        ++ systemInputs;
+        ++ sharedModules;
     };
 
-    rog = inputs.nixpkgs.lib.nixosSystem {
+    rog = nixosSystem {
       inherit system;
 
       modules =
         [
           ./rog
+          ../modules/bluetooth.nix
           ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
+          ../modules/lanzaboote.nix
           ../modules/power-switcher.nix
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
+          systemInputs
         ]
-        ++ sharedModules
-        ++ desktopModules
-        ++ systemInputs;
+        ++ sharedModules;
     };
 
-    kiiro = inputs.nixpkgs.lib.nixosSystem {
+    kiiro = nixosSystem {
       inherit system;
 
       modules =
         [
           ./kiiro
           {home-manager.users.mihai.imports = homeImports.server;}
+          systemInputs
         ]
-        ++ sharedModules
-        ++ systemInputs;
+        ++ sharedModules;
     };
   });
 }

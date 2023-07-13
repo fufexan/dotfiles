@@ -10,8 +10,16 @@
       trustedInterfaces = ["tailscale0"];
       # required to connect to Tailscale exit nodes
       checkReversePath = "loose";
-      # allow the Tailscale UDP port through the firewall
-      allowedUDPPorts = [config.services.tailscale.port];
+
+      allowedUDPPorts = [
+        # allow the Tailscale UDP port through the firewall
+        config.services.tailscale.port
+        5353
+      ];
+
+      allowedTCPPorts = [
+        42355
+      ];
     };
 
     networkmanager = {

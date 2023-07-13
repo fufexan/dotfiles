@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   self,
   ...
@@ -19,36 +18,8 @@
     '';
   };
 
-  # bootloader
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    systemd-boot.enable = true;
-  };
-
-  boot.plymouth.enable = true;
-
   hardware = {
-    bluetooth = {
-      enable = true;
-      package = pkgs.bluez5-experimental;
-      settings = {
-        # make Xbox Series X controller work
-        General = {
-          Class = "0x000100";
-          ControllerMode = "bredr";
-          FastConnectable = true;
-          JustWorksRepairing = "always";
-          Privacy = "device";
-          Experimental = true;
-        };
-      };
-    };
-
-    cpu.intel.updateMicrocode = true;
-
     enableAllFirmware = true;
-
-    opentabletdriver.enable = true;
 
     opengl = {
       extraPackages = with pkgs; [vaapiIntel libvdpau-va-gl vaapiVdpau intel-ocl];
@@ -69,26 +40,16 @@
   };
 
   networking.hostName = "rog";
-  networking.firewall.enable = lib.mkForce false;
-
-  nixpkgs.config.allowUnfree = true;
 
   programs = {
     hyprland = {
       enable = true;
       nvidiaPatches = true;
     };
-    light.enable = true;
     steam.enable = true;
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-    };
   };
 
   services = {
-    dbus.packages = [pkgs.gcr];
-
     kmonad.keyboards = {
       rog = {
         device = "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd";
@@ -101,22 +62,6 @@
       };
     };
 
-    pipewire.lowLatency.enable = true;
-
-    ratbagd.enable = true;
-
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
-        NMI_WATCHDOG = 0;
-      };
-    };
-
     xserver.videoDrivers = ["nvidia"];
   };
-
-  # https://github.com/NixOS/nixpkgs/issues/114222
-  systemd.user.services.telephony_client.enable = false;
 }

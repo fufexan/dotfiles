@@ -51,6 +51,8 @@ in {
     };
   };
 
+  programs.sway.enable = true;
+
   services.greetd.settings.default_session.command =
     "${config.programs.sway.package}/bin/sway --config ${greetdSwayConfig}"
     + (lib.optionalString (config.networking.hostName == "rog") " --unsupported-gpu");

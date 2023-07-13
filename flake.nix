@@ -18,9 +18,6 @@
         pkgs,
         ...
       }: {
-        # set flake-wide pkgs to the one exported by ./lib
-        imports = [{_module.args.pkgs = config.legacyPackages;}];
-
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.alejandra

@@ -117,10 +117,9 @@ in
       cp -r . $out/
     '';
 
-    meta = with lib; {
+    meta = {
       homepage = "https://www.tracktion.com/welcome/waveform-free";
       description = "Waveform DAW";
       platforms = ["x86_64-linux"];
-      license = licenses.unfree;
     };
   }

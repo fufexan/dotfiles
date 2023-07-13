@@ -2,8 +2,15 @@
   inputs',
   pkgs,
   self,
+  self',
   ...
 }: {
+  boot.plymouth = {
+    enable = true;
+    themePackages = [self'.packages.catppuccin-plymouth];
+    theme = "catppuccin-mocha";
+  };
+
   fonts = {
     fonts = with pkgs; [
       # icon fonts
@@ -38,15 +45,24 @@
   # use Wayland where possible (electron)
   environment.variables.NIXOS_OZONE_WL = "1";
 
-  hardware.opengl = {
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+  hardware = {
+    # smooth backlight control
+    brillo.enable = true;
+
+    opengl = {
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
+
+    opentabletdriver.enable = true;
+
+    xpadneo.enable = true;
   };
 
   # enable location service
@@ -139,14 +155,24 @@
       };
     };
 
+    logind.extraConfig = ''
+      HandlePowerKey=suspend
+    '';
+
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       jack.enable = true;
       pulse.enable = true;
+
+      # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
+      lowLatency.enable = true;
     };
 
+    power-profiles-daemon.enable = true;
+
+    # profile-sync-daemon
     psd = {
       enable = true;
       resyncTimer = "10m";
@@ -157,7 +183,14 @@
 
     # needed for GNOME services outside of GNOME Desktop
     dbus.packages = [pkgs.gcr];
-    udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+
+    udev = {
+      packages = with pkgs; [gnome.gnome-settings-daemon];
+      extraRules = ''
+        # add my android device to adbusers
+        SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
+      '';
+    };
   };
 
   security = {

@@ -1,9 +1,7 @@
 {
   config,
   pkgs,
-  lib,
   self,
-  self',
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -16,12 +14,6 @@
 
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
-    bootspec.enable = true;
-
-    initrd = {
-      systemd.enable = true;
-      supportedFilesystems = ["ext4"];
-    };
 
     # load modules on boot
     kernelModules = ["acpi_call"];
@@ -30,73 +22,16 @@
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
     kernelParams = ["amd_pstate=active"];
-
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
-
-    loader = {
-      # systemd-boot on UEFI
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = lib.mkForce false;
-    };
-
-    plymouth = {
-      enable = true;
-      themePackages = [self'.packages.catppuccin-plymouth];
-      theme = "catppuccin-mocha";
-    };
   };
 
-  environment.systemPackages = [
-    config.boot.kernelPackages.cpupower
-    pkgs.sbctl
-  ];
+  environment.systemPackages = [config.boot.kernelPackages.cpupower];
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      # battery info support
-      package = pkgs.bluez5-experimental;
-      settings = {
-        # make Xbox Series X controller work
-        General = {
-          Class = "0x000100";
-          ControllerMode = "bredr";
-          FastConnectable = true;
-          JustWorksRepairing = "always";
-          Privacy = "device";
-          Experimental = true;
-        };
-      };
-    };
-
-    # smooth backlight control
-    brillo.enable = true;
-
-    cpu.amd.updateMicrocode = true;
-
-    enableRedistributableFirmware = true;
-
-    opentabletdriver.enable = true;
-
-    xpadneo.enable = true;
-  };
-
-  networking = {
-    hostName = "io";
-    firewall = {
-      allowedTCPPorts = [42355];
-      allowedUDPPorts = [5353];
-    };
-  };
+  networking.hostName = "io";
 
   programs = {
     # enable hyprland and required options
     hyprland.enable = true;
     steam.enable = true;
-    sway.enable = true;
   };
 
   security.tpm2 = {
@@ -120,22 +55,5 @@
         config = builtins.readFile "${self}/modules/main.kbd";
       };
     };
-
-    logind.extraConfig = ''
-      HandlePowerKey=suspend
-    '';
-
-    # see https://github.com/fufexan/nix-gaming/#pipewire-low-latency
-    pipewire.lowLatency.enable = true;
-
-    power-profiles-daemon.enable = true;
-
-    udev.extraRules = ''
-      # add my android device to adbusers
-      SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
-    '';
   };
-
-  # https://github.com/NixOS/nixpkgs/issues/114222
-  systemd.user.services.telephony_client.enable = false;
 }

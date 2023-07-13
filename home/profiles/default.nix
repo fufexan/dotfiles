@@ -13,48 +13,39 @@
     ../shell
     module_args
     {_module.args = {inherit inputs' self';};}
+    inputs.anyrun.homeManagerModules.default
+    inputs.nix-index-db.hmModules.nix-index
+    inputs.spicetify-nix.homeManagerModule
+    inputs.hyprland.homeManagerModules.default
   ]);
 
   homeImports = {
-    "mihai@io" =
-      [
-        ./io
-        inputs.anyrun.homeManagerModules.default
-        inputs.nix-index-db.hmModules.nix-index
-        inputs.spicetify-nix.homeManagerModule
-        inputs.hyprland.homeManagerModules.default
-      ]
-      ++ sharedModules;
-    "mihai@rog" =
-      [
-        ./rog
-        inputs.anyrun.homeManagerModules.default
-        inputs.nix-index-db.hmModules.nix-index
-        inputs.spicetify-nix.homeManagerModule
-        inputs.hyprland.homeManagerModules.default
-      ]
-      ++ sharedModules;
-    server = sharedModules ++ [./server];
+    "mihai@io" = [./io] ++ sharedModules;
+    "mihai@rog" = [./rog] ++ sharedModules;
+    server = [./server] ++ sharedModules;
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
 in {
   imports = [
+    # we need to pass this to NixOS' HM module
     {_module.args = {inherit homeImports;};}
   ];
 
   flake = {
     homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
       "mihai@io" = homeManagerConfiguration {
-        modules = homeImports."mihai@io" ++ module_args;
+        modules = homeImports."mihai@io";
         inherit pkgs;
       };
+
       "mihai@rog" = homeManagerConfiguration {
-        modules = homeImports."mihai@rog" ++ module_args;
+        modules = homeImports."mihai@rog";
         inherit pkgs;
       };
+
       server = homeManagerConfiguration {
-        modules = homeImports.server ++ module_args;
+        modules = homeImports.server;
         inherit pkgs;
       };
     });

@@ -1,8 +1,6 @@
 {
   pkgs,
-  config,
   lib,
-  self,
   ...
 }:
 # configuration shared by all hosts
@@ -25,9 +23,6 @@
 
   # graphics drivers / HW accel
   hardware.opengl.enable = true;
-
-  # pickup pkgs from flake export
-  nixpkgs.pkgs = self.legacyPackages.${config.nixpkgs.system};
 
   # enable programs
   programs = {

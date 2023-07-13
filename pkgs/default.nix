@@ -8,11 +8,6 @@
 
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
 
-      discord-canary = pkgs.discord-canary.override {
-        nss = pkgs.nss_latest;
-        withOpenASAR = true;
-      };
-
       gdb-frontend = pkgs.callPackage ./gdb-frontend {};
 
       waveform = pkgs.callPackage ./waveform {};
