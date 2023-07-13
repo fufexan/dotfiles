@@ -1,9 +1,6 @@
 # biggest homeserver
 {lib, ...}: {
-  imports = [
-    ./hardware-configuration.nix
-    ./services.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   # used by tailscale for exit node
   boot.kernel.sysctl = {

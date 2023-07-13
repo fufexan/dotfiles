@@ -13,7 +13,6 @@
     ripgrep
 
     # file managers
-    joshuto
     ranger
   ];
 

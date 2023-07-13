@@ -5,7 +5,6 @@
 in {
   imports = [
     ./cli.nix
-    ./nushell
     ./starship.nix
     ./transient-services.nix
     ./zsh.nix
