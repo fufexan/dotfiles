@@ -20,5 +20,5 @@
         (box
           :class "icon text"
           (button :class "song-button" :onclick "playerctl previous" "")
-          (button :class "song-button" :onclick "playerctl play-pause" {music.status})
+          (button :class "song-button" :onclick "playerctl play-pause" {music.status == "Playing" ? "" : ""})
           (button :class "song-button" :onclick "playerctl next" ""))))))

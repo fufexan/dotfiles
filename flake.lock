@@ -201,15 +201,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1686423460,
-        "narHash": "sha256-8e6gHSg6FDp6nU5v89D44Tqb1lR5aQpS0lXOVqzoUS4=",
-        "owner": "elkowar",
+        "lastModified": 1689266097,
+        "narHash": "sha256-cbUiy9MVOh/Hu5G7IsfTWzyXFxZL8NRUxeKXzkceFTI=",
+        "owner": "fufexan",
         "repo": "eww",
-        "rev": "25e50eda46379bccd8a7887c18ee35833e0460e8",
+        "rev": "471d3945cf2c6c7c03148a7199ac6896214054ed",
         "type": "github"
       },
       "original": {
-        "owner": "elkowar",
+        "owner": "fufexan",
+        "ref": "globalstyle",
         "repo": "eww",
         "type": "github"
       }
@@ -371,11 +372,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1688310582,
-        "narHash": "sha256-7rAsWSu4lfDxMlr6s09qhqpTiC+5y2DkTuHqO0Ec3TA=",
+        "lastModified": 1689247211,
+        "narHash": "sha256-WlXDmpKUyJdcNGRD6n0y0ZQDh1Dy1TDKAproaqqVJ1A=",
         "owner": "fufexan",
         "repo": "gross",
-        "rev": "fa648707ec87ed19d55458224ef2b6ffb74193cd",
+        "rev": "d118ec3b650660e15ef9367c5a97671643426dec",
         "type": "github"
       },
       "original": {

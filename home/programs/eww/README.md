@@ -25,6 +25,12 @@ The same daemon runs multiple windows which interact with each other:
 
 ## ❔ Usage
 
+NOTE: You will either need to patch your eww with [this commit](https://github.com/fufexan/eww/commit/471d3945cf2c6c7c03148a7199ac6896214054ed)
+or remove the `:globalstyle` attribute in `windows/music.yuck`.
+
+For flake users, you can use my fork (`github:fufexan/eww/globalstyle`). I'll
+keep it rebased.
+
 ### Home Manager
 
 If you use Home Manager, installing is as simple as adding my flake to your

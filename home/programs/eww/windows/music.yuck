@@ -20,41 +20,44 @@
         :hscroll true
         :vscroll false
         (label ; title
-          :class "music-title text ${music.foreground}"
+          :class "music-title text"
+          :style "color: ${music.foreground};"
           :justify "center"
           :text {music.title}))
       (scroll
         :hscroll true
         :vscroll false
         (label ; artist
-          :class "music-artist text ${music.foreground}"
+          :class "music-artist text"
+          :style "color: ${music.foreground};"
           :justify "center"
           :text {music.artist}))
       (centerbox ; buttons
         :halign "center"
         :class "music-button-box icon text"
-        (button :class "music-button ${music.foreground}" :onclick "playerctl previous" "")
-        (button :class "music-button ${music.foreground}" :onclick "playerctl play-pause" {music.status})
-        (button :class "music-button ${music.foreground}" :onclick "playerctl next" ""))
+        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl previous" "")
+        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl play-pause" {music.status == "Playing" ? "" : ""})
+        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl next" ""))
       (box ; time info
         :orientation "v"
         (box
           :class "text"
           (label
             :xalign 0
-            :class "music-time ${music.foreground}"
+            :class "music-time"
+            :style "color: ${music.foreground};"
             :text {music_time.position})
           (label
             :xalign 1
-            :class "music-time ${music.foreground}"
+            :class "music-time"
+            :style "color: ${music.foreground};"
             :text {music.duration}))
         (box ; clickable progress bar
           :class "music-bar"
           (scale
-            ; sadly we cannot access a child (highlight) from a parent using :style
-            ; :style "background: linear-gradient(to right, ${music.color1}, ${music.color2});"
             ; transform scale position percentage into song position
             :onchange "playerctl position `awk -v len=$(playerctl metadata mpris:length) 'BEGIN{print {} * len / 1000000 / 100}'`"
+            :globalstyle ".top { background: ${music.foreground}; }"
             :value {music_time.position_percent}))))))
 
 (defwindow music
