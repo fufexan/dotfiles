@@ -4,7 +4,8 @@
   pkgs,
   ...
 }: {
-  imports = [./config.nix];
+  # imports = [./config.nix];
+  imports = [./settings.nix];
 
   home.packages = with pkgs; [
     jaq

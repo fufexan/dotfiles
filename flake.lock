@@ -373,11 +373,9 @@
       },
       "locked": {
         "lastModified": 1689247211,
-        "narHash": "sha256-WlXDmpKUyJdcNGRD6n0y0ZQDh1Dy1TDKAproaqqVJ1A=",
-        "owner": "fufexan",
-        "repo": "gross",
-        "rev": "d118ec3b650660e15ef9367c5a97671643426dec",
-        "type": "github"
+        "narHash": "sha256-2ktN2NCJ0MdCC8a3WKwj+axa9FrrOO61c6PUwhqjjyY=",
+        "type": "git",
+        "url": "file:///home/mihai/Documents/code/rust/gross"
       },
       "original": {
         "owner": "fufexan",
@@ -420,15 +418,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1688731042,
-        "narHash": "sha256-D1p/LLP1SpDYjutt9W+O5Ek+XGdszsjYjvL30ad++OY=",
-        "owner": "nix-community",
+        "lastModified": 1689854735,
+        "narHash": "sha256-nQBsf+ctdz7+ssI8YoMx/ib97hx7NCgsH73YQnjkxrk=",
+        "owner": "fufexan",
         "repo": "home-manager",
-        "rev": "34db2f05219bcb0e41cc85490e4c338e2405546c",
+        "rev": "827ffde84398c44bb60584e4c36e025dfaa3a46d",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "fufexan",
+        "ref": "hyprland",
         "repo": "home-manager",
         "type": "github"
       }

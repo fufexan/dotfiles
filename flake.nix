@@ -73,7 +73,7 @@
     };
 
     hm = {
-      url = "github:nix-community/home-manager";
+      url = "github:fufexan/home-manager/hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
