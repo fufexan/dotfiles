@@ -93,7 +93,7 @@
             prev.greetd
             // {
               regreet = prev.greetd.regreet.overrideAttrs (oldAttrs: rec {
-                version = "main";
+                version = "0.1.1-patched";
                 src = prev.fetchFromGitHub {
                   owner = "rharish101";
                   repo = "ReGreet";
@@ -105,8 +105,7 @@
                   outputHash = "sha256-dR6veXCGVMr5TbCvP0EqyQKTG2XM65VHF9U2nRWyzfA=";
                 });
 
-                # debug only
-                patches = ["${self}/pkgs/regreet.patch"];
+                patches = [../pkgs/regreet.patch];
               });
             };
 
