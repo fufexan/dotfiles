@@ -2,13 +2,13 @@
   config,
   pkgs,
   lib,
-  inputs',
+  inputs,
   ...
 }: let
   dependencies = with pkgs; [
     cfg.package
 
-    inputs'.gross.packages.gross
+    inputs.gross.packages.${pkgs.system}.gross
     config.wayland.windowManager.hyprland.package
 
     bash
@@ -55,27 +55,19 @@ in {
   options.programs.eww-hyprland = {
     enable = lib.mkEnableOption "eww Hyprland config";
 
-    package = lib.mkOption {
-      type = with lib.types; nullOr package;
-      default = pkgs.eww-wayland;
-      defaultText = lib.literalExpression "pkgs.eww-wayland";
-      description = "Eww package to use.";
-    };
+    package = lib.mkPackageOption pkgs "eww-wayland" {};
 
-    autoReload = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      defaultText = lib.literalExpression "false";
+    autoReload = lib.mkEnableOption null // {
       description = "Whether to restart the eww daemon and windows on change.";
     };
 
     colors = lib.mkOption {
-      type = with lib.types; nullOr lines;
+      type = with lib.types; nullOr (either lines path);
       default = null;
       defaultText = lib.literalExpression "null";
       description = ''
-        SCSS file with colors defined in the same way as Catppuccin colors are,
-        to be used by eww.
+        SCSS variables with colors defined in the same way as Catppuccin colors
+        are, to be used by eww.
 
         Defaults to Catppuccin Mocha.
       '';
