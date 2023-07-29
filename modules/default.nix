@@ -18,6 +18,7 @@ in {
         # NixOS modules
         sharedModules = [
           {home-manager.useGlobalPkgs = true;}
+          {disabledModules = ["security/pam.nix"];}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
           inputs.hyprland.nixosModules.default
@@ -26,8 +27,11 @@ in {
           inputs.lanzaboote.nixosModules.lanzaboote
           module_args
           ./core.nix
+          ./howdy
+          ./linux-enable-ir-emitter.nix
           ./network.nix
           ./nix.nix
+          ./pam.nix
           ./security.nix
         ];
       };

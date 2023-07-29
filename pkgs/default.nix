@@ -10,6 +10,10 @@
 
       gdb-frontend = pkgs.callPackage ./gdb-frontend {};
 
+      howdy = pkgs.callPackage ./howdy {};
+
+      linux-enable-ir-emitter = pkgs.callPackage ./linux-enable-ir-emitter {};
+
       waveform = pkgs.callPackage ./waveform {};
     };
   };

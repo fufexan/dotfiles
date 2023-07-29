@@ -50,6 +50,17 @@
     # for SSD/NVME
     fstrim.enable = true;
 
+    howdy = {
+      enable = true;
+      package = self.packages.${pkgs.system}.howdy;
+      settings = {
+        core.no_confirmation = true;
+        video.device_path = "/dev/video2";
+        video.dark_threshold = 90;
+      };
+    };
+    linux-enable-ir-emitter.enable = true;
+
     kmonad.keyboards = {
       io = {
         name = "io";
