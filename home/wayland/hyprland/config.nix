@@ -80,7 +80,7 @@ in {
     decoration {
       rounding = 16
       blur = true
-      blur_size = 3
+      blur_size = 10
       blur_passes = 3
       blur_new_optimizations = true
 
