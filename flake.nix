@@ -52,7 +52,7 @@
     };
 
     eww = {
-      url = "github:fufexan/eww/globalstyle";
+      url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
