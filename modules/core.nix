@@ -5,8 +5,7 @@
 }:
 # configuration shared by all hosts
 {
-  # remove bloat
-  documentation.nixos.enable = false;
+  documentation.dev.enable = true;
 
   # enable zsh autocompletion for system packages (systemd, etc)
   environment.pathsToLink = ["/share/zsh"];

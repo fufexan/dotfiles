@@ -51,6 +51,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    anyrun-nixos-options = {
+      url = "github:n3oney/anyrun-nixos-options";
+      inputs.flake-utils.follows = "fu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";

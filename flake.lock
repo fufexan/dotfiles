@@ -45,6 +45,29 @@
         "type": "github"
       }
     },
+    "anyrun-nixos-options": {
+      "inputs": {
+        "flake-utils": [
+          "fu"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1691014160,
+        "narHash": "sha256-nuxo5hA7VCPP2HY9Do3X1i9yRpyKsv//MOIkx51xkSQ=",
+        "owner": "n3oney",
+        "repo": "anyrun-nixos-options",
+        "rev": "ebb8f3e99a7545ff2d4040a98b3d30554d42a146",
+        "type": "github"
+      },
+      "original": {
+        "owner": "n3oney",
+        "repo": "anyrun-nixos-options",
+        "type": "github"
+      }
+    },
     "crane": {
       "flake": false,
       "locked": {
@@ -804,6 +827,7 @@
       "inputs": {
         "agenix": "agenix",
         "anyrun": "anyrun",
+        "anyrun-nixos-options": "anyrun-nixos-options",
         "eww": "eww",
         "flake-parts": "flake-parts_2",
         "fu": "fu",

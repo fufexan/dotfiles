@@ -1,4 +1,8 @@
-{inputs', ...}: {
+{
+  inputs',
+  osConfig,
+  ...
+}: {
   programs.anyrun = {
     enable = true;
 
@@ -10,6 +14,7 @@
         shell
         symbols
         translate
+        inputs'.anyrun-nixos-options.packages.default
       ];
 
       width.fraction = 0.3;
@@ -52,6 +57,12 @@
         border-radius: 24px;
         padding: 8px;
       }
+    '';
+
+    extraConfigFiles."nixos-options.ron".text = ''
+      Config(
+        options_path: "${osConfig.system.build.manual.optionsJSON}/share/doc/nixos/options.json"
+      )
     '';
   };
 }
