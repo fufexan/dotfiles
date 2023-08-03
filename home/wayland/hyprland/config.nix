@@ -79,10 +79,12 @@ in {
 
     decoration {
       rounding = 16
-      blur = true
-      blur_size = 10
-      blur_passes = 3
-      blur_new_optimizations = true
+      blur {
+        enabled = true
+        size = 10
+        passes = 3
+        new_optimizations = true
+      }
 
       drop_shadow = true
       shadow_ignore_window = true
