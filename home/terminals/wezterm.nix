@@ -7,7 +7,8 @@
       return {
         font = wezterm.font_with_fallback {
           "${default.terminal.font}",
-          "Material Symbols Outlined"
+          "Material Symbols Outlined",
+          "DejaVu Sans"
         },
         font_size = ${toString default.terminal.size},
         color_scheme = "Catppuccin Mocha",
