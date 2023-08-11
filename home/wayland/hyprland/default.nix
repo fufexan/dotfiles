@@ -1,5 +1,5 @@
 {
-  inputs',
+  inputs,
   lib,
   pkgs,
   ...
@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     jaq
     xorg.xprop
-    inputs'.hyprland-contrib.packages.grimblast
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
   # start swayidle as part of hyprland, not sway

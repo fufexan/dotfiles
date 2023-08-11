@@ -1,6 +1,6 @@
 {
   pkgs,
-  self',
+  self,
   ...
 }:
 # nix tooling
@@ -9,7 +9,7 @@
     alejandra
     deadnix
     statix
-    self'.packages.repl
+    self.packages.${pkgs.system}.repl
   ];
 
   programs.direnv = {

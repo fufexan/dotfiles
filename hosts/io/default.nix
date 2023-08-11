@@ -13,7 +13,7 @@
   };
 
   boot = {
-    binfmt.emulatedSystems = ["aarch64-linux"];
+    binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 
     # load modules on boot
     kernelModules = ["acpi_call"];

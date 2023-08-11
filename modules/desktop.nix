@@ -1,13 +1,12 @@
 {
-  inputs',
   pkgs,
   self,
-  self',
+  inputs,
   ...
 }: {
   boot.plymouth = {
     enable = true;
-    themePackages = [self'.packages.catppuccin-plymouth];
+    themePackages = [self.packages.${pkgs.system}.catppuccin-plymouth];
     theme = "catppuccin-mocha";
   };
 
@@ -95,7 +94,6 @@
   };
 
   nix = {
-    # package = inputs'.nix-super.packages.nix;
     settings = {
       substituters = [
         "https://nix-gaming.cachix.org"
@@ -139,7 +137,7 @@
     # keyboard remapping
     kmonad = {
       enable = true;
-      package = inputs'.kmonad.packages.default;
+      package = inputs.kmonad.packages.${pkgs.system}.default;
       keyboards = {
         one2mini = {
           device = "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd";

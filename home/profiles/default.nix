@@ -4,20 +4,15 @@
   module_args,
   ...
 }: let
-  sharedModules = withSystem "x86_64-linux" ({
-    inputs',
-    self',
-    ...
-  }: [
+  sharedModules = [
     ../.
     ../shell
     module_args
-    {_module.args = {inherit inputs' self';};}
     inputs.anyrun.homeManagerModules.default
     inputs.nix-index-db.hmModules.nix-index
     inputs.spicetify-nix.homeManagerModule
     inputs.hyprland.homeManagerModules.default
-  ]);
+  ];
 
   homeImports = {
     "mihai@io" = [./io] ++ sharedModules;

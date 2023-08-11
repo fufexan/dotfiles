@@ -1,5 +1,5 @@
 {
-  inputs',
+  inputs,
   pkgs,
   ...
 }: {
@@ -7,7 +7,7 @@
 
   programs.helix = {
     enable = true;
-    package = inputs'.helix.packages.default.overrideAttrs (self: {
+    package = inputs.helix.packages.${pkgs.system}.default.overrideAttrs (self: {
       makeWrapperArgs = with pkgs;
         self.makeWrapperArgs
         or []

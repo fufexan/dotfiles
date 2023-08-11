@@ -2,15 +2,14 @@
   config,
   pkgs,
   inputs,
-  inputs',
   lib,
-  self,
   ...
 }: {
   environment.systemPackages = [
     # we need git for flakes
     pkgs.git
-    inputs'.nh.packages.default
+    # cool helper for rebuild
+    inputs.nh.packages.${pkgs.system}.default
   ];
   environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
 

@@ -2,13 +2,13 @@
   config,
   pkgs,
   lib,
-  inputs',
+  inputs,
   ...
 }: let
   dependencies = with pkgs; [
     cfg.package
 
-    inputs'.gross.packages.gross
+    inputs.gross.packages.${pkgs.system}.gross
     config.wayland.windowManager.hyprland.package
 
     bash

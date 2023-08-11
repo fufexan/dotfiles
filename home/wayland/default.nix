@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  inputs',
+  inputs,
   ...
 }:
 # Wayland config
@@ -28,7 +28,7 @@ in {
 
   programs.eww-hyprland = {
     enable = true;
-    package = inputs'.eww.packages.eww-wayland;
+    package = inputs.eww.packages.${pkgs.system}.eww-wayland;
   };
 
   home.packages = with pkgs; [
