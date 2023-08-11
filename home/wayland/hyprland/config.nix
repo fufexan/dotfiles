@@ -6,16 +6,13 @@
   inherit (default) colors;
 
   pointer = config.home.pointerCursor;
-  homeDir = config.home.homeDirectory;
+  scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
 in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-
-    # scale apps
-    exec-once = xprop -root -f _XWAYLAND_GLOBAL_OUTPUT_SCALE 32c -set _XWAYLAND_GLOBAL_OUTPUT_SCALE 2
 
     # set cursor for HL itself
     exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
@@ -31,10 +28,19 @@ in {
     misc {
       # disable auto polling for config file changes
       disable_autoreload = true
+
+      disable_hyprland_logo = true
+      disable_splash_rendering = true
+
       # disable dragging animation
       animate_mouse_windowdragging = false
+
       # enable variable refresh rate (effective depending on hardware)
       vrr = 1
+
+      # groupbar
+      groupbar_titles_font_size = 16
+      groupbar_gradients = false
     }
 
     # touchpad gestures
@@ -68,30 +74,32 @@ in {
     general {
       gaps_in = 5
       gaps_out = 5
-      border_size = 2
-      col.active_border = rgb(${colors.blue}) rgb(${colors.mauve}) 270deg
-      col.inactive_border = rgb(${colors.crust}) rgb(${colors.lavender}) 270deg
+      border_size = 1
+      col.active_border = rgba(88888888)
+      col.inactive_border = rgba(00000088)
 
       # group borders
-      col.group_border_active = rgb(${colors.pink})
-      col.group_border = rgb(${colors.surface0})
+      col.group_border_active = rgba(${colors.pink}88)
+      col.group_border = rgba(${colors.surface0}88)
     }
 
     decoration {
-      rounding = 16
+      rounding = 8
       blur {
         enabled = true
         size = 10
         passes = 3
         new_optimizations = true
+        brightness = 1.0
+        noise = 0.02
       }
 
       drop_shadow = true
       shadow_ignore_window = true
-      shadow_offset = 0 5
-      shadow_range = 50
+      shadow_offset = 0 2
+      shadow_range = 20
       shadow_render_power = 3
-      col.shadow = rgba(00000099)
+      col.shadow = rgba(00000055)
     }
 
     animations {
@@ -107,9 +115,6 @@ in {
       pseudotile = true
       preserve_split = true
     }
-
-    # only allow shadows for floating windows
-    windowrulev2 = noshadow, floating:0
 
     # telegram media viewer
     windowrulev2 = float, title:^(Media viewer)$
@@ -202,18 +207,18 @@ in {
 
     # volume
     bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%+
-    binde = , XF86AudioRaiseVolume, exec, ${homeDir}/.config/eww/scripts/volume osd
+    binde = , XF86AudioRaiseVolume, exec, ${scriptDir}/volume osd
     bindle = , XF86AudioLowerVolume, exec, wpctl set-volume -l "1.0" @DEFAULT_AUDIO_SINK@ 6%-
-    binde = , XF86AudioLowerVolume, exec, ${homeDir}/.config/eww/scripts/volume osd
+    binde = , XF86AudioLowerVolume, exec, ${scriptDir}/volume osd
     bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-    bind = , XF86AudioMute, exec, ${homeDir}/.config/eww/scripts/volume osd
+    bind = , XF86AudioMute, exec, ${scriptDir}/volume osd
     bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 
     # backlight
     bindle = , XF86MonBrightnessUp, exec, brillo -q -u 300000 -A 5
-    binde = , XF86MonBrightnessUp, exec, ${homeDir}/.config/eww/scripts/brightness osd
+    binde = , XF86MonBrightnessUp, exec, ${scriptDir}/brightness osd
     bindle = , XF86MonBrightnessDown, exec, brillo -q -u 300000 -U 5
-    binde = , XF86MonBrightnessDown, exec, ${homeDir}/.config/eww/scripts/brightness osd
+    binde = , XF86MonBrightnessDown, exec, ${scriptDir}/brightness osd
 
     # screenshot
     # stop animations while screenshotting; makes black border go away
@@ -249,8 +254,9 @@ in {
     # cycle workspaces
     bind = $mod, bracketleft, workspace, m-1
     bind = $mod, bracketright, workspace, m+1
+
     # cycle monitors
-    bind = $mod SHIFT, braceleft, focusmonitor, l
-    bind = $mod SHIFT, braceright, focusmonitor, r
+    bind = $mod SHIFT, bracketleft, focusmonitor, l
+    bind = $mod SHIFT, bracketright, focusmonitor, r
   '';
 }

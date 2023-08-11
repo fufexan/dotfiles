@@ -21,7 +21,7 @@
 
   wallpaper = builtins.fetchurl rec {
     name = "wallpaper-${sha256}.png";
-    url = "https://images.unsplash.com/photo-1529840882932-55f06ab2c681";
-    sha256 = "1xngx610skv1vqzx1c7j2zv5cg3gld3hkcxki8jd30rssjjx98p2";
+    url = "https://images.unsplash.com/photo-1525838983331-f8bd3c000585?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=andre-benz-sLokLIacItI-unsplash.jpg";
+    sha256 = "04dqprjnh5bvp5afiq8p9flda30m77674a5ypjpwgr9pyvgvd099";
   };
 }
