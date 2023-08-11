@@ -3,21 +3,27 @@
   pkgs,
   ...
 }: let
-  w = pkgs.wlogout;
+  bgImageSection = name: ''
+    #${name} {
+      background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/${name}.png"));
+    }
+  '';
 in {
   xdg.configFile."wlogout/style.css".text = ''
     * {
     	background-image: none;
-      font-family: "Jost *", Roboto, sans-serif;
+      font-family: "Product Sans", Roboto, sans-serif;
     }
+
     window {
-    	background-color: rgba(12, 12, 12, 0.9);
+    	background-color: rgba(0, 0, 0, .5);
     }
+
     button {
       background: unset;
-      border-radius: 16px;
-    	border: 1px solid #28283d;
-      color: ${default.xcolors.text};
+      border-radius: 8px;
+    	border: 1px solid rgba(130, 130, 130, .7);
+      box-shadow: 0 0 1px 1px rgba(0, 0, 0, .5);
       margin: 1rem;
     	background-repeat: no-repeat;
     	background-position: center;
@@ -25,33 +31,15 @@ in {
     }
 
     button:focus, button:active, button:hover {
-      background-color: ${default.xcolors.blue};
-      color: ${default.xcolors.base};
+      background-color: rgba(255, 255, 255, 0.1);
     	outline-style: none;
     }
 
-    #lock {
-        background-image: image(url("${w}/share/wlogout/icons/lock.png"), url("${w}/local/share/wlogout/icons/lock.png"));
-    }
-
-    #logout {
-        background-image: image(url("${w}/share/wlogout/icons/logout.png"), url("${w}/local/share/wlogout/icons/logout.png"));
-    }
-
-    #suspend {
-        background-image: image(url("${w}/share/wlogout/icons/suspend.png"), url("${w}/local/share/wlogout/icons/suspend.png"));
-    }
-
-    #hibernate {
-        background-image: image(url("${w}/share/wlogout/icons/hibernate.png"), url("${w}/local/share/wlogout/icons/hibernate.png"));
-    }
-
-    #shutdown {
-        background-image: image(url("${w}/share/wlogout/icons/shutdown.png"), url("${w}/local/share/wlogout/icons/shutdown.png"));
-    }
-
-    #reboot {
-        background-image: image(url("${w}/share/wlogout/icons/reboot.png"), url("${w}/local/share/wlogout/icons/reboot.png"));
-    }
+    ${bgImageSection "lock"}
+    ${bgImageSection "logout"}
+    ${bgImageSection "suspend"}
+    ${bgImageSection "hibernate"}
+    ${bgImageSection "shutdown"}
+    ${bgImageSection "reboot"}
   '';
 }
