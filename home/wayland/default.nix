@@ -19,11 +19,11 @@ in {
   imports = [
     ../programs/eww
     ./anyrun.nix
+    ./gtklock.nix
     ./hyprland
     ./sway.nix
     ./swaybg.nix
     ./swayidle.nix
-    ./swaylock.nix
   ];
 
   programs.eww-hyprland = {
@@ -36,9 +36,7 @@ in {
     grim
     slurp
 
-    # idle/lock
     swaybg
-    swaylock-effects
 
     # utils
     ocrScript
