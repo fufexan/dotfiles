@@ -1,6 +1,7 @@
 .osd-part {
   @include window;
-  margin: 0 .5rem .5rem;
+  border-radius: 16px;
+  margin: .1rem .5rem .5rem;
 
   label {
     color: $text;

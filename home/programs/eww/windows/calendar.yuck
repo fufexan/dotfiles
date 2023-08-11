@@ -11,4 +11,5 @@
   	:anchor "top right"
     :width "0px"
     :height "0px")
+  :namespace "eww-calendar"
   (calendar-win))

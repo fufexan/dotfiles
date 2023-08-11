@@ -1,17 +1,22 @@
 @import 'css/colors';
 
 @mixin rounding {
-  border-radius: 16px;
+  border-radius: 8px;
+}
+
+@mixin border {
+  border: 1px solid rgba(130,130,130,.7);
+  box-shadow: 0 0 1px 1px rgba(0,0,0,.5);
 }
 
 @mixin window {
+  @include border;
+  @include rounding;
+
   background-color: $bg;
   background-position: center;
   background-size: cover;
-  border: 1px solid rgba(0, 0, 0, .3);
-  color: $fg;
   margin: 5px 5px 10px;
-  @include rounding;
 }
 
 * {
@@ -29,55 +34,37 @@
 @import 'css/volume';
 
 .bar {
-  background-color: $bg;
-  color: $fg;
-
-  label {
-    font-size: 1.2rem;
-  }
-
-  .text {
-    margin-top: .2rem;
-  }
+  background: rgba(0, 0, 0, .2);
 }
 
 tooltip {
   background: $bg;
   border: 1px solid $border;
   border-radius: 8px;
-
-  label {
-    font-size: 1rem;
-  }
 }
 
 /* icon font */
 .icon,
 .icon label { font-family: Material Symbols Outlined; }
 
-.module { margin: 0 5px; }
+/* subtle shadows to text and icons */
+.bar .text,
+.bar .text label,
+.bar .icon,
+.bar .icon label {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+}
+
+.module { margin: 0 .5rem; }
 
 /* date & time */
 .hour {
-  font-weight: bold;
-  padding-left: 5px;
+  padding-left: .5rem;
 }
 
 .minute {
-  padding-right: .7rem;
+  padding-right: .5rem;
 }
-
-.date {
-  color: $flamingo;
-
-  label {
-    font-size: 1.2rem;
-  }
-}
-
-/* right-aligned modules */
-.bright-icon { color: $yellow; }
-.module-bt { font-size: 1.2rem; }
 
 /* scales */
 scale trough {
@@ -90,7 +77,7 @@ scale trough {
 
 /* workspaces */
 .focused {
-  background-color: $bg;
+  background-color: $bg1;
   border-radius: 1rem;
   margin: .3rem;
   padding: .25rem;

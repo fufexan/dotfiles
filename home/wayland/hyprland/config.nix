@@ -141,8 +141,10 @@ in {
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
-    layerrule = blur, ^(gtk-layer-shell|anyrun)$
-    layerrule = ignorezero, ^(gtk-layer-shell|anyrun)$
+    $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell)$
+    layerrule = blur, $layers
+    layerrule = ignorezero, $layers
+    layerrule = xray 1, ^(bar|gtk-layer-shell)$
 
     # mouse movements
     bindm = $mod, mouse:272, movewindow

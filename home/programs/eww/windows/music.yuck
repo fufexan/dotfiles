@@ -70,4 +70,5 @@
     :width "0%"
     :height "0%"
     :anchor "top center")
+  :namespace "eww-music"
   (music))

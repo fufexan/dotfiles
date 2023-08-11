@@ -15,8 +15,6 @@
   .date-box {
     margin: 0 1rem;
 
-    label { font-size: 1.1rem; }
-
     .date {
       background: unset;
       margin: 0 .5rem 0 0;
@@ -35,7 +33,6 @@
   }
 
   label {
-    font-size: 1rem;
     margin: 0 .1rem;
   }
 }
@@ -77,6 +74,10 @@
 
   box { margin: .2rem 0; }
   label { font-size: 1.2rem; }
+}
+
+.system-row .text, .system-info-box .text {
+  font-size: .9rem;
 }
 
 .volume-slider-box,

@@ -44,4 +44,5 @@
     :width "0%"
     :height "0%"
     :anchor "center left")
+  :namespace "eww-osd"
   (osd))
