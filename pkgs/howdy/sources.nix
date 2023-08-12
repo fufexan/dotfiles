@@ -28,6 +28,6 @@
 
   py = python3.withPackages (p: [
     p.face_recognition
-    (p.opencv4.override {enableGtk3 = true;})
+    p.opencv4
   ]);
 }

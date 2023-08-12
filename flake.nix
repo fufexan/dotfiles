@@ -95,14 +95,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        flake-utils.follows = "fu";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
+    lanzaboote.url = "github:nix-community/lanzaboote";
 
     nh = {
       url = "github:viperML/nh";
