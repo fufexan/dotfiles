@@ -11,8 +11,6 @@
 /* music window */
 .music-window {
   @include window;
-  border: none;
-  box-shadow: none;
   /* matches the cover art radius nicely */
   border-radius: 16px;
 }

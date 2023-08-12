@@ -26,8 +26,7 @@
 
     extraCss = ''
       * {
-        transition: 200ms ease;
-        font-family: Lexend;
+        font-family: Product Sans;
         font-size: 1.3rem;
       }
 
@@ -39,13 +38,18 @@
         background: transparent;
       }
 
-      #match:selected {
-        background: rgba(203, 166, 247, 0.7);
+      .vertical > list > row:first-child {
+        margin-top: 5px;
       }
 
       #match {
-        padding: 3px;
-        border-radius: 16px;
+        margin: 1px;
+        padding: 2px;
+        border-radius: 14px;
+      }
+
+      #match:selected, #match:hover, #plugin:hover {
+        background: rgba(255, 255, 255, .1);
       }
 
       #entry, #plugin:hover {
@@ -53,8 +57,8 @@
       }
 
       box#main {
-        background: rgba(30, 30, 46, 0.7);
-        border: 1px solid #28283d;
+        background: rgba(0, 0, 0, .3);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .4);
         border-radius: 24px;
         padding: 8px;
       }

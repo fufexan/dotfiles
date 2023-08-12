@@ -1,8 +1,4 @@
-{
-  default,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   bgImageSection = name: ''
     #${name} {
       background-image: image(url("${pkgs.wlogout}/share/wlogout/icons/${name}.png"));
@@ -22,8 +18,7 @@ in {
     button {
       background: unset;
       border-radius: 8px;
-    	border: 1px solid rgba(130, 130, 130, .7);
-      box-shadow: 0 0 1px 1px rgba(0, 0, 0, .5);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .4);
       margin: 1rem;
     	background-repeat: no-repeat;
     	background-position: center;
@@ -31,7 +26,7 @@ in {
     }
 
     button:focus, button:active, button:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.2);
     	outline-style: none;
     }
 

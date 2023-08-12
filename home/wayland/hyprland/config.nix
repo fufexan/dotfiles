@@ -148,7 +148,9 @@ in {
 
     $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell)$
     layerrule = blur, $layers
-    layerrule = ignorezero, $layers
+    layerrule = ignorealpha 0.2, $layers
+    layerrule = ignorealpha 0.5, ^(eww-music)$
+    layerrule = ignorealpha 0.1, ^(bar)$
     layerrule = xray 1, ^(bar|gtk-layer-shell)$
 
     # mouse movements

@@ -1,7 +1,6 @@
 /* screenshare & mic share indicators */
 .indicators {
   margin: .3rem;
-  transition: 500ms ease-out;
 
   :first-child {
     border-radius: 1rem 0 0 1rem;
@@ -18,7 +17,7 @@
 
 .indicator {
   color: $base;
-  padding: 0 .5rem;
+  padding: 0 .4rem;
 }
 
 .screenshare { background: $red; }
