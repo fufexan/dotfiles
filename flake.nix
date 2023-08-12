@@ -53,7 +53,7 @@
 
     anyrun-nixos-options = {
       url = "github:n3oney/anyrun-nixos-options";
-      inputs.flake-utils.follows = "fu";
+      inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
