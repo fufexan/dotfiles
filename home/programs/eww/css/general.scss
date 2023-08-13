@@ -1,0 +1,61 @@
+/* general css styles */
+
+/* mixins */
+@mixin rounding {
+  border-radius: 8px;
+}
+
+@mixin border {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .4);
+}
+
+@mixin window {
+  @include border;
+  @include rounding;
+
+  background-color: $bg;
+  background-position: center;
+  background-size: cover;
+  margin: 5px 5px 10px;
+}
+
+/* get rid of GTK theme's styles and set defaults */
+* {
+  all: unset;
+  font-family: "Product Sans", Roboto, sans-serif;
+  font-size: 1.05rem;
+  transition: 200ms ease;
+}
+
+tooltip {
+  background: $bg;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .4);
+  border-radius: 8px;
+}
+
+/* icon font */
+.icon,
+.icon label { font-family: Material Symbols Outlined; }
+
+/* subtle shadows to text and icons */
+.bar, .music-window {
+  .text,
+  .text label,
+  .icon,
+  .icon label {
+    text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+  }
+}
+
+/* scales */
+scale trough {
+  background-color: $bg1;
+  border-radius: 24px;
+  margin: 0 1rem;
+  min-height: 10px;
+  min-width: 70px;
+}
+
+/* modules */
+.enabled { color: white; }
+.disabled { color: $surface1; }

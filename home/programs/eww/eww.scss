@@ -1,93 +1,15 @@
+/* style aggregator */
+
+/* setup */
 @import 'css/colors';
+@import 'css/general'
 
-@mixin rounding {
-  border-radius: 8px;
-}
-
-@mixin border {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .4);
-}
-
-@mixin window {
-  @include border;
-  @include rounding;
-
-  background-color: $bg;
-  background-position: center;
-  background-size: cover;
-  margin: 5px 5px 10px;
-}
-
-* {
-  all: unset;
-  font-family: "Product Sans", Roboto, sans-serif;
-  font-size: 1.05rem;
-  transition: 200ms ease;
-}
-
+/* modules & windows */
+@import 'css/bar'
 @import 'css/calendar';
 @import 'css/indicators';
 @import 'css/music';
 @import 'css/osd';
-@import 'css/sidebar';
+@import 'css/system-menu';
 @import 'css/system';
 @import 'css/volume';
-
-.bar {
-  background: rgba(0, 0, 0, .2);
-}
-
-tooltip {
-  background: $bg;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .4);
-  border-radius: 8px;
-}
-
-/* icon font */
-.icon,
-.icon label { font-family: Material Symbols Outlined; }
-
-/* subtle shadows to text and icons */
-.bar, .music-window {
-  .text,
-  .text label,
-  .icon,
-  .icon label {
-    text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
-  }
-}
-
-.module { margin: 0 .5rem; }
-
-/* date & time */
-.hour {
-  padding-left: .5rem;
-}
-
-.minute {
-  padding-right: .5rem;
-}
-
-/* scales */
-scale trough {
-  background-color: $bg1;
-  border-radius: 24px;
-  margin: 0 1rem;
-  min-height: 10px;
-  min-width: 70px;
-}
-
-/* workspaces */
-.focused {
-  background-color: $bg1;
-  border-radius: 1rem;
-  margin: .3rem;
-  padding: .25rem;
-}
-
-.workspaces { margin-left: 10px; }
-
-.ws {
-  border-radius: 2rem;
-  margin: .7rem .25rem;
-}

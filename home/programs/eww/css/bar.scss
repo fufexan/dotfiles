@@ -1,0 +1,15 @@
+.bar { background: rgba(0, 0, 0, .2); }
+.module { margin: 0 .5rem; }
+
+/* workspaces */
+.focused {
+  background-color: $bg1;
+  border-radius: 1rem;
+  margin: .3rem;
+  padding: .25rem;
+}
+
+.ws {
+  border-radius: 2rem;
+  margin: .7rem .25rem;
+}

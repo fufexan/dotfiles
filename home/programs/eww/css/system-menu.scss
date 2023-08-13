@@ -1,4 +1,5 @@
 /* system menu */
+
 .system-menu-box { @include window; }
 
 /* between net/bt and their arrows */
@@ -43,12 +44,31 @@
   background-color: $bg1;
   margin: .3rem;
 
+  .enabled button {
+    background: rgba(255, 255, 255, .2);
+    label { color: $base; }
+  }
+  .disabled button {
+    background: rgba(0, 0, 0, .1);
+    label { color: white; }
+  }
+
+  .enabled .separator { background: $base; }
+  .disabled .separator { background: white; }
+
   button {
-    @include rounding;
     padding: 1rem;
 
     label {
       font-size: 1.5rem;
+    }
+
+    :first-child {
+      border-radius: 8px 0 0 8px;
+    }
+
+    :last-child {
+      border-radius: 0 8px 8px 0;
     }
 
     /* set wifi/bt colors and dim buttons when hovering */

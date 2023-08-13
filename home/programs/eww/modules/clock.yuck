@@ -1,30 +1,6 @@
-(defvar date_rev false)
-
 (defwidget clock_module []
   (eventbox
-    :onhover "${EWW_CMD} update date_rev=true"
-    :onhoverlost "${EWW_CMD} update date_rev=false"
-    (overlay
-      :class "module"
-      ; the styles make the clock invisible while hovered, and the date is shown instead
-      (box
-        :space-evenly false
-        :class "text"
-        (label
-          :text {formattime(EWW_TIME, "%H")}
-          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
-          :class "hour")
-        (label
-          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
-          :text ":")
-        (label
-          :text {formattime(EWW_TIME, "%M")}
-          :style {date_rev ? "color: rgba(0,0,0,0); text-shadow: none;" : ""}
-          :class "minute"))
-      (revealer
-        :reveal date_rev
-        :transition "crossfade"
-        (button
-          :class "date text"
-          :onclick "${EWW_CMD} open --toggle calendar"
-          {formattime(EWW_TIME, "%d/%m")})))))
+    :onclick "eww open --toggle calendar"
+    (label
+      :class "text module"
+      :text {formattime(EWW_TIME, "%a %b %d  %H:%M")})))
