@@ -1,8 +1,12 @@
 /* general css styles */
 
 /* mixins */
+@mixin window-rounding {
+  border-radius: 16px;
+}
+
 @mixin rounding {
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 @mixin border {
@@ -11,7 +15,7 @@
 
 @mixin window {
   @include border;
-  @include rounding;
+  @include window-rounding;
 
   background-color: $bg;
   background-position: center;
@@ -22,8 +26,8 @@
 /* get rid of GTK theme's styles and set defaults */
 * {
   all: unset;
-  font-family: "Product Sans", Roboto, sans-serif;
-  font-size: 1.05rem;
+  font-family: "Lexend", Roboto, sans-serif;
+  font-size: .9rem;
   transition: 200ms ease;
 }
 
@@ -35,10 +39,13 @@ tooltip {
 
 /* icon font */
 .icon,
-.icon label { font-family: Material Symbols Outlined; }
+.icon label {
+  font-family: Material Symbols Outlined;
+  font-size: 1.05rem;
+}
 
 /* subtle shadows to text and icons */
-.bar, .music-window {
+.bar, .music-window, .system-menu-window {
   .text,
   .text label,
   .icon,
@@ -48,14 +55,33 @@ tooltip {
 }
 
 /* scales */
-scale trough {
-  background-color: $bg1;
-  border-radius: 24px;
-  margin: 0 1rem;
-  min-height: 10px;
-  min-width: 70px;
+scale {
+  trough {
+    background-color: $bg1;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    min-height: 10px;
+    min-width: 70px;
+  }
+
+  highlight {
+    border-radius: 1rem;
+  }
+}
+
+.button {
+  background: rgba(255, 255, 255, .2);
+  border-radius: 100%;
+  padding: .3rem .5rem; /* general for icons */
+
+  &:hover {
+    background: rgba(255, 255, 255, .15);
+  }
+
+  .icon {
+    font-size: .9rem;
+  }
 }
 
 /* modules */
-.enabled { color: white; }
-.disabled { color: $surface1; }
+.enabled, .connected { color: white; }
