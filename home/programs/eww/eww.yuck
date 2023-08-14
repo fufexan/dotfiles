@@ -11,52 +11,9 @@
 (include "./modules/volume.yuck")
 (include "./modules/workspaces.yuck")
 
-; individual windows; bar is in this file
+; individual windows
+(include "./windows/bar.yuck")
 (include "./windows/calendar.yuck")
 (include "./windows/music.yuck")
-(include "./windows/osd.yuck") ; on-screen-display (volume/brightness)
+(include "./windows/osd.yuck")
 (include "./windows/system-menu.yuck")
-
-; bar modules alignment
-(defwidget left []
-  (box
-    :space-evenly false
-    :halign "start"
-    (workspaces)))
-
-(defwidget center []
-  (box
-    :space-evenly false
-    :halign "center"
-    (music-module)))
-
-(defwidget right []
-  (box
-    :space-evenly false
-    :halign "end"
-    (indicators)
-    (volume-module)
-    (net)
-    (bluetooth)
-    (sys)
-    (clock_module)))
-
-(defwidget bar-box []
-  (centerbox
-    (left)
-    (center)
-    (right)))
-
-(defwindow bar
-  :monitor 0
-  :geometry
-    (geometry
-      :x "0%"
-      :y "0%"
-      :width "100%"
-      :height "32px"
-      :anchor "top center")
-  :stacking "fg"
-  :exclusive true
-  :namespace "bar"
-  (bar-box))

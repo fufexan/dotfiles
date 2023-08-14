@@ -1,7 +1,5 @@
 (defwidget bluetooth []
-  (button
-    :class "module-bt module icon ${bluetooth.state == `connected` ? `enabled` : `disabled`}"
-    :onclick "blueberry" ; clicking opens blueberry
-    :onrightclick "scripts/bluetooth toggle" ; rightclick to turn bluetooth on/off
+  (label
+    :class "module icon ${bluetooth.state}"
     :tooltip "${bluetooth.text} ${bluetooth.battery}"
-    {bluetooth.state == "connected" ? "" : bluetooth.state == "enabled" ? "" : ""}))
+    :text {bluetooth.state == "connected" ? "" : bluetooth.state == "enabled" ? "" : ""}))

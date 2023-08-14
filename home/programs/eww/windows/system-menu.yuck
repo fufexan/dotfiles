@@ -1,6 +1,3 @@
-(defvar GB 1024000000)
-(defvar MB 1024000)
-
 (defwidget toggle [name var command icon]
   (eventbox
     :onclick "eww close system-menu; ${command} &"
