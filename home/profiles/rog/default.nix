@@ -10,5 +10,5 @@
     ../../terminals/wezterm.nix
   ];
 
-  wayland.windowManager.hyprland.nvidiaPatches = true;
+  wayland.windowManager.hyprland.enableNvidiaPatches = true;
 }

@@ -44,7 +44,7 @@
   programs = {
     hyprland = {
       enable = true;
-      nvidiaPatches = true;
+      enableNvidiaPatches = true;
     };
     steam.enable = true;
   };
