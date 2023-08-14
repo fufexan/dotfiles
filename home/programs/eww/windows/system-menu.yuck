@@ -1,210 +1,97 @@
 (defvar GB 1024000000)
 (defvar MB 1024000)
 
-(defwidget system-menu []
-  (box ; time & date
-    :class "system-menu-box"
-    :space-evenly false
-    :orientation "v"
+(defwidget toggle [name var command icon]
+  (eventbox
+    :onclick "eww close system-menu; ${command} &"
     (box
-      :class "top-row"
       :space-evenly false
+      :class "toggle ${var.state}"
+      (button
+        :class "button"
+        :onclick "scripts/${name} toggle"
+        (label
+          :class "icon"
+          :text {icon}))
       (label
-        :class "time text"
-        :text {formattime(EWW_TIME, "%H:%M")})
-      (box
-        :class "date-box"
-        :space-evenly false
-        (label
-          :class "date"
-          :text {formattime(EWW_TIME, "%d/%m")})
-        (label
-          :class "day"
-          :text {formattime(EWW_TIME, "%A")})))
+        :class "text"
+        :wrap true
+        :text `${var.text} ${var.battery ?: ""}`))))
 
-    (centerbox ; wifi/bluetooth/airplane buttons
-      :class "system-row"
-      (box
-        :class "net-box"
-        :space-evenly false
-        :orientation "v"
-        (box
-          :class "element icon ${net.class}"
-          :space-evenly false
-          (button
-            :class "net-button"
-            :onclick "scripts/net toggle"
-            {net.icon})
-          (label
-            :class "separator"
-            :text "│")
-          (button
-            :class "net-arrow-btn"
-            :onclick "eww close system-menu && XDG_CURRENT_DESKTOP=GNOME gnome-control-center &"
-            ""))
-        (label
-          :class "text"
-          :text {net.name}
-          :xalign 0.5
-          :justify "center"
-          :wrap true))
-
-      (box
-        :class "bluetooth-box"
-        :space-evenly false
-        :orientation "v"
-        (box
-          :class "element icon ${bluetooth.class}"
-          :space-evenly false
-          (button
-            :class "bluetooth-button"
-            :onclick "scripts/bluetooth toggle"
-            {bluetooth.icon})
-          (label
-            :class "separator"
-            :text "│")
-          (button
-            :class "bluetooth-arrow-btn"
-            :onclick "eww close system-menu && blueberry"
-            ""))
-        (label
-          :class "text"
-          :text {bluetooth.text}
-          :xalign 0.5
-          :justify "center"
-          :tooltip {bluetooth.battery}
-          :wrap true))
-
-      (box
-        :class "airplane-box"
-        :space-evenly false
-        :orientation "v"
-        (box
-          :class "element"
-          (button
-            :class "airplane-button"
-            :onclick "scripts/airplane toggle"
-            airplane))
-        (label
-          :class "text"
-          :text "Airplane Mode"
-          :xalign 0.5
-          :limit-width 16)))
-
+(defwidget system-menu []
+  (box
+    :class "system-menu-window"
+    :orientation "v"
+    :space-evenly false
+    (box ; wifi/bluetooth/airplane buttons
+      :orientation "v"
+      :class "toggles"
+      (toggle
+        :name "net"
+        :var net
+        :command "XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+        :icon {net.icon})
+      (toggle
+        :name "bluetooth"
+        :var bluetooth
+        :command "blueberry"
+        :icon {bluetooth.state == "connected" ? "" : bluetooth.state == "enabled" ? "" : ""})
+      (toggle
+        :name "airplane"
+        :var airplane
+        :command ""
+        :icon {airplane.icon}))
+      
     (box ; brightness & volume sliders
       :class "sliders"
       :orientation "v"
       (box
-        :class "volume-slider-box"
+        :class "volume"
         :space-evenly false
-        (button
-          :class "volume-icon icon"
-          :onclick "scripts/volume mute SINK"
-          {volume.icon})
+        (label
+          :class "icon"
+          :text {volume.icon})
         (scale
-          :class "volume-bar"
           :value {volume.percent}
           :tooltip "volume on ${volume.percent}%"
           :onchange "scripts/volume setvol SINK {}"))
       (box
-        :class "brightness-slider-box"
+        :class "brightness"
         :space-evenly false
-        (button
-          :class "brightness-slider-icon icon"
-          {brightness.icon})
+        (label
+          :class "icon"
+          :text {brightness.icon})
         (scale
-          :class "brightness-slider" 
           :value {brightness.percent} 
-          :marks true 
+          :tooltip "brightness on ${brightness.percent}%"
           :onchange "brillo -S {}")))
 
-    (box ; cpu & memory info
-      :class "system-info-box"
-
-      ; cpu
+    (box ; battery info & power button
+      :space-evenly false
       (box
-        :class "sys-box"
+        :class "battery"
         :space-evenly false
-        :halign "start"
-        (circular-progress
-          :value "${EWW_CPU.avg}"
-          :class "sys-cpu"
-          :thickness 3
-          (label
-            :text ""
-            :class "sys-icon-cpu icon"))
-        (box
-          :class "text"
-          :orientation "v"
-          :vexpand false
-          (label
-            :text "cpu"
-            :halign "start"
-            :class "sys-text-cpu")
-          (label
-            :text "${round(EWW_CPU.avg,2)}%"
-            :halign "start"
-            :class "sys-text-sub")
-          (label
-            :text "${EWW_CPU.cores[0].freq} MHz"
-            :halign "start"
-            :class "sys-text-sub")))
-
-      ; memory
-      (box
-        :class "sys-box"
-        :space-evenly false
-        :halign "end"
-        (circular-progress
-          :value {EWW_RAM.used_mem_perc}
-          :class "sys-mem"
-          :thickness 3
-          (label
-            :text ""
-            :class "sys-icon-mem icon"))
-        (box
-          :class "text"
-          :orientation "v"
-          (label
-            :text "memory"
-            :halign "start"
-            :class "sys-text-mem")
-          (label
-            :text {EWW_RAM.used_mem / GB < 1 ? "${round(EWW_RAM.used_mem / MB, 1)} M used" : "${round(EWW_RAM.used_mem / GB, 1)} G used"}
-            :halign "start"
-            :class "sys-text-sub")
-          (label
-            :text {EWW_RAM.total_mem / GB < 1 ? "${round(EWW_RAM.total_mem / MB, 1)} M total" : "${round(EWW_RAM.total_mem / GB, 1)} G total"}
-            :halign "start"
-            :class "sys-text-sub"))))
-
-    (centerbox ; battery info & power button
-      :class "bottom-row"
-      (box
-        :class "battery-box"
-        :space-evenly false
-        :halign "start"
         (label
-          :class "battery-icon icon ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
+          :class "icon ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
           :text {battery_icons[round(EWW_BATTERY.total_avg / (100 / arraylength(battery_icons)) - 1,0)]})
         (label
           :class "text"
           :text {round(EWW_BATTERY.total_avg,0)})
         (label
-          :class "battery-status text"
+          :class "status text"
           :text {battery.status})
         (label
-          :class "battery-rate text"
+          :class "rate text"
           :text {battery.rate}))
-      (label) ; empty element; centerbox requires 3 children but we only need left/right
-      (box ; power button
-        :space-evenly false
-        :halign "end"
-        (button
-          :halign "end"
-          :class "power-button icon"
-          :onclick "wlogout -p layer-shell &"
-          "")))))
+
+      (box
+        :hexpand true)
+      (button
+        :class "button"
+        :onclick "wlogout -p layer-shell &"
+        (label
+          :class "icon"
+          :text "")))))
 
 (defwindow system-menu
   :stacking "fg" 

@@ -1,156 +1,69 @@
 /* system menu */
 
-.system-menu-box { @include window; }
+.system-menu-window {
+  @include window;
+  background: rgba(0, 0, 0, .5);
+  padding: .25rem;
 
-/* between net/bt and their arrows */
-.separator {
-  font-size: 1rem;
-}
-
-/* date & time */
-.top-row {
-  margin: 1rem 1.5rem 0;
-
-  .time { font-size: 2rem; }
-
-  .date-box {
-    margin: 0 1rem;
-
-    .date {
-      background: unset;
-      margin: 0 .5rem 0 0;
-      padding: 0;
-    }
-  }
-}
-
-/* wifi/bt/airplane button boxes */
-.system-row {
-  margin: .5rem .7rem;
-
-  /* the airplane icon is not properly spaced */
-  .airplane-box button {
-    padding: 1rem 3rem;
+  *.text {
+    font-size: .9rem;
   }
 
-  label {
-    margin: 0 .1rem;
+  > box {
+    @include rounding;
+    background: rgba(255, 255, 255, .15);
+    margin: .25rem;
+    padding: .25rem;
   }
 }
 
 /* wifi/bt/airplane buttons */
-.element {
-  @include rounding;
-  background-color: $bg1;
-  margin: .3rem;
-
-  .enabled button {
-    background: rgba(255, 255, 255, .2);
-    label { color: $base; }
-  }
-  .disabled button {
-    background: rgba(0, 0, 0, .1);
-    label { color: white; }
-  }
-
-  .enabled .separator { background: $base; }
-  .disabled .separator { background: white; }
+.toggle {
+  margin: .2rem;
 
   button {
-    padding: 1rem;
+    margin-right: .5rem;
+  }
 
-    label {
-      font-size: 1.5rem;
-    }
-
-    :first-child {
-      border-radius: 8px 0 0 8px;
-    }
-
-    :last-child {
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* set wifi/bt colors and dim buttons when hovering */
-    &:hover {
-      background-color: rgba(0, 0, 0, .1);
-    }
+  &.enabled button,
+  &.connected button {
+    background: $blue;
+    .icon { color: black; }
   }
 }
 
 /* volume & brightness sliders */
 .sliders {
-  @include rounding;
-  background-color: $bg1;
-  margin: .5rem 1rem;
-  padding: .6rem 1rem;
-
   scale {
-    margin-right: -1rem;
-    min-width: 21.5rem;
-
-    trough { margin-right: 0; }
+    margin-right: -.5rem;
+    min-width: 20rem;
   }
 
-  box { margin: .2rem 0; }
-  label { font-size: 1.2rem; }
-}
+  trough { margin-left: 0; }
 
-.system-row .text, .system-info-box .text {
-  font-size: .9rem;
-}
+  .icon {
+    font-size: 1.05rem;
+    margin: 0 .3rem;
+  }
 
-.volume-slider-box,
-.brightness-slider-box {
-  trough { background-color: $base; }
-}
+  .volume highlight {
+    background-image: linear-gradient(to right, $teal, $sky);
+  }
 
-.volume-bar highlight {
-  @include rounding;
-  background-image: linear-gradient(to right, $teal, $sky);
-}
-
-.brightness-slider-box scale highlight {
-  @include rounding;
-  background-image: linear-gradient(to right, $yellow, $peach);
+  .brightness highlight {
+    background-image: linear-gradient(to right, $yellow, $peach);
+  }
 }
 
 /* battery & power button */
-.bottom-row {
-  margin: .5rem 1rem;
+.system-menu .battery {
+  .icon {
+    font-size: 1.5rem;
 
-  .battery-icon {
-    color: $green;
-    font-size: 2rem;
-
-    .low { color: $red; }
+    &.low { color: $red; }
   }
 
-  .battery-rate { color: $mauve; }
-
-  .battery-status {
-    color: $subtext0;
-    margin: 0 .5rem;
-  }
-
-  button {
-    background-color: $bg1;
-    border-radius: 50%;
-    margin-bottom: .1rem;
-    padding: 0 .5rem;
-
-    label { font-size: 1.5rem; }
-    &:hover { background-color: $bg1; }
-  }
-}
-
-
-.bt-connected {
-  background-color: $blue;
-  color: $crust;
-}
-
-.net-connected {
-  background-color: $mauve;
-  color: $crust;
+  * { transition: none; }
+  .rate { color: #ccc; }
+  .status { margin: 0 .5rem; }
 }

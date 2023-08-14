@@ -5,8 +5,17 @@ source "$(dirname "$0")"/utils
 
 STATUS="$(rfkill list | sed -n 2p | awk '{print $3}')"
 
-icon() {
-  [ "$STATUS" = "no" ] && echo "" || echo ""
+gen_output() {
+  if [ "$STATUS" = "no" ]; then
+    icon=""
+    state="disabled"
+  else
+    icon=""
+    state="enabled"
+  fi
+  text="Airplane Mode"
+
+  echo '{"text": "'"$text"'", "icon": "'"$icon"'", "state": "'"$state"'"}'
 }
 
 toggle() {
@@ -24,7 +33,7 @@ if [ "$1" = "toggle" ]; then
 else
   last_time=$(get_time_ms)
   STATUS="$(rfkill list | sed -n 2p | awk '{print $3}')"
-  icon
+  gen_output
 
   rfkill event | while read -r _; do
     current_time=$(get_time_ms)
@@ -32,7 +41,7 @@ else
     # 50ms debounce
     if [[ $delta -gt 50 ]]; then
       STATUS="$(rfkill list | sed -n 2p | awk '{print $3}')"
-      icon
+      gen_output
       # reset debounce timer
       last_time=$(get_time_ms)
     fi

@@ -27,24 +27,18 @@ gen_output() {
 
   if [ "$powered" = "yes" ]; then
     if [ "$status" != "Missing device address argument" ]; then
-      icon=""
       text="$name"
-      color="#89b4fa"
-      class="bt-connected"
+      state="connected"
     else
-      icon=""
       text="Disconnected"
-      color="#45475a"
-      class=""
+      state="enabled"
     fi
   else
-    icon=""
     text="Bluetooth off"
-    color="#45475a"
-    class=""
+    state="disabled"
   fi
 
-  echo '{ "icon": "'"$icon"'", "battery": "'"$battery"'", "text": "'"$text"'", "color": "'"$color"'", "class": "'"$class"'" }'
+  echo '{ "state": "'"$state"'", "battery": "'"$battery"'", "text": "'"$text"'" }'
 }
 
 if [ "$1" = "toggle" ]; then

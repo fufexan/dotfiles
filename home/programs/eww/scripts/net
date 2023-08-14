@@ -31,16 +31,12 @@ function gen_wifi() {
   fi
 
   icon=${icons[$level]}
-  color="#cba6f7"
-  class="net-connected"
-  name=$(echo "$nm" | jaq -r 'select(.type == "wifi") .connection')
+  text=$(echo "$nm" | jaq -r 'select(.type == "wifi") .connection')
 }
 
 function gen_ethernet() {
   icon=""
-  class="net-connected"
-  color="#cba6f7"
-  name=$(echo "$nm" | jaq -r 'select(.type == "ethernet") .connection')
+  text=$(echo "$nm" | jaq -r 'select(.type == "ethernet") .connection')
 }
 
 function make_content() {
@@ -51,21 +47,17 @@ function make_content() {
   # test ethernet first
   if [[ $ethernet == "connected" ]]; then
     gen_ethernet
+    state="enabled"
   elif [[ $wifi == "connected" ]]; then
     gen_wifi
+    state="enabled"
   else
     icon=""
-    color="#988ba2"
-    class="net-disconnected"
-    name="Disconnected"
+    text="Disconnected"
+    state="disabled"
   fi
 
-  jaq --null-input -r -c \
-    --arg icon "$icon" \
-    --arg name "$name" \
-    --arg color "$color" \
-    --arg class "$class" \
-    '{"icon": $icon, "name": $name, "color": $color, "class": $class}'
+  echo '{"icon": "'"$icon"'", "text": "'"$text"'", "state": "'"$state"'"}'
 }
 
 # first run
