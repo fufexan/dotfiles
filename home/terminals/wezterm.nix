@@ -5,11 +5,6 @@
       local wezterm = require "wezterm"
 
       return {
-        font = wezterm.font_with_fallback {
-          "${default.terminal.font}",
-          "Material Symbols Outlined",
-          "DejaVu Sans"
-        },
         font_size = ${toString default.terminal.size},
         color_scheme = "Catppuccin Mocha",
         window_background_opacity = ${toString default.terminal.opacity},
@@ -23,7 +18,7 @@
           bottom = 10,
         },
         check_for_updates = false,
-        default_cursor_style = "SteadyBar",
+        default_cursor_style = "BlinkingBar",
       }
     '';
   };
