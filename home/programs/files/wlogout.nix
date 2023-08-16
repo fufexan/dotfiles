@@ -11,8 +11,8 @@
 in {
   xdg.configFile."wlogout/style.css".text = ''
     * {
-      background-image: none;
-      font-family: "Product Sans", Roboto, sans-serif;
+      background: none;
+      font-family: Lexend, sans-serif;
     }
 
     window {
@@ -20,9 +20,9 @@ in {
     }
 
     button {
-      background: unset;
+      background: rgba(0, 0, 0, .05);
       border-radius: 8px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .4);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .5);
       margin: 1rem;
       background-repeat: no-repeat;
       background-position: center;

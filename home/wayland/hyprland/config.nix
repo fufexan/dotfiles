@@ -84,7 +84,7 @@ in {
     }
 
     decoration {
-      rounding = 8
+      rounding = 16
       blur {
         enabled = true
         size = 10
@@ -148,9 +148,8 @@ in {
 
     $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell)$
     layerrule = blur, $layers
-    layerrule = ignorealpha 0.2, $layers
-    layerrule = ignorealpha 0.5, ^(eww-music)$
-    layerrule = ignorealpha 0.1, ^(bar)$
+    layerrule = ignorealpha 0, $layers
+    layerrule = ignorealpha 0.5, ^(eww-(music|calendar)|system-menu)$
     layerrule = xray 1, ^(bar|gtk-layer-shell)$
 
     # mouse movements

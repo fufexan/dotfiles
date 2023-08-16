@@ -26,7 +26,8 @@
 
     extraCss = ''
       * {
-        font-family: Product Sans;
+        all: unset;
+        font-family: Lexend;
         font-size: 1.3rem;
       }
 
@@ -34,33 +35,48 @@
       #match,
       #entry,
       #plugin,
-      #main {
-        background: transparent;
-      }
+      #main { background: transparent; }
 
-      .vertical > list > row:first-child {
-        margin-top: 5px;
+      #match.activatable {
+        border-radius: 16px;
+        padding: .3rem .9rem;
+        margin-top: .01rem;
       }
+      #match.activatable:first-child { margin-top: .7rem; }
+      #match.activatable:last-child { margin-bottom: .6rem; }
 
-      #match {
-        margin: 1px;
-        padding: 2px;
-        border-radius: 14px;
+      #plugin:hover #match.activatable {
+        border-radius: 10px;
+        padding: .3rem;
+        margin-top: .01rem;
+        margin-bottom: 0;
       }
 
       #match:selected, #match:hover, #plugin:hover {
         background: rgba(255, 255, 255, .1);
       }
 
-      #entry, #plugin:hover {
+      #entry {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.1);
         border-radius: 16px;
+        margin: .3rem;
+        padding: .3rem 1rem;
       }
 
+      list > #plugin {
+        border-radius: 16px;
+        margin: 0 .3rem;
+      }
+      list > #plugin:first-child { margin-top: .3rem; }
+      list > #plugin:last-child { margin-bottom: .3rem; }
+      list > #plugin:hover { padding: .6rem; }
+
       box#main {
-        background: rgba(0, 0, 0, .3);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .4);
+        background: rgba(0, 0, 0, .5);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .5);
         border-radius: 24px;
-        padding: 8px;
+        padding: .3rem;
       }
     '';
 

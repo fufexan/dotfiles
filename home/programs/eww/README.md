@@ -60,7 +60,7 @@ them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
 Dependencies:
 - Icon fonts: [Material Symbols Outlined](https://github.com/google/material-design-icons/tree/master/variablefont)
 (any variation can be used as long as you change the `font-family` property of `.icon`)
-- Text font: [Product Sans](https://befonts.com/product-sans-font.html)
+- Text font: Lexend
 - Script deps: everything in `default.nix`'s `dependencies` list.
 - [gross](https://github.com/fufexan/gross)
 

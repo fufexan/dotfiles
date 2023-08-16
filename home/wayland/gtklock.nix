@@ -3,8 +3,8 @@
 
   xdg.configFile."gtklock/style.css".text = ''
     window {
-      background: rgba(0,0,0,.5);
-      font-family: Product Sans;
+      background: rgba(0, 0, 0, .5);
+      font-family: Lexend;
     }
 
     grid > label {
@@ -21,13 +21,13 @@
     #clock-label {
       font-size: 6rem;
       margin-bottom: 4rem;
-      text-shadow: 0px 2px 10px rgba(0,0,0,.1);
+      text-shadow: 0px 2px 10px rgba(0, 0, 0, .1);
     }
 
     entry {
       border-radius: 16px;
       margin: 6rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
     }
   '';
 }
