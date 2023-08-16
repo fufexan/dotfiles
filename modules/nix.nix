@@ -104,18 +104,19 @@
                   outputHash = "sha256-dR6veXCGVMr5TbCvP0EqyQKTG2XM65VHF9U2nRWyzfA=";
                 });
 
+                # temp fix until https://github.com/NixOS/nixpkgs/pull/249384 is merged
+                nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [prev.wrapGAppsHook];
+                buildInputs = oldAttrs.buildInputs ++ [prev.librsvg];
+
+                # temp fix until https://github.com/rharish101/ReGreet/issues/32 is solved
                 patches = [../pkgs/regreet.patch];
               });
             };
 
-          clightd = prev.clightd.overrideAttrs (old: {
-            version = "5.9";
-            src = prev.fetchFromGitHub {
-              owner = "FedeDP";
-              repo = "clightd";
-              rev = "e273868cb728b9fd0f36944f6b789997e6d74323";
-              hash = "sha256-0NYWEJNVDfp8KNyWVY8LkvKIQUTq2MGvKUGcuAcl82U=";
-            };
+          # temp fix until https://github.com/NixOS/nixpkgs/pull/249382 is merged
+          gtklock = prev.gtklock.overrideAttrs (old: {
+            nativeBuildInputs = old.nativeBuildInputs ++ [prev.wrapGAppsHook];
+            buildInputs = old.buildInputs ++ [prev.librsvg];
           });
         }
       )
