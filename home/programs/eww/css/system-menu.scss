@@ -2,19 +2,12 @@
 
 .system-menu-window {
   @include window;
-  background: rgba(0, 0, 0, .5);
-  padding: .25rem;
 
-  *.text {
-    font-size: .9rem;
+  .text {
+    font-size: .75rem;
   }
 
-  > box {
-    @include rounding;
-    background: rgba(255, 255, 255, .15);
-    margin: .25rem;
-    padding: .25rem;
-  }
+  & > box { @include window-box; }
 }
 
 /* wifi/bt/airplane buttons */
@@ -36,7 +29,7 @@
 .sliders {
   scale {
     margin-right: -.5rem;
-    min-width: 20rem;
+    min-width: 15rem;
   }
 
   trough { margin-left: 0; }

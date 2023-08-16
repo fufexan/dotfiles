@@ -7,20 +7,22 @@
       background-image: url('${music.background}');
       background-position: center;
       background-size: cover;
-      /*border: 1px solid ${music.border};*/
     "
+
     (box ; cover art, first child
-      :class "music-cover-art"
+      :class "cover"
       :style "background-image: url('${music.cover}');")
+
     (box ; music info, second child
       :orientation "v"
       :space-evenly false
       :class "music-box"
+      :style "background: none;"
       (scroll
         :hscroll true
         :vscroll false
         (label ; title
-          :class "music-title text"
+          :class "title text"
           :style "color: ${music.foreground};"
           :justify "center"
           :text {music.title}))
@@ -28,16 +30,33 @@
         :hscroll true
         :vscroll false
         (label ; artist
-          :class "music-artist text"
+          :class "artist text"
           :style "color: ${music.foreground};"
           :justify "center"
           :text {music.artist}))
+
       (centerbox ; buttons
         :halign "center"
-        :class "music-button-box icon text"
-        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl previous" "")
-        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl play-pause" {music.status == "Playing" ? "" : ""})
-        (button :class "music-button" :style "color: ${music.foreground};" :onclick "playerctl next" ""))
+        :class "buttons"
+        (button
+          :onclick "playerctl previous"
+          (label
+            :style "color: ${music.foreground};"
+            :class "icon"
+            :text ""))
+        (button
+          :onclick "playerctl play-pause" 
+          (label
+            :style "color: ${music.foreground};"
+            :class "icon"
+            :text {music.status == "Playing" ? "" : "" }))
+        (button
+          :onclick "playerctl next" 
+          (label
+            :style "color: ${music.foreground};"
+            :class "icon"
+            :text "")))
+
       (box ; time info
         :orientation "v"
         (box

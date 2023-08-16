@@ -1,13 +1,15 @@
-.calendar-win {
+.calendar-window {
   @include window;
-  padding: .2em;
 }
 
 calendar {
-  padding: 5px;
+  margin: .3rem;
+  padding: .2rem;
 
   :selected {
-    color: $mauve;
+    background: $bg1;
+    border-radius: 100%;
+    padding: .3rem .5rem;
   }
 
   .header {
@@ -19,11 +21,9 @@ calendar {
     font-weight: bold;
   }
 
-  .button {
-    color: $sapphire;
-  }
+  .button { padding: .5rem .3rem; }
 
   :indeterminate {
-    color: $overlay0;
+    color: $subtext1;
   }
 }

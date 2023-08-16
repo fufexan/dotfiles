@@ -11,59 +11,51 @@
 /* music window */
 .music-window {
   @include window;
-  /* matches the cover art radius nicely */
-  border-radius: 16px;
-}
 
-/* cover, left child */
-.music-cover-art {
+  & > box {
+    @include window-box;
+    background-position: center;
+    background-size: cover;
+  }
+
   background-position: center;
   background-size: cover;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px -1px rgba(0, 0, 0, .4);
-  margin: 1em;
-  min-height: 170px;
-  min-width: 170px;
+
+  .cover {
+    border-radius: 10px;
+    box-shadow: 0 1px 2px -1px $bg;
+    min-height: 12rem;
+    min-width: 12rem;
+  }
 }
 
-/* info box, right child */
 .music-box {
-  margin: 1rem 1rem 1rem 0;
-}
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: .5rem;
+  }
 
-.music-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: .5rem;
-}
+  .artist {
+    margin: 1rem;
+  }
 
-.music-artist {
-  margin: 1rem;
-}
+  .buttons {
+    margin: 1rem 0 .5rem;
 
-.music-button-box {
-  margin: 1rem 0 0;
-}
+    .icon { font-size: 2rem; }
+  }
 
-.music-button label {
-  font-size: 2rem;
-}
-
-.music-time {
-  margin: 0 1rem;
-}
-
-.music-bar scale {
   highlight {
     background-image: linear-gradient(to right, $teal, $sky);
     border-radius: 24px;
   }
 
   trough {
-    background-color: $bg1;
-    border-radius: 24px;
-    margin-top: 0;
-    min-height: 10px;
-    min-width: 170px;
+    min-width: 12rem;
   }
+}
+
+.music-time {
+  margin: 0 1rem;
 }

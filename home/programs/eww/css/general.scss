@@ -6,21 +6,28 @@
 }
 
 @mixin rounding {
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 @mixin border {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px rgba(0, 0, 0, .4);
 }
 
+@mixin window-box {
+  @include rounding;
+
+  background: $bg1;
+  margin: .3rem;
+  padding: .3rem;
+}
+
 @mixin window {
   @include border;
   @include window-rounding;
 
-  background-color: $bg;
-  background-position: center;
-  background-size: cover;
+  background: $bg;
   margin: 5px 5px 10px;
+  padding: .3rem;
 }
 
 /* get rid of GTK theme's styles and set defaults */
@@ -28,6 +35,7 @@
   all: unset;
   font-family: "Lexend", Roboto, sans-serif;
   font-size: .9rem;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
   transition: 200ms ease;
 }
 
@@ -42,16 +50,6 @@ tooltip {
 .icon label {
   font-family: Material Symbols Outlined;
   font-size: 1.05rem;
-}
-
-/* subtle shadows to text and icons */
-.bar, .music-window, .system-menu-window {
-  .text,
-  .text label,
-  .icon,
-  .icon label {
-    text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
-  }
 }
 
 /* scales */
@@ -75,7 +73,7 @@ scale {
   padding: .3rem .5rem; /* general for icons */
 
   &:hover {
-    background: rgba(255, 255, 255, .15);
+    background: rgba(255, 255, 255, .25);
   }
 
   .icon {
