@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   default,
   ...
@@ -42,9 +43,11 @@
     ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
 
     signing = {
-      key = "5899325F2F120900";
+      key = "${config.home.homeDirectory}/.ssh/id_ed25519";
       signByDefault = true;
     };
+
+    extraConfig.gpg.format = "ssh";
 
     userEmail = "fufexan@protonmail.com";
     userName = "Mihai Fufezan";
