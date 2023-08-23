@@ -91,7 +91,7 @@
           greetd =
             prev.greetd
             // {
-              regreet = prev.greetd.regreet.overrideAttrs (oldAttrs: rec {
+              regreet = prev.greetd.regreet.overrideAttrs (self: super: rec {
                 version = "0.1.1-patched";
                 src = prev.fetchFromGitHub {
                   owner = "rharish101";
@@ -99,14 +99,14 @@
                   rev = "61d871a0ee5c74230dfef8100d0c9bc75b309203";
                   hash = "sha256-PkQTubSm/FN3FXs9vBB3FI4dXbQhv/7fS1rXkVsTAAs=";
                 };
-                cargoDeps = oldAttrs.cargoDeps.overrideAttrs (_: {
+                cargoDeps = super.cargoDeps.overrideAttrs (_: {
                   inherit src;
                   outputHash = "sha256-dR6veXCGVMr5TbCvP0EqyQKTG2XM65VHF9U2nRWyzfA=";
                 });
 
                 # temp fix until https://github.com/NixOS/nixpkgs/pull/249384 is merged
-                nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [prev.wrapGAppsHook];
-                buildInputs = oldAttrs.buildInputs ++ [prev.librsvg];
+                nativeBuildInputs = super.nativeBuildInputs ++ [prev.wrapGAppsHook];
+                buildInputs = super.buildInputs ++ [prev.librsvg];
 
                 # temp fix until https://github.com/rharish101/ReGreet/issues/32 is solved
                 patches = [../pkgs/regreet.patch];
@@ -114,9 +114,9 @@
             };
 
           # temp fix until https://github.com/NixOS/nixpkgs/pull/249382 is merged
-          gtklock = prev.gtklock.overrideAttrs (old: {
-            nativeBuildInputs = old.nativeBuildInputs ++ [prev.wrapGAppsHook];
-            buildInputs = old.buildInputs ++ [prev.librsvg];
+          gtklock = prev.gtklock.overrideAttrs (self: super: {
+            nativeBuildInputs = super.nativeBuildInputs ++ [prev.wrapGAppsHook];
+            buildInputs = super.buildInputs ++ [prev.librsvg];
           });
         }
       )
