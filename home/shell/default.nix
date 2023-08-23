@@ -23,6 +23,7 @@ in {
 
     EDITOR = "hx";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    MANROFFOPT = "-c";
     DIRENV_LOG_FORMAT = "";
   };
 }
