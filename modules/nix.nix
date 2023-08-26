@@ -8,10 +8,14 @@
   environment.systemPackages = [
     # we need git for flakes
     pkgs.git
-    # cool helper for rebuild
-    inputs.nh.packages.${pkgs.system}.default
   ];
   environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
+
+  nh = {
+    enable = true;
+    # weekly cleanup
+    clean.enable = true;
+  };
 
   nix = {
     # extra builders to offload work onto
@@ -19,21 +23,15 @@
     buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
       {
         system = "aarch64-linux";
-        sshUser = "root";
+        sshUser = "mihai";
         sshKey = "/etc/ssh/ssh_host_ed25519_key";
         maxJobs = 4;
-        hostName = "arm-server";
+        hostName = "alpha";
+        protocol = "ssh-ng";
         supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
       }
     ];
     distributedBuilds = true;
-
-    # auto garbage collect
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
 
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;

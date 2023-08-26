@@ -49,6 +49,7 @@
 
     opengl = {
       extraPackages = with pkgs; [
+        libva
         vaapiVdpau
         libvdpau-va-gl
       ];
