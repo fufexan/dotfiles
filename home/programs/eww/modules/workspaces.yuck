@@ -1,3 +1,5 @@
+(defvar monitor_colors `["#f38ba8", "#f9e2af", "#a6e3a1", "#89b4fa"]`)
+
 (defwidget workspaces []
   (eventbox
 		; scroll to change workspace
@@ -6,10 +8,10 @@
 			:class "module workspaces"
 		  (for ws in {hyprland.workspaces}
 		    (button
-					:onclick "hyprctl dispatch workspace ${ws.number}"
+					:onclick "hyprctl dispatch workspace ${ws.name}"
 					:class "ws icon"
-					:style "background-color: ${ws.color};"
+					:style `background-color: ${ws.state == "Active" ? monitor_colors[ws.monitor] : "rgba(0,0,0,.3)"};`
 					; :tooltip {ws.tooltip}
 					(box
-						:class `${ws.focused ? "focused" : ""}`
+						:class `${ws.name == hyprland.focused ? "focused" : ""}`
 						:height 3))))))

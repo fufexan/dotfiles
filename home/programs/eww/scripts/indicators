@@ -11,7 +11,7 @@ gen_output() {
 
   if [ "$screen" != "$prevScreen" ] || [ "$mic" != "$prevMic" ]; then
     micreveal=$(echo "$mic" | jaq -r '.in_use')
-    screenreveal=$(echo "$screen" | jaq -r '.screencast')
+    screenreveal=$(echo "$screen" | jaq -r '.screenshare')
 
     json='['
 

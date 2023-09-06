@@ -17,4 +17,4 @@
 (deflisten music_time "gross music-time")
 (deflisten net "scripts/net")
 (deflisten volume "scripts/volume")
-(deflisten hyprland "scripts/hyprland")
+(deflisten hyprland "gross hyprland")
