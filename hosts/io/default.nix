@@ -2,6 +2,7 @@
   config,
   pkgs,
   self,
+  lib,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -28,6 +29,8 @@
   };
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
+
+  hardware.pulseaudio.enable = lib.mkForce false;
 
   networking.hostName = "io";
 
@@ -65,6 +68,12 @@
         };
         config = builtins.readFile "${self}/modules/main.kbd";
       };
+    };
+
+    xserver = {
+      enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
     };
   };
 }

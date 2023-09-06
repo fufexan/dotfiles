@@ -12,7 +12,7 @@
         [
           ./io
           ../modules/bluetooth.nix
-          ../modules/greetd.nix
+          # ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
           ../modules/lanzaboote.nix

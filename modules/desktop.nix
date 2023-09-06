@@ -116,6 +116,8 @@
     # make HM-managed GTK stuff work
     dconf.enable = true;
 
+    kdeconnect.enable = true;
+
     seahorse.enable = true;
   };
 
@@ -203,6 +205,6 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    # extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 }

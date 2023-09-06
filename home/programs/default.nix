@@ -7,6 +7,7 @@
     ./media.nix
     ./git.nix
     ./gtk.nix
+    ./kdeconnect.nix
     ./packages.nix
     ./qt.nix
     ./spicetify.nix
