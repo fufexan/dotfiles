@@ -7,6 +7,7 @@
       :space-evenly false
       (box
         :class "song-cover-art"
+        :valign "center"
         :style "background-image: url(\"${music.cover}\");")
       (button
         :class "module text"

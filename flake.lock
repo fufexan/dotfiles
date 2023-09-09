@@ -466,11 +466,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1690794516,
-        "narHash": "sha256-Loxw0IyPShJ4avHX1oC+JbVqN9U9aFQnJEcZBJ1pVQ0=",
+        "lastModified": 1694261454,
+        "narHash": "sha256-6Z4Wb6qUfRRYiSyk6NDgcSBAfxkkPFqmNV/f9a11FEY=",
         "owner": "fufexan",
         "repo": "gross",
-        "rev": "b8d2b259b134c7f7830826ca8d43f5c7dd581328",
+        "rev": "40e2e11ed7df5be380d8f62f639b8534ecae133e",
         "type": "github"
       },
       "original": {
