@@ -2,7 +2,6 @@
   config,
   pkgs,
   self,
-  lib,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -30,14 +29,33 @@
 
   environment.systemPackages = [config.boot.kernelPackages.cpupower];
 
-  hardware.pulseaudio.enable = lib.mkForce false;
-
   networking.hostName = "io";
 
   programs = {
     # enable hyprland and required options
     hyprland.enable = true;
-    steam.enable = true;
+
+    steam = {
+      enable = true;
+      # fix gamescope inside steam
+      package = pkgs.steam.override {
+        extraPkgs = pkgs:
+          with pkgs; [
+            keyutils
+            libkrb5
+            libpng
+            libpulseaudio
+            libvorbis
+            stdenv.cc.cc.lib
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+          ];
+        # set correct scaling
+        extraProfile = "export GDK_SCALE=2";
+      };
+    };
   };
 
   security.tpm2.enable = true;
