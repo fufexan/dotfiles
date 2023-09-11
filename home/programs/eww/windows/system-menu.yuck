@@ -98,6 +98,6 @@
     :y "0"
     :width "0%"
     :height "0%"
-    :anchor "right top")
+    :anchor "left bottom")
   :namespace "system-menu"
   (system-menu))

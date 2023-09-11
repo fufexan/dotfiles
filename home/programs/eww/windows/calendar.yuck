@@ -8,7 +8,7 @@
   :geometry (geometry
     :x "0%"
     :y "0%"
-  	:anchor "top right"
+  	:anchor "left bottom"
     :width "0px"
     :height "0px")
   :namespace "eww-calendar"

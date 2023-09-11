@@ -5,6 +5,7 @@
 		; scroll to change workspace
 		:onscroll "echo {} | sed -e \"s/up/-1/g\" -e \"s/down/+1/g\" | xargs hyprctl dispatch workspace"
 		(box
+			:orientation "v"
 			:class "module workspaces"
 		  (for ws in {hyprland.workspaces}
 		    (button
