@@ -19,6 +19,7 @@ in {
 
     exec-once = systemctl --user start clight
     exec-once = eww open bar
+    exec-once = eww open osd
 
     # use this instead of hidpi patches
     xwayland {
