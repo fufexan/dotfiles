@@ -46,7 +46,7 @@ Or install from the `packages` output. For example:
 ## 💻 Desktop preview
 
 <a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
-  <img src="https://user-images.githubusercontent.com/36706276/236707086-ea6cb781-8b0c-45d3-b6a1-2c6a4d5e2582.png" alt="Desktop Preview">
+  <img src="https://github.com/fufexan/dotfiles/assets/36706276/4a614c6e-8ba1-455e-8d10-489554e55c38" alt="Desktop Preview">
 </a>
 *Hint: click to go to a video showcase*
 <details>
@@ -54,6 +54,7 @@ Or install from the `packages` output. For example:
 Previous versions
 </summary>
   <img src="https://user-images.githubusercontent.com/36706276/216402032-ff32fcad-ca21-49d3-9c29-6ff0d2d8b1d8.png" alt="Desktop Preview">
+  <img src="https://user-images.githubusercontent.com/36706276/236707086-ea6cb781-8b0c-45d3-b6a1-2c6a4d5e2582.png" alt="Desktop Preview">
 </details>
 
 # 💾 Resources
