@@ -640,6 +640,26 @@
         "type": "github"
       }
     },
+    "matugen": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1694798717,
+        "narHash": "sha256-9PXQVUOPbOi2HExrqi1z+EhNo7fjjtBQlAGrOGwTNjM=",
+        "owner": "InioX",
+        "repo": "matugen",
+        "rev": "fc8cba0a721857b832336021b3d22df695e48d3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "InioX",
+        "repo": "matugen",
+        "type": "github"
+      }
+    },
     "mk-naked-shell": {
       "flake": false,
       "locked": {
@@ -927,6 +947,7 @@
         "hyprland-contrib": "hyprland-contrib",
         "kmonad": "kmonad",
         "lanzaboote": "lanzaboote",
+        "matugen": "matugen",
         "nh": "nh",
         "nix-gaming": "nix-gaming",
         "nix-index-db": "nix-index-db",
