@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  default,
   ...
 }: {
   home.packages = [pkgs.gh];
@@ -9,10 +8,7 @@
   programs.git = {
     enable = true;
 
-    delta = {
-      enable = true;
-      options.map-styles = "bold purple => syntax ${default.xcolors.mauve}, bold cyan => syntax ${default.xcolors.blue}";
-    };
+    delta.enable = true;
 
     extraConfig = {
       diff.colorMoved = "default";

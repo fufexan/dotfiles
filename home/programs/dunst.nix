@@ -1,10 +1,12 @@
 {
   pkgs,
-  default,
+  theme,
   ...
 }: {
   # notification daemon
-  services.dunst = {
+  services.dunst = let
+    c = theme.xcolors.colors.${theme.variant};
+  in {
     enable = true;
     iconTheme = {
       name = "Papirus-Dark";
@@ -39,19 +41,19 @@
       fullscreen_delay_everything = {fullscreen = "delay";};
 
       urgency_critical = {
-        background = default.xcolors.bg;
-        foreground = default.xcolors.fg;
-        frame_color = default.xcolors.red;
+        background = c.error_container;
+        foreground = c.on_error_container;
+        frame_color = c.error;
       };
       urgency_low = {
-        background = default.xcolors.bg;
-        foreground = default.xcolors.fg;
-        frame_color = default.xcolors.blue;
+        background = c.secondary_container;
+        foreground = c.on_secondary_container;
+        frame_color = c.secondary;
       };
       urgency_normal = {
-        background = default.xcolors.bg;
-        foreground = default.xcolors.fg;
-        frame_color = default.xcolors.green;
+        background = c.primary_container;
+        foreground = c.on_primary_container;
+        frame_color = c.primary;
       };
     };
   };

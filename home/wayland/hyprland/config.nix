@@ -1,9 +1,10 @@
 {
   config,
   default,
+  theme,
   ...
 }: let
-  inherit (default) colors;
+  c = theme.colors.colors_android.${theme.variant};
 
   pointer = config.home.pointerCursor;
   scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
@@ -80,8 +81,8 @@ in {
       col.inactive_border = rgba(00000088)
 
       # group borders
-      col.group_border_active = rgba(${colors.pink}88)
-      col.group_border = rgba(${colors.surface0}88)
+      col.group_border_active = rgba(${c.color_accent_primary}88)
+      col.group_border = rgba(${c.color_accent_primary_variant}88)
     }
 
     decoration {

@@ -17,7 +17,21 @@ in {
 
         # NixOS modules
         sharedModules = [
-          {home-manager.useGlobalPkgs = true;}
+          ({
+            pkgs,
+            self,
+            ...
+          }: let
+            theme = import "${self}/lib/theme/theme.nix" self pkgs;
+          in {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.mihai._module.args = {inherit theme;};
+            };
+            _module.args = {inherit theme;};
+          })
+
           {disabledModules = ["security/pam.nix"];}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule

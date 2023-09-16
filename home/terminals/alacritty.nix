@@ -1,8 +1,11 @@
-{default, ...}:
+{
+  pkgs,
+  default,
+  ...
+}:
 # terminals
 let
   inherit (default.terminal) font size opacity;
-  inherit (default) xcolors;
 in {
   programs.alacritty = {
     enable = true;
@@ -27,26 +30,14 @@ in {
       };
 
       draw_bold_text_with_bright_colors = true;
-      colors = rec {
-        primary = {
-          background = xcolors.crust;
-          foreground = xcolors.fg;
-        };
-        normal = {
-          inherit (xcolors) red green yellow blue;
-          black = xcolors.mantle;
-          magenta = xcolors.mauve;
-          cyan = xcolors.sky;
-          white = xcolors.text;
-        };
-        bright =
-          normal
-          // {
-            black = xcolors.base;
-            white = xcolors.rosewater;
-          };
-      };
       window.opacity = opacity;
+
+      imports = [
+        (pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/alacritty/3c808cbb4f9c87be43ba5241bc57373c793d2f17/catppuccin-mocha.yml";
+          hash = "sha256-28Tvtf8A/rx40J9PKXH6NL3h/OKfn3TQT1K9G8iWCkM=";
+        })
+      ];
     };
   };
 }
