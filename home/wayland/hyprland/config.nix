@@ -31,8 +31,7 @@ in {
       # disable auto polling for config file changes
       disable_autoreload = true
 
-      disable_hyprland_logo = true
-      disable_splash_rendering = true
+      disable_hypr_chan = true
 
       # disable dragging animation
       animate_mouse_windowdragging = false
