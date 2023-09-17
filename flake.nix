@@ -34,6 +34,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

@@ -2,6 +2,7 @@
   config,
   pkgs,
   self,
+  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -66,14 +67,16 @@
 
     howdy = {
       enable = true;
-      package = self.packages.${pkgs.system}.howdy;
+      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.howdy;
       settings = {
         core.no_confirmation = true;
-        video.device_path = "/dev/video2";
         video.dark_threshold = 90;
       };
     };
-    linux-enable-ir-emitter.enable = true;
+    linux-enable-ir-emitter = {
+      enable = true;
+      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
+    };
 
     kmonad.keyboards = {
       io = {

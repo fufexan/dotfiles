@@ -800,6 +800,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-howdy": {
+      "locked": {
+        "lastModified": 1694981020,
+        "narHash": "sha256-OlYZwGp9ZSpmWkssfmdLYcJvhT2gTjs8v0lnEHoMhYg=",
+        "owner": "fufexan",
+        "repo": "nixpkgs",
+        "rev": "e0c0d75f9b26637310cd9e863c1deef0472ce250",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fufexan",
+        "ref": "howdy",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1685801374,
@@ -952,6 +968,7 @@
         "nix-gaming": "nix-gaming",
         "nix-index-db": "nix-index-db",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-howdy": "nixpkgs-howdy",
         "rust-overlay": "rust-overlay_2",
         "spicetify-nix": "spicetify-nix"
       }
