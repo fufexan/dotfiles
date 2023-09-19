@@ -124,8 +124,13 @@
     seahorse.enable = true;
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "gtk2";
+    style = "gtk2";
+  };
+
   services = {
-    # use Ambient Light Sensors for auto brightness adjustment
     clight = {
       enable = true;
       settings = {
