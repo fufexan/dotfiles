@@ -44,6 +44,7 @@ in {
           ./network.nix
           ./nix.nix
           ./security.nix
+          ./specialisations.nix
         ];
       };
     }

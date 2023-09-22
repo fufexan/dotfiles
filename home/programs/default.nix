@@ -1,4 +1,4 @@
-{
+{lib, theme, ...}: {
   imports = [
     ../shell/nix.nix
     ../terminals/foot.nix
@@ -31,4 +31,10 @@
   };
 
   services.syncthing.enable = true;
+
+  # _module.args.theme.variant = lib.mkDefault "dark";
+  specialisation = {
+    light.configuration._module.args.theme = lib.mkForce (theme // {variant = "light";});
+    dark.configuration._module.args.theme = lib.mkForce (theme // {variant = "dark";});
+  };
 }
