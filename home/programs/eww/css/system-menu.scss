@@ -28,11 +28,13 @@
 /* volume & brightness sliders */
 .sliders {
   scale {
-    margin-right: -.45rem;
     min-width: 15rem;
   }
 
-  trough { margin-left: 0; }
+  trough {
+    margin-left: 0;
+    margin: 0 .45rem 0 .3rem;
+  }
 
   .icon {
     margin: 0 .3rem;

@@ -56,14 +56,13 @@ tooltip {
 }
 
 /* scales */
-$scaleh: 1rem;
+$scaleh: .5rem;
 
 scale {
   trough {
     background-color: $bg1;
     border-radius: $scaleh;
-    margin: 0 calc($scaleh / 2);
-    min-width: 70px;
+    min-width: calc($scaleh * 10);
     padding: 0 calc($scaleh / 2);
   }
 
@@ -71,13 +70,6 @@ scale {
     border-radius: $scaleh;
     margin: 0 calc(0px - $scaleh / 2);
     min-height: $scaleh;
-  }
-
-  slider {
-    background: white;
-    border-radius: $scaleh;
-    box-shadow: 0 0 2px rgba(0,0,0,.3);
-    margin: calc(0px - $scaleh / 2);
   }
 }
 

@@ -2,24 +2,14 @@
   @include window;
   margin: .2rem;
 
-  label {
+  .icon {
     color: $text;
     font-size: 2rem;
   }
 
   trough {
-    @include rounding;
-    background-color: $bg1;
     margin: 0 .5rem;
     min-width: 8rem;
-    min-height: 1rem;
-    padding: 0 .5rem;
-
-    highlight {
-      @include rounding;
-      min-width: 1rem;
-      margin: 0 -.5rem;
-    }
   }
 }
 
