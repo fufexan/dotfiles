@@ -23,6 +23,8 @@ The same daemon runs multiple windows which interact with each other:
 
 ![system](https://github.com/fufexan/dotfiles/assets/36706276/723fd8fe-538c-41a5-bcbf-218304dc3bdf)
 
+NOTE: Looks best with font-size set to 9pt.
+
 ## ❔ Usage
 
 ### Home Manager

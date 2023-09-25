@@ -17,6 +17,7 @@
     font = {
       name = "Roboto";
       package = pkgs.roboto;
+      size = 9;
     };
 
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

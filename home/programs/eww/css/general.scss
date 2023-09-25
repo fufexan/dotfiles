@@ -1,12 +1,17 @@
 /* general css styles */
 
+$round: 8px;
+$margin: .4rem;
+$padding: .4rem;
+$border-width: 2px;
+
 /* mixins */
 @mixin window-rounding {
-  border-radius: 16px;
+  border-radius: calc($round * 2);
 }
 
 @mixin rounding {
-  border-radius: 10px;
+  border-radius: calc($round * 2 - $padding - $border-width);
 }
 
 @mixin border {
@@ -17,8 +22,8 @@
   @include rounding;
 
   background: $bg1;
-  margin: .3rem;
-  padding: .3rem;
+  margin: $margin;
+  padding: $padding;
 }
 
 @mixin window {
@@ -27,14 +32,13 @@
 
   background: $bg;
   margin: 5px 5px 10px;
-  padding: .3rem;
+  padding: $padding;
 }
 
 /* get rid of GTK theme's styles and set defaults */
 * {
   all: unset;
-  font-family: "Lexend", Roboto, sans-serif;
-  font-size: .9rem;
+  font-family: Lexend, Roboto, sans-serif;
   text-shadow: 0 2px 3px rgba(0, 0, 0, .2);
   transition: 200ms ease;
 }
@@ -42,42 +46,48 @@
 tooltip {
   background: $bg;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 rgba(0, 0, 0, .4);
-  border-radius: 8px;
+  border-radius: $round;
 }
 
 /* icon font */
 .icon,
 .icon label {
   font-family: Material Symbols Outlined;
-  font-size: 1.05rem;
 }
 
 /* scales */
+$scaleh: 1rem;
+
 scale {
   trough {
     background-color: $bg1;
-    border-radius: 1rem;
-    margin: 0 1rem;
-    min-height: 10px;
+    border-radius: $scaleh;
+    margin: 0 calc($scaleh / 2);
     min-width: 70px;
+    padding: 0 calc($scaleh / 2);
   }
 
   highlight {
-    border-radius: 1rem;
+    border-radius: $scaleh;
+    margin: 0 calc(0px - $scaleh / 2);
+    min-height: $scaleh;
+  }
+
+  slider {
+    background: white;
+    border-radius: $scaleh;
+    box-shadow: 0 0 2px rgba(0,0,0,.3);
+    margin: calc(0px - $scaleh / 2);
   }
 }
 
 .button {
   background: rgba(255, 255, 255, .2);
   border-radius: 100%;
-  padding: .3rem .5rem; /* general for icons */
+  padding: .4rem .5rem; /* general for icons */
 
   &:hover {
     background: rgba(255, 255, 255, .25);
-  }
-
-  .icon {
-    font-size: .9rem;
   }
 }
 

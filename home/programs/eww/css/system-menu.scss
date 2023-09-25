@@ -4,7 +4,7 @@
   @include window;
 
   .text {
-    font-size: .75rem;
+    font-size: .8rem;
   }
 
   & > box { @include window-box; }
@@ -28,14 +28,13 @@
 /* volume & brightness sliders */
 .sliders {
   scale {
-    margin-right: -.5rem;
+    margin-right: -.45rem;
     min-width: 15rem;
   }
 
   trough { margin-left: 0; }
 
   .icon {
-    font-size: 1.05rem;
     margin: 0 .3rem;
   }
 
