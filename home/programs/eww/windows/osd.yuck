@@ -2,32 +2,30 @@
 (defwidget osd-part [icon value class]
   (box
     :class "osd-part osd-${class}"
-    :orientation "v"
     :space-evenly false
-    (scale
-      :flipped true
-      :orientation "v"
-      :value value)
     (label
       :class "text"
-      :text icon)))
+      :text icon)
+    (scale
+      :value value)))
 
 ; osd window widget
 (defwidget osd []
   (box
     :class "osd-container"
+    :orientation "v"
     :space-evenly false
     ; use revealers for both volume and brightness
     (revealer
       :reveal {osd-brightness}
-      :transition "slideright"
+      :transition "none"
       (osd-part
         :class "brightness"
         :icon {brightness.icon}
         :value {brightness.percent}))
     (revealer
       :reveal {osd-volume}
-      :transition "slideright"
+      :transition "none"
       (osd-part
         :class "volume"
         :icon {volume.icon}
@@ -39,10 +37,10 @@
   :focusable false
   :monitor 0
   :geometry (geometry
-    :x "1%"
-    :y "0%"
+    :x "0%"
+    :y "20%"
     :width "0%"
     :height "0%"
-    :anchor "center left")
+    :anchor "center bottom")
   :namespace "eww-osd"
   (osd))

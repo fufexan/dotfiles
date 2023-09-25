@@ -1,4 +1,8 @@
-{lib, theme, ...}: {
+{
+  lib,
+  theme,
+  ...
+}: {
   imports = [
     ../shell/nix.nix
     ../terminals/foot.nix
