@@ -4,7 +4,7 @@
     :class "osd-part osd-${class}"
     :space-evenly false
     (label
-      :class "text"
+      :class "icon"
       :text icon)
     (scale
       :value value)))

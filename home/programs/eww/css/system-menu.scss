@@ -20,8 +20,12 @@
 
   &.enabled button,
   &.connected button {
-    background: $blue;
+    background: white;
     .icon { color: black; }
+
+    &:hover {
+      background: rgba(255, 255, 255, .25);
+    }
   }
 }
 
@@ -39,14 +43,6 @@
   .icon {
     margin: 0 .3rem;
   }
-
-  .volume highlight {
-    background-image: linear-gradient(to right, $teal, $sky);
-  }
-
-  .brightness highlight {
-    background-image: linear-gradient(to right, $yellow, $peach);
-  }
 }
 
 /* battery & power button */
@@ -60,4 +56,8 @@
   * { transition: none; }
   .rate { color: #ccc; }
   .status { margin: 0 .5rem; }
+}
+
+.button.power {
+  margin: .1rem;
 }

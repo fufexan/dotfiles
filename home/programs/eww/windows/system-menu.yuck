@@ -84,8 +84,8 @@
       (box
         :hexpand true)
       (button
-        :class "button"
-        :onclick "wlogout -p layer-shell &"
+        :class "button power"
+        :onclick "wlogout -p layer-shell & eww close system-menu"
         (label
           :class "icon"
           :text "")))))

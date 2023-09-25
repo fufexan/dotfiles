@@ -12,12 +12,3 @@
     min-width: 8rem;
   }
 }
-
-/* scale highlight gradients for volume & brightness */
-.osd-volume highlight {
-  background-image: linear-gradient(to top, $teal, $sky);
-}
-
-.osd-brightness highlight {
-  background-image: linear-gradient(to top, $yellow, $peach);
-}
