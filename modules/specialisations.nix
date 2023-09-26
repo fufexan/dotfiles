@@ -1,4 +1,8 @@
-{lib, theme, ...}: {
+{
+  lib,
+  theme,
+  ...
+}: {
   specialisation = {
     light = {
       inheritParentConfig = true;
