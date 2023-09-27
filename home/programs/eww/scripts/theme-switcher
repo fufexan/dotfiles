@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [[ $1 != "light" ]] && [[ $1 != "dark" ]]; then
+  echo "Theme can be either 'light' or 'dark'"
+  exit 1
+fi
+
+HMPATH=$(rg ExecStart /run/current-system/etc/systemd/system/home-manager-mihai.service | cut -d' ' -f2)
+HMPATH+="/specialisation/$1/activate"
+
+$HMPATH

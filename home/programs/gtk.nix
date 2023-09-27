@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  theme,
   ...
 }: {
   home.pointerCursor = {
@@ -23,16 +24,28 @@
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
 
     iconTheme = {
-      name = "Papirus-Dark";
+      name =
+        "Papirus-"
+        + (
+          if theme.variant == "light"
+          then "Light"
+          else "Dark"
+        );
       package = pkgs.papirus-icon-theme;
     };
 
     theme = {
-      name = "Catppuccin-Mocha-Compact-Mauve-dark";
+      name =
+        if theme.variant == "light"
+        then "Catppuccin-Latte-Compact-Mauve-light"
+        else "Catppuccin-Mocha-Compact-Mauve-dark";
       package = pkgs.catppuccin-gtk.override {
         accents = ["mauve"];
         size = "compact";
-        variant = "mocha";
+        variant =
+          if theme.variant == "light"
+          then "latte"
+          else "mocha";
       };
     };
   };

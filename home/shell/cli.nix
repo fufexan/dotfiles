@@ -1,4 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  theme,
+  ...
+}: let
+  variant =
+    if theme.variant == "light"
+    then "latte"
+    else "mocha";
+in {
   home.packages = with pkgs; [
     # archives
     zip
@@ -21,12 +30,16 @@
       enable = true;
       config = {
         pager = "less -FR";
-        theme = "Catppuccin-mocha";
+        theme = "Catppuccin-${variant}";
       };
       themes = {
         Catppuccin-mocha = builtins.readFile (pkgs.fetchurl {
           url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme";
           hash = "sha256-qMQNJGZImmjrqzy7IiEkY5IhvPAMZpq0W6skLLsng/w=";
+        });
+        Catppuccin-latte = builtins.readFile (pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-latte.tmTheme";
+          hash = "sha256-rO15D+Gneonrb4dL7LrkwTEyyBBIppp7GqMPU1yxZM4=";
         });
       };
     };

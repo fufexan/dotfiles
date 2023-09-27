@@ -1,4 +1,13 @@
-{default, ...}: {
+{
+  default,
+  theme,
+  ...
+}: let
+  variant =
+    if theme.variant == "light"
+    then "Latte"
+    else "Mocha";
+in {
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -6,19 +15,13 @@
 
       return {
         font_size = ${toString default.terminal.size},
-        color_scheme = "Catppuccin Mocha",
+        color_scheme = 'Catppuccin ${variant}',
         window_background_opacity = ${toString default.terminal.opacity},
         enable_scroll_bar = false,
-        enable_tab_bar = false,
+        hide_tab_bar_if_only_one_tab = true,
         scrollback_lines = 10000,
-        window_padding = {
-          left = 10,
-          right = 10,
-          top = 10,
-          bottom = 10,
-        },
         check_for_updates = false,
-        default_cursor_style = "BlinkingBar",
+        default_cursor_style = 'SteadyBar',
       }
     '';
   };

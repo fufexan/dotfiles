@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  theme,
   ...
 }: {
   # themable spotify
@@ -9,7 +10,13 @@
   in {
     enable = true;
 
-    theme = spicePkgs.themes.catppuccin-mocha;
+    theme = let
+      variant =
+        if theme.variant == "light"
+        then "latte"
+        else "mocha";
+    in
+      spicePkgs.themes."catppuccin-${variant}";
 
     colorScheme = "flamingo";
 
