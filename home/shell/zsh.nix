@@ -67,6 +67,7 @@
       l = "eza -l";
       la = "eza -la";
       md = "mkdir -p";
+      ppc = "powerprofilesctl";
       pf = "powerprofilesctl launch -p performance";
 
       us = "systemctl --user";
