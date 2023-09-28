@@ -14,6 +14,7 @@ in {
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+    env = WLR_DRM_NO_ATOMIC,1
 
     # set cursor for HL itself
     exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
@@ -82,6 +83,8 @@ in {
       # group borders
       col.group_border_active = rgba(${c.color_accent_primary}88)
       col.group_border = rgba(${c.color_accent_primary_variant}88)
+
+      allow_tearing = true
     }
 
     decoration {
@@ -119,6 +122,9 @@ in {
 
     # telegram media viewer
     windowrulev2 = float, title:^(Media viewer)$
+
+    # allow tearing in games
+    windowrulev2 = immediate, class:^(osu\!|cs2)$
 
     # make Firefox PiP window floating and sticky
     windowrulev2 = float, title:^(Picture-in-Picture)$
