@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  theme,
   ...
 }: {
   home.packages = [pkgs.gh];
@@ -8,7 +9,10 @@
   programs.git = {
     enable = true;
 
-    delta.enable = true;
+    delta = {
+      enable = true;
+      options.${theme.variant} = true;
+    };
 
     extraConfig = {
       diff.colorMoved = "default";
