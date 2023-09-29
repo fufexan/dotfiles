@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  self,
   inputs,
   lib,
   ...
@@ -68,4 +69,14 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      lib =
+        prev.lib
+        // {
+          colors = import "${self}/lib/colors" prev.lib;
+        };
+    })
+  ];
 }

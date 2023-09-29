@@ -1,4 +1,8 @@
 {
+  lib,
+  self,
+  ...
+}: {
   home = {
     username = "mihai";
     homeDirectory = "/home/mihai";
@@ -15,4 +19,10 @@
 
   # let HM manage itself when in standalone mode
   programs.home-manager.enable = true;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      lib = prev.lib // {colors = import "${self}/lib/colors" lib;};
+    })
+  ];
 }

@@ -1,13 +1,4 @@
-{
-  default,
-  theme,
-  ...
-}: let
-  variant =
-    if theme.variant == "light"
-    then "Latte"
-    else "Mocha";
-in {
+{default, ...}: {
   programs.wezterm = {
     enable = true;
     extraConfig = ''

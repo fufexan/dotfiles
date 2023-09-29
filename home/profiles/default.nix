@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   withSystem,
   module_args,
@@ -12,6 +13,7 @@
     inputs.nix-index-db.hmModules.nix-index
     inputs.spicetify-nix.homeManagerModule
     inputs.hyprland.homeManagerModules.default
+    self.nixosModules.theme
   ];
 
   homeImports = {

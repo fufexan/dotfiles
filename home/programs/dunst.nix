@@ -1,17 +1,12 @@
-{
-  pkgs,
-  theme,
-  ...
-}: {
+{config, pkgs, ...}: {
   # notification daemon
   services.dunst = let
-    c = theme.xcolors.colors.${theme.variant};
+    xcolors = pkgs.lib.colors.xcolors config.programs.matugen.theme.colors;
+    inherit (config.programs.matugen) variant;
+    c = xcolors.colors.${variant};
   in {
     enable = true;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
+    inherit (config.gtk) iconTheme;
     settings = {
       global = {
         alignment = "center";

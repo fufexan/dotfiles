@@ -1,9 +1,10 @@
 {
   pkgs,
   config,
-  theme,
   ...
-}: {
+}: let
+  inherit (config.programs.matugen) variant;
+in {
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
@@ -27,7 +28,7 @@
       name =
         "Papirus-"
         + (
-          if theme.variant == "light"
+          if variant == "light"
           then "Light"
           else "Dark"
         );
@@ -36,14 +37,14 @@
 
     theme = {
       name =
-        if theme.variant == "light"
+        if variant == "light"
         then "Catppuccin-Latte-Compact-Flamingo-Light"
         else "Catppuccin-Mocha-Compact-Flamingo-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = ["flamingo"];
         size = "compact";
         variant =
-          if theme.variant == "light"
+          if variant == "light"
           then "latte"
           else "mocha";
       };

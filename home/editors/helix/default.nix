@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  theme,
+  config,
   ...
 }: {
   imports = [./languages.nix];
@@ -32,7 +32,7 @@
       theme =
         "catppuccin_"
         + (
-          if theme.variant == "light"
+          if config.programs.matugen.variant == "light"
           then "latte"
           else "mocha"
         );

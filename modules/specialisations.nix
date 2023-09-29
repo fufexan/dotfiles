@@ -1,16 +1,12 @@
 {
-  lib,
-  theme,
-  ...
-}: {
   specialisation = {
     light = {
       inheritParentConfig = true;
-      configuration._module.args.theme = lib.mkForce (theme // {variant = lib.mkForce "light";});
+      configuration.programs.matugen.variant = "light";
     };
     dark = {
       inheritParentConfig = true;
-      configuration._module.args.theme = lib.mkForce (theme // {variant = lib.mkForce "dark";});
+      configuration.programs.matugen.variant = "dark";
     };
   };
 }

@@ -1,10 +1,10 @@
 {
   pkgs,
-  theme,
+  config,
   ...
 }: let
   variant =
-    if theme.variant == "light"
+    if config.programs.matugen.variant == "light"
     then "latte"
     else "mocha";
 in {

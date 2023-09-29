@@ -4,7 +4,7 @@ Various functions I use throughout the config:
 
 Name          | Description
 ------------- | -----------
-`colors.nix`  | Functions for dealing with colors. Used for `default`.
+`colors`      | Functions for dealing with colors.
 `default.nix` | Module for flake-parts
 `repl.nix`    | Cool Nix REPL wrapper
-`theme`       | Theme colors, programs I reference often
+`theme`       | Programs I reference often

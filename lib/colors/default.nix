@@ -64,4 +64,9 @@ with lib; rec {
       else (pow' base (exponent - 1) (value * base));
   in
     base: exponent: pow' base exponent base;
+
+  # #RRGGBB
+  xcolors = colors: lib.mapAttrsRecursive (_: x) colors;
+  # rgba(,,,) colors (css)
+  rgbaColors = colors: lib.mapAttrsRecursive (_: rgba) colors;
 }

@@ -5,11 +5,9 @@
   inputs,
   ...
 }: {
-  boot.plymouth = {
-    enable = true;
-    themePackages = [self.packages.${pkgs.system}.catppuccin-plymouth];
-    theme = "catppuccin-mocha";
-  };
+  # boot.plymouth = {
+  #   enable = true;
+  # };
 
   fonts = {
     packages = with pkgs; [

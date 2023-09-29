@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  theme,
   ...
 }: {
   home.packages = [pkgs.gh];
@@ -11,7 +10,7 @@
 
     delta = {
       enable = true;
-      options.${theme.variant} = true;
+      options.${config.programs.matugen.variant} = true;
     };
 
     extraConfig = {

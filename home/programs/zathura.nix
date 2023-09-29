@@ -1,6 +1,6 @@
 {
   pkgs,
-  theme,
+  config,
   ...
 }: {
   programs.zathura = {
@@ -24,7 +24,7 @@
     extraConfig =
       "include catppuccin-"
       + (
-        if theme.variant == "light"
+        if config.programs.matugen.variant == "light"
         then "latte"
         else "mocha"
       );

@@ -1,10 +1,10 @@
 {
   config,
   default,
-  theme,
   ...
 }: let
-  c = theme.colors.colors_android.${theme.variant};
+  inherit (config.programs.matugen) variant;
+  c = config.programs.matugen.theme.colors.colors_android.${variant};
 
   pointer = config.home.pointerCursor;
   scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";

@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  theme,
+  config,
   ...
 }: {
   # themable spotify
@@ -12,7 +12,7 @@
 
     theme = let
       variant =
-        if theme.variant == "light"
+        if config.programs.matugen.variant == "light"
         then "latte"
         else "mocha";
     in

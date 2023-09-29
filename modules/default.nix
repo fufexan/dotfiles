@@ -17,20 +17,12 @@ in {
 
         # NixOS modules
         sharedModules = [
-          ({
-            pkgs,
-            self,
-            ...
-          }: let
-            theme = import "${self}/lib/theme/theme.nix" self pkgs;
-          in {
+          {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.mihai._module.args = {inherit theme;};
             };
-            _module.args = {inherit theme;};
-          })
+          }
 
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
@@ -40,9 +32,11 @@ in {
           inputs.nh.nixosModules.default
           inputs.lanzaboote.nixosModules.lanzaboote
           module_args
-          ./core.nix
-          ./network.nix
-          ./nix.nix
+
+          self.nixosModules.core
+          self.nixosModules.network
+          self.nixosModules.nix
+          self.nixosModules.theme
           ./security.nix
           ./specialisations.nix
         ];
@@ -57,8 +51,8 @@ in {
     gamemode = import ./gamemode.nix;
     greetd = import ./greetd.nix;
     lanzaboote = import ./lanzaboote.nix;
-    minimal = import ./minimal.nix;
     network = import ./network.nix;
     nix = import ./nix.nix;
+    theme = import ./theme inputs.matugen;
   };
 }

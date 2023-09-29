@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  theme,
   ...
 }: let
   colorschemePath = "/org/gnome/desktop/interface/color-scheme";
@@ -53,11 +52,11 @@ in {
   # light/dark specialisations
   specialisation = {
     light.configuration = {
-      _module.args.theme = lib.mkForce (theme // {variant = "light";});
+      programs.matugen.variant = "light";
       home.activation = {inherit dconfLight;};
     };
     dark.configuration = {
-      _module.args.theme = lib.mkForce (theme // {variant = "dark";});
+      programs.matugen.variant = "dark";
       home.activation = {inherit dconfDark;};
     };
   };
