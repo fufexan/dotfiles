@@ -74,7 +74,7 @@
 
     helix = {
       url = "github:SoraTenshi/helix/new-daily-driver";
-      inputs.parts.follows = "flake-parts";
+      inputs.flake-utils.follows = "fu";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };

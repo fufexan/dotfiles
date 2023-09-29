@@ -27,7 +27,7 @@ in {
   environment.systemPackages = with pkgs; [
     # theme packages
     (catppuccin-gtk.override {
-      accents = ["mauve"];
+      accents = ["flamingo"];
       size = "compact";
       variant = "mocha";
     })
@@ -61,9 +61,9 @@ in {
       };
       GTK = {
         cursor_theme_name = "Bibata-Modern-Classic";
-        font_name = "Lexend 12";
+        font_name = "Lexend 9";
         icon_theme_name = "Papirus-Dark";
-        theme_name = "Catppuccin-Mocha-Compact-Mauve-dark";
+        theme_name = "Catppuccin-Mocha-Compact-Mauve-Dark";
       };
     };
   };

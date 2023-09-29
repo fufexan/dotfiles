@@ -37,8 +37,8 @@
     theme = {
       name =
         if theme.variant == "light"
-        then "Catppuccin-Latte-Compact-Flamingo-light"
-        else "Catppuccin-Mocha-Compact-Flamingo-dark";
+        then "Catppuccin-Latte-Compact-Flamingo-Light"
+        else "Catppuccin-Mocha-Compact-Flamingo-Dark";
       package = pkgs.catppuccin-gtk.override {
         accents = ["flamingo"];
         size = "compact";

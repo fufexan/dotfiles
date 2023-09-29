@@ -36,23 +36,37 @@
     # enable hyprland and required options
     hyprland.enable = true;
 
+    matugen = {
+      enable = false;
+
+      wallpaper = default.wallpaper;
+
+      # templates.amongus = {
+      #   input_path = pkgs.writeText "amongus-test.css" ''
+      #     color1: @{primary};
+      #     color2: @{surface_variant};
+      #   '';
+      #   output_path = "$HOME/.config/amongus-test.css";
+      # };
+    };
+
     steam = {
       enable = true;
       # fix gamescope inside steam
       package = pkgs.steam.override {
-        extraPkgs = pkgs:
-          with pkgs; [
-            keyutils
-            libkrb5
-            libpng
-            libpulseaudio
-            libvorbis
-            stdenv.cc.cc.lib
-            xorg.libXcursor
-            xorg.libXi
-            xorg.libXinerama
-            xorg.libXScrnSaver
-          ];
+        # extraPkgs = pkgs:
+        #   with pkgs; [
+        #     keyutils
+        #     libkrb5
+        #     libpng
+        #     libpulseaudio
+        #     libvorbis
+        #     stdenv.cc.cc.lib
+        #     xorg.libXcursor
+        #     xorg.libXi
+        #     xorg.libXinerama
+        #     xorg.libXScrnSaver
+        #   ];
         # set correct scaling
         extraProfile = "export GDK_SCALE=2";
       };
