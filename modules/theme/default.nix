@@ -103,8 +103,8 @@ in {
       lib.mkOption {
         description = "Colorscheme variant. Can be one of ${printEnum validVariants}";
         type = lib.types.enum validVariants;
-        default = "light";
-        example = "dark";
+        default = "dark";
+        example = "light";
       };
 
     theme.files = lib.mkOption {
