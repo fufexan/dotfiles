@@ -11,6 +11,7 @@
         ./lib
         ./modules
         ./pkgs
+        ./pre-commit-hooks.nix
       ];
 
       perSystem = {
@@ -26,6 +27,9 @@
           ];
           name = "dots";
           DIRENV_LOG_FORMAT = "";
+          shellHook = ''
+            ${config.pre-commit.installationScript}
+          '';
         };
 
         formatter = pkgs.alejandra;
@@ -117,6 +121,12 @@
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
+    };
+
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "fu";
     };
 
     rust-overlay = {
