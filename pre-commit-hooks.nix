@@ -2,7 +2,7 @@
   imports = [inputs.pre-commit-hooks.flakeModule];
 
   perSystem.pre-commit = {
-    check.enable = true;
+    check.enable = false;
 
     settings.hooks = {
       alejandra.enable = true;

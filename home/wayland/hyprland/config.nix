@@ -95,6 +95,7 @@ in {
         passes = 3
         new_optimizations = true
         brightness = 1.0
+        contrast = 1.0
         noise = 0.02
       }
 
