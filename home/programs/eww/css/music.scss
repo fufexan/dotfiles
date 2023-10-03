@@ -45,10 +45,6 @@
     .icon { font-size: 2rem; }
   }
 
-  highlight {
-    background-image: linear-gradient(to right, $teal, $sky);
-  }
-
   trough {
     min-width: 12rem;
     margin: 0 calc($scaleh / 2);

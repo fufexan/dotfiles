@@ -7,23 +7,23 @@ calendar {
   padding: .2rem;
 
   :selected {
-    background: $bg1;
+    background: $surface;
     border-radius: 100%;
     padding: .3rem .5rem;
   }
 
   .header {
-    color: $subtext1;
+    color: $subtext;
   }
 
   .highlight {
-    color: $maroon;
+    color: $red;
     font-weight: bold;
   }
 
   .button { padding: .5rem .3rem; }
 
   :indeterminate {
-    color: $subtext1;
+    color: $subtext;
   }
 }

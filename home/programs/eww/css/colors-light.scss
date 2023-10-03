@@ -1,0 +1,23 @@
+$red:         #d20f39;
+$yellow:      #df8e1d;
+$green:       #40a02b;
+$blue:        #1e66f5;
+
+$tooltip-bg: #FFFFFF;
+
+$bar-bg: rgba(255, 255, 255, .01);
+$bg: $bar-bg;
+$fg: #000000;
+$surface: rgba(255, 255, 255, .3);
+$overlay: rgba(0, 0, 0, .1);
+
+$button: rgba(0, 0, 0, .1);
+$button-active: rgba(0, 0, 0, .7);
+$hover: rgba(0, 0, 0, .25);
+
+$text: $fg;
+$subtext: rgba(0, 0, 0, .5);
+
+@mixin border {
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.1);
+}

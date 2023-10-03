@@ -156,7 +156,8 @@ in {
     $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell)$
     layerrule = blur, $layers
     layerrule = ignorealpha 0, $layers
-    layerrule = ignorealpha 0.5, ^(eww-(music|calendar)|system-menu|anyrun)$
+    layerrule = ignorealpha 0.5, ^(eww-music)$
+    layerrule = ignorealpha 0${if variant == "dark" then ".5" else ""}, ^(eww-calendar|system-menu|anyrun)$
     layerrule = xray 1, ^(bar|gtk-layer-shell)$
 
     # mouse movements

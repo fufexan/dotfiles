@@ -68,5 +68,5 @@ Dependencies:
 
 ## 🎨 Theme
 
-The theme colors can be changed in `css/colors.scss`. Currently the theme used
-is [Catppuccin Mocha](https://github.com/catppuccin/catppuccin).
+The theme colors can be changed in `css/colors.scss`. There are dark/light
+variants which can be symlinked to `colors.scss` to change the theme.

@@ -1,4 +1,4 @@
-.bar { background: rgba(0, 0, 0, .2); }
+.bar { background: $bar-bg; }
 .module { margin: 0 .5rem; }
 
 /* workspaces */
@@ -10,7 +10,13 @@
 }
 
 .ws {
+  background: $surface;
   border-radius: 2rem;
   margin: .8rem .2rem;
   padding: .1rem;
 }
+
+.ws-red { background: $red; }
+.ws-yellow { background: $yellow; }
+.ws-green { background: $green; }
+.ws-blue { background: $blue; }

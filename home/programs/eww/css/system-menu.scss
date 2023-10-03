@@ -20,11 +20,11 @@
 
   &.enabled button,
   &.connected button {
-    background: white;
-    .icon { color: black; }
+    background: $fg;
+    .icon { color: $bg; }
 
     &:hover {
-      background: rgba(255, 255, 255, .25);
+      background: $hover;
     }
   }
 }
@@ -54,7 +54,7 @@
   }
 
   * { transition: none; }
-  .rate { color: #ccc; }
+  .rate { color: $subtext; }
   .status { margin: 0 .5rem; }
 }
 

@@ -74,10 +74,7 @@ in {
       default = null;
       defaultText = lib.literalExpression "null";
       description = ''
-        SCSS file with colors defined in the same way as Catppuccin colors are,
-        to be used by eww.
-
-        Defaults to Catppuccin Mocha.
+        SCSS file with colors (defaults to dark mode).
       '';
     };
   };
@@ -91,7 +88,7 @@ in {
         filter = name: _type: let
           baseName = baseNameOf (toString name);
         in
-          !(lib.hasSuffix ".nix" baseName) && (baseName != "colors.scss");
+          !(lib.hasSuffix ".nix" baseName) && (baseName != "colors-dark.scss") && (baseName != "colors-light.scss");
         src = lib.cleanSource ./.;
       };
 
@@ -108,7 +105,7 @@ in {
     xdg.configFile."eww/css/colors.scss".text =
       if cfg.colors != null
       then cfg.colors
-      else (builtins.readFile ./css/colors.scss);
+      else (builtins.readFile ./css/colors-dark.scss);
 
     systemd.user.services.eww = {
       Unit = {
