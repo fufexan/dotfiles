@@ -13,6 +13,10 @@ source "$(dirname "$0")"/utils
 nm="$(nmcli d | jc --nmcli | jaq -r '.[] | select(.type | test("^(wifi|ethernet)$", "ix"))')"
 icons=("" "" "" "" "")
 
+function sanitize() {
+  echo "${1//\"/\\\"}"
+}
+
 function toggle() {
   status=$(rfkill -J | jaq -r '.rfkilldevices[] | select(.type == "wlan") | .soft' | head -1)
 
@@ -57,7 +61,7 @@ function make_content() {
     state="disabled"
   fi
 
-  echo '{"icon": "'"$icon"'", "text": "'"$text"'", "state": "'"$state"'"}'
+  echo '{"icon": "'"$icon"'", "text": "'"$(sanitize "$text")"'", "state": "'"$state"'"}'
 }
 
 # first run
