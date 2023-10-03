@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # notification daemon
   services.dunst = let
     xcolors = pkgs.lib.colors.xcolors config.programs.matugen.theme.colors;
