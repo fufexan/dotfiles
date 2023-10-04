@@ -9,7 +9,7 @@ top. Using [flakes](https://nixos.wiki/wiki/Flakes) and
 See an overview of the flake outputs by running
 `nix flake show github:fufexan/dotfiles`.
 
-## 🗃️  Contents
+## 🗃️ Contents
 
 - [modules](modules): NixOS common configs
 - [hosts](hosts): host-specific configuration
