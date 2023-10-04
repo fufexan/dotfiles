@@ -3,13 +3,13 @@
 }
 
 calendar {
-  margin: .3rem;
-  padding: .2rem;
+  margin: 0.3rem;
+  padding: 0.2rem;
 
   :selected {
     background: $surface;
     border-radius: 100%;
-    padding: .3rem .5rem;
+    padding: 0.3rem 0.5rem;
   }
 
   .header {
@@ -21,7 +21,9 @@ calendar {
     font-weight: bold;
   }
 
-  .button { padding: .5rem .3rem; }
+  .button {
+    padding: 0.5rem 0.3rem;
+  }
 
   :indeterminate {
     color: $subtext;

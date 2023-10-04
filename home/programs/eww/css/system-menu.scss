@@ -4,28 +4,20 @@
   @include window;
 
   .text {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
-  & > box { @include window-box; }
+  & > box {
+    @include window-box;
+  }
 }
 
 /* wifi/bt/airplane buttons */
 .toggle {
-  margin: .2rem;
+  margin: 0.2rem;
 
   button {
-    margin-right: .5rem;
-  }
-
-  &.enabled button,
-  &.connected button {
-    background: $fg;
-    .icon { color: $bg; }
-
-    &:hover {
-      background: $hover;
-    }
+    margin-right: 0.5rem;
   }
 }
 
@@ -37,11 +29,11 @@
 
   trough {
     margin-left: 0;
-    margin: 0 .45rem 0 .3rem;
+    margin: 0 0.45rem 0 0.3rem;
   }
 
   .icon {
-    margin: 0 .3rem;
+    margin: 0 0.3rem;
   }
 }
 
@@ -50,14 +42,22 @@
   .icon {
     font-size: 1.5rem;
 
-    &.low { color: $red; }
+    &.low {
+      color: $red;
+    }
   }
 
-  * { transition: none; }
-  .rate { color: $subtext; }
-  .status { margin: 0 .5rem; }
+  * {
+    transition: none;
+  }
+  .rate {
+    color: $subtext;
+  }
+  .status {
+    margin: 0 0.5rem;
+  }
 }
 
 .button.power {
-  margin: .1rem;
+  margin: 0.1rem;
 }

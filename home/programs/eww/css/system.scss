@@ -1,20 +1,22 @@
 /* CPU & RAM */
 .sys-indicator {
   .property {
-    font-size: .5rem;
+    font-size: 0.5rem;
     font-weight: 300;
-    margin-bottom: -.2rem;
-    margin-top: .4rem;
+    margin-bottom: -0.2rem;
+    margin-top: 0.4rem;
   }
 
   .value {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 
-  margin: .35rem;
+  margin: 0.35rem;
 }
 
 .bar .battery .icon {
   font-size: 1.2rem;
-  .low { color: $red; }
+  .low {
+    color: $red;
+  }
 }

@@ -32,17 +32,19 @@
   .title {
     font-size: 1.5rem;
     font-weight: bold;
-    margin: .5rem;
+    margin: 0.5rem;
   }
 
   .artist {
-    margin: .7rem;
+    margin: 0.7rem;
   }
 
   .buttons {
-    margin: 1rem 0 .5rem;
+    margin: 1rem 0 0.5rem;
 
-    .icon { font-size: 2rem; }
+    .icon {
+      font-size: 2rem;
+    }
   }
 
   trough {

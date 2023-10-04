@@ -1,6 +1,6 @@
 .osd-part {
   @include window;
-  margin: .2rem;
+  margin: 0.2rem;
 
   .icon {
     color: $overlay;
@@ -8,7 +8,7 @@
   }
 
   trough {
-    margin: 0 .5rem;
+    margin: 0 0.5rem;
     min-width: 8rem;
   }
 }

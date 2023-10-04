@@ -1,23 +1,27 @@
-$red:         #d20f39;
-$yellow:      #df8e1d;
-$green:       #40a02b;
-$blue:        #1e66f5;
+$red: #d20f39;
+$yellow: #df8e1d;
+$green: #40a02b;
+$blue: #1e66f5;
 
-$tooltip-bg: #FFFFFF;
+$tooltip-bg: #ffffff;
 
-$bar-bg: rgba(255, 255, 255, .01);
-$bg: $bar-bg;
+$bar-bg: rgba(255, 255, 255, 0.3);
+$bg: rgba(255, 255, 255, 0.01);
 $fg: #000000;
-$surface: rgba(255, 255, 255, .3);
-$overlay: rgba(0, 0, 0, .1);
+$surface: rgba(255, 255, 255, 0.3);
+$overlay: rgba(0, 0, 0, 0.5);
 
-$button: rgba(0, 0, 0, .1);
-$button-active: rgba(0, 0, 0, .7);
-$hover: rgba(0, 0, 0, .25);
+$button: rgba(0, 0, 0, 0.1);
+$button-active: rgba(255, 255, 255, 0.7);
+$hover: rgba(0, 0, 0, 0.25);
 
 $text: $fg;
-$subtext: rgba(0, 0, 0, .5);
+$subtext: rgba(0, 0, 0, 0.5);
+
+$focused: $surface;
 
 @mixin border {
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1), inset 0 0 0 1px rgba(255,255,255,.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }

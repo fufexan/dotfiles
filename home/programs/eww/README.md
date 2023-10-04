@@ -3,7 +3,7 @@
 This configuration aims to provide a shell replacement for compositors/window
 managers. Features constantly get added and existing ones get improved.
 
-## 🗃️  Components
+## 🗃️ Components
 
 The same daemon runs multiple windows which interact with each other:
 
@@ -32,6 +32,7 @@ NOTE: Looks best with font-size set to 9pt.
 If you use Home Manager, installing is as simple as adding my flake to your
 inputs, passing `inputs` to `extraSpecialArgs` and importing the relevant
 module:
+
 ```nix
 {inputs, pkgs, ...}: {
   imports = [inputs.fufexan.homeManagerModules.eww-hyprland];
@@ -46,7 +47,7 @@ module:
     colors = builtins.readFile ./latte.scss;
 
     # set to true to reload on change
-    autoReload = false; 
+    autoReload = false;
   };
 }
 ```
@@ -60,8 +61,9 @@ To quickly install this config, grab all the files in this directory and put
 them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
 
 Dependencies:
+
 - Icon fonts: [Material Symbols Outlined](https://github.com/google/material-design-icons/tree/master/variablefont)
-(any variation can be used as long as you change the `font-family` property of `.icon`)
+  (any variation can be used as long as you change the `font-family` property of `.icon`)
 - Text font: Lexend
 - Script deps: everything in `default.nix`'s `dependencies` list.
 - [gross](https://github.com/fufexan/gross)
