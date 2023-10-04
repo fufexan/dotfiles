@@ -23,6 +23,7 @@
           packages = [
             pkgs.alejandra
             pkgs.git
+            pkgs.nodePackages.prettier
             config.packages.repl
           ];
           name = "dots";

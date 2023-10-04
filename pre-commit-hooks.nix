@@ -9,7 +9,6 @@
     settings.hooks = {
       alejandra.enable = true;
       prettier.enable = true;
-      shellcheck.enable = true;
     };
   };
 }
