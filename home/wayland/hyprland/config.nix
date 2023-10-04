@@ -121,6 +121,13 @@ in {
       preserve_split = true
     }
 
+    plugin {
+      csgo-vulkan-fix {
+        res_w = 1280
+        res_h = 800
+      }
+    }
+
     # telegram media viewer
     windowrulev2 = float, title:^(Media viewer)$
 

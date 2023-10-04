@@ -16,5 +16,8 @@
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 
   # enable hyprland
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
+  };
 }
