@@ -22,14 +22,15 @@
       end
 
       return {
-        font_size = ${toString default.terminal.size},
+        check_for_updates = false,
         color_scheme = scheme_for_appearance(get_appearance()),
-        window_background_opacity = ${toString default.terminal.opacity},
+        default_cursor_style = 'SteadyBar',
+        enable_kitty_keyboard = true,
         enable_scroll_bar = false,
+        font_size = ${toString default.terminal.size},
         hide_tab_bar_if_only_one_tab = true,
         scrollback_lines = 10000,
-        check_for_updates = false,
-        default_cursor_style = 'SteadyBar',
+        window_background_opacity = ${toString default.terminal.opacity},
       }
     '';
   };
