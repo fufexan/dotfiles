@@ -1,0 +1,25 @@
+window {
+  background: rgba(255, 255, 255, 0.3);
+  font-family: Lexend;
+}
+
+grid > label {
+  color: transparent;
+  margin: -20rem;
+}
+
+button {
+  all: unset;
+  color: transparent;
+  margin: -20rem;
+}
+
+#clock-label {
+  font-size: 6rem;
+  margin-bottom: 4rem;
+}
+
+entry {
+  border-radius: 16px;
+  margin: 6rem;
+}

@@ -20,8 +20,8 @@ let
 in {
   imports = [
     ../programs/eww
-    ./anyrun.nix
-    ./gtklock.nix
+    ./anyrun
+    ./gtklock
     ./hyprland
     ./sway.nix
     ./swaybg.nix
