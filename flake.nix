@@ -52,10 +52,7 @@
       inputs.home-manager.follows = "hm";
     };
 
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    anyrun.url = "github:Kirottu/anyrun";
 
     anyrun-nixos-options = {
       url = "github:n3oney/anyrun-nixos-options";
