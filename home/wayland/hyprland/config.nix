@@ -32,23 +32,29 @@ in {
       # disable auto polling for config file changes
       disable_autoreload = true
 
-      disable_hypr_chan = true
+      force_default_wallpaper = 0
 
       # disable dragging animation
       animate_mouse_windowdragging = false
 
       # enable variable refresh rate (effective depending on hardware)
       vrr = 1
-
-      # groupbar
-      groupbar_titles_font_size = 16
-      groupbar_gradients = false
     }
 
     # touchpad gestures
     gestures {
       workspace_swipe = true
       workspace_swipe_forever = true
+    }
+
+    group {
+      groupbar {
+        font_size = 16
+        gradients = false
+      }
+
+      col.border_active = rgba(${c.color_accent_primary}88)
+      col.border_inactive = rgba(${c.color_accent_primary_variant}88)
     }
 
     input {
@@ -79,10 +85,6 @@ in {
       border_size = 1
       col.active_border = rgba(88888888)
       col.inactive_border = rgba(00000088)
-
-      # group borders
-      col.group_border_active = rgba(${c.color_accent_primary}88)
-      col.group_border = rgba(${c.color_accent_primary_variant}88)
 
       allow_tearing = true
     }
