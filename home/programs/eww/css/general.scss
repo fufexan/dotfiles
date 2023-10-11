@@ -22,6 +22,7 @@ $border-width: 2px;
   @include rounding;
 
   background: $surface;
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: $margin;
   padding: $padding;
 }

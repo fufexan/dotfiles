@@ -6,7 +6,7 @@
 (defvar vol_reveal false)
 (defvar osd-brightness false)
 (defvar osd-volume false)
-(defvar battery_icons `["","","","","","","",""]`)
+(defvar battery_icons `["","","","","","","",""]`)
 
 (deflisten airplane "scripts/airplane")
 (deflisten battery "gross battery")
