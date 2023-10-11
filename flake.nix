@@ -54,12 +54,6 @@
 
     anyrun.url = "github:Kirottu/anyrun";
 
-    anyrun-nixos-options = {
-      url = "github:n3oney/anyrun-nixos-options";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";
