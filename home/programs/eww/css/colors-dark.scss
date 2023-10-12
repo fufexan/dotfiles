@@ -5,6 +5,8 @@ $blue: #89b4fa;
 
 $tooltip-bg: #000000;
 
+$accent: rgb(46, 63, 147);
+
 $bar-bg: rgba(0, 0, 0, 0.2);
 $bg: rgba(0, 0, 0, 0.5);
 $fg: #ffffff;
@@ -12,8 +14,10 @@ $surface: rgba(255, 255, 255, 0.15);
 $overlay: rgba(255, 255, 255, 0.7);
 
 $button: $surface;
-$button-active: $fg;
-$hover: rgba(255, 255, 255, 0.25);
+$hover: adjust_color($button, $alpha: +0.1);
+
+$button-active: $accent;
+$button-active-hover: adjust_color($accent, $lightness: +20%);
 
 $text: $fg;
 $subtext: #cccccc;
