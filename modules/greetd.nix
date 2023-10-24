@@ -23,21 +23,33 @@ let
 
     exec "${lib.getExe config.programs.regreet.package} -l debug; swaymsg exit"
   '';
+
+  inherit (config.programs.matugen) variant;
+
+  themeName =
+    if variant == "light"
+    then "Catppuccin-Latte-Compact-Flamingo-Light"
+    else "Catppuccin-Mocha-Compact-Flamingo-Dark";
+
+  themePackage = pkgs.catppuccin-gtk.override {
+    accents = ["flamingo"];
+    size = "compact";
+    variant =
+      if variant == "light"
+      then "latte"
+      else "mocha";
+  };
 in {
   environment.systemPackages = with pkgs; [
     # theme packages
-    (catppuccin-gtk.override {
-      accents = ["flamingo"];
-      size = "compact";
-      variant = "mocha";
-    })
+    themePackage
     bibata-cursors
     papirus-icon-theme
   ];
 
   programs.regreet = {
     enable = true;
-    package = pkgs.greetd.regreet.overrideAttrs (self: super: rec {
+    package = pkgs.greetd.regreet.overrideAttrs (self: super: {
       version = "0.1.1-patched";
       src = pkgs.fetchFromGitHub {
         owner = "rharish101";
@@ -46,7 +58,7 @@ in {
         hash = "sha256-PkQTubSm/FN3FXs9vBB3FI4dXbQhv/7fS1rXkVsTAAs=";
       };
       cargoDeps = super.cargoDeps.overrideAttrs (_: {
-        inherit src;
+        inherit (self) src;
         outputHash = "sha256-dR6veXCGVMr5TbCvP0EqyQKTG2XM65VHF9U2nRWyzfA=";
       });
 
@@ -63,7 +75,7 @@ in {
         cursor_theme_name = "Bibata-Modern-Classic";
         font_name = "Lexend 9";
         icon_theme_name = "Papirus-Dark";
-        theme_name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+        theme_name = themeName;
       };
     };
   };

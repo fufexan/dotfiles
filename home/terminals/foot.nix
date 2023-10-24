@@ -6,8 +6,8 @@
       main = {
         font = "${default.terminal.font}:size=${toString default.terminal.size}";
         box-drawings-uses-font-glyphs = "yes";
-        dpi-aware = "auto";
-        pad = "0x0center";
+        dpi-aware = "yes";
+        pad = "0x0 center";
         notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
         selection-target = "clipboard";
       };

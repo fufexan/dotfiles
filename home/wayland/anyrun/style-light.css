@@ -47,7 +47,7 @@
 }
 
 #match:selected,
-#match {
+#match:hover {
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
 }
 
