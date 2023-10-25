@@ -7,38 +7,48 @@ matugen: {
 }: let
   cfg = config.programs.matugen;
 
-  # used to print valid values of an enum
-  printEnum = list: builtins.concatStringsSep ", " (map (x: "`${x}`") list);
+  configFormat = pkgs.formats.toml {};
 
-  # configFormat = pkgs.formats.toml {};
+  capitalize = str: let
+    inherit (builtins) substring stringLength;
+    firstChar = substring 0 1 str;
+    restOfString = substring 1 (stringLength str) str;
+  in
+    lib.concatStrings [(lib.toUpper firstChar) restOfString];
 
   # don't use ~, use $HOME
-  # sanitizedTemplates =
-  #   builtins.mapAttrs (_: v: {
-  #     input_path = builtins.toString v.input_path;
-  #     output_path = builtins.replaceStrings ["$HOME"] ["~"] v.output_path;
-  #   })
-  #   cfg.templates;
+  sanitizedTemplates =
+    builtins.mapAttrs (_: v: {
+      mode = capitalize cfg.variant;
+      input_path = builtins.toString v.input_path;
+      output_path = builtins.replaceStrings ["$HOME"] ["~"] v.output_path;
+    })
+    cfg.templates;
 
-  # matugenConfig = configFormat.generate "matugen-config.toml" {
-  #   config = {};
-  #   templates = sanitizedTemplates;
-  # };
-
-  # matugenConfig = pkgs.writeText "matugen-config.toml" (builtins.concatStringsSep "\n" generatedTemplates);
+  matugenConfig = configFormat.generate "matugen-config.toml" {
+    config = {};
+    templates = sanitizedTemplates;
+  };
 
   # get matugen package
   pkg = matugen.packages.${pkgs.system}.default;
 
   themePackage = pkgs.runCommandLocal "matugen-themes-${cfg.variant}" {} ''
-    export HOME=$(pwd)
     mkdir -p $out
+    cd $out
+    export HOME=$(pwd)
 
     ${pkg}/bin/matugen \
       image ${cfg.wallpaper} \
+      ${
+      if cfg.templates != {}
+      then "--config ${matugenConfig}"
+      else ""
+    } \
       --mode ${cfg.variant} \
       --palette ${cfg.palette} \
       --json ${cfg.jsonFormat} \
+      --quiet \
       > $out/theme.json
   '';
   colors = builtins.fromJSON (builtins.readFile "${themePackage}/theme.json");
@@ -55,70 +65,62 @@ in {
       '';
     };
 
-    # templates = lib.mkOption {
-    #   type = with lib.types;
-    #     attrsOf (submodule {
-    #       options = {
-    #         input_path = lib.mkOption {
-    #           type = path;
-    #           description = "Path to the template";
-    #           example = "./style.css";
-    #         };
-    #         output_path = lib.mkOption {
-    #           type = str;
-    #           description = "Path where the generated file will be written to";
-    #           example = "~/.config/sytle.css";
-    #         };
-    #       };
-    #     });
-    #   description = ''
-    #     Templates that have `@{placeholders}` which will be replaced by the respective colors.
-    #     See <https://github.com/InioX/Matugen/#example-of-all-the-color-keywords> for a list of colors.
-    #   '';
-    # };
+    templates = lib.mkOption {
+      type = with lib.types;
+        attrsOf (submodule {
+          options = {
+            input_path = lib.mkOption {
+              type = path;
+              description = "Path to the template";
+              example = "./style.css";
+            };
+            output_path = lib.mkOption {
+              type = str;
+              description = "Path where the generated file will be written to";
+              example = "~/.config/sytle.css";
+            };
+          };
+        });
+      default = {};
+      description = ''
+        Templates that have `@{placeholders}` which will be replaced by the respective colors.
+        See <https://github.com/InioX/Matugen/#example-of-all-the-color-keywords> for a list of colors.
+      '';
+    };
 
-    palette = let
-      validPalettes = ["default" "triadic" "adjacent"];
-    in
-      lib.mkOption {
-        description = "Palette used when generating the colorschemes. Can be one of ${printEnum validPalettes}";
-        type = lib.types.enum validPalettes;
-        default = "default";
-        example = "triadic";
-      };
+    palette = lib.mkOption {
+      description = "Palette used when generating the colorschemes.";
+      type = lib.types.enum ["default" "triadic" "adjacent"];
+      default = "default";
+      example = "triadic";
+    };
 
-    jsonFormat = let
-      validFormats = ["rgb" "rgba" "hsl" "hsla" "hex" "strip"];
-    in
-      lib.mkOption {
-        description = "Color format of the colorschemes. Can be one of ${printEnum validFormats}";
-        type = lib.types.enum validFormats;
-        default = "strip";
-        example = "rgba";
-      };
+    jsonFormat = lib.mkOption {
+      description = "Color format of the colorschemes.";
+      type = lib.types.enum ["rgb" "rgba" "hsl" "hsla" "hex" "strip"];
+      default = "strip";
+      example = "rgba";
+    };
 
-    variant = let
-      validVariants = ["light" "dark" "amoled"];
-    in
-      lib.mkOption {
-        description = "Colorscheme variant. Can be one of ${printEnum validVariants}";
-        type = lib.types.enum validVariants;
-        default = "dark";
-        example = "light";
-      };
+    variant = lib.mkOption {
+      description = "Colorscheme variant.";
+      type = lib.types.enum ["light" "dark" "amoled"];
+      default = "dark";
+      example = "light";
+    };
 
     theme.files = lib.mkOption {
       type = lib.types.package;
       readOnly = true;
       default = themePackage;
-      description = "Generated theme files";
+      description = "Generated theme files. Including only the variant chosen.";
     };
 
     theme.colors = lib.mkOption {
-      type = with lib.types; attrsOf anything;
+      inherit (pkgs.formats.json {}) type;
       readOnly = true;
       default = colors;
-      description = "Generated theme colors";
+      description = "Generated theme colors. Includes all variants.";
     };
   };
 }

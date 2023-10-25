@@ -42,13 +42,13 @@
 
       wallpaper = default.wallpaper;
 
-      # templates.amongus = {
-      #   input_path = pkgs.writeText "amongus-test.css" ''
-      #     color1: @{primary};
-      #     color2: @{surface_variant};
-      #   '';
-      #   output_path = "$HOME/.config/amongus-test.css";
-      # };
+      templates.amongus = {
+        input_path = pkgs.writeText "amongus-test.css" ''
+          color1: @{primary};
+          color2: @{surface_variant};
+        '';
+        output_path = "~/.config/amongus-test.css";
+      };
     };
 
     steam = {
