@@ -574,15 +574,16 @@
         ]
       },
       "locked": {
-        "dirtyRev": "c178f31f7e26a22ddfba86e562362080a54a0ebd-dirty",
-        "dirtyShortRev": "c178f31-dirty",
-        "lastModified": 1698253434,
-        "narHash": "sha256-A69iVQAQoH6xtZ64w7LPeRRo7mHptDRH2dqCZoKipg4=",
-        "type": "git",
-        "url": "file:///home/mihai/Documents/code/rust/git/matugen"
+        "lastModified": 1699310205,
+        "narHash": "sha256-G/w5emPS6OtSwLclW1ji5dwjLec0ey06IU/Xj96W9f0=",
+        "owner": "InioX",
+        "repo": "matugen",
+        "rev": "ceead3ee416bffa337c5243c60d69022572a4cdf",
+        "type": "github"
       },
       "original": {
         "owner": "InioX",
+        "ref": "module",
         "repo": "matugen",
         "type": "github"
       }
