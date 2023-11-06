@@ -73,7 +73,7 @@ in {
       };
       GTK = {
         cursor_theme_name = "Bibata-Modern-Classic";
-        font_name = "Lexend 9";
+        font_name = "Inter 9";
         icon_theme_name = "Papirus-Dark";
         theme_name = themeName;
       };

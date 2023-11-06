@@ -64,7 +64,7 @@ Dependencies:
 
 - Icon fonts: [Material Symbols Outlined](https://github.com/google/material-design-icons/tree/master/variablefont)
   (any variation can be used as long as you change the `font-family` property of `.icon`)
-- Text font: Lexend
+- Text font: Inter or Roboto
 - Script deps: everything in `default.nix`'s `dependencies` list.
 - [gross](https://github.com/fufexan/gross)
 

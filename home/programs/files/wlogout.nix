@@ -12,7 +12,6 @@ in {
   xdg.configFile."wlogout/style.css".text = ''
     * {
       background: none;
-      font-family: Lexend, sans-serif;
     }
 
     window {

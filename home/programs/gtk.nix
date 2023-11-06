@@ -17,8 +17,8 @@ in {
     enable = true;
 
     font = {
-      name = "Roboto";
-      package = pkgs.roboto;
+      name = "Inter";
+      package = pkgs.google-fonts.override {fonts = ["Inter"];};
       size = 9;
     };
 
