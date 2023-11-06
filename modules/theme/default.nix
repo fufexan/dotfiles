@@ -21,7 +21,7 @@ matugen: {
   sanitizedTemplates =
     builtins.mapAttrs (_: v: {
       mode = capitalize cfg.variant;
-      input_path = builtins.toString (builtins.unsafeDiscardStringContext v.input_path);
+      input_path = builtins.toString v.input_path;
       output_path = builtins.replaceStrings ["$HOME"] ["~"] v.output_path;
     })
     cfg.templates;
@@ -114,9 +114,12 @@ in {
       type = lib.types.package;
       readOnly = true;
       default =
-        if cfg.templates != osCfg.templates
-        then themePackage
-        else osCfg.theme.files;
+        if builtins.hasAttr "templates" osCfg
+        then
+          if cfg.templates != osCfg.templates
+          then themePackage
+          else osCfg.theme.files
+        else themePackage;
       description = "Generated theme files. Including only the variant chosen.";
     };
 

@@ -4,7 +4,7 @@ lib: {
 
   terminal = {
     font = "JetBrainsMono Nerd Font";
-    name = "wezterm";
+    name = "foot";
     opacity = 0.9;
     size = 10;
   };

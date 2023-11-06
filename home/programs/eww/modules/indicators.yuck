@@ -1,7 +1,7 @@
 ; screenshare & mic share indicators
 (defwidget indicators []
   (box
-    :space-evenly: false
+    :space-evenly false
     :class "indicators"
     (for i in indicators
       (label
