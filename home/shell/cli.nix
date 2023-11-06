@@ -32,15 +32,22 @@ in {
         pager = "less -FR";
         theme = "Catppuccin-${variant}";
       };
-      themes = {
-        Catppuccin-mocha = builtins.readFile (pkgs.fetchurl {
-          url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme";
-          hash = "sha256-qMQNJGZImmjrqzy7IiEkY5IhvPAMZpq0W6skLLsng/w=";
-        });
-        Catppuccin-latte = builtins.readFile (pkgs.fetchurl {
-          url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-latte.tmTheme";
-          hash = "sha256-rO15D+Gneonrb4dL7LrkwTEyyBBIppp7GqMPU1yxZM4=";
-        });
+      themes = let
+        src = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "bat";
+          rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
+          hash = "sha256-6WVKQErGdaqb++oaXnY3i6/GuH2FhTgK0v4TN4Y0Wbw=";
+        };
+      in {
+        Catppuccin-mocha = {
+          inherit src;
+          file = "Catppuccin-mocha.tmTheme";
+        };
+        Catppuccin-latte = {
+          inherit src;
+          file = "Catppuccin-latte.tmTheme";
+        };
       };
     };
 
