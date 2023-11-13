@@ -18,6 +18,6 @@
   # enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
+    # plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
   };
 }

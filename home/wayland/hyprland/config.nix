@@ -14,7 +14,6 @@ in {
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-    env = WLR_DRM_NO_ATOMIC,1
 
     # set cursor for HL itself
     exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
@@ -68,15 +67,10 @@ in {
       }
     }
 
-    device:MSFT0001:00 04F3:31EB Touchpad {
+    device:elan2841:00-04f3:31eb-touchpad {
       accel_profile = adaptive
       natural_scroll = true
-      sensitivity = 0.1
-    }
-    device:elan1200:00-04f3:3090-touchpad {
-      accel_profile = adaptive
-      natural_scroll = true
-      sensitivity = 0.1
+      sensitivity = 0
     }
 
     general {
