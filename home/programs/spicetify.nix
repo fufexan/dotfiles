@@ -7,18 +7,16 @@
   # themable spotify
   programs.spicetify = let
     spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+    variant =
+      if config.programs.matugen.variant == "light"
+      then "latte"
+      else "mocha";
   in {
     enable = true;
 
-    theme = let
-      variant =
-        if config.programs.matugen.variant == "light"
-        then "latte"
-        else "mocha";
-    in
-      spicePkgs.themes."catppuccin-${variant}";
+    theme = spicePkgs.themes.catppuccin;
 
-    colorScheme = "flamingo";
+    colorScheme = variant;
 
     enabledExtensions = with spicePkgs.extensions; [
       fullAppDisplay
