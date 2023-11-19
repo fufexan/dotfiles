@@ -29,6 +29,14 @@
           injection-regex = "(clojure|clj|edn|boot|yuck)";
           file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
         }
+        {
+          name = "javascript";
+          auto-format = true;
+          language-servers = [
+            "eslint"
+            "typescript-language-server"
+          ];
+        }
       ]
       ++ prettierLangs langs;
 
@@ -43,9 +51,19 @@
         clangd.fallbackFlags = ["-std=c++2b"];
       };
 
+      eslint = {
+        command = "${pkgs.nodePackages.eslint}/bin/eslint";
+        args = ["--stdin"];
+      };
+
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+      };
+
+      typescript-language-server = {
+        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        args = ["--stdio"];
       };
 
       vscode-css-language-server = {
