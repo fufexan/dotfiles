@@ -9,6 +9,7 @@
     ../.
     ../shell
     module_args
+    inputs.ags.homeManagerModules.default
     inputs.anyrun.homeManagerModules.default
     inputs.nix-index-db.hmModules.nix-index
     inputs.spicetify-nix.homeManagerModule

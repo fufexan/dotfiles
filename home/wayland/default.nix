@@ -19,6 +19,7 @@ let
     '';
 in {
   imports = [
+    ../programs/ags
     ../programs/eww
     ./anyrun
     ./gtklock

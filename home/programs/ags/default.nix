@@ -1,0 +1,3 @@
+{
+  programs.ags.enable = true;
+}
