@@ -1,3 +1,4 @@
+import { BatteryModule } from "./modules/battery.js";
 import { Date } from "./modules/date.js";
 import { Widget } from "../../imports.js";
 
@@ -21,7 +22,7 @@ const End = Widget.Box({
     // SystemInfo,
     // Net,
     // Bluetooth,
-    // Battery,
+    BatteryModule,
     Date,
   ],
 });
