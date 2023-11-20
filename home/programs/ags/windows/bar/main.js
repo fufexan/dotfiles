@@ -2,6 +2,7 @@ import { BatteryModule } from "./modules/battery.js";
 import { Date } from "./modules/date.js";
 import { Widget } from "../../imports.js";
 import { Net } from "./modules/net.js";
+import { BluetoothModule } from "./modules/bluetooth.js";
 
 const Start = Widget.Box({
   children: [
@@ -22,7 +23,7 @@ const End = Widget.Box({
     // Tray,
     // SystemInfo,
     Net,
-    // Bluetooth,
+    BluetoothModule,
     BatteryModule,
     Date,
   ],
