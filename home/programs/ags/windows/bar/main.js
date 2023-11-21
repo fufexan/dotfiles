@@ -3,6 +3,7 @@ import { Date } from "./modules/date.js";
 import { Widget } from "../../imports.js";
 import { Net } from "./modules/net.js";
 import { BluetoothModule } from "./modules/bluetooth.js";
+import { SystemInfo } from "./modules/system_info.js";
 
 const Start = Widget.Box({
   children: [
@@ -21,7 +22,7 @@ const End = Widget.Box({
   children: [
     Widget.Box({ hexpand: true }),
     // Tray,
-    // SystemInfo,
+    SystemInfo,
     Net,
     BluetoothModule,
     BatteryModule,
