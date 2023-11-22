@@ -7,4 +7,5 @@ export const Widget = await require("widget");
 export const Utils = await import(resource("utils"));
 export const Battery = await service("battery");
 export const Bluetooth = await service("bluetooth");
+export const Hyprland = await service("hyprland");
 export const Network = await service("network");

@@ -4,10 +4,11 @@ import { Widget } from "../../imports.js";
 import { Net } from "./modules/net.js";
 import { BluetoothModule } from "./modules/bluetooth.js";
 import { SystemInfo } from "./modules/system_info.js";
+import { Workspaces } from "./modules/workspaces.js";
 
 const Start = Widget.Box({
   children: [
-    // Workspaces,
+    Workspaces,
     // Indicators
   ],
 });
