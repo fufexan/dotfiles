@@ -5,6 +5,7 @@ import { Net } from "./modules/net.js";
 import { BluetoothModule } from "./modules/bluetooth.js";
 import { SystemInfo } from "./modules/system_info.js";
 import { Workspaces } from "./modules/workspaces.js";
+import { Music } from "./modules/music.js";
 
 const Start = Widget.Box({
   children: [
@@ -14,9 +15,7 @@ const Start = Widget.Box({
 });
 
 const Center = Widget.Box({
-  children: [
-    // Music
-  ],
+  children: [Music],
 });
 
 const End = Widget.Box({
