@@ -1,41 +1,49 @@
-import { Widget, Hyprland, Utils } from "../../../imports.js";
+import { Widget, Hyprland, Utils, Variable } from "../../../imports.js";
 const { execAsync } = Utils;
 
-const dispatch = (ws) => execAsync([`hyprctl dispatch workspace ${ws}`]);
+const dispatch = (ws) =>
+  execAsync(["sh", "-c", `hyprctl dispatch workspace ${ws}`]);
 
-const makeWorkspaces = () => {
-  let workspaces = Array.from(Hyprland.workspaces);
+const monitors = Variable(Hyprland.monitors);
 
-  return workspaces
+const getMonitorId = (workspace) => {
+  let monitor = monitors.value.findIndex((e) => e.name == workspace?.monitor);
+
+  if (monitor == -1) return "";
+
+  return `monitor${monitor}`;
+};
+
+const getLastWorkspaceId = () =>
+  Hyprland.workspaces
     .sort((x, y) => {
       return x.id - y.id;
     })
     .filter((x) => {
       return x.name.indexOf("special") == -1;
     })
-    .map((i) =>
-      Widget.Button({
-        setup: (btn) => (btn.id = i.id),
-        on_clicked: () => dispatch(i.id),
+    .slice(-1)[0].id;
 
-        child: Widget.Label({
-          label: `${i.id}`,
-          vpack: "center",
-        }),
+const makeWorkspaces = () =>
+  [...Array(getLastWorkspaceId())].map((_, i) => {
+    let id = i + 1;
 
-        connections: [
-          [
-            Hyprland,
-            (btn) =>
-              btn.toggleClassName(
-                "focused",
-                Hyprland.active.workspace.id === i.id,
-              ),
-          ],
+    return Widget.Button({
+      setup: (btn) => (btn.id = id),
+      on_clicked: () => dispatch(id),
+
+      className: getMonitorId(Hyprland.getWorkspace(id)),
+
+      connections: [
+        [
+          Hyprland,
+          (btn) => {
+            btn.toggleClassName("focused", Hyprland.active.workspace.id === id);
+          },
         ],
-      }),
-    );
-};
+      ],
+    });
+  });
 
 function update(self) {
   self.children = makeWorkspaces();
@@ -46,13 +54,19 @@ export const Workspaces = Widget.EventBox({
   onScrollDown: () => dispatch("-1"),
 
   child: Widget.Box({
-    className: "workspaces",
+    className: "workspaces module",
 
     children: makeWorkspaces(),
 
     connections: [
       [Hyprland, update, "workspace-added"],
       [Hyprland, update, "workspace-removed"],
+      [Hyprland, (_) => (monitors.value = Hyprland.monitors), "monitor-added"],
+      [
+        Hyprland,
+        (_) => (monitors.value = Hyprland.monitors),
+        "monitor-removed",
+      ],
     ],
   }),
 });
