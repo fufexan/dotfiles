@@ -7,7 +7,7 @@ export const BluetoothModule = Widget.Icon({
     [
       "icon",
       Bluetooth,
-      "connected_devices",
+      "connected-devices",
       (connected) => {
         if (!Bluetooth.enabled) return "bluetooth-disabled";
         if (connected.length > 0) return "bluetooth-paired";
@@ -17,7 +17,7 @@ export const BluetoothModule = Widget.Icon({
     [
       "tooltip-text",
       Bluetooth,
-      "connected_devices",
+      "connected-devices",
       (connected) => {
         if (!Bluetooth.enabled) return "Bluetooth off";
 

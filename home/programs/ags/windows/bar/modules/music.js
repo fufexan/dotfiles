@@ -88,34 +88,22 @@ export const Music = Widget.EventBox({
           // don't replace the same player
           if (player.getValue() == null || player?.value.busName != busName)
             player.value = Mpris.getPlayer(busName);
-
-          console.log(
-            `player changed: ${busName}\nwe have ${Mpris.players.length} player(s)`,
-          );
         },
         "player-changed",
       ],
       [
         Mpris,
-        (self, busName) => {
+        (self, _) => {
           // music module is visible, as we have a player
           self.visible = true;
-
-          console.log(
-            `player added: ${busName}\nwe have ${Mpris.players.length} player(s)`,
-          );
         },
         "player-added",
       ],
       [
         Mpris,
-        (self, busName) => {
+        (self, _) => {
           // if we have no players, make the module invisible
           self.visible = Mpris.players.length > 0 ? true : false;
-
-          console.log(
-            `player closed: ${busName}\nwe have ${Mpris.players.length} player(s)`,
-          );
         },
         "player-closed",
       ],
