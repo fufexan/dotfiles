@@ -97,6 +97,8 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+
     kmonad = {
       url = "github:kmonad/kmonad?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
