@@ -2,7 +2,7 @@ import { Widget, Utils } from "../../../imports.js";
 const { execAsync } = Utils;
 
 export const SystemInfo = Widget.Box({
-  className: "system-info",
+  className: "system-info module",
 
   children: [
     Widget.Box({
@@ -22,7 +22,7 @@ export const SystemInfo = Widget.Box({
                 execAsync([
                   "sh",
                   "-c",
-                  `top -bn1 | grep '%Cpu' | tail -1 | awk '{print 100-$8}'`,
+                  `top -bn1 | rg '%Cpu' | tail -1 | awk '{print 100-$8}'`,
                 ])
                   .then((r) => (self.label = Math.round(Number(r)) + "%"))
                   .catch((err) => print(err)),

@@ -1,7 +1,7 @@
 import { Widget, Network } from "../../../imports.js";
 
 export const Net = Widget.Icon({
-  className: "net",
+  className: "net module",
 
   binds: [
     [

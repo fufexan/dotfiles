@@ -1,0 +1,6 @@
+/* get rid of GTK theme's styles and set defaults */
+* {
+  all: unset;
+  font-family: Inter, Roboto, sans-serif;
+  transition: 200ms ease;
+}

@@ -16,6 +16,8 @@ const Cover = Widget.Box({
 });
 
 const Title = Widget.Label({
+  className: "title module",
+
   connections: [
     [Mpris, (self) => (self.label = player.value?.track_title ?? "")],
   ],

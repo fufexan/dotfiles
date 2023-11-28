@@ -1,0 +1,66 @@
+.bar {
+  background: $bar-bg;
+
+  .module {
+    margin: 0 0.5rem;
+  }
+}
+
+/* workspaces */
+.bar .workspaces {
+  button {
+    font-size: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2rem;
+    margin: 0.7rem 0.2rem;
+    padding: 0 0.5rem;
+  }
+
+  .focused {
+    border-radius: 1rem;
+    padding: 0 1rem;
+    transition: 200ms cubic-bezier(0.2, 0.7, 0.01, 1);
+  }
+
+  .monitor0 {
+    background: $red;
+  }
+  .monitor1 {
+    background: $yellow;
+  }
+  .monitor2 {
+    background: $green;
+  }
+  .monitor3 {
+    background: $blue;
+  }
+}
+
+/* music */
+.bar .music .cover {
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  margin: 0.2rem;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+/* system-info */
+.bar .system-info {
+  margin: 0 0.2rem;
+
+  & > box {
+    margin: 0 0.3rem;
+  }
+
+  .type {
+    font-size: 0.5rem;
+    font-weight: 300;
+    margin-top: 0.4rem;
+  }
+
+  .value {
+    font-size: 0.8rem;
+  }
+}

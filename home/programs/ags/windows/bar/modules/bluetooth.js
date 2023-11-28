@@ -1,7 +1,7 @@
 import { Widget, Bluetooth } from "../../../imports.js";
 
 export const BluetoothModule = Widget.Icon({
-  className: "bluetooth",
+  className: "bluetooth module",
 
   binds: [
     [

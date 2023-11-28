@@ -3,6 +3,7 @@ const { execAsync } = Utils;
 
 export const Date = Widget.EventBox({
   child: Widget.Label({
+    className: "date module",
     connections: [
       [
         1000,
