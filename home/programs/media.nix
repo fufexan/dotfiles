@@ -15,6 +15,7 @@
     pavucontrol
     playerctl
     pulsemixer
+
     # images
     imv
 
@@ -27,8 +28,6 @@
       defaultProfiles = ["gpu-hq"];
       scripts = [pkgs.mpvScripts.mpris];
     };
-
-    obs-studio.enable = true;
   };
 
   services = {
