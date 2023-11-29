@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -31,6 +32,11 @@
       bindkey "^[OA" history-beginning-search-backward-end
       bindkey "^[OB" history-beginning-search-forward-end
 
+      # open commands in $EDITOR
+      autoload -z edit-command-line
+      zle -N edit-command-line
+      bindkey "^e" edit-command-line
+
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
       zstyle ':completion:*' list-colors '\'
@@ -54,11 +60,6 @@
           unfunction kitty-integration
         fi
       ''}
-
-      # run programs that are not in PATH with comma
-      command_not_found_handler() {
-        ${pkgs.comma}/bin/comma "$@"
-      }
     '';
 
     shellAliases = {
