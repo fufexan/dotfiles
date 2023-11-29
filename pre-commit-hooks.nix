@@ -6,7 +6,10 @@
 
     settings.hooks = {
       alejandra.enable = true;
-      prettier.enable = true;
+      prettier = {
+        enable = true;
+        excludes = [".js" ".md" ".ts"];
+      };
     };
   };
 }
