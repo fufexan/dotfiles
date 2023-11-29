@@ -136,7 +136,7 @@
         backlight.disabled = true;
         dpms.timeouts = [900 300];
         dimmer.timeouts = [870 270];
-        gamma.long_transition = false;
+        gamma.long_transition = true;
         screen.disabled = true;
       };
     };
@@ -145,6 +145,8 @@
     geoclue2.enable = true;
 
     gnome.gnome-keyring.enable = true;
+
+    gvfs.enable = true;
 
     # keyboard remapping
     kmonad = {
