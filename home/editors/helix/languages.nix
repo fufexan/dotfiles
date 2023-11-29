@@ -5,6 +5,11 @@
 }: {
   programs.helix.languages = {
     language = let
+      deno = lang: {
+        command = "${pkgs.deno}/bin/deno";
+        args = ["fmt" "-" "--ext" lang];
+      };
+
       prettier = lang: {
         command = "${pkgs.nodePackages.prettier}/bin/prettier";
         args = ["--parser" lang];
@@ -13,7 +18,7 @@
         name = e;
         formatter = prettier e;
       });
-      langs = ["css" "scss" "json" "html"];
+      langs = ["css" "scss" "html"];
     in
       [
         {
@@ -36,6 +41,16 @@
             "eslint"
             "typescript-language-server"
           ];
+          formatter = deno "js";
+        }
+        {
+          name = "json";
+          formatter = deno "json";
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = deno "md";
         }
       ]
       ++ prettierLangs langs;
