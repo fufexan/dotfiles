@@ -1,4 +1,4 @@
-import { Widget, Utils } from "../../../imports.js";
+import { Utils, Widget } from "../../../imports.js";
 const { execAsync } = Utils;
 
 export const SystemInfo = Widget.Box({

@@ -1,4 +1,4 @@
-import { Widget, Hyprland, Utils, Variable } from "../../../imports.js";
+import { Hyprland, Utils, Variable, Widget } from "../../../imports.js";
 const { execAsync } = Utils;
 
 const dispatch = (ws) =>

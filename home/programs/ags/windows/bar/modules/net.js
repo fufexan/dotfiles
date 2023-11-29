@@ -1,4 +1,4 @@
-import { Widget, Network } from "../../../imports.js";
+import { Network, Widget } from "../../../imports.js";
 
 export const Net = Widget.Icon({
   className: "net module",

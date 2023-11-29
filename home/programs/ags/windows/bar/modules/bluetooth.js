@@ -1,4 +1,4 @@
-import { Widget, Bluetooth } from "../../../imports.js";
+import { Bluetooth, Widget } from "../../../imports.js";
 
 export const BluetoothModule = Widget.Icon({
   className: "bluetooth module",
@@ -25,8 +25,9 @@ export const BluetoothModule = Widget.Icon({
           let dev = Bluetooth.getDevice(connected.at(0).address);
           let battery_str = "";
 
-          if (dev.battery_percentage > 0)
+          if (dev.battery_percentage > 0) {
             battery_str += " " + dev.battery_percentage + "%";
+          }
 
           return dev.name + battery_str;
         }

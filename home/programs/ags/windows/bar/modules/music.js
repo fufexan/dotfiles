@@ -1,4 +1,4 @@
-import { Widget, Mpris, Variable } from "../../../imports.js";
+import { Mpris, Variable, Widget } from "../../../imports.js";
 
 let revealControls = Variable(false);
 let player = Variable(Mpris.getPlayer(""));
@@ -9,8 +9,9 @@ const Cover = Widget.Box({
   connections: [
     [
       Mpris,
-      (self) =>
-        (self.css = `background-image: url('${player.value?.cover_path}');`),
+      (
+        self,
+      ) => (self.css = `background-image: url('${player.value?.cover_path}');`),
     ],
   ],
 });
@@ -43,8 +44,7 @@ const Controls = Widget.CenterBox({
         [
           Mpris,
           (self) => {
-            self.icon =
-              "media-" +
+            self.icon = "media-" +
               (player.value?.playBackStatus == "Playing" ? "pause" : "play");
           },
           "changed",
@@ -88,8 +88,9 @@ export const Music = Widget.EventBox({
         Mpris,
         (_, busName) => {
           // don't replace the same player
-          if (player.getValue() == null || player?.value.busName != busName)
+          if (player.getValue() == null || player?.value.busName != busName) {
             player.value = Mpris.getPlayer(busName);
+          }
         },
         "player-changed",
       ],

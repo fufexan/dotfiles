@@ -1,4 +1,4 @@
-import { Widget, Battery } from "../../../imports.js";
+import { Battery, Widget } from "../../../imports.js";
 
 export const BatteryModule = Widget.Icon({
   className: "battery module",
