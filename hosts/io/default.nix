@@ -18,7 +18,7 @@
     binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
 
     # use latest kernel
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
       "amd_pstate=active"
@@ -41,14 +41,6 @@
       enable = false;
 
       wallpaper = default.wallpaper;
-
-      templates.amongus = {
-        input_path = pkgs.writeText "amongus-test.css" ''
-          color1: @{primary};
-          color2: @{surface_variant};
-        '';
-        output_path = "~/.config/amongus-test.css";
-      };
     };
 
     steam = {
