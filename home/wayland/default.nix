@@ -22,10 +22,10 @@ in {
     ../programs/ags
     ../programs/eww
     ./anyrun
-    ./gtklock
     ./hyprland
     ./hyprpaper.nix
     ./swayidle.nix
+    ./swaylock.nix
   ];
 
   programs.eww-hyprland = {
