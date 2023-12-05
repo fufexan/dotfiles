@@ -9,7 +9,6 @@
     bash
     coreutils
     gawk
-    inotify-tools
     procps
     ripgrep
     sassc

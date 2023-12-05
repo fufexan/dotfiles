@@ -1,0 +1,65 @@
+/* general styles */
+
+$round: 8px;
+$margin: 0.4rem;
+$padding: 0.4rem;
+$border-width: 2px;
+$scale: 0.5rem;
+
+* {
+  color: $fg;
+}
+
+/* mixins */
+@mixin window-rounding {
+  border-radius: calc(#{$round} * 2);
+}
+
+@mixin rounding {
+  border-radius: calc(#{$round} * 2 - #{$padding} - #{$border-width});
+}
+
+@mixin window-box {
+  @include rounding;
+
+  background: $surface;
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  margin: $margin;
+  padding: $padding;
+}
+
+@mixin window {
+  @include border;
+  @include window-rounding;
+
+  background: $bg;
+  margin: 5px 5px 10px;
+  padding: $padding;
+}
+
+tooltip {
+  background: $tooltip-bg;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 0 rgba(0, 0, 0, 0.4);
+  border-radius: $round;
+}
+
+/* scales & progress bars */
+scale,
+progressbar {
+  trough {
+    background-color: $surface;
+    border-radius: $scale;
+    min-width: calc(#{$scale} * 10);
+    padding: 0 calc(#{$scale} / 2);
+  }
+
+  highlight,
+  progress {
+    background: $overlay;
+    border-radius: $scale;
+    margin: 0 calc(0px - #{$scale} / 2);
+    min-height: $scale;
+  }
+}

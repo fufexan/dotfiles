@@ -1,5 +1,6 @@
 import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
+import { Osd } from "./windows/osd/main.js";
 
 const scss = App.configDir + "/style.scss";
 const css = App.configDir + "/style.css";
@@ -8,22 +9,19 @@ Utils.exec(`sassc ${scss} ${css}`);
 
 export default {
   style: css,
-  windows: [Bar],
+  windows: [Bar, Osd(0)],
+
+  closeWindowDelay: {
+    "osd": 500,
+  },
 };
 
-Utils.subprocess(
-  [
-    "inotifywait",
-    "--recursive",
-    "--event",
-    "create,modify",
-    "-m",
-    App.configDir + "/style",
-  ],
-  () => {
-    print("scss change detected");
-    Utils.exec(`sassc ${scss} ${css}`);
-    App.resetCss();
-    App.applyCss(css);
-  },
-);
+function reloadCss() {
+  console.log("scss change detected");
+  Utils.exec(`sassc ${scss} ${css}`);
+  App.resetCss();
+  App.applyCss(css);
+}
+
+Utils.monitorFile(App.configDir + "/style.scss", reloadCss);
+Utils.monitorFile(App.configDir + "/style", reloadCss);

@@ -1,0 +1,27 @@
+.osd-container {
+  margin-top: 30rem;
+}
+
+.osd {
+  @include window;
+  border-radius: 3rem;
+  padding: 0.5rem;
+
+  image {
+    font-size: 3rem;
+    margin: 0.5rem;
+  }
+
+  box {
+    margin: 0.5rem;
+  }
+
+  label {
+    margin: 0 0 0.5rem;
+  }
+
+  progressbar trough {
+    margin: 0.5rem 0.5rem 0;
+    min-width: 10rem;
+  }
+}
