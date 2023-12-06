@@ -2,6 +2,9 @@ import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
 import { Osd } from "./windows/osd/main.js";
 
+// start date of Ags, used for OSD
+globalThis.startDate = Date.now();
+
 const scss = App.configDir + "/style.scss";
 const css = App.configDir + "/style.css";
 
@@ -23,5 +26,4 @@ function reloadCss() {
   App.applyCss(css);
 }
 
-Utils.monitorFile(App.configDir + "/style.scss", reloadCss);
-Utils.monitorFile(App.configDir + "/style", reloadCss);
+Utils.monitorFile(`${App.configDir}/style`, reloadCss, "directory");
