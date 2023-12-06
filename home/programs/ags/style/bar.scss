@@ -8,18 +8,19 @@
 
 /* workspaces */
 .bar .workspaces {
+  margin: 0.2rem 0.5rem;
+
   button {
     font-size: 0.5rem;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 2rem;
     margin: 0.7rem 0.2rem;
     padding: 0 0.5rem;
+    transition: 0.1s cubic-bezier(0.2, 0, 0, 1);
   }
 
   .focused {
-    border-radius: 1rem;
     padding: 0 1rem;
-    transition: 200ms cubic-bezier(0.2, 0.7, 0.01, 1);
   }
 
   .monitor0 {
@@ -37,13 +38,17 @@
 }
 
 /* music */
-.bar .music .cover {
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
+.bar .music {
   margin: 0.2rem;
-  min-width: 2rem;
-  min-height: 2rem;
+
+  .cover {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 0.2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
 }
 
 /* system-info */
