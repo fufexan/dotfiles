@@ -37,11 +37,7 @@
         {
           name = "javascript";
           auto-format = true;
-          language-servers = [
-            "eslint"
-            "typescript-language-server"
-          ];
-          formatter = deno "js";
+          language-servers = ["deno-lsp"];
         }
         {
           name = "json";
@@ -66,19 +62,32 @@
         clangd.fallbackFlags = ["-std=c++2b"];
       };
 
-      eslint = {
-        command = "${pkgs.nodePackages.eslint}/bin/eslint";
-        args = ["--stdin"];
+      deno-lsp = {
+        command = "${pkgs.deno}/bin/deno";
+        args = ["lsp"];
+        environment.NO_COLOR = "1";
+        config.deno = {
+          enable = true;
+          lint = true;
+          unstable = true;
+          suggest = {
+            completeFunctionCalls = false;
+            imports = {hosts."https://deno.land" = true;};
+          };
+          inlayHints = {
+            enumMemberValues.enabled = true;
+            functionLikeReturnTypes.enabled = true;
+            parameterNames.enabled = "all";
+            parameterTypes.enabled = true;
+            propertyDeclarationTypes.enabled = true;
+            variableTypes.enabled = true;
+          };
+        };
       };
 
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
-      };
-
-      typescript-language-server = {
-        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
-        args = ["--stdio"];
       };
 
       vscode-css-language-server = {
