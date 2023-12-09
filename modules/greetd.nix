@@ -26,7 +26,7 @@ in {
     # theme packages
     themePackage
     bibata-cursors
-    papirus-icon-theme
+    gnome.adwaita-icon-theme
   ];
 
   programs.regreet = {
@@ -42,7 +42,7 @@ in {
       GTK = {
         cursor_theme_name = "Bibata-Modern-Classic";
         font_name = "Inter 9";
-        icon_theme_name = "Papirus-Dark";
+        icon_theme_name = "Adwaita";
         theme_name = themeName;
       };
     };
