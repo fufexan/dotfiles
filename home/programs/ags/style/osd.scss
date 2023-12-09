@@ -5,6 +5,7 @@
 .osd {
   @include window;
   border-radius: 3rem;
+  box-shadow: none;
   padding: 0.5rem;
 
   image {

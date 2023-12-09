@@ -9,6 +9,7 @@
     bash
     coreutils
     gawk
+    imagemagick
     procps
     ripgrep
     sassc

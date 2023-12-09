@@ -1,7 +1,8 @@
 import { Mpris, Variable, Widget } from "../../../imports.js";
 
 let revealControls = Variable(false);
-let player = Variable(Mpris.getPlayer(""));
+globalThis.player = Variable(Mpris.getPlayer(""));
+globalThis.musicVisible = Variable(false);
 
 const Cover = Widget.Box({
   className: "cover",
@@ -11,7 +12,7 @@ const Cover = Widget.Box({
       Mpris,
       (
         self,
-      ) => (self.css = `background-image: url('${player.value?.cover_path}');`),
+      ) => self.css = `background-image: url('${player.value?.cover_path}');`,
     ],
   ],
 });
@@ -20,23 +21,23 @@ const Title = Widget.Label({
   className: "title module",
 
   connections: [
-    [Mpris, (self) => (self.label = player.value?.track_title ?? "")],
+    [Mpris, (self) => self.label = player.value?.track_title ?? ""],
   ],
 });
 
-const Controls = Widget.CenterBox({
+export const Controls = Widget.CenterBox({
   className: "controls",
 
   startWidget: Widget.Button({
-    onHover: () => (revealControls.value = true),
-    onHoverLost: () => (revealControls.value = false),
+    onHover: () => revealControls.value = true,
+    onHoverLost: () => revealControls.value = false,
     onClicked: () => player.value?.previous(),
     child: Widget.Icon("media-skip-backward"),
   }),
 
   centerWidget: Widget.Button({
-    onHover: () => (revealControls.value = true),
-    onHoverLost: () => (revealControls.value = false),
+    onHover: () => revealControls.value = true,
+    onHoverLost: () => revealControls.value = false,
     onClicked: () => player.value?.playPause(),
 
     child: Widget.Icon({
@@ -54,16 +55,17 @@ const Controls = Widget.CenterBox({
   }),
 
   endWidget: Widget.Button({
-    onHover: () => (revealControls.value = true),
-    onHoverLost: () => (revealControls.value = false),
+    onHover: () => revealControls.value = true,
+    onHoverLost: () => revealControls.value = false,
     onClicked: () => player.value?.next(),
     child: Widget.Icon("media-skip-forward"),
   }),
 });
 
 export const Music = Widget.EventBox({
-  onHover: () => (revealControls.value = true),
-  onHoverLost: () => (revealControls.value = false),
+  onPrimaryClick: () => musicVisible.value = !musicVisible.value,
+  onHover: () => revealControls.value = true,
+  onHoverLost: () => revealControls.value = false,
 
   child: Widget.Box({
     className: "music",
@@ -78,7 +80,7 @@ export const Music = Widget.EventBox({
         child: Controls,
 
         connections: [
-          [revealControls, (self) => (self.revealChild = revealControls.value)],
+          [revealControls, (self) => self.revealChild = revealControls.value],
         ],
       }),
     ],
@@ -96,18 +98,14 @@ export const Music = Widget.EventBox({
       ],
       [
         Mpris,
-        (self, _) => {
-          // music module is visible, as we have a player
-          self.visible = true;
-        },
+        // music module is visible, as we have a player
+        (self, _) => self.visible = true,
         "player-added",
       ],
       [
         Mpris,
-        (self, _) => {
-          // if we have no players, make the module invisible
-          self.visible = Mpris.players.length > 0 ? true : false;
-        },
+        // if we have no players, make the module invisible
+        (self, _) => self.visible = Mpris.players.length > 0 ? true : false,
         "player-closed",
       ],
     ],
