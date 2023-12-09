@@ -1,5 +1,6 @@
 import { Mpris, Utils, Widget } from "../../imports.js";
 import Gtk from "gi://Gtk?version=3.0";
+import Icons from "../../icons.js";
 
 export default Widget.Box({
   className: "player-info",
@@ -18,7 +19,7 @@ export default Widget.Box({
         (self) =>
           self.icon = Utils.lookUpIcon(player.value?.entry)
             ? player.value?.entry
-            : "multimedia-player-symbolic",
+            : Icons.media.player,
         "player-changed",
       ]],
     }),

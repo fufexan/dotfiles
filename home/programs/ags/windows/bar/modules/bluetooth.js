@@ -1,4 +1,5 @@
 import { Bluetooth, Widget } from "../../../imports.js";
+import Icons from "../../../icons.js";
 
 export const BluetoothModule = Widget.Icon({
   className: "bluetooth module",
@@ -9,9 +10,9 @@ export const BluetoothModule = Widget.Icon({
       Bluetooth,
       "connected-devices",
       (connected) => {
-        if (!Bluetooth.enabled) return "bluetooth-disabled-symbolic";
-        if (connected.length > 0) return "bluetooth-active-symbolic";
-        return "bluetooth-disconnected-symbolic";
+        if (!Bluetooth.enabled) return Icons.bluetooth.disabled;
+        if (connected.length > 0) return Icons.bluetooth.active;
+        return Icons.bluetooth.disconnected;
       },
     ],
     [

@@ -1,5 +1,6 @@
 import { Mpris, Widget } from "../../imports.js";
 import Gtk from "gi://Gtk?version=3.0";
+import Icons from "../../icons.js";
 
 export default Widget.CenterBox({
   className: "controls",
@@ -7,7 +8,7 @@ export default Widget.CenterBox({
 
   startWidget: Widget.Button({
     onClicked: () => player.value?.previous(),
-    child: Widget.Icon("media-skip-backward"),
+    child: Widget.Icon(Icons.media.previous),
   }),
 
   centerWidget: Widget.Button({
@@ -18,9 +19,10 @@ export default Widget.CenterBox({
         [
           Mpris,
           (self) => {
-            self.icon = "media-playback-" +
-              (player.value?.playBackStatus == "Playing" ? "pause" : "start") +
-              "-symbolic";
+            const state = player.value?.playBackStatus == "Playing"
+              ? "pause"
+              : "play";
+            self.icon = Icons.media[state];
           },
           "changed",
         ],
@@ -30,6 +32,6 @@ export default Widget.CenterBox({
 
   endWidget: Widget.Button({
     onClicked: () => player.value?.next(),
-    child: Widget.Icon("media-skip-forward"),
+    child: Widget.Icon(Icons.media.next),
   }),
 });
