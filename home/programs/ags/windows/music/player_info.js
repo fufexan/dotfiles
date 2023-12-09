@@ -18,7 +18,7 @@ export default Widget.Box({
         (self) =>
           self.icon = Utils.lookUpIcon(player.value?.entry)
             ? player.value?.entry
-            : "view-media-track",
+            : "multimedia-player-symbolic",
         "player-changed",
       ]],
     }),

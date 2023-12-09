@@ -3,7 +3,7 @@ import GLib from "gi://GLib";
 
 // create a debouncer for burst events (like Audio changes)
 export const debounce = (self) => {
-  let date = Date.now();
+  const date = Date.now();
   if (date - osdVars.debounceTimer < 50) {
     osdVars.debounceTimer = date;
     return;

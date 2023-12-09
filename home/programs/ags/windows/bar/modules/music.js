@@ -1,6 +1,6 @@
 import { Mpris, Variable, Widget } from "../../../imports.js";
 
-let revealControls = Variable(false);
+const revealControls = Variable(false);
 globalThis.player = Variable(Mpris.getPlayer(""));
 globalThis.musicVisible = Variable(false);
 
@@ -45,8 +45,9 @@ export const Controls = Widget.CenterBox({
         [
           Mpris,
           (self) => {
-            self.icon = "media-" +
-              (player.value?.playBackStatus == "Playing" ? "pause" : "play");
+            self.icon = "media-playback-" +
+              (player.value?.playBackStatus == "Playing" ? "pause" : "start") +
+              "-symbolic";
           },
           "changed",
         ],

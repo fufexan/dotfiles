@@ -9,9 +9,9 @@ export const BluetoothModule = Widget.Icon({
       Bluetooth,
       "connected-devices",
       (connected) => {
-        if (!Bluetooth.enabled) return "bluetooth-disabled";
-        if (connected.length > 0) return "bluetooth-paired";
-        return "bluetooth-active";
+        if (!Bluetooth.enabled) return "bluetooth-disabled-symbolic";
+        if (connected.length > 0) return "bluetooth-active-symbolic";
+        return "bluetooth-disconnected-symbolic";
       },
     ],
     [
@@ -22,7 +22,7 @@ export const BluetoothModule = Widget.Icon({
         if (!Bluetooth.enabled) return "Bluetooth off";
 
         if (connected.length > 0) {
-          let dev = Bluetooth.getDevice(connected.at(0).address);
+          const dev = Bluetooth.getDevice(connected.at(0).address);
           let battery_str = "";
 
           if (dev.battery_percentage > 0) {

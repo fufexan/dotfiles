@@ -7,7 +7,7 @@ const dispatch = (ws) =>
 const monitors = Variable(Hyprland.monitors);
 
 const getMonitorId = (workspace) => {
-  let monitor = monitors.value.findIndex((e) => e.name == workspace?.monitor);
+  const monitor = monitors.value.findIndex((e) => e.name == workspace?.monitor);
 
   if (monitor == -1) return "";
 
@@ -26,7 +26,7 @@ const getLastWorkspaceId = () =>
 
 const makeWorkspaces = () =>
   [...Array(getLastWorkspaceId())].map((_, i) => {
-    let id = i + 1;
+    const id = i + 1;
 
     return Widget.Button({
       setup: (btn) => (btn.id = id),

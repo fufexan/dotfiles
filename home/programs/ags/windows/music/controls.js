@@ -18,8 +18,9 @@ export default Widget.CenterBox({
         [
           Mpris,
           (self) => {
-            self.icon = "media-" +
-              (player.value?.playBackStatus == "Playing" ? "pause" : "play");
+            self.icon = "media-playback-" +
+              (player.value?.playBackStatus == "Playing" ? "pause" : "start") +
+              "-symbolic";
           },
           "changed",
         ],
