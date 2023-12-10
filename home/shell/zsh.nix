@@ -32,7 +32,19 @@
       bindkey "^[OA" history-beginning-search-backward-end
       bindkey "^[OB" history-beginning-search-forward-end
 
-      # open commands in $EDITOR
+      # C-right / C-left for word skips
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;5D" backward-word
+
+      # C-Backspace / C-Delete for word deletions
+      bindkey "^[[3;5~" forward-kill-word
+      bindkey "^H" backward-kill-word
+
+      # Home/End
+      bindkey "^[[OH" beginning-of-line
+      bindkey "^[[OF" end-of-line
+
+      # open commands in $EDITOR with C-e
       autoload -z edit-command-line
       zle -N edit-command-line
       bindkey "^e" edit-command-line
@@ -62,18 +74,20 @@
       ''}
     '';
 
-    shellAliases = {
-      grep = "grep --color";
-      ip = "ip --color";
-      l = "eza -l";
-      la = "eza -la";
-      md = "mkdir -p";
-      ppc = "powerprofilesctl";
-      pf = "powerprofilesctl launch -p performance";
+    shellAliases =
+      {
+        grep = "grep --color";
+        ip = "ip --color";
+        l = "eza -l";
+        la = "eza -la";
+        md = "mkdir -p";
+        ppc = "powerprofilesctl";
+        pf = "powerprofilesctl launch -p performance";
 
-      us = "systemctl --user";
-      rs = "sudo systemctl";
-    };
+        us = "systemctl --user";
+        rs = "sudo systemctl";
+      }
+      // lib.optionalAttrs (config.programs.bat.enable == true) {cat = "bat";};
     shellGlobalAliases = {eza = "eza --icons --git";};
   };
 }
