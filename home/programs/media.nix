@@ -18,6 +18,10 @@
 
     # images
     imv
+    loupe
+
+    # videos
+    celluloid
 
     spotify-tui
   ];

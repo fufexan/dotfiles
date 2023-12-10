@@ -1,8 +1,8 @@
 {config, ...}: let
-  browser = ["firefox.desktop"];
+  browser = ["firefox"];
 
   # XDG MIME types
-  associations = {
+  associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) {
     "application/x-extension-htm" = browser;
     "application/x-extension-html" = browser;
     "application/x-extension-shtml" = browser;
@@ -11,20 +11,20 @@
     "application/xhtml+xml" = browser;
     "text/html" = browser;
     "x-scheme-handler/about" = browser;
-    "x-scheme-handler/chrome" = ["chromium-browser.desktop"];
+    "x-scheme-handler/chrome" = ["chromium-browser"];
     "x-scheme-handler/ftp" = browser;
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = ["mpv.desktop"];
-    "video/*" = ["mpv.desktop"];
-    "image/*" = ["imv.desktop"];
+    "audio/*" = ["celluloid"];
+    "video/*" = ["celluloid"];
+    "image/*" = ["loupe"];
     "application/json" = browser;
-    "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
-    "x-scheme-handler/discord" = ["discordcanary.desktop"];
-    "x-scheme-handler/spotify" = ["spotify.desktop"];
-    "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
+    "application/pdf" = ["org.pwmt.zathura"];
+    "x-scheme-handler/discord" = browser;
+    "x-scheme-handler/spotify" = ["spotify"];
+    "x-scheme-handler/tg" = ["telegramdesktop"];
   };
 in {
   xdg = {
