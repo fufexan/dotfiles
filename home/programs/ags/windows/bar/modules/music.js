@@ -93,12 +93,11 @@ export default Widget.EventBox({
 
     binds: [
       ["children", Mpris, "players", (players) => {
-        if (players.length > 0) {
-          [
-            Revealer(players[0]),
-            MusicBox(players[0]),
-          ];
-        }
+        if (players.length == 0) return [];
+        return [
+          Revealer(players[0]),
+          MusicBox(players[0]),
+        ];
       }],
       [
         "visible",

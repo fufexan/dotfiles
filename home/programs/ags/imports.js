@@ -26,18 +26,4 @@ export const osdVars = Variable({
   container: null,
 });
 
-export const player = Variable(Mpris.getPlayer(""));
 export const musicVisible = Variable(false);
-
-// Functions
-globalThis.getPlayer = () => {
-  console.log(`player: ${JSON.stringify(player.value)}`);
-};
-
-globalThis.setPlayer = () => {
-  const player = Mpris.getPlayer("");
-  const players = Mpris.players;
-  console.log(`player: ${JSON.stringify(player)}`);
-  console.log(`players: ${JSON.stringify(players)}`);
-  player.value = player;
-};

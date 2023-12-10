@@ -18,7 +18,7 @@ export default (player) =>
         connections: [[
           Mpris,
           (self) =>
-            self.icon = Utils.lookUpIcon(player.entry)
+            self.icon = Utils.lookUpIcon(player.entry ?? "")
               ? player.entry
               : Icons.media.player,
           "player-changed",

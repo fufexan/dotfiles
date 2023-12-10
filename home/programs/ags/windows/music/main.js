@@ -61,7 +61,7 @@ const MusicBox = (player) =>
     ],
   });
 
-export const Music = Widget.Window({
+export default Widget.Window({
   monitor: 0,
   layer: "overlay",
   anchor: ["top"],
@@ -74,10 +74,9 @@ export const Music = Widget.Window({
       Mpris,
       "players",
       (players) => {
-        if (players.length > 0) MusicBox(players[0]);
+        if (players.length == 0) return Widget.Box();
+        return MusicBox(players[0]);
       },
     ],
   ],
 });
-
-export default Music;
