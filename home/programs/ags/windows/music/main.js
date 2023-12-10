@@ -1,4 +1,4 @@
-import { Utils, Widget } from "../../imports.js";
+import { Mpris, musicVisible, Utils, Widget } from "../../imports.js";
 import GLib from "gi://GLib";
 
 import Cover from "./cover.js";
@@ -10,8 +10,8 @@ import PlayerInfo from "./player_info.js";
 const MEDIA_CACHE_PATH = Utils.CACHE_DIR + "/media";
 const blurredPath = MEDIA_CACHE_PATH + "/blurred";
 
-const generateBackground = (box) => {
-  const url = player.value.cover_path;
+const generateBackground = (box, cover_path) => {
+  const url = cover_path;
   if (!url) return;
 
   const blurred = blurredPath +
@@ -27,37 +27,39 @@ const generateBackground = (box) => {
     .catch(print);
 };
 
-const Info = Widget.Box({
-  className: "info",
-  vertical: true,
-  vexpand: false,
-  hexpand: false,
-  homogeneous: true,
+const Info = (player) =>
+  Widget.Box({
+    className: "info",
+    vertical: true,
+    vexpand: false,
+    hexpand: false,
+    homogeneous: true,
 
-  children: [
-    PlayerInfo,
-    Title,
-    Artists,
-    Controls,
-    TimeInfo,
-  ],
-});
-
-const MusicBox = Widget.Box({
-  className: "music window",
-  children: [
-    Cover,
-    Info,
-  ],
-
-  connections: [
-    [
-      player.value,
-      generateBackground,
-      "notify::cover-path",
+    children: [
+      PlayerInfo(player),
+      Title(player),
+      Artists(player),
+      Controls(player),
+      TimeInfo(player),
     ],
-  ],
-});
+  });
+
+const MusicBox = (player) =>
+  Widget.Box({
+    className: "music window",
+    children: [
+      Cover(player),
+      Info(player),
+    ],
+
+    connections: [
+      [
+        player,
+        generateBackground,
+        "notify::cover-path",
+      ],
+    ],
+  });
 
 export const Music = Widget.Window({
   monitor: 0,
@@ -65,8 +67,17 @@ export const Music = Widget.Window({
   anchor: ["top"],
   name: "music",
 
-  child: MusicBox,
-  binds: [["visible", musicVisible]],
+  binds: [
+    ["visible", musicVisible],
+    [
+      "child",
+      Mpris,
+      "players",
+      (players) => {
+        if (players.length > 0) MusicBox(players[0]);
+      },
+    ],
+  ],
 });
 
 export default Music;

@@ -1,75 +1,89 @@
-import {
-  Mpris,
-  musicVisible,
-  player,
-  Variable,
-  Widget,
-} from "../../../imports.js";
+import { Mpris, musicVisible, Variable, Widget } from "../../../imports.js";
+import Icons from "../../../icons.js";
 
 const revealControls = Variable(false);
 
-setPlayer();
+const Cover = (player) =>
+  Widget.Box({
+    className: "cover",
 
-const Cover = Widget.Box({
-  className: "cover",
-
-  connections: [
-    [
-      Mpris,
-      (
-        self,
-      ) => self.css = `background-image: url('${player.value?.cover_path}');`,
-    ],
-  ],
-});
-
-const Title = Widget.Label({
-  className: "title module",
-
-  connections: [
-    [Mpris, (self) => self.label = player.value?.track_title ?? ""],
-  ],
-});
-
-export const Controls = Widget.CenterBox({
-  className: "controls",
-
-  startWidget: Widget.Button({
-    onHover: () => revealControls.value = true,
-    onHoverLost: () => revealControls.value = false,
-    onClicked: () => player.value?.previous(),
-    child: Widget.Icon("media-skip-backward"),
-  }),
-
-  centerWidget: Widget.Button({
-    onHover: () => revealControls.value = true,
-    onHoverLost: () => revealControls.value = false,
-    onClicked: () => player.value?.playPause(),
-
-    child: Widget.Icon({
-      connections: [
-        [
-          Mpris,
-          (self) => {
-            self.icon = "media-playback-" +
-              (player.value?.playBackStatus == "Playing" ? "pause" : "start") +
-              "-symbolic";
-          },
-          "changed",
-        ],
+    connections: [
+      [
+        Mpris,
+        (self) =>
+          self.css = `background-image: url('${player.cover_path ?? ""}');`,
       ],
+    ],
+  });
+
+const Title = (player) =>
+  Widget.Label({
+    className: "title module",
+
+    connections: [
+      [Mpris, (self) => self.label = player.track_title ?? ""],
+    ],
+  });
+
+export const Controls = (player) =>
+  Widget.CenterBox({
+    className: "controls",
+
+    startWidget: Widget.Button({
+      onHover: () => revealControls.value = true,
+      onHoverLost: () => revealControls.value = false,
+      onClicked: () => player.previous(),
+      child: Widget.Icon(Icons.media.previous),
     }),
-  }),
 
-  endWidget: Widget.Button({
-    onHover: () => revealControls.value = true,
-    onHoverLost: () => revealControls.value = false,
-    onClicked: () => player.value?.next(),
-    child: Widget.Icon("media-skip-forward"),
-  }),
-});
+    centerWidget: Widget.Button({
+      onHover: () => revealControls.value = true,
+      onHoverLost: () => revealControls.value = false,
+      onClicked: () => player.playPause(),
 
-export const Music = Widget.EventBox({
+      child: Widget.Icon({
+        connections: [
+          [
+            Mpris,
+            (self) => {
+              const state = player.playBackStatus == "Playing"
+                ? "pause"
+                : "play";
+              self.icon = Icons.media[state];
+            },
+            "changed",
+          ],
+        ],
+      }),
+    }),
+
+    endWidget: Widget.Button({
+      onHover: () => revealControls.value = true,
+      onHoverLost: () => revealControls.value = false,
+      onClicked: () => player.next(),
+      child: Widget.Icon(Icons.media.next),
+    }),
+  });
+export const Revealer = (player) =>
+  Widget.Revealer({
+    revealChild: false,
+    transition: "slide_right",
+    child: Controls(player),
+
+    connections: [
+      [revealControls, (self) => self.revealChild = revealControls.value],
+    ],
+  });
+
+export const MusicBox = (player) =>
+  Widget.Box({
+    children: [
+      Cover(player),
+      Title(player),
+    ],
+  });
+
+export default Widget.EventBox({
   onPrimaryClick: () => musicVisible.value = !musicVisible.value,
   onHover: () => revealControls.value = true,
   onHoverLost: () => revealControls.value = false,
@@ -77,43 +91,20 @@ export const Music = Widget.EventBox({
   child: Widget.Box({
     className: "music",
 
-    children: [
-      Widget.Box({
-        children: [Cover, Title],
-      }),
-      Widget.Revealer({
-        revealChild: false,
-        transition: "slide_right",
-        child: Controls,
-
-        connections: [
-          [revealControls, (self) => self.revealChild = revealControls.value],
-        ],
-      }),
-    ],
-
-    connections: [
+    binds: [
+      ["children", Mpris, "players", (players) => {
+        if (players.length > 0) {
+          [
+            Revealer(players[0]),
+            MusicBox(players[0]),
+          ];
+        }
+      }],
       [
+        "visible",
         Mpris,
-        (_, busName) => {
-          // don't replace the same player
-          if (player.getValue() == null || player?.value.busName != busName) {
-            player.value = Mpris.getPlayer(busName);
-          }
-        },
-        "player-changed",
-      ],
-      [
-        Mpris,
-        // music module is visible, as we have a player
-        (self, _) => self.visible = true,
-        "player-added",
-      ],
-      [
-        Mpris,
-        // if we have no players, make the module invisible
-        (self, _) => self.visible = Mpris.players.length > 0 ? true : false,
-        "player-closed",
+        "players",
+        (p) => p.length > 0,
       ],
     ],
   }),
