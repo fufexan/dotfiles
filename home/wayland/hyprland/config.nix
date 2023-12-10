@@ -27,6 +27,10 @@ in {
       force_zero_scaling = true
     }
 
+    debug {
+      disable_logs = false
+    }
+
     misc {
       # disable auto polling for config file changes
       disable_autoreload = true
@@ -157,10 +161,10 @@ in {
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
-    $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell)$
+    $layers = ^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell|osd[0-9])$
     layerrule = blur, $layers
-    layerrule = ignorealpha 0, $layers
-    layerrule = ignorealpha 0.5, ^(eww-music)$
+    layerrule = ignorealpha 0.2, $layers
+    layerrule = ignorealpha 0.5, ^((eww-)?music)$
     layerrule = ignorealpha 0${
       if variant == "dark"
       then ".5"
