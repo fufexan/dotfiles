@@ -11,6 +11,7 @@
 in {
   wayland.windowManager.hyprland.extraConfig = ''
     $mod = SUPER
+    $accelpoints = 0.000 0.040 0.080 0.140 0.200 0.261 0.326 0.418 0.509 0.601 0.692 0.784 0.875 0.966 1.058 1.149 1.241 1.332 1.424 1.613
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
     env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
@@ -67,14 +68,14 @@ in {
       follow_mouse = 1
       accel_profile = flat
       touchpad {
-        scroll_factor = 0.3
+        scroll_factor = 0.1
       }
     }
 
     device:elan2841:00-04f3:31eb-touchpad {
-      accel_profile = adaptive
+      accel_profile = custom 0.21 $accelpoints
+      scroll_points = 0.21 $accelpoints
       natural_scroll = true
-      sensitivity = 0
     }
 
     general {
