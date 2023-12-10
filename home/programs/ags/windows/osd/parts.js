@@ -1,7 +1,6 @@
-import { Audio } from "../../imports.js";
+import { Audio, Icons } from "../../imports.js";
 import Brightness from "../../services/brightness.js";
 import { debounce, OsdValue, toggleOsd } from "./util.js";
-import Icons from "../../icons.js";
 
 export const brightnessIndicator = OsdValue({
   label: "Brightness",

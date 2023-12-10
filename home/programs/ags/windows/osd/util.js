@@ -1,5 +1,4 @@
-import { osdVars, startDate, Utils, Widget } from "../../imports.js";
-import GLib from "gi://GLib";
+import { GLib, osdVars, startDate, Utils, Widget } from "../../imports.js";
 
 // create a debouncer for burst events (like Audio changes)
 export const debounce = (self) => {

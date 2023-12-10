@@ -1,5 +1,4 @@
-import { Bluetooth, Widget } from "../../../imports.js";
-import Icons from "../../../icons.js";
+import { Bluetooth, Icons, Widget } from "../../../imports.js";
 
 export const BluetoothModule = Widget.Icon({
   className: "bluetooth module",

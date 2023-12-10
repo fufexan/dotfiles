@@ -1,5 +1,4 @@
 import { Service, Utils } from "../imports.js";
-const { exec, readFile, writeFile, monitorFile } = Utils;
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
@@ -14,11 +13,11 @@ class BrightnessService extends Service {
 
   #screenValue = 0;
 
-  #interface = exec("sh -c 'ls -w1 /sys/class/backlight | head -1'");
+  #interface = Utils.exec("sh -c 'ls -w1 /sys/class/backlight | head -1'");
   #path = `/sys/class/backlight/${this.#interface}`;
   #brightness = `${this.#path}/brightness`;
 
-  #max = Number(readFile(`${this.#path}/max_brightness`));
+  #max = Number(Utils.readFile(`${this.#path}/max_brightness`));
 
   get screen_value() {
     return this.#screenValue;
@@ -28,7 +27,7 @@ class BrightnessService extends Service {
     percent = clamp(percent, 0, 1);
     this.#screenValue = percent;
 
-    writeFile(percent * this.#max, this.#brightness)
+    Utils.writeFile(percent * this.#max, this.#brightness)
       .then(() => {
         // signals has to be explicity emitted
         this.emit("screen-changed", percent);
@@ -44,11 +43,11 @@ class BrightnessService extends Service {
     super();
 
     this.#updateScreenValue();
-    monitorFile(this.#brightness, () => this.#onChange());
+    Utils.monitorFile(this.#brightness, () => this.#onChange());
   }
 
   #updateScreenValue() {
-    this.#screenValue = Number(readFile(this.#brightness)) / this.#max;
+    this.#screenValue = Number(Utils.readFile(this.#brightness)) / this.#max;
   }
 
   #onChange() {

@@ -1,5 +1,10 @@
-import { Mpris, musicVisible, Variable, Widget } from "../../../imports.js";
-import Icons from "../../../icons.js";
+import {
+  Icons,
+  Mpris,
+  musicVisible,
+  Variable,
+  Widget,
+} from "../../../imports.js";
 
 const revealControls = Variable(false);
 

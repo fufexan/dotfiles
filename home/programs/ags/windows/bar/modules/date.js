@@ -1,5 +1,4 @@
 import { Utils, Widget } from "../../../imports.js";
-const { execAsync } = Utils;
 
 export const Date = Widget.EventBox({
   child: Widget.Label({
@@ -8,7 +7,7 @@ export const Date = Widget.EventBox({
       [
         1000,
         (self) => {
-          execAsync(["date", "+%a %b %d  %H:%M"]).then(
+          Utils.execAsync(["date", "+%a %b %d  %H:%M"]).then(
             (res) => (self.label = res),
           );
         },

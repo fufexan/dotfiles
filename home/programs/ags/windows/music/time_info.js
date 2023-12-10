@@ -1,5 +1,4 @@
-import { Widget } from "../../imports.js";
-import Gtk from "gi://Gtk?version=3.0";
+import { Gtk, Widget } from "../../imports.js";
 
 function lengthStr(length) {
   const min = Math.floor(length / 60);

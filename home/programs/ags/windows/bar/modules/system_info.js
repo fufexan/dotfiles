@@ -1,5 +1,4 @@
 import { Utils, Widget } from "../../../imports.js";
-const { execAsync } = Utils;
 
 export const SystemInfo = Widget.Box({
   className: "system-info module",
@@ -19,7 +18,7 @@ export const SystemInfo = Widget.Box({
             [
               2000,
               (self) =>
-                execAsync([
+                Utils.execAsync([
                   "sh",
                   "-c",
                   `top -bn1 | rg '%Cpu' | tail -1 | awk '{print 100-$8}'`,
@@ -45,7 +44,7 @@ export const SystemInfo = Widget.Box({
             [
               2000,
               (self) =>
-                execAsync([
+                Utils.execAsync([
                   "sh",
                   "-c",
                   `free | tail -2 | head -1 | awk '{print $3/$2*100}'`,

@@ -1,3 +1,4 @@
+import { Gtk } from "../../imports.js";
 import { BatteryModule } from "./modules/battery.js";
 import { Date } from "./modules/date.js";
 import { Widget } from "../../imports.js";
@@ -6,7 +7,6 @@ import { BluetoothModule } from "./modules/bluetooth.js";
 import { SystemInfo } from "./modules/system_info.js";
 import { Workspaces } from "./modules/workspaces.js";
 import Music from "./modules/music.js";
-import Gtk from "gi://Gtk?version=3.0";
 
 const Start = Widget.Box({
   children: [

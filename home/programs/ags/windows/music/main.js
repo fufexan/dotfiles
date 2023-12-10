@@ -1,5 +1,4 @@
-import { Mpris, musicVisible, Utils, Widget } from "../../imports.js";
-import GLib from "gi://GLib";
+import { GLib, Mpris, musicVisible, Utils, Widget } from "../../imports.js";
 
 import Cover from "./cover.js";
 import { Artists, Title } from "./title_artists.js";

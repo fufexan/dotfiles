@@ -1,6 +1,4 @@
-import { Mpris, Utils, Widget } from "../../imports.js";
-import Gtk from "gi://Gtk?version=3.0";
-import Icons from "../../icons.js";
+import { Gtk, Icons, Mpris, Utils, Widget } from "../../imports.js";
 
 export default (player) =>
   Widget.Box({
