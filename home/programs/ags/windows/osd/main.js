@@ -1,12 +1,5 @@
-import { Variable, Widget } from "../../imports.js";
+import { osdVars, Widget } from "../../imports.js";
 import { brightnessIndicator, volumeIndicator } from "./parts.js";
-
-globalThis.osdVars = {
-  reveal: Variable(false),
-  debounceTimer: Date.now(),
-  timePassed: 0,
-  timeout: null,
-};
 
 const OsdContainer = Widget.Box({
   className: "osd-container",
@@ -17,7 +10,7 @@ const OsdContainer = Widget.Box({
   ],
 });
 
-globalThis.osdcontainer = OsdContainer;
+osdVars.value.osdcontainer = OsdContainer;
 
 export const Osd = (monitor = 0) =>
   Widget.Window({
@@ -27,7 +20,7 @@ export const Osd = (monitor = 0) =>
     visible: false,
 
     child: OsdContainer,
-    binds: [["visible", osdVars.reveal]],
+    binds: [["visible", osdVars.value.reveal]],
   });
 
 export default Osd;

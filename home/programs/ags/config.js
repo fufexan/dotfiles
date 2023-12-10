@@ -1,6 +1,3 @@
-// start date of Ags, used for OSD
-globalThis.startDate = Date.now();
-
 import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
 import Osd from "./windows/osd/main.js";
@@ -13,7 +10,11 @@ Utils.exec(`sassc ${scss} ${css}`);
 
 export default {
   style: css,
-  windows: [Bar, Osd(0), Music],
+  windows: [
+    Bar,
+    Osd(0),
+    Music,
+  ],
 
   closeWindowDelay: {
     "osd": 500,

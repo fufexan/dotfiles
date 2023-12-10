@@ -1,8 +1,14 @@
-import { Mpris, Variable, Widget } from "../../../imports.js";
+import {
+  Mpris,
+  musicVisible,
+  player,
+  Variable,
+  Widget,
+} from "../../../imports.js";
 
 const revealControls = Variable(false);
-globalThis.player = Variable(Mpris.getPlayer(""));
-globalThis.musicVisible = Variable(false);
+
+setPlayer();
 
 const Cover = Widget.Box({
   className: "cover",

@@ -15,3 +15,29 @@ export const Bluetooth = await service("bluetooth");
 export const Hyprland = await service("hyprland");
 export const Mpris = await service("mpris");
 export const Network = await service("network");
+
+// Variables
+export const startDate = Date.now();
+export const osdVars = Variable({
+  reveal: Variable(false),
+  debounceTimer: Date.now(),
+  timePassed: 0,
+  timeout: null,
+  container: null,
+});
+
+export const player = Variable(Mpris.getPlayer(""));
+export const musicVisible = Variable(false);
+
+// Functions
+globalThis.getPlayer = () => {
+  console.log(`player: ${JSON.stringify(player.value)}`);
+};
+
+globalThis.setPlayer = () => {
+  const player = Mpris.getPlayer("");
+  const players = Mpris.players;
+  console.log(`player: ${JSON.stringify(player)}`);
+  console.log(`players: ${JSON.stringify(players)}`);
+  player.value = player;
+};

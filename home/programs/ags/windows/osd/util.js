@@ -1,14 +1,14 @@
-import { Utils, Widget } from "../../imports.js";
+import { osdVars, startDate, Utils, Widget } from "../../imports.js";
 import GLib from "gi://GLib";
 
 // create a debouncer for burst events (like Audio changes)
 export const debounce = (self) => {
   const date = Date.now();
-  if (date - osdVars.debounceTimer < 50) {
-    osdVars.debounceTimer = date;
+  if (date - osdVars.value.debounceTimer < 50) {
+    osdVars.value.debounceTimer = date;
     return;
   }
-  osdVars.debounceTimer = date;
+  osdVars.value.debounceTimer = date;
   toggleOsd(self);
 };
 
@@ -19,20 +19,20 @@ export const toggleOsd = (self) => {
   if (Date.now() - startDate < 100) return;
 
   // make all other osds invisible
-  osdcontainer.children.forEach((e) => {
+  osdVars.value.osdcontainer.children.forEach((e) => {
     if (e != self) e.visible = false;
   });
 
   // set self to visible and make sure window is revealed
   self.visible = true;
-  osdVars.reveal.value = true;
+  osdVars.value.reveal.value = true;
 
   // after 1.5s, make self and window invisible
-  osdVars.timePassed = 1500;
-  if (osdVars.timeout) GLib.source_remove(osdVars.timeout);
-  osdVars.timeout = Utils.timeout(osdVars.timePassed, () => {
+  osdVars.value.timePassed = 1500;
+  if (osdVars.value.timeout) GLib.source_remove(osdVars.value.timeout);
+  osdVars.value.timeout = Utils.timeout(osdVars.value.timePassed, () => {
     self.visible = false;
-    osdVars.reveal.value = false;
+    osdVars.value.reveal.value = false;
   });
 };
 
