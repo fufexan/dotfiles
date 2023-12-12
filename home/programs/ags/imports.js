@@ -20,7 +20,7 @@ export const Mpris = await service("mpris");
 export const Network = await service("network");
 
 // My definitions
-export const Icons = await requireCustom("./icons.js");
+export const Icons = await requireCustom("./utils/icons.js");
 
 // Variables
 export const startDate = Date.now();

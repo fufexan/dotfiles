@@ -1,6 +1,7 @@
 import { Audio, Icons } from "../../imports.js";
 import Brightness from "../../services/brightness.js";
 import { debounce, OsdValue, toggleOsd } from "./util.js";
+import { audioIcon } from "../../utils/audio.js";
 
 export const brightnessIndicator = OsdValue({
   label: "Brightness",
@@ -33,18 +34,7 @@ export const volumeIndicator = OsdValue({
       const updateValue = Audio.speaker?.volume;
       if (!isNaN(updateValue)) progress.value = updateValue;
     }]],
-    iconConnections: [[Audio, (self) => {
-      const vol = Audio.speaker.volume * 100;
-      const icon = [
-        [101, "overamplified"],
-        [67, "high"],
-        [34, "medium"],
-        [1, "low"],
-        [0, "muted"],
-      ].find(([threshold]) => threshold <= vol)[1];
-
-      self.icon = Icons.volume[icon];
-    }]],
+    iconConnections: [[Audio, (self) => self.icon = audioIcon()]],
   },
   props: {
     connections: [[

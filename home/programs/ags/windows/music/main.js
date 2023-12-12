@@ -1,30 +1,11 @@
-import { GLib, Mpris, musicVisible, Utils, Widget } from "../../imports.js";
+import { Mpris, musicVisible, Widget } from "../../imports.js";
+import { generateBackground } from "../../utils/mpris.js";
 
 import Cover from "./cover.js";
 import { Artists, Title } from "./title_artists.js";
 import TimeInfo from "./time_info.js";
 import Controls from "./controls.js";
 import PlayerInfo from "./player_info.js";
-
-const MEDIA_CACHE_PATH = Utils.CACHE_DIR + "/media";
-const blurredPath = MEDIA_CACHE_PATH + "/blurred";
-
-const generateBackground = (box, cover_path) => {
-  const url = cover_path;
-  if (!url) return;
-
-  const blurred = blurredPath +
-    url.substring(MEDIA_CACHE_PATH.length);
-
-  if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
-    box.setCss(`background: url('${blurred}')`);
-  }
-
-  Utils.ensureDirectory(blurredPath);
-  Utils.execAsync(["convert", url, "-blur", "0x22", blurred])
-    .then(() => box.setCss(`background: url('${blurred}')`))
-    .catch(print);
-};
 
 const Info = (player) =>
   Widget.Box({
@@ -51,11 +32,12 @@ const MusicBox = (player) =>
       Info(player),
     ],
 
-    connections: [
+    binds: [
       [
+        "css",
         player,
+        "cover-path",
         generateBackground,
-        "notify::cover-path",
       ],
     ],
   });

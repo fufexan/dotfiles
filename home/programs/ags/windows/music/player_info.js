@@ -1,4 +1,4 @@
-import { Gtk, Icons, Mpris, Utils, Widget } from "../../imports.js";
+import { Gtk, Icons, Utils, Widget } from "../../imports.js";
 
 export default (player) =>
   Widget.Box({
@@ -13,13 +13,11 @@ export default (player) =>
         className: "player-icon",
         tooltipText: player.identity ?? "",
 
-        connections: [[
-          Mpris,
-          (self) =>
-            self.icon = Utils.lookUpIcon(player.entry ?? "")
-              ? player.entry
-              : Icons.media.player,
-          "player-changed",
+        binds: [[
+          "icon",
+          player,
+          "entry",
+          (entry) => Utils.lookUpIcon(entry ?? "") ? entry : Icons.media.player,
         ]],
       }),
     ],

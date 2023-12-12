@@ -1,11 +1,5 @@
 import { Gtk, Widget } from "../../imports.js";
-
-function lengthStr(length) {
-  const min = Math.floor(length / 60);
-  const sec = Math.floor(length % 60);
-  const sec0 = sec < 10 ? "0" : "";
-  return `${min}:${sec0}${sec}`;
-}
+import { lengthStr } from "../../utils/mpris.js";
 
 export const PositionLabel = (player) =>
   Widget.Label({

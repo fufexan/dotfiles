@@ -6,6 +6,7 @@ import {
   Widget,
 } from "../../imports.js";
 import Brightness from "../../services/brightness.js";
+import { audioIcon } from "../../utils/audio.js";
 
 const Slider = (args) =>
   Widget.Box({
@@ -36,18 +37,15 @@ const vol = {
       systemMenuVisible.value = !systemMenuVisible.value;
       Utils.execAsync("pavucontrol");
     },
-    binds: [["icon", Audio.speaker, "volume", (volume) => {
-      const vol = volume * 100;
-      const icon = [
-        [101, "overamplified"],
-        [67, "high"],
-        [34, "medium"],
-        [1, "low"],
-        [0, "muted"],
-      ].find(([threshold]) => threshold <= vol)[1];
-
-      return Icons.volume[icon];
-    }]],
+    binds: [
+      ["icon", Audio.speaker, "volume", audioIcon],
+      [
+        "icon",
+        Audio.speaker.stream,
+        "is-muted",
+        audioIcon,
+      ],
+    ],
   },
   slider: {
     binds: [[

@@ -1,4 +1,5 @@
-import { Gtk, Icons, Mpris, Widget } from "../../imports.js";
+import { Gtk, Icons, Widget } from "../../imports.js";
+import { mprisStateIcon } from "../../utils/mpris.js";
 
 export default (player) =>
   Widget.CenterBox({
@@ -14,16 +15,12 @@ export default (player) =>
       onClicked: () => player.playPause(),
 
       child: Widget.Icon({
-        connections: [
+        binds: [
           [
-            Mpris,
-            (self) => {
-              const state = player.playBackStatus == "Playing"
-                ? "pause"
-                : "play";
-              self.icon = Icons.media[state];
-            },
-            "changed",
+            "icon",
+            player,
+            "play-back-status",
+            mprisStateIcon,
           ],
         ],
       }),

@@ -1,4 +1,4 @@
-import { Mpris, Widget } from "../../imports.js";
+import { Widget } from "../../imports.js";
 
 export const Title = (player) =>
   Widget.Scrollable({
@@ -10,11 +10,12 @@ export const Title = (player) =>
       className: "title",
       label: "Nothing playing",
 
-      connections: [
+      binds: [
         [
-          Mpris,
-          (self) => self.label = player.track_title ?? "Nothing playing",
-          "changed",
+          "label",
+          player,
+          "track-title",
+          (title) => title ?? "Nothing playing",
         ],
       ],
     }),
@@ -29,12 +30,11 @@ export const Artists = (player) =>
     child: Widget.Label({
       className: "artists",
 
-      connections: [[
-        Mpris,
-        (self) =>
-          self.label = player.track_artists.join(", ") ??
-            "Nothing playing",
-        "changed",
+      binds: [[
+        "label",
+        player,
+        "track-artists",
+        (artists) => artists.join(", ") ?? "",
       ]],
     }),
   });

@@ -1,7 +1,7 @@
 import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
-import Osd from "./windows/osd/main.js";
 import Music from "./windows/music/main.js";
+import Osd from "./windows/osd/main.js";
 import SystemMenu from "./windows/system-menu/main.js";
 
 const scss = App.configDir + "/style.scss";
@@ -13,8 +13,8 @@ export default {
   style: css,
   windows: [
     Bar,
-    Osd(0),
     Music,
+    Osd(0),
     SystemMenu,
   ],
 };
