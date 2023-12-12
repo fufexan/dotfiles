@@ -1,10 +1,10 @@
-import { Gtk, Icons, Widget } from "../../imports.js";
+import { Icons, Widget } from "../../imports.js";
 import { mprisStateIcon } from "../../utils/mpris.js";
 
 export default (player) =>
   Widget.CenterBox({
     className: "controls",
-    halign: Gtk.Align.CENTER,
+    hpack: "center",
 
     startWidget: Widget.Button({
       onClicked: () => player.previous(),

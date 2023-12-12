@@ -1,6 +1,5 @@
 import {
   Battery,
-  Gtk,
   Icons,
   systemMenuVisible,
   Utils,
@@ -51,7 +50,7 @@ const batteryTime = () => {
 const BatteryTime = Widget.Label({
   className: "time",
   vexpand: true,
-  valign: Gtk.Align.CENTER,
+  vpack: "center",
 
   binds: [
     ["label", Battery, "charging", batteryTime],
@@ -73,7 +72,7 @@ const BatteryBox = Widget.Box({
 const PowerButton = Widget.Button({
   className: "button disabled",
   hexpand: true,
-  halign: Gtk.Align.END,
+  hpack: "end",
 
   onPrimaryClick: () => {
     systemMenuVisible.value = !systemMenuVisible.value;

@@ -1,6 +1,6 @@
 import { Utils, Widget } from "../../../imports.js";
 
-export const SystemInfo = Widget.Box({
+export default Widget.Box({
   className: "system-info module",
 
   children: [

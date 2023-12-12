@@ -1,6 +1,6 @@
 import { Utils, Widget } from "../../../imports.js";
 
-export const Date = Widget.EventBox({
+export default Widget.EventBox({
   child: Widget.Label({
     className: "date module",
     connections: [

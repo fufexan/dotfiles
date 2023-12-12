@@ -49,7 +49,7 @@ function update(self) {
   self.children = makeWorkspaces();
 }
 
-export const Workspaces = Widget.EventBox({
+export default Widget.EventBox({
   onScrollUp: () => dispatch("+1"),
   onScrollDown: () => dispatch("-1"),
 

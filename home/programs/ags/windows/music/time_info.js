@@ -1,4 +1,4 @@
-import { Gtk, Widget } from "../../imports.js";
+import { Widget } from "../../imports.js";
 import { lengthStr } from "../../utils/mpris.js";
 
 export const PositionLabel = (player) =>
@@ -63,7 +63,7 @@ export default (player) =>
   Widget.Box({
     vertical: true,
     vexpand: true,
-    valign: Gtk.Align.END,
+    vpack: "end",
 
     children: [
       Widget.Box({

@@ -1,6 +1,6 @@
 import { Bluetooth, Icons, Widget } from "../../../imports.js";
 
-export const BluetoothModule = Widget.Icon({
+export default Widget.Icon({
   className: "bluetooth module",
 
   binds: [

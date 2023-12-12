@@ -1,6 +1,5 @@
 import {
   Bluetooth,
-  Gtk,
   Icons,
   Network,
   systemMenuVisible,
@@ -13,7 +12,7 @@ const Toggle = (args) =>
     ...args.props ?? {},
     className: `toggle ${args.name}`,
     hexpand: true,
-    halign: Gtk.Align.START,
+    hpack: "start",
 
     children: [
       Widget.Button({

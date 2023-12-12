@@ -1,6 +1,6 @@
 import { Battery, Widget } from "../../../imports.js";
 
-export const BatteryModule = Widget.Icon({
+export default Widget.Icon({
   className: "battery module",
 
   binds: [

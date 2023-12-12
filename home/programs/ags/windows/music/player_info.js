@@ -1,15 +1,15 @@
-import { Gtk, Icons, Utils, Widget } from "../../imports.js";
+import { Icons, Utils, Widget } from "../../imports.js";
 
 export default (player) =>
   Widget.Box({
     className: "player-info",
     vexpand: true,
-    valign: Gtk.Align.START,
+    vpack: "start",
 
     children: [
       Widget.Icon({
         hexpand: true,
-        halign: Gtk.Align.END,
+        hpack: "end",
         className: "player-icon",
         tooltipText: player.identity ?? "",
 
@@ -17,7 +17,11 @@ export default (player) =>
           "icon",
           player,
           "entry",
-          (entry) => Utils.lookUpIcon(entry ?? "") ? entry : Icons.media.player,
+          (entry) => {
+            // the Spotify icon is called spotify-client
+            if (entry == "spotify") entry = "spotify-client";
+            return Utils.lookUpIcon(entry ?? "") ? entry : Icons.media.player;
+          },
         ]],
       }),
     ],

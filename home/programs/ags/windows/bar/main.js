@@ -1,12 +1,11 @@
-import { Gtk, systemMenuVisible } from "../../imports.js";
-import { BatteryModule } from "./modules/battery.js";
-import { Date } from "./modules/date.js";
-import { Widget } from "../../imports.js";
-import { Net } from "./modules/net.js";
-import { BluetoothModule } from "./modules/bluetooth.js";
-import { SystemInfo } from "./modules/system_info.js";
-import { Workspaces } from "./modules/workspaces.js";
+import { systemMenuVisible, Widget } from "../../imports.js";
+import Battery from "./modules/battery.js";
+import Bluetooth from "./modules/bluetooth.js";
+import Date from "./modules/date.js";
 import Music from "./modules/music.js";
+import Net from "./modules/net.js";
+import SystemInfo from "./modules/system_info.js";
+import Workspaces from "./modules/workspaces.js";
 
 const Start = Widget.Box({
   children: [
@@ -23,7 +22,7 @@ const Center = Widget.Box({
 
 const End = Widget.Box({
   hexpand: true,
-  halign: Gtk.Align.END,
+  hpack: "end",
 
   children: [
     // Tray,
@@ -33,8 +32,8 @@ const End = Widget.Box({
       child: Widget.Box({
         children: [
           Net,
-          BluetoothModule,
-          BatteryModule,
+          Bluetooth,
+          Battery,
         ],
       }),
     }),
