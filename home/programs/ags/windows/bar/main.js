@@ -1,4 +1,4 @@
-import { Gtk } from "../../imports.js";
+import { Gtk, systemMenuVisible } from "../../imports.js";
 import { BatteryModule } from "./modules/battery.js";
 import { Date } from "./modules/date.js";
 import { Widget } from "../../imports.js";
@@ -28,9 +28,16 @@ const End = Widget.Box({
   children: [
     // Tray,
     SystemInfo,
-    Net,
-    BluetoothModule,
-    BatteryModule,
+    Widget.EventBox({
+      onPrimaryClick: () => systemMenuVisible.value = !systemMenuVisible.value,
+      child: Widget.Box({
+        children: [
+          Net,
+          BluetoothModule,
+          BatteryModule,
+        ],
+      }),
+    }),
     Date,
   ],
 });

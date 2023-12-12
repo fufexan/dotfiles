@@ -33,7 +33,7 @@ $scale: 0.5rem;
   @include window-rounding;
 
   background: $bg;
-  margin: 5px 5px 10px;
+  margin: 5px 5px 15px 10px;
   padding: $padding;
 }
 
@@ -61,5 +61,23 @@ progressbar {
     border-radius: $scale;
     margin: 0 calc(0px - #{$scale} / 2);
     min-height: $scale;
+  }
+}
+
+.button {
+  background: $button-enabled;
+  border-radius: 5rem;
+  padding: 0.4rem;
+
+  &:hover {
+    background: $button-enabled-hover;
+  }
+}
+
+.button.disabled {
+  background: $button-disabled;
+
+  &:hover {
+    background: $button-disabled-hover;
   }
 }

@@ -23,4 +23,6 @@ export default {
     high: "audio-volume-high-symbolic",
     overamplified: "audio-volume-overamplified-symbolic",
   },
+
+  powerButton: "system-shutdown-symbolic",
 };

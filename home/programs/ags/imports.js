@@ -33,3 +33,4 @@ export const osdVars = Variable({
 });
 
 export const musicVisible = Variable(false);
+export const systemMenuVisible = Variable(false);

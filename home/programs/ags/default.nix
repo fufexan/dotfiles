@@ -7,12 +7,15 @@
   dependencies = with pkgs; [
     config.wayland.windowManager.hyprland.package
     bash
+    blueberry
     coreutils
     gawk
+    gnome.gnome-control-center
     imagemagick
     procps
     ripgrep
     sassc
+    wlogout
   ];
 
   cfg = config.programs.ags;

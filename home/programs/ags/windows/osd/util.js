@@ -1,4 +1,11 @@
-import { GLib, osdVars, startDate, Utils, Widget } from "../../imports.js";
+import {
+  GLib,
+  osdVars,
+  startDate,
+  systemMenuVisible,
+  Utils,
+  Widget,
+} from "../../imports.js";
 
 // create a debouncer for burst events (like Audio changes)
 export const debounce = (self) => {
@@ -15,7 +22,7 @@ export const debounce = (self) => {
 export const toggleOsd = (self) => {
   // first-run, don't show osds which will otherwise be shown because of the connections firing
   // this is done by comparing the start time of Ags with the current time
-  if (Date.now() - startDate < 100) return;
+  if (Date.now() - startDate < 100 || systemMenuVisible.value) return;
 
   // make all other osds invisible
   osdVars.value.osdcontainer.children.forEach((e) => {

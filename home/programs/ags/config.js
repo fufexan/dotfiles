@@ -2,6 +2,7 @@ import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
 import Osd from "./windows/osd/main.js";
 import Music from "./windows/music/main.js";
+import SystemMenu from "./windows/system-menu/main.js";
 
 const scss = App.configDir + "/style.scss";
 const css = App.configDir + "/style.css";
@@ -14,11 +15,8 @@ export default {
     Bar,
     Osd(0),
     Music,
+    SystemMenu,
   ],
-
-  closeWindowDelay: {
-    "osd": 500,
-  },
 };
 
 function reloadCss() {
