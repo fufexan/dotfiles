@@ -1,10 +1,15 @@
 /* general styles */
 
 $round: 8px;
+$round2: 16px;
 $margin: 0.4rem;
 $padding: 0.4rem;
 $border-width: 2px;
 $scale: 0.5rem;
+
+@mixin animate {
+  transition: 200ms;
+}
 
 * {
   color: $fg;
@@ -12,11 +17,11 @@ $scale: 0.5rem;
 
 /* mixins */
 @mixin window-rounding {
-  border-radius: calc(#{$round} * 2);
+  border-radius: $round2;
 }
 
 @mixin rounding {
-  border-radius: calc(#{$round} * 2 - #{$padding} - #{$border-width});
+  border-radius: calc(#{$round2} - #{$padding} - #{$border-width});
 }
 
 @mixin window-box {
@@ -64,7 +69,8 @@ progressbar {
   }
 }
 
-.button {
+@mixin button-active {
+  @include animate;
   background: $button-enabled;
   border-radius: 5rem;
   padding: 0.4rem;
@@ -74,10 +80,21 @@ progressbar {
   }
 }
 
-.button.disabled {
+@mixin button {
+  @include animate;
   background: $button-disabled;
+  border-radius: 5rem;
+  padding: 0.4rem;
 
   &:hover {
     background: $button-disabled-hover;
   }
+}
+
+.button {
+  @include button-active;
+}
+
+.button.disabled {
+  @include button;
 }

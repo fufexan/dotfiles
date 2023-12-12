@@ -5,6 +5,7 @@ import Date from "./modules/date.js";
 import Music from "./modules/music.js";
 import Net from "./modules/net.js";
 import SystemInfo from "./modules/system_info.js";
+import Tray from "./tray.js";
 import Workspaces from "./modules/workspaces.js";
 
 const Start = Widget.Box({
@@ -25,7 +26,7 @@ const End = Widget.Box({
   hpack: "end",
 
   children: [
-    // Tray,
+    Tray,
     SystemInfo,
     Widget.EventBox({
       onPrimaryClick: () => systemMenuVisible.value = !systemMenuVisible.value,

@@ -5,7 +5,6 @@ export const service = async (file) => await require(`service/${file}`);
 
 export const App = await require("app");
 export const GLib = await requireCustom("gi://GLib");
-export const Gtk = await requireCustom("gi://Gtk?version=3.0");
 export const Service = await require("service");
 export const Utils = await import(resource("utils"));
 export const Variable = await require("variable");
@@ -18,6 +17,7 @@ export const Bluetooth = await service("bluetooth");
 export const Hyprland = await service("hyprland");
 export const Mpris = await service("mpris");
 export const Network = await service("network");
+export const SystemTray = await service("systemtray");
 
 // My definitions
 export const Icons = await requireCustom("./utils/icons.js");

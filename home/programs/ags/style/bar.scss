@@ -52,6 +52,46 @@
   }
 }
 
+/* tray */
+.tray button {
+  @include button;
+  background: none;
+  margin: 0.5rem 0;
+
+  &:not(:last-child) {
+    margin-right: 0.3rem;
+  }
+
+  &.active {
+    background: $surface;
+  }
+}
+
+menu {
+  background: $tooltip-bg;
+  border-radius: $round;
+
+  separator {
+    background-color: $surface;
+  }
+
+  menuitem {
+    @include button;
+    border-radius: 0;
+    padding: 0.4rem 0.7rem;
+
+    &:first-child {
+      border-radius: $round $round 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 $round $round;
+    }
+    &:only-child {
+      border-radius: $round;
+    }
+  }
+}
+
 /* system-info */
 .bar .system-info {
   margin: 0 0.2rem;
