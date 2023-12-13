@@ -12,14 +12,12 @@
 
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
 
-      gdb-frontend = pkgs.callPackage ./gdb-frontend {};
+      overskride = pkgs.callPackage ./overskride {};
 
       theme = pkgs.callPackage ./theme-generator {
         matugen = inputs'.matugen.packages.default;
         wallpaper = default.wallpaper;
       };
-
-      waveform = pkgs.callPackage ./waveform {};
     };
   };
 }
