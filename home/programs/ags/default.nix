@@ -2,16 +2,17 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   dependencies = with pkgs; [
     config.wayland.windowManager.hyprland.package
     bash
-    blueberry
     coreutils
     gawk
     gnome.gnome-control-center
     imagemagick
+    inputs.self.packages.${pkgs.system}.overskride
     procps
     ripgrep
     sassc

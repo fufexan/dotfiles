@@ -66,7 +66,11 @@ const net = {
   label: {
     action: () => {
       systemMenuVisible.value = !systemMenuVisible.value;
-      Utils.exec("sh -c 'XDG_CURRENT_DESKTOP=GNOME gnome-control-center'");
+      Utils.execAsync([
+        "sh",
+        "-c",
+        "XDG_CURRENT_DESKTOP=GNOME gnome-control-center",
+      ]);
     },
     binds: [
       [
@@ -114,7 +118,7 @@ const bt = {
   label: {
     action: () => {
       systemMenuVisible.value = !systemMenuVisible.value;
-      Utils.execAsync("blueberry");
+      Utils.execAsync("overskride");
     },
     binds: [[
       "label",
