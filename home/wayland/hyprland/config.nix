@@ -18,12 +18,8 @@ in {
 
     # set cursor for HL itself
     exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
-
     exec-once = systemctl --user start clight
-    exec-once = eww open bar
-    exec-once = eww open osd
 
-    # use this instead of hidpi patches
     xwayland {
       force_zero_scaling = true
     }
@@ -143,22 +139,18 @@ in {
     windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
     windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
 
-    # start spotify tiled in ws9
-    windowrulev2 = tile, title:^(Spotify)$
-    windowrulev2 = workspace 9 silent, title:^(Spotify)$
-
-    # start Discord/WebCord in ws2
-    windowrulev2 = workspace 2, title:^(.*(Disc|WebC)ord.*)$
+    # start spotify in ws9
+    windowrulev2 = workspace 9 silent, class:^(spotify)$
 
     # idle inhibit while watching videos
-    windowrulev2 = idleinhibit focus, class:^(mpv|.+exe)$
+    windowrulev2 = idleinhibit focus, class:^(mpv|.+exe|celluloid)$
     windowrulev2 = idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
     windowrulev2 = dimaround, class:^(gcr-prompter)$
 
     # fix xwayland apps
-    windowrulev2 = rounding 0, xwayland:1, floating:1
+    windowrulev2 = rounding 0, xwayland:1
     windowrulev2 = center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$
     windowrulev2 = size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$
 
