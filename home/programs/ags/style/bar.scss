@@ -12,16 +12,15 @@
   margin: 0.2rem 0.5rem;
 
   button {
-    font-size: 0.5rem;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 2rem;
     margin: 0.7rem 0.2rem;
-    padding: 0 0.5rem;
-    transition: 0.1s cubic-bezier(0.2, 0, 0, 1);
+    min-width: 1rem;
+    transition: 100ms linear;
   }
 
   .focused {
-    padding: 0 1rem;
+    min-width: 2rem;
   }
 
   .monitor0 {

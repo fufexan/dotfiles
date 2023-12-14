@@ -14,6 +14,8 @@ const getMonitorId = (workspace) => {
   return `monitor${monitor}`;
 };
 
+let lastFocused = 0;
+
 const getLastWorkspaceId = () =>
   Hyprland.workspaces
     .sort((x, y) => {
@@ -33,15 +35,6 @@ const makeWorkspaces = () =>
       on_clicked: () => dispatch(id),
 
       className: getMonitorId(Hyprland.getWorkspace(id)),
-
-      connections: [
-        [
-          Hyprland,
-          (btn) => {
-            btn.toggleClassName("focused", Hyprland.active.workspace.id === id);
-          },
-        ],
-      ],
     });
   });
 
@@ -66,6 +59,17 @@ export default Widget.EventBox({
         Hyprland,
         (_) => (monitors.value = Hyprland.monitors),
         "monitor-removed",
+      ],
+      [
+        Hyprland.active.workspace,
+        (self) => {
+          const id = Hyprland.active.workspace.id - 1;
+          if (lastFocused == id) return;
+
+          self.children[lastFocused].toggleClassName("focused", false);
+          self.children[id].toggleClassName("focused", true);
+          lastFocused = id;
+        },
       ],
     ],
   }),
