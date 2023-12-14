@@ -40,8 +40,11 @@ const End = Widget.Box({
       }),
       connections: [[
         App,
-        (self, window, visible) =>
-          self.toggleClassName("active", window === "system-menu" && visible),
+        (self, window, visible) => {
+          if (window === "system-menu") {
+            self.toggleClassName("active", visible);
+          }
+        },
       ]],
     }),
     Date,

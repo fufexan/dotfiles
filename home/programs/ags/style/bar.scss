@@ -41,11 +41,28 @@
 .bar .music {
   margin: 0.2rem;
 
+  & > box {
+    border-radius: $round2;
+    margin: 0.4rem;
+    transition: 200ms;
+  }
+
+  &.active > box {
+    background: $surface;
+  }
+
+  .controls {
+    padding-right: 0.5rem;
+  }
+  .controls image {
+    font-size: 0.8rem;
+    padding: 0.1rem;
+  }
+
   .cover {
     background-size: cover;
     background-position: center;
     border-radius: 50%;
-    margin: 0.2rem;
     min-width: 2rem;
     min-height: 2rem;
   }
@@ -112,13 +129,9 @@ menu {
 
 .system-menu-toggler {
   box {
-    margin: 0.5rem 0;
+    margin: 0.4rem 0;
     border-radius: $round2;
     transition: 200ms;
-  }
-
-  &:hover box {
-    background: $button-disabled-hover;
   }
 
   &.active box {

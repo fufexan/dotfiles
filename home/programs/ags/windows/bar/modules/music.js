@@ -79,13 +79,22 @@ export const MusicBox = (player) =>
   });
 
 export default Widget.EventBox({
+  className: "music",
+
   onPrimaryClick: () => App.toggleWindow("music"),
   onHover: () => revealControls.value = true,
   onHoverLost: () => revealControls.value = false,
 
-  child: Widget.Box({
-    className: "music",
+  connections: [[
+    App,
+    (self, window, visible) => {
+      if (window === "music") {
+        self.toggleClassName("active", visible);
+      }
+    },
+  ]],
 
+  child: Widget.Box({
     binds: [
       ["children", Mpris, "players", (players) => {
         if (players.length == 0) return [];
