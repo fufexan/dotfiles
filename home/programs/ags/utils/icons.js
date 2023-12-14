@@ -25,4 +25,10 @@ export default {
   },
 
   powerButton: "system-shutdown-symbolic",
+
+  powerProfiles: {
+    powersaver: "power-profile-power-saver-symbolic",
+    balanced: "power-profile-balanced-symbolic",
+    performance: "power-profile-performance-symbolic",
+  },
 };

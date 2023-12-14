@@ -1,5 +1,6 @@
 import { systemMenuVisible, Widget } from "../../imports.js";
 import Toggles from "./toggles.js";
+import PowerProfiles from "./powerprofiles.js";
 import Sliders from "./sliders.js";
 import BatteryInfo from "./battery_info.js";
 
@@ -9,6 +10,7 @@ const SystemMenuBox = Widget.Box({
 
   children: [
     Toggles,
+    PowerProfiles,
     Sliders,
     BatteryInfo,
   ],

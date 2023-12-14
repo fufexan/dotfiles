@@ -1,3 +1,4 @@
+/* general */
 .system-menu {
   @include window;
 
@@ -6,6 +7,7 @@
   }
 }
 
+/* toggles */
 .system-menu .toggle {
   min-width: 20rem;
   &:not(:last-child) {
@@ -17,6 +19,38 @@
   }
 }
 
+/* power profiles */
+.system-menu .power-profiles {
+  padding: 0;
+
+  .current-profile {
+    padding: 0.3rem;
+  }
+
+  image,
+  label {
+    margin: 0.3rem;
+  }
+
+  .options {
+    padding: 0;
+
+    widget {
+      @include button;
+      border-radius: 0;
+
+      &:last-child {
+        border-radius: 0 0 $round $round;
+      }
+
+      box {
+        padding: 0.3rem;
+      }
+    }
+  }
+}
+
+/* sliders */
 .system-menu .sliders {
   image {
     margin: 0.3rem;
