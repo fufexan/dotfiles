@@ -1,10 +1,4 @@
-import {
-  Battery,
-  Icons,
-  systemMenuVisible,
-  Utils,
-  Widget,
-} from "../../imports.js";
+import { App, Battery, Icons, Utils, Widget } from "../../imports.js";
 
 const batteryEnergy = () => {
   return Battery.energyRate > 0.1 ? `${Battery.energyRate.toFixed(1)} W ` : "";
@@ -75,7 +69,7 @@ const PowerButton = Widget.Button({
   hpack: "end",
 
   onPrimaryClick: () => {
-    systemMenuVisible.value = !systemMenuVisible.value;
+    App.toggleWindow("system-menu");
     Utils.exec("wlogout");
   },
 

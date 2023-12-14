@@ -31,6 +31,3 @@ export const osdVars = Variable({
   timeout: null,
   container: null,
 });
-
-export const musicVisible = Variable(false);
-export const systemMenuVisible = Variable(false);

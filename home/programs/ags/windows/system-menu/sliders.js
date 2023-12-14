@@ -1,10 +1,4 @@
-import {
-  Audio,
-  Icons,
-  systemMenuVisible,
-  Utils,
-  Widget,
-} from "../../imports.js";
+import { App, Audio, Icons, Utils, Widget } from "../../imports.js";
 import Brightness from "../../services/brightness.js";
 import { audioIcon } from "../../utils/audio.js";
 
@@ -34,7 +28,7 @@ const vol = {
   name: "volume",
   icon: {
     action: () => {
-      systemMenuVisible.value = !systemMenuVisible.value;
+      App.toggleWindow("system-menu");
       Utils.execAsync("pavucontrol");
     },
     binds: [

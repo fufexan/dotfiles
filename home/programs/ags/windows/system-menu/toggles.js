@@ -1,8 +1,8 @@
 import {
+  App,
   Bluetooth,
   Icons,
   Network,
-  systemMenuVisible,
   Utils,
   Widget,
 } from "../../imports.js";
@@ -65,7 +65,7 @@ const net = {
   },
   label: {
     action: () => {
-      systemMenuVisible.value = !systemMenuVisible.value;
+      App.toggleWindow("system-menu");
       Utils.execAsync([
         "sh",
         "-c",
@@ -117,7 +117,7 @@ const bt = {
   },
   label: {
     action: () => {
-      systemMenuVisible.value = !systemMenuVisible.value;
+      App.toggleWindow("system-menu");
       Utils.execAsync("overskride");
     },
     binds: [[

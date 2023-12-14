@@ -1,5 +1,6 @@
-import { Mpris, musicVisible, Widget } from "../../imports.js";
+import { Mpris, Widget } from "../../imports.js";
 import { generateBackground } from "../../utils/mpris.js";
+import PopupWindow from "../../utils/popup_window.js";
 
 import Cover from "./cover.js";
 import { Artists, Title } from "./title_artists.js";
@@ -42,14 +43,14 @@ const MusicBox = (player) =>
     ],
   });
 
-export default Widget.Window({
+export default PopupWindow({
   monitor: 0,
   layer: "overlay",
   anchor: ["top"],
   name: "music",
+  child: Widget.Box(),
 
   binds: [
-    ["visible", musicVisible],
     [
       "child",
       Mpris,

@@ -1,10 +1,4 @@
-import {
-  Icons,
-  Mpris,
-  musicVisible,
-  Variable,
-  Widget,
-} from "../../../imports.js";
+import { App, Icons, Mpris, Variable, Widget } from "../../../imports.js";
 import { mprisStateIcon } from "../../../utils/mpris.js";
 
 const revealControls = Variable(false);
@@ -85,7 +79,7 @@ export const MusicBox = (player) =>
   });
 
 export default Widget.EventBox({
-  onPrimaryClick: () => musicVisible.value = !musicVisible.value,
+  onPrimaryClick: () => App.toggleWindow("music"),
   onHover: () => revealControls.value = true,
   onHoverLost: () => revealControls.value = false,
 

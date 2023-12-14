@@ -1,4 +1,6 @@
-import { systemMenuVisible, Widget } from "../../imports.js";
+import { Widget } from "../../imports.js";
+import PopupWindow from "../../utils/popup_window.js";
+
 import Toggles from "./toggles.js";
 import PowerProfiles from "./powerprofiles.js";
 import Sliders from "./sliders.js";
@@ -16,16 +18,9 @@ const SystemMenuBox = Widget.Box({
   ],
 });
 
-export default Widget.Window({
+export default PopupWindow({
   monitor: 0,
   anchor: ["top", "right"],
   name: "system-menu",
-
   child: SystemMenuBox,
-  binds: [
-    [
-      "visible",
-      systemMenuVisible,
-    ],
-  ],
 });

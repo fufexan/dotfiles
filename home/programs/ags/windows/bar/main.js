@@ -1,4 +1,4 @@
-import { systemMenuVisible, Widget } from "../../imports.js";
+import { App, Widget } from "../../imports.js";
 import Battery from "./modules/battery.js";
 import Bluetooth from "./modules/bluetooth.js";
 import Date from "./modules/date.js";
@@ -29,7 +29,8 @@ const End = Widget.Box({
     Tray,
     SystemInfo,
     Widget.EventBox({
-      onPrimaryClick: () => systemMenuVisible.value = !systemMenuVisible.value,
+      className: "system-menu-toggler",
+      onPrimaryClick: () => App.toggleWindow("system-menu"),
       child: Widget.Box({
         children: [
           Net,
@@ -37,6 +38,11 @@ const End = Widget.Box({
           Battery,
         ],
       }),
+      connections: [[
+        App,
+        (self, window, visible) =>
+          self.toggleClassName("active", window === "system-menu" && visible),
+      ]],
     }),
     Date,
   ],

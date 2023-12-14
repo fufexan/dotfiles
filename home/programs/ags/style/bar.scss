@@ -109,3 +109,19 @@ menu {
     font-size: 0.8rem;
   }
 }
+
+.system-menu-toggler {
+  box {
+    margin: 0.5rem 0;
+    border-radius: $round2;
+    transition: 200ms;
+  }
+
+  &:hover box {
+    background: $button-disabled-hover;
+  }
+
+  &.active box {
+    background: $surface;
+  }
+}

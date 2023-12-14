@@ -12,11 +12,15 @@ Utils.exec(`sassc ${scss} ${css}`);
 export default {
   style: css,
   windows: [
-    Bar,
+    SystemMenu,
     Music,
     Osd(0),
-    SystemMenu,
+    Bar,
   ],
+
+  closeWindowDelay: {
+    "system-menu": 200,
+  },
 };
 
 function reloadCss() {
