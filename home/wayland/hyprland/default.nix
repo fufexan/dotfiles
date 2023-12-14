@@ -4,11 +4,13 @@
   pkgs,
   ...
 }: {
-  imports = [./config.nix];
+  imports = [
+    ./binds.nix
+    ./rules.nix
+    ./settings.nix
+  ];
 
-  home.packages = with pkgs; [
-    jaq
-    xorg.xprop
+  home.packages = [
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
@@ -18,6 +20,6 @@
   # enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
-    # plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
+    plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
   };
 }

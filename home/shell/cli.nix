@@ -15,10 +15,11 @@ in {
     unrar
 
     # utils
-    file
     du-dust
     duf
     fd
+    file
+    jaq
     ripgrep
 
     # file managers
