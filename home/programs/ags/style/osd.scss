@@ -1,11 +1,8 @@
-.osd-container {
-  margin-top: 30rem;
-}
-
 .osd {
   @include window;
   border-radius: 3rem;
   box-shadow: none;
+  margin-top: 30rem;
   padding: 0.5rem;
 
   image {

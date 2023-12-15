@@ -24,6 +24,13 @@ export default {
     overamplified: "audio-volume-overamplified-symbolic",
   },
 
+  microphone: {
+    muted: "microphone-sensitivity-muted-symbolic",
+    low: "microphone-sensitivity-low-symbolic",
+    medium: "microphone-sensitivity-medium-symbolic",
+    high: "microphone-sensitivity-high-symbolic",
+  },
+
   powerButton: "system-shutdown-symbolic",
 
   powerProfiles: {

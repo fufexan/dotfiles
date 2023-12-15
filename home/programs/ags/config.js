@@ -14,7 +14,7 @@ export default {
   windows: [
     SystemMenu,
     Music,
-    Osd(0),
+    Osd,
     Bar,
   ],
 

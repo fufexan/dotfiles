@@ -5,6 +5,7 @@ export default (
   {
     name,
     child,
+    revealerConnections = null,
     transition = "crossfade",
     transitionDuration = 200,
     ...props
@@ -26,7 +27,7 @@ export default (
       child: Revealer({
         transition,
         transitionDuration,
-        connections: [
+        connections: revealerConnections ?? [
           [
             App,
             (self, currentName, visible) => {

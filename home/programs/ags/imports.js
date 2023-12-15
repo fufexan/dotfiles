@@ -25,9 +25,5 @@ export const Icons = await requireCustom("./utils/icons.js");
 // Variables
 export const startDate = Date.now();
 export const osdVars = Variable({
-  reveal: Variable(false),
-  debounceTimer: Date.now(),
-  timePassed: 0,
-  timeout: null,
   container: null,
 });
