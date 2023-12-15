@@ -18,6 +18,8 @@
         matugen = inputs'.matugen.packages.default;
         wallpaper = default.wallpaper;
       };
+
+      wezterm = pkgs.callPackage ./wezterm {};
     };
   };
 }
