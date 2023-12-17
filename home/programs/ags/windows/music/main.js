@@ -32,16 +32,13 @@ const MusicBox = (player) =>
       Cover(player),
       Info(player),
     ],
-
-    binds: [
-      [
-        "css",
-        player,
-        "cover-path",
-        generateBackground,
-      ],
-    ],
-  });
+  })
+    .bind(
+      "css",
+      player,
+      "cover-path",
+      generateBackground,
+    );
 
 export default PopupWindow({
   monitor: 0,
@@ -49,16 +46,13 @@ export default PopupWindow({
   anchor: ["top"],
   name: "music",
   child: Widget.Box(),
-
-  binds: [
-    [
-      "child",
-      Mpris,
-      "players",
-      (players) => {
-        if (players.length == 0) return Widget.Box();
-        return MusicBox(players[0]);
-      },
-    ],
-  ],
-});
+})
+  .bind(
+    "child",
+    Mpris,
+    "players",
+    (players) => {
+      if (players.length == 0) return Widget.Box();
+      return MusicBox(players[0]);
+    },
+  );

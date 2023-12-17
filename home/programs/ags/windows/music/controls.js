@@ -14,16 +14,12 @@ export default (player) =>
     centerWidget: Widget.Button({
       onClicked: () => player.playPause(),
 
-      child: Widget.Icon({
-        binds: [
-          [
-            "icon",
-            player,
-            "play-back-status",
-            mprisStateIcon,
-          ],
-        ],
-      }),
+      child: Widget.Icon().bind(
+        "icon",
+        player,
+        "play-back-status",
+        mprisStateIcon,
+      ),
     }),
 
     endWidget: Widget.Button({

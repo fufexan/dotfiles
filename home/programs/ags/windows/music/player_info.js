@@ -12,8 +12,8 @@ export default (player) =>
         hpack: "end",
         className: "player-icon",
         tooltipText: player.identity ?? "",
-
-        binds: [[
+      })
+        .bind(
           "icon",
           player,
           "entry",
@@ -22,7 +22,6 @@ export default (player) =>
             if (entry == "spotify") entry = "spotify-client";
             return Utils.lookUpIcon(entry ?? "") ? entry : Icons.media.player;
           },
-        ]],
-      }),
+        ),
     ],
   });

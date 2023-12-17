@@ -12,32 +12,25 @@ export const PositionLabel = (player) =>
         ? label.label = lengthStr(time || player.position)
         : label.visible = !!player;
     }]],
-
-    connections: [
-      [player, (l, time) => l._update(l, time), "position"],
-      [1000, (l) => l._update(l)],
-    ],
-  });
+  })
+    .hook(player, (l, time) => l._update(l, time), "position")
+    .poll(1000, (l) => l._update(l));
 
 export const LengthLabel = (player) =>
   Widget.Label({
     className: "length",
     hexpand: true,
     xalign: 1,
-
-    connections: [[player, (label) => {
-      player.length > 0
-        ? label.label = lengthStr(player.length)
-        : label.visible = !!player;
-    }]],
-  });
+  })
+    .bind("visible", player, "length", (length) => length > 0)
+    .bind("label", player, "length", (length) => lengthStr(length));
 
 export const Position = (player) =>
   Widget.Slider({
     className: "position",
     draw_value: false,
 
-    on_change: ({ value }) => {
+    onChange: ({ value }) => {
       player.position = player.length * value;
     },
 
@@ -51,13 +44,10 @@ export const Position = (player) =>
         slider.value = player.position / player.length;
       }
     }]],
-
-    connections: [
-      [player, (self) => self._update(self)],
-      [player, (self) => self._update(self), "position"],
-      [1000, (self) => self._update(self)],
-    ],
-  });
+  })
+    .hook(player, (self) => self._update(self))
+    .hook(player, (self) => self._update(self), "position")
+    .poll(1000, (self) => self._update(self));
 
 export default (player) =>
   Widget.Box({
