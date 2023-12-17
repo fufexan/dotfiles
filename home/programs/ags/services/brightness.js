@@ -1,4 +1,6 @@
 import { Service, Utils } from "../imports.js";
+import Gio from "gi://Gio";
+import GLib from "gi://GLib";
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
@@ -27,12 +29,26 @@ class BrightnessService extends Service {
     percent = clamp(percent, 0, 1);
     this.#screenValue = percent;
 
-    Utils.writeFile(percent * this.#max, this.#brightness)
-      .then(() => {
-        this.emit("screen-changed", percent);
-        this.notify("screen-value");
-      })
-      .catch(print);
+    const file = Gio.File.new_for_path(this.#brightness);
+    const string = `${Math.round(percent * this.#max)}`;
+
+    new Promise((resolve, _) => {
+      file.replace_contents_bytes_async(
+        new GLib.Bytes(new TextEncoder().encode(string)),
+        null,
+        false,
+        Gio.FileCreateFlags.NONE,
+        null,
+        (self, res) => {
+          try {
+            self.replace_contents_finish(res);
+            resolve(self);
+          } catch (error) {
+            print(error);
+          }
+        },
+      );
+    });
   }
 
   constructor() {

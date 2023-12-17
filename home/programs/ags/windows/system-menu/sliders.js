@@ -49,7 +49,7 @@ const brightness = {
   },
   slider: {
     setup: (self) => self.bind("value", Brightness, "screen-value"),
-    onChange: ({ value }) => Brightness.screenValue(value),
+    onChange: ({ value }) => Brightness.screenValue = value,
   },
 };
 
