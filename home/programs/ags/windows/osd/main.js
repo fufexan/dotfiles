@@ -5,8 +5,16 @@ import Indicators from "../../services/osd.js";
 import PopupWindow from "../../utils/popup_window.js";
 
 // connections
-Audio.speaker.connect("changed", () => Indicators.speaker());
-Audio.microphone.connect("changed", () => Indicators.mic());
+Audio.connect("speaker-changed", () =>
+  Audio.speaker.connect(
+    "changed",
+    () => Indicators.speaker(),
+  ));
+Audio.connect(
+  "microphone-changed",
+  () => Audio.microphone.connect("changed", () => Indicators.mic()),
+);
+
 Brightness.connect("screen-changed", () => Indicators.display());
 
 let lastMonitor;
@@ -60,19 +68,23 @@ export const Osd = PopupWindow({
   revealerConnections: [[Indicators, (revealer, _, visible) => {
     revealer.reveal_child = visible;
   }]],
-  visible: true,
   child,
-  connections: [[
-    Hyprland.active,
-    (self) => {
-      // prevent useless resets
-      if (lastMonitor === Hyprland.active.monitor) return;
+  connections: [
+    [
+      Hyprland.active,
+      (self) => {
+        // prevent useless resets
+        if (lastMonitor === Hyprland.active.monitor) return;
 
-      self.monitor = Hyprland.monitors.find(({ name }) =>
-        name === Hyprland.active.monitor
-      ).id;
-    },
-  ]],
+        self.monitor = Hyprland.monitors.find(({ name }) =>
+          name === Hyprland.active.monitor
+        ).id;
+      },
+    ],
+    [Indicators, (win, _, visible) => {
+      win.visible = visible;
+    }],
+  ],
 });
 
 export default Osd;

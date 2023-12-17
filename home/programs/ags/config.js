@@ -7,7 +7,7 @@ import SystemMenu from "./windows/system-menu/main.js";
 const scss = App.configDir + "/style.scss";
 const css = App.configDir + "/style.css";
 
-Utils.exec(`sassc ${scss} ${css}`);
+Utils.exec(`sass ${scss} ${css}`);
 
 export default {
   style: css,
@@ -25,7 +25,7 @@ export default {
 
 function reloadCss() {
   console.log("scss change detected");
-  Utils.exec(`sassc ${scss} ${css}`);
+  Utils.exec(`sass ${scss} ${css}`);
   App.resetCss();
   App.applyCss(css);
 }

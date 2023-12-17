@@ -1,4 +1,4 @@
-import { Service } from "../imports.js";
+import { App, Service } from "../imports.js";
 import Gio from "gi://Gio";
 
 const NAME = "net.hadess.PowerProfiles";
@@ -20,7 +20,9 @@ class PowerProfiles extends Service {
   #proxy;
 
   #getProxy() {
-    const xmlFile = Gio.File.new_for_path(`services/${NAME}.xml`);
+    const xmlFile = Gio.File.new_for_path(
+      `${App.configDir}/services/${NAME}.xml`,
+    );
     const [_, contents] = xmlFile.load_contents(null);
     const decoder = new TextDecoder("utf-8");
     const interfaceXml = decoder.decode(contents);

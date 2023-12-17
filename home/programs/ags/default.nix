@@ -9,13 +9,13 @@
     config.wayland.windowManager.hyprland.package
     bash
     coreutils
+    dart-sass
     gawk
     gnome.gnome-control-center
     imagemagick
     inputs.self.packages.${pkgs.system}.overskride
     procps
     ripgrep
-    sassc
     wlogout
   ];
 
