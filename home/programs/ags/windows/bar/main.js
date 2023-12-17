@@ -4,9 +4,30 @@ import Bluetooth from "./modules/bluetooth.js";
 import Date from "./modules/date.js";
 import Music from "./modules/music.js";
 import Net from "./modules/net.js";
-import SystemInfo from "./modules/system_info.js";
-import Tray from "./tray.js";
+import CpuRam from "./modules/cpu_ram.js";
+import Tray from "./modules/tray.js";
 import Workspaces from "./modules/workspaces.js";
+
+const SystemInfo = Widget.EventBox({
+  className: "system-menu-toggler",
+  onPrimaryClick: () => App.toggleWindow("system-menu"),
+
+  child: Widget.Box({
+    children: [
+      Net,
+      Bluetooth,
+      Battery,
+    ],
+  }),
+})
+  .hook(
+    App,
+    (self, window, visible) => {
+      if (window === "system-menu") {
+        self.toggleClassName("active", visible);
+      }
+    },
+  );
 
 const Start = Widget.Box({
   children: [
@@ -27,26 +48,8 @@ const End = Widget.Box({
 
   children: [
     Tray,
+    CpuRam,
     SystemInfo,
-    Widget.EventBox({
-      className: "system-menu-toggler",
-      onPrimaryClick: () => App.toggleWindow("system-menu"),
-      child: Widget.Box({
-        children: [
-          Net,
-          Bluetooth,
-          Battery,
-        ],
-      }),
-      connections: [[
-        App,
-        (self, window, visible) => {
-          if (window === "system-menu") {
-            self.toggleClassName("active", visible);
-          }
-        },
-      ]],
-    }),
     Date,
   ],
 });

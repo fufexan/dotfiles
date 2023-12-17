@@ -1,10 +1,10 @@
-import { SystemTray, Widget } from "../../imports.js";
+import { SystemTray, Widget } from "../../../imports.js";
 import Gdk from "gi://Gdk?version=3.0";
 
 const Item = (item) =>
   Widget.Button({
-    child: Widget.Icon({ binds: [["icon", item, "icon"]] }),
-    binds: [["tooltip-markup", item, "tooltip-markup"]],
+    child: Widget.Icon().bind("icon", item, "icon"),
+
     onPrimaryClick: (_, ev) => {
       try {
         item.activate(ev);
@@ -25,6 +25,8 @@ const Item = (item) =>
       if (id) {
         self.connect("destroy", () => item.menu?.disconnect(id));
       }
+
+      self.bind("tooltip-markup", item, "tooltip-markup");
     },
 
     onSecondaryClick: (btn) =>
@@ -36,10 +38,5 @@ const Item = (item) =>
       ),
   });
 
-export default Widget.Box({
-  className: "tray module",
-
-  binds: [
-    ["children", SystemTray, "items", (items) => items.map(Item)],
-  ],
-});
+export default Widget.Box({ className: "tray module" })
+  .bind("children", SystemTray, "items", (items) => items.map(Item));

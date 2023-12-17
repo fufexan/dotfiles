@@ -3,59 +3,54 @@ import { mprisStateIcon } from "../../../utils/mpris.js";
 
 const revealControls = Variable(false);
 
-const Cover = (player) =>
-  Widget.Box({
-    className: "cover",
+const onHover = () => revealControls.value = true;
+const onHoverLost = () => revealControls.value = false;
 
-    binds: [[
+const Cover = (player) =>
+  Widget.Box({ className: "cover" })
+    .bind(
       "css",
       player,
       "cover-path",
       (cover) => `background-image: url('${cover ?? ""}');`,
-    ]],
-  });
+    );
 
 const Title = (player) =>
-  Widget.Label({
-    className: "title module",
-
-    binds: [[
+  Widget.Label({ className: "title module" })
+    .bind(
       "label",
       player,
       "track-title",
-      (title) => title ?? "",
-    ]],
-  });
+      (title) => (title ?? "") == "Unknown title" ? "" : title,
+    );
 
 export const Controls = (player) =>
   Widget.CenterBox({
     className: "controls",
 
     startWidget: Widget.Button({
-      onHover: () => revealControls.value = true,
-      onHoverLost: () => revealControls.value = false,
+      onHover,
+      onHoverLost,
       onClicked: () => player.previous(),
       child: Widget.Icon(Icons.media.previous),
     }),
 
     centerWidget: Widget.Button({
-      onHover: () => revealControls.value = true,
-      onHoverLost: () => revealControls.value = false,
+      onHover,
+      onHoverLost,
       onClicked: () => player.playPause(),
 
-      child: Widget.Icon({
-        binds: [[
-          "icon",
-          player,
-          "play-back-status",
-          mprisStateIcon,
-        ]],
-      }),
+      child: Widget.Icon().bind(
+        "icon",
+        player,
+        "play-back-status",
+        mprisStateIcon,
+      ),
     }),
 
     endWidget: Widget.Button({
-      onHover: () => revealControls.value = true,
-      onHoverLost: () => revealControls.value = false,
+      onHover,
+      onHoverLost,
       onClicked: () => player.next(),
       child: Widget.Icon(Icons.media.next),
     }),
@@ -66,9 +61,8 @@ export const Revealer = (player) =>
     revealChild: false,
     transition: "slide_right",
     child: Controls(player),
-
-    binds: [["reveal-child", revealControls]],
-  });
+  })
+    .bind("reveal-child", revealControls);
 
 export const MusicBox = (player) =>
   Widget.Box({
@@ -78,37 +72,30 @@ export const MusicBox = (player) =>
     ],
   });
 
+const makeChildren = (players) => {
+  if (players.length == 0) return [];
+  return [
+    MusicBox(players[0]),
+    Revealer(players[0]),
+  ];
+};
+
 export default Widget.EventBox({
   className: "music",
 
+  onHover,
+  onHoverLost,
   onPrimaryClick: () => App.toggleWindow("music"),
-  onHover: () => revealControls.value = true,
-  onHoverLost: () => revealControls.value = false,
 
-  connections: [[
+  child: Widget.Box()
+    .bind("children", Mpris, "players", makeChildren)
+    .bind("visible", Mpris, "players", (p) => p.length > 0),
+})
+  .hook(
     App,
     (self, window, visible) => {
       if (window === "music") {
         self.toggleClassName("active", visible);
       }
     },
-  ]],
-
-  child: Widget.Box({
-    binds: [
-      ["children", Mpris, "players", (players) => {
-        if (players.length == 0) return [];
-        return [
-          MusicBox(players[0]),
-          Revealer(players[0]),
-        ];
-      }],
-      [
-        "visible",
-        Mpris,
-        "players",
-        (p) => p.length > 0,
-      ],
-    ],
-  }),
-});
+  );
