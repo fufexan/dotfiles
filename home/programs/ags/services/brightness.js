@@ -29,12 +29,8 @@ class BrightnessService extends Service {
 
     Utils.writeFile(percent * this.#max, this.#brightness)
       .then(() => {
-        // signals has to be explicity emitted
         this.emit("screen-changed", percent);
         this.notify("screen-value");
-
-        // or use Service.changed(propName: string) which does the above two
-        // this.changed("screen");
       })
       .catch(print);
   }

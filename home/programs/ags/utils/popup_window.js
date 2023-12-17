@@ -5,7 +5,7 @@ export default (
   {
     name,
     child,
-    revealerConnections = null,
+    revealerSetup = null,
     transition = "crossfade",
     transitionDuration = 200,
     ...props
@@ -18,6 +18,8 @@ export default (
     visible: false,
     ...props,
 
+    setup: (self) => self.getChild = () => child,
+
     child: Box({
       css: `
         min-height: 1px;
@@ -27,20 +29,21 @@ export default (
       child: Revealer({
         transition,
         transitionDuration,
-        connections: revealerConnections ?? [
-          [
-            App,
-            (self, currentName, visible) => {
-              if (currentName === name) {
-                self.reveal_child = visible;
-              }
-            },
-          ],
-        ],
         child: child,
+
+        setup: revealerSetup ?? ((self) =>
+          self
+            .hook(
+              App,
+              (self, currentName, visible) => {
+                if (currentName === name) {
+                  self.reveal_child = visible;
+                }
+              },
+            )),
       }),
     }),
   });
-  window.getChild = () => child;
+
   return window;
 };
