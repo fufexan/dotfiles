@@ -12,13 +12,13 @@ const Slider = (args) =>
         onPrimaryClick: args.icon.action ?? null,
         child: Widget.Icon({
           icon: args.icon.icon ?? "",
-          binds: args.icon.binds ?? [],
+          setup: args.icon.setup,
         }),
       }),
       Widget.Slider({
         drawValue: false,
         hexpand: true,
-        binds: args.slider.binds ?? [],
+        setup: args.slider.setup,
         onChange: args.slider.onChange ?? null,
       }),
     ],
@@ -31,22 +31,13 @@ const vol = {
       App.toggleWindow("system-menu");
       Utils.execAsync("pavucontrol");
     },
-    binds: [
-      ["icon", Audio.speaker, "volume", audioIcon],
-      [
-        "icon",
-        Audio.speaker.stream,
-        "is-muted",
-        audioIcon,
-      ],
-    ],
+    setup: (self) =>
+      self
+        .bind("icon", Audio.speaker, "volume", audioIcon)
+        .bind("icon", Audio.speaker.stream, "is-muted", audioIcon),
   },
   slider: {
-    binds: [[
-      "value",
-      Audio.speaker,
-      "volume",
-    ]],
+    setup: (self) => self.bind("value", Audio.speaker, "volume"),
     onChange: ({ value }) => Audio.speaker.volume = value,
   },
 };
@@ -57,11 +48,7 @@ const brightness = {
     icon: Icons.brightness,
   },
   slider: {
-    binds: [[
-      "value",
-      Brightness,
-      "screen-value",
-    ]],
+    setup: (self) => self.bind("value", Brightness, "screen-value"),
     onChange: ({ value }) => Brightness.screenValue(value),
   },
 };

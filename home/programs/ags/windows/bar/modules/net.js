@@ -1,25 +1,16 @@
 import { Network, Widget } from "../../../imports.js";
+import { getNetIcon, getNetText } from "../../../utils/net.js";
 
 export default Widget.Icon({ className: "net module" })
   .bind(
     "icon",
     Network,
     "connectivity",
-    (conn) => {
-      if (conn == "none") return "";
-      if (Network.primary == "wired") return "network-wired";
-
-      return Network.wifi.icon_name;
-    },
+    getNetIcon,
   )
   .bind(
     "tooltip-text",
     Network,
     "connectivity",
-    (conn) => {
-      if (conn == "none") return "";
-      if (Network.primary == "wired") return "Wired";
-
-      return Network.wifi.ssid;
-    },
+    getNetText,
   );

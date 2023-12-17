@@ -1,11 +1,7 @@
-import {
-  App,
-  Bluetooth,
-  Icons,
-  Network,
-  Utils,
-  Widget,
-} from "../../imports.js";
+import { App, Bluetooth, Network, Utils, Widget } from "../../imports.js";
+
+import { getNetIcon, getNetText } from "../../utils/net.js";
+import { getBluetoothIcon, getBluetoothText } from "../../utils/bluetooth.js";
 
 const Toggle = (args) =>
   Widget.Box({
@@ -17,20 +13,17 @@ const Toggle = (args) =>
     children: [
       Widget.Button({
         className: "button",
-        onPrimaryClick: args.icon.action,
 
         child: Widget.Icon({
-          binds: args.icon.binds,
+          setup: args.icon.setup,
         }),
-        connections: args.icon.buttonConnections ?? [],
+        setup: args.icon.buttonSetup,
       }),
       Widget.Button({
-        onPrimaryClick: args.label.action,
-
         child: Widget.Label({
-          binds: args.label.binds,
+          setup: args.label.setup,
         }),
-        connections: args.label.buttonConnections ?? [],
+        setup: args.label.buttonSetup,
       }),
     ],
   });
@@ -38,111 +31,73 @@ const Toggle = (args) =>
 const net = {
   name: "net",
   icon: {
-    action: () => Network.toggleWifi(),
-    binds: [
-      [
-        "icon",
-        Network,
-        "connectivity",
-        (conn) => {
-          if (conn == "none") return "";
-          if (Network.primary == "wired") return "network-wired";
+    setup: (self) =>
+      self
+        .bind("icon", Network, "connectivity", getNetIcon)
+        .bind("icon", Network.wifi, "icon-name", getNetIcon),
 
-          return Network.wifi.icon_name;
-        },
-      ],
-      [
-        "icon",
-        Network.wifi,
-        "icon-name",
-      ],
-    ],
-    buttonConnections: [[
-      Network,
-      (btn) => btn.toggleClassName("disabled", Network.connectivity != "full"),
-      "notify::connectivity",
-    ]],
+    buttonSetup: (self) => {
+      self.onPrimaryClick = () => Network.toggleWifi();
+      self.hook(
+        Network,
+        (btn) =>
+          btn.toggleClassName("disabled", Network.connectivity != "full"),
+        "notify::connectivity",
+      );
+    },
   },
   label: {
-    action: () => {
-      App.toggleWindow("system-menu");
-      Utils.execAsync([
-        "sh",
-        "-c",
-        "XDG_CURRENT_DESKTOP=GNOME gnome-control-center",
-      ]);
-    },
-    binds: [
-      [
-        "label",
-        Network,
-        "connectivity",
-        (conn) => {
-          if (conn == "none") return "";
-          if (Network.primary == "wired") return "Wired";
+    setup: (self) =>
+      self
+        .bind("label", Network, "connectivity", getNetText)
+        .bind("label", Network.wifi, "ssid"),
 
-          return Network.wifi.ssid;
-        },
-      ],
-      [
-        "label",
-        Network.wifi,
-        "ssid",
-      ],
-    ],
+    buttonSetup: (self) => {
+      self.onPrimaryClick = () => {
+        App.toggleWindow("system-menu");
+        Utils.execAsync([
+          "sh",
+          "-c",
+          "XDG_CURRENT_DESKTOP=GNOME gnome-control-center",
+        ]);
+      };
+    },
   },
 };
 
 const bt = {
   name: "bluetooth",
   icon: {
-    action: () => Bluetooth.toggle(),
-    binds: [[
-      "icon",
-      Bluetooth,
-      "connected-devices",
-      () => {
-        if (!Bluetooth.enabled) return Icons.bluetooth.disabled;
-        if (Bluetooth.connectedDevices.length > 0) {
-          return Icons.bluetooth.active;
-        }
-        return Icons.bluetooth.disconnected;
-      },
-    ]],
-    buttonConnections: [[
-      Bluetooth,
-      (btn) => btn.toggleClassName("disabled", !Bluetooth.enabled),
-      "notify::enabled",
-    ]],
+    setup: (self) =>
+      self.bind(
+        "icon",
+        Bluetooth,
+        "connected-devices",
+        getBluetoothIcon,
+      ),
+    buttonSetup: (self) => {
+      self.onPrimaryClick = () => Bluetooth.toggle();
+      self.hook(
+        Bluetooth,
+        (btn) => btn.toggleClassName("disabled", !Bluetooth.enabled),
+        "notify::enabled",
+      );
+    },
   },
   label: {
-    action: () => {
-      App.toggleWindow("system-menu");
-      Utils.execAsync("overskride");
+    setup: (self) =>
+      self.bind(
+        "label",
+        Bluetooth,
+        "connected-devices",
+        getBluetoothText,
+      ),
+    buttonSetup: (self) => {
+      self.onPrimaryClick = () => {
+        App.toggleWindow("system-menu");
+        Utils.execAsync("overskride");
+      };
     },
-    binds: [[
-      "label",
-      Bluetooth,
-      "connected-devices",
-      (conn) => {
-        if (!Bluetooth.enabled) return "Bluetooth off";
-
-        if (conn.length > 0) {
-          const dev = Bluetooth.getDevice(
-            conn.at(0).address,
-          );
-          let battery_str = "";
-
-          if (dev.battery_percentage > 0) {
-            battery_str += " " + dev.battery_percentage + "%";
-          }
-
-          return dev.name + battery_str;
-        }
-
-        return "Bluetooth on";
-      },
-    ]],
   },
 };
 

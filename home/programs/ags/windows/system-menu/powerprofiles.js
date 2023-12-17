@@ -14,11 +14,11 @@ const Profile = (args) =>
       children: [
         Widget.Icon({
           icon: args.icon ?? "",
-          binds: args.iconBinds ?? [],
+          setup: args.iconSetup,
         }),
         Widget.Label({
           label: args.label ?? "",
-          binds: args.labelBinds ?? [],
+          setup: args.labelSetup,
         }),
       ],
     }),
@@ -40,6 +40,33 @@ const makeProfiles = (profiles) =>
     })
   );
 
+const ActiveProfile = Profile({
+  props: {
+    className: "current-profile",
+  },
+  primaryClickAction: () => showList.value = !showList.value,
+  iconSetup: (self) => self.bind("icon", PowerProfiles, "icon"),
+  labelSetup: (self) =>
+    self.bind("label", PowerProfiles, "active-profile", prettyName),
+});
+
+const ProfileRevealer = Widget.Revealer({
+  revealChild: false,
+  transition: "slide_down",
+
+  child: Widget.Box({
+    className: "options",
+    vertical: true,
+  })
+    .bind(
+      "children",
+      PowerProfiles,
+      "profiles",
+      makeProfiles,
+    ),
+})
+  .bind("reveal-child", showList);
+
 export default Widget.Box({
   className: "power-profiles",
   vertical: true,
@@ -48,32 +75,8 @@ export default Widget.Box({
     Widget.Box({
       vertical: true,
       children: [
-        Profile({
-          props: {
-            className: "current-profile",
-          },
-          primaryClickAction: () => showList.value = !showList.value,
-          iconBinds: [["icon", PowerProfiles, "icon"]],
-          labelBinds: [["label", PowerProfiles, "active-profile", prettyName]],
-        }),
-        Widget.Revealer({
-          revealChild: false,
-          transition: "slide_down",
-
-          binds: [["reveal-child", showList]],
-
-          child: Widget.Box({
-            className: "options",
-            vertical: true,
-
-            binds: [[
-              "children",
-              PowerProfiles,
-              "profiles",
-              makeProfiles,
-            ]],
-          }),
-        }),
+        ActiveProfile,
+        ProfileRevealer,
       ],
     }),
   ],
