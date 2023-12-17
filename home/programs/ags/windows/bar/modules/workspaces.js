@@ -1,46 +1,33 @@
-import { Hyprland, Utils, Variable, Widget } from "../../../imports.js";
-const { execAsync } = Utils;
-
-const dispatch = (ws) =>
-  execAsync(["sh", "-c", `hyprctl dispatch workspace ${ws}`]);
-
-const monitors = Variable(Hyprland.monitors);
-
-const getMonitorId = (workspace) => {
-  const monitor = monitors.value.findIndex((e) => e.name == workspace?.monitor);
-
-  if (monitor == -1) return "";
-
-  return `monitor${monitor}`;
-};
-
-let lastFocused = 0;
-
-const getLastWorkspaceId = () =>
-  Hyprland.workspaces
-    .sort((x, y) => {
-      return x.id - y.id;
-    })
-    .filter((x) => {
-      return x.name.indexOf("special") == -1;
-    })
-    .slice(-1)[0].id;
+import { Hyprland, Widget } from "../../../imports.js";
+import {
+  added,
+  dispatch,
+  focusedSwitch,
+  getLastWorkspaceId,
+  removed,
+  workspaceActive,
+} from "../../../utils/hyprland.js";
 
 const makeWorkspaces = () =>
-  [...Array(getLastWorkspaceId())].map((_, i) => {
+  [...Array(10)].map((_, i) => {
     const id = i + 1;
 
     return Widget.Button({
-      setup: (btn) => (btn.id = id),
-      on_clicked: () => dispatch(id),
+      onPrimaryClick: () => dispatch(id),
+      visible: getLastWorkspaceId() >= id,
 
-      className: getMonitorId(Hyprland.getWorkspace(id)),
+      setup: (self) => {
+        self.id = id;
+        self.active = workspaceActive(id);
+        self.monitor = -1;
+
+        if (self.active) {
+          self.monitor = Hyprland.getWorkspace(id).monitorID;
+          self.toggleClassName(`monitor${self.monitor}`, true);
+        }
+      },
     });
   });
-
-function update(self) {
-  self.children = makeWorkspaces();
-}
 
 export default Widget.EventBox({
   onScrollUp: () => dispatch("+1"),
@@ -51,26 +38,13 @@ export default Widget.EventBox({
 
     children: makeWorkspaces(),
 
-    connections: [
-      [Hyprland, update, "workspace-added"],
-      [Hyprland, update, "workspace-removed"],
-      [Hyprland, (_) => (monitors.value = Hyprland.monitors), "monitor-added"],
-      [
-        Hyprland,
-        (_) => (monitors.value = Hyprland.monitors),
-        "monitor-removed",
-      ],
-      [
-        Hyprland.active.workspace,
-        (self) => {
-          const id = Hyprland.active.workspace.id - 1;
-          if (lastFocused == id) return;
-
-          self.children[lastFocused].toggleClassName("focused", false);
-          self.children[id].toggleClassName("focused", true);
-          lastFocused = id;
-        },
-      ],
-    ],
+    setup: (self) => {
+      self.lastFocused = Hyprland.active.workspace.id;
+      self.biggestId = getLastWorkspaceId();
+      self
+        .hook(Hyprland.active.workspace, focusedSwitch)
+        .hook(Hyprland, added, "workspace-added")
+        .hook(Hyprland, removed, "workspace-removed");
+    },
   }),
 });
