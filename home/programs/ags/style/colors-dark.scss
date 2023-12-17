@@ -1,0 +1,32 @@
+$red: #f38ba8;
+$yellow: #f9e2af;
+$green: #a6e3a1;
+$blue: #89b4fa;
+
+$tooltip-bg: #000000;
+$fg: #ffffff;
+$bg: rgba(0, 0, 0, 0.5);
+$bar-bg: rgba(0, 0, 0, 0.21);
+
+$surface: rgba(255, 255, 255, 0.15);
+$overlay: rgba(255, 255, 255, 0.7);
+
+$accent: #9d5b7a;
+
+/* buttons */
+$button-enabled: $accent;
+$button-enabled-hover: adjust_color($button-enabled, $lightness: -10%);
+
+$button-disabled: $surface;
+$button-disabled-hover: adjust_color($button-disabled, $alpha: +0.1);
+
+* {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+@mixin border {
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow:
+    // inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 3px 5px 1px rgba(0, 0, 0, 0.3);
+}

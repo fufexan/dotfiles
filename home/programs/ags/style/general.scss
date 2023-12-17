@@ -1,7 +1,7 @@
 /* general styles */
 
 $round: 8px;
-$round2: 16px;
+$round2: calc($round * 2);
 $margin: 0.4rem;
 $padding: 0.4rem;
 $border-width: 2px;
@@ -21,7 +21,7 @@ $scale: 0.5rem;
 }
 
 @mixin rounding {
-  border-radius: calc(#{$round2} - #{$padding} - #{$border-width});
+  border-radius: calc($round2 - $padding - $border-width);
 }
 
 @mixin window-box {
@@ -56,15 +56,15 @@ progressbar {
   trough {
     background-color: $surface;
     border-radius: $scale;
-    min-width: calc(#{$scale} * 10);
-    padding: 0 calc(#{$scale} / 2);
+    min-width: calc($scale * 10);
+    padding: 0 calc($scale / 2);
   }
 
   highlight,
   progress {
     background: $overlay;
     border-radius: $scale;
-    margin: 0 calc(0px - #{$scale} / 2);
+    margin: 0 calc(0px - $scale / 2);
     min-height: $scale;
   }
 }

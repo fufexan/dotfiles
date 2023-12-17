@@ -42,9 +42,9 @@
   margin: 0.2rem;
 
   & > box {
+    @include animate;
     border-radius: $round2;
     margin: 0.4rem;
-    transition: 200ms;
   }
 
   &.active > box {
@@ -129,9 +129,9 @@ menu {
 
 .system-menu-toggler {
   box {
+    @include animate;
     margin: 0.4rem 0;
     border-radius: $round2;
-    transition: 200ms;
   }
 
   &.active box {
