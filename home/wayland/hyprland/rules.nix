@@ -4,17 +4,17 @@ in {
   wayland.windowManager.hyprland.settings = {
     # layer rules
     layerrule = let
-      layers = "^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell|osd[0-9])$";
+      layers = "^(eww-.+|bar|system-menu|anyrun|gtk-layer-shell|osd)$";
     in [
       "blur, ${layers}"
       "xray 1, ^(bar|gtk-layer-shell)$"
       "ignorealpha 0.2, ${layers}"
-      "ignorealpha 0.5, ^((eww-)?music)$"
-      "ignorealpha 0${
-        if variant == "dark"
-        then ".5"
-        else ""
-      }, ^(eww-calendar|system-menu|anyrun)$"
+      "ignorealpha 0.5, ^((eww-)?music|calendar|system-menu|anyrun)$"
+      # "ignorealpha 0${
+      #   if variant == "dark"
+      #   then ".5"
+      #   else ""
+      # }, ^(anyrun)$"
     ];
 
     # window rules

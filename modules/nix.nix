@@ -70,6 +70,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   nixpkgs.overlays = [
     (final: prev: {
       lib =

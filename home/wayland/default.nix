@@ -29,7 +29,7 @@ in {
   ];
 
   programs.eww-hyprland = {
-    enable = true;
+    enable = false;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;
     colors = builtins.readFile "${self}/home/programs/eww/css/colors-${config.programs.matugen.variant}.scss";
   };
