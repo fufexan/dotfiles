@@ -1,50 +1,20 @@
 {
-  pkgs,
   config,
-  default,
+  lib,
   ...
-}:
-# greetd display manager
-let
-  inherit (config.programs.matugen) variant;
-
-  themeName =
-    if variant == "light"
-    then "Catppuccin-Latte-Compact-Flamingo-Light"
-    else "Catppuccin-Mocha-Compact-Flamingo-Dark";
-
-  themePackage = pkgs.catppuccin-gtk.override {
-    accents = ["flamingo"];
-    size = "compact";
-    variant =
-      if variant == "light"
-      then "latte"
-      else "mocha";
-  };
-in {
-  environment.systemPackages = with pkgs; [
-    # theme packages
-    themePackage
-    bibata-cursors
-    gnome.adwaita-icon-theme
-  ];
-
-  programs.regreet = {
+}: {
+  # greetd display manager
+  services.greetd = let
+    session = {
+      command = "${lib.getExe config.programs.hyprland.package}";
+      user = "mihai";
+    };
+  in {
     enable = true;
-
-    cageArgs = ["-s" "-m" "last"];
-
     settings = {
-      background = {
-        path = default.wallpaper;
-        fit = "Cover";
-      };
-      GTK = {
-        cursor_theme_name = "Bibata-Modern-Classic";
-        font_name = "Inter 9";
-        icon_theme_name = "Adwaita";
-        theme_name = themeName;
-      };
+      terminal.vt = 1;
+      default_session = session;
+      initial_session = session;
     };
   };
 
