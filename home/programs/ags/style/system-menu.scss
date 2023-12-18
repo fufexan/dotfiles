@@ -1,6 +1,8 @@
 /* general */
 .system-menu {
   @include window;
+  margin-top: 4px;
+  margin-right: 4px;
 
   & > box {
     @include window-box;
