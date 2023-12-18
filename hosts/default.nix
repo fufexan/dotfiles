@@ -17,7 +17,6 @@
           ../modules/desktop.nix
           ../modules/gamemode.nix
           ../modules/lanzaboote.nix
-          ../modules/power-switcher.nix
           {home-manager.users.mihai.imports = homeImports."mihai@io";}
           {disabledModules = ["security/pam.nix"];}
           "${howdy}/nixos/modules/security/pam.nix"
@@ -36,7 +35,6 @@
           ../modules/desktop.nix
           ../modules/gamemode.nix
           ../modules/lanzaboote.nix
-          ../modules/power-switcher.nix
           {home-manager.users.mihai.imports = homeImports."mihai@rog";}
         ]
         ++ sharedModules;

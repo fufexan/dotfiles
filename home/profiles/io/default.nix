@@ -5,6 +5,7 @@
     ../../programs
     ../../programs/games.nix
     ../../programs/dunst.nix
+    ../../services/power-monitor.nix
     ../../wayland
     ../../terminals/alacritty.nix
     ../../terminals/wezterm.nix
