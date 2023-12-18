@@ -48,6 +48,11 @@
           auto-format = true;
           formatter = deno "md";
         }
+        {
+          name = "typescript";
+          auto-format = true;
+          language-servers = ["deno-lsp"];
+        }
       ]
       ++ prettierLangs langs;
 
