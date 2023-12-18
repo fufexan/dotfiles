@@ -5,6 +5,8 @@
     ../../programs
     ../../programs/games.nix
     ../../programs/dunst.nix
+    ../../services/cinny.nix
+    ../../services/kdeconnect.nix
     ../../services/power-monitor.nix
     ../../wayland
     ../../terminals/alacritty.nix

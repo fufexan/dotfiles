@@ -16,12 +16,10 @@ in {
   imports = [
     ../shell/nix.nix
     ../terminals/foot.nix
-    ./cinny.nix
     ./files
     ./media.nix
     ./git.nix
     ./gtk.nix
-    ./kdeconnect.nix
     ./packages.nix
     ./spicetify.nix
     ./xdg.nix

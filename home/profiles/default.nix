@@ -48,6 +48,6 @@ in {
       };
     });
 
-    homeManagerModules.eww-hyprland = import ../programs/eww;
+    homeManagerModules.eww-hyprland = import ../services/eww;
   };
 }

@@ -19,19 +19,19 @@ let
     '';
 in {
   imports = [
-    ../programs/ags
-    ../programs/eww
     ./anyrun
     ./hyprland
-    ./hyprpaper.nix
-    ./swayidle.nix
     ./swaylock.nix
+    ../services/ags
+    ../services/eww
+    ../services/hyprpaper.nix
+    ../services/swayidle.nix
   ];
 
   programs.eww-hyprland = {
     enable = false;
     package = inputs.eww.packages.${pkgs.system}.eww-wayland;
-    colors = builtins.readFile "${self}/home/programs/eww/css/colors-${config.programs.matugen.variant}.scss";
+    colors = builtins.readFile "${self}/home/services/eww/css/colors-${config.programs.matugen.variant}.scss";
   };
 
   home.packages = with pkgs; [
@@ -54,8 +54,7 @@ in {
     XDG_SESSION_TYPE = "wayland";
   };
 
-  # fake a tray to let apps start
-  # https://github.com/nix-community/home-manager/issues/2064
+  # Create tray target
   systemd.user.targets.tray = {
     Unit = {
       Description = "Home Manager System Tray";

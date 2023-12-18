@@ -52,8 +52,8 @@ module:
 }
 ```
 
-Make sure to also add the fonts listed below. You can simply search where
-they are in my config.
+Make sure to also add the fonts listed below. You can simply search where they
+are in my config.
 
 ### Other distros
 
@@ -62,8 +62,10 @@ them in `~/.config/eww`. Then run `eww daemon` and `eww open bar`. Enjoy!
 
 Dependencies:
 
-- Icon fonts: [Material Symbols Outlined](https://github.com/google/material-design-icons/tree/master/variablefont)
-  (any variation can be used as long as you change the `font-family` property of `.icon`)
+- Icon fonts:
+  [Material Symbols Outlined](https://github.com/google/material-design-icons/tree/master/variablefont)
+  (any variation can be used as long as you change the `font-family` property of
+  `.icon`)
 - Text font: Inter or Roboto
 - Script deps: everything in `default.nix`'s `dependencies` list.
 - [gross](https://github.com/fufexan/gross)
