@@ -1,8 +1,10 @@
+// Helpers
 export const resource = (file) => `resource:///com/github/Aylur/ags/${file}.js`;
 export const require = async (file) => (await import(resource(file))).default;
 export const requireCustom = async (path) => (await import(path)).default;
 export const service = async (file) => await require(`service/${file}`);
 
+// Required components
 export const App = await require("app");
 export const GLib = await requireCustom("gi://GLib");
 export const Service = await require("service");
@@ -21,9 +23,3 @@ export const SystemTray = await service("systemtray");
 
 // My definitions
 export const Icons = await requireCustom("./utils/icons.js");
-
-// Variables
-export const startDate = Date.now();
-export const osdVars = Variable({
-  container: null,
-});

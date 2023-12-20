@@ -83,9 +83,7 @@ export const Osd = PopupWindow({
       // prevent useless resets
       if (lastMonitor === Hyprland.active.monitor) return;
 
-      self.monitor =
-        Hyprland.monitors.find(({ name }) => name === Hyprland.active.monitor)
-          .id;
+      self.monitor = Hyprland.active.monitor.id;
     },
   )
   .hook(Indicators, (win, _, visible) => {
