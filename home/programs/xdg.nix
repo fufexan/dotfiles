@@ -1,31 +1,47 @@
 {config, ...}: let
   browser = ["firefox"];
+  imageViewer = ["org.gnome.Loupe"];
+  videoPlayer = ["io.github.celluloid_player.Celluloid"];
+  audioPlayer = ["io.bassi.Amberol"];
+
+  xdgAssociations = type: program: list:
+    builtins.listToAttrs (map (e: {
+        name = "${type}/${e}";
+        value = program;
+      })
+      list);
+
+  image = xdgAssociations "image" imageViewer ["png" "svg" "jpeg" "gif"];
+  video = xdgAssociations "video" videoPlayer ["mp4" "avi" "mkv"];
+  audio = xdgAssociations "audio" audioPlayer ["mp3" "flac" "wav" "aac"];
+  browserTypes =
+    (xdgAssociations "application" browser [
+      "json"
+      "x-extension-htm"
+      "x-extension-html"
+      "x-extension-shtml"
+      "x-extension-xht"
+      "x-extension-xhtml"
+    ])
+    // (xdgAssociations "x-scheme-handler" browser [
+      "about"
+      "ftp"
+      "http"
+      "https"
+      "unknown"
+    ]);
 
   # XDG MIME types
-  associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) {
-    "application/x-extension-htm" = browser;
-    "application/x-extension-html" = browser;
-    "application/x-extension-shtml" = browser;
-    "application/x-extension-xht" = browser;
-    "application/x-extension-xhtml" = browser;
-    "application/xhtml+xml" = browser;
-    "text/html" = browser;
-    "x-scheme-handler/about" = browser;
-    "x-scheme-handler/chrome" = ["chromium-browser"];
-    "x-scheme-handler/ftp" = browser;
-    "x-scheme-handler/http" = browser;
-    "x-scheme-handler/https" = browser;
-    "x-scheme-handler/unknown" = browser;
-
-    "audio/*" = ["celluloid"];
-    "video/*" = ["celluloid"];
-    "image/*" = ["loupe"];
-    "application/json" = browser;
-    "application/pdf" = ["org.pwmt.zathura"];
-    "x-scheme-handler/discord" = browser;
-    "x-scheme-handler/spotify" = ["spotify"];
-    "x-scheme-handler/tg" = ["telegramdesktop"];
-  };
+  associations = builtins.mapAttrs (_: v: (map (e: "${e}.desktop") v)) ({
+      "application/pdf" = ["org.pwmt.zathura-pdf-mupdf"];
+      "text/html" = browser;
+      "text/plain" = ["Helix"];
+      "x-scheme-handler/chrome" = ["chromium-browser"];
+    }
+    // image
+    // video
+    // audio
+    // browserTypes);
 in {
   xdg = {
     enable = true;

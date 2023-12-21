@@ -16,14 +16,15 @@
     playerctl
     pulsemixer
 
+    # audio
+    amberol
+    spotify-tui
+
     # images
-    imv
     loupe
 
     # videos
     celluloid
-
-    spotify-tui
   ];
 
   programs = {
