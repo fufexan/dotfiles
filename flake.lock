@@ -50,15 +50,15 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1701453400,
-        "narHash": "sha256-hI9+KBShsSfvWX7bmRa/1VI20WGat3lDXmbceMZzMS4=",
-        "owner": "Kirottu",
+        "lastModified": 1703189097,
+        "narHash": "sha256-xWC+YFd631H2q75ZQc3Ov3sQQedwjLVkRFTCBPWDYjs=",
+        "owner": "fufexan",
         "repo": "anyrun",
-        "rev": "e14da6c37337ffa3ee1bc66965d58ef64c1590e5",
+        "rev": "08f3d0bfcb1dfcad66d23a77bf6445f2ec7bd818",
         "type": "github"
       },
       "original": {
-        "owner": "Kirottu",
+        "owner": "fufexan",
         "repo": "anyrun",
         "type": "github"
       }

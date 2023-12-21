@@ -1,5 +1,6 @@
 {
   pkgs,
+  default,
   inputs,
   config,
   self,
@@ -24,5 +25,13 @@
     };
 
     extraCss = builtins.readFile "${self}/home/wayland/anyrun/style-${config.programs.matugen.variant}.css";
+
+    extraConfigFiles."applications.ron".text = ''
+      Config(
+        desktop_actions: false,
+        max_entries: 5,
+        terminal: Some("${default.terminal.name}"),
+      )
+    '';
   };
 }

@@ -57,7 +57,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.url = "github:fufexan/anyrun";
 
     eww = {
       url = "github:elkowar/eww";
