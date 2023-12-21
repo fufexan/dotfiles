@@ -39,7 +39,7 @@
     # network discovery, mDNS
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         domain = true;

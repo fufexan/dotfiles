@@ -26,6 +26,8 @@
       "loglevel=3"
       "systemd.show_status=auto"
       "rd.udev.log_level=3"
+      "ideapad_laptop.allow_v4_dytc=Y"
+      ''acpi_osi="Windows 2020"''
     ];
   };
 
@@ -47,21 +49,19 @@
       enable = true;
       # fix gamescope inside steam
       package = pkgs.steam.override {
-        # extraPkgs = pkgs:
-        #   with pkgs; [
-        #     keyutils
-        #     libkrb5
-        #     libpng
-        #     libpulseaudio
-        #     libvorbis
-        #     stdenv.cc.cc.lib
-        #     xorg.libXcursor
-        #     xorg.libXi
-        #     xorg.libXinerama
-        #     xorg.libXScrnSaver
-        #   ];
-        # set correct scaling
-        extraProfile = "export GDK_SCALE=2";
+        extraPkgs = pkgs:
+          with pkgs; [
+            keyutils
+            libkrb5
+            libpng
+            libpulseaudio
+            libvorbis
+            stdenv.cc.cc.lib
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+          ];
       };
     };
   };
@@ -76,7 +76,10 @@
       enable = true;
       package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.howdy;
       settings = {
-        core.no_confirmation = true;
+        core = {
+          no_confirmation = true;
+          abort_if_ssh = true;
+        };
         video.dark_threshold = 90;
       };
     };
