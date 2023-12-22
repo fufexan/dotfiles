@@ -5,6 +5,7 @@ lib: {
   terminal = {
     font = "JetBrainsMono Nerd Font";
     name = "wezterm";
+    exec = "start"; # command used to execute programs
     opacity = 0.9;
     size = 10;
   };

@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  default,
+  ...
+}: let
   browser = ["firefox"];
   imageViewer = ["org.gnome.Loupe"];
   videoPlayer = ["io.github.celluloid_player.Celluloid"];
@@ -60,4 +65,11 @@ in {
       };
     };
   };
+
+  # used by `gio open` and xdp-gtk
+  home.packages = [
+    (pkgs.writeShellScriptBin "xdg-terminal-exec" ''
+      ${default.terminal.name} ${default.terminal.exec} "$@"
+    '')
+  ];
 }
