@@ -25,6 +25,7 @@ in {
     ../services/ags
     ../services/eww
     ../services/hyprpaper.nix
+    ../services/polkit-agent.nix
     ../services/swayidle.nix
   ];
 
