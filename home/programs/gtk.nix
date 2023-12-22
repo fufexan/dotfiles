@@ -32,16 +32,9 @@ in {
     theme = {
       name =
         if variant == "light"
-        then "Catppuccin-Latte-Compact-Flamingo-Light"
-        else "Catppuccin-Mocha-Compact-Flamingo-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["flamingo"];
-        size = "compact";
-        variant =
-          if variant == "light"
-          then "latte"
-          else "mocha";
-      };
+        then "adw-gtk3"
+        else "adw-gtk3-dark";
+      package = pkgs.adw-gtk3;
     };
   };
 }
