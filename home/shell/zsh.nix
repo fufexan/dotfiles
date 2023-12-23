@@ -1,7 +1,5 @@
 {
-  inputs,
   config,
-  pkgs,
   lib,
   ...
 }: {
@@ -51,26 +49,20 @@
 
       # case insensitive tab completion
       zstyle ':completion:*' completer _complete _ignored _approximate
-      zstyle ':completion:*' list-colors '\'
       zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
       zstyle ':completion:*' menu select
       zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
       zstyle ':completion:*' verbose true
+
+      # use cache for completions
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
       _comp_options+=(globdots)
 
       ${lib.optionalString config.services.gpg-agent.enable ''
         gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
-      ''}
-
-      ${lib.optionalString config.programs.kitty.enable ''
-        if test -n "$KITTY_INSTALLATION_DIR"; then
-          export KITTY_SHELL_INTEGRATION="enabled"
-          autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-          kitty-integration
-          unfunction kitty-integration
-        fi
       ''}
     '';
 
