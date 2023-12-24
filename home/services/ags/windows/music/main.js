@@ -42,7 +42,6 @@ const MusicBox = (player) =>
 
 export default PopupWindow({
   monitor: 0,
-  layer: "overlay",
   anchor: ["top"],
   name: "music",
   child: Widget.Box(),

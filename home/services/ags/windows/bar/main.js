@@ -30,6 +30,8 @@ const SystemInfo = Widget.EventBox({
   );
 
 const Start = Widget.Box({
+  hexpand: true,
+  hpack: "start",
   children: [
     Workspaces,
     // Indicators
