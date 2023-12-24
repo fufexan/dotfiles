@@ -1,7 +1,8 @@
-import { Variable, Widget } from "../../imports.js";
-import PowerProfiles from "../../services/powerprofiles.js";
+import { PowerProfiles, Variable, Widget } from "../../imports.js";
 
 const showList = Variable(false);
+globalThis.power = PowerProfiles;
+
 const Profile = (args) =>
   Widget.EventBox({
     onPrimaryClick: args.primaryClickAction,
@@ -32,11 +33,11 @@ const makeProfiles = (profiles) =>
   profiles.map((e) =>
     Profile({
       primaryClickAction: () => {
-        PowerProfiles.activeProfile = e.profile;
+        PowerProfiles.activeProfile = e.Profile;
         showList.value = false;
       },
-      icon: e.icon,
-      label: prettyName(e.profile),
+      icon: `power-profile-${e.Profile}-symbolic`,
+      label: prettyName(e.Profile),
     })
   );
 
@@ -45,7 +46,7 @@ const ActiveProfile = Profile({
     className: "current-profile",
   },
   primaryClickAction: () => showList.value = !showList.value,
-  iconSetup: (self) => self.bind("icon", PowerProfiles, "icon"),
+  iconSetup: (self) => self.bind("icon", PowerProfiles, "icon-name"),
   labelSetup: (self) =>
     self.bind("label", PowerProfiles, "active-profile", prettyName),
 });
