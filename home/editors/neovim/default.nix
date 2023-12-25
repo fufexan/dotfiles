@@ -25,9 +25,9 @@
       nvim-colorizer-lua
       nvim-lspconfig
       nvim-tree-lua
-      nvim-ts-rainbow
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       plenary-nvim
+      rainbow-delimiters-nvim
       telescope-fzy-native-nvim
       telescope-nvim
       vim-floaterm
