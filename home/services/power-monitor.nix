@@ -7,10 +7,9 @@
     BAT=$(echo /sys/class/power_supply/BAT*)
     BAT_STATUS="$BAT/status"
     BAT_CAP="$BAT/capacity"
-    LOW_BAT_PERCENT=20
 
     AC_PROFILE="performance"
-    BAT_PROFILE="balanced"
+    BAT_PROFILE="power-saver"
 
     # wait a while if needed
     [[ -z $STARTUP_WAIT ]] || sleep "$STARTUP_WAIT"
