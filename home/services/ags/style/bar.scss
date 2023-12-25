@@ -39,8 +39,6 @@
 
 /* music */
 .bar .music {
-  margin: 0.2rem;
-
   & > box {
     @include animate;
     border-radius: $round2;
@@ -49,14 +47,6 @@
 
   &.active > box {
     background: $surface;
-  }
-
-  .controls {
-    padding-right: 0.5rem;
-  }
-  .controls image {
-    font-size: 0.8rem;
-    padding: 0.1rem;
   }
 
   .cover {
@@ -117,9 +107,8 @@ menu {
   }
 
   .type {
-    font-size: 0.5rem;
+    font-size: 0.55rem;
     font-weight: 300;
-    margin-top: 0.4rem;
   }
 
   .value {

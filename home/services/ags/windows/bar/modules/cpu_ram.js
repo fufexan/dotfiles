@@ -3,6 +3,9 @@ import { Utils, Widget } from "../../../imports.js";
 const Indicator = (props) =>
   Widget.Box({
     vertical: true,
+    vexpand: true,
+    vpack: "center",
+
     children: [
       Widget.Label({
         className: "type",
