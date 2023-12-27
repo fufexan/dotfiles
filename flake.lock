@@ -464,16 +464,15 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1702904222,
-        "narHash": "sha256-NNdTGwug58cc1HgLSLvVXqj4VDSsrzOhvZSwZ4F82r0=",
-        "owner": "fufexan",
+        "lastModified": 1703701675,
+        "narHash": "sha256-bhvq/8yDBViLy/rcc4iV0bHrokPUeNZpP2JYSMHEJjo=",
+        "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "5e6e633e446b72ae874c983ef3235011a38a24dd",
+        "rev": "e5eb11ad0423bfdfd4056964ef868e26b2d3c846",
         "type": "github"
       },
       "original": {
-        "owner": "fufexan",
-        "ref": "wezterm_fix",
+        "owner": "hyprwm",
         "repo": "Hyprland",
         "type": "github"
       }
@@ -505,11 +504,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1702823915,
-        "narHash": "sha256-ZHnEiOmV/d+fGslT/rLqPTf8e6i5nLxgNzGjUv7b+IA=",
+        "lastModified": 1703674712,
+        "narHash": "sha256-j5VlqOPcCnf0MUwFAOMlG1VCpwmi4spaHU5cJBceYo4=",
         "owner": "hyprwm",
         "repo": "hyprland-plugins",
-        "rev": "28c119162091c54dbc81d31ee9db408b3b392fcd",
+        "rev": "e654b1e9f6dbc38cfa6808fb294c2f588ccce39b",
         "type": "github"
       },
       "original": {
@@ -656,11 +655,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1703380831,
-        "narHash": "sha256-JqptMO/EPgeeJOeyzF0whENAbKoN2DpMcr07fwwYy44=",
+        "lastModified": 1703553195,
+        "narHash": "sha256-4iOPcdDwGsiVhHM26a+uSkLmdlrZGCBUabpp4NuCEdU=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "e12595103fee68cc57a9a16a6288c00f3d7ab828",
+        "rev": "219145d5cba3b597de446fc0ee1d7213713aef43",
         "type": "github"
       },
       "original": {
@@ -755,11 +754,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1703255338,
-        "narHash": "sha256-Z6wfYJQKmDN9xciTwU3cOiOk+NElxdZwy/FiHctCzjU=",
+        "lastModified": 1703438236,
+        "narHash": "sha256-aqVBq1u09yFhL7bj1/xyUeJjzr92fXVvQSSEx6AdB1M=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6df37dc6a77654682fe9f071c62b4242b5342e04",
+        "rev": "5f64a12a728902226210bf01d25ec6cbb9d9265b",
         "type": "github"
       },
       "original": {

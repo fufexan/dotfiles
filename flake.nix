@@ -85,7 +85,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:fufexan/Hyprland/wezterm_fix";
+    hyprland.url = "github:hyprwm/Hyprland";
 
     hyprland-contrib = {
       url = "github:hyprwm/contrib";

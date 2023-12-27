@@ -100,13 +100,18 @@ in {
       workspace_swipe_forever = true;
     };
 
-    plugin.csgo-vulkan-fix = {
-      res_w = 1280;
-      res_h = 800;
-    };
-
     xwayland.force_zero_scaling = true;
 
     debug.disable_logs = false;
   };
+
+  wayland.windowManager.hyprland.extraConfig = ''
+    plugin {
+      csgo-vulkan-fix {
+        res_w = 1280
+        res_h = 800
+        class = cs2
+      }
+    }
+  '';
 }
