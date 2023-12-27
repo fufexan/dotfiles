@@ -40,18 +40,19 @@ const MusicBox = (player) =>
       generateBackground,
     );
 
-export default PopupWindow({
-  monitor: 0,
-  anchor: ["top"],
-  name: "music",
-  child: Widget.Box(),
-})
-  .bind(
-    "child",
-    Mpris,
-    "players",
-    (players) => {
-      if (players.length == 0) return Widget.Box();
-      return MusicBox(players[0]);
-    },
-  );
+export default () =>
+  PopupWindow({
+    monitor: 0,
+    anchor: ["top"],
+    name: "music",
+    child: Widget.Box(),
+  })
+    .bind(
+      "child",
+      Mpris,
+      "players",
+      (players) => {
+        if (players.length == 0) return Widget.Box();
+        return MusicBox(players[0]);
+      },
+    );

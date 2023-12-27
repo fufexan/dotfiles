@@ -76,7 +76,4 @@ class BrightnessService extends Service {
 
 const service = new BrightnessService();
 
-// make it global for easy use with cli
-globalThis.brightness = service;
-
 export default service;

@@ -1,4 +1,5 @@
-import { App, Audio, Hyprland, Widget } from "../../imports.js";
+import { Audio, Hyprland, Widget } from "../../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
 
 import Brightness from "../../services/brightness.js";
 import Indicators from "../../services/osd.js";
@@ -67,27 +68,26 @@ const child = Widget.Box({
   ],
 });
 
-export const Osd = PopupWindow({
-  name: "osd",
-  monitor: 0,
-  child,
-  revealerSetup: (self) =>
-    self
-      .hook(Indicators, (revealer, _, visible) => {
-        revealer.reveal_child = visible;
-      }),
-})
-  .hook(
-    Hyprland.active,
-    (self) => {
-      // prevent useless resets
-      if (lastMonitor === Hyprland.active.monitor) return;
+export default () =>
+  PopupWindow({
+    name: "osd",
+    monitor: 0,
+    child,
+    revealerSetup: (self) =>
+      self
+        .hook(Indicators, (revealer, _, visible) => {
+          revealer.reveal_child = visible;
+        }),
+  })
+    .hook(
+      Hyprland.active,
+      (self) => {
+        // prevent useless resets
+        if (lastMonitor === Hyprland.active.monitor) return;
 
-      self.monitor = Hyprland.active.monitor.id;
-    },
-  )
-  .hook(Indicators, (win, _, visible) => {
-    win.visible = visible;
-  });
-
-export default Osd;
+        self.monitor = Hyprland.active.monitor.id;
+      },
+    )
+    .hook(Indicators, (win, _, visible) => {
+      win.visible = visible;
+    });

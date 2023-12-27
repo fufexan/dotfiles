@@ -40,11 +40,12 @@ const ram = {
       .catch((err) => print(err)),
 };
 
-export default Widget.Box({
-  className: "system-info module",
+export default () =>
+  Widget.Box({
+    className: "system-info module",
 
-  children: [
-    Indicator(cpu),
-    Indicator(ram),
-  ],
-});
+    children: [
+      Indicator(cpu),
+      Indicator(ram),
+    ],
+  });

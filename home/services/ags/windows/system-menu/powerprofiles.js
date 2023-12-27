@@ -1,7 +1,6 @@
 import { PowerProfiles, Variable, Widget } from "../../imports.js";
 
 const showList = Variable(false);
-globalThis.power = PowerProfiles;
 
 const Profile = (args) =>
   Widget.EventBox({
@@ -68,17 +67,18 @@ const ProfileRevealer = Widget.Revealer({
 })
   .bind("reveal-child", showList);
 
-export default Widget.Box({
-  className: "power-profiles",
-  vertical: true,
+export default () =>
+  Widget.Box({
+    className: "power-profiles",
+    vertical: true,
 
-  children: [
-    Widget.Box({
-      vertical: true,
-      children: [
-        ActiveProfile,
-        ProfileRevealer,
-      ],
-    }),
-  ],
-});
+    children: [
+      Widget.Box({
+        vertical: true,
+        children: [
+          ActiveProfile,
+          ProfileRevealer,
+        ],
+      }),
+    ],
+  });

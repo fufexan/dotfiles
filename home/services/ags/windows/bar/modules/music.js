@@ -1,4 +1,5 @@
-import { App, Mpris, Widget } from "../../../imports.js";
+import { Mpris, Widget } from "../../../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
 
 const Cover = (player) =>
   Widget.Box({ className: "cover" })
@@ -26,20 +27,21 @@ export const MusicBox = (player) =>
     ],
   });
 
-export default Widget.EventBox({
-  className: "music",
-  onPrimaryClick: () => App.toggleWindow("music"),
-})
-  .hook(
-    App,
-    (self, window, visible) => {
-      if (window === "music") {
-        self.toggleClassName("active", visible);
-      }
-    },
-  )
-  .bind("visible", Mpris, "players", (p) => p.length > 0)
-  .bind("child", Mpris, "players", (players) => {
-    if (players.length == 0) return Widget.Box();
-    return MusicBox(players[0]);
-  });
+export default () =>
+  Widget.EventBox({
+    className: "music",
+    onPrimaryClick: () => App.toggleWindow("music"),
+  })
+    .hook(
+      App,
+      (self, window, visible) => {
+        if (window === "music") {
+          self.toggleClassName("active", visible);
+        }
+      },
+    )
+    .bind("visible", Mpris, "players", (p) => p.length > 0)
+    .bind("child", Mpris, "players", (players) => {
+      if (players.length == 0) return Widget.Box();
+      return MusicBox(players[0]);
+    });

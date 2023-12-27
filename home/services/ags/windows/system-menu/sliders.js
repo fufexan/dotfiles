@@ -24,41 +24,47 @@ const Slider = (args) =>
     ],
   });
 
-const vol = {
-  name: "volume",
-  icon: {
-    action: () => {
-      App.toggleWindow("system-menu");
-      Utils.execAsync("pavucontrol");
+const vol = () => {
+  return {
+    name: "volume",
+    icon: {
+      icon: "",
+      action: () => {
+        App.toggleWindow("system-menu");
+        Utils.execAsync("pavucontrol");
+      },
+      setup: (self) =>
+        self
+          .bind("icon", Audio.speaker, "volume", audioIcon)
+          .bind("icon", Audio.speaker.stream, "is-muted", audioIcon),
     },
-    setup: (self) =>
-      self
-        .bind("icon", Audio.speaker, "volume", audioIcon)
-        .bind("icon", Audio.speaker.stream, "is-muted", audioIcon),
-  },
-  slider: {
-    setup: (self) => self.bind("value", Audio.speaker, "volume"),
-    onChange: ({ value }) => Audio.speaker.volume = value,
-  },
+    slider: {
+      setup: (self) => self.bind("value", Audio.speaker, "volume"),
+      onChange: ({ value }) => Audio.speaker.volume = value,
+    },
+  };
 };
 
-const brightness = {
-  name: "brightness",
-  icon: {
-    icon: Icons.brightness,
-  },
-  slider: {
-    setup: (self) => self.bind("value", Brightness, "screen-value"),
-    onChange: ({ value }) => Brightness.screenValue = value,
-  },
+const brightness = () => {
+  return {
+    name: "brightness",
+    icon: {
+      icon: Icons.brightness,
+    },
+    slider: {
+      setup: (self) => self.bind("value", Brightness, "screen-value"),
+      onChange: ({ value }) => Brightness.screenValue = value,
+    },
+  };
 };
 
-export default Widget.Box({
-  className: "sliders",
-  vertical: true,
+export default () =>
+  Widget.Box({
+    className: "sliders",
+    vertical: true,
 
-  children: [
-    Slider(vol),
-    Slider(brightness),
-  ],
-});
+    children: [
+      Slider(vol()),
+      Slider(brightness()),
+    ],
+  });

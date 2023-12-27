@@ -1,26 +1,37 @@
-// Helpers
-export const resource = (file) => `resource:///com/github/Aylur/ags/${file}.js`;
-export const require = async (file) => (await import(resource(file))).default;
-export const requireCustom = async (path) => (await import(path)).default;
-export const service = async (file) => await require(`service/${file}`);
-
 // Required components
-export const App = await require("app");
-export const GLib = await requireCustom("gi://GLib");
-export const Service = await require("service");
-export const Utils = await import(resource("utils"));
-export const Variable = await require("variable");
-export const Widget = await require("widget");
+import App from "resource:///com/github/Aylur/ags/app.js";
+import GLib from "gi://GLib";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+import Service from "resource:///com/github/Aylur/ags/service.js";
+import Variable from "resource:///com/github/Aylur/ags/variable.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js";
 
 // Services
-export const Audio = await service("audio");
-export const Battery = await service("battery");
-export const Bluetooth = await service("bluetooth");
-export const Hyprland = await service("hyprland");
-export const Mpris = await service("mpris");
-export const Network = await service("network");
-export const PowerProfiles = await service("powerprofiles");
-export const SystemTray = await service("systemtray");
+import Audio from "resource:///com/github/Aylur/ags/service/audio.js";
+import Battery from "resource:///com/github/Aylur/ags/service/battery.js";
+import Bluetooth from "resource:///com/github/Aylur/ags/service/bluetooth.js";
+import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
+import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
+import Network from "resource:///com/github/Aylur/ags/service/network.js";
+import PowerProfiles from "resource:///com/github/Aylur/ags/service/powerprofiles.js";
+import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
 
-// My definitions
-export const Icons = await requireCustom("./utils/icons.js");
+import Icons from "./utils/icons.js";
+
+export {
+  App,
+  Audio,
+  Battery,
+  Bluetooth,
+  GLib,
+  Hyprland,
+  Icons,
+  Mpris,
+  Network,
+  PowerProfiles,
+  Service,
+  SystemTray,
+  Utils,
+  Variable,
+  Widget,
+};

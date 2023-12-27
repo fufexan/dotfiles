@@ -38,5 +38,6 @@ const Item = (item) =>
       ),
   });
 
-export default Widget.Box({ className: "tray module" })
-  .bind("children", SystemTray, "items", (items) => items.map(Item));
+export default () =>
+  Widget.Box({ className: "tray module" })
+    .bind("children", SystemTray, "items", (items) => items.map(Item));

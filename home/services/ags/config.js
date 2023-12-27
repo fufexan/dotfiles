@@ -9,15 +9,9 @@ const css = App.configDir + "/style.css";
 
 Utils.exec(`sass ${scss} ${css}`);
 
+App.connect("config-parsed", () => print("config parsed"));
 export default {
   style: css,
-  windows: [
-    SystemMenu,
-    Music,
-    Osd,
-    Bar,
-  ],
-
   closeWindowDelay: {
     "system-menu": 200,
   },
@@ -31,3 +25,18 @@ function reloadCss() {
 }
 
 Utils.monitorFile(`${App.configDir}/style`, reloadCss, "directory");
+
+function addWindows(windows) {
+  windows.forEach((win) => App.addWindow(win));
+}
+
+Utils.idle(() =>
+  addWindows(
+    [
+      Bar(),
+      Music(),
+      Osd(),
+      SystemMenu(),
+    ],
+  )
+);

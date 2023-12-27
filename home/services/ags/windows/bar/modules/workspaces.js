@@ -29,22 +29,23 @@ const makeWorkspaces = () =>
     });
   });
 
-export default Widget.EventBox({
-  onScrollUp: () => dispatch("+1"),
-  onScrollDown: () => dispatch("-1"),
+export default () =>
+  Widget.EventBox({
+    onScrollUp: () => dispatch("+1"),
+    onScrollDown: () => dispatch("-1"),
 
-  child: Widget.Box({
-    className: "workspaces module",
+    child: Widget.Box({
+      className: "workspaces module",
 
-    children: makeWorkspaces(),
+      children: makeWorkspaces(),
 
-    setup: (self) => {
-      self.lastFocused = Hyprland.active.workspace.id;
-      self.biggestId = getLastWorkspaceId();
-      self
-        .hook(Hyprland.active.workspace, focusedSwitch)
-        .hook(Hyprland, added, "workspace-added")
-        .hook(Hyprland, removed, "workspace-removed");
-    },
-  }),
-});
+      setup: (self) => {
+        self.lastFocused = Hyprland.active.workspace.id;
+        self.biggestId = getLastWorkspaceId();
+        self
+          .hook(Hyprland.active.workspace, focusedSwitch)
+          .hook(Hyprland, added, "workspace-added")
+          .hook(Hyprland, removed, "workspace-removed");
+      },
+    }),
+  });

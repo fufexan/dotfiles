@@ -1,4 +1,5 @@
-import { GLib, Icons, Utils } from "../imports.js";
+import { Icons, Utils } from "../imports.js";
+import GLib from "gi://GLib";
 
 export const mprisStateIcon = (status) => {
   const state = status == "Playing" ? "pause" : "play";

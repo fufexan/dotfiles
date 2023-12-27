@@ -49,11 +49,12 @@ const PowerButton = Widget.Button({
   child: Widget.Icon(Icons.powerButton),
 });
 
-export default Widget.Box({
-  className: "battery-info",
+export default () =>
+  Widget.Box({
+    className: "battery-info",
 
-  children: [
-    BatteryBox,
-    PowerButton,
-  ],
-});
+    children: [
+      BatteryBox,
+      PowerButton,
+    ],
+  });

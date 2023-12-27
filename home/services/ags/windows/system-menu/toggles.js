@@ -101,12 +101,13 @@ const bt = {
   },
 };
 
-export default Widget.Box({
-  className: "toggles",
-  vertical: true,
+export default () =>
+  Widget.Box({
+    className: "toggles",
+    vertical: true,
 
-  children: [
-    Toggle(net),
-    Toggle(bt),
-  ],
-});
+    children: [
+      Toggle(net),
+      Toggle(bt),
+    ],
+  });

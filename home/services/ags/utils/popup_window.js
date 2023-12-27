@@ -1,4 +1,5 @@
-import { App, Widget } from "../imports.js";
+import App from "resource:///com/github/Aylur/ags/app.js";
+import { Widget } from "../imports.js";
 const { Box, Revealer, Window } = Widget;
 
 export default (
