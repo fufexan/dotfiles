@@ -21,9 +21,6 @@ in {
     file
     jaq
     ripgrep
-
-    # file managers
-    ranger
   ];
 
   programs = {

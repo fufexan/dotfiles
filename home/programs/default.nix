@@ -23,6 +23,7 @@ in {
     ./packages.nix
     ./spicetify.nix
     ./xdg.nix
+    ./yazi
     ./zathura.nix
   ];
 
