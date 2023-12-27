@@ -42,10 +42,8 @@
   networking.hostName = "rog";
 
   programs = {
-    hyprland = {
-      enable = true;
-      enableNvidiaPatches = true;
-    };
+    hyprland.enable = true;
+
     steam.enable = true;
   };
 
