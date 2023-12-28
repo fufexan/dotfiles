@@ -5,11 +5,11 @@ const batteryEnergy = () => {
   return Battery.energyRate > 0.1 ? `${Battery.energyRate.toFixed(1)} W ` : "";
 };
 
-const BatteryIcon = Widget.Icon()
+const BatteryIcon = () => Widget.Icon()
   .bind("icon", Battery, "percent", () => Battery.iconName)
   .bind("tooltip-text", Battery, "energy-rate", batteryEnergy);
 
-const BatteryPercent = Widget.Label()
+const BatteryPercent = () => Widget.Label()
   .bind(
     "label",
     Battery,
@@ -17,7 +17,7 @@ const BatteryPercent = Widget.Label()
     (percent) => `${percent}%`,
   );
 
-const BatteryTime = Widget.Label({
+const BatteryTime = () => Widget.Label({
   className: "time",
   vexpand: true,
   vpack: "center",
@@ -25,18 +25,18 @@ const BatteryTime = Widget.Label({
   .bind("label", Battery, "charging", batteryTime)
   .bind("label", Battery, "energy-rate", batteryTime);
 
-const BatteryBox = Widget.Box({
+const BatteryBox = () => Widget.Box({
   className: "battery-box",
   visible: Battery.available,
 
   children: [
-    BatteryIcon,
-    BatteryPercent,
-    BatteryTime,
+    BatteryIcon(),
+    BatteryPercent(),
+    BatteryTime(),
   ],
 });
 
-const PowerButton = Widget.Button({
+const PowerButton = () => Widget.Button({
   className: "button disabled",
   hexpand: true,
   hpack: "end",
@@ -54,7 +54,7 @@ export default () =>
     className: "battery-info",
 
     children: [
-      BatteryBox,
-      PowerButton,
+      BatteryBox(),
+      PowerButton(),
     ],
   });

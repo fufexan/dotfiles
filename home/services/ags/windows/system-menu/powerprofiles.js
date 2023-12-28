@@ -40,7 +40,7 @@ const makeProfiles = (profiles) =>
     })
   );
 
-const ActiveProfile = Profile({
+const ActiveProfile = () => Profile({
   props: {
     className: "current-profile",
   },
@@ -50,7 +50,7 @@ const ActiveProfile = Profile({
     self.bind("label", PowerProfiles, "active-profile", prettyName),
 });
 
-const ProfileRevealer = Widget.Revealer({
+const ProfileRevealer = () => Widget.Revealer({
   revealChild: false,
   transition: "slide_down",
 
@@ -76,8 +76,8 @@ export default () =>
       Widget.Box({
         vertical: true,
         children: [
-          ActiveProfile,
-          ProfileRevealer,
+          ActiveProfile(),
+          ProfileRevealer(),
         ],
       }),
     ],

@@ -6,7 +6,7 @@ import PowerProfiles from "./powerprofiles.js";
 // import Sliders from "./sliders.js";
 import BatteryInfo from "./battery_info.js";
 
-const SystemMenuBox = Widget.Box({
+const SystemMenuBox = () => Widget.Box({
   className: "system-menu",
   vertical: true,
 
@@ -23,5 +23,5 @@ export default () =>
     monitor: 0,
     anchor: ["top", "right"],
     name: "system-menu",
-    child: SystemMenuBox,
+    child: SystemMenuBox(),
   });
