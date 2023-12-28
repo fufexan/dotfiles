@@ -1,6 +1,17 @@
 import { Icons, Utils } from "../imports.js";
 import GLib from "gi://GLib";
 
+export const findPlayer = (players) => {
+  // try to get the first active player
+  const activePlayer = players.find((p) => p.playBackStatus == "Playing");
+  if (activePlayer != null) return activePlayer;
+
+  // otherwise get the first "working" player
+  for (const p of players) {
+    if (p.title != "undefined") return p;
+  }
+};
+
 export const mprisStateIcon = (status) => {
   const state = status == "Playing" ? "pause" : "play";
   return Icons.media[state];

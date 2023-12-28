@@ -1,5 +1,6 @@
 import { Mpris, Widget } from "../../../imports.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
+import { findPlayer } from "../../../utils/mpris.js";
 
 const Cover = (player) =>
   Widget.Box({ className: "cover" })
@@ -43,5 +44,5 @@ export default () =>
     .bind("visible", Mpris, "players", (p) => p.length > 0)
     .bind("child", Mpris, "players", (players) => {
       if (players.length == 0) return Widget.Box();
-      return MusicBox(players[0]);
+      return MusicBox(findPlayer(players));
     });

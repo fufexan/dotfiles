@@ -1,5 +1,5 @@
 import { Mpris, Widget } from "../../imports.js";
-import { generateBackground } from "../../utils/mpris.js";
+import { findPlayer, generateBackground } from "../../utils/mpris.js";
 import PopupWindow from "../../utils/popup_window.js";
 
 import Cover from "./cover.js";
@@ -53,6 +53,6 @@ export default () =>
       "players",
       (players) => {
         if (players.length == 0) return Widget.Box();
-        return MusicBox(players[0]);
+        return MusicBox(findPlayer(players));
       },
     );

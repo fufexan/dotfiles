@@ -30,32 +30,35 @@ const SystemInfo = () =>
       },
     );
 
-const Start = () => Widget.Box({
-  hexpand: true,
-  hpack: "start",
-  children: [
-    Workspaces(),
-    // Indicators
-  ],
-});
+const Start = () =>
+  Widget.Box({
+    hexpand: true,
+    hpack: "start",
+    children: [
+      Workspaces(),
+      // Indicators
+    ],
+  });
 
-const Center = () => Widget.Box({
-  children: [
-    Music(),
-  ],
-});
+const Center = () =>
+  Widget.Box({
+    children: [
+      Music(),
+    ],
+  });
 
-const End = () => Widget.Box({
-  hexpand: true,
-  hpack: "end",
+const End = () =>
+  Widget.Box({
+    hexpand: true,
+    hpack: "end",
 
-  children: [
-    Tray(),
-    CpuRam(),
-    SystemInfo(),
-    Date(),
-  ],
-});
+    children: [
+      Tray(),
+      CpuRam(),
+      SystemInfo(),
+      Date(),
+    ],
+  });
 
 export default () =>
   Widget.Window({
