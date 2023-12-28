@@ -10,6 +10,7 @@ const css = App.configDir + "/style.css";
 Utils.exec(`sass ${scss} ${css}`);
 
 App.connect("config-parsed", () => print("config parsed"));
+
 export default {
   style: css,
   closeWindowDelay: {
@@ -30,7 +31,10 @@ function addWindows(windows) {
   windows.forEach((win) => App.addWindow(win));
 }
 
-Utils.idle(() =>
+//timeout to wait for Hyprland service to be fully
+//initialized. Maybe connect to Hyprland signal like
+//notify::worksapces for more consistant results?
+Utils.timeout(100, () =>
   addWindows(
     [
       Bar(),

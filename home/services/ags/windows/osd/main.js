@@ -28,7 +28,7 @@ Brightness.connect("screen-changed", () => {
 
 let lastMonitor;
 
-const child = Widget.Box({
+const child = () => Widget.Box({
   hexpand: true,
   visible: false,
   className: "osd",
@@ -72,7 +72,7 @@ export default () =>
   PopupWindow({
     name: "osd",
     monitor: 0,
-    child,
+    child: child(),
     revealerSetup: (self) =>
       self
         .hook(Indicators, (revealer, _, visible) => {

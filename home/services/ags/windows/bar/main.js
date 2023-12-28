@@ -30,7 +30,7 @@ const SystemInfo = () =>
       },
     );
 
-const Start = Widget.Box({
+const Start = () => Widget.Box({
   hexpand: true,
   hpack: "start",
   children: [
@@ -39,13 +39,13 @@ const Start = Widget.Box({
   ],
 });
 
-const Center = Widget.Box({
+const Center = () => Widget.Box({
   children: [
     Music(),
   ],
 });
 
-const End = Widget.Box({
+const End = () => Widget.Box({
   hexpand: true,
   hpack: "end",
 
@@ -67,8 +67,8 @@ export default () =>
     child: Widget.CenterBox({
       className: "bar",
 
-      startWidget: Start,
-      centerWidget: Center,
-      endWidget: End,
+      startWidget: Start(),
+      centerWidget: Center(),
+      endWidget: End(),
     }),
   });
