@@ -31,16 +31,11 @@ function addWindows(windows) {
   windows.forEach((win) => App.addWindow(win));
 }
 
-//timeout to wait for Hyprland service to be fully
-//initialized. Maybe connect to Hyprland signal like
-//notify::worksapces for more consistant results?
-Utils.timeout(100, () =>
-  addWindows(
-    [
-      Bar(),
-      Music(),
-      Osd(),
-      SystemMenu(),
-    ],
-  )
+addWindows(
+  [
+    Bar(),
+    Music(),
+    Osd(),
+    SystemMenu(),
+  ],
 );

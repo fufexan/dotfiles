@@ -37,15 +37,20 @@ export default () =>
     child: Widget.Box({
       className: "workspaces module",
 
-      children: makeWorkspaces(),
-
+      // The Hyprland service is ready later than ags is done parsing the config,
+      // so only build the widget when we receive a signal from it.
       setup: (self) => {
-        self.lastFocused = Hyprland.active.workspace.id;
-        self.biggestId = getLastWorkspaceId();
-        self
-          .hook(Hyprland.active.workspace, focusedSwitch)
-          .hook(Hyprland, added, "workspace-added")
-          .hook(Hyprland, removed, "workspace-removed");
+        const connID = Hyprland.connect("notify::workspaces", () => {
+          Hyprland.disconnect(connID);
+
+          self.children = makeWorkspaces();
+          self.lastFocused = Hyprland.active.workspace.id;
+          self.biggestId = getLastWorkspaceId();
+          self
+            .hook(Hyprland.active.workspace, focusedSwitch)
+            .hook(Hyprland, added, "workspace-added")
+            .hook(Hyprland, removed, "workspace-removed");
+        });
       },
     }),
   });

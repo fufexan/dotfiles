@@ -63,8 +63,15 @@ export default () =>
     className: "sliders",
     vertical: true,
 
-    children: [
-      Slider(vol()),
-      Slider(brightness()),
-    ],
+    // The Audio service is ready later than ags is done parsing the config,
+    // so only build the widget when we receive a signal from it.
+    setup: (self) => {
+      const connID = Audio.connect("notify::speaker", () => {
+        Audio.disconnect(connID);
+        self.children = [
+          Slider(vol()),
+          Slider(brightness()),
+        ];
+      });
+    },
   });
