@@ -1,6 +1,0 @@
-(defwidget clock_module []
-  (eventbox
-    :onclick "eww open --toggle calendar"
-    (label
-      :class "text module"
-      :text {formattime(EWW_TIME, "%a %b %d  %H:%M")})))

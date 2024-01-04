@@ -8,7 +8,7 @@ Home-Manager configurations for different hosts.
 | `editors`     | Helix & Neovim                                       |
 | `profiles`    | Per-device/user profiles, entry point of the configs |
 | `programs`    | Programs, games, media, etc                          |
-| `services`    | Services like `ags`, `eww`, etc                      |
+| `services`    | Services like `ags`, etc                             |
 | `shell`       | Zsh, Nix options, etc.                               |
 | `terminals`   | Terminal configs                                     |
 | `wayland`     | Wayland-specific options, including Hyprland         |

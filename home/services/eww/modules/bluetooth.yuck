@@ -1,5 +1,0 @@
-(defwidget bluetooth []
-  (label
-    :class "module icon ${bluetooth.state}"
-    :tooltip "${bluetooth.text} ${bluetooth.battery}"
-    :text {bluetooth.state == "connected" ? "" : bluetooth.state == "enabled" ? "" : ""}))

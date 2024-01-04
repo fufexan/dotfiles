@@ -47,7 +47,5 @@ in {
         inherit pkgs;
       };
     });
-
-    homeManagerModules.eww-hyprland = import ../services/eww;
   };
 }

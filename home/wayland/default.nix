@@ -1,9 +1,6 @@
 {
   pkgs,
   lib,
-  self,
-  inputs,
-  config,
   ...
 }:
 # Wayland config
@@ -23,17 +20,10 @@ in {
     ./hyprland
     ./swaylock.nix
     ../services/ags
-    ../services/eww
     ../services/hyprpaper.nix
     ../services/polkit-agent.nix
     ../services/swayidle.nix
   ];
-
-  programs.eww-hyprland = {
-    enable = false;
-    package = inputs.eww.packages.${pkgs.system}.eww-wayland;
-    colors = builtins.readFile "${self}/home/services/eww/css/colors-${config.programs.matugen.variant}.scss";
-  };
 
   home.packages = with pkgs; [
     # screenshot

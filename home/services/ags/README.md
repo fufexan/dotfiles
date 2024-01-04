@@ -3,7 +3,8 @@
 This configuration aims to provide a shell replacement for compositors/window
 managers. Features constantly get added and existing ones get improved.
 
-This builds upon my [previous work on Eww](../eww).
+This builds upon my
+[previous work on Eww](https://github.com/fufexan/dotfiles/tree/eww/home/services/eww).
 
 ## 🗃️ Components
 

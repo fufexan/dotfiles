@@ -1,5 +1,0 @@
-(defwidget net []
-  (label
-    :class "module icon ${net.state}"
-    :tooltip {net.text}
-    :text {net.icon}))

@@ -47,6 +47,10 @@ Or install from the `packages` output. For example:
 
 ## 💻 Desktop preview
 
+Currently, my widgets are created using [Ags](https://github.com/Aylur/ags/). If
+you're looking for the [Eww](https://github.com/elkowar/eww) version, you can
+find it [here](https://github.com/fufexan/dotfiles/tree/eww).
+
 <details>
 <summary>
 Dark
