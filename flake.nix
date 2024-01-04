@@ -73,12 +73,7 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    helix = {
-      url = "github:SoraTenshi/helix/new-daily-driver";
-      inputs.flake-utils.follows = "fu";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    helix.url = "github:helix-editor/helix";
 
     hm = {
       url = "github:nix-community/home-manager";
