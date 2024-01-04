@@ -23,7 +23,7 @@
     monitor = [
       "DP-1, preferred, -1920x0, auto"
       "DP-2, preferred, -1920x0, auto"
-      "eDP-1, preferred, auto, auto"
+      "eDP-1, preferred, auto, 1.600000"
     ];
 
     "device:elan2841:00-04f3:31eb-touchpad" = {
