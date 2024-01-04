@@ -12,8 +12,6 @@
 
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
 
-      overskride = pkgs.callPackage ./overskride {};
-
       theme = pkgs.callPackage ./theme-generator {
         matugen = inputs'.matugen.packages.default;
         wallpaper = default.wallpaper;

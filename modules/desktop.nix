@@ -5,24 +5,27 @@
   inputs,
   ...
 }: {
-  # boot.plymouth = {
-  #   enable = true;
-  # };
+  boot.plymouth = {
+    enable = true;
+  };
 
   fonts = {
     packages = with pkgs; [
       # icon fonts
       material-symbols
 
-      # normal fonts
+      # Sans(Serif) fonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
       roboto
       (google-fonts.override {fonts = ["Inter"];})
 
+      # monospace fonts
+      jetbrains-mono
+
       # nerdfonts
-      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+      (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly"];})
     ];
 
     # causes more issues than it solves
@@ -34,7 +37,7 @@
     fontconfig.defaultFonts = {
       serif = ["Noto Serif" "Noto Color Emoji"];
       sansSerif = ["Inter" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      monospace = ["JetBrains Mono" "Noto Color Emoji"];
       emoji = ["Noto Color Emoji"];
     };
   };
@@ -60,6 +63,7 @@
 
     opentabletdriver.enable = true;
 
+    # using PipeWire instead
     pulseaudio.enable = lib.mkForce false;
 
     xpadneo.enable = true;
@@ -141,6 +145,12 @@
       };
     };
 
+    dbus = {
+      implementation = "broker";
+      # needed for GNOME services outside of GNOME Desktop
+      packages = [pkgs.gcr];
+    };
+
     # provide location
     geoclue2.enable = true;
 
@@ -188,12 +198,6 @@
       resyncTimer = "10m";
     };
 
-    # battery info & stuff
-    upower.enable = true;
-
-    # needed for GNOME services outside of GNOME Desktop
-    dbus.packages = [pkgs.gcr];
-
     udev = {
       packages = with pkgs; [gnome.gnome-settings-daemon];
       extraRules = ''
@@ -201,6 +205,9 @@
         SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
       '';
     };
+
+    # battery info
+    upower.enable = true;
   };
 
   security = {

@@ -40,32 +40,34 @@ const makeProfiles = (profiles) =>
     })
   );
 
-const ActiveProfile = () => Profile({
-  props: {
-    className: "current-profile",
-  },
-  primaryClickAction: () => showList.value = !showList.value,
-  iconSetup: (self) => self.bind("icon", PowerProfiles, "icon-name"),
-  labelSetup: (self) =>
-    self.bind("label", PowerProfiles, "active-profile", prettyName),
-});
+const ActiveProfile = () =>
+  Profile({
+    props: {
+      className: "current-profile",
+    },
+    primaryClickAction: () => showList.value = !showList.value,
+    iconSetup: (self) => self.bind("icon", PowerProfiles, "icon-name"),
+    labelSetup: (self) =>
+      self.bind("label", PowerProfiles, "active-profile", prettyName),
+  });
 
-const ProfileRevealer = () => Widget.Revealer({
-  revealChild: false,
-  transition: "slide_down",
+const ProfileRevealer = () =>
+  Widget.Revealer({
+    revealChild: false,
+    transition: "slide_down",
 
-  child: Widget.Box({
-    className: "options",
-    vertical: true,
+    child: Widget.Box({
+      className: "options",
+      vertical: true,
+    })
+      .bind(
+        "children",
+        PowerProfiles,
+        "profiles",
+        makeProfiles,
+      ),
   })
-    .bind(
-      "children",
-      PowerProfiles,
-      "profiles",
-      makeProfiles,
-    ),
-})
-  .bind("reveal-child", showList);
+    .bind("reveal-child", showList);
 
 export default () =>
   Widget.Box({

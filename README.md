@@ -13,7 +13,8 @@ See an overview of the flake outputs by running
 
 - [modules](modules): NixOS common configs
 - [hosts](hosts): host-specific configuration
-- [home](home): my [Home Manager](https://github.com/nix-community/home-manager) config
+- [home](home): my [Home Manager](https://github.com/nix-community/home-manager)
+  config
 - [lib](lib): helper functions
 - [pkgs](pkgs): package definitions
 
@@ -30,9 +31,10 @@ Or install from the `packages` output. For example:
 ```nix
 # flake.nix
 {
-  inputs.fufexan-dotfiles.url = "github:fufexan/dotfiles";
-  # Override my nixpkgs, binary cache will have less hits
-  inputs.fufexan-dotfiles.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.fufexan-dotfiles = {
+    url = "github:fufexan/dotfiles";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 }
 
 # configuration.nix

@@ -28,45 +28,46 @@ Brightness.connect("screen-changed", () => {
 
 let lastMonitor;
 
-const child = () => Widget.Box({
-  hexpand: true,
-  visible: false,
-  className: "osd",
+const child = () =>
+  Widget.Box({
+    hexpand: true,
+    visible: false,
+    className: "osd",
 
-  children: [
-    Widget.Icon().hook(
-      Indicators,
-      (self, props) => self.icon = props?.icon ?? "",
-    ),
-    Widget.Box({
-      hexpand: true,
-      vertical: true,
-      children: [
-        Widget.Label({
-          hexpand: false,
-          truncate: "end",
-          max_width_chars: 24,
-        })
-          .hook(
-            Indicators,
-            (self, props) => self.label = props?.label ?? "",
-          ),
+    children: [
+      Widget.Icon().hook(
+        Indicators,
+        (self, props) => self.icon = props?.icon ?? "",
+      ),
+      Widget.Box({
+        hexpand: true,
+        vertical: true,
+        children: [
+          Widget.Label({
+            hexpand: false,
+            truncate: "end",
+            max_width_chars: 24,
+          })
+            .hook(
+              Indicators,
+              (self, props) => self.label = props?.label ?? "",
+            ),
 
-        Widget.ProgressBar({
-          hexpand: true,
-          vertical: false,
-        })
-          .hook(
-            Indicators,
-            (self, props) => {
-              self.value = props?.value ?? 0;
-              self.visible = props?.showProgress ?? false;
-            },
-          ),
-      ],
-    }),
-  ],
-});
+          Widget.ProgressBar({
+            hexpand: true,
+            vertical: false,
+          })
+            .hook(
+              Indicators,
+              (self, props) => {
+                self.value = props?.value ?? 0;
+                self.visible = props?.showProgress ?? false;
+              },
+            ),
+        ],
+      }),
+    ],
+  });
 
 export default () =>
   PopupWindow({

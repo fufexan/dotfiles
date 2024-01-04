@@ -16,7 +16,7 @@
     # Do not accept IP source route packets (we're not a router)
     "net.ipv4.conf.all.accept_source_route" = 0;
     "net.ipv6.conf.all.accept_source_route" = 0;
-    # Don't send ICMP redirects (again, we're on a router)
+    # Don't send ICMP redirects (again, we're not a router)
     "net.ipv4.conf.all.send_redirects" = 0;
     "net.ipv4.conf.default.send_redirects" = 0;
     # Refuse ICMP redirects (MITM mitigations)
@@ -41,10 +41,4 @@
     "net.core.default_qdisc" = "cake";
   };
   boot.kernelModules = ["tcp_bbr"];
-
-  # So we don't have to do this later...
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "fufexan@proton.me";
-  };
 }

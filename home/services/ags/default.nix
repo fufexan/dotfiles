@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }: let
   dependencies = with pkgs; [
@@ -13,7 +12,7 @@
     gawk
     gnome.gnome-control-center
     imagemagick
-    inputs.self.packages.${pkgs.system}.overskride
+    overskride
     procps
     ripgrep
     wlogout

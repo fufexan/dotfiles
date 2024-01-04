@@ -10,6 +10,7 @@
         FastConnectable = true;
         JustWorksRepairing = "always";
         Privacy = "device";
+        # Battery info for Bluetooth devices
         Experimental = true;
       };
     };

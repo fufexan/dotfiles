@@ -2,14 +2,16 @@
 
 As of now, there are multiple modules included:
 
-| Name          | Description                                                                                                                      |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `default.nix` | Flake-parts module                                                                                                               |
-| Desktop       | Config aimed at desktop usage                                                                                                    |
-| Gamemode      | Gamemode settings                                                                                                                |
-| Gnome         | GNOME config                                                                                                                     |
-| Greetd        | Greetd + GTKGreet config                                                                                                         |
-| Minimal       | Shared configuration                                                                                                             |
-| Nix           | Nix-related options                                                                                                              |
-| Security      | Tweaks for a more secure system, borrowed from [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix) |
-| Xserver       | Xorg config                                                                                                                      |
+| Name            | Description                                                                                                                      |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Bluetooth       | Bluetooth configuration                                                                                                          |
+| `default.nix`   | Flake-parts module, entry point                                                                                                  |
+| Desktop         | Config aimed at desktop usage                                                                                                    |
+| Gamemode        | Gamemode settings                                                                                                                |
+| Greetd          | Greetd config                                                                                                                    |
+| Core            | Shared config                                                                                                                    |
+| Lanzaboote      | Secure Boot config                                                                                                               |
+| Nix             | Nix-related options                                                                                                              |
+| Network         | Network configuration                                                                                                            |
+| Security        | Tweaks for a more secure system, borrowed from [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix) |
+| Specialisations | Currently only used for Dark/Light themes                                                                                        |

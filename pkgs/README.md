@@ -1,7 +1,7 @@
 # Packages & Overlays
 
-Here are all of the packages I couldn't find anywhere and packaged by myself,
-or overrides that I use throughout the configuration.
+Here are all of the packages I couldn't find anywhere and packaged by myself, or
+overrides that I use throughout the configuration.
 
 | Name                                                        | Description                                                             |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------- |
