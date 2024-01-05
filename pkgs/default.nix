@@ -17,6 +17,8 @@
         wallpaper = default.wallpaper;
       };
 
+      wl-ocr = pkgs.callPackage ./wl-ocr {};
+
       wezterm = pkgs.callPackage ./wezterm {};
     };
   };
