@@ -6,9 +6,9 @@
 # Wayland config
 {
   imports = [
-    ./anyrun
     ./hyprland
     ./swaylock.nix
+    ../programs/anyrun
     ../services/ags
     ../services/hyprpaper.nix
     ../services/polkit-agent.nix
