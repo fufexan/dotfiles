@@ -1,13 +1,16 @@
-{pkgs, ...}:
-# manage files in ~
 {
-  imports = [
-    ./wlogout.nix
-  ];
-
-  home.file.".config" = {
-    source = ./config;
-    recursive = true;
+  pkgs,
+  config,
+  ...
+}: let
+  variant =
+    if config.programs.matugen.variant == "light"
+    then "latte"
+    else "mocha";
+in {
+  programs.btop = {
+    enable = true;
+    settings.color_theme = "catppuccin_${variant}";
   };
 
   xdg.configFile = {

@@ -66,10 +66,11 @@ in {
     };
   };
 
-  # used by `gio open` and xdp-gtk
   home.packages = [
+    # used by `gio open` and xdp-gtk
     (pkgs.writeShellScriptBin "xdg-terminal-exec" ''
       ${default.terminal.name} ${default.terminal.exec} "$@"
     '')
+    pkgs.xdg-utils
   ];
 }

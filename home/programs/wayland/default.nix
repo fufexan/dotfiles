@@ -8,11 +8,7 @@
   imports = [
     ./hyprland
     ./swaylock.nix
-    ../programs/anyrun
-    ../services/ags
-    ../services/hyprpaper.nix
-    ../services/polkit-agent.nix
-    ../services/swayidle.nix
+    ./wlogout.nix
   ];
 
   home.packages = with pkgs; [
@@ -24,7 +20,6 @@
     self.packages.${pkgs.system}.wl-ocr
     wl-clipboard
     wl-screenrec
-    wlogout
     wlr-randr
   ];
 
@@ -33,13 +28,5 @@
     QT_QPA_PLATFORM = "wayland";
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
-  };
-
-  # Create tray target
-  systemd.user.targets.tray = {
-    Unit = {
-      Description = "Home Manager System Tray";
-      Requires = ["graphical-session-pre.target"];
-    };
   };
 }

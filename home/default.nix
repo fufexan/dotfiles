@@ -3,6 +3,11 @@
   self,
   ...
 }: {
+  imports = [
+    ./specialisations.nix
+    ./terminal
+  ];
+
   home = {
     username = "mihai";
     homeDirectory = "/home/mihai";

@@ -4,7 +4,8 @@
   ...
 }: {
   imports = [
-    ./theme/icons.nix
+    # https://github.com/sxyazi/yazi/issues/458#issuecomment-1870996093
+    # ./theme/icons.nix
     ./theme/manager.nix
     ./theme/status.nix
   ];

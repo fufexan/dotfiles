@@ -27,15 +27,15 @@
     # Marker
     marker_selected = {
       fg = "lightgreen";
-      # bg = "lightgreen";
+      bg = "lightgreen";
     };
     marker_copied = {
       fg = "lightyellow";
-      # bg = "lightyellow";
+      bg = "lightyellow";
     };
     marker_cut = {
       fg = "lightred";
-      # bg = "lightred";
+      bg = "lightred";
     };
 
     # Tab

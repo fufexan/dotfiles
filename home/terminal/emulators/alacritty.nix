@@ -2,9 +2,7 @@
   pkgs,
   default,
   ...
-}:
-# terminals
-let
+}: let
   inherit (default.terminal) font size opacity;
 in {
   programs.alacritty = {

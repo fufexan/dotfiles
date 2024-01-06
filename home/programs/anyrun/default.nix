@@ -3,7 +3,6 @@
   default,
   inputs,
   config,
-  self,
   ...
 }: {
   programs.anyrun = {
@@ -24,7 +23,7 @@
       closeOnClick = true;
     };
 
-    extraCss = builtins.readFile "${self}/home/wayland/anyrun/style-${config.programs.matugen.variant}.css";
+    extraCss = builtins.readFile (./. + "/style-${config.programs.matugen.variant}.css");
 
     extraConfigFiles."applications.ron".text = ''
       Config(

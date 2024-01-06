@@ -1,21 +1,38 @@
 {
   imports = [
+    # editors
     ../../editors/helix
     ../../editors/neovim
-    ../../programs
-    ../../programs/games.nix
-    ../../programs/dunst.nix
-    ../../services/cinny.nix
-    ../../services/kdeconnect.nix
-    ../../services/power-monitor.nix
-    ../../wayland
-    ../../terminals/alacritty.nix
-    ../../terminals/wezterm.nix
-  ];
 
-  home.sessionVariables = {
-    GDK_SCALE = "2";
-  };
+    # programs
+    ../../programs
+    ../../programs/games
+    ../../programs/wayland
+
+    # services
+    ../../services/ags
+    ../../services/cinny.nix
+
+    # media services
+    ../../services/media/playerctl.nix
+    ../../services/media/spotifyd.nix
+
+    # system services
+    ../../services/system/dunst.nix
+    ../../services/system/kdeconnect.nix
+    ../../services/system/polkit-agent.nix
+    ../../services/system/power-monitor.nix
+    ../../services/system/syncthing.nix
+    ../../services/system/udiskie.nix
+
+    # wayland-specific
+    ../../services/wayland/hyprpaper.nix
+    ../../services/wayland/swayidle.nix
+
+    # terminal emulators
+    ../../terminal/emulators/foot.nix
+    ../../terminal/emulators/wezterm.nix
+  ];
 
   wayland.windowManager.hyprland.settings = let
     accelpoints = "0.21 0.000 0.040 0.080 0.140 0.200 0.261 0.326 0.418 0.509 0.601 0.692 0.784 0.875 0.966 1.058 1.149 1.241 1.332 1.424 1.613";
