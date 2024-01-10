@@ -40,5 +40,17 @@
     "net.ipv4.tcp_congestion_control" = "bbr";
     "net.core.default_qdisc" = "cake";
   };
+
   boot.kernelModules = ["tcp_bbr"];
+
+  security = {
+    # allow wayland lockers to unlock the screen
+    pam.services.swaylock.text = "auth include login";
+
+    # userland niceness
+    rtkit.enable = true;
+
+    # don't ask for password for wheel group
+    sudo.wheelNeedsPassword = false;
+  };
 }

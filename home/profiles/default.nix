@@ -1,13 +1,16 @@
 {
   self,
   inputs,
+  default,
   withSystem,
-  module_args,
   ...
 }: let
+  # get these into the module system
+  specialArgs = {inherit inputs self default;};
+
   sharedModules = [
     ../.
-    module_args
+    {_module.args = specialArgs;}
     inputs.ags.homeManagerModules.default
     inputs.anyrun.homeManagerModules.default
     inputs.nix-index-db.hmModules.nix-index
@@ -24,10 +27,8 @@
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
 in {
-  imports = [
-    # we need to pass this to NixOS' HM module
-    {_module.args = {inherit homeImports;};}
-  ];
+  # we need to pass this to NixOS' HM module
+  _module.args = {inherit homeImports;};
 
   flake = {
     homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {

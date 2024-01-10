@@ -1,5 +1,6 @@
 {
   pkgs,
+  # default,
   lib,
   ...
 }: {
@@ -24,4 +25,9 @@
       home.activation = {inherit dconfDark;};
     };
   };
+
+  # programs.matugen = {
+  #   enable = false;
+  #   wallpaper = default.wallpaper;
+  # };
 }

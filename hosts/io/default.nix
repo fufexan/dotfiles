@@ -1,9 +1,7 @@
 {
-  config,
   pkgs,
   self,
   inputs,
-  default,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -14,57 +12,18 @@
     group = "users";
   };
 
-  boot = {
-    binfmt.emulatedSystems = ["aarch64-linux" "riscv64-linux"];
+  boot.kernelParams = [
+    "amd_pstate=active"
+    "ideapad_laptop.allow_v4_dytc=Y"
+    ''acpi_osi="Windows 2020"''
+  ];
 
-    # use latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    kernelParams = [
-      "amd_pstate=active"
-      "quiet"
-      "loglevel=3"
-      "systemd.show_status=auto"
-      "rd.udev.log_level=3"
-      "ideapad_laptop.allow_v4_dytc=Y"
-      ''acpi_osi="Windows 2020"''
-    ];
+  hardware = {
+    opentabletdriver.enable = true;
+    xpadneo.enable = true;
   };
-
-  environment.systemPackages = [config.boot.kernelPackages.cpupower];
 
   networking.hostName = "io";
-
-  programs = {
-    # enable hyprland and required options
-    hyprland.enable = true;
-
-    matugen = {
-      enable = false;
-
-      wallpaper = default.wallpaper;
-    };
-
-    steam = {
-      enable = true;
-      # fix gamescope inside steam
-      package = pkgs.steam.override {
-        extraPkgs = pkgs:
-          with pkgs; [
-            keyutils
-            libkrb5
-            libpng
-            libpulseaudio
-            libvorbis
-            stdenv.cc.cc.lib
-            xorg.libXcursor
-            xorg.libXi
-            xorg.libXinerama
-            xorg.libXScrnSaver
-          ];
-      };
-    };
-  };
 
   security.tpm2.enable = true;
 
@@ -83,6 +42,7 @@
         video.dark_threshold = 90;
       };
     };
+
     linux-enable-ir-emitter = {
       enable = true;
       package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
@@ -91,13 +51,13 @@
     kmonad.keyboards = {
       io = {
         name = "io";
+        config = builtins.readFile "${self}/system/services/kmonad/main.kbd";
         device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
         defcfg = {
           enable = true;
           fallthrough = true;
           allowCommands = false;
         };
-        config = builtins.readFile "${self}/modules/main.kbd";
       };
     };
   };
