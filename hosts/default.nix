@@ -2,7 +2,6 @@
   self,
   inputs,
   homeImports,
-  default,
   ...
 }: {
   flake.nixosConfigurations = let
@@ -15,7 +14,7 @@
     inherit (import "${self}/system") desktop laptop;
 
     # get these into the module system
-    specialArgs = {inherit inputs self default;};
+    specialArgs = {inherit inputs self;};
   in {
     io = nixosSystem {
       inherit specialArgs;

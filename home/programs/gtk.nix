@@ -2,9 +2,7 @@
   pkgs,
   config,
   ...
-}: let
-  inherit (config.programs.matugen) variant;
-in {
+}: {
   home.pointerCursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
@@ -31,7 +29,7 @@ in {
 
     theme = {
       name =
-        if variant == "light"
+        if config.theme.name == "light"
         then "adw-gtk3"
         else "adw-gtk3-dark";
       package = pkgs.adw-gtk3;

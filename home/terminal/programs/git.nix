@@ -13,7 +13,7 @@
 
     delta = {
       enable = true;
-      options.${config.programs.matugen.variant} = true;
+      options.${config.theme.name} = true;
     };
 
     extraConfig = {

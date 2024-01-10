@@ -1,8 +1,4 @@
-{
-  default,
-  config,
-  ...
-}: let
+{config, ...}: let
   colors = {
     dark = {
       foreground = "cdd6f4"; # Text
@@ -52,7 +48,7 @@ in {
 
     settings = {
       main = {
-        font = "${default.terminal.font}:size=${toString default.terminal.size}";
+        font = "JetBrains Mono:size=10";
         box-drawings-uses-font-glyphs = "yes";
         pad = "0x0 center";
         notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
@@ -79,9 +75,9 @@ in {
 
       colors =
         {
-          alpha = default.terminal.opacity;
+          alpha = 0.9;
         }
-        // colors.${config.programs.matugen.variant};
+        // colors.${config.theme.name};
     };
   };
 }

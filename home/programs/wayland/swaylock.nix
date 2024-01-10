@@ -1,6 +1,5 @@
 {
   config,
-  default,
   pkgs,
   ...
 }: {
@@ -8,11 +7,11 @@
     enable = true;
     package = pkgs.swaylock-effects;
     settings = let
-      c = config.programs.matugen.theme.colors.colors.dark;
+      c = config.programs.matugen.theme.colors.colors.${config.theme.name};
     in {
       clock = true;
       font = "Inter";
-      image = default.wallpaper;
+      image = config.theme.wallpaper;
       indicator = true;
 
       bs-hl-color = c.error;

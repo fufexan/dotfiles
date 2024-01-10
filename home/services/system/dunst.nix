@@ -6,7 +6,7 @@
   # notification daemon
   services.dunst = let
     xcolors = pkgs.lib.colors.xcolors config.programs.matugen.theme.colors;
-    inherit (config.programs.matugen) variant;
+    variant = config.theme.name;
     c = xcolors.colors.${variant};
   in {
     enable = true;

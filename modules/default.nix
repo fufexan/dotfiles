@@ -1,5 +1,5 @@
-{inputs, ...}: {
+{
   flake.nixosModules = {
-    theme = import ./theme inputs.matugen;
+    theme = import ./theme;
   };
 }

@@ -2,12 +2,12 @@
   pkgs,
   inputs,
   lib,
-  default,
+  config,
   ...
 }: {
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ${default.wallpaper}
-    wallpaper = , ${default.wallpaper}
+    preload = ${config.theme.wallpaper}
+    wallpaper = , ${config.theme.wallpaper}
   '';
 
   systemd.user.services.hyprpaper = {

@@ -1,21 +1,21 @@
 {
   self,
   inputs,
-  default,
   withSystem,
   ...
 }: let
   # get these into the module system
-  specialArgs = {inherit inputs self default;};
+  specialArgs = {inherit inputs self;};
 
   sharedModules = [
     ../.
     {_module.args = specialArgs;}
     inputs.ags.homeManagerModules.default
     inputs.anyrun.homeManagerModules.default
+    inputs.hyprland.homeManagerModules.default
+    inputs.matugen.nixosModules.default
     inputs.nix-index-db.hmModules.nix-index
     inputs.spicetify-nix.homeManagerModule
-    inputs.hyprland.homeManagerModules.default
     self.nixosModules.theme
   ];
 

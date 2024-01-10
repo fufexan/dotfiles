@@ -1,9 +1,9 @@
-{default, ...}: {
+{
   programs.kitty = {
     enable = true;
     font = {
-      inherit (default.terminal) size;
-      name = default.terminal.font;
+      size = 10;
+      name = "JetBrains Mono";
     };
 
     settings = {
@@ -20,7 +20,7 @@
       selection_background = "none";
 
       # colors
-      background_opacity = toString default.terminal.opacity;
+      background_opacity = "0.9";
     };
 
     theme = "Catppuccin-Mocha";

@@ -24,7 +24,7 @@
     extraConfig =
       "include catppuccin-"
       + (
-        if config.programs.matugen.variant == "light"
+        if config.theme.name == "light"
         then "latte"
         else "mocha"
       );

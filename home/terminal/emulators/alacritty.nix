@@ -1,10 +1,4 @@
-{
-  pkgs,
-  default,
-  ...
-}: let
-  inherit (default.terminal) font size opacity;
-in {
+{pkgs, ...}: {
   programs.alacritty = {
     enable = true;
     settings = {
@@ -21,14 +15,14 @@ in {
       scrolling.history = 10000;
 
       font = {
-        normal.family = font;
-        bold.family = font;
-        italic.family = font;
-        inherit size;
+        normal.family = "JetBrains Mono";
+        bold.family = "JetBrains Mono";
+        italic.family = "JetBrains Mono";
+        size = 10;
       };
 
       draw_bold_text_with_bright_colors = true;
-      window.opacity = opacity;
+      window.opacity = 0.9;
 
       imports = [
         (pkgs.fetchurl {

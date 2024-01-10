@@ -1,5 +1,5 @@
 {config, ...}: let
-  inherit (config.programs.matugen) variant;
+  variant = config.theme.name;
   c = config.programs.matugen.theme.colors.colors_android.${variant};
   pointer = config.home.pointerCursor;
 in {

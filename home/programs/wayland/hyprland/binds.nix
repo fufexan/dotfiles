@@ -1,4 +1,4 @@
-{default, ...}: let
+let
   screenshotarea = "hyprctl keyword animation 'fadeOut,0,0,default'; grimblast --notify copysave area; hyprctl keyword animation 'fadeOut,1,4,default'";
 
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
@@ -45,7 +45,7 @@ in {
 
         # utility
         # terminal
-        "$mod, Return, exec, run-as-service ${default.terminal.name}"
+        "$mod, Return, exec, run-as-service wezterm"
         # logout menu
         "$mod, Escape, exec, wlogout -p layer-shell"
         # lock screen
@@ -86,7 +86,7 @@ in {
 
     bindr = [
       # launcher
-      "$mod, SUPER_L, exec, pkill .${default.launcher}-wrapped || run-as-service ${default.launcher}"
+      "$mod, SUPER_L, exec, pkill .anyrun-wrapped || run-as-service anyrun"
     ];
 
     bindl = [

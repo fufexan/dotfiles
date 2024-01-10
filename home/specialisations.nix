@@ -1,7 +1,7 @@
 {
   pkgs,
-  # default,
   lib,
+  config,
   ...
 }: {
   # light/dark specialisations
@@ -17,17 +17,31 @@
     '';
   in {
     light.configuration = {
-      programs.matugen.variant = "light";
+      theme.name = "light";
       home.activation = {inherit dconfLight;};
     };
     dark.configuration = {
-      programs.matugen.variant = "dark";
+      theme.name = "dark";
       home.activation = {inherit dconfDark;};
     };
   };
 
-  # programs.matugen = {
-  #   enable = false;
-  #   wallpaper = default.wallpaper;
-  # };
+  theme = {
+    # specific to unsplash
+    wallpaper = let
+      params = "?q=85&fm=jpg&crop=fit&cs=srgb&w=2560";
+      url = "https://images.unsplash.com/photo-1608507974219-2df72d775da0${params}.jpg";
+      sha256 = "0dr4svc3sbygkxyrjxillrdx4940rvw0avf2grrrx2l88z64srmq";
+      ext = lib.last (lib.splitString "." url);
+    in
+      builtins.fetchurl {
+        name = "wallpaper-${sha256}.${ext}";
+        inherit url sha256;
+      };
+  };
+
+  programs.matugen = {
+    enable = false;
+    wallpaper = config.theme.wallpaper;
+  };
 }

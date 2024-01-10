@@ -1,6 +1,5 @@
 {
   pkgs,
-  default,
   inputs,
   config,
   ...
@@ -23,13 +22,13 @@
       closeOnClick = true;
     };
 
-    extraCss = builtins.readFile (./. + "/style-${config.programs.matugen.variant}.css");
+    extraCss = builtins.readFile (./. + "/style-${config.theme.name}.css");
 
     extraConfigFiles."applications.ron".text = ''
       Config(
         desktop_actions: false,
         max_entries: 5,
-        terminal: Some("${default.terminal.name}"),
+        terminal: Some("wezterm"),
       )
     '';
   };
