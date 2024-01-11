@@ -8,9 +8,9 @@
 
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.system}.default.overrideAttrs (self: {
+    package = inputs.helix.packages.${pkgs.system}.default.overrideAttrs (old: {
       makeWrapperArgs = with pkgs;
-        self.makeWrapperArgs
+        old.makeWrapperArgs
         or []
         ++ [
           "--suffix"

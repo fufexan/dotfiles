@@ -35,7 +35,12 @@
           "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
-          {home-manager.users.mihai.imports = homeImports."mihai@io";}
+          {
+            home-manager = {
+              users.mihai.imports = homeImports."mihai@io";
+              extraSpecialArgs = specialArgs;
+            };
+          }
 
           # enable unmerged Howdy
           {disabledModules = ["security/pam.nix"];}

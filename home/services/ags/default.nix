@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   config,
@@ -20,6 +21,10 @@
 
   cfg = config.programs.ags;
 in {
+  imports = [
+    inputs.ags.homeManagerModules.default
+  ];
+
   programs.ags.enable = true;
 
   systemd.user.services.ags = {

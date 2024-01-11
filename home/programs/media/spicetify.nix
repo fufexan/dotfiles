@@ -5,6 +5,10 @@
   ...
 }: {
   # themable spotify
+  imports = [
+    inputs.spicetify-nix.homeManagerModule
+  ];
+
   programs.spicetify = let
     spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
     variant =

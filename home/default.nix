@@ -1,11 +1,15 @@
 {
   lib,
   self,
+  inputs,
   ...
 }: {
   imports = [
     ./specialisations.nix
     ./terminal
+    inputs.matugen.nixosModules.default
+    inputs.nix-index-db.hmModules.nix-index
+    self.nixosModules.theme
   ];
 
   home = {
