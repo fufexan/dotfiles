@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   script = pkgs.writeShellScript "power_monitor.sh" ''
@@ -21,8 +22,10 @@
     	# read the current state
     	if [[ $(cat "$BAT_STATUS") == "Discharging" ]]; then
       	profile=$BAT_PROFILE
+        hyprctl --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
     	else
     		profile=$AC_PROFILE
+        hyprctl --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
     	fi
 
     	# set the new profile
@@ -40,6 +43,7 @@
 
   dependencies = with pkgs; [
     coreutils
+    config.wayland.windowManager.hyprland.package
     power-profiles-daemon
     inotify-tools
   ];
@@ -48,16 +52,18 @@ in {
   # Plugged in - performance
   # Unplugged - power-saver
   systemd.user.services.power-monitor = {
-    Unit.Description = "Power Monitor";
+    Unit = {
+      Description = "Power Monitor";
+      After = ["power-profiles-daemon.service"];
+    };
+
     Service = {
       Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
       Type = "simple";
       ExecStart = script;
       Restart = "on-failure";
     };
-    Install = {
-      After = ["power-profiles-daemon.service"];
-      WantedBy = ["default.target"];
-    };
+
+    Install.WantedBy = ["default.target"];
   };
 }
