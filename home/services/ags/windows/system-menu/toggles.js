@@ -20,7 +20,9 @@ const Toggle = (args) =>
         setup: args.icon.buttonSetup,
       }),
       Widget.Button({
+        hexpand: true,
         child: Widget.Label({
+          hpack: "start",
           setup: args.label.setup,
         }),
         setup: args.label.buttonSetup,
@@ -49,8 +51,8 @@ const net = {
   label: {
     setup: (self) =>
       self
-        .bind("label", Network, "connectivity", getNetText)
-        .bind("label", Network.wifi, "ssid"),
+        .bind("label", Network, "connectivity", () => getNetText())
+        .bind("label", Network.wifi, "ssid", () => getNetText()),
 
     buttonSetup: (self) => {
       self.onPrimaryClick = () => {
