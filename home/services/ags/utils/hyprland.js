@@ -15,12 +15,15 @@ export const focusedSwitch = (self) => {
 export const added = (self, name) => {
   if (!name) return;
   const id = Number(name);
-  const monitor = Hyprland.getWorkspace(id).monitorID;
+  const ws = Hyprland.getWorkspace(id);
 
   const child = self.children[id - 1];
-  child.monitor = monitor;
+  child.monitor = {
+    monitor: ws.monitor,
+    id: ws.monitorID,
+  };
   child.active = true;
-  child.toggleClassName(`monitor${monitor}`);
+  child.toggleClassName(`monitor${child.monitor.id}`);
 
   // if this id is bigger than the last biggest id, visibilise all other ws before it
   if (id > self.biggestId) {
@@ -49,8 +52,10 @@ export const removed = (self, name) => {
 
   const id = Number(name);
   const child = self.children[id - 1];
+
+  child.toggleClassName(`monitor${child.monitor.id}`, false);
   child.active = false;
-  child.toggleClassName(`monitor${child.monitor}`, false);
+  child.monitor = {};
 
   // if this id is the biggest id, unvisibilise it and all other inactives until the next active before it
   if (id == self.biggestId) {

@@ -8,6 +8,8 @@ import {
   workspaceActive,
 } from "../../../utils/hyprland.js";
 
+globalThis.hyprland = Hyprland;
+
 const makeWorkspaces = () =>
   [...Array(10)].map((_, i) => {
     const id = i + 1;
@@ -17,13 +19,17 @@ const makeWorkspaces = () =>
       visible: getLastWorkspaceId() >= id,
 
       setup: (self) => {
+        const ws = Hyprland.getWorkspace(id);
         self.id = id;
         self.active = workspaceActive(id);
-        self.monitor = -1;
+        self.monitor = {};
 
         if (self.active) {
-          self.monitor = Hyprland.getWorkspace(id).monitorID;
-          self.toggleClassName(`monitor${self.monitor}`, true);
+          self.monitor = {
+            id: ws.monitorID,
+            name: ws.monitor,
+          };
+          self.toggleClassName(`monitor${self.monitor?.id ?? ""}`, true);
         }
       },
     });
