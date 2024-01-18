@@ -16,6 +16,7 @@
     overskride
     procps
     ripgrep
+    util-linux
     wlogout
   ];
 
