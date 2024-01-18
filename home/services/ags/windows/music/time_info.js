@@ -7,14 +7,18 @@ export const PositionLabel = (player) =>
     hexpand: true,
     xalign: 0,
 
-    properties: [["update", (label, time) => {
-      player.length > 0
-        ? label.label = lengthStr(time || player.position)
-        : label.visible = !!player;
-    }]],
-  })
-    .hook(player, (l, time) => l._update(l, time), "position")
-    .poll(1000, (l) => l._update(l));
+    setup: (self) => {
+      const update = (_, time) => {
+        player.length > 0
+          ? self.label = lengthStr(time || player.position)
+          : self.visible = !!player;
+      };
+
+      self
+        .hook(player, update, "position")
+        .poll(1000, update);
+    },
+  });
 
 export const LengthLabel = (player) =>
   Widget.Label({
@@ -30,24 +34,25 @@ export const Position = (player) =>
     className: "position",
     draw_value: false,
 
-    onChange: ({ value }) => {
-      player.position = player.length * value;
+    onChange: ({ value }) => player.position = player.length * value,
+
+    setup: (self) => {
+      const update = () => {
+        if (self.dragging) return;
+
+        self.visible = player.length > 0;
+
+        if (player.length > 0) {
+          self.value = player.position / player.length;
+        }
+      };
+
+      self
+        .hook(player, update)
+        .hook(player, update, "position")
+        .poll(1000, update);
     },
-
-    properties: [["update", (slider) => {
-      if (slider.dragging) {
-        return;
-      }
-
-      slider.visible = player.length > 0;
-      if (player.length > 0) {
-        slider.value = player.position / player.length;
-      }
-    }]],
-  })
-    .hook(player, (self) => self._update(self))
-    .hook(player, (self) => self._update(self), "position")
-    .poll(1000, (self) => self._update(self));
+  });
 
 export default (player) =>
   Widget.Box({
