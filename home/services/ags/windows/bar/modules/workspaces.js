@@ -1,9 +1,11 @@
 import { Hyprland, Widget } from "../../../imports.js";
 import {
   added,
-  dispatch,
+  changeWorkspace,
+  DEFAULT_MONITOR,
   focusedSwitch,
   getLastWorkspaceId,
+  moveWorkspace,
   removed,
   workspaceActive,
 } from "../../../utils/hyprland.js";
@@ -15,21 +17,22 @@ const makeWorkspaces = () =>
     const id = i + 1;
 
     return Widget.Button({
-      onPrimaryClick: () => dispatch(id),
+      onPrimaryClick: () => changeWorkspace(id),
+
       visible: getLastWorkspaceId() >= id,
 
       setup: (self) => {
         const ws = Hyprland.getWorkspace(id);
         self.id = id;
         self.active = workspaceActive(id);
-        self.monitor = {};
+        self.monitor = DEFAULT_MONITOR;
 
         if (self.active) {
           self.monitor = {
-            id: ws.monitorID,
-            name: ws.monitor,
+            name: ws?.monitor ?? DEFAULT_MONITOR.name,
+            id: ws?.monitorID ?? DEFAULT_MONITOR.id,
           };
-          self.toggleClassName(`monitor${self.monitor?.id ?? ""}`, true);
+          self.toggleClassName(`monitor${self.monitor.id}`, true);
         }
       },
     });
@@ -37,8 +40,8 @@ const makeWorkspaces = () =>
 
 export default () =>
   Widget.EventBox({
-    onScrollUp: () => dispatch("+1"),
-    onScrollDown: () => dispatch("-1"),
+    onScrollUp: () => changeWorkspace("+1"),
+    onScrollDown: () => changeWorkspace("-1"),
 
     child: Widget.Box({
       className: "workspaces module",
@@ -55,7 +58,10 @@ export default () =>
           self
             .hook(Hyprland.active.workspace, focusedSwitch)
             .hook(Hyprland, added, "workspace-added")
-            .hook(Hyprland, removed, "workspace-removed");
+            .hook(Hyprland, removed, "workspace-removed")
+            .hook(Hyprland, (self, name, data) => {
+              if (name === "moveworkspace") moveWorkspace(self, data);
+            }, "event");
         });
       },
     }),

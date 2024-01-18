@@ -1,7 +1,17 @@
-import { Hyprland, Utils } from "../imports.js";
+import { Hyprland } from "../imports.js";
 
-export const dispatch = (ws) =>
-  Utils.execAsync(["hyprctl", "dispatch", "workspace", `${ws}`]);
+export let DEFAULT_MONITOR;
+const connID = Hyprland.connect("notify::workspaces", () => {
+  Hyprland.disconnect(connID);
+
+  DEFAULT_MONITOR = {
+    name: Hyprland.monitors[0].name,
+    id: Hyprland.monitors[0].id,
+  };
+});
+
+export const changeWorkspace = (ws) =>
+  Hyprland.sendMessage(`dispatch workspace ${ws}`);
 
 export const focusedSwitch = (self) => {
   const id = Hyprland.active.workspace.id;
@@ -14,16 +24,17 @@ export const focusedSwitch = (self) => {
 
 export const added = (self, name) => {
   if (!name) return;
-  const id = Number(name);
-  const ws = Hyprland.getWorkspace(id);
-
+  const ws = Hyprland.workspaces.find((e) => e.name == name);
+  const id = ws?.id ?? Number(name);
   const child = self.children[id - 1];
+
   child.monitor = {
-    monitor: ws.monitor,
-    id: ws.monitorID,
+    name: ws?.monitor ?? DEFAULT_MONITOR.name,
+    id: ws?.monitorID ?? DEFAULT_MONITOR.id,
   };
+
   child.active = true;
-  child.toggleClassName(`monitor${child.monitor.id}`);
+  child.toggleClassName(`monitor${child.monitor.id}`, true);
 
   // if this id is bigger than the last biggest id, visibilise all other ws before it
   if (id > self.biggestId) {
@@ -55,12 +66,31 @@ export const removed = (self, name) => {
 
   child.toggleClassName(`monitor${child.monitor.id}`, false);
   child.active = false;
-  child.monitor = {};
 
   // if this id is the biggest id, unvisibilise it and all other inactives until the next active before it
   if (id == self.biggestId) {
     makeInvisible(self, id);
   }
+};
+
+export const moveWorkspace = (self, data) => {
+  const [id, name] = data.split(",");
+
+  const child = self.children[id - 1];
+
+  // remove previous monitor class
+  child.toggleClassName(`monitor${child.monitor.id}`, false);
+
+  // add new monitor and class
+  const monitor = Hyprland.monitors.find((e) => e.name == name);
+
+  child.monitor = {
+    name,
+    id: monitor?.id ?? DEFAULT_MONITOR.id,
+  };
+
+  print(`child ${id}: monitor ${name} ${child.monitor.id}`);
+  child.toggleClassName(`monitor${child.monitor.id}`, true);
 };
 
 export const sortWorkspaces = () => {
