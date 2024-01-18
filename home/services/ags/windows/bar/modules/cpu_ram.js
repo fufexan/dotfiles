@@ -64,11 +64,15 @@ const ram = {
 };
 
 export default () =>
-  Widget.Box({
-    className: "system-info module",
+  Widget.EventBox({
+    onPrimaryClick: () => Utils.execAsync(["missioncenter"]),
 
-    children: [
-      Indicator(cpu),
-      Indicator(ram),
-    ],
+    child: Widget.Box({
+      className: "system-info module",
+
+      children: [
+        Indicator(cpu),
+        Indicator(ram),
+      ],
+    }),
   });

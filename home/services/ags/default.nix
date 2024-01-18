@@ -5,20 +5,26 @@
   config,
   ...
 }: let
-  dependencies = with pkgs; [
+  requiredDeps = with pkgs; [
     config.wayland.windowManager.hyprland.package
     bash
     coreutils
     dart-sass
     gawk
-    gnome.gnome-control-center
     imagemagick
-    overskride
     procps
     ripgrep
     util-linux
+  ];
+
+  guiDeps = with pkgs; [
+    gnome.gnome-control-center
+    mission-center
+    overskride
     wlogout
   ];
+
+  dependencies = requiredDeps ++ guiDeps;
 
   cfg = config.programs.ags;
 in {
