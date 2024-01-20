@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -16,6 +17,8 @@
   # yazi file manager
   programs.yazi = {
     enable = true;
+
+    package = inputs.yazi.packages.${pkgs.system}.default;
 
     enableBashIntegration = config.programs.bash.enable;
     enableZshIntegration = config.programs.zsh.enable;

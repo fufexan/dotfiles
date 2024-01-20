@@ -41,6 +41,7 @@
       "text/html" = browser;
       "text/plain" = ["Helix"];
       "x-scheme-handler/chrome" = ["chromium-browser"];
+      "inode/directory" = ["yazi"];
     }
     // image
     // video
