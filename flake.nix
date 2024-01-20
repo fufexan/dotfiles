@@ -125,5 +125,7 @@
       url = "github:the-argus/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    yazi.url = "github:sxyazi/yazi";
   };
 }
