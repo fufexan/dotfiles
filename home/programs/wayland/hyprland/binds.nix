@@ -81,6 +81,10 @@ in {
         # cycle monitors
         "$mod SHIFT, bracketleft, focusmonitor, l"
         "$mod SHIFT, bracketright, focusmonitor, r"
+
+        # send focused workspace to left/right monitors
+        "$mod SHIFT ALT, bracketleft, movecurrentworkspacetomonitor, l"
+        "$mod SHIFT ALT, bracketright, movecurrentworkspacetomonitor, r"
       ]
       ++ workspaces;
 

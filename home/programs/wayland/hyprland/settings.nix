@@ -24,6 +24,7 @@ in {
       "col.inactive_border" = "rgba(00000088)";
 
       allow_tearing = true;
+      resize_on_border = true;
     };
 
     decoration = {
@@ -92,6 +93,9 @@ in {
 
       # enable variable refresh rate (effective depending on hardware)
       vrr = 1;
+
+      # we do, in fact, want direct scanout
+      no_direct_scanout = false;
     };
 
     # touchpad gestures
