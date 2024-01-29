@@ -37,7 +37,8 @@
         {
           name = "javascript";
           auto-format = true;
-          language-servers = ["deno-lsp"];
+          formatter = deno "javascript";
+          language-servers = ["typescript-language-server"];
         }
         {
           name = "json";
@@ -51,7 +52,8 @@
         {
           name = "typescript";
           auto-format = true;
-          language-servers = ["deno-lsp"];
+          formatter = deno "typescript";
+          language-servers = ["typescript-language-server"];
         }
       ]
       ++ prettierLangs langs;
@@ -93,6 +95,35 @@
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+      };
+
+      typescript-language-server = {
+        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        args = ["--stdio"];
+        config = let
+          inlayHints = {
+            includeInlayEnumMemberValueHints = true;
+            includeInlayFunctionLikeReturnTypeHints = true;
+            includeInlayFunctionParameterTypeHints = true;
+            includeInlayParameterNameHints = "all";
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true;
+            includeInlayPropertyDeclarationTypeHints = true;
+            includeInlayVariableTypeHints = true;
+          };
+        in {
+          typescript-language-server.source = {
+            addMissingImports.ts = true;
+            fixAll.ts = true;
+            organizeImports.ts = true;
+            removeUnusedImports.ts = true;
+            sortImports.ts = true;
+          };
+
+          typescript = {inherit inlayHints;};
+          javascript = {inherit inlayHints;};
+
+          hostInfo = "helix";
+        };
       };
 
       vscode-css-language-server = {
