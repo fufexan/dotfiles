@@ -52,30 +52,31 @@
         ];
     };
 
-    rog = nixosSystem {
-      inherit specialArgs;
-      modules =
-        laptop
-        ++ [
-          ./rog
-          "${self}/system/core/lanzaboote.nix"
-          "${self}/system/programs/gamemode.nix"
+    # rog = nixosSystem {
+    #   inherit specialArgs;
+    #   modules =
+    #     laptop
+    #     ++ [
+    #       ./rog
+    #       "${mod}/core/lanzaboote.nix"
 
-          "${self}/system/programs/hyprland.nix"
-          "${self}/system/programs/steam.nix"
+    #       "${mod}/programs/gamemode.nix"
+    #       "${mod}/programs/hyprland.nix"
+    #       "${mod}/programs/steam.nix"
 
-          {home-manager.users.mihai.imports = homeImports."mihai@rog";}
-        ];
-    };
+    #       "${mod}/services/kmonad"
+    #       {home-manager.users.mihai.imports = homeImports."mihai@rog";}
+    #     ];
+    # };
 
-    kiiro = nixosSystem {
-      inherit specialArgs;
-      modules =
-        desktop
-        ++ [
-          ./kiiro
-          {home-manager.users.mihai.imports = homeImports.server;}
-        ];
-    };
+    # kiiro = nixosSystem {
+    #   inherit specialArgs;
+    #   modules =
+    #     desktop
+    #     ++ [
+    #       ./kiiro
+    #       {home-manager.users.mihai.imports = homeImports.server;}
+    #     ];
+    # };
   };
 }

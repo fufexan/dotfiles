@@ -56,7 +56,7 @@
           fallthrough = true;
           allowCommands = false;
         };
-        config = builtins.readFile "${self}/modules/main.kbd";
+        config = builtins.readFile "${self}/system/services/kmonad/main.kbd";
       };
     };
 
