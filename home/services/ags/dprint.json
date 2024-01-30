@@ -1,0 +1,10 @@
+{
+  "typescript": {
+  },
+  "excludes": [
+    "**/node_modules"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.88.10.wasm"
+  ]
+}
