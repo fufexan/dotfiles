@@ -37,8 +37,7 @@
         {
           name = "javascript";
           auto-format = true;
-          formatter = deno "javascript";
-          language-servers = ["typescript-language-server"];
+          language-servers = ["dprint" "typescript-language-server"];
         }
         {
           name = "json";
@@ -52,8 +51,7 @@
         {
           name = "typescript";
           auto-format = true;
-          formatter = deno "typescript";
-          language-servers = ["typescript-language-server"];
+          language-servers = ["dprint" "typescript-language-server"];
         }
       ]
       ++ prettierLangs langs;
@@ -70,7 +68,7 @@
       };
 
       deno-lsp = {
-        command = "${pkgs.deno}/bin/deno";
+        command = lib.getExe pkgs.deno;
         args = ["lsp"];
         environment.NO_COLOR = "1";
         config.deno = {
@@ -90,6 +88,11 @@
             variableTypes.enabled = true;
           };
         };
+      };
+
+      dprint = {
+        command = lib.getExe pkgs.dprint;
+        args = ["lsp"];
       };
 
       nil = {
