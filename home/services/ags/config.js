@@ -1,6 +1,7 @@
 import { App, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
 import Music from "./windows/music/main.js";
+import NotificationPopup from "./windows/notifications/popups.js";
 import Osd from "./windows/osd/main.js";
 import SystemMenu from "./windows/system-menu/main.js";
 
@@ -16,6 +17,10 @@ export default {
   closeWindowDelay: {
     "system-menu": 200,
   },
+  notificationPopupTimeout: 5000,
+  notificationForceTimeout: false,
+  cacheNotificationActions: true,
+  maxStreamVolume: 1,
 };
 
 function reloadCss() {
@@ -27,6 +32,9 @@ function reloadCss() {
 
 Utils.monitorFile(`${App.configDir}/style`, reloadCss, "directory");
 
+/**
+ * @param {import("types/widgets/window.js").Window[]} windows
+ */
 function addWindows(windows) {
   windows.forEach((win) => App.addWindow(win));
 }
@@ -37,5 +45,6 @@ addWindows(
     Music(),
     Osd(),
     SystemMenu(),
+    NotificationPopup(),
   ],
 );

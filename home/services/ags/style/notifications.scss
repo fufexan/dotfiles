@@ -1,0 +1,57 @@
+.notification {
+  @include window;
+  margin: 5px 5px 5px 10px;
+
+  min-width: 25rem;
+
+  border-radius: $round2;
+  background-color: $bg;
+
+  .critical {
+    border: 1px solid red;
+  }
+}
+
+.notifications widget:last-child .notification {
+  margin-bottom: 15px;
+}
+
+.notification .icon {
+  image {
+    font-size: 5rem;
+    margin: 0.5rem;
+    min-height: 5rem;
+    min-width: 5rem;
+  }
+
+  > box {
+    border-radius: $round;
+    margin: 0.5rem;
+    min-height: 5rem;
+    min-width: 5rem;
+  }
+}
+
+.notification .actions .action-button {
+  @include window-box;
+  @include animate;
+  padding: 0.5rem 0;
+
+  &:hover {
+    background: $button-disabled-hover;
+  }
+}
+
+.notification .text {
+  margin: 0.5rem;
+
+  .title {
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+  }
+
+  .body {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+}
