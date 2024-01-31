@@ -54,6 +54,14 @@ Modules
 
 - Shows the current date and time.
 
+#### Notification popups
+
+- Shows notifications
+- Primary clicks activates the "default" action, if it exists
+- Secondary click dismisses the notification
+- Middle click dismisses all popup notifications
+- Actions other than "default" are shown as buttons
+
 </details>
 
 ### Music window
