@@ -13,8 +13,6 @@
       catppuccin-plymouth = pkgs.callPackage ./catppuccin-plymouth {};
 
       wl-ocr = pkgs.callPackage ./wl-ocr {};
-
-      wezterm = pkgs.callPackage ./wezterm {};
     };
   };
 }

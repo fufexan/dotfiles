@@ -1,12 +1,6 @@
 {
-  self,
-  pkgs,
-  ...
-}: {
   programs.wezterm = {
     enable = true;
-
-    package = self.packages.${pkgs.system}.wezterm;
 
     extraConfig = ''
       local wezterm = require "wezterm"
