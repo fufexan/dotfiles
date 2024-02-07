@@ -1,4 +1,4 @@
-import { App, Utils } from "./imports.js";
+import { App, Audio, Notifications, Utils } from "./imports.js";
 import Bar from "./windows/bar/main.js";
 import Music from "./windows/music/main.js";
 import NotificationPopup from "./windows/notifications/popups.js";
@@ -17,11 +17,11 @@ export default {
   closeWindowDelay: {
     "system-menu": 200,
   },
-  notificationPopupTimeout: 5000,
-  notificationForceTimeout: false,
-  cacheNotificationActions: true,
-  maxStreamVolume: 1,
 };
+Notifications.popupTimeout = 5000;
+Notifications.forceTimeout = false;
+Notifications.cacheActions = true;
+Audio.maxStreamVolume = 1;
 
 function reloadCss() {
   console.log("scss change detected");

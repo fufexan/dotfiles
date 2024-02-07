@@ -1,4 +1,4 @@
-import { Notifications, Utils, Widget } from "../../imports.js";
+import { Hyprland, Notifications, Utils, Widget } from "../../imports.js";
 
 const closeAll = () => {
   Notifications.popups.map(n => n.dismiss());
@@ -113,6 +113,7 @@ export const Notification = (n) => {
   });
 };
 
+let lastMonitor;
 export const notificationPopup = () =>
   Widget.Window({
     name: "notifications",
@@ -126,6 +127,15 @@ export const notificationPopup = () =>
         return popups.map(Notification);
       }),
     }),
-  });
+  })
+    .hook(
+      Hyprland.active,
+      (self) => {
+        // prevent useless resets
+        if (lastMonitor === Hyprland.active.monitor) return;
+
+        self.monitor = Hyprland.active.monitor.id;
+      },
+    );
 
 export default notificationPopup;
