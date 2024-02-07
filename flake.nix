@@ -59,6 +59,8 @@
 
     anyrun.url = "github:fufexan/anyrun";
 
+    chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+
     fu.url = "github:numtide/flake-utils";
 
     gross = {

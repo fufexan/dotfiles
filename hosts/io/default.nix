@@ -2,6 +2,7 @@
   pkgs,
   self,
   inputs,
+  lib,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -11,6 +12,9 @@
     owner = "mihai";
     group = "users";
   };
+
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+  environment.systemPackages = [pkgs.scx];
 
   boot.kernelParams = [
     "amd_pstate=active"
