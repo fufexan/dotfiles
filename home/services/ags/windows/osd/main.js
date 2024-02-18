@@ -1,5 +1,5 @@
-import { Audio, Hyprland, Widget } from "../../imports.js";
 import App from "resource:///com/github/Aylur/ags/app.js";
+import { Audio, Hyprland, Widget } from "../../imports.js";
 
 import Brightness from "../../services/brightness.js";
 import Indicators from "../../services/osd.js";
@@ -10,7 +10,7 @@ Audio.connect("speaker-changed", () =>
   Audio.speaker.connect(
     "changed",
     () => {
-      if (!App.getWindow("system-menu").visible) {
+      if (!App.getWindow("system-menu")?.visible) {
         Indicators.speaker();
       }
     },
@@ -21,7 +21,7 @@ Audio.connect(
 );
 
 Brightness.connect("screen-changed", () => {
-  if (!App.getWindow("system-menu").visible) {
+  if (!App.getWindow("system-menu")?.visible) {
     Indicators.display();
   }
 });

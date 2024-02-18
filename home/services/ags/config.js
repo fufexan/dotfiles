@@ -30,7 +30,7 @@ function reloadCss() {
   App.applyCss(css);
 }
 
-Utils.monitorFile(`${App.configDir}/style`, reloadCss, "directory");
+Utils.monitorFile(`${App.configDir}/style`, reloadCss);
 
 /**
  * @param {import("types/widgets/window.js").Window[]} windows
