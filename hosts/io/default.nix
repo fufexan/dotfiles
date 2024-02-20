@@ -35,22 +35,22 @@
     # for SSD/NVME
     fstrim.enable = true;
 
-    howdy = {
-      enable = true;
-      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.howdy;
-      settings = {
-        core = {
-          no_confirmation = true;
-          abort_if_ssh = true;
-        };
-        video.dark_threshold = 90;
-      };
-    };
+    # howdy = {
+    #   enable = true;
+    #   package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.howdy;
+    #   settings = {
+    #     core = {
+    #       no_confirmation = true;
+    #       abort_if_ssh = true;
+    #     };
+    #     video.dark_threshold = 90;
+    #   };
+    # };
 
-    linux-enable-ir-emitter = {
-      enable = true;
-      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
-    };
+    # linux-enable-ir-emitter = {
+    #   enable = true;
+    #   package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
+    # };
 
     kmonad.keyboards = {
       io = {

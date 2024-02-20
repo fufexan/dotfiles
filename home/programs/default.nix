@@ -10,5 +10,8 @@
 
   home.packages = with pkgs; [
     tdesktop
+
+    overskride
+    mission-center
   ];
 }
