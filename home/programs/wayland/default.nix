@@ -7,7 +7,7 @@
 {
   imports = [
     ./hyprland
-    ./swaylock.nix
+    ./hyprlock.nix
     ./wlogout.nix
   ];
 

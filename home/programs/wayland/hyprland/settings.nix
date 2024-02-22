@@ -13,7 +13,7 @@ in {
       # set cursor for HL itself
       "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
       "systemctl --user start clight"
-      "swaylock"
+      "hyprlock"
     ];
 
     general = {

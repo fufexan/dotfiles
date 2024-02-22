@@ -1,4 +1,9 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     ${pkgs.pipewire}/bin/pw-cli i all | ${pkgs.ripgrep}/bin/rg running
     # only suspend if audio isn't running
@@ -8,22 +13,15 @@
   '';
 in {
   # screen idle
-  services.swayidle = {
+  services.hypridle = {
     enable = true;
-    events = [
-      {
-        event = "before-sleep";
-        command = "${pkgs.systemd}/bin/loginctl lock-session";
-      }
-      {
-        event = "lock";
-        command = "${pkgs.swaylock-effects}/bin/swaylock";
-      }
-    ];
-    timeouts = [
+    beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
+    lockCmd = lib.getExe config.programs.hyprlock.package;
+
+    listeners = [
       {
         timeout = 330;
-        command = suspendScript.outPath;
+        onTimeout = suspendScript.outPath;
       }
     ];
   };
