@@ -1,11 +1,14 @@
 {
   pkgs,
   self,
-  inputs,
+  # inputs,
   lib,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    ./powersave.nix
+  ];
 
   age.secrets.spotify = {
     file = "${self}/secrets/spotify.age";

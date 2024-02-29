@@ -22,10 +22,14 @@
     	# read the current state
     	if [[ $(cat "$BAT_STATUS") == "Discharging" ]]; then
       	profile=$BAT_PROFILE
-        hyprctl --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
+        for i in $(hyprctl instances -j | jaq ".[].instance" -r); do
+          hyprctl -i "$i" --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
+        done
     	else
     		profile=$AC_PROFILE
-        hyprctl --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
+        for i in $(hyprctl instances -j | jaq ".[].instance" -r); do
+          hyprctl -i "$i" --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
+        done
     	fi
 
     	# set the new profile
@@ -46,6 +50,7 @@
     config.wayland.windowManager.hyprland.package
     power-profiles-daemon
     inotify-tools
+    jaq
   ];
 in {
   # Power state monitor. Switches Power profiles based on charging state.
