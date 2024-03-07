@@ -13,5 +13,6 @@
 
     overskride
     mission-center
+    wineWowPackages.wayland
   ];
 }
