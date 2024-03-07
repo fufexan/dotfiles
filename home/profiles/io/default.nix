@@ -18,7 +18,6 @@
     ../../services/media/spotifyd.nix
 
     # system services
-    ../../services/system/dunst.nix
     ../../services/system/kdeconnect.nix
     ../../services/system/polkit-agent.nix
     ../../services/system/power-monitor.nix
