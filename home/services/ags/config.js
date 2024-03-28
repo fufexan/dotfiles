@@ -12,12 +12,13 @@ Utils.exec(`sass ${scss} ${css}`);
 
 App.connect("config-parsed", () => print("config parsed"));
 
-export default {
+App.config({
   style: css,
   closeWindowDelay: {
     "system-menu": 200,
   },
-};
+});
+
 Notifications.popupTimeout = 5000;
 Notifications.forceTimeout = false;
 Notifications.cacheActions = true;
@@ -48,3 +49,5 @@ addWindows(
     NotificationPopup(),
   ],
 );
+
+export {};

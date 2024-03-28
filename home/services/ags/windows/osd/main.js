@@ -73,7 +73,10 @@ export default () =>
   PopupWindow({
     name: "osd",
     monitor: 0,
+    layer: "overlay",
     child: child(),
+    click_through: true,
+    anchor: ["bottom"],
     revealerSetup: (self) =>
       self
         .hook(Indicators, (revealer, _, visible) => {

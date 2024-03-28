@@ -7,7 +7,7 @@
   border-radius: $round2;
   background-color: $bg;
 
-  .critical {
+  &.critical {
     border: 1px solid red;
   }
 }
