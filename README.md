@@ -11,12 +11,13 @@ See an overview of the flake outputs by running
 
 ## 🗃️ Contents
 
-- [modules](modules): NixOS common configs
 - [hosts](hosts): host-specific configuration
-- [home](home): my [Home Manager](https://github.com/nix-community/home-manager)
+- [home](home): [Home Manager](https://github.com/nix-community/home-manager)
   config
 - [lib](lib): helper functions
+- [modules](modules): NixOS modules
 - [pkgs](pkgs): package definitions
+- [system](system): common NixOS configurations
 
 # 📦 Exported packages
 

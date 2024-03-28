@@ -1,17 +1,13 @@
-# Modules
+# System
 
-As of now, there are multiple modules included:
+Common configuration files shared across hosts.
 
-| Name            | Description                                                                                                                      |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Bluetooth       | Bluetooth configuration                                                                                                          |
-| `default.nix`   | Flake-parts module, entry point                                                                                                  |
-| Desktop         | Config aimed at desktop usage                                                                                                    |
-| Gamemode        | Gamemode settings                                                                                                                |
-| Greetd          | Greetd config                                                                                                                    |
-| Core            | Shared config                                                                                                                    |
-| Lanzaboote      | Secure Boot config                                                                                                               |
-| Nix             | Nix-related options                                                                                                              |
-| Network         | Network configuration                                                                                                            |
-| Security        | Tweaks for a more secure system, borrowed from [hlissner](https://github.com/hlissner/dotfiles/blob/master/modules/security.nix) |
-| Specialisations | Currently only used for Dark/Light themes                                                                                        |
+| Name          | Description                                            |
+| ------------- | ------------------------------------------------------ |
+| `default.nix` | Flake-parts module, entry point                        |
+| core          | Core configurations, including boot, security, users   |
+| hardware      | Controls hardware, such as Bluetooth, video cards, etc |
+| network       | Network-related software configuration                 |
+| nix           | Nix-related options                                    |
+| programs      | `programs.*` configuration                             |
+| services      | `services.*` configurtaion                             |
