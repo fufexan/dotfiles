@@ -4,6 +4,7 @@ let
     ./core/default.nix
 
     ./hardware/opengl.nix
+    ./hardware/fwupd.nix
 
     ./network/avahi.nix
     ./network/default.nix
