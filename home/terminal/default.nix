@@ -7,6 +7,7 @@ in {
     ./programs
     ./shell/starship.nix
     ./shell/zsh.nix
+    ./shell/zoxide.nix
   ];
 
   # add environment variables
