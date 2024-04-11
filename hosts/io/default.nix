@@ -8,6 +8,10 @@
   imports = [
     ./hardware-configuration.nix
     ./powersave.nix
+
+    # TODO: remove when https://github.com/NixOS/nixpkgs/pull/303186 lands in nixos-unstable
+    (lib.mkRenamedOptionModule ["services" "xserver" "displayManager" "sessionData"] ["services" "displayManager" "sessionData"])
+    (lib.mkRenamedOptionModule ["services" "xserver" "displayManager" "sessionPackages"] ["services" "displayManager" "sessionPackages"])
   ];
 
   age.secrets.spotify = {
