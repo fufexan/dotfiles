@@ -1,12 +1,8 @@
-{inputs, ...}: {
-  imports = [
-    inputs.nh.nixosModules.default
-  ];
-
+{pkgs, ...}: {
   # nh default flake
   environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
 
-  nh = {
+  programs.nh = {
     enable = true;
     # weekly cleanup
     clean = {
