@@ -14,13 +14,14 @@
         "system-menu"
 
         "anyrun"
+        "logout_dialog"
       ];
 
-      layers = ignorealpha ++ ["bar" "gtk-layer-shell"];
+      layers = ignorealpha ++ ["bar"];
     in [
       "blur, ${toRegex layers}"
-      "xray 1, ${toRegex ["bar" "gtk-layer-shell"]}"
-      "ignorealpha 0.2, ${toRegex ["bar" "gtk-layer-shell"]}"
+      "xray 1, ${toRegex ["bar"]}"
+      "ignorealpha 0.2, ${toRegex ["bar" "logout_dialog"]}"
       "ignorealpha 0.5, ${toRegex (ignorealpha ++ ["music"])}"
     ];
 
