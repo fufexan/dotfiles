@@ -127,11 +127,6 @@
       inputs.flake-utils.follows = "fu";
     };
 
-    spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     yazi.url = "github:sxyazi/yazi";
   };
 }

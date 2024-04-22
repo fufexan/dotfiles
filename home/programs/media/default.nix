@@ -4,7 +4,6 @@
   imports = [
     ./mpv.nix
     ./rnnoise.nix
-    ./spicetify.nix
   ];
 
   home.packages = with pkgs; [
@@ -14,6 +13,7 @@
 
     # audio
     amberol
+    spotify
 
     # images
     loupe
