@@ -69,7 +69,7 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    helix.url = "github:helix-editor/helix";
+    helix.url = "github:SoraTenshi/helix/new-daily-driver";
 
     hm = {
       url = "github:nix-community/home-manager";
