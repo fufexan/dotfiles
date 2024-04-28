@@ -48,16 +48,9 @@
   };
 
   services = {
-    kmonad.keyboards = {
-      rog = {
-        device = "/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd";
-        defcfg = {
-          enable = true;
-          fallthrough = true;
-          allowCommands = false;
-        };
-        config = builtins.readFile "${self}/system/services/kmonad/main.kbd";
-      };
+    kanata.keyboards.rog = {
+      devices = ["/dev/input/by-path/pci-0000:00:14.0-usb-0:8:1.0-event-kbd"];
+      config = builtins.readFile "${self}/system/services/kanata/main.kbd";
     };
 
     xserver.videoDrivers = ["nvidia"];

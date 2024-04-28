@@ -94,11 +94,6 @@
 
     hyprpaper.url = "github:hyprwm/hyprpaper";
 
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     matugen = {

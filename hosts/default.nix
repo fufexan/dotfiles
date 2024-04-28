@@ -31,7 +31,7 @@
           "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
 
-          "${mod}/services/kmonad"
+          "${mod}/services/kanata"
           "${mod}/services/gnome-services.nix"
           "${mod}/services/location.nix"
 
@@ -65,7 +65,7 @@
     #       "${mod}/programs/hyprland.nix"
     #       "${mod}/programs/steam.nix"
 
-    #       "${mod}/services/kmonad"
+    #       "${mod}/services/kanata"
     #       {home-manager.users.mihai.imports = homeImports."mihai@rog";}
     #     ];
     # };
