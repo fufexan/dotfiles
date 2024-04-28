@@ -23,10 +23,6 @@
     "amd_pstate=active"
     "ideapad_laptop.allow_v4_dytc=Y"
     ''acpi_osi="Windows 2020"''
-
-    # hopefully fixing nvme issues
-    "nvme_core.default_ps_max_latency_us=0"
-    "pcie_aspm=off"
   ];
 
   hardware = {
