@@ -1,16 +1,7 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
-  variant =
-    if config.theme.name == "light"
-    then "latte"
-    else "mocha";
-in {
+{pkgs, ...}: {
   programs.btop = {
     enable = true;
-    settings.color_theme = "catppuccin_${variant}";
+    settings.color_theme = "catppuccin_mocha";
   };
 
   xdg.configFile = {

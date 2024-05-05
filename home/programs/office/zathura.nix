@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.zathura = {
     enable = true;
     options = {
@@ -21,13 +17,7 @@
       zoom-min = "10";
     };
 
-    extraConfig =
-      "include catppuccin-"
-      + (
-        if config.theme.name == "light"
-        then "latte"
-        else "mocha"
-      );
+    extraConfig = "include catppuccin-mocha";
   };
 
   xdg.configFile = {

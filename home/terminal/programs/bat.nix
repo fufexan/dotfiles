@@ -1,18 +1,9 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
-  variant =
-    if config.theme.name == "light"
-    then "latte"
-    else "mocha";
-in {
+{pkgs, ...}: {
   programs.bat = {
     enable = true;
     config = {
       pager = "less -FR";
-      theme = "Catppuccin-${variant}";
+      theme = "Catppuccin-mocha";
     };
     themes = let
       src = pkgs.fetchFromGitHub {

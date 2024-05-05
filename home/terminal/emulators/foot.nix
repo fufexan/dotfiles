@@ -77,7 +77,7 @@ in {
         {
           alpha = 0.9;
         }
-        // colors.${config.theme.name};
+        // colors.dark;
     };
   };
 }

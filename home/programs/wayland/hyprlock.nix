@@ -1,5 +1,5 @@
 {config, ...}: let
-  variant = config.theme.name;
+  variant = "dark";
   c = config.programs.matugen.theme.colors.colors.${variant};
 
   font_family = "Inter";
@@ -16,7 +16,7 @@ in {
     backgrounds = [
       {
         monitor = "";
-        path = "${config.home.homeDirectory}/wall.png";
+        path = config.theme.wallpaper;
       }
     ];
 

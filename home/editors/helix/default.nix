@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  config,
   ...
 }: {
   imports = [./languages.nix];
@@ -29,13 +28,7 @@
     });
 
     settings = {
-      theme =
-        "catppuccin_"
-        + (
-          if config.theme.name == "light"
-          then "latte"
-          else "mocha"
-        );
+      theme = "catppuccin_mocha";
       editor = {
         color-modes = true;
         cursorline = true;

@@ -16,7 +16,7 @@ in {
 
     delta = {
       enable = true;
-      options.${config.theme.name} = true;
+      options.dark = true;
     };
 
     extraConfig = {

@@ -39,7 +39,7 @@
         tab_size = 2;
         max_width = 600;
         max_height = 900;
-        cache_dir = "${config.xdg.cacheHome}";
+        cache_dir = config.xdg.cacheHome;
       };
     };
   };
