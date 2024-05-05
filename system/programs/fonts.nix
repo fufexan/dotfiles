@@ -24,11 +24,14 @@
     # user defined fonts
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Inter" "Noto Color Emoji"];
-      monospace = ["JetBrains Mono" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
-    };
+    fontconfig.defaultFonts = let
+      addAll = builtins.mapAttrs (k: v: ["Symbols Nerd Font"] ++ v ++ ["Noto Color Emoji"]);
+    in
+      addAll {
+        serif = ["Noto Serif"];
+        sansSerif = ["Inter"];
+        monospace = ["JetBrains Mono"];
+        emoji = [];
+      };
   };
 }
