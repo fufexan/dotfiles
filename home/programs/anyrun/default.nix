@@ -14,7 +14,7 @@
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
-        randr
+        # randr
         rink
         shell
         symbols

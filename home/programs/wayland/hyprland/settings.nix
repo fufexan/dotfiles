@@ -7,6 +7,7 @@ in {
     "$mod" = "SUPER";
     env = [
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      # "WLR_DRM_NO_ATOMIC,1"
     ];
 
     exec-once = [
@@ -107,15 +108,36 @@ in {
     xwayland.force_zero_scaling = true;
 
     debug.disable_logs = false;
-  };
 
-  wayland.windowManager.hyprland.extraConfig = ''
-    plugin {
-      csgo-vulkan-fix {
-        res_w = 1280
-        res_h = 800
-        class = cs2
-      }
-    }
-  '';
+    plugin = {
+      csgo-vulkan-fix = {
+        res_w = 1280;
+        res_h = 800;
+        class = "cs2";
+      };
+
+      hyprbars = {
+        bar_height = 20;
+        bar_precedence_over_border = true;
+
+        # order is right-to-left
+        hyprbars-button = [
+          # close
+          "rgb(ff0000), 15, , hyprctl dispatch killactive"
+          # maximize
+          "rgb(ffff00), 15, , hyprctl dispatch fullscreen 1"
+        ];
+      };
+
+      hyprexpo = {
+        columns = 3;
+        gap_size = 4;
+        bg_col = "rgb(000000)";
+
+        enable_gesture = true;
+        gesture_distance = 300;
+        gesture_positive = false;
+      };
+    };
+  };
 }

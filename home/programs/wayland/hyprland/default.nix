@@ -18,7 +18,10 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # plugins = [inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix];
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+      # hyprbars
+      # hyprexpo
+    ];
 
     systemd = {
       variables = ["--all"];
