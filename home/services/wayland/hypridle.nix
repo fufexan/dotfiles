@@ -15,14 +15,17 @@ in {
   # screen idle
   services.hypridle = {
     enable = true;
-    beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
-    lockCmd = lib.getExe config.programs.hyprlock.package;
 
-    listeners = [
-      {
-        timeout = 330;
-        onTimeout = suspendScript.outPath;
-      }
-    ];
+    settings = {
+      beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
+      lockCmd = lib.getExe config.programs.hyprlock.package;
+
+      listener = [
+        {
+          timeout = 330;
+          onTimeout = suspendScript.outPath;
+        }
+      ];
+    };
   };
 }
