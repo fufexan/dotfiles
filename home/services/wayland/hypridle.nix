@@ -11,19 +11,28 @@
       ${pkgs.systemd}/bin/systemctl suspend
     fi
   '';
+
+  brillo = lib.getExe pkgs.brillo;
 in {
   # screen idle
   services.hypridle = {
     enable = true;
 
     settings = {
-      beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
-      lockCmd = lib.getExe config.programs.hyprlock.package;
+      general = {
+        lock_cmd = lib.getExe config.programs.hyprlock.package;
+        before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+      };
 
       listener = [
         {
           timeout = 330;
-          onTimeout = suspendScript.outPath;
+          on-timeout = suspendScript.outPath;
+        }
+        {
+          timeout = 290;
+          on-timeout = "${brillo} -u 1000000 -U 20";
+          on-resume = "${brillo} -u 1000000 -A 20";
         }
       ];
     };
