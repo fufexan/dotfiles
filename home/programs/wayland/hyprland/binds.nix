@@ -1,6 +1,4 @@
 let
-  screenshotarea = "hyprctl keyword animation 'fadeOut,0,0,default'; grimblast --notify copysave area; hyprctl keyword animation 'fadeOut,1,4,default'";
-
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   workspaces = builtins.concatLists (builtins.genList (
       x: let
@@ -50,8 +48,15 @@ in {
         "$mod, Escape, exec, wlogout -p layer-shell"
         # lock screen
         "$mod, L, exec, loginctl lock-session"
+        # lock screen, to be used with the F10 special key on my keyboard
+        "$mod, I, exec, loginctl lock-session"
         # select area to perform OCR on
         "$mod, O, exec, run-as-service wl-ocr"
+        ", XF86Favorites, exec, run-as-service wl-ocr"
+        # open calculator
+        ", XF86Calculator, exec, run-as-service gnome-calculator"
+        # open settings
+        "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome gnome-control-center"
 
         # move focus
         "$mod, left, movefocus, l"
@@ -60,13 +65,15 @@ in {
         "$mod, down, movefocus, d"
 
         # screenshot
-        # stop animations while screenshotting; makes black border go away
-        ", Print, exec, ${screenshotarea}"
-        "$mod SHIFT, R, exec, ${screenshotarea}"
+        # area
+        ", Print, exec, grimblast --notify copysave area"
+        "$mod SHIFT, R, exec, grimblast --notify copysave area"
 
+        # current screen
         "CTRL, Print, exec, grimblast --notify --cursor copysave output"
         "$mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output"
 
+        # all screens
         "ALT, Print, exec, grimblast --notify --cursor copysave screen"
         "$mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen"
 

@@ -31,8 +31,11 @@ in {
         }
         {
           timeout = 290;
-          on-timeout = "${brillo} -u 1000000 -U 20";
-          on-resume = "${brillo} -u 1000000 -A 20";
+          # save the current brightness and dim the screen over a period of
+          # 1 second
+          on-timeout = "${brillo} -O; ${brillo} -u 1000000 -S 10";
+          # brighten the screen over a period of 500ms to the saved value
+          on-resume = "${brillo} -I -u 500000";
         }
       ];
     };

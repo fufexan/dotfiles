@@ -1,7 +1,7 @@
 import { Network } from "../imports.js";
 
-export const getNetIcon = (conn) => {
-  if (conn == "none") return "";
+export const getNetIcon = () => {
+  if (Network.connectivity == "none") return "";
   if (Network.primary == "wired") return "network-wired";
 
   return Network.wifi.icon_name;

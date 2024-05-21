@@ -8,16 +8,13 @@
 
       lowopacity = [
         "bar"
+        "calendar"
         "notifications"
         "osd"
-        "logout_dialog"
+        "system-menu"
       ];
 
       highopacity = [
-        # ags
-        "calendar"
-        "system-menu"
-
         "anyrun"
         "logout_dialog"
       ];
@@ -37,6 +34,10 @@
     windowrulev2 = [
       # telegram media viewer
       "float, title:^(Media viewer)$"
+
+      # gnome calculator
+      "float, class:^(org.gnome.Calculator)$"
+      "size 360 490, class:^(org.gnome.Calculator)$"
 
       # allow tearing in games
       "immediate, class:^(osu\!|cs2)$"
