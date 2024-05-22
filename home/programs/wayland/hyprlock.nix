@@ -49,7 +49,19 @@ in {
           font_size = 50;
           color = "rgb(${c.primary})";
 
-          position = "0, 80";
+          position = "0, 150";
+
+          valign = "center";
+          halign = "center";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:3600000] date +'%a %b %d'";
+          inherit font_family;
+          font_size = 20;
+          color = "rgb(${c.primary})";
+
+          position = "0, 50";
 
           valign = "center";
           halign = "center";
