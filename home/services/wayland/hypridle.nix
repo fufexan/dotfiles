@@ -15,7 +15,7 @@
   brillo = lib.getExe pkgs.brillo;
 
   # timeout after which DPMS kicks in
-  timeout = 30;
+  timeout = 300;
 in {
   # screen idle
   services.hypridle = {
