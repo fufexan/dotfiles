@@ -3,7 +3,6 @@
     ./fonts.nix
     ./home-manager.nix
     # ./qt.nix
-    ./school.nix
     ./xdg.nix
   ];
 
