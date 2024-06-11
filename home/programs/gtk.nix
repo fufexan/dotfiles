@@ -29,7 +29,12 @@
 
     theme = {
       name = "adw-gtk3-dark";
-      package = pkgs.adw-gtk3;
+      package = pkgs.adw-gtk3.overrideAttrs (self: super: {
+        postInstall = ''
+          rm -rf $out/share/themes/adw-gtk3/gtk-4.0
+          rm -rf $out/share/themes/adw-gtk3-dark/gtk-4.0
+        '';
+      });
     };
   };
 }
