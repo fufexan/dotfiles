@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}: let
   variant = "dark";
   c = config.programs.matugen.theme.colors.colors.${variant};
 
@@ -6,6 +11,8 @@
 in {
   programs.hyprlock = {
     enable = true;
+
+    package = inputs.hyprlock.packages.${pkgs.system}.hyprlock;
 
     settings = {
       general = {

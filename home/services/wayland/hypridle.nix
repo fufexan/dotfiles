@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
@@ -20,6 +21,8 @@ in {
   # screen idle
   services.hypridle = {
     enable = true;
+
+    package = inputs.hypridle.packages.${pkgs.system}.hypridle;
 
     settings = {
       general = {
