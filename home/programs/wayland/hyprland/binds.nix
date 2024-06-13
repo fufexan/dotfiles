@@ -1,4 +1,4 @@
-let
+{lib, ...}: let
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   workspaces = builtins.concatLists (builtins.genList (
       x: let
@@ -12,6 +12,13 @@ let
       ]
     )
     10);
+
+  toggle = program: service: let
+    prog = builtins.substring 0 14 program;
+    runserv = lib.optionalString service "run-as-service";
+  in "pkill ${prog} || ${runserv} ${program}";
+
+  runOnce = program: "pgrep ${program} || ${program}";
 in {
   wayland.windowManager.hyprland.settings = {
     # mouse movements
@@ -45,16 +52,16 @@ in {
         # terminal
         "$mod, Return, exec, run-as-service foot"
         # logout menu
-        "$mod, Escape, exec, wlogout -p layer-shell"
+        "$mod, Escape, exec, ${toggle "wlogout" true} -p layer-shell"
         # lock screen
-        "$mod, L, exec, loginctl lock-session"
-        # lock screen, to be used with the F10 special key on my keyboard
-        "$mod, I, exec, loginctl lock-session"
+        "$mod, L, exec, pgrep hyprlock || hyprlock"
+        # lock screen, to be used with the special key Fn+F10 on my keyboard
+        "$mod, I, exec, pgrep hyprlock || hyprlock"
         # select area to perform OCR on
-        "$mod, O, exec, run-as-service wl-ocr"
-        ", XF86Favorites, exec, run-as-service wl-ocr"
+        "$mod, O, exec, ${runOnce "wl-ocr"}"
+        ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
         # open calculator
-        ", XF86Calculator, exec, run-as-service gnome-calculator"
+        ", XF86Calculator, exec, ${toggle "gnome-calculator" true}"
         # open settings
         "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome gnome-control-center"
 
@@ -66,16 +73,16 @@ in {
 
         # screenshot
         # area
-        ", Print, exec, grimblast --notify copysave area"
-        "$mod SHIFT, R, exec, grimblast --notify copysave area"
+        ", Print, exec, ${runOnce "grimblast"} --notify copysave area"
+        "$mod SHIFT, R, exec, ${runOnce "grimblast"} --notify copysave area"
 
         # current screen
-        "CTRL, Print, exec, grimblast --notify --cursor copysave output"
-        "$mod SHIFT CTRL, R, exec, grimblast --notify --cursor copysave output"
+        "CTRL, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
+        "$mod SHIFT CTRL, R, exec, ${runOnce "grimblast"} --notify --cursor copysave output"
 
         # all screens
-        "ALT, Print, exec, grimblast --notify --cursor copysave screen"
-        "$mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen"
+        "ALT, Print, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
+        "$mod SHIFT ALT, R, exec, ${runOnce "grimblast"} --notify --cursor copysave screen"
 
         # special workspace
         "$mod SHIFT, grave, movetoworkspace, special"
@@ -97,7 +104,7 @@ in {
 
     bindr = [
       # launcher
-      "$mod, SUPER_L, exec, pkill .anyrun-wrapped || run-as-service anyrun"
+      "$mod, SUPER_L, exec, ${toggle "anyrun" true}"
     ];
 
     bindl = [
