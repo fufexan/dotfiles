@@ -13,32 +13,53 @@
     BAT_PROFILE="power-saver"
 
     # wait a while if needed
-    [[ -z $STARTUP_WAIT ]] || sleep "$STARTUP_WAIT"
+    [ -z "$STARTUP_WAIT" ] || sleep "$STARTUP_WAIT"
 
     # start the monitor loop
-    prev=0
+    currentStatus=$(cat "$BAT_STATUS")
+    prevProfile=$AC_PROFILE
+    prevStatus=Charging
 
+    # initial run
+    if [ "$currentStatus" = "Discharging" ]; then
+     	profile="$BAT_PROFILE"
+       hyprctl -i 0 --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
+    else
+    	profile="$AC_PROFILE"
+       hyprctl -i 0 --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
+    fi
+
+    # set the new profile
+    if [ $prevProfile != "$profile" ]; then
+    	echo setting power profile to "$profile"
+    	powerprofilesctl set "$profile"
+    fi
+
+    prevProfile="$profile"
+    prevStatus="$currentStatus"
+
+    # event loop
     while true; do
-    	# read the current state
-    	if [[ $(cat "$BAT_STATUS") == "Discharging" ]]; then
-      	profile=$BAT_PROFILE
-        for i in $(hyprctl instances -j | jaq ".[].instance" -r); do
-          hyprctl -i "$i" --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
-        done
-    	else
-    		profile=$AC_PROFILE
-        for i in $(hyprctl instances -j | jaq ".[].instance" -r); do
-          hyprctl -i "$i" --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
-        done
-    	fi
+      currentStatus=$(cat "$BAT_STATUS")
+      if [ "$currentStatus" != "$prevStatus" ]; then
+      	# read the current state
+      	if [ "$currentStatus" = "Discharging" ]; then
+        	profile="$BAT_PROFILE"
+          hyprctl -i 0 --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
+      	else
+      		profile="$AC_PROFILE"
+          hyprctl -i 0 --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
+      	fi
 
-    	# set the new profile
-    	if [[ $prev != "$profile" ]]; then
-    		echo setting power profile to $profile
-    		powerprofilesctl set $profile
-    	fi
+      	# set the new profile
+      	if [ $prevProfile != "$profile" ]; then
+      		echo setting power profile to "$profile"
+      		powerprofilesctl set "$profile"
+      	fi
 
-    	prev=$profile
+      	prevProfile="$profile"
+        prevStatus="$currentStatus"
+      fi
 
     	# wait for the next power change event
     	inotifywait -qq "$BAT_STATUS" "$BAT_CAP"
