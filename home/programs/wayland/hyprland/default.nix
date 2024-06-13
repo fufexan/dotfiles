@@ -1,10 +1,9 @@
 {
   inputs,
   pkgs,
-  config,
   ...
 }: let
-  cursor = "${config.home.pointerCursor.name}-hyprcursor";
+  cursor = "HyprBibataModernClassicSVG";
   cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
 in {
   imports = [
