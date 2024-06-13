@@ -7,12 +7,14 @@ in {
     "$mod" = "SUPER";
     env = [
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      "HYPRCURSOR_THEME,${pointer.name}-hyprcursor"
+      "HYPRCURSOR_SIZE,${toString pointer.size}"
       # "WLR_DRM_NO_ATOMIC,1"
     ];
 
     exec-once = [
       # set cursor for HL itself
-      "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
+      "hyprctl setcursor ${pointer.name}-hyprcursor ${toString pointer.size}"
       "hyprlock"
     ];
 
