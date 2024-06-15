@@ -26,7 +26,6 @@
   ];
 
   hardware = {
-    opentabletdriver.enable = true;
     xpadneo.enable = true;
   };
 
