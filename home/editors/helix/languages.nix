@@ -6,12 +6,12 @@
   programs.helix.languages = {
     language = let
       deno = lang: {
-        command = "${pkgs.deno}/bin/deno";
+        command = lib.getExe pkgs.deno;
         args = ["fmt" "-" "--ext" lang];
       };
 
       prettier = lang: {
-        command = "${pkgs.nodePackages.prettier}/bin/prettier";
+        command = lib.getExe pkgs.nodePackages.prettier;
         args = ["--parser" lang];
       };
       prettierLangs = map (e: {
@@ -25,7 +25,7 @@
           name = "bash";
           auto-format = true;
           formatter = {
-            command = "${pkgs.shfmt}/bin/shfmt";
+            command = lib.getExe pkgs.shfmt;
             args = ["-i" "2"];
           };
         }
@@ -33,6 +33,15 @@
           name = "clojure";
           injection-regex = "(clojure|clj|edn|boot|yuck)";
           file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
+        }
+        {
+          name = "cmake";
+          auto-format = true;
+          language-servers = ["cmake-language-server"];
+          formatter = {
+            command = lib.getExe pkgs.cmake-format;
+            args = ["-"];
+          };
         }
         {
           name = "javascript";
@@ -58,13 +67,17 @@
 
     language-server = {
       bash-language-server = {
-        command = "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server";
+        command = lib.getExe pkgs.bash-language-server;
         args = ["start"];
       };
 
       clangd = {
         command = "${pkgs.clang-tools}/bin/clangd";
         clangd.fallbackFlags = ["-std=c++2b"];
+      };
+
+      cmake-language-server = {
+        command = lib.getExe pkgs.cmake-language-server;
       };
 
       deno-lsp = {
@@ -101,7 +114,7 @@
       };
 
       typescript-language-server = {
-        command = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server";
+        command = lib.getExe pkgs.nodePackages.typescript-language-server;
         args = ["--stdio"];
         config = let
           inlayHints = {
@@ -130,7 +143,7 @@
       };
 
       vscode-css-language-server = {
-        command = "${pkgs.nodePackages.vscode-css-languageserver-bin}/bin/css-languageserver";
+        command = lib.getExe pkgs.nodePackages.vscode-css-languageserver-bin;
         args = ["--stdio"];
         config = {
           provideFormatter = true;
