@@ -31,7 +31,7 @@ const vol = () => {
       icon: "",
       action: () => {
         App.toggleWindow("system-menu");
-        Utils.execAsync("pavucontrol");
+        Utils.execAsync("pwvucontrol");
       },
       setup: (self) =>
         self

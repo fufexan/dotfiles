@@ -8,8 +8,8 @@
 
   home.packages = with pkgs; [
     # audio control
-    pavucontrol
     pulsemixer
+    pwvucontrol
 
     # audio
     amberol
