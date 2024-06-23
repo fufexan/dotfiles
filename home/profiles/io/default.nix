@@ -31,9 +31,6 @@
     # terminal emulators
     ../../terminal/emulators/foot.nix
     ../../terminal/emulators/wezterm.nix
-
-    # school
-    ../../programs/school.nix
   ];
 
   wayland.windowManager.hyprland.settings = let

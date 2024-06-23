@@ -98,12 +98,6 @@
       inputs.flake-parts.follows = "flake-parts";
     };
 
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
-    };
-
     nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
     pre-commit-hooks = {
