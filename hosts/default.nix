@@ -26,7 +26,7 @@
 
           "${mod}/programs/gamemode.nix"
           "${mod}/programs/hyprland.nix"
-          "${mod}/programs/steam.nix"
+          "${mod}/programs/games.nix"
 
           "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
@@ -63,7 +63,7 @@
 
     #       "${mod}/programs/gamemode.nix"
     #       "${mod}/programs/hyprland.nix"
-    #       "${mod}/programs/steam.nix"
+    #       "${mod}/programs/games.nix"
 
     #       "${mod}/services/kanata"
     #       {home-manager.users.mihai.imports = homeImports."mihai@rog";}
