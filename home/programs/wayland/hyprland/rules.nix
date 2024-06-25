@@ -10,12 +10,12 @@
         "bar"
         "calendar"
         "notifications"
-        "osd"
         "system-menu"
       ];
 
       highopacity = [
         "anyrun"
+        "osd"
         "logout_dialog"
       ];
 
