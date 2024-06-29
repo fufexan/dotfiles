@@ -1,4 +1,4 @@
-{config, ...}: let
+{pkgs, ...}: let
   colors = {
     dark = {
       foreground = "cdd6f4"; # Text
@@ -50,8 +50,10 @@ in {
       main = {
         font = "JetBrains Mono:size=10";
         box-drawings-uses-font-glyphs = "yes";
-        pad = "0x0 center";
-        notify = "notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
+        horizontal-letter-offset = 0;
+        vertical-letter-offset = 0;
+        pad = "4x4 center";
+        notify = "${pkgs.libnotify}/bin/notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
         selection-target = "clipboard";
       };
 
@@ -61,10 +63,10 @@ in {
       };
 
       url = {
-        launch = "xdg-open \${url}";
+        launch = "${pkgs.xdg-utils}/bin/xdg-open \${url}";
         label-letters = "sadfjklewcmpgh";
         osc8-underline = "url-mode";
-        protocols = "http, https, ftp, ftps, file";
+        protocols = "http, https, ftp, ftps, file, mailto, ipfs";
         uri-characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+=\"'()[]";
       };
 
