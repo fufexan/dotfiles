@@ -1,6 +1,6 @@
 * {
   all: unset;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: black;
 }
 
@@ -13,62 +13,37 @@
 }
 
 #match.activatable {
-  border-radius: 16px;
-  padding: 0.3rem 0.9rem;
-  margin-top: 0.01rem;
+  border-radius: 8px;
+  margin: 4px 0;
+  padding: 4px;
+  transition: 100ms ease-out;
 }
 #match.activatable:first-child {
-  margin-top: 0.7rem;
+  margin-top: 12px;
 }
 #match.activatable:last-child {
-  margin-bottom: 0.6rem;
-}
-
-#plugin:hover #match.activatable {
-  border-radius: 10px;
-  padding: 0.3rem;
-  margin-top: 0.01rem;
   margin-bottom: 0;
 }
 
-#match:selected,
-#match:hover,
-#plugin:hover {
-  background: rgba(255, 255, 255, 0.3);
+#match:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+#match:selected {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #entry {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  margin: 0.5rem;
-  padding: 0.3rem 1rem;
-}
-
-#match:selected,
-#match:hover {
-  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
-}
-
-list > #plugin {
-  border-radius: 16px;
-  margin: 0 0.3rem;
-}
-list > #plugin:first-child {
-  margin-top: 0.3rem;
-}
-list > #plugin:last-child {
-  margin-bottom: 0.3rem;
-}
-list > #plugin:hover {
-  padding: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 box#main {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(200, 200, 200, 0.5);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 0.3rem;
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 30px 30px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  padding: 12px;
 }
