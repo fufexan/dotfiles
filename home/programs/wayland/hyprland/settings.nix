@@ -11,7 +11,6 @@ in {
       "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       "HYPRCURSOR_THEME,${cursorName}"
       "HYPRCURSOR_SIZE,${toString pointer.size}"
-      # "WLR_DRM_NO_ATOMIC,1"
     ];
 
     exec-once = [
@@ -27,7 +26,7 @@ in {
       "col.active_border" = "rgba(88888888)";
       "col.inactive_border" = "rgba(00000088)";
 
-      allow_tearing = true;
+      allow_tearing = false;
       resize_on_border = true;
     };
 
@@ -51,9 +50,10 @@ in {
 
       drop_shadow = true;
       shadow_ignore_window = true;
-      shadow_offset = "0 2";
-      shadow_range = 20;
-      shadow_render_power = 3;
+      shadow_offset = "0 15";
+      shadow_range = 100;
+      shadow_render_power = 2;
+      shadow_scale = 0.97;
       "col.shadow" = "rgba(00000055)";
     };
 
