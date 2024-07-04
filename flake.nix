@@ -83,8 +83,9 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     matugen = {
-      url = "github:InioX/matugen/module";
+      url = "github:InioX/matugen";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "hyprland/systems";
     };
 
     nix-index-db = {
