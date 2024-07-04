@@ -10,7 +10,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   inherit (bibata-cursors) version;
 
   src = fetchurl {
-    url = "https://cdn.discordapp.com/attachments/1216066899729977435/1216076659149504643/HyprBibataModernClassicSVG.tar.gz?ex=666c7f25&is=666b2da5&hm=713c14532d55604a3c2054e65f552578b599d21ccc93b3429dec5404f982313a&";
+    url = "https://drive.usercontent.google.com/download?id=1HkJPuKNkf4zfVYbQ6IxHUl5KaDXgFest";
     name = "HyprBibataModernClassic.tar.gz";
     hash = "sha256-KDYoULjJC0Nhdx9Pz5Ezq+1F0tWwkVQIc5buy07hO98=";
   };
