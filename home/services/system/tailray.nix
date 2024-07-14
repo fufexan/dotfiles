@@ -1,0 +1,3 @@
+{
+  services.tailray.enable = true;
+}

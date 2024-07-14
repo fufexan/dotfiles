@@ -1152,6 +1152,7 @@
         "nixpkgs-howdy": "nixpkgs-howdy",
         "pre-commit-hooks": "pre-commit-hooks",
         "systems": "systems_5",
+        "tailray": "tailray",
         "yazi": "yazi"
       }
     },
@@ -1317,6 +1318,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tailray": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1720881498,
+        "narHash": "sha256-UDOhWxCREXmHK7XHqA7q1PulkkF/biHjnET13MphoYM=",
+        "owner": "NotAShelf",
+        "repo": "tailray",
+        "rev": "344c9ba219e6e0e4d4e1289fe75d7c7989d07bcf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NotAShelf",
+        "repo": "tailray",
         "type": "github"
       }
     },
