@@ -35,6 +35,9 @@
       # telegram media viewer
       "float, title:^(Media viewer)$"
 
+      # Bitwarden extension
+      "float, title:^(.*Bitwarden Password Manager.*)$"
+
       # gnome calculator
       "float, class:^(org.gnome.Calculator)$"
       "size 360 490, class:^(org.gnome.Calculator)$"
