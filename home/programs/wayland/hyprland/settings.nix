@@ -26,7 +26,7 @@ in {
       "col.active_border" = "rgba(88888888)";
       "col.inactive_border" = "rgba(00000088)";
 
-      allow_tearing = false;
+      allow_tearing = true;
       resize_on_border = true;
     };
 
