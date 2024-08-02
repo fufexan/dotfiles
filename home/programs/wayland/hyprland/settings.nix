@@ -3,7 +3,7 @@
   c = config.programs.matugen.theme.colors.colors.${variant};
   pointer = config.home.pointerCursor;
 
-  cursorName = "HyprBibataModernClassicSVG";
+  cursorName = "Bibata-Modern-Classic-Hyprcursor";
 in {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";

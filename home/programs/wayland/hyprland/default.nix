@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  cursor = "HyprBibataModernClassicSVG";
+  cursor = "Bibata-Modern-Classic-Hyprcursor";
   cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
 in {
   imports = [
@@ -17,7 +17,6 @@ in {
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
 
-  home.file.".icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
   xdg.dataFile."icons/${cursor}".source = "${cursorPackage}/share/icons/${cursor}";
 
   # enable hyprland

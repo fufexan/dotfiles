@@ -18,7 +18,7 @@
   in
     lib.toUpper capital_letter + non_capital;
 
-  themeName = "Bibata-${capitalize variant}-${capitalize colorName}";
+  themeName = "Bibata-${capitalize variant}-${capitalize colorName}-Hyprcursor";
 in
   assert builtins.elem variant ["modern" "modern-right" "original" "original-right"];
     stdenvNoCC.mkDerivation (final: {
