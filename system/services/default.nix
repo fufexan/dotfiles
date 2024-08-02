@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   services = {
     dbus.implementation = "broker";
 

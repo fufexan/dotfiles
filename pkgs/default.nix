@@ -1,11 +1,7 @@
 {
   systems = ["x86_64-linux"];
 
-  perSystem = {
-    pkgs,
-    inputs',
-    ...
-  }: {
+  perSystem = {pkgs, ...}: {
     packages = {
       # instant repl with automatic flake loading
       repl = pkgs.callPackage ./repl {};

@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   # light/dark specialisations
   # specialisation = let
   #   colorschemePath = "/org/gnome/desktop/interface/color-scheme";
@@ -40,6 +35,6 @@
 
   programs.matugen = {
     enable = false;
-    wallpaper = config.theme.wallpaper;
+    inherit (config.theme) wallpaper;
   };
 }

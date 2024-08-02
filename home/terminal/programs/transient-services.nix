@@ -10,7 +10,7 @@
     export PATH=${concatStringsSep ":" config.home.sessionPath}:$PATH
   '';
 
-  stringVariables = mapAttrs (n: v: toString v) config.home.sessionVariables;
+  stringVariables = mapAttrs (_: toString) config.home.sessionVariables;
 
   variables = lib.concatStrings (lib.mapAttrsToList (k: v: ''
       export ${k}="${toString v}"
