@@ -11,7 +11,7 @@
   home.packages = with pkgs; [
     tdesktop
 
-    gnome.gnome-calculator
+    gnome-calculator
     gnome.gnome-control-center
 
     overskride

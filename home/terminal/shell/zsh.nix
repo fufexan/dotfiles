@@ -5,7 +5,7 @@
 }: {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     autocd = true;
     dirHashes = {
       dl = "$HOME/Downloads";

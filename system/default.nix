@@ -3,8 +3,8 @@ let
     ./core/boot.nix
     ./core/default.nix
 
-    ./hardware/opengl.nix
     ./hardware/fwupd.nix
+    ./hardware/graphics.nix
 
     ./network/avahi.nix
     ./network/default.nix
