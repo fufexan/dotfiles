@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   colors = {
     dark = {
       foreground = "cdd6f4"; # Text
@@ -49,17 +53,18 @@ in {
     settings = {
       main = {
         font = "JetBrains Mono:size=10";
-        box-drawings-uses-font-glyphs = "yes";
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "4x4 center";
-        notify = "${pkgs.libnotify}/bin/notify-send -a \${app-id} -i \${app-id} \${title} \${body}";
+        notify = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
         selection-target = "clipboard";
       };
 
       scrollback = {
         lines = 10000;
         multiplier = 3;
+        indicator-position = "relative";
+        indicator-format = "line";
       };
 
       url = {
