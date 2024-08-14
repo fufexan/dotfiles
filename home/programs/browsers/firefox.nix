@@ -6,8 +6,8 @@
   shyfox = pkgs.fetchFromGitHub {
     owner = "Naezr";
     repo = "ShyFox";
-    rev = "b8687644566e10eae652227b07cb97a6d4b09d63";
-    hash = "sha256-EkT1vf3JJdBaM3trlrurGmPNWsBu79HoH0dTWWTVD28=";
+    rev = "8d0d0139bbdb538a64e5a05df907160c39c8f008";
+    hash = "sha256-k3p8VxFpI/jw1TLBOKskH4KylsiiWBJLRNpffm+w7Bo=";
   };
 in {
   programs.firefox = {
