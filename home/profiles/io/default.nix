@@ -26,6 +26,7 @@
     ../../services/system/udiskie.nix
 
     # wayland-specific
+    ../../services/wayland/gammastep.nix
     ../../services/wayland/hyprpaper.nix
     ../../services/wayland/hypridle.nix
 
