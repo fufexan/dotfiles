@@ -1,6 +1,6 @@
-import { Service, Utils } from "../imports.js";
 import Gio from "gi://Gio";
 import GLib from "gi://GLib";
+import { Service, Utils } from "../imports.js";
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
@@ -55,7 +55,14 @@ class BrightnessService extends Service {
     super();
 
     this.#updateScreenValue();
-    Utils.monitorFile(this.#brightness, () => this.#onChange());
+    // Utils.monitorFile(this.#brightness, () => this.#onChange());
+    Utils.subprocess([
+      "inotifywait",
+      "--event",
+      "create,modify",
+      "-m",
+      this.#brightness,
+    ], () => this.#onChange());
   }
 
   #updateScreenValue() {

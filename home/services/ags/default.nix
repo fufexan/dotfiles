@@ -12,6 +12,7 @@
     dart-sass
     gawk
     imagemagick
+    inotify-tools
     procps
     ripgrep
     util-linux
