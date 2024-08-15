@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }: let
   script = pkgs.writeShellScript "power_monitor.sh" ''
@@ -23,10 +22,8 @@
     # initial run
     if [ "$currentStatus" = "Discharging" ]; then
      	profile="$BAT_PROFILE"
-       hyprctl -i 0 --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
     else
     	profile="$AC_PROFILE"
-       hyprctl -i 0 --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
     fi
 
     # set the new profile
@@ -45,10 +42,8 @@
       	# read the current state
       	if [ "$currentStatus" = "Discharging" ]; then
         	profile="$BAT_PROFILE"
-          hyprctl -i 0 --batch 'keyword decoration:blur:enabled false; keyword animations:enabled false'
       	else
       		profile="$AC_PROFILE"
-          hyprctl -i 0 --batch 'keyword decoration:blur:enabled true; keyword animations:enabled true'
       	fi
 
       	# set the new profile
@@ -68,10 +63,8 @@
 
   dependencies = with pkgs; [
     coreutils
-    config.wayland.windowManager.hyprland.package
     power-profiles-daemon
     inotify-tools
-    jaq
   ];
 in {
   # Power state monitor. Switches Power profiles based on charging state.
