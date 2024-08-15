@@ -132,9 +132,9 @@ in {
         # order is right-to-left
         hyprbars-button = [
           # close
-          "rgb(ff0000), 15, , hyprctl dispatch killactive"
+          "rgb(${c.error}), 15, , hyprctl dispatch killactive"
           # maximize
-          "rgb(ffff00), 15, , hyprctl dispatch fullscreen 1"
+          "rgb(${c.primary}), 15, , hyprctl dispatch fullscreen 1"
         ];
       };
 
