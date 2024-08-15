@@ -6,6 +6,7 @@
     ./media
     ./gtk.nix
     ./office
+    ./qt.nix
   ];
 
   home.packages = with pkgs; [
