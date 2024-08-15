@@ -7,7 +7,6 @@
   cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
 in {
   imports = [
-    inputs.hyprland.homeManagerModules.default
     ./binds.nix
     ./rules.nix
     ./settings.nix
@@ -22,6 +21,8 @@ in {
   # enable hyprland
   wayland.windowManager.hyprland = {
     enable = true;
+
+    package = inputs.hyprland.packages.${pkgs.system}.default;
 
     plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
       hyprbars
