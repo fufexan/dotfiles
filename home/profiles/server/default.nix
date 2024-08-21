@@ -1,3 +1,5 @@
 {
-  programs.helix.enable = true;
+  imports = [
+    ../../editors/helix
+  ];
 }

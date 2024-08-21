@@ -25,6 +25,9 @@
     ''acpi_osi="Windows 2020"''
   ];
 
+  # nh default flake
+  environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
+
   hardware = {
     xpadneo.enable = true;
     sensor.iio.enable = true;
