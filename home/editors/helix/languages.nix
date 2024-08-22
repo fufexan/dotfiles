@@ -58,6 +58,14 @@
           formatter = deno "md";
         }
         {
+          name = "python";
+          language-servers = ["pyright"];
+          formatter = {
+            command = lib.getExe pkgs.black;
+            args = ["-" "--quiet" "--line-length 100"];
+          };
+        }
+        {
           name = "typescript";
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
@@ -111,6 +119,18 @@
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+      };
+
+      pyright = {
+        command = "${pkgs.pyright}/bin/pyright-langserver";
+        args = ["--stdio"];
+        config = {
+          reportMissingTypeStubs = false;
+          analysis = {
+            typeCheckingMode = "basic";
+            autoImportCompletions = true;
+          };
+        };
       };
 
       typescript-language-server = {
