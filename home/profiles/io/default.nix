@@ -11,7 +11,7 @@
 
     # services
     ../../services/ags
-    ../../services/cinny.nix
+    # ../../services/cinny.nix
 
     # media services
     ../../services/media/playerctl.nix

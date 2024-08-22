@@ -56,8 +56,16 @@ in {
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "4x4 center";
-        notify = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
         selection-target = "clipboard";
+      };
+
+      bell = {
+        urgent = "yes";
+        notify = "yes";
+      };
+
+      desktop-notifications = {
+        command = "${lib.getExe pkgs.libnotify} -a \${app-id} -i \${app-id} \${title} \${body}";
       };
 
       scrollback = {
@@ -69,10 +77,7 @@ in {
 
       url = {
         launch = "${pkgs.xdg-utils}/bin/xdg-open \${url}";
-        label-letters = "sadfjklewcmpgh";
-        osc8-underline = "url-mode";
         protocols = "http, https, ftp, ftps, file, mailto, ipfs";
-        uri-characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+=\"'()[]";
       };
 
       cursor = {
