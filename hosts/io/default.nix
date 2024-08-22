@@ -19,11 +19,14 @@
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
   environment.systemPackages = [pkgs.scx];
 
-  boot.kernelParams = [
-    "amd_pstate=active"
-    "ideapad_laptop.allow_v4_dytc=Y"
-    ''acpi_osi="Windows 2020"''
-  ];
+  boot = {
+    kernelModules = ["i2c-dev"];
+    kernelParams = [
+      "amd_pstate=active"
+      "ideapad_laptop.allow_v4_dytc=Y"
+      ''acpi_osi="Windows 2020"''
+    ];
+  };
 
   # nh default flake
   environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
