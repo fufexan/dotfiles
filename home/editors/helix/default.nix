@@ -37,6 +37,10 @@
           select = "underline";
         };
         indent-guides.render = true;
+        inline-diagnostics = {
+          cursor-line = "hint";
+          other-lines = "error";
+        };
         lsp.display-inlay-hints = true;
         statusline.center = ["position-percentage"];
         true-color = true;
