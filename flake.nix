@@ -75,7 +75,7 @@
 
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
-    helix.url = "github:SoraTenshi/helix/new-daily-driver";
+    helix.url = "github:helix-editor/helix";
 
     hm = {
       url = "github:nix-community/home-manager";
