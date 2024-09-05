@@ -1,6 +1,6 @@
 {config, ...}: let
   variant = "dark";
-  c = config.programs.matugen.theme.colors.colors.${variant};
+  c = config.programs.matugen.theme.colors.${variant};
   pointer = config.home.pointerCursor;
 
   cursorName = "Bibata-Modern-Classic-Hyprcursor";

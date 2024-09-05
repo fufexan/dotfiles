@@ -5,7 +5,7 @@
   ...
 }: let
   variant = "dark";
-  c = config.programs.matugen.theme.colors.colors.${variant};
+  c = config.programs.matugen.theme.colors.${variant};
 
   font_family = "Inter";
 in {
