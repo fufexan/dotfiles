@@ -13,7 +13,7 @@
     tdesktop
 
     gnome-calculator
-    gnome.gnome-control-center
+    gnome-control-center
 
     overskride
     mission-center
