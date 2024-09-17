@@ -1,18 +1,19 @@
 {
   self,
   inputs,
-  homeImports,
-  lib,
   ...
 }: {
   flake.nixosConfigurations = let
     # shorten paths
     inherit (inputs.nixpkgs.lib) nixosSystem;
-    howdy = inputs.nixpkgs-howdy;
-    mod = "${self}/system";
 
+    howdy = inputs.nixpkgs-howdy;
+
+    homeImports = import "${self}/home/profiles";
+
+    mod = "${self}/system";
     # get the basic config to build on top of
-    inherit (import "${self}/system") laptop;
+    inherit (import mod) laptop;
 
     # get these into the module system
     specialArgs = {inherit inputs self;};
