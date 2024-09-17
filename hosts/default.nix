@@ -55,23 +55,6 @@
         ];
     };
 
-    # rog = nixosSystem {
-    #   inherit specialArgs;
-    #   modules =
-    #     laptop
-    #     ++ [
-    #       ./rog
-    #       "${mod}/core/lanzaboote.nix"
-
-    #       "${mod}/programs/gamemode.nix"
-    #       "${mod}/programs/hyprland.nix"
-    #       "${mod}/programs/games.nix"
-
-    #       "${mod}/services/kanata"
-    #       {home-manager.users.mihai.imports = homeImports."mihai@rog";}
-    #     ];
-    # };
-
     nixos = nixosSystem {
       inherit specialArgs;
       modules = [
