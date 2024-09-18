@@ -24,24 +24,64 @@ in {
       merge.conflictstyle = "diff3";
     };
 
-    aliases = {
-      a = "add";
+    aliases = let
+      log = "log --show-notes='*' --abbrev-commit --pretty=format:'%Cred%h %Cgreen(%aD)%Creset -%C(bold red)%d%Creset %s %C(bold blue)<%an>% %Creset' --graph";
+    in {
+      a = "add --patch"; # make it a habit to consciosly add hunks
+      ad = "add";
+
       b = "branch";
+      ba = "branch -a"; # list remote branches
+      bd = "branch --delete";
+      bdd = "branch -D";
+
       c = "commit";
       ca = "commit --amend";
-      cm = "commit -m";
+      cm = "commit --message";
+
       co = "checkout";
+      cb = "checkout --branch";
+      pc = "checkout --patch";
+
+      cl = "clone";
+
       d = "diff";
       ds = "diff --staged";
+
+      h = "show";
+      h1 = "show HEAD^";
+      h2 = "show HEAD^^";
+      h3 = "show HEAD^^^";
+      h4 = "show HEAD^^^^";
+      h5 = "show HEAD^^^^^";
+
       p = "push";
       pf = "push --force-with-lease";
+
       pl = "pull";
-      l = "log";
+
+      l = log;
+      lp = "${log} --patch";
+      la = "${log} --all";
+
       r = "rebase";
-      s = "status --short";
+      ra = "rebase --abort";
+      rc = "rebase --continue";
+      ri = "rebase --interactive";
+
+      rs = "reset";
+      rsh = "reset --hard";
+
+      s = "status --short --branch";
       ss = "status";
+
+      st = "stash";
+      stc = "stash clear";
+      sth = "stash show --patch";
+      stl = "stash list";
+      stp = "stash pop";
+
       forgor = "commit --amend --no-edit";
-      graph = "log --all --decorate --graph --oneline";
       oops = "checkout --";
     };
 
