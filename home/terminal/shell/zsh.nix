@@ -68,6 +68,7 @@
 
     shellAliases =
       {
+        g = "git";
         grep = "grep --color";
         ip = "ip --color";
         l = "eza -l";
@@ -76,8 +77,8 @@
         ppc = "powerprofilesctl";
         pf = "powerprofilesctl launch -p performance";
 
-        us = "systemctl --user";
-        rs = "sudo systemctl";
+        us = "systemctl --user"; # mnemonic for user systemctl
+        rs = "sudo systemctl"; # mnemonic for root systemctl
       }
       // lib.optionalAttrs config.programs.bat.enable {cat = "bat";};
     shellGlobalAliases = {eza = "eza --icons --git";};
