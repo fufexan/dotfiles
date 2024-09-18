@@ -2,7 +2,6 @@
   imports = [
     # editors
     ../../editors/helix
-    ../../editors/neovim
 
     # programs
     ../../programs
