@@ -54,12 +54,11 @@
         }
         {
           name = "markdown";
-          auto-format = true;
-          formatter = deno "md";
+          language-servers = ["dprint" "markdown-oxide"];
         }
         {
           name = "python";
-          language-servers = ["pyright"];
+          language-servers = ["basedpyright"];
           formatter = {
             command = lib.getExe pkgs.black;
             args = ["-" "--quiet" "--line-length 100"];
@@ -74,6 +73,10 @@
       ++ prettierLangs langs;
 
     language-server = {
+      basedpyright = {
+        command = lib.getExe pkgs.basedpyright;
+      };
+
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
         args = ["start"];
@@ -121,32 +124,10 @@
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
       };
 
-      pyright = {
-        command = "${pkgs.pyright}/bin/pyright-langserver";
-        args = ["--stdio"];
-        config = {
-          reportMissingTypeStubs = false;
-          analysis = {
-            typeCheckingMode = "basic";
-            autoImportCompletions = true;
-          };
-        };
-      };
-
       typescript-language-server = {
         command = lib.getExe pkgs.nodePackages.typescript-language-server;
         args = ["--stdio"];
-        config = let
-          inlayHints = {
-            includeInlayEnumMemberValueHints = true;
-            includeInlayFunctionLikeReturnTypeHints = true;
-            includeInlayFunctionParameterTypeHints = true;
-            includeInlayParameterNameHints = "all";
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true;
-            includeInlayPropertyDeclarationTypeHints = true;
-            includeInlayVariableTypeHints = true;
-          };
-        in {
+        config = {
           typescript-language-server.source = {
             addMissingImports.ts = true;
             fixAll.ts = true;
@@ -154,11 +135,6 @@
             removeUnusedImports.ts = true;
             sortImports.ts = true;
           };
-
-          typescript = {inherit inlayHints;};
-          javascript = {inherit inlayHints;};
-
-          hostInfo = "helix";
         };
       };
 
@@ -173,4 +149,26 @@
       };
     };
   };
+
+  home.file.".dprint.json".source = builtins.toFile "dprint.json" (builtins.toJSON {
+    lineWidth = 80;
+
+    # This applies to both JavaScript & TypeScript
+    typescript = {
+      quoteStyle = "preferSingle";
+      binaryExpression.operatorPosition = "sameLine";
+    };
+
+    json.indentWidth = 2;
+
+    excludes = [
+      "**/*-lock.json"
+    ];
+
+    plugins = [
+      "https://plugins.dprint.dev/typescript-0.93.0.wasm"
+      "https://plugins.dprint.dev/json-0.19.3.wasm"
+      "https://plugins.dprint.dev/markdown-0.17.8.wasm"
+    ];
+  });
 }

@@ -7,29 +7,19 @@
 
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.system}.default.overrideAttrs (old: {
-      makeWrapperArgs = with pkgs;
-        old.makeWrapperArgs
-        or []
-        ++ [
-          "--suffix"
-          "PATH"
-          ":"
-          (lib.makeBinPath [
-            clang-tools
-            marksman
-            nil
-            bash-language-server
-            nodePackages.vscode-langservers-extracted
-            shellcheck
-          ])
-        ];
-    });
+    package = inputs.helix.packages.${pkgs.system}.default;
+    extraPackages = with pkgs; [
+      markdown-oxide
+      nodePackages.vscode-langservers-extracted
+      shellcheck
+    ];
 
     settings = {
       theme = "catppuccin_mocha";
       editor = {
         color-modes = true;
+        completion-trigger-len = 1;
+        completion-replace = true;
         cursorline = true;
         cursor-shape = {
           insert = "bar";
