@@ -1,5 +1,6 @@
 import { Audio, Icons, Service, Utils } from "../imports.js";
 import { audioIcon, micIcon } from "../utils/audio.js";
+import { getBluetoothDevice } from "../utils/bluetooth.js";
 import Brightness from "./brightness.js";
 
 class Indicator extends Service {
