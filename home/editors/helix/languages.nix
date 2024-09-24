@@ -73,9 +73,7 @@
       ++ prettierLangs langs;
 
     language-server = {
-      basedpyright = {
-        command = lib.getExe pkgs.basedpyright;
-      };
+      basedpyright.command = "${pkgs.basedpyright}/bin/basedpyright-langserver";
 
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
