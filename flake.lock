@@ -1214,7 +1214,8 @@
         "pre-commit-hooks": "pre-commit-hooks",
         "systems": "systems_4",
         "tailray": "tailray",
-        "yazi": "yazi"
+        "yazi": "yazi",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-analyzer-src": {
@@ -1469,6 +1470,26 @@
       "original": {
         "owner": "sxyazi",
         "repo": "yazi",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727248177,
+        "narHash": "sha256-QHE2H3VYUK3T7zVbIfqEF7P8hBeim8vU5hXz8X6y8j0=",
+        "owner": "fufexan",
+        "repo": "zen-browser-flake",
+        "rev": "67f1db200b6d533cf1f2b562c183ac536919ec4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fufexan",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

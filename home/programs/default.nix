@@ -3,6 +3,7 @@
     ./anyrun
     ./browsers/chromium.nix
     ./browsers/firefox.nix
+    ./browsers/zen.nix
     ./media
     ./gtk.nix
     ./office

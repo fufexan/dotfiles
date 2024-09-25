@@ -172,5 +172,10 @@
         flake-compat.follows = "flake-compat";
       };
     };
+
+    zen-browser = {
+      url = "github:fufexan/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

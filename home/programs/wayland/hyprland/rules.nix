@@ -45,12 +45,13 @@
       # allow tearing in games
       "immediate, class:^(osu\!|cs2)$"
 
-      # make Firefox PiP window floating and sticky
+      # make Firefox/Zen PiP window floating and sticky
       "float, title:^(Picture-in-Picture)$"
       "pin, title:^(Picture-in-Picture)$"
 
       # throw sharing indicators away
       "workspace special silent, title:^(Firefox — Sharing Indicator)$"
+      "workspace special silent, title:^(Zen — Sharing Indicator)$"
       "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
       # start spotify in ws9
@@ -58,8 +59,8 @@
 
       # idle inhibit while watching videos
       "idleinhibit focus, class:^(mpv|.+exe|celluloid)$"
-      "idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$"
-      "idleinhibit fullscreen, class:^(firefox)$"
+      "idleinhibit focus, class:^(zen)$, title:^(.*YouTube.*)$"
+      "idleinhibit fullscreen, class:^(zen)$"
 
       "dimaround, class:^(gcr-prompter)$"
       "dimaround, class:^(xdg-desktop-portal-gtk)$"

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  browser = ["firefox"];
+  browser = ["zen-browser"];
   imageViewer = ["org.gnome.Loupe"];
   videoPlayer = ["io.github.celluloid_player.Celluloid"];
   audioPlayer = ["io.bassi.Amberol"];
