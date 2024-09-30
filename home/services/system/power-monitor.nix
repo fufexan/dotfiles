@@ -26,11 +26,9 @@
     	profile="$AC_PROFILE"
     fi
 
-    # set the new profile
-    if [ $prevProfile != "$profile" ]; then
-    	echo setting power profile to "$profile"
-    	powerprofilesctl set "$profile"
-    fi
+    # set the initial profile
+    echo setting power profile to "$profile"
+    powerprofilesctl set "$profile"
 
     prevProfile="$profile"
     prevStatus="$currentStatus"
