@@ -60,6 +60,17 @@
       zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
       _comp_options+=(globdots)
 
+      # Allow foot to pipe command output
+      function precmd {
+          if ! builtin zle; then
+              print -n "\e]133;D\e\\"
+          fi
+      }
+
+      function preexec {
+          print -n "\e]133;C\e\\"
+      }
+
       ${lib.optionalString config.services.gpg-agent.enable ''
         gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
