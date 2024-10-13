@@ -16,8 +16,10 @@
     group = "users";
   };
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
-  environment.systemPackages = [pkgs.scx];
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+  environment.systemPackages = [
+    pkgs.scx
+  ];
 
   boot = {
     kernelModules = ["i2c-dev"];
