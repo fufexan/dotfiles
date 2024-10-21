@@ -25,8 +25,8 @@ in {
     package = inputs.hyprland.packages.${pkgs.system}.default;
 
     plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-      hyprbars
-      hyprexpo
+      # hyprbars
+      # hyprexpo
     ];
 
     systemd = {
