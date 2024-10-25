@@ -52,7 +52,7 @@ in {
 
     settings = {
       main = {
-        font = "JetBrains Mono:size=10";
+        font = "JetBrains Mono Nerd Font:size=10";
         horizontal-letter-offset = 0;
         vertical-letter-offset = 0;
         pad = "4x4 center";
