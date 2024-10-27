@@ -1,6 +1,4 @@
 {config, ...}: let
-  variant = "dark";
-  c = config.programs.matugen.theme.colors.${variant};
   pointer = config.home.pointerCursor;
 
   cursorName = "Bibata-Modern-Classic-Hyprcursor";
@@ -71,11 +69,11 @@ in {
       groupbar = {
         font_size = 10;
         gradients = false;
-        text_color = "rgb(${c.primary})";
+        text_color = "rgb(b6c4ff)";
       };
 
-      "col.border_active" = "rgba(${c.primary_container}88);";
-      "col.border_inactive" = "rgba(${c.on_primary_container}88)";
+      "col.border_active" = "rgba(35447988)";
+      "col.border_inactive" = "rgba(dce1ff88)";
     };
 
     input = {
@@ -132,9 +130,9 @@ in {
         # order is right-to-left
         hyprbars-button = [
           # close
-          "rgb(${c.error}), 15, , hyprctl dispatch killactive"
+          "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
           # maximize
-          "rgb(${c.primary}), 15, , hyprctl dispatch fullscreen 1"
+          "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
         ];
       };
 

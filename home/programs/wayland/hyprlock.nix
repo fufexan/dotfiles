@@ -4,9 +4,6 @@
   pkgs,
   ...
 }: let
-  variant = "dark";
-  c = config.programs.matugen.theme.colors.${variant};
-
   font_family = "Inter";
 in {
   programs.hyprlock = {
@@ -36,12 +33,12 @@ in {
 
           outline_thickness = 1;
 
-          outer_color = "rgb(${c.primary})";
-          inner_color = "rgb(${c.on_primary_container})";
-          font_color = "rgb(${c.primary_container})";
+          outer_color = "rgb(b6c4ff)";
+          inner_color = "rgb(dce1ff)";
+          font_color = "rgb(354479)";
 
           fade_on_empty = false;
-          placeholder_text = ''<span font_family="${font_family}" foreground="##${c.primary_container}">Password...</span>'';
+          placeholder_text = ''<span font_family="${font_family}" foreground="##354479">Password...</span>'';
 
           dots_spacing = 0.2;
           dots_center = true;
@@ -54,7 +51,7 @@ in {
           text = "$TIME";
           inherit font_family;
           font_size = 50;
-          color = "rgb(${c.primary})";
+          color = "rgb(b6c4ff)";
 
           position = "0, 150";
 
@@ -66,7 +63,7 @@ in {
           text = "cmd[update:3600000] date +'%a %b %d'";
           inherit font_family;
           font_size = 20;
-          color = "rgb(${c.primary})";
+          color = "rgb(b6c4ff)";
 
           position = "0, 50";
 
