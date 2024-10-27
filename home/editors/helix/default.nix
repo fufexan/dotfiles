@@ -15,7 +15,7 @@
     ];
 
     settings = {
-      theme = "catppuccin_mocha";
+      theme = "zed_onedark";
       editor = {
         color-modes = true;
         completion-trigger-len = 1;

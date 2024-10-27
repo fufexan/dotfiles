@@ -5,24 +5,24 @@
 }: let
   colors = {
     dark = {
-      foreground = "cdd6f4"; # Text
-      background = "1e1e2e"; # Base
-      regular0 = "45475a"; # Surface 1
-      regular1 = "f38ba8"; # red
-      regular2 = "a6e3a1"; # green
-      regular3 = "f9e2af"; # yellow
-      regular4 = "89b4fa"; # blue
-      regular5 = "f5c2e7"; # maroon
-      regular6 = "94e2d5"; # teal
-      regular7 = "bac2de"; # Subtext 1
-      bright0 = "585b70"; # Surface 2
-      bright1 = "f38ba8"; # red
-      bright2 = "a6e3a1"; # green
-      bright3 = "f9e2af"; # yellow
-      bright4 = "89b4fa"; # blue
-      bright5 = "f5c2e7"; # maroon
-      bright6 = "94e2d5"; # teal
-      bright7 = "a6adc8"; # Subtext 0
+      foreground = "979eab";
+      background = "282c34";
+      regular0 = "282c34"; # black
+      regular1 = "e06c75"; # red
+      regular2 = "98c379"; # green
+      regular3 = "e5c07b"; # yellow
+      regular4 = "61afef"; # blue
+      regular5 = "be5046"; # magenta
+      regular6 = "56b6c2"; # cyan
+      regular7 = "979eab"; # white
+      bright0 = "393e48"; # bright black
+      bright1 = "d19a66"; # bright red
+      bright2 = "56b6c2"; # bright green
+      bright3 = "e5c07b"; # bright yellow
+      bright4 = "61afef"; # bright blue
+      bright5 = "be5046"; # bright magenta
+      bright6 = "56b6c2"; # bright cyan
+      bright7 = "abb2bf"; # bright white
     };
 
     light = {
