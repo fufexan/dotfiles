@@ -29,9 +29,7 @@ in {
     ];
 
     # binds
-    bind = let
-      monocle = "dwindle:no_gaps_when_only";
-    in
+    bind =
       [
         # compositor commands
         "$mod SHIFT, E, exec, pkill Hyprland"
@@ -44,9 +42,6 @@ in {
         "$mod, T, togglefloating,"
         "$mod, P, pseudo,"
         "$mod ALT, ,resizeactive,"
-
-        # toggle "monocle" (no_gaps_when_only)
-        "$mod, M, exec, hyprctl keyword ${monocle} $(($(hyprctl getoption ${monocle} -j | jaq -r '.int') ^ 1))"
 
         # utility
         # terminal
