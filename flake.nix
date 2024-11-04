@@ -70,7 +70,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    anyrun.url = "github:fufexan/anyrun";
+    anyrun.url = "github:anyrun-org/anyrun";
 
     chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
 
