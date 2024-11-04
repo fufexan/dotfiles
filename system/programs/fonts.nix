@@ -5,6 +5,7 @@
       material-symbols
 
       # Sans(Serif) fonts
+      libertinus
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
@@ -25,12 +26,12 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = let
-      addAll = builtins.mapAttrs (_: v: ["Symbols Nerd Font"] ++ v ++ ["Noto Color Emoji"]);
+      addAll = builtins.mapAttrs (_: v: v ++ ["Noto Color Emoji"]);
     in
       addAll {
-        serif = ["Noto Serif"];
+        serif = ["Libertinus Serif"];
         sansSerif = ["Inter"];
-        monospace = ["JetBrains Mono"];
+        monospace = ["JetBrains Mono Nerd Font"];
         emoji = [];
       };
   };
