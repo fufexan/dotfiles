@@ -15,6 +15,7 @@
   ];
 
   home.packages = with pkgs; [
+    signal-desktop
     tdesktop
 
     gnome-calculator
