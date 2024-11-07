@@ -42,6 +42,7 @@ in {
         "tray.target"
         "graphical-session.target"
       ];
+      After = "graphical-session.target";
     };
     Service = {
       Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
