@@ -1,5 +1,5 @@
 # networking configuration
-{
+{pkgs, ...}: {
   networking = {
     # use quad9 with DNS over TLS
     nameservers = ["9.9.9.9#dns.quad9.net"];
@@ -23,4 +23,6 @@
       dnsovertls = "opportunistic";
     };
   };
+
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = ["" "${pkgs.networkmanager}/bin/nm-online -q"];
 }
