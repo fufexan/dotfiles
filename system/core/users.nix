@@ -3,7 +3,6 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [
-      "adbusers"
       "input"
       "libvirtd"
       "networkmanager"
