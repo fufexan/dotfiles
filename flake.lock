@@ -55,15 +55,16 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1730444665,
-        "narHash": "sha256-i3FxeHjsHw4AePx3AWVVywy92EEobx/ZER4ignWxNrE=",
-        "owner": "anyrun-org",
+        "lastModified": 1731186561,
+        "narHash": "sha256-+jwC6oo7yx40SowZW4SCpTlYS+e0mPKmIuXvsBFNw3g=",
+        "owner": "fufexan",
         "repo": "anyrun",
-        "rev": "b3b4f2253d43af3311b3d3fc86973fc3e9559c33",
+        "rev": "3bc08db41dec30cd4278597c1c4bd7cf66b15fe0",
         "type": "github"
       },
       "original": {
-        "owner": "anyrun-org",
+        "owner": "fufexan",
+        "ref": "launch-prefix",
         "repo": "anyrun",
         "type": "github"
       }
