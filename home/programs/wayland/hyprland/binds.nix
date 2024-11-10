@@ -1,4 +1,4 @@
-{lib, ...}: let
+let
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
   workspaces = builtins.concatLists (builtins.genList (
       x: let
@@ -13,12 +13,11 @@
     )
     10);
 
-  toggle = program: service: let
+  toggle = program: let
     prog = builtins.substring 0 14 program;
-    runserv = lib.optionalString service "run-as-service";
-  in "pkill ${prog} || ${runserv} ${program}";
+  in "pkill ${prog} || uwsm app -- ${program}";
 
-  runOnce = program: "pgrep ${program} || ${program}";
+  runOnce = program: "pgrep ${program} || uwsm app -- ${program}";
 in {
   wayland.windowManager.hyprland.settings = {
     # mouse movements
@@ -45,20 +44,20 @@ in {
 
         # utility
         # terminal
-        "$mod, Return, exec, run-as-service foot"
+        "$mod, Return, exec, uwsm app -- foot"
         # logout menu
-        "$mod, Escape, exec, ${toggle "wlogout" true} -p layer-shell"
+        "$mod, Escape, exec, ${toggle "wlogout"} -p layer-shell"
         # lock screen
-        "$mod, L, exec, pgrep hyprlock || hyprlock"
+        "$mod, L, exec, ${runOnce "hyprlock"}"
         # lock screen, to be used with the special key Fn+F10 on my keyboard
-        "$mod, I, exec, pgrep hyprlock || hyprlock"
+        "$mod, I, exec, ${runOnce "hyprlock"}"
         # select area to perform OCR on
         "$mod, O, exec, ${runOnce "wl-ocr"}"
         ", XF86Favorites, exec, ${runOnce "wl-ocr"}"
         # open calculator
-        ", XF86Calculator, exec, ${toggle "gnome-calculator" true}"
+        ", XF86Calculator, exec, ${toggle "gnome-calculator"}"
         # open settings
-        "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome gnome-control-center"
+        "$mod, U, exec, XDG_CURRENT_DESKTOP=gnome ${runOnce "gnome-control-center"}"
 
         # move focus
         "$mod, left, movefocus, l"
@@ -99,7 +98,7 @@ in {
 
     bindr = [
       # launcher
-      "$mod, SUPER_L, exec, ${toggle "anyrun" true}"
+      "$mod, SUPER_L, exec, ${toggle "anyrun"}"
     ];
 
     bindl = [
