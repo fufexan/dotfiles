@@ -7,9 +7,11 @@
   inherit (config.wayland.windowManager.hyprland.settings.general) gaps_in gaps_out border_size;
   inherit (config.wayland.windowManager.hyprland.settings.decoration) rounding;
   inherit (builtins) concatStringsSep;
+  inherit (lib.lists) flatten;
+
+  workspaceSelectors = ["w[t1]" "w[tg1]" "f[1]"];
 
   toggleSmartGaps = let
-    workspaceSelectors = ["w[t1]" "w[tg1]" "f[1]"];
     forEach = f: concatStringsSep "\n" (map f workspaceSelectors);
   in
     pkgs.writeShellScript "toggleSmartGaps" ''
@@ -33,20 +35,13 @@ in {
   # Ref https://wiki.hyprland.org/Configuring/Workspace-Rules/
   # "Smart gaps" / "No gaps when only"
   wayland.windowManager.hyprland.settings = {
-    workspace = [
-      "w[t1], gapsout:0, gapsin:0"
-      "w[tg1], gapsout:0, gapsin:0"
-      "f[1], gapsout:0, gapsin:0"
-    ];
+    workspace = map (x: "${x}, gapsout:0, gapsin:0") workspaceSelectors;
 
-    windowrulev2 = [
-      "bordersize 0, floating:0, onworkspace:w[t1]"
-      "rounding 0, floating:0, onworkspace:w[t1]"
-      "bordersize 0, floating:0, onworkspace:w[tg1]"
-      "rounding 0, floating:0, onworkspace:w[tg1]"
-      "bordersize 0, floating:0, onworkspace:f[1]"
-      "rounding 0, floating:0, onworkspace:f[1]"
-    ];
+    windowrulev2 = flatten (map (x: [
+        "bordersize 0, floating:0, onworkspace:${x}"
+        "rounding 0, floating:0, onworkspace:${x}"
+      ])
+      workspaceSelectors);
 
     bind = [
       "$mod, M, exec, ${toggleSmartGaps}"
