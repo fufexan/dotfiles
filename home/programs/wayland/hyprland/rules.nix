@@ -54,8 +54,9 @@
       "workspace special silent, title:^(Zen — Sharing Indicator)$"
       "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
 
-      # start spotify in ws9
+      # start Spotify and YouTube Music in ws9
       "workspace 9 silent, title:^(Spotify( Premium)?)$"
+      "workspace 9 silent, title:^(YouTube Music)$"
 
       # idle inhibit while watching videos
       "idleinhibit focus, class:^(mpv|.+exe|celluloid)$"
@@ -65,6 +66,7 @@
       "dimaround, class:^(gcr-prompter)$"
       "dimaround, class:^(xdg-desktop-portal-gtk)$"
       "dimaround, class:^(polkit-gnome-authentication-agent-1)$"
+      "dimaround, class:^(zen)$, title:^(File Upload)$"
 
       # fix xwayland apps
       "rounding 0, xwayland:1"
