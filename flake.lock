@@ -1244,6 +1244,26 @@
         "type": "github"
       }
     },
+    "quickshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731635656,
+        "narHash": "sha256-l02a7v+G4YpYzBTTvXlBJt8fsilHnNRJ4x50ad/dyrY=",
+        "ref": "refs/heads/master",
+        "rev": "60dfa67ec7f20e574a1ecf112a759aac30523ce2",
+        "revCount": 372,
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -1269,6 +1289,7 @@
         "nixpkgs": "nixpkgs_6",
         "nixpkgs-howdy": "nixpkgs-howdy",
         "pre-commit-hooks": "pre-commit-hooks_2",
+        "quickshell": "quickshell",
         "systems": "systems_5",
         "tailray": "tailray",
         "yazi": "yazi",

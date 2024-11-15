@@ -10,6 +10,7 @@
 
     # services
     ../../services/ags
+    ../../services/quickshell
     # ../../services/cinny.nix
 
     # media services
