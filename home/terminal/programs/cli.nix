@@ -7,6 +7,7 @@
 
     # misc
     libnotify
+    sshfs
 
     # utils
     du-dust
