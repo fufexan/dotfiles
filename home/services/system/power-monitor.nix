@@ -9,7 +9,7 @@
     BAT_CAP="$BAT/capacity"
 
     AC_PROFILE="performance"
-    BAT_PROFILE="power-saver"
+    BAT_PROFILE="balanced" # power-saver is too choppy to use
 
     # wait a while if needed
     [ -z "$STARTUP_WAIT" ] || sleep "$STARTUP_WAIT"
