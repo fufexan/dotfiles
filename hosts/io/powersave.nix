@@ -7,10 +7,6 @@ let
     for i in /sys/bus/pci/devices/*; do
       echo auto > "$i/power/control"
     done
-
-    echo auto > /sys/bus/i2c/devices/i2c-0/device/power/control
-    echo auto > /sys/bus/i2c/devices/i2c-2/device/power/control
-    echo auto > /sys/bus/i2c/devices/i2c-5/device/power/control
   '';
 in {
   systemd.services.powersave = {
