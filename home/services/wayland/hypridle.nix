@@ -5,14 +5,7 @@
   inputs,
   ...
 }: let
-  suspendScript = pkgs.writeShellScript "suspend-script" ''
-    # check if any player has status "Playing"
-    ${lib.getExe pkgs.playerctl} -a status | ${lib.getExe pkgs.ripgrep} Playing -q
-    # only suspend if nothing is playing
-    if [ $? == 1 ]; then
-      ${pkgs.systemd}/bin/systemctl suspend
-    fi
-  '';
+  lock = "${pkgs.systemd}/bin/loginctl lock-session";
 
   brillo = lib.getExe pkgs.brillo;
 
@@ -26,19 +19,16 @@ in {
     package = inputs.hypridle.packages.${pkgs.system}.hypridle;
 
     settings = {
-      general = {
-        lock_cmd = lib.getExe config.programs.hyprlock.package;
-        before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
-      };
+      general.lock_cmd = lib.getExe config.programs.hyprlock.package;
 
       listener = [
         {
           timeout = timeout - 10;
           # save the current brightness and dim the screen over a period of
-          # 1 second
-          on-timeout = "${brillo} -O; ${brillo} -u 1000000 -S 10";
-          # brighten the screen over a period of 500ms to the saved value
-          on-resume = "${brillo} -I -u 500000";
+          # 500 ms
+          on-timeout = "${brillo} -O; ${brillo} -u 500000 -S 10";
+          # brighten the screen over a period of 250ms to the saved value
+          on-resume = "${brillo} -I -u 250000";
         }
         {
           inherit timeout;
@@ -47,11 +37,38 @@ in {
         }
         {
           timeout = timeout + 10;
-          on-timeout = suspendScript.outPath;
+          on-timeout = lock;
         }
       ];
     };
   };
 
   systemd.user.services.hypridle.Unit.After = lib.mkForce "graphical-session.target";
+
+  # Use in place of hypridle's before_sleep_cmd, since systemd does not wait for
+  # it to complete
+  systemd.user.services.before-suspend = let
+    suspendScript = pkgs.writeShellScript "suspend-script" ''
+      # Pause media before suspend
+      ${lib.getExe pkgs.playerctl} pause
+
+      # Lock the compositor
+      ${lock}
+
+      # Wait for lockscreen to be up
+      sleep 3
+    '';
+  in {
+    Install.RequiredBy = ["suspend.target"];
+
+    Service = {
+      ExecStart = suspendScript.outPath;
+      Type = "forking";
+    };
+
+    Unit = {
+      Description = "Commands run before suspend";
+      PartOf = "suspend.target";
+    };
+  };
 }
