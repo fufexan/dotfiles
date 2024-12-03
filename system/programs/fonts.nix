@@ -16,7 +16,8 @@
       jetbrains-mono
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["NerdFontsSymbolsOnly" "JetBrainsMono"];})
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.symbols-only
     ];
 
     # causes more issues than it solves
