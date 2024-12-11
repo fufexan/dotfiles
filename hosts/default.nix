@@ -41,6 +41,7 @@
             home-manager = {
               users.mihai.imports = homeImports."mihai@io";
               extraSpecialArgs = specialArgs;
+              backupFileExtension = ".hm-backup";
             };
           }
 
@@ -67,6 +68,7 @@
           home-manager = {
             users.mihai.imports = homeImports.server;
             extraSpecialArgs = specialArgs;
+            backupFileExtension = ".hm-backup";
           };
         }
       ];
