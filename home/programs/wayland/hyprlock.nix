@@ -49,7 +49,7 @@
 
           shadow_color = "rgba(0, 0, 0, 0.1)";
           shadow_size = 7;
-          shadow_passes = 1;
+          shadow_passes = 2;
         }
       ];
 
@@ -64,6 +64,11 @@
 
           valign = "center";
           halign = "center";
+
+          shadow_color = "rgba(0, 0, 0, 0.1)";
+          shadow_size = 20;
+          shadow_passes = 2;
+          shadow_boost = 0.3;
         }
         {
           monitor = "";
@@ -75,6 +80,11 @@
 
           valign = "center";
           halign = "center";
+
+          shadow_color = "rgba(0, 0, 0, 0.1)";
+          shadow_size = 20;
+          shadow_passes = 2;
+          shadow_boost = 0.3;
         }
       ];
     };
