@@ -74,7 +74,7 @@
 
     anyrun.url = "github:fufexan/anyrun/launch-prefix";
 
-    chaotic.url = "https://flakehub.com/f/chaotic-cx/nyx/*.tar.gz";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     helix.url = "github:helix-editor/helix";
 

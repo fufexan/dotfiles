@@ -111,16 +111,18 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1732922729,
-        "narHash": "sha256-vp02vUhYVA2yECXTPXifUgb3YtEPYaerpD6lts99010=",
-        "rev": "e581215cbee1ccf67a08f478d3c49808bc93a523",
-        "revCount": 1531,
-        "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/chaotic-cx/nyx/0.1.1531%2Brev-e581215cbee1ccf67a08f478d3c49808bc93a523/01937a42-9657-7647-a534-f2c7fb2bf814/source.tar.gz?rev=e581215cbee1ccf67a08f478d3c49808bc93a523&revCount=1531"
+        "lastModified": 1733967201,
+        "narHash": "sha256-gfA/6BUhFmrfTMaTNToHm5Lm9c/snG7ED4W/x4vCGJs=",
+        "owner": "chaotic-cx",
+        "repo": "nyx",
+        "rev": "1559608a73a9211c7f78e7a0a8c13caca9f31006",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://flakehub.com/f/chaotic-cx/nyx/%2A.tar.gz"
+        "owner": "chaotic-cx",
+        "ref": "nyxpkgs-unstable",
+        "repo": "nyx",
+        "type": "github"
       }
     },
     "crane": {
