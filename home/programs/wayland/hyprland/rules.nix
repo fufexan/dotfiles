@@ -85,7 +85,19 @@
       "plugin:hyprbars:nobar, floating:0"
 
       # less sensitive scroll for some windows
-      "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser)$"
+      # browser(-based)
+      "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser|chrome-.*)$"
+      "scrolltouchpad 0.1, class:^(obsidian)$"
+      # GTK3
+      "scrolltouchpad 0.1, class:^(com.github.xournalpp.xournalpp)$"
+      "scrolltouchpad 0.1, class:^(libreoffice.*)$"
+      "scrolltouchpad 0.1, class:^(.virt-manager-wrapped)$"
+      "scrolltouchpad 0.1, class:^(xdg-desktop-portal-gtk)$"
+      # Qt5
+      "scrolltouchpad 0.1, class:^(org.prismlauncher.PrismLauncher)$"
+      "scrolltouchpad 0.1, class:^(org.kde.kdeconnect.app)$"
+      # Others
+      "scrolltouchpad 0.1, class:^(org.pwmt.zathura)$"
     ];
   };
 }
