@@ -83,6 +83,9 @@
 
       # don't render hyprbars on tiling windows
       "plugin:hyprbars:nobar, floating:0"
+
+      # less sensitive scroll for some windows
+      "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser)$"
     ];
   };
 }

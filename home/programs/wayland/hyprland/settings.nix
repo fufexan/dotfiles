@@ -87,7 +87,6 @@ in {
       follow_mouse = 1;
       accel_profile = "flat";
       tablet.output = "current";
-      touchpad.scroll_factor = 0.1;
     };
 
     dwindle = {
