@@ -42,6 +42,9 @@
       "text/plain" = ["Helix"];
       "x-scheme-handler/chrome" = ["chromium-browser"];
       "inode/directory" = ["yazi"];
+      # Full entry is org.telegram.desktop.desktop
+      "x-scheme-handler/tg" = ["org.telegram.desktop"];
+      "x-scheme-handler/tonsite" = ["org.telegram.desktop"];
     }
     // image
     // video
