@@ -26,9 +26,11 @@
       "x-extension-shtml"
       "x-extension-xht"
       "x-extension-xhtml"
+      "xhtml+xml"
     ])
     // (xdgAssociations "x-scheme-handler" browser [
       "about"
+      "chrome"
       "ftp"
       "http"
       "https"
@@ -40,7 +42,6 @@
       "application/pdf" = ["org.pwmt.zathura-pdf-mupdf"];
       "text/html" = browser;
       "text/plain" = ["Helix"];
-      "x-scheme-handler/chrome" = ["chromium-browser"];
       "inode/directory" = ["yazi"];
       # Full entry is org.telegram.desktop.desktop
       "x-scheme-handler/tg" = ["org.telegram.desktop"];
