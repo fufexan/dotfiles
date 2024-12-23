@@ -15,6 +15,7 @@
   ];
 
   home.packages = with pkgs; [
+    halloy
     signal-desktop
     tdesktop
 
@@ -22,7 +23,7 @@
     gnome-control-center
 
     overskride
-    mission-center
+    resources
     wineWowPackages.wayland
 
     inputs.nix-matlab.packages.${pkgs.system}.matlab

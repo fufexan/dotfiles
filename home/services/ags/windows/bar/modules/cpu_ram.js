@@ -65,7 +65,7 @@ const ram = {
 
 export default () =>
   Widget.EventBox({
-    onPrimaryClick: () => Utils.execAsync(["missioncenter"]),
+    onPrimaryClick: () => Utils.execAsync(["resources"]),
 
     child: Widget.Box({
       className: "system-info module",
