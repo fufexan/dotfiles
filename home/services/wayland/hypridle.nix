@@ -44,31 +44,4 @@ in {
   };
 
   systemd.user.services.hypridle.Unit.After = lib.mkForce "graphical-session.target";
-
-  # Use in place of hypridle's before_sleep_cmd, since systemd does not wait for
-  # it to complete
-  systemd.user.services.before-suspend = let
-    suspendScript = pkgs.writeShellScript "suspend-script" ''
-      # Pause media before suspend
-      ${lib.getExe pkgs.playerctl} pause
-
-      # Lock the compositor
-      ${lock}
-
-      # Wait for lockscreen to be up
-      sleep 3
-    '';
-  in {
-    Install.RequiredBy = ["suspend.target"];
-
-    Service = {
-      ExecStart = suspendScript.outPath;
-      Type = "forking";
-    };
-
-    Unit = {
-      Description = "Commands run before suspend";
-      PartOf = "suspend.target";
-    };
-  };
 }
