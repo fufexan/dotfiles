@@ -69,7 +69,10 @@
       # last commit I had before ags switched to astal (thus breaking my config)
       # TODO: set up quickshell ASAP
       url = "github:Aylur/ags/60180a184cfb32b61a1d871c058b31a3b9b0743d";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
 
     anyrun.url = "github:fufexan/anyrun/launch-prefix";
@@ -102,7 +105,10 @@
 
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
     };
 
     pre-commit-hooks = {
@@ -141,6 +147,7 @@
     hyprlock = {
       url = "github:hyprwm/hyprlock";
       inputs = {
+        hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
         nixpkgs.follows = "hyprland/nixpkgs";
@@ -151,6 +158,7 @@
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
       inputs = {
+        hyprgraphics.follows = "hyprland/hyprgraphics";
         hyprlang.follows = "hyprland/hyprlang";
         hyprutils.follows = "hyprland/hyprutils";
         nixpkgs.follows = "hyprland/nixpkgs";
