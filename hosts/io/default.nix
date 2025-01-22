@@ -32,7 +32,7 @@
   environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
 
   hardware = {
-    xpadneo.enable = true;
+    # xpadneo.enable = true;
     sensor.iio.enable = true;
   };
 
