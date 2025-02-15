@@ -9,8 +9,7 @@
       "eDP-1, preferred, auto, 1.600000"
     ];
 
-    device = {
-      name = "elan2841:00-04f3:31eb-touchpad";
+    "device[elan2841:00-04f3:31eb-touchpad]" = {
       accel_profile = "custom ${accelpoints}";
       scroll_points = accelpoints;
       natural_scroll = true;

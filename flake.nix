@@ -122,7 +122,7 @@
     yazi.url = "github:sxyazi/yazi";
 
     # hyprwm
-    hyprland.url = "github:hyprwm/hyprland";
+    hyprland.url = "github:hyprwm/hyprland/nix-module";
 
     hypridle = {
       url = "github:hyprwm/hypridle";

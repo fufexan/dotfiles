@@ -59,15 +59,14 @@ in {
       };
     };
 
-    animations = {
-      enabled = true;
-      animation = [
-        "border, 1, 2, default"
-        "fade, 1, 4, default"
-        "windows, 1, 3, default, popin 80%"
-        "workspaces, 1, 2, default, slide"
-      ];
-    };
+    animations.enabled = true;
+
+    animation = [
+      "border, 1, 2, default"
+      "fade, 1, 4, default"
+      "windows, 1, 3, default, popin 80%"
+      "workspaces, 1, 2, default, slide"
+    ];
 
     group = {
       groupbar = {
@@ -96,9 +95,6 @@ in {
     };
 
     misc = {
-      # disable auto polling for config file changes
-      disable_autoreload = true;
-
       force_default_wallpaper = 0;
 
       # disable dragging animation
@@ -116,7 +112,8 @@ in {
 
     # touchpad gestures
     gestures = {
-      workspace_swipe = true;
+      # Disable because of bug https://github.com/hyprwm/Hyprland/issues/9262
+      # workspace_swipe = true;
       workspace_swipe_forever = true;
     };
 
@@ -124,35 +121,35 @@ in {
 
     debug.disable_logs = false;
 
-    plugin = {
-      csgo-vulkan-fix = {
-        res_w = 1280;
-        res_h = 800;
-        class = "cs2";
-      };
+    # plugin = {
+    #   csgo-vulkan-fix = {
+    #     res_w = 1280;
+    #     res_h = 800;
+    #     class = "cs2";
+    #   };
 
-      hyprbars = {
-        bar_height = 20;
-        bar_precedence_over_border = true;
+    #   hyprbars = {
+    #     bar_height = 20;
+    #     bar_precedence_over_border = true;
 
-        # order is right-to-left
-        hyprbars-button = [
-          # close
-          "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
-          # maximize
-          "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
-        ];
-      };
+    #     # order is right-to-left
+    #     hyprbars-button = [
+    #       # close
+    #       "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
+    #       # maximize
+    #       "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
+    #     ];
+    #   };
 
-      hyprexpo = {
-        columns = 3;
-        gap_size = 4;
-        bg_col = "rgb(000000)";
+    #   hyprexpo = {
+    #     columns = 3;
+    #     gap_size = 4;
+    #     bg_col = "rgb(000000)";
 
-        enable_gesture = true;
-        gesture_distance = 300;
-        gesture_positive = false;
-      };
-    };
+    #     enable_gesture = true;
+    #     gesture_distance = 300;
+    #     gesture_positive = false;
+    #   };
+    # };
   };
 }

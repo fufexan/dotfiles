@@ -17,10 +17,9 @@
     group = "users";
   };
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
-
   boot = {
     kernelModules = ["i2c-dev"];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_pstate=active"
       "ideapad_laptop.allow_v4_dytc=Y"
