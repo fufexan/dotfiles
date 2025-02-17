@@ -4,7 +4,6 @@
   ...
 }: {
   imports = [
-    # (import ../../../modules/hyprland.nix inputs)
     inputs.hyprland.nixosModules.default
 
     ./binds.nix
@@ -23,6 +22,7 @@
   # enable hyprland and required options
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
 
     plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
       # hyprbars
