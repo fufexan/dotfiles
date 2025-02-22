@@ -20,5 +20,8 @@
 
     # videos
     celluloid
+
+    # torrents
+    transmission_4-gtk
   ];
 }

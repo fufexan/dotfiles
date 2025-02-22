@@ -43,6 +43,7 @@
       "text/html" = browser;
       "text/plain" = ["Helix"];
       "inode/directory" = ["yazi"];
+      "x-scheme-handler/magnet" = ["transmission-gtk"];
       # Full entry is org.telegram.desktop.desktop
       "x-scheme-handler/tg" = ["org.telegram.desktop"];
       "x-scheme-handler/tonsite" = ["org.telegram.desktop"];
