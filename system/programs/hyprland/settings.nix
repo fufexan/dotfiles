@@ -107,7 +107,7 @@ in {
     render = {
       direct_scanout = true;
       # Fixes some apps stuttering (xournalpp, hyprlock). Possibly an amdgpu bug
-      allow_early_buffer_release = true;
+      # allow_early_buffer_release = true;
     };
 
     # touchpad gestures

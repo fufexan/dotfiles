@@ -88,6 +88,8 @@
       # browser(-based)
       "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser|chrome-.*)$"
       "scrolltouchpad 0.1, class:^(obsidian)$"
+      "scrolltouchpad 0.1, class:^(steam)$"
+      "scrolltouchpad 0.1, class:^(Zotero)$"
       # GTK3
       "scrolltouchpad 0.1, class:^(com.github.xournalpp.xournalpp)$"
       "scrolltouchpad 0.1, class:^(libreoffice.*)$"
