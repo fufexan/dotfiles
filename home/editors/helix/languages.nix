@@ -58,11 +58,11 @@
         }
         {
           name = "python";
-          language-servers = ["basedpyright"];
-          formatter = {
-            command = lib.getExe pkgs.black;
-            args = ["-" "--quiet" "--line-length 100"];
-          };
+          auto-format = true;
+          language-servers = [
+            "basedpyright"
+            "ruff"
+          ];
         }
         {
           name = "typescript";
@@ -134,6 +134,11 @@
             sortImports.ts = true;
           };
         };
+      };
+
+      ruff = {
+        command = lib.getExe pkgs.ruff;
+        args = ["server"];
       };
 
       vscode-css-language-server = {
