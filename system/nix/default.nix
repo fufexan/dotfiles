@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./builders.nix
     ./nh.nix
     ./nixpkgs.nix
     ./substituters.nix
