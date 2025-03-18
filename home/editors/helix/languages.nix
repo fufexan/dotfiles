@@ -69,6 +69,11 @@
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
         }
+        {
+          name = "typst";
+          auto-format = true;
+          language-servers = ["tinymist"];
+        }
       ]
       ++ prettierLangs langs;
 
@@ -120,6 +125,16 @@
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+      };
+
+      tinymist = {
+        command = lib.getExe pkgs.tinymist;
+        config = {
+          exportPdf = "onType";
+          outputPath = "$root/target/$dir/$name";
+          formatterMode = "typstyle";
+          formatterPrintWidth = 80;
+        };
       };
 
       typescript-language-server = {
