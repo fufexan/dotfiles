@@ -65,6 +65,10 @@
           ];
         }
         {
+          name = "qml";
+          language-servers = ["qmlls"];
+        }
+        {
           name = "typescript";
           auto-format = true;
           language-servers = ["dprint" "typescript-language-server"];
@@ -125,6 +129,11 @@
       nil = {
         command = lib.getExe pkgs.nil;
         config.nil.formatting.command = ["${lib.getExe pkgs.alejandra}" "-q"];
+      };
+
+      qmlls = {
+        command = "${pkgs.qt6.qtdeclarative}/bin/qmlls";
+        args = ["-E"];
       };
 
       tinymist = {
