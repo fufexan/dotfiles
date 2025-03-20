@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import "../utils"
 import "../components/bar"
+import "../components/bar/workspaces"
 
 Scope {
     PanelWindow {
