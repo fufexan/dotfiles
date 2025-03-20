@@ -1,6 +1,9 @@
+//@ pragma NativeTextRendering
+
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import "../utils"
 import "../components/bar"
 
 Scope {
@@ -21,7 +24,7 @@ Scope {
             id: bar
             anchors.fill: parent
 
-            color: "transparent"
+            color: Colors.bgBlur
 
             // left
             RowLayout {
@@ -30,8 +33,9 @@ Scope {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.top: parent.top
-                anchors.leftMargin: 5
 
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
                 spacing: 5
 
                 Workspaces {}
@@ -45,6 +49,8 @@ Scope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
 
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
                 spacing: 5
 
                 Mpris {}
@@ -57,8 +63,9 @@ Scope {
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
                 anchors.top: parent.top
-                anchors.rightMargin: 5
 
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
                 spacing: 5
 
                 Tray {}

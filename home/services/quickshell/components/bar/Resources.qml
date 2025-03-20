@@ -26,7 +26,7 @@ Rectangle {
                 color: textColor
                 font.pointSize: textSize
                 text: "CPU"
-                Layout.alignment: Qt.AlignVCenter
+                Layout.alignment: Qt.AlignCenter
             }
             Label {
                 color: valueColor
