@@ -19,7 +19,11 @@ in {
     package = inputs.hypridle.packages.${pkgs.system}.hypridle;
 
     settings = {
-      general.lock_cmd = lib.getExe config.programs.hyprlock.package;
+      general = {
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        lock_cmd = "pgrep hyprlock || ${lib.getExe config.programs.hyprlock.package}";
+      };
 
       listener = [
         {

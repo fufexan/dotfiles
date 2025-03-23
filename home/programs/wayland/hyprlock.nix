@@ -17,6 +17,8 @@
         no_fade_in = true;
       };
 
+      animation = "inputFieldDots, 1, 2, linear";
+
       background = [
         {
           monitor = "";
