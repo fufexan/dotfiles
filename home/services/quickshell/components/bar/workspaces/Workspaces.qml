@@ -20,36 +20,36 @@ Rectangle {
         implicitWidth: (parent.height * 0.5 + spacing) * 2 - spacing
         anchors.centerIn: parent
 
-        spacing: 5
+        spacing: height / 7
 
-        // sample workspace indicators
         Repeater {
             id: repeater
 
             model: HyprlandUtils.maxWorkspace
 
             Workspace {
+                id: ws
                 required property int index
-                property HyprlandWorkspace currWorkspace: HyprlandUtils.workspaces[index] || null
+                property HyprlandWorkspace currWorkspace: Hyprland.workspaces.values.find(e => e.id == index + 1) || null
                 property bool nonexistent: currWorkspace === null
+                property bool focused: index + 1 === Hyprland.focusedMonitor.activeWorkspace.id
+
+                Layout.preferredWidth: {
+                    if (focused) {
+                        return parent.height * 0.8;
+                    } else {
+                        return parent.height * 0.4;
+                    }
+                }
+
                 color: {
                     if (nonexistent) {
-                        return Colors.bgBlur
-                    } else if (currWorkspace === HyprlandUtils.focusedWorkspace) {
-                        return Colors.fg
+                        return Colors.bgBlur;
                     } else {
-                        return Colors.bgBar
+                        return Colors.monitorColors[Hyprland.monitors.values.indexOf(Hyprland.workspaces.values.find(e => e.id === index + 1).monitor)];
                     }
                 }
             }
-
-            // Rectangle {
-            //     color: 'yellow'
-            //     Layout.preferredWidth: parent.height * 0.4
-            //     Layout.preferredHeight: parent.height * 0.4
-            //     Layout.alignment: Qt.AlignHCenter
-            //     radius: height / 2
-            // }
         }
     }
 }

@@ -35,9 +35,9 @@ Scope {
                 anchors.left: parent.left
                 anchors.top: parent.top
 
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                spacing: 5
+                anchors.leftMargin: height / 4
+                anchors.rightMargin: height / 4
+                spacing: height / 4
 
                 Workspaces {}
             }
@@ -50,9 +50,9 @@ Scope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
 
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                spacing: 5
+                anchors.leftMargin: height / 4
+                anchors.rightMargin: height / 4
+                spacing: height / 4
 
                 Mpris {}
             }
@@ -65,9 +65,9 @@ Scope {
                 anchors.right: parent.right
                 anchors.top: parent.top
 
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                spacing: 5
+                anchors.leftMargin: height / 4
+                anchors.rightMargin: height / 4
+                spacing: height / 4
 
                 Tray {}
                 Resources {}
