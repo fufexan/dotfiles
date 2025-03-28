@@ -71,7 +71,7 @@ Scope {
 
                 Tray {}
                 Resources {}
-                System {}
+                Battery {}
                 Clock {}
             }
         }
