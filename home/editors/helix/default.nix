@@ -15,7 +15,7 @@
     ];
 
     settings = {
-      theme = "zed_onedark";
+      theme = "onedark";
       editor = {
         color-modes = true;
         completion-trigger-len = 1;
