@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
@@ -46,7 +47,7 @@
         {
           name = "javascript";
           auto-format = true;
-          language-servers = ["dprint" "typescript-language-server"];
+          language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
         }
         {
           name = "json";
@@ -55,6 +56,10 @@
         {
           name = "markdown";
           language-servers = ["dprint" "markdown-oxide"];
+        }
+        {
+          name = "nix";
+          language-servers = ["nil" "uwu-colors"];
         }
         {
           name = "python";
@@ -66,12 +71,12 @@
         }
         {
           name = "qml";
-          language-servers = ["qmlls"];
+          language-servers = ["qmlls" "uwu-colors"];
         }
         {
           name = "typescript";
           auto-format = true;
-          language-servers = ["dprint" "typescript-language-server"];
+          language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
         }
         {
           name = "typst";
@@ -136,6 +141,11 @@
         args = ["-E"];
       };
 
+      ruff = {
+        command = lib.getExe pkgs.ruff;
+        args = ["server"];
+      };
+
       tinymist = {
         command = lib.getExe pkgs.tinymist;
         config = {
@@ -160,9 +170,9 @@
         };
       };
 
-      ruff = {
-        command = lib.getExe pkgs.ruff;
-        args = ["server"];
+      uwu-colors = {
+        command = "${inputs.uwu-colors.packages.${pkgs.system}.default}/bin/uwu_colors";
+        # command = "uwu_colors"; # useful for testing
       };
 
       vscode-css-language-server = {

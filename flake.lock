@@ -1419,6 +1419,7 @@
         "quickshell": "quickshell",
         "systems": "systems_4",
         "tailray": "tailray",
+        "uwu-colors": "uwu-colors",
         "yazi": "yazi",
         "zen-browser": "zen-browser"
       }
@@ -1595,6 +1596,29 @@
       "original": {
         "owner": "NotAShelf",
         "repo": "tailray",
+        "type": "github"
+      }
+    },
+    "uwu-colors": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": [
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743271498,
+        "narHash": "sha256-DFBPB47toRVOeUYscSWMQSEafTGo698Ph+DqR/7KQb8=",
+        "owner": "q60",
+        "repo": "uwu_colors",
+        "rev": "bf7aa1196e21c393045128a1d5a192587bfa24a7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "q60",
+        "repo": "uwu_colors",
         "type": "github"
       }
     },
