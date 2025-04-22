@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   # pointer = config.home.pointerCursor;
   cursorName = "Bibata-Modern-Classic-Hyprcursor";
 in {
@@ -113,6 +118,14 @@ in {
       workspace_swipe = true;
       workspace_swipe_forever = true;
     };
+
+    permission = [
+      # Allow xdph and grim
+      "${config.programs.hyprland.portalPackage}/libexec/.xdg-desktop-portal-hyprland-wrapped, screencopy, allow"
+      "${lib.getExe pkgs.grim}, screencopy, allow"
+      # Optionally allow non-pipewire capturing
+      "${lib.getExe pkgs.wl-screenrec}, screencopy, allow"
+    ];
 
     xwayland.force_zero_scaling = true;
 
