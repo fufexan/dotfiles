@@ -5,7 +5,7 @@
 }: let
   colors = {
     dark = {
-      foreground = "5c6370";
+      foreground = "abb2bf";
       background = "1e2127";
       regular0 = "1e2127"; # black
       regular1 = "e06c75"; # red
