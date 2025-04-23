@@ -31,7 +31,9 @@
 
   nixpkgsFromInputsPath = flake.inputs.nixpkgs.outPath or "";
   nixpkgs =
-    flake.pkgs.${currentSystem}.nixpkgs
+    flake.pkgs.${
+      currentSystem
+    }.nixpkgs
     or (
       if nixpkgsFromInputsPath != ""
       then import nixpkgsFromInputsPath {}
