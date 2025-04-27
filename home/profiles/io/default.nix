@@ -2,6 +2,7 @@
   imports = [
     # editors
     ../../editors/helix
+    ../../editors/jetbrains/idea.nix
 
     # programs
     ../../programs
