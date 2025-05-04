@@ -131,24 +131,24 @@ in {
 
     debug.disable_logs = false;
 
-    # plugin = {
+    plugin.hyprbars = {
+      bar_height = 20;
+      # bar_precedence_over_border = true;
+      icon_on_hover = true;
+    };
+
+    # order is right-to-left
+    hyprbars-button = [
+      # close
+      "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
+      # maximize
+      "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
+    ];
+
     #   csgo-vulkan-fix = {
     #     res_w = 1280;
     #     res_h = 800;
     #     class = "cs2";
-    #   };
-
-    #   hyprbars = {
-    #     bar_height = 20;
-    #     bar_precedence_over_border = true;
-
-    #     # order is right-to-left
-    #     hyprbars-button = [
-    #       # close
-    #       "rgb(ffb4ab), 15, , hyprctl dispatch killactive"
-    #       # maximize
-    #       "rgb(b6c4ff), 15, , hyprctl dispatch fullscreen 1"
-    #     ];
     #   };
 
     #   hyprexpo = {
@@ -160,6 +160,5 @@ in {
     #     gesture_distance = 300;
     #     gesture_positive = false;
     #   };
-    # };
   };
 }
