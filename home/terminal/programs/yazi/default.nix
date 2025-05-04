@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -22,6 +23,7 @@
 
     enableBashIntegration = config.programs.bash.enable;
     enableZshIntegration = config.programs.zsh.enable;
+    shellWrapperName = "y";
 
     settings = {
       manager = {
@@ -42,5 +44,13 @@
         cache_dir = config.xdg.cacheHome;
       };
     };
+
+    # Run ripdrag when pressing C-n
+    keymap.manager.prepend_keymap = [
+      {
+        on = ["<C-n>"];
+        run = ''shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm'';
+      }
+    ];
   };
 }
