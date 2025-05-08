@@ -28,6 +28,8 @@
 
     inputs.nix-matlab.packages.${pkgs.system}.matlab
     zotero
+
+    unityhub
   ];
 
   xdg.configFile."matlab/nix.sh".text = "INSTALL_DIR=$XDG_DATA_HOME/matlab/installation";
