@@ -15,76 +15,90 @@
         command = lib.getExe pkgs.nodePackages.prettier;
         args = ["--parser" lang];
       };
-      prettierLangs = map (e: {
-        name = e;
-        formatter = prettier e;
-      });
-      langs = ["css" "scss" "html"];
-    in
-      [
-        {
-          name = "bash";
-          auto-format = true;
-          formatter = {
-            command = lib.getExe pkgs.shfmt;
-            args = ["-i" "2"];
-          };
-        }
-        {
-          name = "clojure";
-          injection-regex = "(clojure|clj|edn|boot|yuck)";
-          file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
-        }
-        {
-          name = "cmake";
-          auto-format = true;
-          language-servers = ["cmake-language-server"];
-          formatter = {
-            command = lib.getExe pkgs.cmake-format;
-            args = ["-"];
-          };
-        }
-        {
-          name = "javascript";
-          auto-format = true;
-          language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
-        }
-        {
-          name = "json";
-          formatter = deno "json";
-        }
-        {
-          name = "markdown";
-          language-servers = ["dprint" "markdown-oxide"];
-        }
-        {
-          name = "nix";
-          language-servers = ["nil" "uwu-colors"];
-        }
-        {
-          name = "python";
-          auto-format = true;
-          language-servers = [
-            "basedpyright"
-            "ruff"
-          ];
-        }
-        {
-          name = "qml";
-          language-servers = ["qmlls" "uwu-colors"];
-        }
-        {
-          name = "typescript";
-          auto-format = true;
-          language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
-        }
-        {
-          name = "typst";
-          auto-format = true;
-          language-servers = ["tinymist"];
-        }
-      ]
-      ++ prettierLangs langs;
+    in [
+      {
+        name = "bash";
+        auto-format = true;
+        formatter = {
+          command = lib.getExe pkgs.shfmt;
+          args = ["-i" "2"];
+        };
+      }
+      {
+        name = "clojure";
+        injection-regex = "(clojure|clj|edn|boot|yuck)";
+        file-types = ["clj" "cljs" "cljc" "clje" "cljr" "cljx" "edn" "boot" "yuck"];
+      }
+      {
+        name = "cmake";
+        auto-format = true;
+        language-servers = ["cmake-language-server"];
+        formatter = {
+          command = lib.getExe pkgs.cmake-format;
+          args = ["-"];
+        };
+      }
+      {
+        name = "css";
+        formatter = prettier "css";
+        language-servers = ["vscode-css-language-server" "tailwindcss-ls"];
+      }
+      {
+        name = "javascript";
+        auto-format = true;
+        language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
+      }
+      {
+        name = "json";
+        formatter = deno "json";
+      }
+      {
+        name = "html";
+        formatter = prettier "html";
+        language-servers = ["vscode-html-language-server" "tailwindcss-ls"];
+      }
+      {
+        name = "markdown";
+        language-servers = ["dprint" "markdown-oxide"];
+      }
+      {
+        name = "nix";
+        language-servers = ["nil" "uwu-colors"];
+      }
+      {
+        name = "python";
+        auto-format = true;
+        language-servers = [
+          "basedpyright"
+          "ruff"
+        ];
+      }
+      {
+        name = "qml";
+        language-servers = ["qmlls" "uwu-colors"];
+      }
+      {
+        name = "scss";
+        formatter = prettier "scss";
+        language-servers = ["vscode-css-language-server" "tailwindcss-ls"];
+      }
+      {
+        name = "typescript";
+        auto-format = true;
+        language-servers = ["dprint" "typescript-language-server" "uwu-colors"];
+      }
+      {
+        name = "typst";
+        auto-format = true;
+        language-servers = ["tinymist"];
+      }
+      {
+        name = "vue";
+        auto-format = true;
+        formatter = prettier "vue";
+        language-servers = ["typescript-language-server" "tailwindcss-ls"];
+      }
+    ];
 
     language-server = {
       basedpyright.command = "${pkgs.basedpyright}/bin/basedpyright-langserver";
@@ -146,6 +160,11 @@
         args = ["server"];
       };
 
+      tailwindcss-ls = {
+        command = lib.getExe pkgs.tailwindcss-language-server;
+        args = ["--stdio"];
+      };
+
       tinymist = {
         command = lib.getExe pkgs.tinymist;
         config = {
@@ -167,6 +186,13 @@
             removeUnusedImports.ts = true;
             sortImports.ts = true;
           };
+          plugins = [
+            {
+              name = "@vue/typescript-plugin";
+              location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+              languages = ["vue"];
+            }
+          ];
         };
       };
 
