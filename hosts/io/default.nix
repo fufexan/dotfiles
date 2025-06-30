@@ -24,6 +24,7 @@
       "amd_pstate=active"
       "ideapad_laptop.allow_v4_dytc=Y"
       ''acpi_osi="Windows 2020"''
+      "amdgpu.dcfeaturemask=0x8"
     ];
   };
 
