@@ -103,14 +103,6 @@
 
     nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-      };
-    };
-
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs = {
