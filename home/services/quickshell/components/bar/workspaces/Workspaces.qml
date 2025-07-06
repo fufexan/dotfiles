@@ -1,52 +1,85 @@
-pragma ComponentBehavior: Bound
+// pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
 import "../../../utils"
+import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Widgets
 
-Rectangle {
-    id: workspaces
+WrapperMouseArea {
+    id: root
 
-    color: 'transparent'
-
-    width: workspacesRow.implicitWidth
     Layout.fillHeight: true
 
+    readonly property HyprlandMonitor monitor: Hyprland.monitorFor(QsWindow.window?.screen)
+    readonly property int activeWorkspace: monitor?.activeWorkspace?.id ?? 1
+    property int shownWorkspaces: 10
+    property int baseWorkspace: Math.floor((activeWorkspace - 1) / shownWorkspaces) * shownWorkspaces + 1
+
+    property int scrollAccumulator: 0
+
+    acceptedButtons: Qt.NoButton
+
+    onWheel: event => {
+        event.accepted = true;
+        let acc = Math.abs(scrollAccumulator - event.angleDelta.x - event.angleDelta.y);
+        const sign = Math.sign(acc);
+        acc = Math.abs(acc);
+
+        const offset = sign * Math.floor(acc / 120);
+        scrollAccumulator = sign * (acc % 120);
+
+        if (offset) {
+            const currentWorkspace = root.activeWorkspace;
+            const targetWorkspace = currentWorkspace + offset;
+            const id = Math.max(baseWorkspace, Math.min(baseWorkspace + shownWorkspaces - 1, targetWorkspace));
+            if (id != currentWorkspace)
+                Hyprland.dispatch(`workspace ${id}`);
+        }
+    }
+
     RowLayout {
-        id: workspacesRow
-
-        height: parent.height
-        implicitWidth: (parent.height * 0.5 + spacing) * 2 - spacing
-        anchors.centerIn: parent
-
         spacing: height / 7
+        anchors.centerIn: parent
 
         Repeater {
             id: repeater
 
-            model: HyprlandUtils.maxWorkspace
-
-            Workspace {
-                id: ws
-                required property int index
-                property HyprlandWorkspace currWorkspace: Hyprland.workspaces.values.find(e => e.id == index + 1) || null
-                property bool nonexistent: currWorkspace === null
-                property bool focused: index + 1 === Hyprland.focusedMonitor.activeWorkspace.id
-
-                Layout.preferredWidth: {
-                    if (focused) {
-                        return parent.height * 0.8;
-                    } else {
-                        return parent.height * 0.4;
-                    }
+            model: ScriptModel {
+                objectProp: "index"
+                values: {
+                    const workspaces = Hyprland.workspaces.values;
+                    const base = root.baseWorkspace;
+                    return Array.from({
+                        length: root.shownWorkspaces
+                    }, (_, i) => ({
+                                index: base + i,
+                                workspace: workspaces.find(w => w.id == base + i)
+                            }));
                 }
+            }
 
-                color: {
-                    if (nonexistent) {
-                        return Colors.bgBlur;
-                    } else {
-                        return Colors.monitorColors[Hyprland.monitors.values.indexOf(Hyprland.workspaces.values.find(e => e.id === index + 1).monitor)];
+            WrapperMouseArea {
+                id: ws
+                required property var modelData
+                implicitHeight: parent.height * 0.4
+
+                onPressed: Hyprland.dispatch(`workspace ${modelData.index}`)
+
+                Rectangle {
+                    radius: height / 2
+
+                    color: {
+                        ws.modelData.workspace ?? false ? Colors.monitorColors[ws.modelData.workspace?.monitor?.id] : Colors.bgBlur;
+                    }
+
+                    implicitHeight: parent.height
+                    implicitWidth: {
+                        if (ws.modelData.workspace?.focused ?? false) {
+                            return parent.height * 2;
+                        }
+                        return parent.height;
                     }
                 }
             }
