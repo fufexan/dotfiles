@@ -1,19 +1,18 @@
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami
 
-Rectangle {
+WrapperRectangle {
     id: bat
 
-    Layout.preferredWidth: batIcon.width
     Layout.fillHeight: true
     color: 'transparent'
 
     readonly property var battery: UPower.displayDevice
     readonly property int percentage: Math.round(battery.percentage * 100)
-    property var size: height * 0.4
 
     visible: battery.isLaptopBattery
 
@@ -21,8 +20,8 @@ Rectangle {
         id: batIcon
         anchors.centerIn: parent
 
-        implicitHeight: bat.size
-        implicitWidth: bat.size
+        implicitHeight: 16
+        implicitWidth: 16
 
         // This recolors the entire svg, instead of only classless components.
         // Hopefully in the future classes can be selected for recoloring.
@@ -35,7 +34,12 @@ Rectangle {
             let charging;
 
             if (bat.battery.state == UPowerDeviceState.Charging) {
-                charging = "-charging";
+                // My battery is old and keeps staying at 94-96% while plugged in
+                if (nearestTen == 100) {
+                    charging = "-charged";
+                } else {
+                    charging = "-charging";
+                }
             } else if (bat.battery.state.toString() == UPowerDeviceState.FullyCharged) {
                 charging = "-charged";
             } else {
