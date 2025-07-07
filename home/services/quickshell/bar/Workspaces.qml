@@ -2,10 +2,10 @@
 
 import QtQuick
 import QtQuick.Layouts
-import "../../../utils"
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
+import "../utils"
 
 WrapperMouseArea {
     id: root

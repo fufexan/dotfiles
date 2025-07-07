@@ -1,7 +1,8 @@
 import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls
-import "../../utils"
+import QtQuick.Layouts
+import "../utils"
+import "../components"
 
 Rectangle {
     id: resources
@@ -13,7 +14,7 @@ Rectangle {
     property int valueSize: 8
     property int textSize: 6
 
-    property string valueColor: "white"
+    property string valueColor: Colors.foreground
     property string textColor: "lightgray"
 
     RowLayout {
@@ -22,31 +23,31 @@ Rectangle {
 
         ColumnLayout {
             id: cpuColumn
-            Label {
+            Text {
                 color: textColor
                 font.pointSize: textSize
                 text: "CPU"
                 Layout.alignment: Qt.AlignCenter
             }
-            Label {
+            Text {
                 color: valueColor
                 font.pointSize: valueSize
-                text: Resources.cpu_percent + "%"
+                text: ResourcesState.cpu_percent + "%"
                 Layout.alignment: Qt.AlignCenter
             }
         }
 
         ColumnLayout {
-            Label {
+            Text {
                 color: textColor
                 font.pointSize: textSize
                 text: "MEM"
                 Layout.alignment: Qt.AlignCenter
             }
-            Label {
+            Text {
                 color: valueColor
                 font.pointSize: valueSize
-                text: Resources.mem_percent + "%"
+                text: ResourcesState.mem_percent + "%"
                 Layout.alignment: Qt.AlignCenter
             }
         }

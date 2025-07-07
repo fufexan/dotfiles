@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import "../../utils/"
+import "../utils"
+import "../components"
 
 WrapperMouseArea {
     id: root
@@ -13,11 +14,11 @@ WrapperMouseArea {
     onClicked: event => {
         event.accepted = true;
 
-        Mpris.player.togglePlaying();
+        MprisState.player.togglePlaying();
     }
 
     RowLayout {
-        visible: Mpris.player
+        visible: MprisState.player
         Layout.fillHeight: true
 
         ClippingWrapperRectangle {
@@ -27,7 +28,7 @@ WrapperMouseArea {
             Image {
                 id: artwork
                 anchors.fill: parent
-                source: Mpris.player?.trackArtUrl || ""
+                source: MprisState.player?.trackArtUrl || ""
                 fillMode: Image.PreserveAspectFit
                 asynchronous: true
             }
@@ -35,9 +36,7 @@ WrapperMouseArea {
 
         Text {
             id: title
-            color: "white"
-            text: Mpris.player?.trackTitle || ""
-            renderType: Text.NativeRendering
+            text: MprisState.player?.trackTitle || ""
         }
     }
 }
