@@ -6,7 +6,7 @@
   imports = [
     ./specialisations.nix
     ./terminal
-    inputs.nix-index-db.hmModules.nix-index
+    inputs.nix-index-db.homeModules.nix-index
     inputs.tailray.homeManagerModules.default
     self.nixosModules.theme
   ];
