@@ -10,6 +10,7 @@
     unrar
 
     # misc
+    chafa
     libnotify
     sshfs
 
