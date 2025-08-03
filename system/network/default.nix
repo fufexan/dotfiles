@@ -8,6 +8,9 @@
       enable = true;
       dns = "systemd-resolved";
       wifi.powersave = true;
+      plugins = [
+        pkgs.networkmanager-openvpn
+      ];
     };
   };
 
@@ -32,5 +35,8 @@
     };
   };
 
-  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = ["" "${pkgs.networkmanager}/bin/nm-online -q"];
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = [
+    ""
+    "${pkgs.networkmanager}/bin/nm-online -q"
+  ];
 }
