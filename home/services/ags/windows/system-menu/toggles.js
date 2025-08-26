@@ -5,7 +5,7 @@ import { getBluetoothIcon, getBluetoothText } from "../../utils/bluetooth.js";
 
 const Toggle = (args) =>
   Widget.Box({
-    ...args.props ?? {},
+    ...(args.props ?? {}),
     className: `toggle ${args.name}`,
     hexpand: true,
     hpack: "start",
@@ -71,12 +71,7 @@ const bt = {
   name: "bluetooth",
   icon: {
     setup: (self) =>
-      self.bind(
-        "icon",
-        Bluetooth,
-        "connected-devices",
-        getBluetoothIcon,
-      ),
+      self.bind("icon", Bluetooth, "connected-devices", getBluetoothIcon),
     buttonSetup: (self) => {
       self.onPrimaryClick = () => Bluetooth.toggle();
       self.hook(
@@ -88,12 +83,7 @@ const bt = {
   },
   label: {
     setup: (self) =>
-      self.bind(
-        "label",
-        Bluetooth,
-        "connected-devices",
-        getBluetoothText,
-      ),
+      self.bind("label", Bluetooth, "connected-devices", getBluetoothText),
     buttonSetup: (self) => {
       self.onPrimaryClick = () => {
         App.toggleWindow("system-menu");
@@ -108,8 +98,5 @@ export default () =>
     className: "toggles",
     vertical: true,
 
-    children: [
-      Toggle(net),
-      Toggle(bt),
-    ],
+    children: [Toggle(net), Toggle(bt)],
   });

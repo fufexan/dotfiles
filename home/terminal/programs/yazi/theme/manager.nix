@@ -1,6 +1,8 @@
 {
   programs.yazi.theme.manager = {
-    cwd = {fg = "cyan";};
+    cwd = {
+      fg = "cyan";
+    };
 
     # Hovered
     hovered = {
@@ -51,11 +53,23 @@
 
     # Border;
     border_symbol = "│";
-    border_style = {fg = "gray";};
+    border_style = {
+      fg = "gray";
+    };
 
     # Offset;
-    folder_offset = [1 0 1 0];
-    preview_offset = [1 1 1 1];
+    folder_offset = [
+      1
+      0
+      1
+      0
+    ];
+    preview_offset = [
+      1
+      1
+      1
+      1
+    ];
 
     # Highlighting;
     syntect_theme = "";

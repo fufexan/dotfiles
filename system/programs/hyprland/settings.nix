@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   # pointer = config.home.pointerCursor;
   cursorName = "Bibata-Modern-Classic-Hyprcursor";
-in {
+in
+{
   programs.hyprland.settings = {
     "$mod" = "SUPER";
     env = [

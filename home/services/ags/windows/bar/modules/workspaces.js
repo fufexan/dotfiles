@@ -59,9 +59,13 @@ export default () =>
             .hook(Hyprland.active.workspace, focusedSwitch)
             .hook(Hyprland, added, "workspace-added")
             .hook(Hyprland, removed, "workspace-removed")
-            .hook(Hyprland, (self, name, data) => {
-              if (name === "moveworkspace") moveWorkspace(self, data);
-            }, "event");
+            .hook(
+              Hyprland,
+              (self, name, data) => {
+                if (name === "moveworkspace") moveWorkspace(self, data);
+              },
+              "event",
+            );
         });
       },
     }),

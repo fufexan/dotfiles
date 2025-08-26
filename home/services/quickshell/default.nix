@@ -3,10 +3,12 @@
   inputs,
   lib,
   ...
-}: let
+}:
+let
   quickshell = inputs.quickshell.packages.${pkgs.system}.default;
-in {
-  home.packages = [quickshell];
+in
+{
+  home.packages = [ quickshell ];
 
   home.sessionVariables.QML2_IMPORT_PATH = lib.concatStringsSep ":" [
     "${quickshell}/lib/qt-6/qml"

@@ -2,7 +2,8 @@
   self,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     ./specialisations.nix
     ./terminal
@@ -15,7 +16,10 @@
     username = "mihai";
     homeDirectory = "/home/mihai";
     stateVersion = "23.11";
-    extraOutputsToInstall = ["doc" "devdoc"];
+    extraOutputsToInstall = [
+      "doc"
+      "devdoc"
+    ];
   };
 
   # disable manuals as nmd fails to build often

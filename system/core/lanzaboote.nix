@@ -20,5 +20,5 @@
     loader.systemd-boot.enable = lib.mkForce false;
   };
 
-  environment.systemPackages = [pkgs.sbctl];
+  environment.systemPackages = [ pkgs.sbctl ];
 }

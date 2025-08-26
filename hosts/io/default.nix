@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./hyprland.nix
@@ -18,7 +19,7 @@
   };
 
   boot = {
-    kernelModules = ["i2c-dev"];
+    kernelModules = [ "i2c-dev" ];
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_pstate=active"
@@ -63,7 +64,7 @@
 
     kanata.keyboards.io = {
       config = builtins.readFile "${self}/system/services/kanata/main.kbd";
-      devices = ["/dev/input/by-path/platform-i8042-serio-0-event-kbd"];
+      devices = [ "/dev/input/by-path/platform-i8042-serio-0-event-kbd" ];
     };
   };
 }

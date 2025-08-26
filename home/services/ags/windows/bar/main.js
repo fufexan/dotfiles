@@ -14,21 +14,13 @@ const SystemInfo = () =>
     onPrimaryClick: () => App.toggleWindow("system-menu"),
 
     child: Widget.Box({
-      children: [
-        Net(),
-        Bluetooth(),
-        Battery(),
-      ],
+      children: [Net(), Bluetooth(), Battery()],
     }),
-  })
-    .hook(
-      App,
-      (self, window, visible) => {
-        if (window === "system-menu") {
-          self.toggleClassName("active", visible);
-        }
-      },
-    );
+  }).hook(App, (self, window, visible) => {
+    if (window === "system-menu") {
+      self.toggleClassName("active", visible);
+    }
+  });
 
 const Start = () =>
   Widget.Box({
@@ -42,9 +34,7 @@ const Start = () =>
 
 const Center = () =>
   Widget.Box({
-    children: [
-      Music(),
-    ],
+    children: [Music()],
   });
 
 const End = () =>
@@ -52,12 +42,7 @@ const End = () =>
     hexpand: true,
     hpack: "end",
 
-    children: [
-      Tray(),
-      CpuRam(),
-      SystemInfo(),
-      Date(),
-    ],
+    children: [Tray(), CpuRam(), SystemInfo(), Date()],
   });
 
 export default () =>

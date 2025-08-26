@@ -2,16 +2,14 @@ import App from "resource:///com/github/Aylur/ags/app.js";
 import { Widget } from "../imports.js";
 const { Box, Revealer, Window } = Widget;
 
-export default (
-  {
-    name,
-    child,
-    revealerSetup = null,
-    transition = "crossfade",
-    transitionDuration = 200,
-    ...props
-  },
-) => {
+export default ({
+  name,
+  child,
+  revealerSetup = null,
+  transition = "crossfade",
+  transitionDuration = 200,
+  ...props
+}) => {
   const window = Window({
     name,
     popup: false,
@@ -19,7 +17,7 @@ export default (
     visible: false,
     ...props,
 
-    setup: (self) => self.getChild = () => child,
+    setup: (self) => (self.getChild = () => child),
 
     child: Box({
       css: `
@@ -32,16 +30,14 @@ export default (
         transitionDuration,
         child: child,
 
-        setup: revealerSetup ?? ((self) =>
-          self
-            .hook(
-              App,
-              (self, currentName, visible) => {
-                if (currentName === name) {
-                  self.reveal_child = visible;
-                }
-              },
-            )),
+        setup:
+          revealerSetup ??
+          ((self) =>
+            self.hook(App, (self, currentName, visible) => {
+              if (currentName === name) {
+                self.reveal_child = visible;
+              }
+            })),
       }),
     }),
   });

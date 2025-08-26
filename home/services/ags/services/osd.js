@@ -6,7 +6,7 @@ import Brightness from "./brightness.js";
 class Indicator extends Service {
   static {
     Service.register(this, {
-      "popup": ["jsobject", "boolean"],
+      popup: ["jsobject", "boolean"],
     });
   }
 
@@ -32,12 +32,7 @@ class Indicator extends Service {
   }
 
   bluetooth(addr) {
-    this.popup(
-      0,
-      getBluetoothDevice(addr),
-      Icons.bluetooth.active,
-      false,
-    );
+    this.popup(0, getBluetoothDevice(addr), Icons.bluetooth.active, false);
   }
 
   speaker() {
@@ -59,11 +54,8 @@ class Indicator extends Service {
   display() {
     // brightness is async, so lets wait a bit
     Utils.timeout(10, () =>
-      this.popup(
-        Brightness.screenValue,
-        "Brightness",
-        Icons.brightness,
-      ));
+      this.popup(Brightness.screenValue, "Brightness", Icons.brightness),
+    );
   }
 
   connect(event = "popup", callback) {

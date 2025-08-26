@@ -2,13 +2,14 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   boot = {
     bootspec.enable = true;
 
     initrd = {
       systemd.enable = true;
-      supportedFilesystems = ["ext4"];
+      supportedFilesystems = [ "ext4" ];
     };
 
     # use latest kernel
@@ -31,5 +32,5 @@
     plymouth.enable = true;
   };
 
-  environment.systemPackages = [config.boot.kernelPackages.cpupower];
+  environment.systemPackages = [ config.boot.kernelPackages.cpupower ];
 }

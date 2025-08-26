@@ -11,13 +11,7 @@ const BatteryIcon = () =>
     .bind("tooltip-text", Battery, "energy-rate", batteryEnergy);
 
 const BatteryPercent = () =>
-  Widget.Label()
-    .bind(
-      "label",
-      Battery,
-      "percent",
-      (percent) => `${percent}%`,
-    );
+  Widget.Label().bind("label", Battery, "percent", (percent) => `${percent}%`);
 
 const BatteryTime = () =>
   Widget.Label({
@@ -33,11 +27,7 @@ const BatteryBox = () =>
     className: "battery-box",
     visible: Battery.available,
 
-    children: [
-      BatteryIcon(),
-      BatteryPercent(),
-      BatteryTime(),
-    ],
+    children: [BatteryIcon(), BatteryPercent(), BatteryTime()],
   });
 
 const PowerButton = () =>
@@ -58,8 +48,5 @@ export default () =>
   Widget.Box({
     className: "battery-info",
 
-    children: [
-      BatteryBox(),
-      PowerButton(),
-    ],
+    children: [BatteryBox(), PowerButton()],
   });

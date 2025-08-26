@@ -1,8 +1,10 @@
-{config, ...}: let
+{ config, ... }:
+let
   pointer = config.home.pointerCursor;
 
   cursorName = "Bibata-Modern-Classic-Hyprcursor";
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     env = [

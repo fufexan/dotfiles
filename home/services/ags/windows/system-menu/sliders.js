@@ -4,7 +4,7 @@ import { audioIcon } from "../../utils/audio.js";
 
 const Slider = (args) =>
   Widget.Box({
-    ...args.props ?? {},
+    ...(args.props ?? {}),
     className: args.name,
 
     children: [
@@ -40,7 +40,7 @@ const vol = () => {
     },
     slider: {
       setup: (self) => self.bind("value", Audio.speaker, "volume"),
-      onChange: ({ value }) => Audio.speaker.volume = value,
+      onChange: ({ value }) => (Audio.speaker.volume = value),
     },
   };
 };
@@ -53,7 +53,7 @@ const brightness = () => {
     },
     slider: {
       setup: (self) => self.bind("value", Brightness, "screen-value"),
-      onChange: ({ value }) => Brightness.screenValue = value,
+      onChange: ({ value }) => (Brightness.screenValue = value),
     },
   };
 };
@@ -68,10 +68,7 @@ export default () =>
     setup: (self) => {
       const connID = Audio.connect("notify::speaker", () => {
         Audio.disconnect(connID);
-        self.children = [
-          Slider(vol()),
-          Slider(brightness()),
-        ];
+        self.children = [Slider(vol()), Slider(brightness())];
       });
     },
   });

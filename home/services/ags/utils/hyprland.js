@@ -10,7 +10,8 @@ const connID = Hyprland.connect("notify::workspaces", () => {
   };
 });
 
-export const changeWorkspace = (ws) => Hyprland.messageAsync(`dispatch workspace ${ws}`);
+export const changeWorkspace = (ws) =>
+  Hyprland.messageAsync(`dispatch workspace ${ws}`);
 
 export const focusedSwitch = (self) => {
   const id = Hyprland.active.workspace.id;

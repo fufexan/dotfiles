@@ -2,27 +2,28 @@
   self,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations = let
-    # shorten paths
-    inherit (inputs.nixpkgs.lib) nixosSystem;
+}:
+{
+  flake.nixosConfigurations =
+    let
+      # shorten paths
+      inherit (inputs.nixpkgs.lib) nixosSystem;
 
-    howdy = inputs.nixpkgs-howdy;
+      howdy = inputs.nixpkgs-howdy;
 
-    homeImports = import "${self}/home/profiles";
+      homeImports = import "${self}/home/profiles";
 
-    mod = "${self}/system";
-    # get the basic config to build on top of
-    inherit (import mod) laptop;
+      mod = "${self}/system";
+      # get the basic config to build on top of
+      inherit (import mod) laptop;
 
-    # get these into the module system
-    specialArgs = {inherit inputs self;};
-  in {
-    io = nixosSystem {
-      inherit specialArgs;
-      modules =
-        laptop
-        ++ [
+      # get these into the module system
+      specialArgs = { inherit inputs self; };
+    in
+    {
+      io = nixosSystem {
+        inherit specialArgs;
+        modules = laptop ++ [
           ./io
           "${mod}/core/lanzaboote.nix"
 
@@ -46,7 +47,7 @@
           }
 
           # enable unmerged Howdy
-          {disabledModules = ["security/pam.nix"];}
+          { disabledModules = [ "security/pam.nix" ]; }
           "${howdy}/nixos/modules/security/pam.nix"
           "${howdy}/nixos/modules/services/security/howdy"
           "${howdy}/nixos/modules/services/misc/linux-enable-ir-emitter.nix"
@@ -54,24 +55,24 @@
           inputs.agenix.nixosModules.default
           inputs.chaotic.nixosModules.default
         ];
-    };
+      };
 
-    nixos = nixosSystem {
-      inherit specialArgs;
-      modules = [
-        ./wsl
-        "${mod}/core/users.nix"
-        "${mod}/nix"
-        "${mod}/programs/zsh.nix"
-        "${mod}/programs/home-manager.nix"
-        {
-          home-manager = {
-            users.mihai.imports = homeImports.server;
-            extraSpecialArgs = specialArgs;
-            backupFileExtension = ".hm-backup";
-          };
-        }
-      ];
+      nixos = nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./wsl
+          "${mod}/core/users.nix"
+          "${mod}/nix"
+          "${mod}/programs/zsh.nix"
+          "${mod}/programs/home-manager.nix"
+          {
+            home-manager = {
+              users.mihai.imports = homeImports.server;
+              extraSpecialArgs = specialArgs;
+              backupFileExtension = ".hm-backup";
+            };
+          }
+        ];
+      };
     };
-  };
 }

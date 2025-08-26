@@ -11,8 +11,7 @@ const Indicator = (props) =>
         className: "type",
         label: props.type,
       }),
-      Widget.Label({ className: "value" })
-        .poll(2000, props.poll),
+      Widget.Label({ className: "value" }).poll(2000, props.poll),
     ],
   }).poll(2000, props.boxpoll);
 
@@ -29,11 +28,7 @@ const cpu = {
       .catch((err) => print(err)),
 
   boxpoll: (self) =>
-    Utils.execAsync([
-      "sh",
-      "-c",
-      "lscpu --parse=MHZ",
-    ])
+    Utils.execAsync(["sh", "-c", "lscpu --parse=MHZ"])
       .then((r) => {
         const mhz = r.split("\n").slice(4);
         const freq = mhz.reduce((acc, e) => acc + Number(e), 0) / mhz.length;
@@ -59,7 +54,7 @@ const ram = {
       "-c",
       "free --si -h | tail -2 | head -1 | awk '{print $3}'",
     ])
-      .then((r) => self.tooltipText = r)
+      .then((r) => (self.tooltipText = r))
       .catch((err) => print(err)),
 };
 
@@ -70,9 +65,6 @@ export default () =>
     child: Widget.Box({
       className: "system-info module",
 
-      children: [
-        Indicator(cpu),
-        Indicator(ram),
-      ],
+      children: [Indicator(cpu), Indicator(ram)],
     }),
   });

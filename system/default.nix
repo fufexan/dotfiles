@@ -17,14 +17,13 @@ let
     ./services/pipewire.nix
   ];
 
-  laptop =
-    desktop
-    ++ [
-      ./hardware/bluetooth.nix
+  laptop = desktop ++ [
+    ./hardware/bluetooth.nix
 
-      ./services/backlight.nix
-      ./services/power.nix
-    ];
-in {
+    ./services/backlight.nix
+    ./services/power.nix
+  ];
+in
+{
   inherit desktop laptop;
 }

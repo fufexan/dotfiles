@@ -4,14 +4,16 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   lock = "${pkgs.systemd}/bin/loginctl lock-session";
 
   brillo = lib.getExe pkgs.brillo;
 
   # timeout after which DPMS kicks in
   timeout = 300;
-in {
+in
+{
   # screen idle
   services.hypridle = {
     enable = true;

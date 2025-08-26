@@ -10,13 +10,11 @@ export const PositionLabel = (player) =>
     setup: (self) => {
       const update = (_, time) => {
         player.length > 0
-          ? self.label = lengthStr(time || player.position)
-          : self.visible = !!player;
+          ? (self.label = lengthStr(time || player.position))
+          : (self.visible = !!player);
       };
 
-      self
-        .hook(player, update, "position")
-        .poll(1000, update);
+      self.hook(player, update, "position").poll(1000, update);
     },
   });
 
@@ -34,7 +32,7 @@ export const Position = (player) =>
     className: "position",
     draw_value: false,
 
-    onChange: ({ value }) => player.position = player.length * value,
+    onChange: ({ value }) => (player.position = player.length * value),
 
     setup: (self) => {
       const update = () => {
@@ -63,10 +61,7 @@ export default (player) =>
     children: [
       Widget.Box({
         hexpand: true,
-        children: [
-          PositionLabel(player),
-          LengthLabel(player),
-        ],
+        children: [PositionLabel(player), LengthLabel(player)],
       }),
       Position(player),
     ],

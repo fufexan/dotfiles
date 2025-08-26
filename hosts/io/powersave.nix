@@ -8,12 +8,13 @@ let
       echo auto > "$i/power/control"
     done
   '';
-in {
+in
+{
   systemd.services.powersave = {
     enable = true;
 
     description = "Apply power saving tweaks";
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
 
     inherit script;
   };

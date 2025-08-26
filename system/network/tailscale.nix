@@ -1,6 +1,6 @@
 {
   networking.firewall = {
-    trustedInterfaces = ["tailscale0"];
+    trustedInterfaces = [ "tailscale0" ];
     # required to connect to Tailscale exit nodes
     checkReversePath = "loose";
   };

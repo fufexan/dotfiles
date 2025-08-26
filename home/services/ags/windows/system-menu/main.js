@@ -11,12 +11,7 @@ const SystemMenuBox = () =>
     className: "system-menu",
     vertical: true,
 
-    children: [
-      Toggles(),
-      PowerProfiles(),
-      Sliders(),
-      BatteryInfo(),
-    ],
+    children: [Toggles(), PowerProfiles(), Sliders(), BatteryInfo()],
   });
 
 export default () =>

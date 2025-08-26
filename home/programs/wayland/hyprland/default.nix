@@ -3,10 +3,12 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   cursor = "Bibata-Modern-Classic-Hyprcursor";
   cursorPackage = inputs.self.packages.${pkgs.system}.bibata-hyprcursor;
-in {
+in
+{
   imports = [
     ./binds.nix
     ./rules.nix
@@ -33,7 +35,7 @@ in {
 
     systemd = {
       enable = false;
-      variables = ["--all"];
+      variables = [ "--all" ];
       extraCommands = [
         "systemctl --user stop graphical-session.target"
         "systemctl --user start hyprland-session.target"

@@ -25,7 +25,9 @@
     };
 
     # Progress;
-    progress_label = {bold = true;};
+    progress_label = {
+      bold = true;
+    };
     progress_normal = {
       fg = "blue";
       bg = "black";
@@ -36,10 +38,20 @@
     };
 
     # Permissions;
-    permissions_t = {fg = "blue";};
-    permissions_r = {fg = "lightyellow";};
-    permissions_w = {fg = "lightred";};
-    permissions_x = {fg = "lightgreen";};
-    permissions_s = {fg = "darkgray";};
+    permissions_t = {
+      fg = "blue";
+    };
+    permissions_r = {
+      fg = "lightyellow";
+    };
+    permissions_w = {
+      fg = "lightred";
+    };
+    permissions_x = {
+      fg = "lightgreen";
+    };
+    permissions_s = {
+      fg = "darkgray";
+    };
   };
 }

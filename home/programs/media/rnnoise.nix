@@ -1,5 +1,6 @@
-{pkgs, ...}: let
-  json = pkgs.formats.json {};
+{ pkgs, ... }:
+let
+  json = pkgs.formats.json { };
 
   pw_rnnoise_config = {
     "context.modules" = [
@@ -21,7 +22,10 @@
               }
             ];
           };
-          "audio.position" = ["FL" "FR"];
+          "audio.position" = [
+            "FL"
+            "FR"
+          ];
           "capture.props" = {
             "node.name" = "effect_input.rnnoise";
             "node.passive" = true;
@@ -34,7 +38,8 @@
       }
     ];
   };
-in {
+in
+{
   xdg.configFile."pipewire/pipewire.conf.d/99-input-denoising.conf" = {
     source = json.generate "99-input-denoising.conf" pw_rnnoise_config;
   };

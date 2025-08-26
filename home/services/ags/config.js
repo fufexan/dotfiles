@@ -40,14 +40,6 @@ function addWindows(windows) {
   windows.forEach((win) => App.addWindow(win));
 }
 
-addWindows(
-  [
-    Bar(),
-    Music(),
-    Osd(),
-    SystemMenu(),
-    NotificationPopup(),
-  ],
-);
+addWindows([Bar(), Music(), Osd(), SystemMenu(), NotificationPopup()]);
 
 export {};

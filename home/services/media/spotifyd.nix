@@ -2,14 +2,15 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     spotify-tui
   ];
 
   services.spotifyd = {
     enable = true;
-    package = pkgs.spotifyd.override {withMpris = true;};
+    package = pkgs.spotifyd.override { withMpris = true; };
     settings.global = {
       autoplay = true;
       backend = "pulseaudio";

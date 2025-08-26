@@ -41,7 +41,7 @@
     "net.core.default_qdisc" = "cake";
   };
 
-  boot.kernelModules = ["tcp_bbr"];
+  boot.kernelModules = [ "tcp_bbr" ];
 
   security = {
     # allow wayland lockers to unlock the screen

@@ -1,4 +1,4 @@
-{lib, ...}:
+{ lib, ... }:
 # personal lib
 {
   _module.args = {

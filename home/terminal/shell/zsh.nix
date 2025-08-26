@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -68,20 +69,21 @@
       ''}
     '';
 
-    shellAliases =
-      {
-        grep = "grep --color";
-        ip = "ip --color";
-        l = "eza -l";
-        la = "eza -la";
-        md = "mkdir -p";
-        ppc = "powerprofilesctl";
-        pf = "powerprofilesctl launch -p performance";
+    shellAliases = {
+      grep = "grep --color";
+      ip = "ip --color";
+      l = "eza -l";
+      la = "eza -la";
+      md = "mkdir -p";
+      ppc = "powerprofilesctl";
+      pf = "powerprofilesctl launch -p performance";
 
-        us = "systemctl --user"; # mnemonic for user systemctl
-        rs = "sudo systemctl"; # mnemonic for root systemctl
-      }
-      // lib.optionalAttrs config.programs.bat.enable {cat = "bat";};
-    shellGlobalAliases = {eza = "eza --icons --git";};
+      us = "systemctl --user"; # mnemonic for user systemctl
+      rs = "sudo systemctl"; # mnemonic for root systemctl
+    }
+    // lib.optionalAttrs config.programs.bat.enable { cat = "bat"; };
+    shellGlobalAliases = {
+      eza = "eza --icons --git";
+    };
   };
 }

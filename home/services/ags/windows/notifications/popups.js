@@ -1,7 +1,7 @@
 import { Hyprland, Notifications, Utils, Widget } from "../../imports.js";
 
 const closeAll = () => {
-  Notifications.popups.map(n => n.dismiss());
+  Notifications.popups.map((n) => n.dismiss());
 };
 
 /** @param {import("types/service/notifications").Notification} n */
@@ -34,7 +34,7 @@ export const Notification = (n) => {
     vpack: "start",
     class_name: "icon",
     // @ts-ignore
-    setup: self => {
+    setup: (self) => {
       let icon = NotificationIcon(n);
       if (icon !== null) {
         self.child = icon;
@@ -67,14 +67,16 @@ export const Notification = (n) => {
 
   const actions = Widget.Box({
     class_name: "actions",
-    children: n.actions.filter(({ id }) => id != "default").map(({ id, label }) =>
-      Widget.Button({
-        class_name: "action-button",
-        on_clicked: () => n.invoke(id),
-        hexpand: true,
-        child: Widget.Label(label),
-      })
-    ),
+    children: n.actions
+      .filter(({ id }) => id != "default")
+      .map(({ id, label }) =>
+        Widget.Button({
+          class_name: "action-button",
+          on_clicked: () => n.invoke(id),
+          hexpand: true,
+          child: Widget.Label(label),
+        }),
+      ),
   });
 
   return Widget.EventBox({
@@ -97,7 +99,7 @@ export const Notification = (n) => {
               class_name: "text",
               vpack: "center",
 
-              setup: self => {
+              setup: (self) => {
                 if (n.body.length > 0) {
                   self.children = [title, body];
                 } else {
@@ -127,15 +129,11 @@ export const notificationPopup = () =>
         return popups.map(Notification);
       }),
     }),
-  })
-    .hook(
-      Hyprland.active,
-      (self) => {
-        // prevent useless resets
-        if (lastMonitor === Hyprland.active.monitor) return;
+  }).hook(Hyprland.active, (self) => {
+    // prevent useless resets
+    if (lastMonitor === Hyprland.active.monitor) return;
 
-        self.monitor = Hyprland.active.monitor.id;
-      },
-    );
+    self.monitor = Hyprland.active.monitor.id;
+  });
 
 export default notificationPopup;

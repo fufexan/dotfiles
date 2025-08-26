@@ -2,20 +2,21 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   systemd.user.services.wluma = {
     Unit = {
       Description = "Automatic backlight control";
-      PartOf = ["graphical-session.target"];
+      PartOf = [ "graphical-session.target" ];
     };
     Service = {
       ExecStart = lib.getExe pkgs.wluma;
       Restart = "on-failure";
     };
-    Install.WantedBy = ["graphical-session.target"];
+    Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  xdg.configFile."wluma/config.toml".source = (pkgs.formats.toml {}).generate "wluma-config" {
+  xdg.configFile."wluma/config.toml".source = (pkgs.formats.toml { }).generate "wluma-config" {
     als.iio = {
       path = "/sys/bus/iio/devices";
       thresholds = {

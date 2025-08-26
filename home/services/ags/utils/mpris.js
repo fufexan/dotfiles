@@ -26,8 +26,7 @@ export const generateBackground = (cover_path) => {
 
   const makeBg = (bg) => `background: center/cover url('${bg}')`;
 
-  const blurred = blurredPath +
-    url.substring(MEDIA_CACHE_PATH.length);
+  const blurred = blurredPath + url.substring(MEDIA_CACHE_PATH.length);
 
   if (GLib.file_test(blurred, GLib.FileTest.EXISTS)) {
     return makeBg(blurred);

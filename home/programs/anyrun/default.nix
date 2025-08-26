@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   programs.anyrun = {
     enable = true;
     package = inputs.anyrun.packages.x86_64-linux.default;

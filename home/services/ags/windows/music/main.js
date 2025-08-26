@@ -28,17 +28,8 @@ const Info = (player) =>
 const MusicBox = (player) =>
   Widget.Box({
     className: "music window",
-    children: [
-      Cover(player),
-      Info(player),
-    ],
-  })
-    .bind(
-      "css",
-      player,
-      "cover-path",
-      generateBackground,
-    );
+    children: [Cover(player), Info(player)],
+  }).bind("css", player, "cover-path", generateBackground);
 
 export default () =>
   PopupWindow({
@@ -46,13 +37,7 @@ export default () =>
     anchor: ["top"],
     name: "music",
     child: Widget.Box(),
-  })
-    .bind(
-      "child",
-      Mpris,
-      "players",
-      (players) => {
-        if (players.length == 0) return Widget.Box();
-        return MusicBox(findPlayer(players));
-      },
-    );
+  }).bind("child", Mpris, "players", (players) => {
+    if (players.length == 0) return Widget.Box();
+    return MusicBox(findPlayer(players));
+  });

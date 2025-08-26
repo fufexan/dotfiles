@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   users.users.mihai = {
     isNormalUser = true;
     shell = pkgs.zsh;

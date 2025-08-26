@@ -2,14 +2,15 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   systemd.user.timers = {
     theme-toggle-dark = {
       Unit.Description = "Toggle dark theme";
       Timer.OnCalendar = [
         "*-*-* 18:00:00"
       ];
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
 
     theme-toggle-light = {
@@ -17,7 +18,7 @@
       Timer.OnCalendar = [
         "*-*-* 06:00:00"
       ];
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 

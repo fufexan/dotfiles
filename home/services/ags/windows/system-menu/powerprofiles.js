@@ -7,7 +7,7 @@ const Profile = (args) =>
     onPrimaryClick: args.primaryClickAction,
     hexpand: true,
     child: Widget.Box({
-      ...args.props ?? {},
+      ...(args.props ?? {}),
       hexpand: true,
       hpack: "start",
 
@@ -25,8 +25,7 @@ const Profile = (args) =>
   });
 
 const prettyName = (n) =>
-  n.charAt(0).toUpperCase() +
-  n.substring(1).replace("-", " ");
+  n.charAt(0).toUpperCase() + n.substring(1).replace("-", " ");
 
 const makeProfiles = (profiles) =>
   profiles.map((e) =>
@@ -37,7 +36,7 @@ const makeProfiles = (profiles) =>
       },
       icon: `power-profile-${e.Profile}-symbolic`,
       label: prettyName(e.Profile),
-    })
+    }),
   );
 
 const ActiveProfile = () =>
@@ -45,7 +44,7 @@ const ActiveProfile = () =>
     props: {
       className: "current-profile",
     },
-    primaryClickAction: () => showList.value = !showList.value,
+    primaryClickAction: () => (showList.value = !showList.value),
     iconSetup: (self) => self.bind("icon", PowerProfiles, "icon-name"),
     labelSetup: (self) =>
       self.bind("label", PowerProfiles, "active-profile", prettyName),
@@ -59,15 +58,8 @@ const ProfileRevealer = () =>
     child: Widget.Box({
       className: "options",
       vertical: true,
-    })
-      .bind(
-        "children",
-        PowerProfiles,
-        "profiles",
-        makeProfiles,
-      ),
-  })
-    .bind("reveal-child", showList);
+    }).bind("children", PowerProfiles, "profiles", makeProfiles),
+  }).bind("reveal-child", showList);
 
 export default () =>
   Widget.Box({
@@ -77,10 +69,7 @@ export default () =>
     children: [
       Widget.Box({
         vertical: true,
-        children: [
-          ActiveProfile(),
-          ProfileRevealer(),
-        ],
+        children: [ActiveProfile(), ProfileRevealer()],
       }),
     ],
   });

@@ -3,13 +3,14 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   KvLibadwaita = pkgs.fetchFromGitHub {
     owner = "GabePoel";
     repo = "KvLibadwaita";
     rev = "87c1ef9f44ec48855fd09ddab041007277e30e37";
     hash = "sha256-K/2FYOtX0RzwdcGyeurLXAh3j8ohxMrH2OWldqVoLwo=";
-    sparseCheckout = ["src"];
+    sparseCheckout = [ "src" ];
   };
 
   qtctConf = {
@@ -22,7 +23,8 @@
   };
 
   defaultFont = "${config.gtk.font.name},${builtins.toString config.gtk.font.size}";
-in {
+in
+{
   qt = {
     enable = true;
     platformTheme.name = "qtct";
@@ -48,10 +50,11 @@ in {
     '';
 
     # qtct config
-    "qt5ct/qt5ct.conf".text = let
-      default = ''"${defaultFont},-1,5,50,0,0,0,0,0"'';
-    in
-      lib.generators.toINI {} (
+    "qt5ct/qt5ct.conf".text =
+      let
+        default = ''"${defaultFont},-1,5,50,0,0,0,0,0"'';
+      in
+      lib.generators.toINI { } (
         qtctConf
         // {
           Fonts = {
@@ -61,10 +64,11 @@ in {
         }
       );
 
-    "qt6ct/qt6ct.conf".text = let
-      default = ''"${defaultFont},-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
-    in
-      lib.generators.toINI {} (
+    "qt6ct/qt6ct.conf".text =
+      let
+        default = ''"${defaultFont},-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"'';
+      in
+      lib.generators.toINI { } (
         qtctConf
         // {
           Fonts = {

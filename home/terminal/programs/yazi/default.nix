@@ -4,7 +4,8 @@
   inputs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./theme/filetype.nix
     ./theme/icons.nix
@@ -13,7 +14,7 @@
   ];
 
   # general file info
-  home.packages = [pkgs.exiftool];
+  home.packages = [ pkgs.exiftool ];
 
   # yazi file manager
   programs.yazi = {
@@ -27,7 +28,11 @@
 
     settings = {
       manager = {
-        layout = [1 4 3];
+        layout = [
+          1
+          4
+          3
+        ];
         sort_by = "alphabetical";
         sort_sensitive = true;
         sort_reverse = false;
@@ -48,7 +53,7 @@
     # Run ripdrag when pressing C-n
     keymap.manager.prepend_keymap = [
       {
-        on = ["<C-n>"];
+        on = [ "<C-n>" ];
         run = ''shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm'';
       }
     ];

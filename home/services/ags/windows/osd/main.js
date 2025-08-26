@@ -7,17 +7,14 @@ import PopupWindow from "../../utils/popup_window.js";
 
 // connections
 Audio.connect("speaker-changed", () =>
-  Audio.speaker.connect(
-    "changed",
-    () => {
-      if (!App.getWindow("system-menu")?.visible) {
-        Indicators.speaker();
-      }
-    },
-  ));
-Audio.connect(
-  "microphone-changed",
-  () => Audio.microphone.connect("changed", () => Indicators.mic()),
+  Audio.speaker.connect("changed", () => {
+    if (!App.getWindow("system-menu")?.visible) {
+      Indicators.speaker();
+    }
+  }),
+);
+Audio.connect("microphone-changed", () =>
+  Audio.microphone.connect("changed", () => Indicators.mic()),
 );
 
 Brightness.connect("screen-changed", () => {
@@ -41,14 +38,10 @@ const child = () =>
         child: Widget.ProgressBar({
           hexpand: true,
           vertical: false,
-        })
-          .hook(
-            Indicators,
-            (self, props) => {
-              self.value = props?.value ?? 0;
-              self.visible = props?.showProgress ?? false;
-            },
-          ),
+        }).hook(Indicators, (self, props) => {
+          self.value = props?.value ?? 0;
+          self.visible = props?.showProgress ?? false;
+        }),
 
         overlays: [
           Widget.Box({
@@ -57,7 +50,7 @@ const child = () =>
             children: [
               Widget.Icon().hook(
                 Indicators,
-                (self, props) => self.icon = props?.icon ?? "",
+                (self, props) => (self.icon = props?.icon ?? ""),
               ),
               Widget.Box({
                 hexpand: true,
@@ -78,20 +71,16 @@ export default () =>
     click_through: true,
     anchor: ["bottom"],
     revealerSetup: (self) =>
-      self
-        .hook(Indicators, (revealer, _, visible) => {
-          revealer.reveal_child = visible;
-        }),
+      self.hook(Indicators, (revealer, _, visible) => {
+        revealer.reveal_child = visible;
+      }),
   })
-    .hook(
-      Hyprland.active,
-      (self) => {
-        // prevent useless resets
-        if (lastMonitor === Hyprland.active.monitor) return;
+    .hook(Hyprland.active, (self) => {
+      // prevent useless resets
+      if (lastMonitor === Hyprland.active.monitor) return;
 
-        self.monitor = Hyprland.active.monitor.id;
-      },
-    )
+      self.monitor = Hyprland.active.monitor.id;
+    })
     .hook(Indicators, (win, _, visible) => {
       win.visible = visible;
     });
