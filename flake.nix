@@ -68,10 +68,10 @@
       # last commit I had before ags switched to astal (thus breaking my config)
       # TODO: set up quickshell ASAP
       url = "github:Aylur/ags/60180a184cfb32b61a1d871c058b31a3b9b0743d";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
+      # inputs = {
+      #   nixpkgs.follows = "nixpkgs";
+      #   systems.follows = "systems";
+      # };
     };
 
     anyrun.url = "github:fufexan/anyrun/launch-prefix";
