@@ -15,16 +15,22 @@ See an overview of the flake outputs by running
 - [home](./home): [Home Manager](https://github.com/nix-community/home-manager)
   config
 - [lib](./lib): helper functions
-- [modules](./modules): NixOS modules
+- [modules](./modules): exported NixOS modules
 - [pkgs](./pkgs): package definitions
-- [system](./system): common NixOS configurations
+- [system](./system): NixOS configuration common between hosts
 
 # 📦 Exported packages
 
-Run packages directly with:
+This flake exports several packages. To get a list of available packages, run
 
 ```console
-nix run github:fufexan/dotfiles#packageName
+nix flake show github:fufexan/dotfiles
+```
+
+Run packages directly with the below command, replacing `<packageName>` with the desired package:
+
+```console
+nix run github:fufexan/dotfiles#<packageName>
 ```
 
 Or install from the `packages` output. For example:
@@ -41,7 +47,7 @@ Or install from the `packages` output. For example:
 # configuration.nix
 {pkgs, inputs, ...}: {
   environment.systemPackages = [
-    inputs.fufexan-dotfiles.packages."x86_64-linux".packageName
+    inputs.fufexan-dotfiles.packages."x86_64-linux".<packageName>
   ];
 }
 ```
