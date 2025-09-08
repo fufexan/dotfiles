@@ -34,7 +34,6 @@
         experimental-features = [
           "nix-command"
           "flakes"
-          "repl-flake"
         ];
         flake-registry = "/etc/nix/registry.json";
 
