@@ -32,7 +32,9 @@
     # DNS resolver
     resolved = {
       enable = true;
-      dnsovertls = "opportunistic";
+      # Disable until https://github.com/NixOS/nixpkgs/issues/440073 is fixed
+      # Waiting for https://github.com/NixOS/nixpkgs/pull/440130 to land in nixos-unstable
+      # dnsovertls = "opportunistic";
     };
   };
 
