@@ -1,7 +1,6 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
-import "../utils"
+import "../utils/."
 import "../components"
 
 Rectangle {
@@ -14,7 +13,7 @@ Rectangle {
     property int valueSize: 8
     property int textSize: 6
 
-    property string valueColor: Colors.foreground
+    property color valueColor: Colors.foreground
     property string textColor: "lightgray"
 
     RowLayout {

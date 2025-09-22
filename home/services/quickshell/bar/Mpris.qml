@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import "../utils"
+import "../utils/."
 import "../components"
 
 WrapperMouseArea {

@@ -1,0 +1,3 @@
+singleton Colors 1.0 Colors.qml
+singleton MprisState 1.0 MprisState.qml
+singleton ResourcesState 1.0 ResourcesState.qml
