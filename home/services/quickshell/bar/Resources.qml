@@ -4,14 +4,14 @@ import "../utils/."
 import "../components"
 
 Rectangle {
-    id: resources
+    id: root
 
     Layout.fillHeight: true
     color: "transparent"
     implicitWidth: rowLayout.width
 
-    property int valueSize: 8
-    property int textSize: 6
+    property int valueSize: 7
+    property int textSize: 5
 
     property color valueColor: Colors.foreground
     property string textColor: "lightgray"
@@ -23,14 +23,14 @@ Rectangle {
         ColumnLayout {
             id: cpuColumn
             Text {
-                color: textColor
-                font.pointSize: textSize
+                color: root.textColor
+                font.pointSize: root.textSize
                 text: "CPU"
                 Layout.alignment: Qt.AlignCenter
             }
             Text {
-                color: valueColor
-                font.pointSize: valueSize
+                color: root.valueColor
+                font.pointSize: root.valueSize
                 text: ResourcesState.cpu_percent + "%"
                 Layout.alignment: Qt.AlignCenter
             }
@@ -38,14 +38,14 @@ Rectangle {
 
         ColumnLayout {
             Text {
-                color: textColor
-                font.pointSize: textSize
+                color: root.textColor
+                font.pointSize: root.textSize
                 text: "MEM"
                 Layout.alignment: Qt.AlignCenter
             }
             Text {
-                color: valueColor
-                font.pointSize: valueSize
+                color: root.valueColor
+                font.pointSize: root.valueSize
                 text: ResourcesState.mem_percent + "%"
                 Layout.alignment: Qt.AlignCenter
             }
