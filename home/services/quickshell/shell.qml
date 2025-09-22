@@ -1,6 +1,10 @@
 import "./bar"
+import "./notifications"
 import Quickshell // for ShellRoot and PanelWindow
 
-ShellRoot {
-    Bar {}
+Scope {
+    ShellRoot {
+        Bar {}
+    }
+    NotificationOverlay {}
 }
