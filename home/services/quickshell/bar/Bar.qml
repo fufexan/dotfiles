@@ -1,9 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Wayland
 import "../utils"
 
 PanelWindow {
+    WlrLayershell.namespace: "quickshell:bar"
     id: barWindow
     screen: Quickshell.screens[0]
 
@@ -20,7 +22,7 @@ PanelWindow {
         id: bar
         anchors.fill: parent
 
-        color: Colors.bgBlur
+        color: Colors.bgBar
 
         // left
         RowLayout {
