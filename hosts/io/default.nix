@@ -61,10 +61,5 @@
       enable = true;
       package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
     };
-
-    kanata.keyboards.io = {
-      config = builtins.readFile "${self}/system/services/kanata/main.kbd";
-      devices = [ "/dev/input/by-path/platform-i8042-serio-0-event-kbd" ];
-    };
   };
 }
