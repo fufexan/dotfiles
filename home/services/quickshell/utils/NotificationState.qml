@@ -88,6 +88,7 @@ Singleton {
         onNotification: notif => {
             notif.tracked = true;
             root.onNewNotif(notif);
+            console.log("notif: appName", notif.appName || "null", ", appIcon", notif.appIcon || "null", ", image", notif.image || "null")
 
             notif.closed.connect(() => {
                 notifDismissByNotif(notif);

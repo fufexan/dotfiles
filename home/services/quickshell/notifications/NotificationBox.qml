@@ -14,21 +14,23 @@ WrapperMouseArea {
 
     acceptedButtons: Qt.AllButtons
 
-    property string appIcon: ""
-    property string app: ""
-    property string summary: ""
-    property string body: ""
-    property string icon: ""
-    property list<NotificationAction> actions: []
+    property Notification n
+    property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
+    property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
     property int indexPopup: -1
     property int indexAll: -1
-    property bool hasDismiss: true
     property real iconSize: 48
     property bool expanded: false
 
+    function getImage(image: string): string {
+        if (image.search(/:\/\//) != -1)
+            return Qt.resolvedUrl(image);
+        return Quickshell.iconPath(image);
+    }
+
     onClicked: mouse => {
-        if (mouse.button == Qt.LeftButton && actions != []) {
-            actions[0].invoke();
+        if (mouse.button == Qt.LeftButton && root.n.actions != []) {
+            root.n.actions[0].invoke();
         } else if (mouse.button == Qt.RightButton) {
             if (indexAll != -1)
                 NotificationState.notifDismissByAll(indexAll);
@@ -59,23 +61,41 @@ WrapperMouseArea {
             Item {
                 id: coverItem
 
-                visible: root.icon != ""
+                visible: root.image != ""
 
                 Layout.alignment: Qt.AlignTop
                 implicitWidth: root.iconSize
                 implicitHeight: root.iconSize
-                Layout.margins: 8
+                Layout.margins: 12
                 Layout.rightMargin: 0
 
                 ClippingWrapperRectangle {
-                    visible: root.icon != ""
                     anchors.centerIn: parent
                     radius: 8
                     color: "transparent"
 
                     IconImage {
                         implicitSize: coverItem.height
-                        source: Quickshell.iconPath(root.icon)
+                        source: root.getImage(root.image)
+                    }
+                }
+
+                ClippingWrapperRectangle {
+                    visible: root.hasAppIcon
+
+                    anchors {
+                        horizontalCenter: coverItem.right
+                        verticalCenter: coverItem.bottom
+                        horizontalCenterOffset: -4
+                        verticalCenterOffset: -4
+                    }
+
+                    radius: 2
+                    color: "transparent"
+
+                    IconImage {
+                        implicitSize: 16
+                        source: root.getImage(root.n.appIcon)
                     }
                 }
             }
@@ -84,20 +104,13 @@ WrapperMouseArea {
                 id: contentLayout
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.margins: 8
-                Layout.leftMargin: coverItem.visible ? 0 : 8
+                Layout.margins: 12
+                Layout.leftMargin: coverItem.visible ? 4 : 12
                 spacing: 4
-
-                // HACK: gives the illusion that 2-row text is centered (when bodyText is only one
-                // row, and no action buttons are present)
-                Item {
-                    Layout.fillHeight: true
-                }
 
                 Text {
                     Layout.maximumWidth: contentLayout.width - buttonLayout.width
-                    text: root.summary
+                    text: root.n.summary
                     elide: Text.ElideRight
                     font.weight: Font.Bold
                 }
@@ -105,23 +118,22 @@ WrapperMouseArea {
                 Text {
                     id: bodyText
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
                     font.weight: Font.Medium
-                    maximumLineCount: root.expanded ? 5 : (root.actions.length > 1 ? 1 : 2)
-                    text: root.body
+                    maximumLineCount: root.expanded ? 5 : (root.n.actions.length > 1 ? 1 : 2)
+                    text: root.n.body
                 }
 
                 RowLayout {
-                    visible: root.actions.length > 1
+                    visible: root.n.actions.length > 1
 
                     Layout.fillWidth: true
                     implicitHeight: actionRepeater.implicitHeight
 
                     Repeater {
                         id: actionRepeater
-                        model: root.actions.slice(1)
+                        model: root.n.actions.slice(1)
 
                         WrapperMouseArea {
                             id: actionButtonMA
@@ -170,7 +182,7 @@ WrapperMouseArea {
             WrapperMouseArea {
                 id: expandButton
 
-                visible: bodyText.text.length > (root.actions.length > 1 ? 50 : 100)
+                visible: bodyText.text.length > (root.n.actions.length > 1 ? 50 : 100)
 
                 property string sourceIcon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
 

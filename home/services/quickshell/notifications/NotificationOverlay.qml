@@ -35,12 +35,7 @@ PanelWindow {
 
             NotificationBox {
                 required property int index
-                appIcon: NotificationState.popupNotifs[index].appIcon
-                app: NotificationState.popupNotifs[index].appName
-                summary: NotificationState.popupNotifs[index].summary
-                body: NotificationState.popupNotifs[index].body
-                icon: NotificationState.popupNotifs[index].appIcon
-                actions: NotificationState.popupNotifs[index].actions
+                n: NotificationState.popupNotifs[index]
                 indexPopup: index
             }
         }
