@@ -16,12 +16,15 @@
           "calendar"
           "notifications"
           "system-menu"
+          "quickshell:bar"
+          "quickshell:notifications:overlay"
         ];
 
         highopacity = [
           "anyrun"
           "osd"
           "logout_dialog"
+          "quickshell:notifications:panel"
         ];
 
         blurred = lib.concatLists [
@@ -31,9 +34,21 @@
       in
       [
         "blur, ${toRegex blurred}"
-        "xray 1, ${toRegex [ "bar" ]}"
+        "xray 1, ${
+          toRegex [
+            "bar"
+            "quickshell:bar"
+          ]
+        }"
         "ignorealpha 0.5, ${toRegex (highopacity ++ [ "music" ])}"
         "ignorealpha 0.2, ${toRegex lowopacity}"
+        "noanim, ${
+          toRegex [
+            "notifications"
+            "quickshell:notifications:overlay"
+            "quickshell:notifictaions:panel"
+          ]
+        }"
       ];
 
     # window rules

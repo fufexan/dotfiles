@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 import "./bar"
 import "./notifications"
 import Quickshell // for ShellRoot and PanelWindow
