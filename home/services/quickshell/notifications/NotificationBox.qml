@@ -48,7 +48,6 @@ WrapperMouseArea {
         RowLayout {
             id: mainLayout
 
-            implicitHeight: contentLayout.implicitHeight
             spacing: 8
 
             anchors {
@@ -85,14 +84,22 @@ WrapperMouseArea {
                 id: contentLayout
 
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 Layout.margins: 8
                 Layout.leftMargin: coverItem.visible ? 0 : 8
                 spacing: 4
+
+                // HACK: gives the illusion that 2-row text is centered (when bodyText is only one
+                // row, and no action buttons are present)
+                Item {
+                    Layout.fillHeight: true
+                }
 
                 Text {
                     Layout.maximumWidth: contentLayout.width - buttonLayout.width
                     text: root.summary
                     elide: Text.ElideRight
+                    font.weight: Font.Bold
                 }
 
                 Text {
@@ -101,6 +108,7 @@ WrapperMouseArea {
                     Layout.fillHeight: true
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
+                    font.weight: Font.Medium
                     maximumLineCount: root.expanded ? 5 : (root.actions.length > 1 ? 1 : 2)
                     text: root.body
                 }
@@ -164,16 +172,13 @@ WrapperMouseArea {
 
                 visible: bodyText.text.length > (root.actions.length > 1 ? 50 : 100)
 
-                property string sourceIcon: "go-down-symbolic"
+                property string sourceIcon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
 
                 hoverEnabled: true
                 Layout.fillHeight: true
                 implicitWidth: 16
 
-                onPressed: () => {
-                    root.expanded = !root.expanded;
-                    sourceIcon = root.expanded ? "go-up-symbolic" : "go-down-symbolic";
-                }
+                onPressed: () => root.expanded = !root.expanded
 
                 Rectangle {
                     radius: 16
