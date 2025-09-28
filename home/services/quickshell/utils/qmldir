@@ -1,4 +1,5 @@
-singleton NotificationState 1.0 NotificationState.qml
 singleton Colors 1.0 Colors.qml
+singleton Config 1.0 Config.qml
 singleton MprisState 1.0 MprisState.qml
+singleton NotificationState 1.0 NotificationState.qml
 singleton ResourcesState 1.0 ResourcesState.qml

@@ -2,12 +2,12 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
-import "../utils"
+import "../utils/."
 
 PanelWindow {
     WlrLayershell.namespace: "quickshell:bar"
     id: barWindow
-    screen: Quickshell.screens[0]
+    screen: Quickshell.screens.find(m => m.name === Config.preferredMonitor)
 
     anchors {
         top: true
