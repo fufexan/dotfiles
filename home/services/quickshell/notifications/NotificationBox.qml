@@ -1,6 +1,9 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Services.Notifications
 import Quickshell.Widgets
 import org.kde.kirigami
 import "../utils/."
@@ -16,6 +19,7 @@ WrapperMouseArea {
     property string summary: ""
     property string body: ""
     property string icon: ""
+    property list<NotificationAction> actions: []
     property int indexPopup: -1
     property int indexAll: -1
     property bool hasDismiss: true
@@ -23,7 +27,9 @@ WrapperMouseArea {
     property bool expanded: false
 
     onClicked: mouse => {
-        if (mouse.button == Qt.RightButton) {
+        if (mouse.button == Qt.LeftButton && actions != []) {
+            actions[0].invoke();
+        } else if (mouse.button == Qt.RightButton) {
             if (indexAll != -1)
                 NotificationState.notifDismissByAll(indexAll);
             else if (indexPopup != -1)
@@ -79,9 +85,9 @@ WrapperMouseArea {
                 id: contentLayout
 
                 Layout.fillWidth: true
-                Layout.margins: 15
-                Layout.leftMargin: coverItem.visible ? 0 : 15
-                spacing: 5
+                Layout.margins: 8
+                Layout.leftMargin: coverItem.visible ? 0 : 8
+                spacing: 4
 
                 Text {
                     Layout.maximumWidth: contentLayout.width - buttonLayout.width
@@ -95,8 +101,49 @@ WrapperMouseArea {
                     Layout.fillHeight: true
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
-                    maximumLineCount: root.expanded ? 5 : 1
+                    maximumLineCount: root.expanded ? 5 : (root.actions.length > 1 ? 1 : 2)
                     text: root.body
+                }
+
+                RowLayout {
+                    visible: root.actions.length > 1
+
+                    Layout.fillWidth: true
+                    implicitHeight: actionRepeater.implicitHeight
+
+                    Repeater {
+                        id: actionRepeater
+                        model: root.actions.slice(1)
+
+                        WrapperMouseArea {
+                            id: actionButtonMA
+                            required property NotificationAction modelData
+
+                            hoverEnabled: true
+                            implicitHeight: actionButton.implicitHeight
+                            Layout.fillWidth: true
+
+                            onPressed: () => {
+                                modelData.invoke();
+                            }
+
+                            Rectangle {
+                                id: actionButton
+
+                                radius: 16
+                                color: actionButtonMA.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
+                                implicitHeight: buttonText.implicitHeight
+                                Layout.fillWidth: true
+
+                                Text {
+                                    id: buttonText
+
+                                    anchors.centerIn: parent
+                                    text: actionButtonMA.modelData.text
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -108,14 +155,14 @@ WrapperMouseArea {
             anchors {
                 top: parent.top
                 right: parent.right
-                topMargin: 13
-                rightMargin: 12
+                topMargin: 8
+                rightMargin: 8
             }
 
             WrapperMouseArea {
                 id: expandButton
 
-                visible: bodyText.truncated
+                visible: bodyText.text.length > (root.actions.length > 1 ? 50 : 100)
 
                 property string sourceIcon: "go-down-symbolic"
 
@@ -130,7 +177,7 @@ WrapperMouseArea {
 
                 Rectangle {
                     radius: 16
-                    color: expandButton.containsMouse ? Colors.bgBar : Colors.bgBlur
+                    color: expandButton.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
                     implicitWidth: 16
                     implicitHeight: 16
 
@@ -140,7 +187,7 @@ WrapperMouseArea {
                         implicitHeight: parent.implicitHeight - 4
                         implicitWidth: parent.implicitHeight - 4
                         isMask: true
-                        color: 'white'
+                        color: Colors.foreground
                     }
                 }
             }
@@ -161,7 +208,7 @@ WrapperMouseArea {
 
                 Rectangle {
                     radius: 16
-                    color: closeButton.containsMouse ? Qt.lighter(Qt.lighter(Qt.lighter(Colors.bgBlur))) : Qt.lighter(Qt.lighter(Colors.bgBlur))
+                    color: closeButton.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
                     implicitWidth: 16
                     implicitHeight: 16
 
@@ -171,7 +218,7 @@ WrapperMouseArea {
                         implicitHeight: parent.implicitHeight - 4
                         implicitWidth: parent.implicitHeight - 4
                         isMask: true
-                        color: 'white'
+                        color: Colors.foreground
                     }
                 }
             }

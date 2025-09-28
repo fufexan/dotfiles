@@ -7,4 +7,14 @@ Singleton {
     property color bgBlur: Qt.rgba(0, 0, 0, 0.5)
     property color foreground: "white"
     property list<color> monitorColors: ["#e06c75", "#e5c07b", "#98c379", "#61afef"]
+
+    property color surface: Qt.rgba(255, 255, 255, 0.15)
+    property color overlay: Qt.rgba(255, 255, 255, 0.7)
+
+    property color accent: "#e06c75"
+
+    property color buttonEnabled: accent
+    property color buttonEnabledHover: Qt.lighter(accent, 0.9)
+    property color buttonDisabled: surface
+    property color buttonDisabledHover: Qt.rgba(surface.r, surface.g, surface.b, surface.a + 0.1)
 }

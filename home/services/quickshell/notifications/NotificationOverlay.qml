@@ -35,6 +35,7 @@ WlrLayershell {
                 summary: NotificationState.popupNotifs[index].summary
                 body: NotificationState.popupNotifs[index].body
                 icon: NotificationState.popupNotifs[index].appIcon
+                actions: NotificationState.popupNotifs[index].actions
                 indexPopup: index
             }
         }
