@@ -34,9 +34,18 @@ PanelWindow {
             model: NotificationState.popupNotifs
 
             NotificationBox {
+                id: notifBox
                 required property int index
                 n: NotificationState.popupNotifs[index]
                 indexPopup: index
+
+                Timer {
+                    running: true
+                    interval: (notifBox.n.expireTimeout > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout) * 1000
+                    onTriggered: {
+                        NotificationState.notifDismissByNotif(notifBox.n);
+                    }
+                }
             }
         }
     }

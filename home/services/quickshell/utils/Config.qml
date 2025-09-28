@@ -11,4 +11,6 @@ Singleton {
                 return mon;
         }
     }
+
+    readonly property var notificationExpireTimeout: 10
 }
