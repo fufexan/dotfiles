@@ -25,6 +25,7 @@ WrapperRectangle {
 
                     IconImage {
                         id: trayIcon
+                        mipmap: true
                         source: mouseArea.modelData.icon
                         implicitSize: 16
                     }
