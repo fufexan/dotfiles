@@ -13,20 +13,19 @@ WrapperMouseArea {
     id: root
 
     acceptedButtons: Qt.AllButtons
+    hoverEnabled: true
 
     property Notification n
+    property real timestamp
+    property real elapsed: Date.now()
     property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
     property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
     property int indexPopup: -1
     property int indexAll: -1
     property real iconSize: 48
-    property bool expanded: false
 
-    function getImage(image: string): string {
-        if (image.search(/:\/\//) != -1)
-            return Qt.resolvedUrl(image);
-        return Quickshell.iconPath(image);
-    }
+    property bool showTime: false
+    property bool expanded: false
 
     onClicked: mouse => {
         if (mouse.button == Qt.LeftButton && root.n.actions != []) {
@@ -39,6 +38,17 @@ WrapperMouseArea {
         } else if (mouse.button == Qt.MiddleButton) {
             NotificationState.dismissAll();
         }
+    }
+
+    ElapsedTimer {
+        id: elapsedTimer
+    }
+
+    Timer {
+        running: root.showTime
+        interval: 1000
+        repeat: true
+        onTriggered: root.elapsed = elapsedTimer.elapsed()
     }
 
     Rectangle {
@@ -76,7 +86,7 @@ WrapperMouseArea {
 
                     IconImage {
                         implicitSize: coverItem.height
-                        source: root.getImage(root.image)
+                        source: Utils.getImage(root.image)
                     }
                 }
 
@@ -95,7 +105,7 @@ WrapperMouseArea {
 
                     IconImage {
                         implicitSize: 16
-                        source: root.getImage(root.n.appIcon)
+                        source: Utils.getImage(root.n.appIcon)
                     }
                 }
             }
@@ -108,11 +118,21 @@ WrapperMouseArea {
                 Layout.leftMargin: coverItem.visible ? 4 : 12
                 spacing: 4
 
-                Text {
+                RowLayout {
                     Layout.maximumWidth: contentLayout.width - buttonLayout.width
-                    text: root.n.summary
-                    elide: Text.ElideRight
-                    font.weight: Font.Bold
+
+                    Text {
+                        Layout.alignment: Qt.AlignLeft
+                        text: root.n.summary
+                        elide: Text.ElideRight
+                        font.weight: Font.Bold
+                    }
+
+                    Text {
+                        visible: root.showTime
+                        Layout.alignment: Qt.AlignRight
+                        text: Utils.humanTime(root.timestamp, root.elapsed)
+                    }
                 }
 
                 Text {
@@ -170,6 +190,7 @@ WrapperMouseArea {
 
         RowLayout {
             id: buttonLayout
+            visible: root.containsMouse
             implicitHeight: 16
 
             anchors {
