@@ -1,15 +1,10 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Hyprland
 
 Singleton {
-    property list<string> preferredMonitorOrder: ["DP-1", "DP-2", "eDP-1"]
-    property var preferredMonitor: () => {
-        for (let mon in preferredMonitorOrder) {
-            if (Hyprland.monitors.find(m => m.name == mon))
-                return mon;
-        }
+    property var preferredMonitor: {
+        return [...Quickshell.screens].sort().reverse()[0];
     }
 
     readonly property var notificationExpireTimeout: 10

@@ -7,7 +7,7 @@ import Quickshell.Wayland
 PanelWindow {
     id: root
 
-    screen: Quickshell.screens.find(m => m.name === Config.preferredMonitor)
+    screen: Config.preferredMonitor
     visible: NotificationState.notifOverlayOpen
 
     WlrLayershell.namespace: "quickshell:notifications:overlay"

@@ -5,9 +5,9 @@ import Quickshell.Wayland
 import "../utils/."
 
 PanelWindow {
-    WlrLayershell.namespace: "quickshell:bar"
     id: barWindow
-    screen: Quickshell.screens.find(m => m.name === Config.preferredMonitor)
+    WlrLayershell.namespace: "quickshell:bar"
+    screen: Config.preferredMonitor
 
     anchors {
         top: true
