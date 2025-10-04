@@ -23,13 +23,12 @@ WrapperMouseArea {
 
         ClippingWrapperRectangle {
             radius: height / 2
-            implicitWidth: 24
-            implicitHeight: 24
-            Image {
+            margin: 12
+
+            IconImage {
                 id: artwork
                 anchors.fill: parent
                 source: MprisState.player?.trackArtUrl || ""
-                fillMode: Image.PreserveAspectFit
                 asynchronous: true
             }
         }

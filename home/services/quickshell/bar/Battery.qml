@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.UPower
 import "../components"
+import "../utils/."
 
 WrapperMouseArea {
     id: root
@@ -39,8 +40,8 @@ WrapperMouseArea {
 
         visible: battery.isLaptopBattery
 
-        implicitHeight: 14
-        implicitWidth: 14
+        implicitHeight: Config.iconSize
+        implicitWidth: Config.iconSize
 
         // This recolors the entire svg, instead of only classless components.
         // Hopefully in the future classes can be selected for recoloring.

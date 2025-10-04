@@ -3,13 +3,12 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
+import "../utils/."
 
 WrapperRectangle {
     id: root
     resizeChild: false
-    margin: 0
     color: "transparent"
-    Layout.fillHeight: true
 
     RowLayout {
         Repeater {
@@ -27,7 +26,7 @@ WrapperRectangle {
                         id: trayIcon
                         mipmap: true
                         source: mouseArea.modelData.icon
-                        implicitSize: 16
+                        implicitSize: Config.iconSize
                     }
                 }
 
