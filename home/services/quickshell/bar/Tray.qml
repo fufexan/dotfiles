@@ -12,6 +12,8 @@ WrapperRectangle {
     color: "transparent"
 
     RowLayout {
+        spacing: Config.spacing
+
         Repeater {
             model: SystemTray.items
 

@@ -25,7 +25,7 @@ PopupWindow {
         id: textRect
 
         color: Colors.bgBlur
-        margin: 4
+        margin: 6
         radius: 8
 
         Text {

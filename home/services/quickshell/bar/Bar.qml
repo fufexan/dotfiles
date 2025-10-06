@@ -32,9 +32,9 @@ PanelWindow {
             anchors.left: parent.left
             anchors.top: parent.top
 
-            anchors.leftMargin: height / 4
-            anchors.rightMargin: height / 4
-            spacing: height / 4
+            anchors.leftMargin: Config.spacing
+            anchors.rightMargin: Config.spacing
+            spacing: Config.spacing
 
             Workspaces {}
         }
@@ -47,9 +47,9 @@ PanelWindow {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
 
-            anchors.leftMargin: height / 4
-            anchors.rightMargin: height / 4
-            spacing: height / 4
+            anchors.leftMargin: Config.spacing
+            anchors.rightMargin: Config.spacing
+            spacing: Config.spacing
 
             Mpris {}
         }
@@ -62,9 +62,9 @@ PanelWindow {
             anchors.right: parent.right
             anchors.top: parent.top
 
-            anchors.leftMargin: height / 4
-            anchors.rightMargin: height / 4
-            spacing: height / 4
+            anchors.leftMargin: Config.spacing
+            anchors.rightMargin: Config.spacing
+            spacing: Config.spacing
 
             Tray {}
             Resources {}

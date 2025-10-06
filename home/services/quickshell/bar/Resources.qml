@@ -10,8 +10,9 @@ Rectangle {
     color: "transparent"
     implicitWidth: rowLayout.width
 
-    property int valueSize: 7
-    property int textSize: 5
+    readonly property int valueSize: 7
+    readonly property int textSize: 5
+    readonly property int spacing: 0
 
     property color valueColor: Colors.foreground
     property string textColor: "lightgray"
@@ -24,7 +25,8 @@ Rectangle {
             text: ResourcesState.cpu_freq
 
             ColumnLayout {
-                id: cpuColumn
+                spacing: root.spacing
+
                 Text {
                     color: root.textColor
                     font.pointSize: root.textSize
@@ -42,7 +44,10 @@ Rectangle {
 
         HoverTooltip {
             text: ResourcesState.mem_used
+
             ColumnLayout {
+                spacing: root.spacing
+
                 Text {
                     color: root.textColor
                     font.pointSize: root.textSize

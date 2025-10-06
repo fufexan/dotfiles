@@ -9,4 +9,6 @@ Singleton {
 
     readonly property int notificationExpireTimeout: 10
     readonly property int iconSize: 14
+    readonly property int barHeight: 32
+    readonly property real spacing: 12
 }
