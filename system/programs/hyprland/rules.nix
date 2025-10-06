@@ -34,6 +34,7 @@
       in
       [
         "blur, ${toRegex blurred}"
+        "blurpopups, ^quickshell.*$"
         "xray 1, ${
           toRegex [
             "bar"
