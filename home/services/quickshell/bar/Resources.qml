@@ -20,34 +20,41 @@ Rectangle {
         id: rowLayout
         anchors.centerIn: parent
 
-        ColumnLayout {
-            id: cpuColumn
-            Text {
-                color: root.textColor
-                font.pointSize: root.textSize
-                text: "CPU"
-                Layout.alignment: Qt.AlignCenter
-            }
-            Text {
-                color: root.valueColor
-                font.pointSize: root.valueSize
-                text: ResourcesState.cpu_percent + "%"
-                Layout.alignment: Qt.AlignCenter
+        HoverTooltip {
+            text: ResourcesState.cpu_freq
+
+            ColumnLayout {
+                id: cpuColumn
+                Text {
+                    color: root.textColor
+                    font.pointSize: root.textSize
+                    text: "CPU"
+                    Layout.alignment: Qt.AlignCenter
+                }
+                Text {
+                    color: root.valueColor
+                    font.pointSize: root.valueSize
+                    text: ResourcesState.cpu_percent + "%"
+                    Layout.alignment: Qt.AlignCenter
+                }
             }
         }
 
-        ColumnLayout {
-            Text {
-                color: root.textColor
-                font.pointSize: root.textSize
-                text: "MEM"
-                Layout.alignment: Qt.AlignCenter
-            }
-            Text {
-                color: root.valueColor
-                font.pointSize: root.valueSize
-                text: ResourcesState.mem_percent + "%"
-                Layout.alignment: Qt.AlignCenter
+        HoverTooltip {
+            text: ResourcesState.mem_used
+            ColumnLayout {
+                Text {
+                    color: root.textColor
+                    font.pointSize: root.textSize
+                    text: "MEM"
+                    Layout.alignment: Qt.AlignCenter
+                }
+                Text {
+                    color: root.valueColor
+                    font.pointSize: root.valueSize
+                    text: ResourcesState.mem_percent + "%"
+                    Layout.alignment: Qt.AlignCenter
+                }
             }
         }
     }
