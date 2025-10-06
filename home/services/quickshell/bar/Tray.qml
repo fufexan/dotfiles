@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
+import "../components"
 import "../utils/."
 
 WrapperRectangle {
@@ -14,9 +15,11 @@ WrapperRectangle {
         Repeater {
             model: SystemTray.items
 
-            WrapperMouseArea {
+            HoverTooltip {
                 id: mouseArea
                 required property SystemTrayItem modelData
+
+                text: modelData.tooltipTitle
 
                 Item {
                     implicitWidth: trayIcon.implicitWidth
