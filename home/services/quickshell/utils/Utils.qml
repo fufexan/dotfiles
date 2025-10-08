@@ -10,25 +10,23 @@ Singleton {
         return Quickshell.iconPath(image);
     }
 
-    function humanTime(timestamp: int, elapsed: int): string {
+    function humanTime(elapsed: int): string {
         const MINUTE = 60;
         const HOUR = 60 * MINUTE;
         const DAY = 24 * HOUR;
 
-        const diff = elapsed - timestamp;
-
-        if (diff < 15) {
+        if (elapsed < 15) {
             return "now";
-        } else if (diff < MINUTE) {
+        } else if (elapsed < MINUTE) {
             return "seconds ago";
-        } else if (diff < HOUR) {
-            return `${diff}m ago`;
-        } else if (diff < DAY) {
-            return `${Math.round(diff / HOUR)}h ago`;
-        } else if (diff < 2 * DAY) {
+        } else if (elapsed < HOUR) {
+            return `${elapsed}m ago`;
+        } else if (elapsed < DAY) {
+            return `${Math.round(elapsed / HOUR)}h ago`;
+        } else if (elapsed < 2 * DAY) {
             return "yesterday";
         } else {
-            return `${Math.round(diff / DAY)} days ago`;
+            return `${Math.round(elapsed / DAY)} days ago`;
         }
     }
 }

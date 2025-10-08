@@ -16,8 +16,7 @@ WrapperMouseArea {
     hoverEnabled: true
 
     property Notification n
-    property real timestamp
-    property real elapsed: Date.now()
+    property int elapsed: 0
     property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
     property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
     property int indexPopup: -1
@@ -120,9 +119,9 @@ WrapperMouseArea {
 
                 RowLayout {
                     Layout.maximumWidth: contentLayout.width - buttonLayout.width
+                    Layout.fillWidth: false
 
                     Text {
-                        Layout.alignment: Qt.AlignLeft
                         text: root.n.summary
                         elide: Text.ElideRight
                         font.weight: Font.Bold
@@ -130,8 +129,12 @@ WrapperMouseArea {
 
                     Text {
                         visible: root.showTime
-                        Layout.alignment: Qt.AlignRight
-                        text: Utils.humanTime(root.timestamp, root.elapsed)
+                        text: "·"
+                    }
+
+                    Text {
+                        visible: root.showTime
+                        text: Utils.humanTime(root.elapsed)
                     }
                 }
 

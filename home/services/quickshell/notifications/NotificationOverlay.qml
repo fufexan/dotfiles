@@ -37,7 +37,6 @@ PanelWindow {
                 id: notifBox
                 required property int index
                 n: NotificationState.popupNotifs[index]
-                timestamp: Date.now()
                 indexPopup: index
 
                 Timer {
