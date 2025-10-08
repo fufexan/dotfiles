@@ -1,6 +1,7 @@
 //@ pragma UseQApplication
 import "./bar"
 import "./notifications"
+import "./osd"
 import Quickshell // for ShellRoot and PanelWindow
 
 Scope {
@@ -8,4 +9,5 @@ Scope {
         Bar {}
     }
     NotificationOverlay {}
+    OSD {}
 }
