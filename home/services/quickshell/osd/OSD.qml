@@ -14,7 +14,7 @@ Scope {
     Connections {
         target: PipeWireState.defaultSink?.audio
 
-        function onChanged() {
+        function update() {
             scope.osdVisible = true;
             scope.icon = PipeWireState.sinkIcon();
             scope.progress = PipeWireState.defaultSink?.audio.volume ?? 0;
@@ -22,18 +22,18 @@ Scope {
         }
 
         function onVolumeChanged() {
-            onChanged();
+            update();
         }
 
         function onMutedChanged() {
-            onChanged();
+            update();
         }
     }
 
     Connections {
         target: PipeWireState.defaultSource?.audio
 
-        function onChanged() {
+        function update() {
             scope.osdVisible = true;
             scope.icon = PipeWireState.sourceIcon();
             scope.progress = PipeWireState.defaultSource?.audio.volume ?? 0;
@@ -41,11 +41,22 @@ Scope {
         }
 
         function onVolumeChanged() {
-            onChanged();
+            update();
         }
 
         function onMutedChanged() {
-            onChanged();
+            update();
+        }
+    }
+
+    Connections {
+        target: BrightnessState
+
+        function onBrightnessChanged() {
+            scope.osdVisible = true;
+            scope.icon = "display-brightness-symbolic";
+            scope.progress = BrightnessState.brightness ?? 0;
+            hideTimer.restart();
         }
     }
 

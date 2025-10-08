@@ -1,3 +1,4 @@
+singleton BrightnessState 1.0 BrightnessState.qml
 singleton Colors 1.0 Colors.qml
 singleton Config 1.0 Config.qml
 singleton MprisState 1.0 MprisState.qml
