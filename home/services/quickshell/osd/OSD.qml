@@ -1,81 +1,122 @@
+pragma ComponentBehavior: Bound
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import "../utils/."
 
-PanelWindow {
-    id: root
+Scope {
+    id: scope
+    property bool osdVisible: false
+    property real progress: 0
+    property string icon: ""
 
-    visible: false
-    screen: Config.preferredMonitor
+    Connections {
+        target: PipeWireState.defaultSink?.audio
 
-    WlrLayershell.exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.namespace: "quickshell:osd"
-    color: 'transparent'
-    mask: Region {}
+        function onChanged() {
+            scope.osdVisible = true;
+            scope.icon = PipeWireState.sinkIcon();
+            scope.progress = PipeWireState.defaultSink?.audio.volume ?? 0;
+            hideTimer.restart();
+        }
 
-    anchors {
-        bottom: true
+        function onVolumeChanged() {
+            onChanged();
+        }
+
+        function onMutedChanged() {
+            onChanged();
+        }
     }
 
-    implicitWidth: 200
-    implicitHeight: bg.implicitHeight + bg.anchors.bottomMargin
+    Connections {
+        target: PipeWireState.defaultSource?.audio
 
-	Connections {
-		target: PipeWireState.defaultSink?.audio
-
-		function onVolumeChanged() {
-			root.visible = true;
-			hideTimer.restart();
-		}
-	}
-
-	Timer {
-	    id: hideTimer
-	    interval: Config.osdTimeout
-	    onTriggered: root.visible = false
-	}
-
-    Rectangle {
-        id: bg
-        radius: 16
-
-        color: Colors.bgBar
-
-        implicitHeight: 32
-
-        anchors {
-            fill: parent
-            bottomMargin: 64
+        function onChanged() {
+            scope.osdVisible = true;
+            scope.icon = PipeWireState.sourceIcon();
+            scope.progress = PipeWireState.defaultSource?.audio.volume ?? 0;
+            hideTimer.restart();
         }
 
-        ClippingWrapperRectangle {
-            id: progress
-            anchors.fill: parent
-            radius: 16
-            resizeChild: false
+        function onVolumeChanged() {
+            onChanged();
+        }
+
+        function onMutedChanged() {
+            onChanged();
+        }
+    }
+
+    Timer {
+        id: hideTimer
+        interval: Config.osdTimeout
+        onTriggered: scope.osdVisible = false
+    }
+
+    LazyLoader {
+        active: scope.osdVisible
+
+        PanelWindow {
+            id: root
+
+            screen: Config.preferredMonitor
+
+            WlrLayershell.exclusionMode: ExclusionMode.Ignore
+            WlrLayershell.namespace: "quickshell:osd"
             color: 'transparent'
-
-            Rectangle {
-                color: Colors.foregroundBlur
-                anchors.left: parent.left
-                implicitHeight: 32
-                implicitWidth: parent.width * PipeWireState.defaultSink?.audio?.volume ?? 0
-            }
-        }
-
-        IconImage {
-            id: icon
+            mask: Region {}
 
             anchors {
-                horizontalCenter: bg.left
-                horizontalCenterOffset: icon.implicitSize + 4
-                verticalCenter: bg.verticalCenter
+                bottom: true
             }
-            mipmap: true
-            implicitSize: Config.iconSize
-            source: Quickshell.iconPath("audio-volume-high-symbolic")
+
+            implicitWidth: bg.implicitWidth
+            implicitHeight: bg.implicitHeight + bg.anchors.bottomMargin
+
+            Rectangle {
+                id: bg
+                radius: 16
+
+                color: Colors.bgBar
+
+                implicitHeight: Config.barHeight
+                implicitWidth: 200
+
+                anchors {
+                    fill: parent
+                    bottomMargin: Config.barHeight * 2
+                }
+
+                ClippingWrapperRectangle {
+                    id: progress
+                    anchors.fill: parent
+                    radius: 16
+                    resizeChild: false
+                    color: 'transparent'
+
+                    Rectangle {
+                        color: Colors.foregroundBlur
+                        anchors.left: parent.left
+                        implicitHeight: 32
+                        implicitWidth: parent.width * scope.progress ?? 0
+                    }
+                }
+
+                IconImage {
+                    id: icon
+
+                    anchors {
+                        horizontalCenter: bg.left
+                        horizontalCenterOffset: icon.implicitSize + 4
+                        verticalCenter: bg.verticalCenter
+                    }
+                    mipmap: true
+                    implicitSize: Config.iconSize
+                    source: Quickshell.iconPath(scope.icon)
+                }
+            }
         }
     }
 }
