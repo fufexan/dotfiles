@@ -8,8 +8,8 @@ let
   KvLibadwaita = pkgs.fetchFromGitHub {
     owner = "GabePoel";
     repo = "KvLibadwaita";
-    rev = "87c1ef9f44ec48855fd09ddab041007277e30e37";
-    hash = "sha256-K/2FYOtX0RzwdcGyeurLXAh3j8ohxMrH2OWldqVoLwo=";
+    rev = "1f4e0bec44b13dabfa1fe4047aa8eeaccf2f3557";
+    hash = "sha256-32RlnRBNJajD0Ps+vZSwVfDj6HzPpZjfm/LBG7u0eDg=";
     sparseCheckout = [ "src" ];
   };
 
