@@ -24,7 +24,7 @@ WrapperMouseArea {
         id: timer
         interval: 500
         repeat: false
-        onTriggered: if (root.containsMouse)
+        onTriggered: if (root.containsMouse && root.text != "")
             tooltip.visible = true
     }
 
