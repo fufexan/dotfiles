@@ -2,6 +2,7 @@
 import "./bar"
 import "./notifications"
 import "./osd"
+import "./sidebar"
 import Quickshell // for ShellRoot and PanelWindow
 
 Scope {
@@ -10,4 +11,5 @@ Scope {
     }
     NotificationOverlay {}
     OSD {}
+    Sidebar {}
 }
