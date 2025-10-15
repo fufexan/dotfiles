@@ -10,11 +10,12 @@ Singleton {
 
     PersistentProperties {
         id: persist
+        reloadableId: "persistedBrightness"
         property string screenInterface: ""
-        property string path: `/sys/class/backlight/${screenInterface}`
-        property int rawBrightness: Number(getRawBrightness.text());
-        property int max: Number(getMaxBrightness.text());
-        property real brightness: rawBrightness / max;
+        readonly property string path: `/sys/class/backlight/${screenInterface}`
+        readonly property int rawBrightness: Number(getRawBrightness.text());
+        readonly property int max: Number(getMaxBrightness.text());
+        readonly property real brightness: rawBrightness / max;
     }
 
     Process {
@@ -24,7 +25,6 @@ Singleton {
         command: ["sh", "-c", "ls -w1 /sys/class/backlight | head -1"]
         stdout: SplitParser {
             onRead: data => {
-                console.log(`found brightness interface ${data}`);
                 persist.screenInterface = data;
             }
         }
