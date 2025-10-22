@@ -18,13 +18,14 @@
           "system-menu"
           "quickshell:bar"
           "quickshell:notifications:overlay"
+          "quickshell:osd"
         ];
 
         highopacity = [
           "anyrun"
           "osd"
           "logout_dialog"
-          "quickshell:notifications:panel"
+          "quickshell:sidebar"
         ];
 
         blurred = lib.concatLists [
