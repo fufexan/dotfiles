@@ -9,7 +9,7 @@
     package = inputs.anyrun.packages.x86_64-linux.default;
 
     config = {
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${pkgs.stdenv.hostPlatform.system}; [
         uwsm_app
         randr
         rink

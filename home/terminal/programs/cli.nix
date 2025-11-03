@@ -16,7 +16,7 @@
     sshfs
 
     # utils
-    du-dust
+    dust
     duf
     fd
     file

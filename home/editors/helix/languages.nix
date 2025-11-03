@@ -255,7 +255,7 @@
       };
 
       uwu-colors = {
-        command = "${inputs.uwu-colors.packages.${pkgs.system}.default}/bin/uwu_colors";
+        command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";
         # command = "uwu_colors"; # useful for testing
       };
 

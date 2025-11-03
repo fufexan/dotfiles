@@ -14,7 +14,7 @@
   home.packages = with pkgs; [
     halloy
     signal-desktop
-    tdesktop
+    telegram-desktop
 
     gnome-calculator
     gnome-control-center
@@ -25,7 +25,7 @@
 
     zotero
 
-    inputs.nix-matlab.packages.${pkgs.system}.matlab
+    inputs.nix-matlab.packages.${pkgs.stdenv.hostPlatform.system}.matlab
   ];
 
   xdg.configFile."matlab/nix.sh".text = "INSTALL_DIR=$XDG_DATA_HOME/matlab/installation";

@@ -3,6 +3,9 @@
   pkgs,
   ...
 }:
+let
+  inherit (pkgs.stdenv.hostPlatform) system;
+in
 {
   imports = [
     inputs.hyprland.nixosModules.default
@@ -14,8 +17,8 @@
   ];
 
   environment.systemPackages = [
-    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
-    inputs.self.packages.${pkgs.system}.bibata-hyprcursor
+    inputs.hyprland-contrib.packages.${system}.grimblast
+    inputs.self.packages.${system}.bibata-hyprcursor
   ];
 
   environment.pathsToLink = [ "/share/icons" ];
@@ -25,7 +28,7 @@
     enable = true;
     withUWSM = true;
 
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    plugins = with inputs.hyprland-plugins.packages.${system}; [
       hyprbars
       # hyprexpo
     ];

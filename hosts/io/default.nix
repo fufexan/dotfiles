@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  inherit (pkgs.stdenv.hostPlatform) system;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -47,7 +50,7 @@
 
     howdy = {
       enable = true;
-      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.howdy;
+      package = inputs.nixpkgs-howdy.legacyPackages.${system}.howdy;
       settings = {
         core = {
           no_confirmation = true;
@@ -59,7 +62,7 @@
 
     linux-enable-ir-emitter = {
       enable = true;
-      package = inputs.nixpkgs-howdy.legacyPackages.${pkgs.system}.linux-enable-ir-emitter;
+      package = inputs.nixpkgs-howdy.legacyPackages.${system}.linux-enable-ir-emitter;
     };
   };
 }
