@@ -9,14 +9,6 @@ Singleton {
     property var allNotifs: []
     property var defaultNotifTimeout: 5000
     property bool notifOverlayOpen: false
-    property bool notifPanelOpen: false
-
-    function togglePanel() {
-        if (notifOverlayOpen && !notifPanelOpen)
-            notifOverlayOpen = false;
-
-        notifPanelOpen = !notifPanelOpen;
-    }
 
     function onNewNotif(notif) {
         allNotifs = [notif, ...allNotifs];
@@ -26,7 +18,7 @@ Singleton {
 
         popupNotifs = [notif, ...popupNotifs];
 
-        if (!notifPanelOpen)
+        if (!Config.showSidebar)
             notifOverlayOpen = true;
     }
 

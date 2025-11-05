@@ -5,7 +5,10 @@ import "../components"
 import "../utils/."
 
 WrapperMouseArea {
-    onClicked: () => Config.showSidebar = !Config.showSidebar
+    onClicked: () => {
+        NotificationState.notifOverlayOpen = false;
+        Config.showSidebar = !Config.showSidebar;
+    }
 
     Text {
         SystemClock {

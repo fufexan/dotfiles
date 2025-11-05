@@ -34,6 +34,7 @@ LazyLoader {
             anchors.fill: parent
 
             Calendar {}
+            NotificationCenter {}
         }
     }
 }

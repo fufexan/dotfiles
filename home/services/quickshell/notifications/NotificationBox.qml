@@ -19,23 +19,26 @@ WrapperMouseArea {
     property int elapsed: 0
     property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
     property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
-    property int indexPopup: -1
-    property int indexAll: -1
     property real iconSize: 48
 
     property bool showTime: false
     property bool expanded: false
 
+    property bool dismissOnClose: true
+
     onClicked: mouse => {
-        if (mouse.button == Qt.LeftButton && root.n.actions != []) {
-            root.n.actions[0].invoke();
+        if (mouse.button == Qt.LeftButton && root.n?.actions != []) {
+            root.n?.actions[0].invoke();
         } else if (mouse.button == Qt.RightButton) {
-            if (indexAll != -1)
-                NotificationState.notifDismissByAll(indexAll);
-            else if (indexPopup != -1)
-                NotificationState.notifDismissByPopup(indexPopup);
-        } else if (mouse.button == Qt.MiddleButton) {
+            if (dismissOnClose) {
+                NotificationState.notifDismissByNotif(n);
+            } else {
+                NotificationState.notifCloseByNotif(n);
+            }
+        } else if (mouse.button == Qt.MiddleButton && dismissOnClose) {
             NotificationState.dismissAll();
+        } else if (mouse.button == Qt.MiddleButton) {
+            NotificationState.closeAll();
         }
     }
 
@@ -104,7 +107,7 @@ WrapperMouseArea {
 
                     IconImage {
                         implicitSize: 16
-                        source: Utils.getImage(root.n.appIcon)
+                        source: Utils.getImage(root.n?.appIcon)
                     }
                 }
             }
@@ -122,18 +125,18 @@ WrapperMouseArea {
                     Layout.fillWidth: false
 
                     Text {
-                        text: root.n.summary
+                        text: root.n?.summary
                         elide: Text.ElideRight
                         font.weight: Font.Bold
                     }
 
                     Text {
-                        visible: root.showTime
+                        visible: root?.showTime
                         text: "·"
                     }
 
                     Text {
-                        visible: root.showTime
+                        visible: root?.showTime
                         text: Utils.humanTime(root.elapsed)
                     }
                 }
@@ -144,19 +147,19 @@ WrapperMouseArea {
                     elide: Text.ElideRight
                     wrapMode: Text.Wrap
                     font.weight: Font.Medium
-                    maximumLineCount: root.expanded ? 5 : (root.n.actions.length > 1 ? 1 : 2)
-                    text: root.n.body
+                    maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
+                    text: root.n?.body
                 }
 
                 RowLayout {
-                    visible: root.n.actions.length > 1
+                    visible: root.n?.actions.length > 1
 
                     Layout.fillWidth: true
                     implicitHeight: actionRepeater.implicitHeight
 
                     Repeater {
                         id: actionRepeater
-                        model: root.n.actions.slice(1)
+                        model: root.n?.actions.slice(1)
 
                         WrapperMouseArea {
                             id: actionButtonMA
@@ -206,7 +209,7 @@ WrapperMouseArea {
             WrapperMouseArea {
                 id: expandButton
 
-                visible: bodyText.text.length > (root.n.actions.length > 1 ? 50 : 100)
+                visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
 
                 property string sourceIcon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
 
@@ -241,10 +244,7 @@ WrapperMouseArea {
                 implicitWidth: 16
 
                 onPressed: () => {
-                    if (root.indexAll != -1)
-                        NotificationState.notifCloseByAll(root.indexAll);
-                    else if (root.indexPopup != -1)
-                        NotificationState.notifCloseByPopup(root.indexPopup);
+                    NotificationState.notifCloseByNotif(root.n);
                 }
 
                 Rectangle {

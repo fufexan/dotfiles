@@ -2,13 +2,14 @@ import "../utils/."
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Services.Notifications
 import Quickshell.Wayland
 
 PanelWindow {
     id: root
 
     screen: Config.preferredMonitor
-    visible: NotificationState.notifOverlayOpen
+    visible: NotificationState.notifOverlayOpen && !Config.showSidebar
 
     WlrLayershell.namespace: "quickshell:notifications:overlay"
     WlrLayershell.layer: WlrLayer.Top
@@ -35,9 +36,8 @@ PanelWindow {
 
             NotificationBox {
                 id: notifBox
-                required property int index
-                n: NotificationState.popupNotifs[index]
-                indexPopup: index
+                required property Notification modelData
+                n: modelData
 
                 Timer {
                     running: true
