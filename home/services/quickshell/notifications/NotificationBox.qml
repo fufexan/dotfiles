@@ -212,62 +212,29 @@ WrapperMouseArea {
                 rightMargin: 8
             }
 
-            WrapperMouseArea {
+            IconButton {
                 id: expandButton
 
+                Layout.fillHeight: true
+                Layout.minimumHeight: 16
                 visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
 
-                property string sourceIcon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
-
-                hoverEnabled: true
-                Layout.fillHeight: true
-                implicitWidth: 16
+                icon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
+                text: ""
 
                 onPressed: () => root.expanded = !root.expanded
-
-                Rectangle {
-                    radius: 16
-                    color: expandButton.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
-                    implicitWidth: 16
-                    implicitHeight: 16
-
-                    Icon {
-                        source: Quickshell.iconPath(expandButton.sourceIcon)
-                        anchors.centerIn: parent
-                        implicitHeight: parent.implicitHeight - 4
-                        implicitWidth: parent.implicitHeight - 4
-                        isMask: true
-                        color: Colors.foreground
-                    }
-                }
             }
 
-            WrapperMouseArea {
+            IconButton {
                 id: closeButton
+                Layout.minimumHeight: 16
 
-                hoverEnabled: true
                 Layout.fillHeight: true
-                implicitWidth: 16
 
-                onPressed: () => {
-                    NotificationState.notifCloseByNotif(root.n);
-                }
+                icon: "process-stop-symbolic"
+                text: ""
 
-                Rectangle {
-                    radius: 16
-                    color: closeButton.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
-                    implicitWidth: 16
-                    implicitHeight: 16
-
-                    Icon {
-                        source: Quickshell.iconPath("process-stop-symbolic")
-                        anchors.centerIn: parent
-                        implicitHeight: parent.implicitHeight - 4
-                        implicitWidth: parent.implicitHeight - 4
-                        isMask: true
-                        color: Colors.foreground
-                    }
-                }
+                onPressed: NotificationState.notifCloseByNotif(root.n)
             }
         }
     }
