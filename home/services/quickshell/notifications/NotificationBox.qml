@@ -16,7 +16,7 @@ WrapperMouseArea {
     hoverEnabled: true
 
     property Notification n
-    property int elapsed: 0
+    property int elapsed: getElapsed()
     property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
     property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
     property real iconSize: 48
@@ -25,6 +25,10 @@ WrapperMouseArea {
     property bool expanded: false
 
     property bool dismissOnClose: true
+
+    function getElapsed(): int {
+        return Math.floor(Date.now() / 1000) - Math.floor(n.time / 1000);
+    }
 
     onClicked: mouse => {
         if (mouse.button == Qt.LeftButton && root.n?.actions != []) {
@@ -42,15 +46,14 @@ WrapperMouseArea {
         }
     }
 
-    ElapsedTimer {
-        id: elapsedTimer
-    }
-
     Timer {
         running: root.showTime
         interval: 1000
         repeat: true
-        onTriggered: root.elapsed = elapsedTimer.elapsed()
+        onTriggered: {
+            console.log(Math.floor(Date.now() % 1000), Math.floor(root.n.time / 1000), root.getElapsed());
+            root.elapsed = root.getElapsed();
+        }
     }
 
     Rectangle {
