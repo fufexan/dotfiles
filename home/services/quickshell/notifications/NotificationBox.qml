@@ -130,6 +130,9 @@ WrapperMouseArea {
                     Text {
                         text: root.n?.summary
                         elide: Text.ElideRight
+                        Layout.fillWidth: true
+                        maximumLineCount: 1
+                        wrapMode: Text.Wrap
                         font.weight: Font.Bold
                     }
 
