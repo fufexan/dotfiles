@@ -20,7 +20,7 @@ Singleton {
         } else if (elapsed < MINUTE) {
             return "seconds ago";
         } else if (elapsed < HOUR) {
-            return `${elapsed}m ago`;
+            return `${Math.round(elapsed / MINUTE)}m ago`;
         } else if (elapsed < DAY) {
             return `${Math.round(elapsed / HOUR)}h ago`;
         } else if (elapsed < 2 * DAY) {
