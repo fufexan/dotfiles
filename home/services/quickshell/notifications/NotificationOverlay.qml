@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import "../utils/."
 import QtQuick
 import QtQuick.Layouts
@@ -11,25 +13,30 @@ PanelWindow {
     screen: Config.preferredMonitor
     visible: NotificationState.notifOverlayOpen && !Config.showSidebar
 
+    WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.namespace: "quickshell:notifications:overlay"
-    WlrLayershell.layer: WlrLayer.Top
 
-    implicitHeight: notifs.height
-    implicitWidth: notifs.width + 10
+    implicitWidth: 360
 
     color: "transparent"
+    mask: Region {
+        item: notifs
+    }
 
     anchors {
         top: true
         right: true
+        bottom: true
+    }
+
+    margins {
+        top: Config.barHeight + 8
+        right: 8
+        bottom: 8
     }
 
     ColumnLayout {
         id: notifs
-
-        Item {
-            implicitHeight: 10
-        }
 
         Repeater {
             model: NotificationState.popupNotifs
@@ -40,7 +47,7 @@ PanelWindow {
                 n: modelData
 
                 Timer {
-                    running: true
+                    running: root.visible
                     interval: (notifBox.n.expireTimeout > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout) * 1000
                     onTriggered: {
                         NotificationState.notifDismissByNotif(notifBox.n);

@@ -16,10 +16,12 @@ LazyLoader {
         anchors {
             right: true
             top: true
+            bottom: true
         }
         margins {
             top: Config.barHeight + 8
             right: 8
+            bottom: 8
         }
 
         WlrLayershell.exclusionMode: ExclusionMode.Ignore
@@ -27,11 +29,14 @@ LazyLoader {
         color: 'transparent'
 
         implicitWidth: 360
-        implicitHeight: col.implicitHeight
+        mask: Region { item: col }
 
         ColumnLayout {
             id: col
-            anchors.fill: parent
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
 
             Calendar {}
             NotificationCenter {}
