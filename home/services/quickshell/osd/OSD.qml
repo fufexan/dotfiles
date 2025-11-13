@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
+import QtQuick.Effects
 import "../utils/."
 
 Scope {
@@ -83,6 +84,10 @@ Scope {
                 bottom: true
             }
 
+            margins {
+                bottom: Config.barHeight
+            }
+
             implicitWidth: bg.implicitWidth
             implicitHeight: bg.implicitHeight + bg.anchors.bottomMargin
 
@@ -92,12 +97,15 @@ Scope {
 
                 color: Colors.bgBar
 
-                implicitHeight: Config.barHeight
-                implicitWidth: 200
+                implicitHeight: Config.barHeight * 1.5
+                implicitWidth: 200 + Config.padding * 8
 
                 anchors {
                     fill: parent
-                    bottomMargin: Config.barHeight * 2
+                    leftMargin: Config.padding * 4
+                    topMargin: Config.padding * 4
+                    rightMargin: Config.padding * 4
+                    bottomMargin: Config.padding * 6
                 }
 
                 ClippingWrapperRectangle {
@@ -110,7 +118,7 @@ Scope {
                     Rectangle {
                         color: Colors.foregroundBlur
                         anchors.left: parent.left
-                        implicitHeight: 32
+                        implicitHeight: Config.barHeight
                         implicitWidth: parent.width * scope.progress ?? 0
                     }
                 }
@@ -127,6 +135,15 @@ Scope {
                     implicitSize: Config.iconSize
                     source: Quickshell.iconPath(scope.icon)
                 }
+            }
+
+            RectangularShadow {
+                anchors.fill: bg
+                radius: bg.radius
+                offset.y: Config.padding
+                blur: Config.blurMax
+                spread: Config.padding * 2
+                color: Colors.windowShadow
             }
         }
     }
