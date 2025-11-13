@@ -2,10 +2,8 @@ import "../utils/."
 import "../notifications"
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
-import org.kde.kirigami
 import "../components"
 
 ColumnLayout {

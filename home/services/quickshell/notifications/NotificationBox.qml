@@ -50,10 +50,7 @@ WrapperMouseArea {
         running: root.showTime
         interval: 1000
         repeat: true
-        onTriggered: {
-            console.log(Math.floor(Date.now() % 1000), Math.floor(root.n.time / 1000), root.getElapsed());
-            root.elapsed = root.getElapsed();
-        }
+        onTriggered: root.elapsed = root.getElapsed();
     }
 
     Rectangle {
@@ -167,33 +164,15 @@ WrapperMouseArea {
                         id: actionRepeater
                         model: root.n?.actions.slice(1)
 
-                        WrapperMouseArea {
+                        Button {
                             id: actionButtonMA
                             required property NotificationAction modelData
 
-                            hoverEnabled: true
-                            implicitHeight: actionButton.implicitHeight
                             Layout.fillWidth: true
 
-                            onPressed: () => {
-                                modelData.invoke();
-                            }
-
-                            Rectangle {
-                                id: actionButton
-
-                                radius: 16
-                                color: actionButtonMA.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
-                                implicitHeight: buttonText.implicitHeight
-                                Layout.fillWidth: true
-
-                                Text {
-                                    id: buttonText
-
-                                    anchors.centerIn: parent
-                                    text: actionButtonMA.modelData.text
-                                }
-                            }
+                            buttonText: actionButtonMA.modelData.text
+                            text: ""
+                            onPressed: modelData.invoke()
                         }
                     }
                 }
