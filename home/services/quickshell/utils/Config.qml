@@ -14,6 +14,8 @@ PersistentProperties {
     readonly property int iconSize: 14
     readonly property int barHeight: 32
     readonly property real spacing: 12
+    readonly property int radius: 16
+    readonly property int padding: 4
 
     readonly property int osdTimeout: 1000
 }
