@@ -47,8 +47,8 @@ WrapperMouseArea {
 
             implicitWidth: parent.width
             color: Colors.bgBlurShadow
-            margin: 12
-            radius: 16
+            margin: Config.spacing
+            radius: Config.radius
 
             ColumnLayout {
                 id: calendarColumn
@@ -58,8 +58,8 @@ WrapperMouseArea {
                 RowLayout {
                     id: row
                     Layout.fillWidth: true
-                    Layout.leftMargin: 12
-                    Layout.rightMargin: 12
+                    Layout.leftMargin: Config.spacing
+                    Layout.rightMargin: Config.spacing
                     // uniformCellSizes: true
 
                     HoverTooltip {
@@ -131,7 +131,7 @@ WrapperMouseArea {
                     delegate: WrapperRectangle {
                         id: wr
                         required property var model
-                        radius: 16
+                        radius: Config.radius
                         readonly property bool today: model.day === root._today.getDate() && model.month === root._today.getMonth() && model.year === root._today.getFullYear()
                         color: today ? Colors.foreground : "transparent"
 

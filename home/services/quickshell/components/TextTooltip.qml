@@ -26,7 +26,7 @@ PopupWindow {
 
         color: Colors.bgBlur
         margin: 6
-        radius: 8
+        radius: Config.radius / 2
 
         Text {
             text: root.targetText

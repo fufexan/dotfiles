@@ -18,7 +18,7 @@ WrapperMouseArea {
     property int elapsed: getElapsed()
     property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
     property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
-    property real iconSize: 48
+    property real iconSize: Config.notificationIconSize
 
     property bool showTime: false
     property bool expanded: false
@@ -68,7 +68,7 @@ WrapperMouseArea {
         Rectangle {
             id: mainRect
 
-            implicitWidth: 360
+            implicitWidth: Config.notificationWidth
             implicitHeight: mainLayout.implicitHeight
             radius: Config.radius
             color: Colors.bgBlurShadow
@@ -76,7 +76,7 @@ WrapperMouseArea {
             RowLayout {
                 id: mainLayout
 
-                spacing: 8
+                spacing: Config.padding * 2
 
                 anchors {
                     top: parent.top
@@ -92,7 +92,7 @@ WrapperMouseArea {
                     Layout.alignment: Qt.AlignTop
                     implicitWidth: root.iconSize
                     implicitHeight: root.iconSize
-                    Layout.margins: 12
+                    Layout.margins: Config.spacing
                     Layout.rightMargin: 0
 
                     ClippingWrapperRectangle {
@@ -112,15 +112,15 @@ WrapperMouseArea {
                         anchors {
                             horizontalCenter: coverItem.right
                             verticalCenter: coverItem.bottom
-                            horizontalCenterOffset: -4
-                            verticalCenterOffset: -4
+                            horizontalCenterOffset: -Config.padding
+                            verticalCenterOffset: -Config.padding
                         }
 
                         radius: 2
                         color: "transparent"
 
                         IconImage {
-                            implicitSize: 16
+                            implicitSize: Config.radius
                             source: Utils.getImage(root.n?.appIcon)
                         }
                     }
@@ -130,9 +130,9 @@ WrapperMouseArea {
                     id: contentLayout
 
                     Layout.fillWidth: true
-                    Layout.margins: 12
-                    Layout.leftMargin: coverItem.visible ? 4 : 12
-                    spacing: 4
+                    Layout.margins: Config.spacing
+                    Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
+                    spacing: Config.padding
 
                     RowLayout {
                         Layout.maximumWidth: contentLayout.width - buttonLayout.width
@@ -196,20 +196,20 @@ WrapperMouseArea {
             RowLayout {
                 id: buttonLayout
                 visible: root.containsMouse
-                implicitHeight: 16
+                implicitHeight: Config.radius
 
                 anchors {
                     top: parent.top
                     right: parent.right
-                    topMargin: 8
-                    rightMargin: 8
+                    topMargin: Config.padding * 2
+                    rightMargin: Config.padding * 2
                 }
 
                 IconButton {
                     id: expandButton
 
                     Layout.fillHeight: true
-                    Layout.minimumHeight: 16
+                    Layout.minimumHeight: Config.padding * 4
                     visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
 
                     icon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
@@ -220,7 +220,7 @@ WrapperMouseArea {
 
                 IconButton {
                     id: closeButton
-                    Layout.minimumHeight: 16
+                    Layout.minimumHeight: Config.padding * 4
 
                     Layout.fillHeight: true
 

@@ -1,10 +1,12 @@
 import QtQuick
 import Quickshell.Widgets
+import "../utils/."
+import "../components"
 
 WrapperMouseArea {
     id: root
 
-    property var rect: Qt.rect(root.width / 2, root.height + 8, 0, 0)
+    property var rect: Qt.rect(root.width / 2, root.height + Config.padding * 2, 0, 0)
     required property string text
     default property alias contentItem: contentItem.data
 
@@ -22,7 +24,7 @@ WrapperMouseArea {
 
     Timer {
         id: timer
-        interval: 500
+        interval: Config.hoverTimeoutMs
         repeat: false
         onTriggered: if (root.containsMouse && root.text != "")
             tooltip.visible = true

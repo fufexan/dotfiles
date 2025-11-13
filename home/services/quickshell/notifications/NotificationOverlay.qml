@@ -16,7 +16,7 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.namespace: "quickshell:notifications:overlay"
 
-    implicitWidth: 360 + Config.padding * 6
+    implicitWidth: Config.notificationWidth + Config.padding * 6
 
     color: "transparent"
     mask: Region {

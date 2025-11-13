@@ -93,12 +93,12 @@ Scope {
 
             Rectangle {
                 id: bg
-                radius: 16
+                radius: Config.radius
 
                 color: Colors.bgBar
 
                 implicitHeight: Config.barHeight * 1.5
-                implicitWidth: 200 + Config.padding * 8
+                implicitWidth: Config.osdWidth + Config.padding * 8
 
                 anchors {
                     fill: parent
@@ -111,7 +111,7 @@ Scope {
                 ClippingWrapperRectangle {
                     id: progress
                     anchors.fill: parent
-                    radius: 16
+                    radius: Config.radius
                     resizeChild: false
                     color: 'transparent'
 
@@ -128,7 +128,7 @@ Scope {
 
                     anchors {
                         horizontalCenter: bg.left
-                        horizontalCenterOffset: icon.implicitSize + 4
+                        horizontalCenterOffset: icon.implicitSize + Config.padding
                         verticalCenter: bg.verticalCenter
                     }
                     mipmap: true

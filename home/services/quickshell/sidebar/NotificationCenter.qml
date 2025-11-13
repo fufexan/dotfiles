@@ -33,7 +33,7 @@ ColumnLayout {
 
             RowLayout {
                 WrapperRectangle {
-                    margin: 4
+                    margin: Config.padding
                     color: "transparent"
                     Text {
                         text: "No notifications"

@@ -26,7 +26,7 @@ LazyLoader {
         WlrLayershell.namespace: "quickshell:sidebar"
         color: 'transparent'
 
-        implicitWidth: 360 + Config.padding * 6
+        implicitWidth: Config.notificationWidth + Config.padding * 6
         mask: Region { item: col }
 
         ColumnLayout {

@@ -23,7 +23,7 @@ WrapperMouseArea {
 
         ClippingWrapperRectangle {
             radius: height / 2
-            margin: 12
+            margin: Config.padding * 3
 
             IconImage {
                 id: artwork
