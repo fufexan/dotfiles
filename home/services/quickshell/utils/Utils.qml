@@ -29,4 +29,9 @@ Singleton {
             return `${Math.round(elapsed / DAY)} days ago`;
         }
     }
+
+    property var clock: SystemClock {
+        id: clock
+        precision: SystemClock.Minutes
+    }
 }
