@@ -32,7 +32,7 @@ Item {
     Text {
         id: textItem
 
-        anchors.centerIn: parent
+        anchors.fill: parent
         renderType: Text.NativeRendering
         color: Colors.foreground
     }
