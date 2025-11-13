@@ -1,5 +1,6 @@
 import org.kde.kirigami
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Services.UPower
 import "../components"
@@ -45,5 +46,14 @@ HoverTooltip {
 
             return Quickshell.iconPath(`battery-level-${number}${charging}-symbolic`);
         }
+    }
+
+    MultiEffect {
+        source: batIcon
+        anchors.fill: batIcon
+        shadowEnabled: Config.shadowEnabled
+        shadowVerticalOffset: Config.shadowVerticalOffset
+        blurMax: Config.blurMax
+        opacity: Config.shadowOpacity
     }
 }

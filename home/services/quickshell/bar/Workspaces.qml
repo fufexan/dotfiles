@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
@@ -65,19 +66,32 @@ WrapperMouseArea {
 
                 onPressed: Hyprland.dispatch(`workspace ${modelData.index}`)
 
-                Rectangle {
-                    radius: height / 2
-
-                    color: {
-                        ws.modelData.workspace ?? false ? Colors.monitorColors[ws.modelData.workspace?.monitor?.id] : Colors.bgBlur;
-                    }
-
+                Item {
                     implicitHeight: parent.height
                     implicitWidth: {
                         if (ws.modelData.workspace?.focused ?? false) {
                             return parent.height * 2;
                         }
                         return parent.height;
+                    }
+                    Rectangle {
+                        id: wsRect
+                        radius: height / 2
+
+                        color: {
+                            ws.modelData.workspace ?? false ? Colors.monitorColors[ws.modelData.workspace?.monitor?.id] : Colors.bgBlur;
+                        }
+
+                        implicitHeight: parent.height
+                        implicitWidth: parent.width
+                    }
+                    MultiEffect {
+                        source: wsRect
+                        anchors.fill: wsRect
+                        shadowEnabled: Config.shadowEnabled
+                        shadowVerticalOffset: Config.shadowVerticalOffset
+                        blurMax: Config.blurMax
+                        opacity: Config.shadowOpacity
                     }
                 }
             }

@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
@@ -32,6 +33,15 @@ WrapperRectangle {
                         mipmap: true
                         source: mouseArea.modelData.icon
                         implicitSize: Config.iconSize
+                    }
+
+                    MultiEffect {
+                        source: trayIcon
+                        anchors.fill: trayIcon
+                        shadowEnabled: Config.shadowEnabled
+                        shadowVerticalOffset: Config.shadowVerticalOffset
+                        blurMax: Config.blurMax
+                        opacity: Config.shadowOpacity
                     }
                 }
 

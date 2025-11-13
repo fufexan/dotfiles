@@ -1,5 +1,6 @@
 import org.kde.kirigami
 import QtQuick
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Bluetooth
 import "../components"
@@ -60,5 +61,14 @@ HoverTooltip {
         color: 'white'
 
         source: root.iconPath
+    }
+
+    MultiEffect {
+        source: btIcon
+        anchors.fill: btIcon
+        shadowEnabled: Config.shadowEnabled
+        shadowVerticalOffset: Config.shadowVerticalOffset
+        blurMax: Config.blurMax
+        opacity: Config.shadowOpacity
     }
 }
