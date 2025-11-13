@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Widgets
 import "../utils/."
@@ -11,8 +12,7 @@ WrapperMouseArea {
     id: root
     Layout.fillWidth: true
 
-    implicitWidth: wrapper.implicitWidth
-    implicitHeight: wrapper.implicitHeight
+    implicitHeight: wrapperItem.implicitHeight
 
     readonly property int gridW: Math.floor(width / 7) * 7
     property var locale: Qt.locale("en_GB")
@@ -27,110 +27,128 @@ WrapperMouseArea {
         root.monthShift += (event.angleDelta.y < 0) ? 1 : -1;
     }
 
-    WrapperRectangle {
-        id: wrapper
-        color: Colors.bgBlur
-        margin: 12
-        radius: 16
+    Item {
+        id: wrapperItem
 
-        ColumnLayout {
-            id: calendarColumn
-            spacing: 5
+        implicitWidth: root.width
+        implicitHeight: wrapper.implicitHeight
 
-            // Calendar header
-            RowLayout {
-                id: row
-                Layout.fillWidth: true
-                Layout.leftMargin: 12
-                Layout.rightMargin: 12
-                // uniformCellSizes: true
+        RectangularShadow {
+            anchors.fill: wrapper
+            radius: wrapper.radius
+            offset.y: Config.padding
+            blur: Config.blurMax
+            spread: Config.padding * 2
+            color: Colors.windowShadow
+        }
 
-                HoverTooltip {
+        WrapperRectangle {
+            id: wrapper
+
+            implicitWidth: parent.width
+            color: Colors.bgBlurShadow
+            margin: 12
+            radius: 16
+
+            ColumnLayout {
+                id: calendarColumn
+                spacing: 5
+
+                // Calendar header
+                RowLayout {
+                    id: row
                     Layout.fillWidth: true
-                    acceptedButtons: Qt.LeftButton
-                    onClicked: root.monthShift--
-                    text: "Previous month"
+                    Layout.leftMargin: 12
+                    Layout.rightMargin: 12
+                    // uniformCellSizes: true
 
-                    Text {
-                        // anchors.fill: parent
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        text: "‹"
+                    HoverTooltip {
+                        Layout.fillWidth: true
+                        acceptedButtons: Qt.LeftButton
+                        onClicked: root.monthShift--
+                        text: "Previous month"
+
+                        Text {
+                            // anchors.fill: parent
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            text: "‹"
+                        }
+                    }
+                    HoverTooltip {
+                        Layout.fillWidth: true
+                        // Layout.alignment: Qt.AlignCenter
+                        acceptedButtons: Qt.LeftButton
+                        onClicked: root.monthShift = 0
+                        text: (root.monthShift === 0) ? "" : "Jump to current month"
+                        Text {
+                            anchors.centerIn: parent
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            text: `${root.monthShift != 0 ? "• " : ""}${monthGrid.title}`
+                        }
+                    }
+                    HoverTooltip {
+                        // Layout.fillWidth: true
+                        acceptedButtons: Qt.LeftButton
+                        onClicked: root.monthShift++
+                        text: "Next month"
+                        Text {
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            text: "›"
+                        }
                     }
                 }
-                HoverTooltip {
+
+                DayOfWeekRow {
+                    locale: root.locale
                     Layout.fillWidth: true
-                    // Layout.alignment: Qt.AlignCenter
-                    acceptedButtons: Qt.LeftButton
-                    onClicked: root.monthShift = 0
-                    text: (root.monthShift === 0) ? "" : "Jump to current month"
-                    Text {
-                        anchors.centerIn: parent
+
+                    delegate: Text {
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                        text: `${root.monthShift != 0 ? "• " : ""}${monthGrid.title}`
+                        text: shortName
+                        font.weight: Font.Bold
+
+                        required property string shortName
                     }
                 }
-                HoverTooltip {
-                    // Layout.fillWidth: true
-                    acceptedButtons: Qt.LeftButton
-                    onClicked: root.monthShift++
-                    text: "Next month"
-                    Text {
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        text: "›"
-                    }
-                }
-            }
 
-            DayOfWeekRow {
-                locale: root.locale
-                Layout.fillWidth: true
+                MonthGrid {
+                    id: monthGrid
+                    locale: root.locale
+                    Layout.fillWidth: true
 
-                delegate: Text {
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    text: shortName
-                    font.weight: Font.Bold
+                    month: root.displayMonth
+                    year: root.displayYear
 
-                    required property string shortName
-                }
-            }
+                    width: parent.width
+                    property int rows: 6
+                    property int cellH: 24
+                    implicitHeight: rows * cellH
 
-            MonthGrid {
-                id: monthGrid
-                locale: root.locale
-                Layout.fillWidth: true
+                    delegate: WrapperRectangle {
+                        id: wr
+                        required property var model
+                        radius: 16
+                        readonly property bool today: model.day === root._today.getDate() && model.month === root._today.getMonth() && model.year === root._today.getFullYear()
+                        color: today ? Colors.foreground : "transparent"
 
-                month: root.displayMonth
-                year: root.displayYear
-
-                width: parent.width
-                property int rows: 6
-                property int cellH: 24
-                implicitHeight: rows * cellH
-
-                delegate: WrapperRectangle {
-                    id: wr
-                    required property var model
-                    radius: 16
-                    readonly property bool today: model.day === root._today.getDate() && model.month === root._today.getMonth() && model.year === root._today.getFullYear()
-                    color: today ? Colors.foreground : "transparent"
-
-                    Text {
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        text: wr.model.day
-                        // font: control.font
-                        color: {
-                            if (wr.model.month !== root.displayMonth) {
-                                return Colors.buttonDisabledHover;
+                        Text {
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            text: wr.model.day
+                            // font: control.font
+                            color: {
+                                if (wr.model.month !== root.displayMonth) {
+                                    return Colors.buttonDisabledHover;
+                                }
+                                if (wr.today) {
+                                    return Colors.bg;
+                                }
+                                return Colors.foreground;
                             }
-                            if (wr.today) {
-                                return Colors.bg;
-                            }
-                            return Colors.foreground;
                         }
                     }
                 }

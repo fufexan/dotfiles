@@ -19,23 +19,27 @@ LazyLoader {
             bottom: true
         }
         margins {
-            top: Config.barHeight + 8
-            right: 8
-            bottom: 8
+            top: Config.barHeight
         }
 
         WlrLayershell.exclusionMode: ExclusionMode.Ignore
         WlrLayershell.namespace: "quickshell:sidebar"
         color: 'transparent'
 
-        implicitWidth: 360
+        implicitWidth: 360 + Config.padding * 6
         mask: Region { item: col }
 
         ColumnLayout {
             id: col
+            spacing: Config.spacing
             anchors {
-                left: parent.left
+                top: parent.top
                 right: parent.right
+                left: parent.left
+                leftMargin: Config.padding * 4
+                topMargin: Config.padding * 2
+                rightMargin: Config.padding * 2
+                bottomMargin: Config.padding * 4
             }
 
             Calendar {}

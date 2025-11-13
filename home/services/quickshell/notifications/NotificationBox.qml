@@ -1,11 +1,10 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
-import Quickshell
 import Quickshell.Services.Notifications
 import Quickshell.Widgets
-import org.kde.kirigami
 import "../utils/."
 import "../components"
 
@@ -50,170 +49,186 @@ WrapperMouseArea {
         running: root.showTime
         interval: 1000
         repeat: true
-        onTriggered: root.elapsed = root.getElapsed();
+        onTriggered: root.elapsed = root.getElapsed()
     }
 
-    Rectangle {
-        implicitWidth: 360
-        implicitHeight: mainLayout.implicitHeight
-        radius: 16
-        color: Colors.bgBlur
+    Item {
+        implicitWidth: mainRect.implicitWidth
+        implicitHeight: mainRect.implicitHeight
 
-        RowLayout {
-            id: mainLayout
+        RectangularShadow {
+            anchors.fill: mainRect
+            radius: mainRect.radius
+            offset.y: Config.padding
+            blur: Config.blurMax
+            spread: Config.padding * 2
+            color: Colors.windowShadow
+        }
 
-            spacing: 8
+        Rectangle {
+            id: mainRect
 
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
+            implicitWidth: 360
+            implicitHeight: mainLayout.implicitHeight
+            radius: Config.radius
+            color: Colors.bgBlurShadow
 
-            Item {
-                id: coverItem
+            RowLayout {
+                id: mainLayout
 
-                visible: root.image != ""
+                spacing: 8
 
-                Layout.alignment: Qt.AlignTop
-                implicitWidth: root.iconSize
-                implicitHeight: root.iconSize
-                Layout.margins: 12
-                Layout.rightMargin: 0
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                }
 
-                ClippingWrapperRectangle {
-                    anchors.centerIn: parent
-                    radius: 8
-                    color: "transparent"
+                Item {
+                    id: coverItem
 
-                    IconImage {
-                        implicitSize: coverItem.height
-                        source: Utils.getImage(root.image)
+                    visible: root.image != ""
+
+                    Layout.alignment: Qt.AlignTop
+                    implicitWidth: root.iconSize
+                    implicitHeight: root.iconSize
+                    Layout.margins: 12
+                    Layout.rightMargin: 0
+
+                    ClippingWrapperRectangle {
+                        anchors.centerIn: parent
+                        radius: 8
+                        color: "transparent"
+
+                        IconImage {
+                            implicitSize: coverItem.height
+                            source: Utils.getImage(root.image)
+                        }
+                    }
+
+                    ClippingWrapperRectangle {
+                        visible: root.hasAppIcon
+
+                        anchors {
+                            horizontalCenter: coverItem.right
+                            verticalCenter: coverItem.bottom
+                            horizontalCenterOffset: -4
+                            verticalCenterOffset: -4
+                        }
+
+                        radius: 2
+                        color: "transparent"
+
+                        IconImage {
+                            implicitSize: 16
+                            source: Utils.getImage(root.n?.appIcon)
+                        }
                     }
                 }
 
-                ClippingWrapperRectangle {
-                    visible: root.hasAppIcon
-
-                    anchors {
-                        horizontalCenter: coverItem.right
-                        verticalCenter: coverItem.bottom
-                        horizontalCenterOffset: -4
-                        verticalCenterOffset: -4
-                    }
-
-                    radius: 2
-                    color: "transparent"
-
-                    IconImage {
-                        implicitSize: 16
-                        source: Utils.getImage(root.n?.appIcon)
-                    }
-                }
-            }
-
-            ColumnLayout {
-                id: contentLayout
-
-                Layout.fillWidth: true
-                Layout.margins: 12
-                Layout.leftMargin: coverItem.visible ? 4 : 12
-                spacing: 4
-
-                RowLayout {
-                    Layout.maximumWidth: contentLayout.width - buttonLayout.width
-                    Layout.fillWidth: false
-
-                    Text {
-                        text: root.n?.summary
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        maximumLineCount: 1
-                        wrapMode: Text.Wrap
-                        font.weight: Font.Bold
-                    }
-
-                    Text {
-                        visible: root?.showTime
-                        text: "·"
-                    }
-
-                    Text {
-                        visible: root?.showTime
-                        text: Utils.humanTime(root.elapsed)
-                    }
-                }
-
-                Text {
-                    id: bodyText
-                    Layout.fillWidth: true
-                    elide: Text.ElideRight
-                    wrapMode: Text.Wrap
-                    font.weight: Font.Medium
-                    maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
-                    text: root.n?.body
-                }
-
-                RowLayout {
-                    visible: root.n?.actions.length > 1
+                ColumnLayout {
+                    id: contentLayout
 
                     Layout.fillWidth: true
-                    implicitHeight: actionRepeater.implicitHeight
+                    Layout.margins: 12
+                    Layout.leftMargin: coverItem.visible ? 4 : 12
+                    spacing: 4
 
-                    Repeater {
-                        id: actionRepeater
-                        model: root.n?.actions.slice(1)
+                    RowLayout {
+                        Layout.maximumWidth: contentLayout.width - buttonLayout.width
+                        Layout.fillWidth: false
 
-                        Button {
-                            id: actionButtonMA
-                            required property NotificationAction modelData
-
+                        Text {
+                            text: root.n?.summary
+                            elide: Text.ElideRight
                             Layout.fillWidth: true
+                            maximumLineCount: 1
+                            wrapMode: Text.Wrap
+                            font.weight: Font.Bold
+                        }
 
-                            buttonText: actionButtonMA.modelData.text
-                            text: ""
-                            onPressed: modelData.invoke()
+                        Text {
+                            visible: root?.showTime
+                            text: "·"
+                        }
+
+                        Text {
+                            visible: root?.showTime
+                            text: Utils.humanTime(root.elapsed)
+                        }
+                    }
+
+                    Text {
+                        id: bodyText
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        wrapMode: Text.Wrap
+                        font.weight: Font.Medium
+                        maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
+                        text: root.n?.body
+                    }
+
+                    RowLayout {
+                        visible: root.n?.actions.length > 1
+
+                        Layout.fillWidth: true
+                        implicitHeight: actionRepeater.implicitHeight
+
+                        Repeater {
+                            id: actionRepeater
+                            model: root.n?.actions.slice(1)
+
+                            Button {
+                                id: actionButtonMA
+                                required property NotificationAction modelData
+
+                                Layout.fillWidth: true
+
+                                buttonText: actionButtonMA.modelData.text
+                                text: ""
+                                onPressed: modelData.invoke()
+                            }
                         }
                     }
                 }
             }
-        }
 
-        RowLayout {
-            id: buttonLayout
-            visible: root.containsMouse
-            implicitHeight: 16
+            RowLayout {
+                id: buttonLayout
+                visible: root.containsMouse
+                implicitHeight: 16
 
-            anchors {
-                top: parent.top
-                right: parent.right
-                topMargin: 8
-                rightMargin: 8
-            }
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    topMargin: 8
+                    rightMargin: 8
+                }
 
-            IconButton {
-                id: expandButton
+                IconButton {
+                    id: expandButton
 
-                Layout.fillHeight: true
-                Layout.minimumHeight: 16
-                visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
+                    Layout.fillHeight: true
+                    Layout.minimumHeight: 16
+                    visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
 
-                icon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
-                text: ""
+                    icon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
+                    text: ""
 
-                onPressed: () => root.expanded = !root.expanded
-            }
+                    onPressed: () => root.expanded = !root.expanded
+                }
 
-            IconButton {
-                id: closeButton
-                Layout.minimumHeight: 16
+                IconButton {
+                    id: closeButton
+                    Layout.minimumHeight: 16
 
-                Layout.fillHeight: true
+                    Layout.fillHeight: true
 
-                icon: "process-stop-symbolic"
-                text: ""
+                    icon: "process-stop-symbolic"
+                    text: ""
 
-                onPressed: NotificationState.notifCloseByNotif(root.n)
+                    onPressed: NotificationState.notifCloseByNotif(root.n)
+                }
             }
         }
     }

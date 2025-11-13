@@ -1,6 +1,7 @@
 import "../utils/."
 import "../notifications"
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
@@ -10,30 +11,44 @@ ColumnLayout {
     id: root
     Layout.fillWidth: true
 
-    WrapperRectangle {
-        id: wrapper
+    Item {
         Layout.fillWidth: true
-        margin: 4
-        radius: 16
-        color: Colors.bgBlur
+        implicitHeight: wrapper.implicitHeight
 
-        RowLayout {
-            WrapperRectangle {
-                margin: 4
-                color: "transparent"
-                Text {
-                    text: "No notifications"
+        RectangularShadow {
+            anchors.fill: wrapper
+            radius: wrapper.radius
+            offset.y: Config.padding
+            blur: Config.blurMax
+            spread: Config.padding * 2
+            color: Colors.windowShadow
+        }
+
+        WrapperRectangle {
+            id: wrapper
+            implicitWidth: parent.width
+            margin: Config.padding
+            radius: Config.radius
+            color: Colors.bgBlurShadow
+
+            RowLayout {
+                WrapperRectangle {
+                    margin: 4
+                    color: "transparent"
+                    Text {
+                        text: "No notifications"
+                    }
                 }
-            }
 
-            IconButton {
-                id: closeButton
-                Layout.alignment: Qt.AlignRight
-                Layout.fillHeight: true
+                IconButton {
+                    id: closeButton
+                    Layout.alignment: Qt.AlignRight
+                    Layout.fillHeight: true
 
-                onPressed: NotificationState.closeAll()
-                icon: "process-stop-symbolic"
-                text: "Close all notifications"
+                    onPressed: NotificationState.closeAll()
+                    icon: "process-stop-symbolic"
+                    text: "Close all notifications"
+                }
             }
         }
     }

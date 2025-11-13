@@ -5,9 +5,11 @@ import Quickshell
 Singleton {
     readonly property color bgBar: Qt.rgba(0, 0, 0, 0.21)
     readonly property color bgBlur: Qt.rgba(0, 0, 0, 0.5)
+    readonly property color bgBlurShadow: Qt.rgba(0, 0, 0, 0.4)
     readonly property color bg: Qt.rgba(0, 0, 0, 0.9)
     readonly property color foreground: Qt.hsla(0, 0, 0.95, 1)
     readonly property color foregroundBlur: Qt.rgba(255, 255, 255, 0.7)
+    readonly property color windowShadow: Qt.rgba(0, 0, 0, 0.2)
     readonly property list<color> monitorColors: ["#e06c75", "#e5c07b", "#98c379", "#61afef"]
 
     readonly property color surface: Qt.rgba(255, 255, 255, 0.15)

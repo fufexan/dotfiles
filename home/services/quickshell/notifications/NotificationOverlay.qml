@@ -16,7 +16,7 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.namespace: "quickshell:notifications:overlay"
 
-    implicitWidth: 360
+    implicitWidth: 360 + Config.padding * 6
 
     color: "transparent"
     mask: Region {
@@ -30,13 +30,20 @@ PanelWindow {
     }
 
     margins {
-        top: Config.barHeight + 8
-        right: 8
-        bottom: 8
+        top: Config.barHeight
     }
 
     ColumnLayout {
         id: notifs
+
+        anchors {
+            top: parent.top
+            right: parent.right
+            left: parent.left
+            leftMargin: Config.padding * 4
+            rightMargin: Config.padding * 2
+            topMargin: Config.padding * 2
+        }
 
         Repeater {
             model: NotificationState.popupNotifs
