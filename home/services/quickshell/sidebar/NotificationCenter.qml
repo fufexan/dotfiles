@@ -34,9 +34,10 @@ ColumnLayout {
             RowLayout {
                 WrapperRectangle {
                     margin: Config.padding
+                    leftMargin: Config.padding * 2
                     color: "transparent"
                     Text {
-                        text: "No notifications"
+                        text: (NotificationState.allNotifs.length || "No") + " notification" + (NotificationState.allNotifs.length != 1 ? "s" : "")
                     }
                 }
 
