@@ -41,14 +41,26 @@ ColumnLayout {
                     }
                 }
 
-                IconButton {
-                    id: closeButton
+                Row {
                     Layout.alignment: Qt.AlignRight
                     Layout.fillHeight: true
+                    spacing: Config.padding * 2
 
-                    onPressed: NotificationState.closeAll()
-                    icon: "process-stop-symbolic"
-                    text: "Close all notifications"
+                    MaterialIconButton {
+                        id: dndButton
+
+                        onPressed: Config.doNotDisturb = !Config.doNotDisturb
+                        icon: "do_not_disturb_" + (Config.doNotDisturb ? "on" : "off")
+                        text: "Do not disturb " + (Config.doNotDisturb ? "on" : "off")
+                    }
+
+                    IconButton {
+                        id: closeButton
+
+                        onPressed: NotificationState.closeAll()
+                        icon: "process-stop-symbolic"
+                        text: "Close all notifications"
+                    }
                 }
             }
         }

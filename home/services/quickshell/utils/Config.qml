@@ -9,6 +9,7 @@ PersistentProperties {
         return [...Quickshell.screens].sort().reverse()[0];
     }
     property bool showSidebar: false
+    property bool doNotDisturb: false
 
     readonly property int notificationExpireTimeout: 10
     readonly property int notificationIconSize: 48
