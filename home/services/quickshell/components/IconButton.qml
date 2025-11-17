@@ -2,7 +2,7 @@ import org.kde.kirigami
 import QtQuick
 import QtQuick.Effects
 import Quickshell
-import "../utils/."
+import qs.utils
 
 HoverTooltip {
     id: root

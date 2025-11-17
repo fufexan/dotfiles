@@ -1,4 +1,4 @@
-import "../utils/."
+import qs.utils
 
 Text {
     property real fill: 0

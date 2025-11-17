@@ -4,8 +4,8 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
-import "../components"
-import "../utils/."
+import qs.components
+import qs.utils
 
 WrapperRectangle {
     id: root

@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 
-import "../utils/."
+import qs.utils
 import QtQuick
 import QtQuick.Layouts
 import Quickshell

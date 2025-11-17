@@ -4,7 +4,7 @@ import Quickshell.Wayland
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
-import "../utils/."
+import qs.utils
 
 Scope {
     id: scope

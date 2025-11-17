@@ -1,14 +1,12 @@
 //@ pragma UseQApplication
-import "./bar"
-import "./notifications"
-import "./osd"
-import "./sidebar"
+import qs.bar
+import qs.notifications
+import qs.osd
+import qs.sidebar
 import Quickshell // for ShellRoot and PanelWindow
 
-Scope {
-    ShellRoot {
-        Bar {}
-    }
+ShellRoot {
+    Bar {}
     NotificationOverlay {}
     OSD {}
     Sidebar {}

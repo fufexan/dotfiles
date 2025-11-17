@@ -5,8 +5,8 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Services.Notifications
 import Quickshell.Widgets
-import "../utils/."
-import "../components"
+import qs.utils
+import qs.components
 
 WrapperMouseArea {
     id: root

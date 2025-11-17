@@ -3,8 +3,8 @@ import QtQuick
 import QtQuick.Effects
 import Quickshell
 import Quickshell.Bluetooth
-import "../components"
-import "../utils/."
+import qs.components
+import qs.utils
 
 HoverTooltip {
     id: root

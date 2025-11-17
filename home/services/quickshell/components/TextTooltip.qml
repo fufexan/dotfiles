@@ -1,6 +1,6 @@
 import Quickshell
 import Quickshell.Widgets
-import "../utils/."
+import qs.utils
 
 PopupWindow {
     id: root

@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
-import "../components"
-import "../utils/."
+import qs.components
+import qs.utils
 
 WrapperMouseArea {
     onClicked: () => {

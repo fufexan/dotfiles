@@ -1,11 +1,11 @@
-import "../utils/."
+import qs.utils
 import "../notifications"
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell.Widgets
 import Quickshell.Services.Notifications
-import "../components"
+import qs.components
 
 ColumnLayout {
     id: root

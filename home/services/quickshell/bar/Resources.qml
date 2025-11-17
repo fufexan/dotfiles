@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
-import "../utils/."
-import "../components"
+import qs.utils
+import qs.components
 
 Rectangle {
     id: root

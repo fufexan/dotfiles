@@ -1,6 +1,6 @@
 import QtQuick
-import "../utils/."
-import "."
+import qs.utils
+import qs.components
 
 HoverTooltip {
     id: root
