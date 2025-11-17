@@ -14,7 +14,10 @@
 
   # Allow plugdev group to use Analog Devices' ADALM Pluto devices
   users.groups.plugdev = { };
-  users.users.mihai.extraGroups = [ "plugdev" ];
+  users.users.mihai.extraGroups = [
+    "plugdev"
+    "docker"
+  ];
 
   services.udev.packages =
     let
@@ -53,4 +56,6 @@
       adi-plutosdr-usb
       adi-m2k-usb
     ];
+
+  virtualisation.docker.enable = true;
 }
