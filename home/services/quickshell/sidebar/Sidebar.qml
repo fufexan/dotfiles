@@ -31,15 +31,14 @@ LazyLoader {
 
         ColumnLayout {
             id: col
-            spacing: Config.spacing
             anchors {
                 top: parent.top
                 right: parent.right
                 left: parent.left
-                leftMargin: Config.padding * 4
+                leftMargin: Config.padding * 5
                 topMargin: Config.padding * 2
                 rightMargin: Config.padding * 2
-                bottomMargin: Config.padding * 4
+                bottomMargin: Config.padding * 5
             }
 
             Calendar {}

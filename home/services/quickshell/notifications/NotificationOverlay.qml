@@ -40,8 +40,8 @@ PanelWindow {
             top: parent.top
             right: parent.right
             left: parent.left
-            leftMargin: Config.padding * 4
-            rightMargin: Config.padding * 2
+            leftMargin: Config.padding * 5
+            rightMargin: Config.padding * 5
             topMargin: Config.padding * 2
         }
 

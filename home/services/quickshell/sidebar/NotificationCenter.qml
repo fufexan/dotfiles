@@ -18,7 +18,6 @@ ColumnLayout {
         RectangularShadow {
             anchors.fill: wrapper
             radius: wrapper.radius
-            offset.y: Config.padding
             blur: Config.blurMax
             spread: Config.padding * 2
             color: Colors.windowShadow
