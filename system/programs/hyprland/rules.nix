@@ -9,7 +9,7 @@
           let
             elements = lib.concatStringsSep "|" list;
           in
-          "^(${elements})$";
+          "match:namespace ^(${elements})$";
 
         lowopacity = [
           "bar"
@@ -34,95 +34,96 @@
         ];
       in
       [
-        "blur, ${toRegex blurred}"
-        "blurpopups, ^quickshell.*$"
-        "xray 1, ${
+        "${toRegex blurred}, blur true"
+        "match:namespace ^quickshell.*$, blur_popups true"
+        "${
           toRegex [
             "bar"
             "quickshell:bar"
           ]
-        }"
-        "ignorealpha 0.5, ${toRegex (highopacity ++ [ "music" ])}"
-        "ignorealpha 0.2, ${toRegex lowopacity}"
-        "noanim, ${
+        }, xray true"
+        "${toRegex (highopacity ++ [ "music" ])}, ignore_alpha 0.5"
+        "${toRegex lowopacity}, ignore_alpha 0.2"
+        "${
           toRegex [
             "notifications"
             "quickshell:notifications:overlay"
             "quickshell:notifictaions:panel"
           ]
-        }"
+        }, no_anim true"
       ];
 
     # window rules
-    windowrulev2 = [
+    windowrule = [
       # telegram media viewer
-      "float, title:^(Media viewer)$"
+      "match:title ^(Media viewer)$, float on"
 
       # Bitwarden extension
-      "float, title:^(.*Bitwarden Password Manager.*)$"
+      "match:title ^(.*Bitwarden Password Manager.*)$, float on"
 
       # gnome calculator
-      "float, class:^(org.gnome.Calculator)$"
-      "size 360 490, class:^(org.gnome.Calculator)$"
+      "match:class ^(org.gnome.Calculator)$, float on"
+      "match:class ^(org.gnome.Calculator)$, size 360 490"
 
       # allow tearing in games
-      "immediate, class:^(osu\!|cs2)$"
+      "match:class ^(osu\!|cs2)$, immediate on"
 
-      # make Firefox/Zen PiP window floating and sticky
-      "float, title:^(Picture-in-Picture)$"
-      "pin, title:^(Picture-in-Picture)$"
+      # make Firefox/Zen PiP window float oning and sticky
+      "match:title ^(Picture-in-Picture)$, float on"
+      "match:title ^(Picture-in-Picture)$, pin on"
 
       # throw sharing indicators away
-      "workspace special silent, title:^(Firefox — Sharing Indicator)$"
-      "workspace special silent, title:^(Zen — Sharing Indicator)$"
-      "workspace special silent, title:^(.*is sharing (your screen|a window)\.)$"
+      "match:title ^(Firefox — Sharing Indicator)$, workspace special silent"
+      "match:title ^(Zen — Sharing Indicator)$, workspace special silent"
+      "match:title ^(.*is sharing (your screen|a window)\.)$, workspace special silent"
 
       # start Spotify and YouTube Music in ws9
-      "workspace 9 silent, title:^(Spotify( Premium)?)$"
-      "workspace 9 silent, title:^(YouTube Music)$"
+      "match:title ^(Spotify( Premium)?)$, workspace 9 silent"
+      "match:title ^(YouTube Music)$, workspace 9 silent"
 
       # idle inhibit while watching videos
-      "idleinhibit focus, class:^(mpv|.+exe|celluloid)$"
-      "idleinhibit focus, class:^(zen)$, title:^(.*YouTube.*)$"
-      "idleinhibit fullscreen, class:^(zen)$"
+      "match:class ^(mpv|.+exe|celluloid)$, idle_inhibit focus"
+      "match:class ^(zen)$, match:title ^(.*YouTube.*)$, idle_inhibit focus"
+      "match:class ^(zen)$, idle_inhibit fullscreen"
 
-      "dimaround, class:^(gcr-prompter)$"
-      "dimaround, class:^(xdg-desktop-portal-gtk)$"
-      "dimaround, class:^(polkit-gnome-authentication-agent-1)$"
-      "dimaround, class:^(zen)$, title:^(File Upload)$"
+      "match:class ^(gcr-prompter)$, dim_around on"
+      "match:class ^(xdg-desktop-portal-gtk)$, dim_around on"
+      "match:class ^(polkit-gnome-authentication-agent-1)$, dim_around on"
+      "match:class ^(zen)$, match:title ^(File Upload)$, dim_around on"
 
       # fix xwayland apps
-      "rounding 0, xwayland:1"
-      "center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$"
-      "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
+      "match:xwayland true, rounding 0"
+      "match:class ^(.*jetbrains.*)$, match:title ^(Confirm Exit|Open Project|win424|win201|splash)$, center on"
+      "match:class ^(.*jetbrains.*)$, match:title ^(splash)$, size 640 400"
 
       # Matlab
-      "tile, title:MATLAB"
-      "noanim on, class:MATLAB, title:DefaultOverlayManager.JWindow"
-      "noblur on, class:MATLAB, title:DefaultOverlayManager.JWindow"
-      "noborder on, class:MATLAB, title:DefaultOverlayManager.JWindow"
-      "noshadow on, class:MATLAB, title:DefaultOverlayManager.JWindow"
-      "plugin:hyprbars:nobar, class:MATLAB, title:DefaultOverlayManager.JWindow"
+      "match:title MATLAB, tile on"
+      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, no_anim on"
+      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, no_blur on"
+      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, border_size 0"
+      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, no_shadow on"
+      # NOTE: does not work
+      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, hyprbars:no_bar on"
 
       # don't render hyprbars on tiling windows
-      "plugin:hyprbars:nobar, floating:0"
+      "match:float true, hyprbars:no_bar on"
 
       # less sensitive scroll for some windows
       # browser(-based)
-      "scrolltouchpad 0.1, class:^(zen|firefox|chromium-browser|chrome-.*)$"
-      "scrolltouchpad 0.1, class:^(obsidian)$"
-      "scrolltouchpad 0.1, class:^(steam)$"
-      "scrolltouchpad 0.1, class:^(Zotero)$"
+      "match:class ^(zen|firefox|chromium-browser|chrome-.*)$, scroll_touchpad 0.1"
+      "match:class ^(obsidian)$, scroll_touchpad 0.1"
+      "match:class ^(steam)$, scroll_touchpad 0.1"
+      "match:class ^(Zotero)$, scroll_touchpad 0.1"
       # GTK3
-      "scrolltouchpad 0.1, class:^(com.github.xournalpp.xournalpp)$"
-      "scrolltouchpad 0.1, class:^(libreoffice.*)$"
-      "scrolltouchpad 0.1, class:^(.virt-manager-wrapped)$"
-      "scrolltouchpad 0.1, class:^(xdg-desktop-portal-gtk)$"
+      "match:class ^(com.github.xournalpp.xournalpp)$, scroll_touchpad 0.1"
+      "match:class ^(libreoffice.*)$, scroll_touchpad 0.1"
+      "match:class ^(.virt-manager-wrapped)$, scroll_touchpad 0.1"
+      "match:class ^(xdg-desktop-portal-gtk)$, scroll_touchpad 0.1"
       # Qt5
-      "scrolltouchpad 0.1, class:^(org.prismlauncher.PrismLauncher)$"
-      "scrolltouchpad 0.1, class:^(org.kde.kdeconnect.app)$"
+      "match:class ^(org.prismlauncher.PrismLauncher)$, scroll_touchpad 0.1"
+      "match:class ^(org.kde.kdeconnect.app)$, scroll_touchpad 0.1"
       # Others
-      "scrolltouchpad 0.1, class:^(org.pwmt.zathura)$"
+      "match:class ^(org.pwmt.zathura)$, scroll_touchpad 0.1"
     ];
   };
 }

@@ -29,7 +29,7 @@ in
     withUWSM = true;
 
     plugins = with inputs.hyprland-plugins.packages.${system}; [
-      hyprbars
+      # hyprbars
       # hyprexpo
     ];
   };
