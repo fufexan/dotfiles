@@ -103,10 +103,10 @@
       "match:class MATLAB, match:title DefaultOverlayManager.JWindow, border_size 0"
       "match:class MATLAB, match:title DefaultOverlayManager.JWindow, no_shadow on"
       # NOTE: does not work
-      "match:class MATLAB, match:title DefaultOverlayManager.JWindow, hyprbars:no_bar on"
+      # "match:class MATLAB, match:title DefaultOverlayManager.JWindow, hyprbars:no_bar on"
 
       # don't render hyprbars on tiling windows
-      "match:float true, hyprbars:no_bar on"
+      # "match:float true, hyprbars:no_bar on"
 
       # less sensitive scroll for some windows
       # browser(-based)
