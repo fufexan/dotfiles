@@ -8,12 +8,16 @@
   services.greetd =
     let
       session = {
-        command = "${lib.getExe config.programs.uwsm.package} start hyprland-uwsm.desktop";
+        command = "${lib.getExe config.programs.uwsm.package} start hyprland.desktop";
         user = "mihai";
       };
     in
     {
       enable = true;
+
+      # do not restart on session exit (useful on autologin)
+      restart = false;
+
       settings = {
         terminal.vt = 1;
         default_session = session;
