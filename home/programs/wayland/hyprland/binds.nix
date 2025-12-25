@@ -105,7 +105,7 @@ in
 
     bindr = [
       # launcher
-      "$mod, SUPER_L, exec, ${toggle "anyrun"}"
+      "$mod, SUPER_L, exec, vicinae toggle"
     ];
 
     bindl = [

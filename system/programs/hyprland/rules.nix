@@ -22,7 +22,7 @@
         ];
 
         highopacity = [
-          "anyrun"
+          "vicinae"
           "osd"
           "logout_dialog"
           "quickshell:sidebar"

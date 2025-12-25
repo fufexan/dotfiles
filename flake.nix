@@ -74,8 +74,6 @@
       };
     };
 
-    anyrun.url = "github:fufexan/anyrun/launch-prefix";
-
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     helix.url = "github:helix-editor/helix";
@@ -194,6 +192,9 @@
         utils.follows = "flake-utils";
       };
     };
+
+    vicinae.url = "github:vicinaehq/vicinae";
+    vicinae-extensions.url = "github:vicinaehq/extensions";
 
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";

@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ./anyrun
     ./browsers/chromium.nix
     ./browsers/firefox.nix
     ./browsers/zen.nix
@@ -9,12 +8,13 @@
     ./gtk.nix
     ./office
     ./qt.nix
+    ./vicinae
   ];
 
   home.packages = with pkgs; [
     halloy
     signal-desktop
-    telegram-desktop
+    # telegram-desktop
 
     gnome-calculator
     gnome-control-center

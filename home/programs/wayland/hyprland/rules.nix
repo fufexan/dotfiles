@@ -19,7 +19,7 @@
         ];
 
         highopacity = [
-          "anyrun"
+          "vicinae"
           "osd"
           "logout_dialog"
         ];
