@@ -124,6 +124,7 @@
       "match:class ^(org.kde.kdeconnect.app)$, scroll_touchpad 0.1"
       # Others
       "match:class ^(org.pwmt.zathura)$, scroll_touchpad 0.1"
+      "match:class MATLAB, scroll_touchpad 0.1"
     ];
   };
 }
