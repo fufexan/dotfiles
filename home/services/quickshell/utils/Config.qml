@@ -25,7 +25,7 @@ PersistentProperties {
     readonly property int padding: 4
 
     readonly property int blurMax: 16
-    readonly property real shadowOpacity: 0.3
+    readonly property real shadowOpacity: 0.1
     readonly property int shadowVerticalOffset: 2
     readonly property bool shadowEnabled: true
 
