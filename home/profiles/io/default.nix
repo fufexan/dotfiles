@@ -10,7 +10,7 @@
     ../../programs/wayland
 
     # services
-    ../../services/ags
+    # ../../services/ags
     ../../services/quickshell
     # ../../services/cinny.nix
 
