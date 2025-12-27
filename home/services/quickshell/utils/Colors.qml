@@ -14,6 +14,7 @@ Singleton {
 
     readonly property color surface: Qt.hsla(0, 0, 0.95, 0.15)
     readonly property color overlay: Qt.hsla(0, 0, 0.95, 0.7)
+    readonly property color border: Qt.hsla(0, 0, 0.95, 0.1)
 
     readonly property color accent: "#e06c75"
 

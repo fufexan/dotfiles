@@ -41,8 +41,8 @@ PanelWindow {
             right: parent.right
             left: parent.left
             leftMargin: Config.padding * 5
-            rightMargin: Config.padding * 5
-            topMargin: Config.padding * 2
+            rightMargin: Config.padding * 4
+            topMargin: Config.padding
         }
 
         Repeater {

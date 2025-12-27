@@ -29,6 +29,10 @@ ColumnLayout {
             margin: Config.padding
             radius: Config.radius
             color: Colors.bgBlurShadow
+            border {
+                color: Colors.border
+                width: 1
+            }
 
             RowLayout {
                 WrapperRectangle {

@@ -36,8 +36,8 @@ LazyLoader {
                 right: parent.right
                 left: parent.left
                 leftMargin: Config.padding * 5
-                topMargin: Config.padding * 2
-                rightMargin: Config.padding * 2
+                topMargin: Config.padding
+                rightMargin: Config.padding
                 bottomMargin: Config.padding * 5
             }
 

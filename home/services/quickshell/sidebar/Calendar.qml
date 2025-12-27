@@ -48,6 +48,10 @@ WrapperMouseArea {
             color: Colors.bgBlurShadow
             margin: Config.spacing
             radius: Config.radius
+            border {
+                color: Colors.border
+                width: 1
+            }
 
             ColumnLayout {
                 id: calendarColumn
