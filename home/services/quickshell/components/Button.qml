@@ -15,6 +15,10 @@ HoverTooltip {
         color: root.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
         implicitHeight: text.height + 2 * Config.padding
         implicitWidth: parent.width || text.width + 2 * Config.padding
+        border {
+            color: Colors.border
+            width: 1
+        }
 
         Text {
             id: text

@@ -116,7 +116,7 @@ Scope {
                     color: 'transparent'
 
                     Rectangle {
-                        color: Colors.foregroundBlur
+                        color: Colors.foregroundOSD
                         anchors.left: parent.left
                         implicitHeight: Config.barHeight
                         implicitWidth: parent.width * scope.progress ?? 0

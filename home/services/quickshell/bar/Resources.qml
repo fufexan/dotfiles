@@ -15,7 +15,7 @@ Rectangle {
     readonly property int spacing: 0
 
     property color valueColor: Colors.foreground
-    property string textColor: "lightgray"
+    property color textColor: Colors.overlay
 
     RowLayout {
         id: rowLayout
