@@ -69,8 +69,8 @@ WrapperMouseArea {
 
                         Text {
                             // anchors.fill: parent
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
                             text: "‹"
                         }
                     }
@@ -82,8 +82,8 @@ WrapperMouseArea {
                         text: (root.monthShift === 0) ? "" : "Jump to current month"
                         Text {
                             anchors.centerIn: parent
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
                             text: `${root.monthShift != 0 ? "• " : ""}${monthGrid.title}`
                         }
                     }
@@ -93,8 +93,8 @@ WrapperMouseArea {
                         onClicked: root.monthShift++
                         text: "Next month"
                         Text {
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Qt.AlignHCenter
+                            verticalAlignment: Qt.AlignVCenter
                             text: "›"
                         }
                     }
@@ -105,8 +105,8 @@ WrapperMouseArea {
                     Layout.fillWidth: true
 
                     delegate: Text {
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        verticalAlignment: Qt.AlignVCenter
                         text: shortName
                         font.weight: Font.Bold
 
@@ -124,29 +124,39 @@ WrapperMouseArea {
 
                     width: parent.width
                     property int rows: 6
-                    property int cellH: 24
+                    property int cellH: 25
                     implicitHeight: rows * cellH
 
-                    delegate: WrapperRectangle {
-                        id: wr
+                    delegate: Item {
+                        id: cellContainer
                         required property var model
-                        radius: Config.radius
-                        readonly property bool today: model.day === root._today.getDate() && model.month === root._today.getMonth() && model.year === root._today.getFullYear()
-                        color: today ? Colors.foreground : "transparent"
 
-                        Text {
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            text: wr.model.day
-                            // font: control.font
-                            color: {
-                                if (wr.model.month !== root.displayMonth) {
-                                    return Colors.buttonDisabledHover;
+                        readonly property bool today: model.day === root._today.getDate() && model.month === root._today.getMonth() && model.year === root._today.getFullYear()
+
+                        WrapperRectangle {
+                            implicitWidth: height
+
+                            radius: Config.radius
+                            anchors.centerIn: parent
+                            margin: 5
+
+                            color: cellContainer.today ? Colors.foreground : "transparent"
+
+                            Text {
+                                text: cellContainer.model.day
+
+                                horizontalAlignment: Qt.AlignHCenter
+                                verticalAlignment: Qt.AlignVCenter
+
+                                color: {
+                                    if (cellContainer.model.month !== root.displayMonth) {
+                                        return Colors.buttonDisabledHover;
+                                    }
+                                    if (cellContainer.today) {
+                                        return Colors.bg;
+                                    }
+                                    return Colors.foreground;
                                 }
-                                if (wr.today) {
-                                    return Colors.bg;
-                                }
-                                return Colors.foreground;
                             }
                         }
                     }
