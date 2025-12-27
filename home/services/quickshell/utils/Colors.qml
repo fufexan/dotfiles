@@ -8,12 +8,12 @@ Singleton {
     readonly property color bgBlurShadow: Qt.rgba(0, 0, 0, 0.4)
     readonly property color bg: Qt.rgba(0, 0, 0, 0.9)
     readonly property color foreground: Qt.hsla(0, 0, 0.95, 1)
-    readonly property color foregroundBlur: Qt.rgba(255, 255, 255, 0.7)
+    readonly property color foregroundBlur: Qt.hsla(0, 0, 0.95, 0.7)
     readonly property color windowShadow: Qt.rgba(0, 0, 0, 0.2)
     readonly property list<color> monitorColors: ["#e06c75", "#e5c07b", "#98c379", "#61afef"]
 
-    readonly property color surface: Qt.rgba(255, 255, 255, 0.15)
-    readonly property color overlay: Qt.rgba(255, 255, 255, 0.7)
+    readonly property color surface: Qt.hsla(0, 0, 0.95, 0.15)
+    readonly property color overlay: Qt.hsla(0, 0, 0.95, 0.7)
 
     readonly property color accent: "#e06c75"
 
