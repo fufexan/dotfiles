@@ -50,6 +50,7 @@ in
 
     howdy = {
       enable = true;
+      control = "sufficient";
       package = inputs.nixpkgs-howdy.legacyPackages.${system}.howdy;
       settings = {
         core = {
@@ -65,4 +66,6 @@ in
       package = inputs.nixpkgs-howdy.legacyPackages.${system}.linux-enable-ir-emitter;
     };
   };
+
+  security.pam.services."sshd".howdy.enable = false;
 }
