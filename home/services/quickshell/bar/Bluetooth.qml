@@ -17,13 +17,15 @@ HoverTooltip {
     visible: !!adapter
 
     readonly property string iconState: {
-        if (adapter?.state === BluetoothAdapterState.Disabled)
+        if (adapter?.state === BluetoothAdapterState.Blocked)
+            return "hardware-disabled";
+        else if (adapter?.state === BluetoothAdapterState.Disabled)
             return "disabled";
-        if (connecting?.length)
+        else if (connecting?.length)
             return "acquiring";
-        if (connected?.length)
+        else if (connected?.length)
             return "active";
-        if (adapter?.state === BluetoothAdapterState.Enabled)
+        else if (adapter?.state === BluetoothAdapterState.Enabled)
             return "disconnected";
         return "acquiring"; // fallback/unknown
     }
