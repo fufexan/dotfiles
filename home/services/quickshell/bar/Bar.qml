@@ -68,6 +68,7 @@ PanelWindow {
 
             Tray {}
             Resources {}
+            Network {}
             Bluetooth {}
             Battery {}
             Clock {}
