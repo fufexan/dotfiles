@@ -12,18 +12,12 @@
           "match:namespace ^(${elements})$";
 
         lowopacity = [
-          "bar"
-          "calendar"
-          "notifications"
-          "system-menu"
-          "quickshell:bar"
           "quickshell:notifications:overlay"
           "quickshell:osd"
         ];
 
         highopacity = [
           "vicinae"
-          "osd"
           "logout_dialog"
           "quickshell:sidebar"
         ];
@@ -31,26 +25,28 @@
         blurred = lib.concatLists [
           lowopacity
           highopacity
+          [ "quickshell:bar" ]
+        ];
+
+        xray = [
+          "quickshell:bar"
+        ];
+
+        no_anim = [
+          "quickshell:notifications:overlay"
+          "quickshell:sidebar"
+
         ];
       in
       [
         "${toRegex blurred}, blur true"
-        "match:namespace ^quickshell.*$, blur_popups true"
-        "${
-          toRegex [
-            "bar"
-            "quickshell:bar"
-          ]
-        }, xray true"
-        "${toRegex (highopacity ++ [ "music" ])}, ignore_alpha 0.5"
+        "${toRegex xray}, xray true"
         "${toRegex lowopacity}, ignore_alpha 0.2"
-        "${
-          toRegex [
-            "notifications"
-            "quickshell:notifications:overlay"
-            "quickshell:notifictaions:panel"
-          ]
-        }, no_anim true"
+        "${toRegex highopacity}, ignore_alpha 0.5"
+
+        "match:namespace ^quickshell.*$, blur_popups true"
+        "${toRegex [ "quickshell:bar" ]}, ignore_alpha 0.1"
+        "${toRegex no_anim}, no_anim true"
       ];
 
     # window rules
