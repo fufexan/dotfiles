@@ -1,13 +1,9 @@
 {
   pkgs,
   self,
-  inputs,
   lib,
   ...
 }:
-let
-  inherit (pkgs.stdenv.hostPlatform) system;
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -51,7 +47,6 @@ in
     howdy = {
       enable = true;
       control = "sufficient";
-      package = inputs.nixpkgs-howdy.legacyPackages.${system}.howdy;
       settings = {
         core = {
           no_confirmation = true;
@@ -61,10 +56,8 @@ in
       };
     };
 
-    linux-enable-ir-emitter = {
-      enable = true;
-      package = inputs.nixpkgs-howdy.legacyPackages.${system}.linux-enable-ir-emitter;
-    };
+    linux-enable-ir-emitter.enable = true;
+
   };
 
   security.pam.services."sshd".howdy.enable = false;

@@ -74,8 +74,6 @@
       };
     };
 
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
     helix.url = "github:helix-editor/helix";
 
     hm = {
@@ -102,8 +100,6 @@
       url = "gitlab:fufexan/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-howdy.url = "github:fufexan/nixpkgs/howdy";
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
