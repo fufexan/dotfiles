@@ -1,7 +1,7 @@
 {
   flakePath ? null,
   hostnamePath ? "/etc/hostname",
-  registryPath ? /etc/nix/registry.json,
+  registryPath ? "/etc/nix/registry.json",
 }:
 let
   inherit (builtins)
