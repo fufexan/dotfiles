@@ -79,7 +79,7 @@ WrapperMouseArea {
                         radius: height / 2
 
                         color: {
-                            ws.modelData.workspace ?? false ? Colors.monitorColors[ws.modelData.workspace?.monitor?.id] : Colors.bgBar;
+                            ws.modelData.workspace ?? false ? Colors.monitorColors[ws.modelData.workspace?.monitor?.id ?? 0] : Colors.bgBar;
                         }
 
                         implicitHeight: parent.height

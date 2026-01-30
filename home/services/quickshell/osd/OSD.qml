@@ -13,7 +13,7 @@ Scope {
     property string icon: ""
 
     Connections {
-        target: PipeWireState.defaultSink?.audio
+        target: PipeWireState.defaultSink ? PipeWireState.defaultSink.audio : null
 
         function update() {
             scope.osdVisible = true;
@@ -32,7 +32,7 @@ Scope {
     }
 
     Connections {
-        target: PipeWireState.defaultSource?.audio
+        target: PipeWireState.defaultSource ? PipeWireState.defaultSource.audio : null
 
         function update() {
             scope.osdVisible = true;

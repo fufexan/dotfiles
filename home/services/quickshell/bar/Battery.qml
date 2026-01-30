@@ -28,7 +28,7 @@ HoverTooltip {
 
         source: {
             const nearestTen = Math.round(root.percentage / 10) * 10;
-            const number = nearestTen.toString().padStart(2, "0");
+            const number = nearestTen.toString();
             let charging;
 
             if (root.battery.state == UPowerDeviceState.Charging) {

@@ -9,25 +9,25 @@ import qs.utils
 HoverTooltip {
     id: root
 
-    property NetworkDevice adapter: Networking.devices.values[0]
+    property NetworkDevice adapter: Networking.devices?.values[0] ?? null
 
-	readonly property WifiNetwork activeNetwork: adapter.networks.values.find(network => network.connected)
+    readonly property WifiNetwork activeNetwork: adapter?.networks?.values.find(network => network.connected) ?? null
 
-    visible: !!Networking.devices.values
+    visible: !!Networking.devices?.values
 
     readonly property string iconState: {
         if (!Networking.wifiHardwareEnabled)
             return "hardware-disabled";
         else if (!Networking.wifiEnabled)
             return "disabled";
-        else if (adapter.state == DeviceConnectionState.Connecting || adapter.state == DeviceConnectionState.Disconnecting)
+        else if (adapter?.state == DeviceConnectionState.Connecting || adapter?.state == DeviceConnectionState.Disconnecting)
             return "acquiring";
-        else if (adapter.connected) {
+        else if (adapter?.connected) {
             let strength = "good";
 
-            if (activeNetwork.signalStrength >= 0.66) {
+            if (activeNetwork?.signalStrength >= 0.66) {
                 strength = "good";
-            } else if (activeNetwork.signalStrength >= 0.33) {
+            } else if (activeNetwork?.signalStrength >= 0.33) {
                 strength = "ok";
             } else {
                 strength = "weak";
@@ -41,15 +41,12 @@ HoverTooltip {
     text: {
         if (!Networking.wifiEnabled)
             return "WiFi disabled";
-
-        else if (adapter.state == DeviceConnectionState.Connecting)
+        else if (adapter?.state == DeviceConnectionState.Connecting)
             return `Connecting to ${activeNetwork.name}`;
-
-        else if (adapter.state == DeviceConnectionState.Disconnecting)
+        else if (adapter?.state == DeviceConnectionState.Disconnecting)
             return `Disconnecting from ${activeNetwork.name}`;
-
-        else if (adapter.connected)
-            return activeNetwork.name;
+        else if (adapter?.connected)
+            return activeNetwork?.name ?? null;
 
         return "Disconnected";
     }
