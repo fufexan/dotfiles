@@ -9,7 +9,6 @@ Singleton {
 
     property var popupNotifs: []
     property var allNotifs: []
-    property var defaultNotifTimeout: 5000
     property bool notifOverlayOpen: false
 
     function onNewNotif(notif) {

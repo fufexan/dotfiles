@@ -55,7 +55,7 @@ PanelWindow {
 
                 Timer {
                     running: root.visible
-                    interval: (notifBox.n.expireTimeout > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout) * 1000
+                    interval: notifBox.n.expireTimeout > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout
                     onTriggered: {
                         NotificationState.notifDismissByNotif(notifBox.n);
                     }
