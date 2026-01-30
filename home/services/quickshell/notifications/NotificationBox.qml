@@ -16,12 +16,12 @@ WrapperMouseArea {
 
     property Notification n
     property int elapsed: getElapsed()
-    property string image: (n.image == "" && n.appIcon != "") ? n.appIcon : n.image
-    property bool hasAppIcon: !(n.image == "" && n.appIcon != "")
+    property string image: !n.image && !!n.appIcon ? n.appIcon : n.image
+    property bool hasAppIcon: !!n.image && !!n.appIcon
     property real iconSize: Config.notificationIconSize
 
     property bool showTime: false
-    property bool expanded: false
+    property bool expanded: true
 
     property bool dismissOnClose: true
 
@@ -103,9 +103,12 @@ WrapperMouseArea {
                         radius: 8
                         color: "transparent"
 
-                        IconImage {
-                            implicitSize: coverItem.height
-                            source: Utils.getImage(root.image)
+                        Loader {
+                            active: !!root.image
+                            sourceComponent: IconImage {
+                                implicitSize: coverItem.height
+                                source: Utils.getImage(root.image)
+                            }
                         }
                     }
 
@@ -122,9 +125,12 @@ WrapperMouseArea {
                         radius: 2
                         color: "transparent"
 
-                        IconImage {
-                            implicitSize: Config.radius
-                            source: Utils.getImage(root.n?.appIcon)
+                        Loader {
+                            active: root.hasAppIcon
+                            sourceComponent: IconImage {
+                                implicitSize: Config.radius
+                                source: Utils.getImage(root.n?.appIcon)
+                            }
                         }
                     }
                 }
@@ -133,20 +139,21 @@ WrapperMouseArea {
                     id: contentLayout
 
                     Layout.fillWidth: true
+                    Layout.maximumWidth: !!root.image ? mainLayout.width - coverItem.width - Config.spacing * 2 : mainLayout.width
                     Layout.margins: Config.spacing
                     Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
                     spacing: Config.padding
 
                     RowLayout {
-                        Layout.maximumWidth: contentLayout.width - buttonLayout.width
+                        Layout.maximumWidth: contentLayout.width
                         Layout.fillWidth: false
 
                         Text {
                             text: root.n?.summary
                             elide: Text.ElideRight
-                            Layout.fillWidth: true
+                            Layout.fillWidth: false
+                            Layout.maximumWidth: contentLayout.width
                             maximumLineCount: 1
-                            wrapMode: Text.Wrap
                             font.weight: Font.Bold
                         }
 
@@ -196,42 +203,25 @@ WrapperMouseArea {
                 }
             }
 
-            RowLayout {
-                id: buttonLayout
+            IconButton {
+                id: closeButton
                 visible: root.containsMouse
-                implicitHeight: Config.radius
+                enabled: root.containsMouse
+
+                color: Colors.bgBlurShadow
+                hoverColor: Colors.bgBlur
 
                 anchors {
-                    top: parent.top
-                    right: parent.right
-                    topMargin: Config.padding * 2
-                    rightMargin: Config.padding * 2
+                    horizontalCenter: mainRect.left
+                    verticalCenter: mainRect.top
+                    horizontalCenterOffset: 1.5 * Config.padding
+                    verticalCenterOffset: 1.5 * Config.padding
                 }
 
-                IconButton {
-                    id: expandButton
+                icon: "process-stop-symbolic"
+                text: ""
 
-                    Layout.fillHeight: true
-                    Layout.minimumHeight: Config.padding * 4
-                    visible: bodyText.text.length > (root.n?.actions.length > 1 ? 50 : 100)
-
-                    icon: root.expanded ? "go-up-symbolic" : "go-down-symbolic"
-                    text: ""
-
-                    onPressed: () => root.expanded = !root.expanded
-                }
-
-                IconButton {
-                    id: closeButton
-                    Layout.minimumHeight: Config.padding * 4
-
-                    Layout.fillHeight: true
-
-                    icon: "process-stop-symbolic"
-                    text: ""
-
-                    onPressed: NotificationState.notifCloseByNotif(root.n)
-                }
+                onPressed: NotificationState.notifCloseByNotif(root.n)
             }
         }
     }

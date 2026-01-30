@@ -8,6 +8,8 @@ HoverTooltip {
     id: root
 
     required property string icon
+    property color color: Colors.buttonDisabled
+    property color hoverColor: Colors.buttonDisabledHover
 
     implicitWidth: height
 
@@ -15,8 +17,10 @@ HoverTooltip {
     acceptedButtons: Qt.LeftButton
 
     Rectangle {
+        id: rect
+
         radius: Config.radius
-        color: root.containsMouse ? Colors.buttonDisabledHover : Colors.buttonDisabled
+        color: root.containsMouse ? root.hoverColor : root.color
         implicitWidth: Config.iconSize + 2 * Config.padding
         implicitHeight: Config.iconSize + 2 * Config.padding
 
