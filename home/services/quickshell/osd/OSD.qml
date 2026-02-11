@@ -88,53 +88,41 @@ Scope {
                 bottom: Config.barHeight
             }
 
-            implicitWidth: bg.implicitWidth
-            implicitHeight: bg.implicitHeight + bg.anchors.bottomMargin
+            implicitWidth: bg.width + (Config.padding * 8)
+            implicitHeight: bg.height + (Config.padding * 10)
 
-            Rectangle {
+            SquircleShader {
                 id: bg
                 radius: Config.radius
-
                 color: Colors.bgBar
 
-                implicitHeight: Config.barHeight * 1.5
+                anchors.centerIn: parent
+
+                implicitHeight: Config.barHeight * 1.2
                 implicitWidth: Config.osdWidth + Config.padding * 8
 
+                progressColor: Colors.foregroundOSD
+                progress: scope.progress
+
+                Behavior on progress {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type: Easing.OutCubic
+                    }
+                }
+            }
+
+            IconImage {
+                id: icon
+
                 anchors {
-                    fill: parent
-                    leftMargin: Config.padding * 4
-                    topMargin: Config.padding * 4
-                    rightMargin: Config.padding * 4
-                    bottomMargin: Config.padding * 6
+                    horizontalCenter: bg.left
+                    horizontalCenterOffset: icon.implicitSize + Config.padding
+                    verticalCenter: bg.verticalCenter
                 }
-
-                ClippingWrapperRectangle {
-                    id: progress
-                    anchors.fill: parent
-                    radius: Config.radius
-                    resizeChild: false
-                    color: 'transparent'
-
-                    Rectangle {
-                        color: Colors.foregroundOSD
-                        anchors.left: parent.left
-                        implicitHeight: Config.barHeight
-                        implicitWidth: parent.width * scope.progress ?? 0
-                    }
-                }
-
-                IconImage {
-                    id: icon
-
-                    anchors {
-                        horizontalCenter: bg.left
-                        horizontalCenterOffset: icon.implicitSize + Config.padding
-                        verticalCenter: bg.verticalCenter
-                    }
-                    mipmap: true
-                    implicitSize: Config.iconSize
-                    source: Quickshell.iconPath(scope.icon)
-                }
+                mipmap: true
+                implicitSize: Config.iconSize
+                source: Quickshell.iconPath(scope.icon)
             }
 
             RectangularShadow {
