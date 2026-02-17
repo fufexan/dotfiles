@@ -53,8 +53,8 @@ WrapperMouseArea {
     }
 
     Item {
-        implicitWidth: mainRect.implicitWidth
-        implicitHeight: mainRect.implicitHeight
+        implicitWidth: mainRect.width
+        implicitHeight: mainRect.height
 
         RectangularShadow {
             anchors.fill: mainRect
@@ -64,17 +64,13 @@ WrapperMouseArea {
             color: Colors.windowShadow
         }
 
-        Rectangle {
+        Squircle {
             id: mainRect
-
+            color: Colors.bgBlur
+            strokeWidth: 1.0
+            strokeColor: Colors.border
             implicitWidth: Config.notificationWidth
-            implicitHeight: mainLayout.implicitHeight
-            radius: Config.radius
-            color: Colors.bgBlurShadow
-            border {
-                color: Colors.border
-                width: 1
-            }
+            implicitHeight: mainLayout.height
 
             RowLayout {
                 id: mainLayout
@@ -98,12 +94,14 @@ WrapperMouseArea {
                     Layout.margins: Config.spacing
                     Layout.rightMargin: 0
 
-                    ClippingWrapperRectangle {
+                    Squircle {
                         anchors.centerIn: parent
+                        width: parent.width
+                        height: parent.height
                         radius: 8
                         color: "transparent"
 
-                        Loader {
+                        content: Loader {
                             active: !!root.image
                             sourceComponent: IconImage {
                                 implicitSize: coverItem.height
@@ -112,7 +110,7 @@ WrapperMouseArea {
                         }
                     }
 
-                    ClippingWrapperRectangle {
+                    Squircle {
                         visible: root.hasAppIcon
 
                         anchors {
@@ -125,7 +123,10 @@ WrapperMouseArea {
                         radius: 2
                         color: "transparent"
 
-                        Loader {
+                        width: Config.radius
+                        height: Config.radius
+
+                        content: Loader {
                             active: root.hasAppIcon
                             sourceComponent: IconImage {
                                 implicitSize: Config.radius
