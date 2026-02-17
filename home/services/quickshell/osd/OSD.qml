@@ -5,6 +5,7 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
 import qs.utils
+import qs.components
 
 Scope {
     id: scope
@@ -88,50 +89,49 @@ Scope {
                 bottom: Config.barHeight
             }
 
-            implicitWidth: bg.width + (Config.padding * 8)
-            implicitHeight: bg.height + (Config.padding * 10)
+            implicitWidth: bgroot.width + (Config.padding * 10)
+            implicitHeight: bgroot.height + (Config.padding * 12)
 
-            SquircleShader {
-                id: bg
-                radius: Config.radius
-                color: Colors.bgBar
+            Item {
+                id: bgroot
 
                 anchors.centerIn: parent
 
                 implicitHeight: Config.barHeight * 1.2
                 implicitWidth: Config.osdWidth + Config.padding * 8
 
-                progressColor: Colors.foregroundOSD
-                progress: scope.progress
+                RectangularShadow {
+                    anchors.fill: bgroot
+                    radius: Config.radius
+                    offset.y: Config.padding
+                    blur: Config.blurMax
+                    spread: Config.padding * 2
+                    color: Colors.windowShadow
+                }
 
-                Behavior on progress {
-                    NumberAnimation {
-                        duration: 150
-                        easing.type: Easing.OutCubic
+                Squircle {
+                    anchors.fill: parent
+                    color: Colors.bgBar
+                    progressColor: Colors.foregroundOSD
+                    progress: scope.progress
+                    strokeColor: Colors.border
+                    strokeWidth: 1
+
+                    Behavior on progress { NumberAnimation { duration: 150 } }
+                }
+
+                IconImage {
+                    id: icon
+
+                    anchors {
+                        horizontalCenter: bgroot.left
+                        horizontalCenterOffset: icon.implicitSize + Config.padding
+                        verticalCenter: bgroot.verticalCenter
                     }
+                    mipmap: true
+                    implicitSize: Config.iconSize
+                    source: Quickshell.iconPath(scope.icon)
                 }
-            }
-
-            IconImage {
-                id: icon
-
-                anchors {
-                    horizontalCenter: bg.left
-                    horizontalCenterOffset: icon.implicitSize + Config.padding
-                    verticalCenter: bg.verticalCenter
-                }
-                mipmap: true
-                implicitSize: Config.iconSize
-                source: Quickshell.iconPath(scope.icon)
-            }
-
-            RectangularShadow {
-                anchors.fill: bg
-                radius: bg.radius
-                offset.y: Config.padding
-                blur: Config.blurMax
-                spread: Config.padding * 2
-                color: Colors.windowShadow
             }
         }
     }

@@ -23,6 +23,7 @@ PersistentProperties {
     readonly property real spacing: padding * 3
     readonly property int radius: padding * 4
     readonly property int padding: 4
+    readonly property real roundingPower: 2.5
 
     readonly property int blurMax: 16
     readonly property real shadowOpacity: 0.1
