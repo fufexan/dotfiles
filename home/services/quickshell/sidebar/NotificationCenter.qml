@@ -23,28 +23,27 @@ ColumnLayout {
             color: Colors.windowShadow
         }
 
-        WrapperRectangle {
+        Squircle {
             id: wrapper
             implicitWidth: parent.width
-            margin: Config.padding
-            radius: Config.radius
+            implicitHeight: mainLayout.implicitHeight + Config.padding * 3
+            power: 2
             color: Colors.bgBlurShadow
-            border {
-                color: Colors.border
-                width: 1
-            }
+            strokeColor: Colors.border
+            strokeWidth: 1
 
             RowLayout {
-                WrapperRectangle {
-                    margin: Config.padding
-                    leftMargin: Config.padding * 2
-                    color: "transparent"
-                    Text {
-                        text: (NotificationState.allNotifs.length || "No") + " notification" + (NotificationState.allNotifs.length != 1 ? "s" : "")
-                    }
+                id: mainLayout
+
+                anchors.fill: parent
+                anchors.leftMargin: Config.spacing
+                anchors.rightMargin: Config.spacing / 2
+
+                Text {
+                    text: (NotificationState.allNotifs.length || "No") + " notification" + (NotificationState.allNotifs.length != 1 ? "s" : "")
                 }
 
-                Row {
+                RowLayout {
                     Layout.alignment: Qt.AlignRight
                     Layout.fillHeight: true
                     spacing: Config.padding * 2

@@ -41,21 +41,21 @@ WrapperMouseArea {
             color: Colors.windowShadow
         }
 
-        WrapperRectangle {
+        Squircle {
             id: wrapper
 
             implicitWidth: parent.width
+            implicitHeight: calendarColumn.implicitHeight + Config.spacing * 2
+
             color: Colors.bgBlurShadow
-            margin: Config.spacing
-            radius: Config.radius
-            border {
-                color: Colors.border
-                width: 1
-            }
+            strokeColor: Colors.border
+            strokeWidth: 1
 
             ColumnLayout {
                 id: calendarColumn
                 spacing: 5
+                anchors.fill: parent
+                anchors.margins: Config.spacing
 
                 // Calendar header
                 RowLayout {
@@ -144,7 +144,7 @@ WrapperMouseArea {
                             anchors.centerIn: parent
                             margin: 5
 
-                            color: cellContainer.today ? Colors.foreground : "transparent"
+                            color: cellContainer.today ? Qt.hsla(0, 0, 1, 0.6) : "transparent"
 
                             Text {
                                 text: cellContainer.model.day
