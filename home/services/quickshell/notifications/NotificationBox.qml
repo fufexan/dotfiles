@@ -53,8 +53,8 @@ WrapperMouseArea {
     }
 
     Item {
-        implicitWidth: mainRect.width
-        implicitHeight: mainRect.height
+        implicitWidth: Config.notificationWidth
+        implicitHeight: mainLayout.implicitHeight
 
         RectangularShadow {
             anchors.fill: mainRect
@@ -66,164 +66,162 @@ WrapperMouseArea {
 
         Squircle {
             id: mainRect
-            color: Colors.bgBlur
-            strokeWidth: 1.0
+            color: Colors.bgBlurShadow
+            anchors.fill: parent
             strokeColor: Colors.border
-            implicitWidth: Config.notificationWidth
-            implicitHeight: mainLayout.height
+            strokeWidth: 1
+        }
 
-            RowLayout {
-                id: mainLayout
+        RowLayout {
+            id: mainLayout
 
-                spacing: Config.padding * 2
+            anchors.fill: parent
 
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                    right: parent.right
-                }
+            spacing: Config.padding * 2
 
-                Item {
-                    id: coverItem
+            Item {
+                id: coverItem
 
-                    visible: root.image != ""
+                visible: root.image != ""
 
-                    Layout.alignment: Qt.AlignTop
-                    implicitWidth: root.iconSize
-                    implicitHeight: root.iconSize
-                    Layout.margins: Config.spacing
-                    Layout.rightMargin: 0
+                Layout.alignment: Qt.AlignTop
+                implicitWidth: root.iconSize
+                implicitHeight: root.iconSize
+                Layout.margins: Config.spacing
+                Layout.rightMargin: 0
 
-                    Squircle {
-                        anchors.centerIn: parent
-                        width: parent.width
-                        height: parent.height
-                        radius: 8
-                        color: "transparent"
+                Squircle {
+                    anchors.centerIn: parent
+                    width: parent.width
+                    height: parent.height
+                    radius: 8
+                    color: "transparent"
 
-                        content: Loader {
-                            active: !!root.image
-                            sourceComponent: IconImage {
-                                implicitSize: coverItem.height
-                                source: Utils.getImage(root.image)
-                            }
-                        }
-                    }
-
-                    Squircle {
-                        visible: root.hasAppIcon
-
-                        anchors {
-                            horizontalCenter: coverItem.right
-                            verticalCenter: coverItem.bottom
-                            horizontalCenterOffset: -Config.padding
-                            verticalCenterOffset: -Config.padding
-                        }
-
-                        radius: 2
-                        color: "transparent"
-
-                        width: Config.radius
-                        height: Config.radius
-
-                        content: Loader {
-                            active: root.hasAppIcon
-                            sourceComponent: IconImage {
-                                implicitSize: Config.radius
-                                source: Utils.getImage(root.n?.appIcon)
-                            }
+                    content: Loader {
+                        active: !!root.image
+                        sourceComponent: IconImage {
+                            implicitSize: coverItem.height
+                            source: Utils.getImage(root.image)
                         }
                     }
                 }
 
-                ColumnLayout {
-                    id: contentLayout
+                Squircle {
+                    visible: root.hasAppIcon
 
+                    anchors {
+                        horizontalCenter: coverItem.right
+                        verticalCenter: coverItem.bottom
+                        horizontalCenterOffset: -Config.padding
+                        verticalCenterOffset: -Config.padding
+                    }
+
+                    radius: 2
+                    color: "transparent"
+
+                    width: Config.radius
+                    height: Config.radius
+
+                    content: Loader {
+                        active: root.hasAppIcon
+                        sourceComponent: IconImage {
+                            implicitSize: Config.radius
+                            source: Utils.getImage(root.n?.appIcon)
+                        }
+                    }
+                }
+            }
+
+            ColumnLayout {
+                id: contentLayout
+
+                Layout.fillWidth: true
+                Layout.maximumWidth: !!root.image ? mainLayout.width - coverItem.width - Config.spacing * 2 : mainLayout.width
+                Layout.margins: Config.spacing
+                Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
+
+                spacing: Config.padding
+
+                RowLayout {
+                    Layout.maximumWidth: contentLayout.width
                     Layout.fillWidth: true
-                    Layout.maximumWidth: !!root.image ? mainLayout.width - coverItem.width - Config.spacing * 2 : mainLayout.width
-                    Layout.margins: Config.spacing
-                    Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
-                    spacing: Config.padding
 
-                    RowLayout {
-                        Layout.maximumWidth: contentLayout.width
+                    Text {
                         Layout.fillWidth: false
+                        Layout.maximumWidth: contentLayout.width - timeText.width - Config.spacing
 
-                        Text {
-                            text: root.n?.summary
-                            elide: Text.ElideRight
-                            Layout.fillWidth: false
-                            Layout.maximumWidth: contentLayout.width
-                            maximumLineCount: 1
-                            font.weight: Font.Bold
-                        }
-
-                        Text {
-                            visible: root?.showTime
-                            text: "·"
-                        }
-
-                        Text {
-                            visible: root?.showTime
-                            text: Utils.humanTime(root.elapsed)
-                        }
+                        text: root.n?.summary
+                        elide: Text.ElideRight
+                        maximumLineCount: 1
+                        font.weight: Font.Bold
                     }
 
                     Text {
-                        id: bodyText
-                        Layout.fillWidth: true
-                        elide: Text.ElideRight
-                        wrapMode: Text.Wrap
-                        font.weight: Font.Medium
-                        maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
-                        text: root.n?.body
+                        id: timeText
+
+                        Layout.alignment: Qt.AlignRight
+
+                        visible: root?.showTime
+                        text: Utils.humanTime(root.elapsed)
+                        color: Qt.rgba(1, 1, 1, .6)
+                        font.weight: Font.Bold
                     }
+                }
 
-                    RowLayout {
-                        visible: root.n?.actions.length > 1
+                Text {
+                    id: bodyText
+                    Layout.fillWidth: true
+                    elide: Text.ElideRight
+                    wrapMode: Text.Wrap
+                    font.weight: Font.Medium
+                    maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
+                    text: root.n?.body
+                }
 
-                        Layout.fillWidth: true
-                        implicitHeight: actionRepeater.implicitHeight
+                RowLayout {
+                    visible: root.n?.actions.length > 1
 
-                        Repeater {
-                            id: actionRepeater
-                            model: root.n?.actions.slice(1)
+                    Layout.fillWidth: true
+                    implicitHeight: actionRepeater.implicitHeight
 
-                            Button {
-                                id: actionButtonMA
-                                required property NotificationAction modelData
+                    Repeater {
+                        id: actionRepeater
+                        model: root.n?.actions.slice(1)
 
-                                Layout.fillWidth: true
+                        Button {
+                            id: actionButtonMA
+                            required property NotificationAction modelData
 
-                                buttonText: actionButtonMA.modelData.text
-                                text: ""
-                                onPressed: modelData.invoke()
-                            }
+                            Layout.fillWidth: true
+
+                            buttonText: actionButtonMA.modelData.text
+                            text: ""
+                            onPressed: modelData.invoke()
                         }
                     }
                 }
             }
+        }
 
-            IconButton {
-                id: closeButton
-                visible: root.containsMouse
-                enabled: root.containsMouse
+        IconButton {
+            id: closeButton
+            visible: root.containsMouse
+            enabled: root.containsMouse
 
-                color: Colors.bgBlurShadow
-                hoverColor: Colors.bgBlur
+            color: Colors.bgBlurShadow
+            hoverColor: Colors.bgBlur
 
-                anchors {
-                    horizontalCenter: mainRect.left
-                    verticalCenter: mainRect.top
-                    horizontalCenterOffset: 1.5 * Config.padding
-                    verticalCenterOffset: 1.5 * Config.padding
-                }
-
-                icon: "process-stop-symbolic"
-                text: ""
-
-                onPressed: NotificationState.notifCloseByNotif(root.n)
+            anchors {
+                horizontalCenter: mainRect.left
+                verticalCenter: mainRect.top
+                horizontalCenterOffset: 1.5 * Config.padding
+                verticalCenterOffset: 1.5 * Config.padding
             }
+
+            icon: "process-stop-symbolic"
+            text: ""
+
+            onPressed: NotificationState.notifCloseByNotif(root.n)
         }
     }
 }
