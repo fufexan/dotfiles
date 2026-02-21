@@ -16,11 +16,6 @@ in
   programs.git = {
     enable = true;
 
-    extraConfig = {
-      diff.colorMoved = "default";
-      merge.conflictstyle = "diff3";
-    };
-
     ignores = [
       "*~"
       "*.swp"
@@ -109,6 +104,9 @@ in
         config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
 
       pull.rebase = true;
+
+      diff.colorMoved = "default";
+      merge.conflictstyle = "diff3";
     };
   };
 
@@ -119,6 +117,6 @@ in
   };
 
   xdg.configFile."git/allowed_signers".text = ''
-    ${cfg.userEmail} namespaces="git" ${key}
+    ${cfg.settings.user.email} namespaces="git" ${key}
   '';
 }

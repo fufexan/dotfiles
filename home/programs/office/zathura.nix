@@ -23,12 +23,14 @@
 
   xdg.configFile = {
     "zathura/catppuccin-latte".source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/zathura/main/src/catppuccin-latte";
-      hash = "sha256-nb0ZiHJ9zwlmpN/iHKm3/eRmx4se1om3qCVrfge8B8c=";
+      name = "zathura-catppuccin-latte";
+      url = "https://raw.githubusercontent.com/catppuccin/zathura/9f29c2c1622c70436f0e0b98fea9735863596c1e/themes/catppuccin-latte";
+      hash = "sha256-GbSSl8k0Rqtq5IwcAHE7BiTajozNc+z+VhCAkbFDi2E=";
     };
     "zathura/catppuccin-mocha".source = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/catppuccin/zathura/main/src/catppuccin-mocha";
-      hash = "sha256-/HXecio3My2eXTpY7JoYiN9mnXsps4PAThDPs4OCsAk=";
+      name = "zathura-catppuccin-mocha";
+      url = "https://raw.githubusercontent.com/catppuccin/zathura/9f29c2c1622c70436f0e0b98fea9735863596c1e/themes/catppuccin-mocha";
+      hash = "sha256-aUUT1ExI5kEeEawwqnW+n0XWe2b5j4tFdJbCh4XCFIs=";
     };
   };
 }
