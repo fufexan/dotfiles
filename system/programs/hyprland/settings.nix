@@ -93,6 +93,7 @@ in
 
       # focus change on cursor move
       follow_mouse = 1;
+      focus_on_close = 1;
       accel_profile = "flat";
       tablet.output = "current";
     };
@@ -111,6 +112,11 @@ in
 
       # enable variable refresh rate (effective depending on hardware)
       vrr = 1;
+
+      mouse_move_enables_dpms = true;
+      key_press_enables_dpms = true;
+
+      focus_on_activate = true;
     };
 
     render.direct_scanout = true;
