@@ -16,6 +16,7 @@
     "nvme"
     "xhci_pci"
     "usb_storage"
+    "usbhid"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -45,9 +46,24 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/EFI";
     fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
-  swapDevices = [ ];
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-label/NixOS";
+    fsType = "btrfs";
+    options = [ "subvol=swap" ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16 * 1024;
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
