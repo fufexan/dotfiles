@@ -72,132 +72,135 @@ WrapperMouseArea {
             strokeWidth: 1
         }
 
-        RowLayout {
+        ColumnLayout {
             id: mainLayout
-
             anchors.fill: parent
 
-            spacing: Config.padding * 2
+            RowLayout {
+                Item {
+                    id: coverItem
 
-            Item {
-                id: coverItem
+                    visible: root.image != ""
 
-                visible: root.image != ""
+                    Layout.alignment: Qt.AlignTop
+                    implicitWidth: root.iconSize
+                    implicitHeight: root.iconSize
+                    Layout.margins: Config.spacing
+                    Layout.rightMargin: 0
 
-                Layout.alignment: Qt.AlignTop
-                implicitWidth: root.iconSize
-                implicitHeight: root.iconSize
-                Layout.margins: Config.spacing
-                Layout.rightMargin: 0
+                    Squircle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: parent.height
+                        radius: 8
+                        color: "transparent"
 
-                Squircle {
-                    anchors.centerIn: parent
-                    width: parent.width
-                    height: parent.height
-                    radius: 8
-                    color: "transparent"
+                        content: Loader {
+                            active: !!root.image
+                            sourceComponent: IconImage {
+                                implicitSize: coverItem.height
+                                source: Utils.getImage(root.image)
+                            }
+                        }
+                    }
 
-                    content: Loader {
-                        active: !!root.image
-                        sourceComponent: IconImage {
-                            implicitSize: coverItem.height
-                            source: Utils.getImage(root.image)
+                    Squircle {
+                        visible: root.hasAppIcon
+
+                        anchors {
+                            horizontalCenter: coverItem.right
+                            verticalCenter: coverItem.bottom
+                            horizontalCenterOffset: -Config.padding
+                            verticalCenterOffset: -Config.padding
+                        }
+
+                        radius: 2
+                        color: "transparent"
+
+                        width: Config.radius
+                        height: Config.radius
+
+                        content: Loader {
+                            active: root.hasAppIcon
+                            sourceComponent: IconImage {
+                                implicitSize: Config.radius
+                                source: Utils.getImage(root.n?.appIcon)
+                            }
                         }
                     }
                 }
 
-                Squircle {
-                    visible: root.hasAppIcon
+                ColumnLayout {
+                    id: contentLayout
 
-                    anchors {
-                        horizontalCenter: coverItem.right
-                        verticalCenter: coverItem.bottom
-                        horizontalCenterOffset: -Config.padding
-                        verticalCenterOffset: -Config.padding
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: !!root.image ? mainLayout.width - coverItem.width - Config.spacing * 2 : mainLayout.width
+                    Layout.margins: Config.spacing
+                    Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
+
+                    spacing: Config.padding
+
+                    RowLayout {
+                        Layout.maximumWidth: contentLayout.width
+                        Layout.fillWidth: true
+
+                        Text {
+                            Layout.fillWidth: false
+                            Layout.maximumWidth: contentLayout.width - timeText.width - Config.spacing
+
+                            text: root.n?.summary
+                            elide: Text.ElideRight
+                            maximumLineCount: 1
+                            font.weight: Font.Bold
+                            color: Qt.rgba(1, 1, 1, .9)
+                        }
+
+                        Text {
+                            id: timeText
+
+                            Layout.alignment: Qt.AlignRight
+
+                            visible: root?.showTime
+                            // visible: false
+                            text: Utils.humanTime(root.elapsed)
+                            color: Qt.rgba(1, 1, 1, .6)
+                            font.weight: Font.Bold
+                        }
                     }
 
-                    radius: 2
-                    color: "transparent"
-
-                    width: Config.radius
-                    height: Config.radius
-
-                    content: Loader {
-                        active: root.hasAppIcon
-                        sourceComponent: IconImage {
-                            implicitSize: Config.radius
-                            source: Utils.getImage(root.n?.appIcon)
-                        }
+                    Text {
+                        id: bodyText
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        wrapMode: Text.Wrap
+                        font.weight: Font.Medium
+                        maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
+                        text: root.n?.body
                     }
                 }
             }
 
-            ColumnLayout {
-                id: contentLayout
+            RowLayout {
+                visible: root.n?.actions.length > 1
 
                 Layout.fillWidth: true
-                Layout.maximumWidth: !!root.image ? mainLayout.width - coverItem.width - Config.spacing * 2 : mainLayout.width
+                implicitHeight: actionRepeater.implicitHeight
                 Layout.margins: Config.spacing
-                Layout.leftMargin: coverItem.visible ? Config.padding : Config.spacing
+                Layout.topMargin: 0
 
-                spacing: Config.padding
+                Repeater {
+                    id: actionRepeater
+                    model: root.n?.actions.slice(1)
 
-                RowLayout {
-                    Layout.maximumWidth: contentLayout.width
-                    Layout.fillWidth: true
+                    Button {
+                        id: actionButtonMA
+                        required property NotificationAction modelData
 
-                    Text {
-                        Layout.fillWidth: false
-                        Layout.maximumWidth: contentLayout.width - timeText.width - Config.spacing
+                        Layout.fillWidth: true
 
-                        text: root.n?.summary
-                        elide: Text.ElideRight
-                        maximumLineCount: 1
-                        font.weight: Font.Bold
-                    }
-
-                    Text {
-                        id: timeText
-
-                        Layout.alignment: Qt.AlignRight
-
-                        visible: root?.showTime
-                        text: Utils.humanTime(root.elapsed)
-                        color: Qt.rgba(1, 1, 1, .6)
-                        font.weight: Font.Bold
-                    }
-                }
-
-                Text {
-                    id: bodyText
-                    Layout.fillWidth: true
-                    elide: Text.ElideRight
-                    wrapMode: Text.Wrap
-                    font.weight: Font.Medium
-                    maximumLineCount: root.expanded ? 5 : (root.n?.actions.length > 1 ? 1 : 2)
-                    text: root.n?.body
-                }
-
-                RowLayout {
-                    visible: root.n?.actions.length > 1
-
-                    Layout.fillWidth: true
-                    implicitHeight: actionRepeater.implicitHeight
-
-                    Repeater {
-                        id: actionRepeater
-                        model: root.n?.actions.slice(1)
-
-                        Button {
-                            id: actionButtonMA
-                            required property NotificationAction modelData
-
-                            Layout.fillWidth: true
-
-                            buttonText: actionButtonMA.modelData.text
-                            text: ""
-                            onPressed: modelData.invoke()
-                        }
+                        buttonText: actionButtonMA.modelData.text
+                        text: ""
+                        onPressed: modelData.invoke()
                     }
                 }
             }
@@ -208,8 +211,8 @@ WrapperMouseArea {
             visible: root.containsMouse
             enabled: root.containsMouse
 
-            color: Colors.bgBlurShadow
-            hoverColor: Colors.bgBlur
+            color: Colors.bgBlur
+            hoverColor: Qt.hsla(0, 0, 0.3, 0.5)
 
             anchors {
                 horizontalCenter: mainRect.left
