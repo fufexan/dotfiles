@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.utils
+import qs.bar.Tray
 
 PanelWindow {
     id: barWindow

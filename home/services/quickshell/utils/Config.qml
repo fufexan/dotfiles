@@ -19,6 +19,7 @@ PersistentProperties {
     readonly property int barHeight: 32
     readonly property int osdWidth: 200
 
+    readonly property int textSize: 9
     readonly property int iconSize: 14
     readonly property real spacing: padding * 3
     readonly property int radius: padding * 4
