@@ -20,6 +20,7 @@ Squircle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        enabled: !root.modelData.isSeparator && root.modelData.enabled
         hoverEnabled: true
         onEntered: root.color = Colors.surface
         onExited: root.color = "transparent"
@@ -28,11 +29,19 @@ Squircle {
         }
     }
 
-    implicitHeight: rowLayout.implicitHeight + Config.padding * 2
+    implicitHeight: (root.modelData.isSeparator ? 1 : rowLayout.implicitHeight) + Config.padding * 2
     implicitWidth: rowLayout.implicitWidth + Config.padding * 2
+
+    Rectangle {
+        visible: root.modelData.isSeparator
+        anchors.fill: parent
+        anchors.margins: Config.padding
+        color: Colors.border
+    }
 
     RowLayout {
         id: rowLayout
+        visible: !root.modelData.isSeparator
 
         anchors.fill: parent
         anchors.margins: Config.padding
@@ -54,10 +63,12 @@ Squircle {
 
         Text {
             // Maintain vertical alignment when some entries have icons and some don't
-            Layout.leftMargin: root.opener.children.values.some(e => e.icon != "") && !loader.active ? Config.iconSize + rowLayout.spacing : 0
+            Layout.leftMargin: root.opener.children.values.some(e => e.icon != "") && !loader.active ? Config.iconSize + rowLayout.spacing : Config.padding * 0.5
+            Layout.rightMargin: Config.padding * 0.5
             Layout.fillWidth: true
 
             text: root.modelData.text
+            color: root.modelData.enabled ? Colors.foreground : Qt.lighter(Colors.foreground, 0.6)
         }
 
         MaterialIcon {
