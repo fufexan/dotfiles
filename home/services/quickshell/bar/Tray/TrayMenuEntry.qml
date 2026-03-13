@@ -17,6 +17,8 @@ Squircle {
 
     Layout.fillWidth: true
 
+    signal openSubmenu(handle: QsMenuHandle)
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
@@ -25,7 +27,11 @@ Squircle {
         onEntered: root.color = Colors.surface
         onExited: root.color = "transparent"
         onClicked: {
-            root.modelData.triggered();
+            if (root.modelData.hasChildren) {
+                root.openSubmenu(root.modelData);
+            } else {
+                root.modelData.triggered();
+            }
         }
     }
 
