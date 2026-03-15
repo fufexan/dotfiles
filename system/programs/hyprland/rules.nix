@@ -54,7 +54,10 @@
       # telegram media viewer
       "match:title ^(Media viewer)$, float on"
 
-      # Bitwarden extension
+      # Bitwarden extension (Chromium)
+      "match:class chrome-nngceckbapebfimnlniiiahkandclblb-Default, float on"
+
+      # Bitwarden extension (Zen/Firefox, doesn't work)
       "match:title ^(.*Bitwarden Password Manager.*)$, float on"
 
       # gnome calculator
