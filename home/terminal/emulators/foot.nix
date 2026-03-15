@@ -62,8 +62,7 @@ in
       };
 
       bell = {
-        urgent = "yes";
-        notify = "yes";
+        visual = "yes";
       };
 
       desktop-notifications = {

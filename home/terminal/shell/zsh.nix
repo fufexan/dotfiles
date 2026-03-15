@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -67,6 +68,10 @@
         gnupg_path=$(ls $XDG_RUNTIME_DIR/gnupg)
         export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/$gnupg_path/S.gpg-agent.ssh"
       ''}
+
+      # zlong_alert
+      export zlong_ignore_cmds="$EDITOR fg journalctl less man ssh y yazi"
+      source $XDG_CONFIG_HOME/zsh/zlong_alert.zsh
     '';
 
     shellAliases = {
@@ -86,4 +91,16 @@
       eza = "eza --icons --git";
     };
   };
+
+  # BEL in terminal when commands complete after a long time
+  xdg.configFile."zsh/zlong_alert.zsh".source =
+    let
+      zlong_alert = pkgs.fetchFromGitHub {
+        owner = "kevinywlui";
+        repo = "zlong_alert.zsh";
+        rev = "8df5b6808bba4bf896f6765cca28b5705a048bad";
+        hash = "sha256-liwaOzv70igaJy9bEom2ntu/x64BitjLxvuMUcgajVw=";
+      };
+    in
+    "${zlong_alert}/zlong_alert.zsh";
 }
