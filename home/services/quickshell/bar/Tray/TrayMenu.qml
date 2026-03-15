@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
@@ -14,8 +15,7 @@ PanelWindow {
     visible: false
 
     property point position
-    property alias menu: opener.menu
-    property var menuStack: []
+    property QsMenuHandle menu
 
     screen: Config.preferredMonitor
     color: 'transparent'
@@ -31,22 +31,15 @@ PanelWindow {
         right: true
     }
 
-    QsMenuOpener {
-        id: opener
-        onMenuChanged: console.log(`new menu: ${menu}, menu stack: ${JSON.stringify(root.menuStack)}`)
-        // onChildrenChanged: console.log("Menu children changed, count:", children.values.length)
-    }
-
     MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.BackButton
         onClicked: event => {
-            if ((event.button === Qt.BackButton || event.button === Qt.RightButton) && root.menuStack.length > 0) {
-                root.menu = root.menuStack.pop();
+            if ((event.button === Qt.BackButton || event.button === Qt.RightButton) && stack.depth > 1) {
+                stack.pop();
                 return;
             }
             root.visible = false;
-        // event.accepted();
         }
     }
 
@@ -77,26 +70,109 @@ PanelWindow {
             strokeWidth: 1
             strokeColor: Colors.border
 
-            implicitWidth: columnLayout.implicitWidth + Config.padding * 2
-            implicitHeight: columnLayout.implicitHeight + Config.padding * 2
+            implicitWidth: stack.implicitWidth + Config.padding * 2
+            implicitHeight: stack.implicitHeight + Config.padding * 2
 
-            ColumnLayout {
-                id: columnLayout
+            StackView {
+                id: stack
 
+                clip: true
                 anchors.centerIn: parent
-                spacing: 0
 
-                Repeater {
-                    model: opener.children
-                    delegate: TrayMenuEntry {
-                        opener: opener
-                        onOpenSubmenu: handle => {
-                            let stack = root.menuStack;
-                            stack.push(root.menu);
-                            root.menuStack = stack;
-                            root.menu = handle;
+                implicitWidth: currentItem.implicitWidth
+                implicitHeight: currentItem.implicitHeight
+
+                initialItem: SubMenu {
+                    handle: root.menu
+                }
+
+                property int duration: 200
+
+                Component {
+                    id: subMenuComp
+
+                    SubMenu {}
+                }
+            }
+        }
+    }
+
+    component SubMenu: ColumnLayout {
+        id: columnLayout
+
+        property alias handle: opener.menu
+        property bool isSubMenu: false
+        property bool shown
+
+        opacity: shown ? 1 : 0
+
+        Component.onCompleted: shown = true
+        StackView.onActivating: shown = true
+        StackView.onDeactivating: shown = false
+        StackView.onRemoved: destroy()
+
+        spacing: 0
+
+        QsMenuOpener {
+            id: opener
+        }
+
+        Loader {
+            active: columnLayout.isSubMenu
+            Layout.fillWidth: true
+
+            sourceComponent: Squircle {
+                id: backButton
+
+                color: backMouseArea.containsMouse ? Colors.surface : "transparent"
+                radius: 10
+
+                implicitHeight: rowLayout.implicitHeight + Config.padding * 2
+                implicitWidth: rowLayout.implicitWidth + Config.padding * 2
+
+                MouseArea {
+                    id: backMouseArea
+                    onClicked: stack.pop()
+                    anchors.fill: parent
+                    hoverEnabled: true
+                }
+
+                RowLayout {
+                    id: rowLayout
+
+                    spacing: Config.padding
+
+                    anchors.fill: parent
+                    anchors.leftMargin: Config.padding
+
+                    Item {
+                        implicitWidth: Config.iconSize
+                        MaterialIcon {
+                            anchors.centerIn: parent
+                            text: "chevron_left"
+                            font.pointSize: Config.textSize
+                            font.weight: Font.DemiBold
                         }
                     }
+                    Text {
+                        text: "Back"
+                        Layout.fillWidth: true
+                        Layout.leftMargin: Config.padding * 0.5
+                        Layout.rightMargin: Config.padding * 0.5
+                    }
+                }
+            }
+        }
+
+        Repeater {
+            model: opener.children
+            delegate: TrayMenuEntry {
+                opener: opener
+                onOpenSubmenu: handle => {
+                    stack.push(subMenuComp.createObject(null, {
+                        handle: handle,
+                        isSubMenu: true
+                    }));
                 }
             }
         }

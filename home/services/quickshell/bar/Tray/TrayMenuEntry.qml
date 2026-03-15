@@ -4,7 +4,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
-import Quickshell.Services.SystemTray
 import qs.components
 import qs.utils
 
@@ -48,6 +47,8 @@ Squircle {
     RowLayout {
         id: rowLayout
         visible: !root.modelData.isSeparator
+
+        spacing: Config.padding
 
         anchors.fill: parent
         anchors.margins: Config.padding

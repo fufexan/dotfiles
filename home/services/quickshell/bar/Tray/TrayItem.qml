@@ -17,6 +17,7 @@ HoverTooltip {
     TrayMenu {
         id: menu
         position: root.position
+        menu: root.modelData.menu
     }
 
     Item {
@@ -58,7 +59,6 @@ HoverTooltip {
             break;
         case Qt.RightButton:
             if (modelData.hasMenu) {
-                menu.menu = modelData.menu;
                 menu.visible = !menu.visible;
             }
             break;
