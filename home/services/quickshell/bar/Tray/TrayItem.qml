@@ -20,24 +20,29 @@ HoverTooltip {
         menu: root.modelData.menu
     }
 
-    Item {
+    Rectangle {
         id: trayIconItem
 
-        implicitWidth: trayIcon.implicitWidth
-        implicitHeight: trayIcon.implicitHeight
+        color: menu.visible ? Colors.buttonDisabledHover : root.containsMouse ? Colors.buttonDisabled : "transparent"
+        radius: 20
 
-        Component.onCompleted: Qt.callLater(function () {
-            root.position = Qt.binding(function () {
-                return mapToGlobal(x, y);
-            });
-        })
+        implicitWidth: trayIcon.implicitWidth + Config.padding * 2
+        implicitHeight: trayIcon.implicitHeight + Config.padding * 2
 
         IconImage {
             id: trayIcon
 
+            anchors.centerIn: parent
+
             mipmap: true
             source: root.modelData.icon
             implicitSize: Config.iconSize
+
+            Component.onCompleted: Qt.callLater(function () {
+                root.position = Qt.binding(function () {
+                    return mapToGlobal(x, y);
+                });
+            })
         }
 
         MultiEffect {
