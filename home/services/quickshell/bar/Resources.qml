@@ -1,14 +1,15 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import qs.utils
 import qs.components
 
-Rectangle {
+Item {
     id: root
 
     Layout.fillHeight: true
-    color: "transparent"
-    implicitWidth: rowLayout.width
+    implicitWidth: virtualRowLayout.width
 
     readonly property int valueSize: 7
     readonly property int textSize: 5
@@ -16,6 +17,21 @@ Rectangle {
 
     property color valueColor: Colors.foreground
     property color textColor: Colors.overlay
+
+    // Prevents this component making the bar's elements shift around
+    RowLayout {
+        id: virtualRowLayout
+        opacity: 0
+        anchors.centerIn: parent
+
+        Repeater {
+            model: 2
+            Text {
+                font.pointSize: root.textSize
+                text: "100%"
+            }
+        }
+    }
 
     RowLayout {
         id: rowLayout
