@@ -44,7 +44,7 @@ in
       "$mod, G, togglegroup,"
       "$mod SHIFT, N, changegroupactive, f"
       "$mod SHIFT, P, changegroupactive, b"
-      "$mod, R, togglesplit,"
+      "$mod, R, layoutmsg, togglesplit"
       "$mod, T, togglefloating,"
       "$mod, P, pseudo,"
       "$mod ALT, ,resizeactive,"
