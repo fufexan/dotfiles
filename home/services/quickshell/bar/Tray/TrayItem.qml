@@ -40,7 +40,13 @@ HoverTooltip {
 
             Component.onCompleted: Qt.callLater(function () {
                 root.position = Qt.binding(function () {
-                    return mapToGlobal(x, y);
+                    let p = mapToGlobal(x, y);
+                    let m = Config.preferredMonitor;
+                    if (m.name != "eDP-1") {
+                        p.x -= m.x;
+                        p.y -= m.y;
+                    }
+                    return p;
                 });
             })
         }
