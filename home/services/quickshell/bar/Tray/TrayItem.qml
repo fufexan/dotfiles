@@ -3,16 +3,18 @@ pragma ComponentBehavior: Bound
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Effects
 import qs.components
 import qs.utils
 
-HoverTooltip {
+MouseArea {
     id: root
     required property SystemTrayItem modelData
     property point position
 
-    text: modelData.tooltipTitle
+    implicitWidth: trayIconItem.implicitWidth
+    implicitHeight: trayIconItem.implicitHeight
 
     TrayMenu {
         id: menu
@@ -29,6 +31,11 @@ HoverTooltip {
         implicitWidth: trayIcon.implicitWidth + Config.padding * 2
         implicitHeight: trayIcon.implicitHeight + Config.padding * 2
 
+        TextTooltip {
+            id: tooltip
+            text: root.modelData.tooltipTitle
+        }
+
         IconImage {
             id: trayIcon
 
@@ -41,6 +48,8 @@ HoverTooltip {
             Component.onCompleted: Qt.callLater(function () {
                 root.position = Qt.binding(function () {
                     let p = mapToGlobal(x, y);
+                    p.x += implicitSize / 4;
+                    p.y += implicitSize / 4;
                     let m = Config.preferredMonitor;
                     if (m.name != "eDP-1") {
                         p.x -= m.x;
@@ -62,6 +71,11 @@ HoverTooltip {
     }
 
     acceptedButtons: Qt.RightButton | Qt.LeftButton
+
+    hoverEnabled: true
+
+    onEntered: tooltip.show = true
+    onExited: tooltip.show = false
 
     onClicked: event => {
         switch (event.button) {

@@ -23,7 +23,8 @@ PanelWindow {
         id: bar
         anchors.fill: parent
 
-        color: Colors.bgBar
+        // color: Colors.bgBar
+        color: "transparent"
 
         // left
         RowLayout {

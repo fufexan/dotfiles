@@ -1,35 +1,40 @@
-import Quickshell
-import Quickshell.Widgets
+import QtQuick
+import QtQuick.Controls
+import qs.components
 import qs.utils
 
-PopupWindow {
+Loader {
     id: root
 
-    required property var targetItem
-    required property var targetRect
-    required property string targetText
+    required property string text
+    property bool show: false
 
-    color: "transparent"
+    active: text !== ""
+    visible: show && active
 
-    anchor {
-        item: targetItem
-        rect: targetRect
-        margins.top: 2
-        gravity: Edges.Bottom
-    }
+    anchors.fill: parent
 
-    implicitHeight: textRect.implicitHeight
-    implicitWidth: textRect.implicitWidth
+    ToolTip {
+        id: tooltip
 
-    WrapperRectangle {
-        id: textRect
+        visible: parent.visible
+        popupType: Popup.Window
 
-        color: Colors.bgBlur
-        margin: 6
-        radius: Config.radius / 2
+        text: parent.text
+        delay: 500
 
-        Text {
-            text: root.targetText
+        x: parent.x + parent.width / 2 - width / 2
+        y: parent.y + parent.height + Config.padding
+
+        contentItem: Text {
+            text: tooltip.text
+            font: tooltip.font
+        }
+
+        background: Squircle {
+            color: Colors.bgBlur
+            strokeWidth: 1
+            strokeColor: Colors.border
         }
     }
 }

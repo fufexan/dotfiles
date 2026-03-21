@@ -25,11 +25,6 @@
         blurred = lib.concatLists [
           lowopacity
           highopacity
-          [ "quickshell:bar" ]
-        ];
-
-        xray = [
-          "quickshell:bar"
         ];
 
         no_anim = [
@@ -40,7 +35,6 @@
       in
       [
         "${toRegex blurred}, blur true"
-        "${toRegex xray}, xray true"
         "${toRegex lowopacity}, ignore_alpha 0.2"
         "${toRegex highopacity}, ignore_alpha 0.5"
 

@@ -3,9 +3,9 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Widgets
 import qs.components
 import qs.utils
+import org.kde.kirigami
 
 Squircle {
     id: root
@@ -59,12 +59,16 @@ Squircle {
             active: root.modelData?.icon != ""
             visible: active
 
-            sourceComponent: IconImage {
+            sourceComponent: Icon {
                 id: icon
 
+                implicitWidth: Config.iconSize
+                implicitHeight: Config.iconSize
+
+                isMask: true
+                color: Colors.foreground
+
                 source: Utils.getImage(root.modelData.icon)
-                mipmap: true
-                implicitSize: Config.iconSize
             }
         }
 
