@@ -35,7 +35,7 @@ Item {
         property vector4d fillColor: Qt.vector4d(root.color.r, root.color.g, root.color.b, root.color.a)
         property vector4d progressColor: Qt.vector4d(root.progressColor.r, root.progressColor.g, root.progressColor.b, root.progressColor.a)
         property vector4d strokeColor: Qt.vector4d(root.strokeColor.r, root.strokeColor.g, root.strokeColor.b, root.strokeColor.a)
-        property real strokeWidth: root.strokeWidth
+        property real strokeWidth: root.strokeWidth * Screen.devicePixelRatio
         property real radius: root.radius
         property real power: root.power
         property real progress: root.progress

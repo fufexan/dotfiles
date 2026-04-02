@@ -14,10 +14,9 @@ layout(std140, binding = 0) uniform buf {
     float radius;
     float power;
     float progress;
-    float useTexture; // 1.0 to use the texture, 0.0 for solid/progress fill
+    float useTexture;
 };
 
-// The texture provided by ShaderEffectSource or Image
 layout(binding = 1) uniform sampler2D sourceTexture;
 
 float sdSquircleRect(vec2 p, vec2 b, float r, float n) {
@@ -28,37 +27,39 @@ float sdSquircleRect(vec2 p, vec2 b, float r, float n) {
     return max(q.x, q.y) - r;
 }
 
-float aastep(float threshold, float value) {
-    float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678;
-    return 1.0 - smoothstep(threshold - afwidth, threshold + afwidth, value);
-}
-
 void main() {
-    vec2 p = (qt_TexCoord0 * resolution) - (resolution * 0.5);
+    vec2 p = (qt_TexCoord0 - 0.5) * resolution;
     vec2 halfSize = resolution * 0.5;
 
     float dist = sdSquircleRect(p, halfSize, radius, power);
-    float shapeMask = aastep(0.0, dist);
 
-    // 1. Determine the base content color
+    // This calculates the width of a single physical pixel in SDF units
+    float pixelWidth = fwidth(dist);
+
+    // Create a sharp mask with exactly 1-pixel of antialiasing
+    // Edge is at 0.0, smoothing happens between -pixelWidth and 0.0
+    float outerEdge = smoothstep(0.0, -pixelWidth, dist);
+
+    // Inner edge for the stroke
+    // If you want a 1px border, strokeWidth should be 1.0
+    float innerEdge = smoothstep(-strokeWidth, -strokeWidth + pixelWidth, dist);
+
     vec4 baseContent;
     if (useTexture > 0.5) {
-        // Sample the texture (clipped image/layout)
         baseContent = texture(sourceTexture, qt_TexCoord0);
     } else {
-        // Calculate solid fill or progress bar color
-        float isProgress = 1.0 - smoothstep(progress - 0.001, progress + 0.001, qt_TexCoord0.x);
+        float isProgress = smoothstep(progress + 0.01, progress - 0.01, qt_TexCoord0.x);
         baseContent = mix(fillColor, progressColor, isProgress);
     }
 
-    // 2. Apply Stroke and Opacity logic
-    if (strokeWidth > 0.0) {
-        float innerMask = aastep(-strokeWidth, dist);
-        vec3 color = mix(strokeColor.rgb, baseContent.rgb, innerMask);
-        float alpha = shapeMask * mix(strokeColor.a, baseContent.a, innerMask);
-        fragColor = vec4(color * alpha, alpha) * qt_Opacity;
-    } else {
-        float alpha = shapeMask * baseContent.a;
-        fragColor = vec4(baseContent.rgb * alpha, alpha) * qt_Opacity;
-    }
+    // Blend logic:
+    // We use the stroke color as the base, then overlay the content inside the inner edge.
+    // Finally, we clip the whole thing by the outer edge.
+    vec4 finalColor = mix(baseContent, strokeColor, innerEdge);
+
+    // Apply outer clipping and global opacity
+    float alpha = outerEdge * qt_Opacity;
+
+    // Standard Premultiplied Alpha output for Qt
+    fragColor = vec4(finalColor.rgb * finalColor.a, finalColor.a) * alpha;
 }
