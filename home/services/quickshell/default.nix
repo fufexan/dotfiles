@@ -11,6 +11,7 @@ let
     bash
     coreutils
     gawk
+    lsof
     ripgrep
     procps
     util-linux

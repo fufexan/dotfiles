@@ -68,6 +68,7 @@ PanelWindow {
             anchors.rightMargin: Config.spacing
             spacing: Config.spacing
 
+            Comms {}
             Tray {}
             Resources {}
             Network {}
