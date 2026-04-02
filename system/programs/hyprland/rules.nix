@@ -20,6 +20,7 @@
           "vicinae"
           "logout_dialog"
           "quickshell:sidebar"
+          "quickshell:popup"
         ];
 
         blurred = lib.concatLists [
@@ -30,7 +31,7 @@
         no_anim = [
           "quickshell:notifications:overlay"
           "quickshell:sidebar"
-
+          "quickshell:popup"
         ];
       in
       [
