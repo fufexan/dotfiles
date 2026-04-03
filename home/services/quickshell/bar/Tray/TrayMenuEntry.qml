@@ -21,24 +21,24 @@ Squircle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        enabled: !root.modelData.isSeparator && root.modelData.enabled
+        enabled: (!root.modelData?.isSeparator ?? false) && (root.modelData?.enabled ?? false)
         hoverEnabled: true
         onEntered: root.color = Colors.surface
         onExited: root.color = "transparent"
         onClicked: {
-            if (root.modelData.hasChildren) {
+            if (root.modelData?.hasChildren ?? false) {
                 root.openSubmenu(root.modelData);
             } else {
-                root.modelData.triggered();
+                root.modelData?.triggered();
             }
         }
     }
 
-    implicitHeight: (root.modelData.isSeparator ? 1 : rowLayout.implicitHeight) + Config.padding * 2
+    implicitHeight: (root.modelData?.isSeparator ?? false ? 1 : rowLayout.implicitHeight) + Config.padding * 2
     implicitWidth: rowLayout.implicitWidth + Config.padding * 2
 
     Rectangle {
-        visible: root.modelData.isSeparator
+        visible: root.modelData?.isSeparator ?? false
         anchors.fill: parent
         anchors.margins: Config.padding
         color: Colors.innerBorder
@@ -46,7 +46,7 @@ Squircle {
 
     RowLayout {
         id: rowLayout
-        visible: !root.modelData.isSeparator
+        visible: !root.modelData?.isSeparator ?? false
 
         spacing: Config.padding
 
@@ -56,7 +56,7 @@ Squircle {
         Loader {
             id: loader
 
-            active: root.modelData?.icon != ""
+            active: (root.modelData?.icon ?? false) != ""
             visible: active
 
             sourceComponent: Icon {
@@ -68,7 +68,7 @@ Squircle {
                 isMask: true
                 color: Colors.foreground
 
-                source: Utils.getImage(root.modelData.icon)
+                source: Utils.getImage(root.modelData?.icon ?? "")
             }
         }
 
@@ -78,12 +78,12 @@ Squircle {
             Layout.rightMargin: Config.padding * 0.5
             Layout.fillWidth: true
 
-            text: root.modelData.text
-            color: root.modelData.enabled ? Colors.foreground : Qt.lighter(Colors.foreground, 0.6)
+            text: root.modelData?.text ?? ""
+            color: (root.modelData?.enabled ?? false) ? Colors.foreground : Qt.lighter(Colors.foreground, 0.6)
         }
 
         MaterialIcon {
-            visible: root.modelData.hasChildren
+            visible: root.modelData?.hasChildren ?? false
             text: "chevron_right"
             font.pointSize: Config.textSize
             font.weight: Font.DemiBold

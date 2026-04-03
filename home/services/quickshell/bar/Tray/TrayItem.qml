@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Effects
 import qs.components
 import qs.utils
@@ -16,16 +15,24 @@ MouseArea {
     implicitWidth: trayIconItem.implicitWidth
     implicitHeight: trayIconItem.implicitHeight
 
-    TrayMenu {
-        id: menu
-        position: root.position
-        menu: root.modelData.menu
+    property alias menu: trayMenuLoader.item
+
+    Loader {
+        id: trayMenuLoader
+
+        active: root.modelData.hasMenu && !!root.modelData?.menu
+
+        sourceComponent: TrayMenu {
+            id: trayMenu
+            position: root.position
+            menu: root.modelData.menu
+        }
     }
 
     Rectangle {
         id: trayIconItem
 
-        color: menu.visible ? Colors.buttonDisabledHover : root.containsMouse ? Colors.buttonDisabled : "transparent"
+        color: root.menu.visible ? Colors.buttonDisabledHover : root.containsMouse ? Colors.buttonDisabled : "transparent"
         radius: 20
 
         implicitWidth: trayIcon.implicitWidth + Config.padding * 2
@@ -51,7 +58,7 @@ MouseArea {
                     p.x += implicitSize / 4;
                     p.y += implicitSize / 4;
                     let m = Config.preferredMonitor;
-                    if (m.name != "eDP-1") {
+                    if (m && m.name != "eDP-1") {
                         p.x -= m.x;
                         p.y -= m.y;
                     }
