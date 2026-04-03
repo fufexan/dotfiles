@@ -31,6 +31,7 @@ ColumnLayout {
             color: Colors.bgBlurShadow
             strokeColor: Colors.border
             strokeWidth: 1
+            useInnerStroke: true
 
             RowLayout {
                 id: mainLayout

@@ -70,6 +70,7 @@ WrapperMouseArea {
             anchors.fill: parent
             strokeColor: Colors.border
             strokeWidth: 1
+            useInnerStroke: true
         }
 
         ColumnLayout {

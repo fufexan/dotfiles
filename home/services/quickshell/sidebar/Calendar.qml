@@ -50,6 +50,7 @@ WrapperMouseArea {
             color: Colors.bgBlurShadow
             strokeColor: Colors.border
             strokeWidth: 1
+            useInnerStroke: true
 
             ColumnLayout {
                 id: calendarColumn

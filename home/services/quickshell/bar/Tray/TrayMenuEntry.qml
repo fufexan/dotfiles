@@ -41,7 +41,7 @@ Squircle {
         visible: root.modelData.isSeparator
         anchors.fill: parent
         anchors.margins: Config.padding
-        color: Colors.border
+        color: Colors.innerBorder
     }
 
     RowLayout {

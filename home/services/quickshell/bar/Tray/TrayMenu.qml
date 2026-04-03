@@ -69,6 +69,7 @@ PanelWindow {
             power: 3
             strokeWidth: 1
             strokeColor: Colors.border
+            useInnerStroke: true
 
             implicitWidth: stack.implicitWidth + Config.padding * 2
             implicitHeight: stack.implicitHeight + Config.padding * 2

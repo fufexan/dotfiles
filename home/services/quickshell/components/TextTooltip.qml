@@ -35,6 +35,7 @@ Loader {
             color: Colors.bgBlur
             strokeWidth: 1
             strokeColor: Colors.border
+            useInnerStroke: true
         }
     }
 }

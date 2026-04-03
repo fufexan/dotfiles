@@ -36,7 +36,9 @@ Singleton {
 
     readonly property color surface: darkMode ? Qt.hsla(0, 0, 0.95, 0.15) : Qt.hsla(0, 0, 0.05, 0.15)
     readonly property color overlay: darkMode ? Qt.hsla(0, 0, 0.95, 0.7) : Qt.hsla(0, 0, 0.05, 0.7)
-    readonly property color border: darkMode ? Qt.hsla(0, 0, 0.95, 0.1) : Qt.hsla(0, 0, 0.05, 0.1)
+    readonly property color border: darkMode ? Colors.bgBlurShadow : Qt.hsla(0, 0, 0.05, 0.1)
+    readonly property color innerBorder: darkMode ? Qt.hsla(0, 0, 1, 0.2) : "transparent"
+    readonly property color osdBorder: darkMode ? Qt.hsla(0, 0, 0.95, 0.1) : "transparent"
 
     readonly property color accent: "#e06c75"
 

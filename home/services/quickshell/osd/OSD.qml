@@ -114,8 +114,8 @@ Scope {
                     color: Colors.bgBar
                     progressColor: Colors.foregroundOSD
                     progress: scope.progress
-                    strokeColor: Colors.border
-                    strokeWidth: 1
+                    useInnerStroke: true
+                    innerStrokeColor: Colors.osdBorder
 
                     Behavior on progress { NumberAnimation { duration: 150 } }
                 }

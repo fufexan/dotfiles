@@ -11,7 +11,10 @@ Item {
     // Styling
     property color color: "black"
     property color strokeColor: "transparent"
-    property real strokeWidth: 0
+    property color innerStrokeColor: Colors.innerBorder
+    property real strokeWidth: strokeColor.alpha != 0 ? 1 : 0
+    property real innerStrokeWidth: 0.5
+    property bool useInnerStroke: false
 
     // Progress (Optional)
     property color progressColor: color
@@ -30,13 +33,20 @@ Item {
     ShaderEffect {
         id: shader
         anchors.fill: parent
+        antialiasing: false
+        blending: false
 
-        property vector2d resolution: Qt.vector2d(width, height)
+        readonly property real dpr: Screen.devicePixelRatio
+
+        property vector2d resolution: Qt.vector2d(width * dpr, height * dpr)
         property vector4d fillColor: Qt.vector4d(root.color.r, root.color.g, root.color.b, root.color.a)
         property vector4d progressColor: Qt.vector4d(root.progressColor.r, root.progressColor.g, root.progressColor.b, root.progressColor.a)
         property vector4d strokeColor: Qt.vector4d(root.strokeColor.r, root.strokeColor.g, root.strokeColor.b, root.strokeColor.a)
-        property real strokeWidth: root.strokeWidth * Screen.devicePixelRatio
-        property real radius: root.radius
+        property vector4d innerStrokeColor: Qt.vector4d(root.innerStrokeColor.r, root.innerStrokeColor.g, root.innerStrokeColor.b, root.innerStrokeColor.a)
+        property real strokeWidth: root.strokeWidth * dpr
+        property real innerStrokeWidth: root.useInnerStroke ? Math.max(1.0, root.innerStrokeWidth * dpr) : 0
+        property real useInnerStroke: root.useInnerStroke ? 1 : 0
+        property real radius: root.radius * dpr
         property real power: root.power
         property real progress: root.progress
 
