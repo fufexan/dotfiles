@@ -38,7 +38,7 @@ in
       After = "graphical-session.target";
     };
     Service = {
-      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies} QML2_IMPORT_PATH=${QML2_IMPORT_PATH}";
+      Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies} QML2_IMPORT_PATH=${QML2_IMPORT_PATH} QSG_RHI_BACKEND=vulkan";
       ExecStart = lib.getExe quickshell;
       Restart = "on-failure";
     };
