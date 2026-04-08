@@ -20,7 +20,7 @@ HoverTooltip {
             return "hardware-disabled";
         else if (!Networking.wifiEnabled)
             return "disabled";
-        else if (adapter?.state == DeviceConnectionState.Connecting || adapter?.state == DeviceConnectionState.Disconnecting)
+        else if (adapter?.state == ConnectionState.Connecting || adapter?.state == ConnectionState.Disconnecting)
             return "acquiring";
         else if (adapter?.connected) {
             let strength = "good";
@@ -41,9 +41,9 @@ HoverTooltip {
     text: {
         if (!Networking.wifiEnabled)
             return "WiFi disabled";
-        else if (adapter?.state == DeviceConnectionState.Connecting)
+        else if (adapter?.state == ConnectionState.Connecting)
             return `Connecting to ${activeNetwork.name}`;
-        else if (adapter?.state == DeviceConnectionState.Disconnecting)
+        else if (adapter?.state == ConnectionState.Disconnecting)
             return `Disconnecting from ${activeNetwork.name}`;
         else if (adapter?.connected)
             return activeNetwork?.name ?? null;
