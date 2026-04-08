@@ -85,7 +85,7 @@ Singleton {
             // console.log("notif: appName", notif.appName || "null", ", appIcon", notif.appIcon || "null", ", image", notif.image || "null", ", expireTimeout", notif.expireTimeout)
 
             notif.closed.connect(() => {
-                notifDismissByNotif(notif);
+                root.notifDismissByNotif(notif);
             });
         }
     }

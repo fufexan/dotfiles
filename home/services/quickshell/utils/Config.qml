@@ -6,7 +6,7 @@ PersistentProperties {
     reloadableId: "persistedStates"
 
     property var preferredMonitor: {
-        return [...Quickshell.screens].sort().reverse()[0];
+        return [...Quickshell.screens].find(e => e.name == "eDP-1");
     }
     property bool showSidebar: false
     property bool doNotDisturb: false
