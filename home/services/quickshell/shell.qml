@@ -1,4 +1,5 @@
 //@ pragma UseQApplication
+//@ pragma DropExpensiveFonts
 import qs.bar
 import qs.notifications
 import qs.osd
