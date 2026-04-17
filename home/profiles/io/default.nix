@@ -10,7 +10,6 @@
     ../../programs/wayland
 
     # services
-    # ../../services/ags
     ../../services/quickshell
 
     # media services

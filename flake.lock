@@ -27,29 +27,6 @@
         "type": "github"
       }
     },
-    "ags": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1774947831,
-        "narHash": "sha256-DsslwNZrQbnh8MS1i63LTirTmgo+u91kz5jUhGZod1E=",
-        "owner": "NotAShelf",
-        "repo": "rags",
-        "rev": "1ea5bd542431fdb7d22424a270978c6e8fad2728",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NotAShelf",
-        "repo": "rags",
-        "type": "github"
-      }
-    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -1371,7 +1348,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "ags": "ags",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",

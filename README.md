@@ -54,30 +54,39 @@ Or install from the `packages` output. For example:
 
 ## 💻 Desktop preview
 
-Currently, my widgets are created using [Ags](https://github.com/Aylur/ags/). If
-you're looking for the [Eww](https://github.com/elkowar/eww) version, you can
-find it [here](https://github.com/fufexan/dotfiles/tree/eww).
+Currently, my widgets are created using [Quickshell](https://quickshell.org).
+If you're looking for the [Ags v1](https://github.com/Aylur/ags/tree/v1)
+version, you can find it [here](https://github.com/fufexan/dotfiles/tree/ags).
+Older [Eww](https://github.com/elkowar/eww) version
+[here](https://github.com/fufexan/dotfiles/tree/eww).
 
-<details>
-<summary>
-Dark
-</summary>
-<a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
-  <img src="https://github.com/fufexan/dotfiles/assets/36706276/d0cc86c8-39b1-4a49-b9d9-6f161f2420f2" alt="Desktop Preview Dark">
-</a>
-*Hint: click to go to a video showcase*
-</details>
-<details>
-<summary>
-Light
-</summary>
-<img src="https://github.com/fufexan/dotfiles/assets/36706276/badef73f-b45a-45a2-b1d6-fe615d5f89b2" alt="Desktop Preview Light">
-</details>
+<img alt="Desktop Preview" src="https://github.com/user-attachments/assets/97f033ba-408e-4463-bf86-1d9729b3689c" />
 
 <details>
 <summary>
 Previous versions
 </summary>
+
+### Ags
+
+  <details>
+  <summary>
+  Dark
+  </summary>
+  <a href="https://drive.google.com/file/d/1W-bwn3UwbMxReiiNqMmq38noa7Xw0Gj1/preview">
+    <img src="https://github.com/fufexan/dotfiles/assets/36706276/d0cc86c8-39b1-4a49-b9d9-6f161f2420f2" alt="Desktop Preview Dark">
+  </a>
+  *Hint: click to go to a video showcase*
+  </details>
+  <details>
+  <summary>
+  Light
+  </summary>
+  <img src="https://github.com/fufexan/dotfiles/assets/36706276/badef73f-b45a-45a2-b1d6-fe615d5f89b2" alt="Desktop Preview Light">
+  </details>
+
+### Eww
+
   <img src="https://user-images.githubusercontent.com/36706276/216402032-ff32fcad-ca21-49d3-9c29-6ff0d2d8b1d8.png" alt="Desktop Preview">
   <img src="https://user-images.githubusercontent.com/36706276/236707086-ea6cb781-8b0c-45d3-b6a1-2c6a4d5e2582.png" alt="Desktop Preview">
 </details>

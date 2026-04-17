@@ -64,16 +64,6 @@
       };
     };
 
-    ags = {
-      # use raf's fork of agsv1.
-      # TODO: set up quickshell ASAP
-      url = "github:NotAShelf/rags";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-      };
-    };
-
     helix.url = "github:helix-editor/helix";
 
     hm = {
