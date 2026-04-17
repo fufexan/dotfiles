@@ -21,6 +21,7 @@ in
       "*.swp"
       "*result*"
       ".direnv"
+      ".worktree"
       "node_modules"
     ];
 
