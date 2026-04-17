@@ -6,7 +6,6 @@
 # nix tooling
 {
   home.packages = with pkgs; [
-    alejandra # keep around until migating all projects to nixfmt
     deadnix
     nixfmt
     statix

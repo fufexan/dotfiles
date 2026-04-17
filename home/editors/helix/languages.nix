@@ -39,21 +39,6 @@
           };
         }
         {
-          name = "clojure";
-          injection-regex = "(clojure|clj|edn|boot|yuck)";
-          file-types = [
-            "clj"
-            "cljs"
-            "cljc"
-            "clje"
-            "cljr"
-            "cljx"
-            "edn"
-            "boot"
-            "yuck"
-          ];
-        }
-        {
           name = "cmake";
           auto-format = true;
           language-servers = [ "cmake-language-server" ];

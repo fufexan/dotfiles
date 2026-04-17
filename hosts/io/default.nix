@@ -18,7 +18,6 @@
   };
 
   boot = {
-    kernelModules = [ "i2c-dev" ];
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_pstate=active"
@@ -31,14 +30,12 @@
   # nh default flake
   environment.variables.NH_FLAKE = "/home/mihai/Documents/code/dotfiles";
 
-  hardware = {
-    # xpadneo.enable = true;
-    sensor.iio.enable = true;
-  };
-
   networking.hostName = "io";
 
-  security.tpm2.enable = true;
+  security = {
+    tpm2.enable = true;
+    pam.services."sshd".howdy.enable = false;
+  };
 
   services = {
     # for SSD/NVME
@@ -57,8 +54,5 @@
     };
 
     linux-enable-ir-emitter.enable = true;
-
   };
-
-  security.pam.services."sshd".howdy.enable = false;
 }

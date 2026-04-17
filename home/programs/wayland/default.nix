@@ -20,7 +20,6 @@
     self.packages.${pkgs.stdenv.hostPlatform.system}.wl-ocr
     wl-clipboard
     # wl-screenrec
-    wlr-randr
   ];
 
   # make stuff work on wayland

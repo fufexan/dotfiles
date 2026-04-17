@@ -186,11 +186,11 @@
     "flake-compat_5": {
       "flake": false,
       "locked": {
-        "lastModified": 1747046372,
-        "narHash": "sha256-CIVLLkVgvHYbgI2UpXvIIBJ12HWgX+fjA8Xf8PUmqCY=",
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "9100a0f413b0c601e0533d1d94ffd501ce2e7885",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
         "type": "github"
       },
       "original": {
@@ -1154,11 +1154,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1765494216,
-        "narHash": "sha256-BXR328s5c2VScMasIAp9spewQ1Vrvi32zUJX3FtpdRU=",
+        "lastModified": 1776460239,
+        "narHash": "sha256-WkTOpEt2B98MbjojHNx+ERkZF2BM/reHoWeI20rrzq4=",
         "owner": "fufexan",
         "repo": "nix-matlab",
-        "rev": "0c983ce3990524b3e379aff96c3b66bfdc66f120",
+        "rev": "e1b4581f67a148de58a7431c3bcdb5503289daad",
         "type": "gitlab"
       },
       "original": {

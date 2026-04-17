@@ -29,7 +29,6 @@
           "${mod}/programs/hyprland"
           "${mod}/programs/games.nix"
 
-          "${mod}/network/spotify.nix"
           "${mod}/network/syncthing.nix"
 
           "${mod}/services/kanata"

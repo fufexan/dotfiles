@@ -14,7 +14,6 @@
 
     # audio
     amberol
-    spotify
 
     # images
     loupe

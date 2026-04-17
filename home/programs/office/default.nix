@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     libreoffice
     obsidian
-    rnote
     xournalpp
   ];
 }
