@@ -27,15 +27,16 @@
           normal = "block";
           select = "underline";
         };
+        file-picker.hidden = false;
         indent-guides.render = true;
         inline-diagnostics = {
           cursor-line = "hint";
           other-lines = "error";
         };
+        line-number = "relative";
         lsp.display-inlay-hints = true;
         soft-wrap.enable = true;
         statusline.center = [ "position-percentage" ];
-        true-color = true;
         trim-final-newlines = true;
         trim-trailing-whitespace = true;
         whitespace.characters = {
