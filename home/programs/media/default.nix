@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, self, ... }:
 # media - control and enjoy audio/video
 {
   imports = [
@@ -20,6 +20,7 @@
 
     # videos
     celluloid
+    self.packages.${pkgs.stdenv.hostPlatform.system}.stremio-linux-shell-rewrite-git
 
     # torrents
     transmission_4-gtk
