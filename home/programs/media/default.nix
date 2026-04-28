@@ -3,7 +3,6 @@
 {
   imports = [
     ./mpv.nix
-    ./rnnoise.nix
   ];
 
   home.packages = with pkgs; [
