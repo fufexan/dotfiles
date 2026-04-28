@@ -1,2654 +1,2263 @@
 {
   programs.yazi.theme.filetype.rules = [
     {
-      name = "*LS_COLORS";
+      url = "*LS_COLORS";
       fg = "#ff005f";
       bg = "#87005f";
       bold = true;
       underline = true;
     }
     {
-      name = "*.txt";
+      url = "*.txt";
       fg = "#dadada";
     }
     {
-      name = "*README";
+      url = "*README";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*README.rst";
+      url = "*README.rst";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*README.md";
+      url = "*README.md";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*LICENSE";
+      url = "*LICENSE";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*LICENSE.md";
+      url = "*LICENSE.md";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*COPYING";
+      url = "*COPYING";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*INSTALL";
+      url = "*INSTALL";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*COPYRIGHT";
+      url = "*COPYRIGHT";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*AUTHORS";
+      url = "*AUTHORS";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*HISTORY";
+      url = "*HISTORY";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CONTRIBUTORS";
+      url = "*CONTRIBUTORS";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CONTRIBUTING";
+      url = "*CONTRIBUTING";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CONTRIBUTING.md";
+      url = "*CONTRIBUTING.md";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CHANGELOG";
+      url = "*CHANGELOG";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CHANGELOG.md";
+      url = "*CHANGELOG.md";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CODEOWNERS";
+      url = "*CODEOWNERS";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*PATENTS";
+      url = "*PATENTS";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*VERSION";
+      url = "*VERSION";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*NOTICE";
+      url = "*NOTICE";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*CHANGES";
+      url = "*CHANGES";
       fg = "#ffd700";
       bold = true;
     }
     {
-      name = "*.log";
+      url = "*.log";
       fg = "#d7ff00";
     }
     {
-      name = "*.adoc";
+      url = "*.adoc";
       fg = "#d7d700";
     }
     {
-      name = "*.asciidoc";
+      url = "*.asciidoc";
       fg = "#d7d700";
     }
     {
-      name = "*.etx";
+      url = "*.etx";
       fg = "#d7d700";
     }
     {
-      name = "*.info";
+      url = "*.info";
       fg = "#d7d700";
     }
     {
-      name = "*.markdown";
+      url = "*.markdown";
       fg = "#d7d700";
     }
     {
-      name = "*.md";
+      url = "*.md";
       fg = "#d7d700";
     }
     {
-      name = "*.mkd";
+      url = "*.mkd";
       fg = "#d7d700";
     }
     {
-      name = "*.mdx";
+      url = "*.mdx";
       fg = "#d7d700";
     }
     {
-      name = "*.nfo";
+      url = "*.nfo";
       fg = "#d7d700";
     }
     {
-      name = "*.org";
+      url = "*.org";
       fg = "#d7d700";
     }
     {
-      name = "*.norg";
+      url = "*.norg";
       fg = "#d7d700";
     }
     {
-      name = "*.pod";
+      url = "*.pod";
       fg = "#d7d700";
     }
     {
-      name = "*.rst";
+      url = "*.rst";
       fg = "#d7d700";
     }
     {
-      name = "*.tex";
+      url = "*.tex";
       fg = "#d7d700";
     }
     {
-      name = "*.textile";
+      url = "*.textile";
       fg = "#d7d700";
     }
     {
-      name = "*.bib";
+      url = "*.bib";
       fg = "#d7af00";
     }
     {
-      name = "*.json";
+      url = "*.json";
       fg = "#d7af00";
     }
     {
-      name = "*.jsonc";
+      url = "*.jsonc";
       fg = "#d7af00";
     }
     {
-      name = "*.json5";
+      url = "*.json5";
       fg = "#d7af00";
     }
     {
-      name = "*.hjson";
+      url = "*.hjson";
       fg = "#d7af00";
     }
     {
-      name = "*.jsonl";
+      url = "*.jsonl";
       fg = "#d7af00";
     }
     {
-      name = "*.jsonnet";
+      url = "*.jsonnet";
       fg = "#d7af00";
     }
     {
-      name = "*.libsonnet";
+      url = "*.libsonnet";
       fg = "#afaf00";
     }
     {
-      name = "*.ndjson";
+      url = "*.ndjson";
       fg = "#d7af00";
     }
     {
-      name = "*.msg";
+      url = "*.msg";
       fg = "#d7af00";
     }
     {
-      name = "*.pgn";
+      url = "*.pgn";
       fg = "#d7af00";
     }
     {
-      name = "*.rss";
+      url = "*.rss";
       fg = "#d7af00";
     }
     {
-      name = "*.xml";
+      url = "*.xml";
       fg = "#d7af00";
     }
     {
-      name = "*.fxml";
+      url = "*.fxml";
       fg = "#d7af00";
     }
     {
-      name = "*.toml";
+      url = "*.toml";
       fg = "#d7af00";
     }
     {
-      name = "*.yaml";
+      url = "*.yaml";
       fg = "#d7af00";
     }
     {
-      name = "*.yml";
+      url = "*.yml";
       fg = "#d7af00";
     }
     {
-      name = "*.RData";
+      url = "*.RData";
       fg = "#d7af00";
     }
     {
-      name = "*.rdata";
+      url = "*.rdata";
       fg = "#d7af00";
     }
     {
-      name = "*.xsd";
+      url = "*.xsd";
       fg = "#d7af00";
     }
     {
-      name = "*.dtd";
+      url = "*.dtd";
       fg = "#d7af00";
     }
     {
-      name = "*.sgml";
+      url = "*.sgml";
       fg = "#d7af00";
     }
     {
-      name = "*.rng";
+      url = "*.rng";
       fg = "#d7af00";
     }
     {
-      name = "*.rnc";
+      url = "*.rnc";
       fg = "#d7af00";
     }
     {
-      name = "*.accdb";
+      url = "*.accdb";
       fg = "#5f5f87";
     }
     {
-      name = "*.accde";
+      url = "*.accde";
       fg = "#5f5f87";
     }
     {
-      name = "*.accdr";
+      url = "*.accdr";
       fg = "#5f5f87";
     }
     {
-      name = "*.accdt";
+      url = "*.accdt";
       fg = "#5f5f87";
     }
     {
-      name = "*.db";
+      url = "*.db";
       fg = "#5f5f87";
     }
     {
-      name = "*.fmp12";
+      url = "*.fmp12";
       fg = "#5f5f87";
     }
     {
-      name = "*.fp7";
+      url = "*.fp7";
       fg = "#5f5f87";
     }
     {
-      name = "*.localstorage";
+      url = "*.localstorage";
       fg = "#5f5f87";
     }
     {
-      name = "*.mdb";
+      url = "*.mdb";
       fg = "#5f5f87";
     }
     {
-      name = "*.mde";
+      url = "*.mde";
       fg = "#5f5f87";
     }
     {
-      name = "*.sqlite";
+      url = "*.sqlite";
       fg = "#5f5f87";
     }
     {
-      name = "*.typelib";
+      url = "*.typelib";
       fg = "#5f5f87";
     }
     {
-      name = "*.nc";
+      url = "*.nc";
       fg = "#5f5f87";
     }
     {
-      name = "*.cbr";
+      url = "*.cbr";
       fg = "#af87ff";
     }
     {
-      name = "*.cbz";
+      url = "*.cbz";
       fg = "#af87ff";
     }
     {
-      name = "*.chm";
+      url = "*.chm";
       fg = "#af87ff";
     }
     {
-      name = "*.djvu";
+      url = "*.djvu";
       fg = "#af87ff";
     }
     {
-      name = "*.pdf";
+      url = "*.pdf";
       fg = "#af87ff";
     }
     {
-      name = "*.PDF";
+      url = "*.PDF";
       fg = "#af87ff";
     }
     {
-      name = "*.mobi";
+      url = "*.mobi";
       fg = "#af87ff";
     }
     {
-      name = "*.epub";
+      url = "*.epub";
       fg = "#af87ff";
     }
     {
-      name = "*.docm";
+      url = "*.docm";
       fg = "#87afff";
       underline = true;
     }
     {
-      name = "*.doc";
+      url = "*.doc";
       fg = "#87afff";
     }
     {
-      name = "*.docx";
+      url = "*.docx";
       fg = "#87afff";
     }
     {
-      name = "*.odb";
+      url = "*.odb";
       fg = "#87afff";
     }
     {
-      name = "*.odt";
+      url = "*.odt";
       fg = "#87afff";
     }
     {
-      name = "*.rtf";
+      url = "*.rtf";
       fg = "#87afff";
     }
     {
-      name = "*.pages";
+      url = "*.pages";
       fg = "#87afff";
     }
     {
-      name = "*.odp";
+      url = "*.odp";
       fg = "#d75f00";
     }
     {
-      name = "*.pps";
+      url = "*.pps";
       fg = "#d75f00";
     }
     {
-      name = "*.ppt";
+      url = "*.ppt";
       fg = "#d75f00";
     }
     {
-      name = "*.pptx";
+      url = "*.pptx";
       fg = "#d75f00";
     }
     {
-      name = "*.ppts";
+      url = "*.ppts";
       fg = "#d75f00";
     }
     {
-      name = "*.pptxm";
+      url = "*.pptxm";
       fg = "#d75f00";
       underline = true;
     }
     {
-      name = "*.pptsm";
+      url = "*.pptsm";
       fg = "#d75f00";
       underline = true;
     }
     {
-      name = "*.prisma";
+      url = "*.prisma";
       fg = "#ffd787";
     }
     {
-      name = "*.csv";
+      url = "*.csv";
       fg = "#5fd787";
     }
     {
-      name = "*.tsv";
+      url = "*.tsv";
       fg = "#5fd787";
     }
     {
-      name = "*.numbers";
+      url = "*.numbers";
       fg = "#87d700";
     }
     {
-      name = "*.ods";
+      url = "*.ods";
       fg = "#87d700";
     }
     {
-      name = "*.xla";
+      url = "*.xla";
       fg = "#5fd700";
     }
     {
-      name = "*.xls";
+      url = "*.xls";
       fg = "#87d700";
     }
     {
-      name = "*.xlsx";
+      url = "*.xlsx";
       fg = "#87d700";
     }
     {
-      name = "*.xlsxm";
+      url = "*.xlsxm";
       fg = "#87d700";
       underline = true;
     }
     {
-      name = "*.xltm";
+      url = "*.xltm";
       fg = "#5fafaf";
       underline = true;
     }
     {
-      name = "*.xltx";
+      url = "*.xltx";
       fg = "#5fafaf";
     }
     {
-      name = "*.key";
+      url = "*.key";
       fg = "#d75f00";
     }
     {
-      name = "*config";
+      url = "*config";
       bold = true;
     }
     {
-      name = "*cfg";
+      url = "*cfg";
       bold = true;
     }
     {
-      name = "*conf";
+      url = "*conf";
       bold = true;
     }
     {
-      name = "*rc";
+      url = "*rc";
       bold = true;
     }
     {
-      name = "*authorized_keys";
+      url = "*authorized_keys";
       bold = true;
     }
     {
-      name = "*known_hosts";
+      url = "*known_hosts";
       bold = true;
     }
     {
-      name = "*.ini";
+      url = "*.ini";
       bold = true;
     }
     {
-      name = "*.plist";
+      url = "*.plist";
       bold = true;
     }
     {
-      name = "*.profile";
+      url = "*.profile";
       bold = true;
     }
     {
-      name = "*.bash_profile";
+      url = "*.bash_profile";
       bold = true;
     }
     {
-      name = "*.bash_login";
+      url = "*.bash_login";
       bold = true;
     }
     {
-      name = "*.bash_logout";
+      url = "*.bash_logout";
       bold = true;
     }
     {
-      name = "*.zshenv";
+      url = "*.zshenv";
       bold = true;
     }
     {
-      name = "*.zprofile";
+      url = "*.zprofile";
       bold = true;
     }
     {
-      name = "*.zlogin";
+      url = "*.zlogin";
       bold = true;
     }
     {
-      name = "*.zlogout";
+      url = "*.zlogout";
       bold = true;
     }
     {
-      name = "*.viminfo";
+      url = "*.viminfo";
       bold = true;
     }
     {
-      name = "*.pcf";
+      url = "*.pcf";
       bold = true;
     }
     {
-      name = "*.psf";
+      url = "*.psf";
       bold = true;
     }
     {
-      name = "*.hidden-color-scheme";
+      url = "*.hidden-color-scheme";
       bold = true;
     }
     {
-      name = "*.hidden-tmTheme";
+      url = "*.hidden-tmTheme";
       bold = true;
     }
     {
-      name = "*.last-run";
+      url = "*.last-run";
       bold = true;
     }
     {
-      name = "*.merged-ca-bundle";
+      url = "*.merged-ca-bundle";
       bold = true;
     }
     {
-      name = "*.sublime-build";
+      url = "*.sublime-build";
       bold = true;
     }
     {
-      name = "*.sublime-commands";
+      url = "*.sublime-commands";
       bold = true;
     }
     {
-      name = "*.sublime-keymap";
+      url = "*.sublime-keymap";
       bold = true;
     }
     {
-      name = "*.sublime-settings";
+      url = "*.sublime-settings";
       bold = true;
     }
     {
-      name = "*.sublime-snippet";
+      url = "*.sublime-snippet";
       bold = true;
     }
     {
-      name = "*.sublime-project";
+      url = "*.sublime-project";
       bold = true;
     }
     {
-      name = "*.sublime-workspace";
+      url = "*.sublime-workspace";
       bold = true;
     }
     {
-      name = "*.tmTheme";
+      url = "*.tmTheme";
       bold = true;
     }
     {
-      name = "*.user-ca-bundle";
+      url = "*.user-ca-bundle";
       bold = true;
     }
     {
-      name = "*.rstheme";
+      url = "*.rstheme";
       bold = true;
     }
     {
-      name = "*.epf";
+      url = "*.epf";
       bold = true;
     }
     {
-      name = "*.git";
+      url = "*.git";
       fg = "#ff005f";
     }
     {
-      name = "*.github";
+      url = "*.github";
       fg = "#ff005f";
     }
     {
-      name = "*.gitignore";
+      url = "*.gitignore";
       fg = "#585858";
     }
     {
-      name = "*.gitattributes";
+      url = "*.gitattributes";
       fg = "#585858";
     }
     {
-      name = "*.gitmodules";
+      url = "*.gitmodules";
       fg = "#585858";
     }
     {
-      name = "*.awk";
+      url = "*.awk";
       fg = "#d78700";
     }
     {
-      name = "*.bash";
+      url = "*.bash";
       fg = "#d78700";
     }
     {
-      name = "*.bat";
+      url = "*.bat";
       fg = "#d78700";
     }
     {
-      name = "*.BAT";
+      url = "*.BAT";
       fg = "#d78700";
     }
     {
-      name = "*.sed";
+      url = "*.sed";
       fg = "#d78700";
     }
     {
-      name = "*.sh";
+      url = "*.sh";
       fg = "#d78700";
     }
     {
-      name = "*.zsh";
+      url = "*.zsh";
       fg = "#d78700";
     }
     {
-      name = "*.fish";
+      url = "*.fish";
       fg = "#d78700";
     }
     {
-      name = "*.vim";
+      url = "*.vim";
       fg = "#d78700";
     }
     {
-      name = "*.kak";
+      url = "*.kak";
       fg = "#d78700";
     }
     {
-      name = "*.ahk";
+      url = "*.ahk";
       fg = "#00d75f";
     }
     {
-      name = "*.py";
+      url = "*.py";
       fg = "#00d75f";
     }
     {
-      name = "*.ipynb";
+      url = "*.ipynb";
       fg = "#00d75f";
     }
     {
-      name = "*.xsh";
+      url = "*.xsh";
       fg = "#00d75f";
     }
     {
-      name = "*.rb";
+      url = "*.rb";
       fg = "#00d75f";
     }
     {
-      name = "*.gemspec";
+      url = "*.gemspec";
       fg = "#00d75f";
     }
     {
-      name = "*.pl";
+      url = "*.pl";
       fg = "#ff8700";
     }
     {
-      name = "*.PL";
+      url = "*.PL";
       fg = "#d70000";
     }
     {
-      name = "*.pm";
+      url = "*.pm";
       fg = "#ff5f5f";
     }
     {
-      name = "*.t";
+      url = "*.t";
       fg = "#87d787";
     }
     {
-      name = "*.msql";
+      url = "*.msql";
       fg = "#ffd787";
     }
     {
-      name = "*.mysql";
+      url = "*.mysql";
       fg = "#ffd787";
     }
     {
-      name = "*.prql";
+      url = "*.prql";
       fg = "#ffd787";
     }
     {
-      name = "*.pgsql";
+      url = "*.pgsql";
       fg = "#ffd787";
     }
     {
-      name = "*.sql";
+      url = "*.sql";
       fg = "#ffd787";
     }
     {
-      name = "*.tcl";
+      url = "*.tcl";
       fg = "#5f8700";
       bold = true;
     }
     {
-      name = "*.r";
+      url = "*.r";
       fg = "#00ffaf";
     }
     {
-      name = "*.R";
+      url = "*.R";
       fg = "#00ffaf";
     }
     {
-      name = "*.gs";
+      url = "*.gs";
       fg = "#5fd7ff";
     }
     {
-      name = "*.clj";
+      url = "*.clj";
       fg = "#00d75f";
     }
     {
-      name = "*.cljs";
+      url = "*.cljs";
       fg = "#00d75f";
     }
     {
-      name = "*.cljc";
+      url = "*.cljc";
       fg = "#00d75f";
     }
     {
-      name = "*.cljw";
+      url = "*.cljw";
       fg = "#00d75f";
     }
     {
-      name = "*.scala";
+      url = "*.scala";
       fg = "#00d75f";
     }
     {
-      name = "*.sc";
+      url = "*.sc";
       fg = "#00d75f";
     }
     {
-      name = "*.dart";
+      url = "*.dart";
       fg = "#00ffff";
     }
     {
-      name = "*.asm";
+      url = "*.asm";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cl";
+      url = "*.cl";
       fg = "#5fd7ff";
     }
     {
-      name = "*.ml";
+      url = "*.ml";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lisp";
+      url = "*.lisp";
       fg = "#5fd7ff";
     }
     {
-      name = "*.rkt";
+      url = "*.rkt";
       fg = "#5fd7ff";
     }
     {
-      name = "*.el";
+      url = "*.el";
       fg = "#5fd7ff";
     }
     {
-      name = "*.elc";
+      url = "*.elc";
       fg = "#626262";
     }
     {
-      name = "*.eln";
+      url = "*.eln";
       fg = "#626262";
     }
     {
-      name = "*.lua";
+      url = "*.lua";
       fg = "#5fd7ff";
     }
     {
-      name = "*.moon";
+      url = "*.moon";
       fg = "#5fd7ff";
     }
     {
-      name = "*.c";
+      url = "*.c";
       fg = "#5fd7ff";
     }
     {
-      name = "*.C";
+      url = "*.C";
       fg = "#5fd7ff";
     }
     {
-      name = "*.h";
+      url = "*.h";
       fg = "#87afd7";
     }
     {
-      name = "*.H";
+      url = "*.H";
       fg = "#87afd7";
     }
     {
-      name = "*.tcc";
+      url = "*.tcc";
       fg = "#87afd7";
     }
     {
-      name = "*.c++";
+      url = "*.c++";
       fg = "#5fd7ff";
     }
     {
-      name = "*.h++";
+      url = "*.h++";
       fg = "#87afd7";
     }
     {
-      name = "*.hpp";
+      url = "*.hpp";
       fg = "#87afd7";
     }
     {
-      name = "*.hxx";
+      url = "*.hxx";
       fg = "#87afd7";
     }
     {
-      name = "*.ii";
+      url = "*.ii";
       fg = "#87afd7";
     }
     {
-      name = "*.M";
+      url = "*.M";
       fg = "#87afd7";
     }
     {
-      name = "*.m";
+      url = "*.m";
       fg = "#87afd7";
     }
     {
-      name = "*.cc";
+      url = "*.cc";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cs";
+      url = "*.cs";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cp";
+      url = "*.cp";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cpp";
+      url = "*.cpp";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cxx";
+      url = "*.cxx";
       fg = "#5fd7ff";
     }
     {
-      name = "*.cr";
+      url = "*.cr";
       fg = "#5fd7ff";
     }
     {
-      name = "*.go";
+      url = "*.go";
       fg = "#5fd7ff";
     }
     {
-      name = "*.f";
+      url = "*.f";
       fg = "#5fd7ff";
     }
     {
-      name = "*.F";
+      url = "*.F";
       fg = "#5fd7ff";
     }
     {
-      name = "*.for";
+      url = "*.for";
       fg = "#5fd7ff";
     }
     {
-      name = "*.ftn";
+      url = "*.ftn";
       fg = "#5fd7ff";
     }
     {
-      name = "*.f90";
+      url = "*.f90";
       fg = "#5fd7ff";
     }
     {
-      name = "*.F90";
+      url = "*.F90";
       fg = "#5fd7ff";
     }
     {
-      name = "*.f95";
+      url = "*.f95";
       fg = "#5fd7ff";
     }
     {
-      name = "*.F95";
+      url = "*.F95";
       fg = "#5fd7ff";
     }
     {
-      name = "*.f03";
+      url = "*.f03";
       fg = "#5fd7ff";
     }
     {
-      name = "*.F03";
+      url = "*.F03";
       fg = "#5fd7ff";
     }
     {
-      name = "*.f08";
+      url = "*.f08";
       fg = "#5fd7ff";
     }
     {
-      name = "*.F08";
+      url = "*.F08";
       fg = "#5fd7ff";
     }
     {
-      name = "*.nim";
+      url = "*.nim";
       fg = "#5fd7ff";
     }
     {
-      name = "*.nimble";
+      url = "*.nimble";
       fg = "#5fd7ff";
     }
     {
-      name = "*.s";
+      url = "*.s";
       fg = "#87afd7";
     }
     {
-      name = "*.S";
+      url = "*.S";
       fg = "#87afd7";
     }
     {
-      name = "*.rs";
+      url = "*.rs";
       fg = "#5fd7ff";
     }
     {
-      name = "*.scpt";
+      url = "*.scpt";
       fg = "#ffafff";
     }
     {
-      name = "*.swift";
+      url = "*.swift";
       fg = "#ffafff";
     }
     {
-      name = "*.sx";
+      url = "*.sx";
       fg = "#5fd7ff";
     }
     {
-      name = "*.vala";
+      url = "*.vala";
       fg = "#5fd7ff";
     }
     {
-      name = "*.vapi";
+      url = "*.vapi";
       fg = "#5fd7ff";
     }
     {
-      name = "*.hi";
+      url = "*.hi";
       fg = "#87afd7";
     }
     {
-      name = "*.hs";
+      url = "*.hs";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lhs";
+      url = "*.lhs";
       fg = "#5fd7ff";
     }
     {
-      name = "*.agda";
+      url = "*.agda";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lagda";
+      url = "*.lagda";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lagda.tex";
+      url = "*.lagda.tex";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lagda.rst";
+      url = "*.lagda.rst";
       fg = "#5fd7ff";
     }
     {
-      name = "*.lagda.md";
+      url = "*.lagda.md";
       fg = "#5fd7ff";
     }
     {
-      name = "*.agdai";
+      url = "*.agdai";
       fg = "#87afd7";
     }
     {
-      name = "*.zig";
+      url = "*.zig";
       fg = "#5fd7ff";
     }
     {
-      name = "*.v";
+      url = "*.v";
       fg = "#5fd7ff";
     }
     {
-      name = "*.pyc";
+      url = "*.pyc";
       fg = "#585858";
     }
     {
-      name = "*.tf";
+      url = "*.tf";
       fg = "#d75f87";
     }
     {
-      name = "*.tfstate";
+      url = "*.tfstate";
       fg = "#d75f87";
     }
     {
-      name = "*.tfvars";
+      url = "*.tfvars";
       fg = "#d75f87";
     }
     {
-      name = "*.http";
+      url = "*.http";
       fg = "#870087";
       bold = true;
     }
     {
-      name = "*.eml";
+      url = "*.eml";
       fg = "#870087";
       bold = true;
     }
     {
-      name = "*.css";
+      url = "*.css";
       fg = "#8787ff";
       bold = true;
     }
     {
-      name = "*.less";
+      url = "*.less";
       fg = "#8787ff";
       bold = true;
     }
     {
-      name = "*.sass";
+      url = "*.sass";
       fg = "#8787ff";
       bold = true;
     }
     {
-      name = "*.scss";
+      url = "*.scss";
       fg = "#8787ff";
       bold = true;
     }
     {
-      name = "*.htm";
+      url = "*.htm";
       fg = "#af005f";
       bold = true;
     }
     {
-      name = "*.html";
+      url = "*.html";
       fg = "#af005f";
       bold = true;
     }
     {
-      name = "*.jhtm";
+      url = "*.jhtm";
       fg = "#af005f";
       bold = true;
     }
     {
-      name = "*.mht";
+      url = "*.mht";
       fg = "#af005f";
       bold = true;
     }
     {
-      name = "*.mustache";
+      url = "*.mustache";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.ejs";
+      url = "*.ejs";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.pug";
+      url = "*.pug";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.svelte";
+      url = "*.svelte";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.vue";
+      url = "*.vue";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.astro";
+      url = "*.astro";
       fg = "#af5fff";
       bold = true;
     }
     {
-      name = "*.js";
+      url = "*.js";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.jsx";
+      url = "*.jsx";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.ts";
+      url = "*.ts";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.tsx";
+      url = "*.tsx";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.mjs";
+      url = "*.mjs";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.cjs";
+      url = "*.cjs";
       fg = "#5fafd7";
       bold = true;
     }
     {
-      name = "*.coffee";
+      url = "*.coffee";
       fg = "#5fd7af";
       bold = true;
     }
     {
-      name = "*.java";
+      url = "*.java";
       fg = "#5fd7af";
       bold = true;
     }
     {
-      name = "*.jsm";
+      url = "*.jsm";
       fg = "#5fd7af";
       bold = true;
     }
     {
-      name = "*.jsp";
+      url = "*.jsp";
       fg = "#5fd7af";
       bold = true;
     }
     {
-      name = "*.php";
+      url = "*.php";
       fg = "#5fd7ff";
     }
     {
-      name = "*.ctp";
+      url = "*.ctp";
       fg = "#5fd7ff";
     }
     {
-      name = "*.twig";
+      url = "*.twig";
       fg = "#5fd7ff";
     }
     {
-      name = "*.vb";
+      url = "*.vb";
       fg = "#5fd7ff";
     }
     {
-      name = "*.vba";
+      url = "*.vba";
       fg = "#5fd7ff";
     }
     {
-      name = "*.vbs";
+      url = "*.vbs";
       fg = "#5fd7ff";
     }
     {
-      name = "*Containerfile";
+      url = "*Containerfile";
       fg = "#afff5f";
     }
     {
-      name = "*.containerignore";
+      url = "*.containerignore";
       fg = "#585858";
     }
     {
-      name = "*Dockerfile";
+      url = "*Dockerfile";
       fg = "#afff5f";
     }
     {
-      name = "*.dockerignore";
+      url = "*.dockerignore";
       fg = "#585858";
     }
     {
-      name = "*Makefile";
+      url = "*Makefile";
       fg = "#afff5f";
     }
     {
-      name = "*MANIFEST";
+      url = "*MANIFEST";
       fg = "#767676";
     }
     {
-      name = "*pm_to_blib";
+      url = "*pm_to_blib";
       fg = "#585858";
     }
     {
-      name = "*.nix";
+      url = "*.nix";
       fg = "#afff5f";
     }
     {
-      name = "*.dhall";
+      url = "*.dhall";
       fg = "#d7af00";
     }
     {
-      name = "*.rake";
+      url = "*.rake";
       fg = "#afff5f";
     }
     {
-      name = "*.am";
+      url = "*.am";
       fg = "#6c6c6c";
     }
     {
-      name = "*.in";
+      url = "*.in";
       fg = "#6c6c6c";
     }
     {
-      name = "*.hin";
+      url = "*.hin";
       fg = "#6c6c6c";
     }
     {
-      name = "*.scan";
+      url = "*.scan";
       fg = "#6c6c6c";
     }
     {
-      name = "*.m4";
+      url = "*.m4";
       fg = "#6c6c6c";
     }
     {
-      name = "*.old";
+      url = "*.old";
       fg = "#6c6c6c";
     }
     {
-      name = "*.out";
+      url = "*.out";
       fg = "#6c6c6c";
     }
     {
-      name = "*.SKIP";
+      url = "*.SKIP";
       fg = "#808080";
     }
     {
-      name = "*.diff";
+      url = "*.diff";
       fg = "#080808";
       bg = "#ff005f";
     }
     {
-      name = "*.patch";
+      url = "*.patch";
       fg = "#080808";
       bg = "#ff005f";
       bold = true;
     }
     {
-      name = "*.bmp";
+      mime = "image/*";
       fg = "#875faf";
     }
     {
-      name = "*.dicom";
-      fg = "#875faf";
-    }
-    {
-      name = "*.tiff";
-      fg = "#875faf";
-    }
-    {
-      name = "*.tif";
-      fg = "#875faf";
-    }
-    {
-      name = "*.TIFF";
-      fg = "#875faf";
-    }
-    {
-      name = "*.cdr";
-      fg = "#875faf";
-    }
-    {
-      name = "*.flif";
-      fg = "#875faf";
-    }
-    {
-      name = "*.gif";
-      fg = "#875faf";
-    }
-    {
-      name = "*.icns";
-      fg = "#875faf";
-    }
-    {
-      name = "*.ico";
-      fg = "#875faf";
-    }
-    {
-      name = "*.jpeg";
-      fg = "#875faf";
-    }
-    {
-      name = "*.JPG";
-      fg = "#875faf";
-    }
-    {
-      name = "*.jpg";
-      fg = "#875faf";
-    }
-    {
-      name = "*.jxl";
-      fg = "#875faf";
-    }
-    {
-      name = "*.nth";
-      fg = "#875faf";
-    }
-    {
-      name = "*.png";
-      fg = "#875faf";
-    }
-    {
-      name = "*.psd";
-      fg = "#875faf";
-    }
-    {
-      name = "*.pxd";
-      fg = "#875faf";
-    }
-    {
-      name = "*.pxm";
-      fg = "#875faf";
-    }
-    {
-      name = "*.xpm";
-      fg = "#875faf";
-    }
-    {
-      name = "*.webp";
-      fg = "#875faf";
-    }
-    {
-      name = "*.ai";
-      fg = "#875fff";
-    }
-    {
-      name = "*.eps";
-      fg = "#875fff";
-    }
-    {
-      name = "*.epsf";
-      fg = "#875fff";
-    }
-    {
-      name = "*.drw";
-      fg = "#875fff";
-    }
-    {
-      name = "*.ps";
-      fg = "#875fff";
-    }
-    {
-      name = "*.svg";
-      fg = "#875fff";
-    }
-    {
-      name = "*.avi";
+      mime = "video/*";
       fg = "#87d787";
     }
     {
-      name = "*.divx";
-      fg = "#87d787";
-    }
-    {
-      name = "*.IFO";
-      fg = "#87d787";
-    }
-    {
-      name = "*.m2v";
-      fg = "#87d787";
-    }
-    {
-      name = "*.m4v";
-      fg = "#87d787";
-    }
-    {
-      name = "*.mkv";
-      fg = "#87d787";
-    }
-    {
-      name = "*.MOV";
-      fg = "#87d787";
-    }
-    {
-      name = "*.mov";
-      fg = "#87d787";
-    }
-    {
-      name = "*.mp4";
-      fg = "#87d787";
-    }
-    {
-      name = "*.mpeg";
-      fg = "#87d787";
-    }
-    {
-      name = "*.mpg";
-      fg = "#87d787";
-    }
-    {
-      name = "*.ogm";
-      fg = "#87d787";
-    }
-    {
-      name = "*.rmvb";
-      fg = "#87d787";
-    }
-    {
-      name = "*.sample";
-      fg = "#87d787";
-    }
-    {
-      name = "*.wmv";
-      fg = "#87d787";
-    }
-    {
-      name = "*.3g2";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.3gp";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.gp3";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.webm";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.gp4";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.asf";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.flv";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.ogv";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.f4v";
-      fg = "#87d7af";
-    }
-    {
-      name = "*.VOB";
-      fg = "#87d7af";
-      bold = true;
-    }
-    {
-      name = "*.vob";
-      fg = "#87d7af";
-      bold = true;
-    }
-    {
-      name = "*.ass";
+      url = "*.ass";
       fg = "#87d7ff";
     }
     {
-      name = "*.srt";
+      url = "*.srt";
       fg = "#87d7ff";
     }
     {
-      name = "*.ssa";
+      url = "*.ssa";
       fg = "#87d7ff";
     }
     {
-      name = "*.sub";
+      url = "*.sub";
       fg = "#87d7ff";
     }
     {
-      name = "*.sup";
+      url = "*.sup";
       fg = "#87d7ff";
     }
     {
-      name = "*.vtt";
+      url = "*.vtt";
       fg = "#87d7ff";
     }
     {
-      name = "*.3ga";
+      mime = "audio/*";
       fg = "#af875f";
       bold = true;
     }
     {
-      name = "*.S3M";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.aac";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.amr";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.au";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.caf";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.dat";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.dts";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.fcm";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.m4a";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.mod";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.mp3";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.mp4a";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.oga";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.ogg";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.opus";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.s3m";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.sid";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.wma";
-      fg = "#af875f";
-      bold = true;
-    }
-    {
-      name = "*.ape";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.aiff";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.cda";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.flac";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.alac";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.mid";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.midi";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.pcm";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.wav";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.wv";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.wvc";
-      fg = "#af8700";
-      bold = true;
-    }
-    {
-      name = "*.afm";
+      mime = "font/*";
       fg = "#5f8787";
     }
     {
-      name = "*.fon";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.fnt";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.pfb";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.pfm";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.ttf";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.otf";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.woff";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.woff2";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.PFA";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.pfa";
-      fg = "#5f8787";
-    }
-    {
-      name = "*.7z";
+      url = "*.7z";
       fg = "#00d700";
     }
     {
-      name = "*.a";
+      url = "*.a";
       fg = "#00d700";
     }
     {
-      name = "*.arj";
+      url = "*.arj";
       fg = "#00d700";
     }
     {
-      name = "*.br";
+      url = "*.br";
       fg = "#00d700";
     }
     {
-      name = "*.bz2";
+      url = "*.bz2";
       fg = "#00d700";
     }
     {
-      name = "*.cpio";
+      url = "*.cpio";
       fg = "#00d700";
     }
     {
-      name = "*.gz";
+      url = "*.gz";
       fg = "#00d700";
     }
     {
-      name = "*.lrz";
+      url = "*.lrz";
       fg = "#00d700";
     }
     {
-      name = "*.lz";
+      url = "*.lz";
       fg = "#00d700";
     }
     {
-      name = "*.lzma";
+      url = "*.lzma";
       fg = "#00d700";
     }
     {
-      name = "*.lzo";
+      url = "*.lzo";
       fg = "#00d700";
     }
     {
-      name = "*.rar";
+      url = "*.rar";
       fg = "#00d700";
     }
     {
-      name = "*.s7z";
+      url = "*.s7z";
       fg = "#00d700";
     }
     {
-      name = "*.sz";
+      url = "*.sz";
       fg = "#00d700";
     }
     {
-      name = "*.tar";
+      url = "*.tar";
       fg = "#00d700";
     }
     {
-      name = "*.tbz";
+      url = "*.tbz";
       fg = "#00d700";
     }
     {
-      name = "*.tgz";
+      url = "*.tgz";
       fg = "#00d700";
     }
     {
-      name = "*.warc";
+      url = "*.warc";
       fg = "#00d700";
     }
     {
-      name = "*.WARC";
+      url = "*.WARC";
       fg = "#00d700";
     }
     {
-      name = "*.xz";
+      url = "*.xz";
       fg = "#00d700";
     }
     {
-      name = "*.z";
+      url = "*.z";
       fg = "#00d700";
     }
     {
-      name = "*.zip";
+      url = "*.zip";
       fg = "#00d700";
     }
     {
-      name = "*.zipx";
+      url = "*.zipx";
       fg = "#00d700";
     }
     {
-      name = "*.zoo";
+      url = "*.zoo";
       fg = "#00d700";
     }
     {
-      name = "*.zpaq";
+      url = "*.zpaq";
       fg = "#00d700";
     }
     {
-      name = "*.zst";
+      url = "*.zst";
       fg = "#00d700";
     }
     {
-      name = "*.zstd";
+      url = "*.zstd";
       fg = "#00d700";
     }
     {
-      name = "*.zz";
+      url = "*.zz";
       fg = "#00d700";
     }
     {
-      name = "*.apk";
+      url = "*.apk";
       fg = "#ffaf5f";
     }
     {
-      name = "*.ipa";
+      url = "*.ipa";
       fg = "#ffaf5f";
     }
     {
-      name = "*.deb";
+      url = "*.deb";
       fg = "#ffaf5f";
     }
     {
-      name = "*.rpm";
+      url = "*.rpm";
       fg = "#ffaf5f";
     }
     {
-      name = "*.jad";
+      url = "*.jad";
       fg = "#ffaf5f";
     }
     {
-      name = "*.jar";
+      url = "*.jar";
       fg = "#ffaf5f";
     }
     {
-      name = "*.ear";
+      url = "*.ear";
       fg = "#ffaf5f";
     }
     {
-      name = "*.war";
+      url = "*.war";
       fg = "#ffaf5f";
     }
     {
-      name = "*.cab";
+      url = "*.cab";
       fg = "#ffaf5f";
     }
     {
-      name = "*.pak";
+      url = "*.pak";
       fg = "#ffaf5f";
     }
     {
-      name = "*.pk3";
+      url = "*.pk3";
       fg = "#ffaf5f";
     }
     {
-      name = "*.vdf";
+      url = "*.vdf";
       fg = "#ffaf5f";
     }
     {
-      name = "*.vpk";
+      url = "*.vpk";
       fg = "#ffaf5f";
     }
     {
-      name = "*.bsp";
+      url = "*.bsp";
       fg = "#ffaf5f";
     }
     {
-      name = "*.dmg";
+      url = "*.dmg";
       fg = "#ffaf5f";
     }
     {
-      name = "*.crx";
+      url = "*.crx";
       fg = "#ffaf5f";
     }
     {
-      name = "*.xpi";
+      url = "*.xpi";
       fg = "#ffaf5f";
     }
     {
-      name = "*.iso";
+      url = "*.iso";
       fg = "#af0000";
     }
     {
-      name = "*.img";
+      url = "*.img";
       fg = "#af0000";
     }
     {
-      name = "*.bin";
+      url = "*.bin";
       fg = "#af0000";
     }
     {
-      name = "*.nrg";
+      url = "*.nrg";
       fg = "#af0000";
     }
     {
-      name = "*.qcow";
+      url = "*.qcow";
       fg = "#af0000";
     }
     {
-      name = "*.fvd";
+      url = "*.fvd";
       fg = "#af0000";
     }
     {
-      name = "*.sparseimage";
+      url = "*.sparseimage";
       fg = "#af0000";
     }
     {
-      name = "*.toast";
+      url = "*.toast";
       fg = "#af0000";
     }
     {
-      name = "*.vcd";
+      url = "*.vcd";
       fg = "#af0000";
     }
     {
-      name = "*.vdi";
+      url = "*.vdi";
       fg = "#af0000";
     }
     {
-      name = "*.vhd";
+      url = "*.vhd";
       fg = "#af0000";
     }
     {
-      name = "*.vhdx";
+      url = "*.vhdx";
       fg = "#af0000";
     }
     {
-      name = "*.vfd";
+      url = "*.vfd";
       fg = "#af0000";
     }
     {
-      name = "*.vmdk";
+      url = "*.vmdk";
       fg = "#af0000";
     }
     {
-      name = "*.swp";
+      url = "*.swp";
       fg = "#808080";
     }
     {
-      name = "*.swo";
+      url = "*.swo";
       fg = "#808080";
     }
     {
-      name = "*.tmp";
+      url = "*.tmp";
       fg = "#808080";
     }
     {
-      name = "*.sassc";
+      url = "*.sassc";
       fg = "#808080";
     }
     {
-      name = "*.pacnew";
+      url = "*.pacnew";
       fg = "#0087ff";
     }
     {
-      name = "*.un~";
+      url = "*.un~";
       fg = "#626262";
     }
     {
-      name = "*.orig";
+      url = "*.orig";
       fg = "#626262";
     }
     {
-      name = "*.BUP";
+      url = "*.BUP";
       fg = "#626262";
     }
     {
-      name = "*.bak";
+      url = "*.bak";
       fg = "#626262";
     }
     {
-      name = "*.o";
+      url = "*.o";
       fg = "#626262";
     }
     {
-      name = "*core";
+      url = "*core";
       fg = "#626262";
     }
     {
-      name = "*.mdump";
+      url = "*.mdump";
       fg = "#626262";
     }
     {
-      name = "*.rlib";
+      url = "*.rlib";
       fg = "#626262";
     }
     {
-      name = "*.dll";
+      url = "*.dll";
       fg = "#626262";
     }
     {
-      name = "*.aria2";
+      url = "*.aria2";
       fg = "#626262";
     }
     {
-      name = "*.dump";
+      url = "*.dump";
       fg = "#626262";
     }
     {
-      name = "*.stackdump";
+      url = "*.stackdump";
       fg = "#626262";
     }
     {
-      name = "*.zcompdump";
+      url = "*.zcompdump";
       fg = "#626262";
     }
     {
-      name = "*.zwc";
+      url = "*.zwc";
       fg = "#626262";
     }
     {
-      name = "*.part";
+      url = "*.part";
       fg = "#4e4e4e";
     }
     {
-      name = "*.r[0-9]{0,2}";
+      url = "*.r[0-9]{0,2}";
       fg = "#4e4e4e";
     }
     {
-      name = "*.zx[0-9]{0,2}";
+      url = "*.zx[0-9]{0,2}";
       fg = "#4e4e4e";
     }
     {
-      name = "*.z[0-9]{0,2}";
+      url = "*.z[0-9]{0,2}";
       fg = "#4e4e4e";
     }
     {
-      name = "*.pid";
+      url = "*.pid";
       fg = "#a8a8a8";
     }
     {
-      name = "*.state";
+      url = "*.state";
       fg = "#a8a8a8";
     }
     {
-      name = "*lockfile";
+      url = "*lockfile";
       fg = "#a8a8a8";
     }
     {
-      name = "*lock";
+      url = "*lock";
       fg = "#a8a8a8";
     }
     {
-      name = "*.err";
+      url = "*.err";
       fg = "#d70000";
       bold = true;
     }
     {
-      name = "*.error";
+      url = "*.error";
       fg = "#d70000";
       bold = true;
     }
     {
-      name = "*.stderr";
+      url = "*.stderr";
       fg = "#d70000";
       bold = true;
     }
     {
-      name = "*.pcap";
+      url = "*.pcap";
       fg = "#00875f";
     }
     {
-      name = "*.cap";
+      url = "*.cap";
       fg = "#00875f";
     }
     {
-      name = "*.dmp";
+      url = "*.dmp";
       fg = "#00875f";
     }
     {
-      name = "*.allow";
+      url = "*.allow";
       fg = "#87d700";
     }
     {
-      name = "*.deny";
+      url = "*.deny";
       fg = "#ff0000";
     }
     {
-      name = "*.service";
+      url = "*.service";
       fg = "#00d7ff";
     }
     {
-      name = "*@.service";
+      url = "*@.service";
       fg = "#00d7ff";
     }
     {
-      name = "*.socket";
+      url = "*.socket";
       fg = "#00d7ff";
     }
     {
-      name = "*.swap";
+      url = "*.swap";
       fg = "#00d7ff";
     }
     {
-      name = "*.device";
+      url = "*.device";
       fg = "#00d7ff";
     }
     {
-      name = "*.mount";
+      url = "*.mount";
       fg = "#00d7ff";
     }
     {
-      name = "*.automount";
+      url = "*.automount";
       fg = "#00d7ff";
     }
     {
-      name = "*.target";
+      url = "*.target";
       fg = "#00d7ff";
     }
     {
-      name = "*.path";
+      url = "*.path";
       fg = "#00d7ff";
     }
     {
-      name = "*.timer";
+      url = "*.timer";
       fg = "#00d7ff";
     }
     {
-      name = "*.snapshot";
+      url = "*.snapshot";
       fg = "#00d7ff";
     }
     {
-      name = "*.lnk";
+      url = "*.lnk";
       fg = "#00afff";
     }
     {
-      name = "*.application";
+      url = "*.application";
       fg = "#87d7d7";
     }
     {
-      name = "*.cue";
+      url = "*.cue";
       fg = "#87d7d7";
     }
     {
-      name = "*.description";
+      url = "*.description";
       fg = "#87d7d7";
     }
     {
-      name = "*.directory";
+      url = "*.directory";
       fg = "#87d7d7";
     }
     {
-      name = "*.m3u";
+      url = "*.m3u";
       fg = "#87d7d7";
     }
     {
-      name = "*.m3u8";
+      url = "*.m3u8";
       fg = "#87d7d7";
     }
     {
-      name = "*.md5";
+      url = "*.md5";
       fg = "#87d7d7";
     }
     {
-      name = "*.properties";
+      url = "*.properties";
       fg = "#87d7d7";
     }
     {
-      name = "*.sfv";
+      url = "*.sfv";
       fg = "#87d7d7";
     }
     {
-      name = "*.theme";
+      url = "*.theme";
       fg = "#87d7d7";
     }
     {
-      name = "*.torrent";
+      url = "*.torrent";
       fg = "#87d7d7";
     }
     {
-      name = "*.urlview";
+      url = "*.urlview";
       fg = "#87d7d7";
     }
     {
-      name = "*.webloc";
+      url = "*.webloc";
       fg = "#87d7d7";
     }
     {
-      name = "*.asc";
+      url = "*.asc";
       fg = "#d7ff87";
     }
     {
-      name = "*.bfe";
+      url = "*.bfe";
       fg = "#d7ff87";
     }
     {
-      name = "*.enc";
+      url = "*.enc";
       fg = "#d7ff87";
     }
     {
-      name = "*.gpg";
+      url = "*.gpg";
       fg = "#d7ff87";
     }
     {
-      name = "*.signature";
+      url = "*.signature";
       fg = "#d7ff87";
     }
     {
-      name = "*.sig";
+      url = "*.sig";
       fg = "#d7ff87";
     }
     {
-      name = "*.p12";
+      url = "*.p12";
       fg = "#d7ff87";
     }
     {
-      name = "*.pem";
+      url = "*.pem";
       fg = "#d7ff87";
     }
     {
-      name = "*.pgp";
+      url = "*.pgp";
       fg = "#d7ff87";
     }
     {
-      name = "*.p7s";
+      url = "*.p7s";
       fg = "#d7ff87";
     }
     {
-      name = "*id_dsa";
+      url = "*id_dsa";
       fg = "#d7ff87";
     }
     {
-      name = "*id_rsa";
+      url = "*id_rsa";
       fg = "#d7ff87";
     }
     {
-      name = "*id_ecdsa";
+      url = "*id_ecdsa";
       fg = "#d7ff87";
     }
     {
-      name = "*id_ed25519";
+      url = "*id_ed25519";
       fg = "#d7ff87";
     }
     {
-      name = "*.32x";
+      url = "*.32x";
       fg = "#ff87ff";
     }
     {
-      name = "*.cdi";
+      url = "*.cdi";
       fg = "#ff87ff";
     }
     {
-      name = "*.fm2";
+      url = "*.fm2";
       fg = "#ff87ff";
     }
     {
-      name = "*.rom";
+      url = "*.rom";
       fg = "#ff87ff";
     }
     {
-      name = "*.sav";
+      url = "*.sav";
       fg = "#ff87ff";
     }
     {
-      name = "*.st";
+      url = "*.st";
       fg = "#ff87ff";
     }
     {
-      name = "*.a00";
+      url = "*.a00";
       fg = "#ff87ff";
     }
     {
-      name = "*.a52";
+      url = "*.a52";
       fg = "#ff87ff";
     }
     {
-      name = "*.A64";
+      url = "*.A64";
       fg = "#ff87ff";
     }
     {
-      name = "*.a64";
+      url = "*.a64";
       fg = "#ff87ff";
     }
     {
-      name = "*.a78";
+      url = "*.a78";
       fg = "#ff87ff";
     }
     {
-      name = "*.adf";
+      url = "*.adf";
       fg = "#ff87ff";
     }
     {
-      name = "*.atr";
+      url = "*.atr";
       fg = "#ff87ff";
     }
     {
-      name = "*.gb";
+      url = "*.gb";
       fg = "#ff87ff";
     }
     {
-      name = "*.gba";
+      url = "*.gba";
       fg = "#ff87ff";
     }
     {
-      name = "*.gbc";
+      url = "*.gbc";
       fg = "#ff87ff";
     }
     {
-      name = "*.gel";
+      url = "*.gel";
       fg = "#ff87ff";
     }
     {
-      name = "*.gg";
+      url = "*.gg";
       fg = "#ff87ff";
     }
     {
-      name = "*.ggl";
+      url = "*.ggl";
       fg = "#ff87ff";
     }
     {
-      name = "*.ipk";
+      url = "*.ipk";
       fg = "#ff87ff";
     }
     {
-      name = "*.j64";
+      url = "*.j64";
       fg = "#ff87ff";
     }
     {
-      name = "*.nds";
+      url = "*.nds";
       fg = "#ff87ff";
     }
     {
-      name = "*.nes";
+      url = "*.nes";
       fg = "#ff87ff";
     }
     {
-      name = "*.sms";
+      url = "*.sms";
       fg = "#ff87ff";
     }
     {
-      name = "*.8xp";
+      url = "*.8xp";
       fg = "#87ffaf";
     }
     {
-      name = "*.8eu";
+      url = "*.8eu";
       fg = "#87ffaf";
     }
     {
-      name = "*.82p";
+      url = "*.82p";
       fg = "#87ffaf";
     }
     {
-      name = "*.83p";
+      url = "*.83p";
       fg = "#87ffaf";
     }
     {
-      name = "*.8xe";
+      url = "*.8xe";
       fg = "#87ffaf";
     }
     {
-      name = "*.stl";
+      url = "*.stl";
       fg = "#ffaf87";
     }
     {
-      name = "*.dwg";
+      url = "*.dwg";
       fg = "#ffaf87";
     }
     {
-      name = "*.ply";
+      url = "*.ply";
       fg = "#ffaf87";
     }
     {
-      name = "*.wrl";
+      url = "*.wrl";
       fg = "#ffaf87";
     }
     {
-      name = "*.vert";
+      url = "*.vert";
       fg = "#af8700";
     }
     {
-      name = "*.comp";
+      url = "*.comp";
       fg = "#af8700";
     }
     {
-      name = "*.frag";
+      url = "*.frag";
       fg = "#af8700";
     }
     {
-      name = "*.spv";
+      url = "*.spv";
       fg = "#ffafaf";
     }
     {
-      name = "*.wgsl";
+      url = "*.wgsl";
       fg = "#875faf";
     }
     {
-      name = "*.xib";
+      url = "*.xib";
       fg = "#ff8700";
     }
     {
-      name = "*.iml";
+      url = "*.iml";
       fg = "#d75f00";
     }
     {
-      name = "*.DS_Store";
+      url = "*.DS_Store";
       fg = "#4e4e4e";
     }
     {
-      name = "*.localized";
+      url = "*.localized";
       fg = "#4e4e4e";
     }
     {
-      name = "*.CFUserTextEncoding";
+      url = "*.CFUserTextEncoding";
       fg = "#4e4e4e";
     }
     {
-      name = "*CodeResources";
+      url = "*CodeResources";
       fg = "#4e4e4e";
     }
     {
-      name = "*PkgInfo";
+      url = "*PkgInfo";
       fg = "#4e4e4e";
     }
     {
-      name = "*.nib";
+      url = "*.nib";
       fg = "#5f00ff";
     }
     {
-      name = "*.car";
+      url = "*.car";
       fg = "#5f00ff";
     }
     {
-      name = "*.dylib";
+      url = "*.dylib";
       fg = "#626262";
     }
     {
-      name = "*.entitlements";
+      url = "*.entitlements";
       bold = true;
     }
     {
-      name = "*.pbxproj";
+      url = "*.pbxproj";
       bold = true;
     }
     {
-      name = "*.strings";
+      url = "*.strings";
       bold = true;
     }
     {
-      name = "*.storyboard";
+      url = "*.storyboard";
       fg = "#ff0000";
     }
     {
-      name = "*.xcconfig";
+      url = "*.xcconfig";
       bold = true;
     }
     {
-      name = "*.xcsettings";
+      url = "*.xcsettings";
       bold = true;
     }
     {
-      name = "*.xcuserstate";
+      url = "*.xcuserstate";
       bold = true;
     }
     {
-      name = "*.xcworkspacedata";
+      url = "*.xcworkspacedata";
       bold = true;
     }
     {
-      name = "*.pot";
+      url = "*.pot";
       fg = "#ffffff";
     }
     {
-      name = "*.pcb";
+      url = "*.pcb";
       fg = "#ffffff";
     }
     {
-      name = "*.mm";
+      url = "*.mm";
       fg = "#ffffff";
     }
     {
-      name = "*.gbr";
+      url = "*.gbr";
       fg = "#ffffff";
     }
     {
-      name = "*.scm";
+      url = "*.scm";
       fg = "#ffffff";
     }
     {
-      name = "*.xcf";
+      url = "*.xcf";
       fg = "#ffffff";
     }
     {
-      name = "*.spl";
+      url = "*.spl";
       fg = "#ffffff";
     }
     {
-      name = "*.Rproj";
+      url = "*.Rproj";
       fg = "#ffffff";
     }
     {
-      name = "*.sis";
+      url = "*.sis";
       fg = "#ffffff";
     }
     {
-      name = "*.1p";
+      url = "*.1p";
       fg = "#ffffff";
     }
     {
-      name = "*.3p";
+      url = "*.3p";
       fg = "#ffffff";
     }
     {
-      name = "*.cnc";
+      url = "*.cnc";
       fg = "#ffffff";
     }
     {
-      name = "*.def";
+      url = "*.def";
       fg = "#ffffff";
     }
     {
-      name = "*.ex";
+      url = "*.ex";
       fg = "#ffffff";
     }
     {
-      name = "*.example";
+      url = "*.example";
       fg = "#ffffff";
     }
     {
-      name = "*.feature";
+      url = "*.feature";
       fg = "#ffffff";
     }
     {
-      name = "*.ger";
+      url = "*.ger";
       fg = "#ffffff";
     }
     {
-      name = "*.ics";
+      url = "*.ics";
       fg = "#ffffff";
     }
     {
-      name = "*.map";
+      url = "*.map";
       fg = "#ffffff";
     }
     {
-      name = "*.mf";
+      url = "*.mf";
       fg = "#ffffff";
     }
     {
-      name = "*.mfasl";
+      url = "*.mfasl";
       fg = "#ffffff";
     }
     {
-      name = "*.mi";
+      url = "*.mi";
       fg = "#ffffff";
     }
     {
-      name = "*.mtx";
+      url = "*.mtx";
       fg = "#ffffff";
     }
     {
-      name = "*.pc";
+      url = "*.pc";
       fg = "#ffffff";
     }
     {
-      name = "*.pi";
+      url = "*.pi";
       fg = "#ffffff";
     }
     {
-      name = "*.plt";
+      url = "*.plt";
       fg = "#ffffff";
     }
     {
-      name = "*.rdf";
+      url = "*.rdf";
       fg = "#ffffff";
     }
     {
-      name = "*.ru";
+      url = "*.ru";
       fg = "#ffffff";
     }
     {
-      name = "*.sch";
+      url = "*.sch";
       fg = "#ffffff";
     }
     {
-      name = "*.sty";
+      url = "*.sty";
       fg = "#ffffff";
     }
     {
-      name = "*.sug";
+      url = "*.sug";
       fg = "#ffffff";
     }
     {
-      name = "*.tdy";
+      url = "*.tdy";
       fg = "#ffffff";
     }
     {
-      name = "*.tfm";
+      url = "*.tfm";
       fg = "#ffffff";
     }
     {
-      name = "*.tfnt";
+      url = "*.tfnt";
       fg = "#ffffff";
     }
     {
-      name = "*.tg";
+      url = "*.tg";
       fg = "#ffffff";
     }
     {
-      name = "*.vcard";
+      url = "*.vcard";
       fg = "#ffffff";
     }
     {
-      name = "*.vcf";
+      url = "*.vcf";
       fg = "#ffffff";
     }
     {
-      name = "*.xln";
+      url = "*.xln";
       fg = "#ffffff";
     }
     {
-      name = "*";
+      url = "*";
       is = "block";
       fg = "#5f87d7";
     }
     {
-      name = "*";
+      url = "*";
       is = "char";
       fg = "#87d75f";
       bold = true;
     }
     {
-      name = "*/";
+      url = "*/";
       fg = "#008787";
     }
     {
-      name = "*";
+      url = "*";
       is = "exec";
       fg = "#ff8700";
       bold = true;
     }
     {
-      name = "*";
+      url = "*";
       is = "fifo";
       fg = "#af0087";
     }
     {
-      name = "*";
+      url = "*";
       is = "orphan";
       fg = "#080808";
       bg = "#ff0000";
       bold = true;
     }
     {
-      name = "*";
+      url = "*";
       is = "sock";
       fg = "#ff005f";
     }
     {
-      name = "*";
+      url = "*";
       is = "sticky";
       fg = "#5fffd7";
       bg = "#1c1c1c";

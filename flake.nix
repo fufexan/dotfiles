@@ -173,10 +173,7 @@
 
     uwu-colors = {
       url = "github:q60/uwu_colors";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     vicinae.url = "github:vicinaehq/vicinae";
