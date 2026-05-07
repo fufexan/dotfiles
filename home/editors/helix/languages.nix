@@ -77,6 +77,13 @@
           ];
         }
         {
+          name = "lua";
+          formatter = {
+            command = lib.getExe pkgs.stylua;
+            args = [ "-" ];
+          };
+        }
+        {
           name = "markdown";
           language-servers = [
             "dprint"
@@ -183,6 +190,10 @@
       dprint = {
         command = lib.getExe pkgs.dprint;
         args = [ "lsp" ];
+      };
+
+      lua-language-server = {
+        command = lib.getExe pkgs.lua-language-server;
       };
 
       nil = {
