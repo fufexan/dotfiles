@@ -92,7 +92,7 @@ Singleton {
         const mediaName = String(prop(node, "media.name")).toLowerCase();
         const appName = String(prop(node, "application.name")).toLowerCase();
         const text = name + " " + mediaName + " " + appName;
-        return /cava|monitor|system|effect_input.rnnoise|pulseaudio volume control/.test(text);
+        return /cava|monitor|system|filter-chain|pulseaudio volume control/.test(text);
     }
 
     function isScreencast(node) {
