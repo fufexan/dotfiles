@@ -43,13 +43,17 @@ hl.bind(mod .. " + right", hl.dsp.focus({ direction = "r" }))
 hl.bind(mod .. " + up", hl.dsp.focus({ direction = "u" }))
 hl.bind(mod .. " + down", hl.dsp.focus({ direction = "d" }))
 
--- screenshot
-hl.bind("Print", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify copysave area"))
-hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify copysave area"))
-hl.bind("CTRL + Print", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify --cursor copysave output"))
-hl.bind(mod .. " + SHIFT + CTRL + R", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify --cursor copysave output"))
-hl.bind("ALT + Print", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify --cursor copysave screen"))
-hl.bind(mod .. " + SHIFT + ALT + R", hl.dsp.exec_cmd(runOnce("grimblast") .. " --notify --cursor copysave screen"))
+-- screenshot & screen record
+local area_screenshot = runOnce("grimblast") .. " --notify copysave area"
+local output_screenshot = runOnce("grimblast") .. " --notify copysave output"
+local record = runOnce("gpu-screen-recorder-gtk")
+
+hl.bind("Print", hl.dsp.exec_cmd(area_screenshot))
+hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(area_screenshot))
+hl.bind("CTRL + Print", hl.dsp.exec_cmd(output_screenshot))
+hl.bind(mod .. " + SHIFT + CTRL + R", hl.dsp.exec_cmd(output_screenshot))
+hl.bind("ALT + Print", hl.dsp.exec_cmd(record))
+hl.bind(mod .. " + SHIFT + ALT + R", hl.dsp.exec_cmd(record))
 
 -- special workspace
 hl.bind(mod .. " + SHIFT + grave", hl.dsp.window.move({ workspace = "special" }))
