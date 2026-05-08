@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -10,10 +11,7 @@ in
   imports = [
     inputs.hyprland.nixosModules.default
 
-    ./binds.nix
-    ./rules.nix
-    ./settings.nix
-    ./smartgaps.nix
+    ./variables.nix
   ];
 
   environment.systemPackages = [
@@ -36,4 +34,25 @@ in
 
   # tell Electron/Chromium to run on Wayland
   environment.variables.NIXOS_OZONE_WL = "1";
+
+  # write the Lua config
+  environment.etc =
+    let
+      lua = [
+        ./animations.lua
+        ./binds.lua
+        ./hyprland.lua
+        ./rules.lua
+        ./settings.lua
+        ./smartgaps.lua
+      ];
+    in
+    builtins.listToAttrs (
+      map (e: {
+        name = "xdg/hypr/${lib.baseNameOf e}";
+        value = {
+          source = e;
+        };
+      }) lua
+    );
 }
