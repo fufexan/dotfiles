@@ -23,7 +23,7 @@ in
     settings = {
       general = {
         before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        after_sleep_cmd = ''hyprctl dispatch 'hl.dsp.dpms({action = "enable"})'';
         lock_cmd = "pgrep hyprlock || ${lib.getExe config.programs.hyprlock.package}";
       };
 
@@ -38,8 +38,8 @@ in
         }
         {
           inherit timeout;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
+          on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({action = "disable"})'';
+          on-resume = ''hyprctl dispatch 'hl.dsp.dpms({action = "enable"})'';
         }
         {
           timeout = timeout + 10;
