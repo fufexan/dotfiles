@@ -10,6 +10,7 @@
     settings =
       let
         alpha = 0.9;
+        blur = "yes";
       in
       {
         main = {
@@ -45,7 +46,7 @@
         };
 
         colors-dark = {
-          inherit alpha;
+          inherit alpha blur;
           foreground = "abb2bf";
           background = "1e2127";
           regular0 = "1e2127"; # black
@@ -67,7 +68,7 @@
         };
 
         colors-light = {
-          inherit alpha;
+          inherit alpha blur;
           foreground = "383a42"; # Text
           background = "f9f9f9"; # Base
           regular0 = "000000"; # Surface 1
