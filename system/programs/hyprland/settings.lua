@@ -24,16 +24,16 @@ hl.config({
 		gaps_out = gaps_out,
 		border_size = 1,
 		col = {
-			active_border = "rgba(88888888)",
-			inactive_border = "rgba(00000088)",
+			active_border = active_border,
+			inactive_border = inactive_border,
 		},
 		allow_tearing = true,
 		resize_on_border = true,
 	},
 
 	decoration = {
-		rounding = 10,
-		rounding_power = 2.5,
+		rounding = rounding,
+		rounding_power = rounding_power,
 		blur = {
 			enabled = true,
 			brightness = 1.0,
@@ -62,13 +62,24 @@ hl.config({
 
 	group = {
 		groupbar = {
-			font_size = 10,
+			font_size = 12,
+			font_weight_active = "bold",
 			gradients = false,
+			height = 20,
+			indicator_height = 20,
+			indicator_gap = -20,
+			rounding = rounding,
+			rounding_power = rounding_power,
 			text_color = text_color,
+			text_color_inactive = text_color_inactive,
+			col = {
+				active = group_active_color,
+				inactive = group_inactive_color,
+			},
 		},
 		col = {
-			border_active = border_active_color,
-			border_inactive = border_inactive_color,
+			border_active = active_border,
+			border_inactive = inactive_border,
 		},
 	},
 

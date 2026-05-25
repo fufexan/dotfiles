@@ -10,14 +10,20 @@
     cursorName = "Bibata-Modern-Classic-Hyprcursor"
     cursorSize = "16"
 
+    rounding = 10
+    rounding_power = 2.5
+
     gaps_in = 4
     gaps_out = 8
 
     mod = "SUPER"
 
-    text_color = "rgb(b6c4ff)"
-    border_active_color = "rgba(35447988)"
-    border_inactive_color = "rgba(dce1ff88)"
+    active_border = "rgba(88888888)"
+    inactive_border = "rgba(00000088)"
+    text_color = "rgb(000000)"
+    text_color_inactive = "rgba(ffffff66)"
+    group_active_color = "rgba(ffffff66)"
+    group_inactive_color = "rgba(00000066)"
 
     screencopy_perms = {"${config.programs.hyprland.portalPackage}/libexec/.xdg-desktop-portal-hyprland-wrapped", "${lib.getExe pkgs.grim}", "${lib.getExe pkgs.wl-screenrec}"}
   '';
