@@ -18,7 +18,7 @@ WrapperMouseArea {
         }
 
         MaterialIcon {
-            text: "notifications" + (NotificationState.allNotifs.length > 0 ? "_unread" : "")
+            text: Config.doNotDisturb ? "do_not_disturb_on_total_silence" : "notifications" + (NotificationState.allNotifs.length > 0 ? "_unread" : "")
             font.pointSize: Config.iconSize
         }
     }
