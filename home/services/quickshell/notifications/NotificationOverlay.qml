@@ -46,18 +46,19 @@ PanelWindow {
         }
 
         Repeater {
-            model: NotificationState.popupNotifs
+            model: NotificationState.popupNotifs.length
 
             NotificationBox {
                 id: notifBox
-                required property Notification modelData
-                n: modelData
+                required property int index
+                n: NotificationState.popupNotifs[index]
 
                 Timer {
-                    running: root.visible
-                    interval: notifBox.n.expireTimeout > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout
+                    running: root.visible && !!notifBox.n
+                    interval: (notifBox.n?.expireTimeout ?? 0) > 0 ? notifBox.n.expireTimeout : Config.notificationExpireTimeout
                     onTriggered: {
-                        NotificationState.notifDismissByNotif(notifBox.n);
+                        if (notifBox.n)
+                            NotificationState.notifDismissByNotif(notifBox.n);
                     }
                 }
             }

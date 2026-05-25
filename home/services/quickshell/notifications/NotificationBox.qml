@@ -15,9 +15,9 @@ WrapperMouseArea {
     hoverEnabled: true
 
     property Notification n
-    property int elapsed: getElapsed()
-    property string image: !n.image && !!n.appIcon ? n.appIcon : n.image
-    property bool hasAppIcon: !!n.image && !!n.appIcon
+    property int elapsed: n ? getElapsed() : 0
+    property string image: !n?.image && !!n?.appIcon ? n.appIcon : n?.image ?? ""
+    property bool hasAppIcon: !!n?.image && !!n?.appIcon
     property real iconSize: Config.notificationIconSize
 
     property bool showTime: false
@@ -26,10 +26,12 @@ WrapperMouseArea {
     property bool dismissOnClose: true
 
     function getElapsed(): int {
-        return Math.floor(Date.now() / 1000) - Math.floor(n.time / 1000);
+        if (!n) return 0;
+        return Math.floor(Date.now() / 1000) - Math.floor((n.time ?? Date.now()) / 1000);
     }
 
     onClicked: mouse => {
+        if (!root.n) return;
         if (mouse.button == Qt.LeftButton && root.n?.actions != []) {
             root.n?.actions[0].invoke();
         } else if (mouse.button == Qt.RightButton) {
@@ -46,7 +48,7 @@ WrapperMouseArea {
     }
 
     Timer {
-        running: root.showTime
+        running: root.showTime && !!root.n
         interval: 1000
         repeat: true
         onTriggered: root.elapsed = root.getElapsed()
@@ -191,17 +193,17 @@ WrapperMouseArea {
 
                 Repeater {
                     id: actionRepeater
-                    model: root.n?.actions.slice(1)
+                    model: root.n ? root.n.actions.length - 1 : 0
 
                     Button {
                         id: actionButtonMA
-                        required property NotificationAction modelData
+                        required property int index
 
                         Layout.fillWidth: true
 
-                        buttonText: actionButtonMA.modelData.text
+                        buttonText: root.n.actions[index + 1].text
                         text: ""
-                        onPressed: modelData.invoke()
+                        onPressed: root.n.actions[index + 1].invoke()
                     }
                 }
             }

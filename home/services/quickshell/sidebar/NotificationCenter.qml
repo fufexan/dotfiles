@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs.utils
 import "../notifications"
 import QtQuick
@@ -74,12 +76,11 @@ ColumnLayout {
 
         Repeater {
             id: notifRepeater
-            model: NotificationState.allNotifs
+            model: NotificationState.allNotifs.length
 
             NotificationBox {
-                id: notifBox
-                required property Notification modelData
-                n: modelData
+                required property int index
+                n: NotificationState.allNotifs[index]
                 showTime: true
                 dismissOnClose: false
             }

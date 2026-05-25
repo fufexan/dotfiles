@@ -64,6 +64,7 @@ Singleton {
 
     function closeAll() {
         allNotifs = [];
+        popupNotifs = [];
         notifOverlayOpen = false;
     }
 
