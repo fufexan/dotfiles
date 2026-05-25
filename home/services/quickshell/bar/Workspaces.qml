@@ -22,7 +22,7 @@ WrapperMouseArea {
 
     onWheel: event => {
         event.accepted = true;
-        let acc = Math.abs(scrollAccumulator - event.angleDelta.x - event.angleDelta.y);
+        let acc = scrollAccumulator - event.angleDelta.x - event.angleDelta.y;
         const sign = Math.sign(acc);
         acc = Math.abs(acc);
 
@@ -34,7 +34,7 @@ WrapperMouseArea {
             const targetWorkspace = currentWorkspace + offset;
             const id = Math.max(baseWorkspace, Math.min(baseWorkspace + shownWorkspaces - 1, targetWorkspace));
             if (id != currentWorkspace)
-                Hyprland.dispatch(`workspace ${id}`);
+                Hyprland.dispatch(`hl.dsp.focus({workspace = ${id}})`);
         }
     }
 
@@ -99,7 +99,7 @@ WrapperMouseArea {
                         }
                     }
 
-                    onPressed: Hyprland.dispatch(`workspace ${modelData.index}`)
+                    onPressed: Hyprland.dispatch(`hl.dsp.focus({workspace = ${modelData.index}})`)
 
                     Item {
                         anchors.fill: parent
