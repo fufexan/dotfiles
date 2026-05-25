@@ -5,51 +5,25 @@
   ...
 }:
 let
-  themeScript =
-    theme:
-    pkgs.writeShellScript "theme-start-${theme}" ''
-      ${lib.getExe pkgs.dconf} write /org/gnome/desktop/interface/color-scheme "'prefer-${theme}'"
-      cat <<EOF > ${config.xdg.configHome}/Kvantum/kvantum.kvconfig
-      [General]
-      theme=KvLibadwaita${lib.optionalString (theme == "dark") "Dark"}
-      EOF
-    '';
+  themeName = "KvLibadwaita";
 in
 {
-  systemd.user.timers = {
-    theme-toggle-dark = {
-      Unit.Description = "Toggle dark theme";
-      Timer.OnCalendar = [
-        "*-*-* 16:00:00"
-      ];
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
+  services.darkman = {
+    enable = true;
 
-    theme-toggle-light = {
-      Unit.Description = "Toggle light theme";
-      Timer.OnCalendar = [
-        "*-*-* 08:00:00"
-      ];
-      Install.WantedBy = [ "graphical-session.target" ];
-    };
-  };
+    settings.usegeoclue = true;
 
-  systemd.user.services = {
-    theme-toggle-dark = {
-      Unit.Description = "Toggle dark theme";
-      Service = {
-        Type = "oneshot";
-        ExecStart = themeScript "dark";
-        TimeoutStopSec = 5;
-      };
-    };
-    theme-toggle-light = {
-      Unit.Description = "Toggle light theme";
-      Service = {
-        Type = "oneshot";
-        ExecStart = themeScript "light";
-        TimeoutStopSec = 5;
-      };
+    scripts = {
+      dconf = ''${lib.getExe pkgs.dconf} write /org/gnome/desktop/interface/color-scheme "'prefer-$1'"'';
+
+      kvantum = ''
+        local variant=""
+        [[ "$1" == "dark" ]] && variant="dark"
+        cat <<EOF > ${config.xdg.configHome}/Kvantum/kvantum.kvconfig
+        [General]
+        theme="${themeName}''${variant}"
+        EOF
+      '';
     };
   };
 }

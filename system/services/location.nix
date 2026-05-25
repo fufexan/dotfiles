@@ -9,9 +9,15 @@
     submissionUrl = "https://beacondb.net/v2/geosubmit";
     submissionNick = "geoclue";
 
-    appConfig.gammastep = {
-      isAllowed = true;
-      isSystem = false;
+    appConfig = {
+      darkman = {
+        isAllowed = true;
+        isSystem = false;
+      };
+      gammastep = {
+        isAllowed = true;
+        isSystem = false;
+      };
     };
   };
 }
