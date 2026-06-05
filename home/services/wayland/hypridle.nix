@@ -7,6 +7,7 @@
 }:
 let
   lock = "${pkgs.systemd}/bin/loginctl lock-session";
+  dpms = action: ''hyprctl dispatch 'hl.dsp.dpms({action = "${action}"})'';
 
   brillo = lib.getExe pkgs.brillo;
 
@@ -23,7 +24,7 @@ in
     settings = {
       general = {
         before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = ''hyprctl dispatch 'hl.dsp.dpms({action = "enable"})'';
+        after_sleep_cmd = dpms "enable";
         lock_cmd = "pgrep hyprlock || ${lib.getExe config.programs.hyprlock.package}";
       };
 
@@ -38,8 +39,8 @@ in
         }
         {
           inherit timeout;
-          on-timeout = ''hyprctl dispatch 'hl.dsp.dpms({action = "disable"})'';
-          on-resume = ''hyprctl dispatch 'hl.dsp.dpms({action = "enable"})'';
+          on-timeout = dpms "disable";
+          on-resume = dpms "enable";
         }
         {
           timeout = timeout + 10;
