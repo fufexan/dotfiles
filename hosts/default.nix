@@ -47,6 +47,30 @@
         ];
       };
 
+      ganymede = nixosSystem {
+        inherit specialArgs;
+        modules = laptop ++ [
+          ./ganymede
+          "${mod}/programs/gamemode.nix"
+          "${mod}/programs/hyprland"
+          "${mod}/programs/games.nix"
+
+          "${mod}/network/syncthing.nix"
+
+          "${mod}/services/kanata"
+          "${mod}/services/gnome-services.nix"
+          "${mod}/services/location.nix"
+
+          {
+            home-manager = {
+              users.mihai.imports = homeImports."mihai@io";
+              extraSpecialArgs = specialArgs;
+              backupFileExtension = ".hm-backup";
+            };
+          }
+        ];
+      };
+
       nixos = nixosSystem {
         inherit specialArgs;
         modules = [
