@@ -1,5 +1,5 @@
 # networking configuration
-{ pkgs, ... }:
+{ self, pkgs, ... }:
 {
   networking = {
     # use quad9 with DNS over TLS
@@ -15,18 +15,18 @@
     };
   };
 
-  programs.ssh.extraConfig = ''
-    Host neushore
-      User builder
-      HostName build.neushore.dev
-      IdentityFile /home/mihai/.ssh/id_ed25519
-      Port 30
-  '';
-
   services = {
     openssh = {
       enable = true;
       settings.UseDns = true;
+      knownHosts =
+        let
+          ids = import "${self}/secrets/identities.nix";
+        in
+        {
+          io.publicKey = ids.io;
+          ganymede.publicKey = ids.ganymede;
+        };
     };
 
     # DNS resolver
