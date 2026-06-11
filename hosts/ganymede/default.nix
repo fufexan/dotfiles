@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  self,
   ...
 }:
 {
@@ -21,4 +22,10 @@
 
   # for SSD/NVME
   services.fstrim.enable = true;
+
+  users.users.root.openssh.authorizedKeys.keys =
+    let
+      ids = import "${self}/secrets/identities.nix";
+    in
+    [ ids.io ];
 }

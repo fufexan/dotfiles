@@ -25,6 +25,13 @@
 
   networking.hostName = "io";
 
+  programs.ssh.extraConfig = ''
+    Host ganymede
+      HostName ganymede
+      User root
+      IdentityFile /etc/ssh/ssh_host_ed25519_key
+  '';
+
   security = {
     tpm2.enable = true;
     pam.services."sshd".howdy.enable = false;
