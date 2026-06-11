@@ -43,6 +43,12 @@
     ];
   };
 
+  fileSystems."/home" = {
+    device = "/dev/disk/by-label/home";
+    fsType = "btrfs";
+    options = [ "noatime" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
