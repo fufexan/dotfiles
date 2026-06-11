@@ -7,7 +7,7 @@
 }:
 let
   lock = "${pkgs.systemd}/bin/loginctl lock-session";
-  dpms = action: ''hyprctl dispatch 'hl.dsp.dpms({action = "${action}"})'';
+  dpms = action: ''hyprctl dispatch 'hl.dsp.dpms({action = "${action}"})''\''';
 
   brillo = lib.getExe pkgs.brillo;
 
