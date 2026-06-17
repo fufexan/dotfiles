@@ -25,6 +25,8 @@
         {
           monitor = "";
           path = config.theme.wallpaper;
+          blur_passes = 2;
+          blur_size = 4;
         }
       ];
 
@@ -32,17 +34,17 @@
         {
           monitor = "";
 
-          size = "300, 50";
+          size = "150, 30";
           valign = "bottom";
           position = "0%, 10%";
 
           outline_thickness = 1;
 
-          font_color = "rgb(b6c4ff)";
-          outer_color = "rgba(180, 180, 180, 0.5)";
-          inner_color = "rgba(200, 200, 200, 0.1)";
-          check_color = "rgba(247, 193, 19, 0.5)";
-          fail_color = "rgba(255, 106, 134, 0.5)";
+          font_color = "rgb(ffffff)";
+          outer_color = "rgb(100, 100, 100)";
+          inner_color = "rgb(100, 100, 100)";
+          check_color = "rgb(255, 200, 0)";
+          fail_color = "rgb(255, 100, 100)";
 
           fade_on_empty = false;
           placeholder_text = "Enter Password";
@@ -51,8 +53,8 @@
           dots_center = true;
           dots_fade_time = 100;
 
-          shadow_color = "rgba(0, 0, 0, 0.1)";
-          shadow_size = 7;
+          shadow_color = "rgba(50, 50, 50, 0.1)";
+          shadow_size = 3;
           shadow_passes = 2;
         }
       ];
@@ -60,16 +62,16 @@
       label = [
         {
           monitor = "";
-          text = "$TIME";
+          text = "<b>$TIME</b>";
           font_size = 150;
-          color = "rgb(b6c4ff)";
+          color = "rgba(255, 255, 255, 0.4)";
 
           position = "0%, 30%";
 
           valign = "center";
           halign = "center";
 
-          shadow_color = "rgba(0, 0, 0, 0.1)";
+          shadow_color = "rgba(50, 50, 50, 0.1)";
           shadow_size = 20;
           shadow_passes = 2;
           shadow_boost = 0.3;
@@ -78,14 +80,14 @@
           monitor = "";
           text = "cmd[update:3600000] date +'%a %b %d'";
           font_size = 20;
-          color = "rgb(b6c4ff)";
+          color = "rgba(255, 255, 255, 0.3)";
 
           position = "0%, 40%";
 
           valign = "center";
           halign = "center";
 
-          shadow_color = "rgba(0, 0, 0, 0.1)";
+          shadow_color = "rgba(50, 50, 50, 0.1)";
           shadow_size = 20;
           shadow_passes = 2;
           shadow_boost = 0.3;
