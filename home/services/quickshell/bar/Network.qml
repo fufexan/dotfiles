@@ -9,20 +9,24 @@ import qs.utils
 HoverTooltip {
     id: root
 
-    property list<NetworkDevice> connectedAdapters: Networking.devices.values.filter(e => e.connected) ?? null
+    property list<NetworkDevice> connectedAdapters: Networking.devices.values.filter(e => e.connected)
 
-    property list<NetworkDevice> ethAdapters: connectedAdapters.filter(e => e.name.startsWith("en"))
+    property list<NetworkDevice> wiredAdapters: connectedAdapters.filter(e => e.type === DeviceType.Wired)
 
     property NetworkDevice adapter: {
-        if (ethAdapters.length > 0)
-            return ethAdapters[0] ?? null;
+        if (wiredAdapters.length > 0)
+            return wiredAdapters[0] ?? null;
         else
             return connectedAdapters[0] ?? null;
     }
 
-    readonly property Network activeNetwork: adapter?.networks?.values.find(network => network.connected) ?? null
+    readonly property Network activeNetwork: {
+        if (adapter?.type === DeviceType.Wired)
+            return (adapter as WiredDevice).network ?? null;
+        return adapter?.networks?.values.find(network => network.connected) ?? null;
+    }
 
-    visible: !!Networking.devices?.values
+    visible: Networking.devices.values.length > 0
 
     readonly property string iconState: {
         if (!Networking.wifiHardwareEnabled)
@@ -32,31 +36,23 @@ HoverTooltip {
         else if (adapter?.state == ConnectionState.Connecting || adapter?.state == ConnectionState.Disconnecting)
             return "acquiring";
         else if (adapter?.connected) {
-            let strength = "good";
-
-            if (activeNetwork?.signalStrength >= 0.66) {
-                strength = "good";
-            } else if (activeNetwork?.signalStrength >= 0.33) {
-                strength = "ok";
-            } else {
-                strength = "weak";
-            }
+            const strength = activeNetwork?.signalStrength >= 0.66 ? "good" : activeNetwork?.signalStrength >= 0.33 ? "ok" : "weak";
             return `signal-${strength}`;
         }
         return "offline";
     }
     readonly property string iconPath: {
-        let icon
-        if (adapter.type === DeviceType.Wired)
-            icon = "wired"
+        let icon;
+        if (adapter?.type === DeviceType.Wired)
+            icon = "wired";
         else
             icon = `wireless-${iconState}`;
-        return Quickshell.iconPath(`network-${icon}-symbolic`)
+        return Quickshell.iconPath(`network-${icon}-symbolic`);
     }
 
     text: {
-        if (adapter.type === DeviceType.Wired)
-            return `${activeNetwork.name}\n${adapter.linkSpeed} Mbps`
+        if (adapter?.type === DeviceType.Wired)
+            return `${activeNetwork.name}\n${(adapter as WiredDevice).linkSpeed} Mbps`;
         if (!Networking.wifiEnabled)
             return "WiFi disabled";
         else if (adapter?.state == ConnectionState.Connecting)
