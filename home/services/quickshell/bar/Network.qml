@@ -9,9 +9,18 @@ import qs.utils
 HoverTooltip {
     id: root
 
-    property NetworkDevice adapter: Networking.devices?.values[0] ?? null
+    property list<NetworkDevice> connectedAdapters: Networking.devices.values.filter(e => e.connected) ?? null
 
-    readonly property WifiNetwork activeNetwork: adapter?.networks?.values.find(network => network.connected) ?? null
+    property list<NetworkDevice> ethAdapters: connectedAdapters.filter(e => e.name.startsWith("en"))
+
+    property NetworkDevice adapter: {
+        if (ethAdapters.length > 0)
+            return ethAdapters[0] ?? null;
+        else
+            return connectedAdapters[0] ?? null;
+    }
+
+    readonly property Network activeNetwork: adapter?.networks?.values.find(network => network.connected) ?? null
 
     visible: !!Networking.devices?.values
 
@@ -36,9 +45,18 @@ HoverTooltip {
         }
         return "offline";
     }
-    readonly property string iconPath: Quickshell.iconPath(`network-wireless-${iconState}-symbolic`)
+    readonly property string iconPath: {
+        let icon
+        if (adapter.type === DeviceType.Wired)
+            icon = "wired"
+        else
+            icon = `wireless-${iconState}`;
+        return Quickshell.iconPath(`network-${icon}-symbolic`)
+    }
 
     text: {
+        if (adapter.type === DeviceType.Wired)
+            return `${activeNetwork.name}\n${adapter.linkSpeed} Mbps`
         if (!Networking.wifiEnabled)
             return "WiFi disabled";
         else if (adapter?.state == ConnectionState.Connecting)
