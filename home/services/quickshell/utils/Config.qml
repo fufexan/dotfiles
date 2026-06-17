@@ -6,6 +6,9 @@ PersistentProperties {
     reloadableId: "persistedStates"
 
     property var preferredMonitor: {
+        const screens = [...Quickshell.screens];
+        if (screens.length == 1)
+            return screens[0];
         return [...Quickshell.screens].find(e => e.name == "eDP-1");
     }
     property bool showSidebar: false
