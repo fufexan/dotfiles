@@ -106,10 +106,6 @@ hl.config({
 		focus_on_activate = true,
 	},
 
-	render = {
-		direct_scanout = true,
-	},
-
 	gestures = {
 		workspace_swipe_forever = true,
 	},

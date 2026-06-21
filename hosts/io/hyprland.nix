@@ -10,6 +10,13 @@
       ---------------------------
 
       hl.monitor({
+        output   = "desc:Technical Concepts Ltd 27G64",
+        mode     = "2560x1440@120",
+        position = "auto-left",
+        scale    = 1,
+        bitdepth = 10,
+      })
+      hl.monitor({
         output   = "DP-1",
         mode     = "preferred",
         position = "auto-left",
