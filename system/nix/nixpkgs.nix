@@ -26,6 +26,15 @@
           }
         );
 
+        linuxPackages = prev.linuxPackages.extend (
+          _: lpprev: {
+            ddcci-driver = lpprev.ddcci-driver.overrideAttrs (old: {
+              # allows detection even if monitor does not report itself as such
+              patches = (old.patches or [ ]) ++ [ "${self}/pkgs/ddcci-fix-missing-tags.patch" ];
+            });
+          }
+        );
+
         lib = prev.lib // {
           colors = import "${self}/lib/colors" prev.lib;
         };

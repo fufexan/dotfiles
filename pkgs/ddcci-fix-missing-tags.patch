@@ -1,0 +1,24 @@
+--- a/ddcci/ddcci.c
++++ b/ddcci/ddcci.c
+@@ -1443,12 +1443,13 @@ static int ddcci_parse_capstring(struct ddcci_device *device)
+
+ 	/* if there is no protocol tag */
+ 	if (!device->prot[0]) {
+-		/* and no type tag: give up. */
+-		if (!device->type[0])
+-			return -ENOENT;
+-
+-		/* Assume protocol "monitor" if type is "LCD" or "CRT" */
+-		if (strncasecmp(device->type, "LCD", sizeof(device->type)-1) == 0
+-		 || strncasecmp(device->type, "CRT", sizeof(device->type)-1) == 0) {
++		if (!device->type[0]) {
++			/* Neither prot nor type found; assume "monitor" for quirky monitors */
++			dev_warn(&device->dev,
++				 "capability string missing protocol and type tags, assuming \"monitor\"");
+ 			memcpy(device->prot, "monitor", 7);
++		} else if (strncasecmp(device->type, "LCD", sizeof(device->type)-1) == 0
++		        || strncasecmp(device->type, "CRT", sizeof(device->type)-1) == 0) {
++			/* Assume protocol "monitor" if type is "LCD" or "CRT" */
++			memcpy(device->prot, "monitor", 7);
+ 		}
+ 	}
