@@ -6,7 +6,9 @@ PersistentProperties {
     reloadableId: "persistedStates"
 
     property var preferredMonitor: {
-        const screens = [...Quickshell.screens];
+        // Filter out fallback screens
+        const screens = [...Quickshell.screens].filter(e => !e.name.startsWith("FALLBACK"));
+        // TODO: this is fragile, come up with a better approach
         if (screens.length == 1)
             return screens[0];
         return [...Quickshell.screens].find(e => e.name == "eDP-1");
