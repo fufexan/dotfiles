@@ -24,8 +24,8 @@
 
   # make stuff work on wayland
   home.sessionVariables = {
-    QT_QPA_PLATFORM = "wayland";
-    SDL_VIDEODRIVER = "wayland";
+    QT_QPA_PLATFORM = "wayland;x11";
+    SDL_VIDEODRIVER = "wayland;x11";
     XDG_SESSION_TYPE = "wayland";
   };
 
