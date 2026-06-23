@@ -3,12 +3,12 @@
 ---------------------
 
 local function toggle(program)
-  local prog = program:sub(1, 14)
-  return "pkill " .. prog .. " || uwsm app -- " .. program
+	local prog = program:sub(1, 14)
+	return "pkill " .. prog .. " || uwsm app -- " .. program
 end
 
 local function runOnce(program)
-  return "pgrep " .. program .. " || uwsm app -- " .. program
+	return "pgrep " .. program .. " || uwsm app -- " .. program
 end
 
 -- mouse movements
@@ -55,10 +55,6 @@ hl.bind(mod .. " + SHIFT + CTRL + R", hl.dsp.exec_cmd(output_screenshot))
 hl.bind("ALT + Print", hl.dsp.exec_cmd(record))
 hl.bind(mod .. " + SHIFT + ALT + R", hl.dsp.exec_cmd(record))
 
--- special workspace
-hl.bind(mod .. " + SHIFT + grave", hl.dsp.window.move({ workspace = "special" }))
-hl.bind(mod .. " + grave", hl.dsp.workspace.toggle_special("eDP-1"))
-
 -- cycle workspaces
 hl.bind(mod .. " + bracketleft", hl.dsp.focus({ workspace = "m-1" }))
 hl.bind(mod .. " + bracketright", hl.dsp.focus({ workspace = "m+1" }))
@@ -73,13 +69,20 @@ hl.bind(mod .. " + SHIFT + ALT + bracketright", hl.dsp.workspace.move({ monitor 
 
 -- workspaces 1-10
 for i = 1, 10 do
-  local key = i % 10
-  hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+	local key = i % 10
+	hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+	hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- launcher (release bind)
-hl.bind(mod .. " + SUPER_L", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
+-- hl.bind(mod .. " + SUPER_L", hl.dsp.exec_cmd("vicinae toggle"), { release = true })
+
+hl.bind(mod .. " + SUPER_L", function()
+	local ws = hl.get_active_workspace()
+	if not ws.has_fullscreen then
+		hl.dispatch(hl.dsp.exec_cmd("vicinae toggle"))
+	end
+end, { release = true })
 
 -- media controls (locked)
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -89,8 +92,16 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ to
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 
 -- volume (locked + repeating)
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%-"), { locked = true, repeating = true })
+hl.bind(
+	"XF86AudioRaiseVolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%+"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86AudioLowerVolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l '1.0' @DEFAULT_AUDIO_SINK@ 6%-"),
+	{ locked = true, repeating = true }
+)
 
 -- backlight (locked + repeating)
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brillo -q -u 300000 -A 5"), { locked = true, repeating = true })
