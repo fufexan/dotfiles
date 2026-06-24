@@ -4,6 +4,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [
+      "i2c"
       "input"
       "libvirtd"
       "networkmanager"
