@@ -19,7 +19,7 @@
 
     # videos
     celluloid
-    self.packages.${pkgs.stdenv.hostPlatform.system}.stremio-linux-shell-rewrite-git
+    self.packages.${pkgs.stdenv.hostPlatform.system}.stremio-linux-shell
 
     # torrents
     transmission_4-gtk

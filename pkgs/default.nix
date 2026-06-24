@@ -16,7 +16,7 @@
 
         bibata-hyprcursor = pkgs.callPackage ./bibata-hyprcursor { };
 
-        stremio-linux-shell-rewrite-git = pkgs.callPackage ./stremio-linux-shell-rewrite-git { };
+        stremio-linux-shell = pkgs.callPackage ./stremio-linux-shell { };
         wl-ocr = pkgs.callPackage ./wl-ocr { };
       };
     };
