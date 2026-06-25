@@ -1,24 +1,28 @@
+commit 90be95a24794b40d35b3cac93d64ddf2d392928f
+Author: Mihai Fufezan <mihai@fufexan.net>
+Date:   Wed Jun 24 15:33:36 2026 +0300
+
+    Fallback to monitor when device type is missing
+
+diff --git a/ddcci/ddcci.c b/ddcci/ddcci.c
+index 6b41eab..96a438c 100644
 --- a/ddcci/ddcci.c
 +++ b/ddcci/ddcci.c
-@@ -1443,12 +1443,13 @@ static int ddcci_parse_capstring(struct ddcci_device *device)
-
+@@ -1442,9 +1442,14 @@ static int ddcci_parse_capstring(struct ddcci_device *device)
  	/* if there is no protocol tag */
  	if (!device->prot[0]) {
--		/* and no type tag: give up. */
+ 		/* and no type tag: give up. */
 -		if (!device->type[0])
 -			return -ENOENT;
 -
--		/* Assume protocol "monitor" if type is "LCD" or "CRT" */
--		if (strncasecmp(device->type, "LCD", sizeof(device->type)-1) == 0
--		 || strncasecmp(device->type, "CRT", sizeof(device->type)-1) == 0) {
 +		if (!device->type[0]) {
-+			/* Neither prot nor type found; assume "monitor" for quirky monitors */
-+			dev_warn(&device->dev,
-+				 "capability string missing protocol and type tags, assuming \"monitor\"");
- 			memcpy(device->prot, "monitor", 7);
-+		} else if (strncasecmp(device->type, "LCD", sizeof(device->type)-1) == 0
-+		        || strncasecmp(device->type, "CRT", sizeof(device->type)-1) == 0) {
-+			/* Assume protocol "monitor" if type is "LCD" or "CRT" */
-+			memcpy(device->prot, "monitor", 7);
- 		}
- 	}
++			/* but if vcp( exists, it's likely a monitor anyway */
++			if (strstr(capstr, "vcp(") != NULL) {
++				memcpy(device->prot, "monitor", 7);
++			} else {
++				return -ENOENT;
++			}
++		}
+ 		/* Assume protocol "monitor" if type is "LCD" or "CRT" */
+ 		if (strncasecmp(device->type, "LCD", sizeof(device->type)-1) == 0
+ 		 || strncasecmp(device->type, "CRT", sizeof(device->type)-1) == 0) {

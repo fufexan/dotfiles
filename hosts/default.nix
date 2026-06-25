@@ -51,6 +51,8 @@
         inherit specialArgs;
         modules = laptop ++ [
           ./ganymede
+          "${mod}/hardware/ddcci.nix"
+
           "${mod}/programs/gamemode.nix"
           "${mod}/programs/hyprland"
           "${mod}/programs/games.nix"

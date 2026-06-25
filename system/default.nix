@@ -3,6 +3,7 @@ let
     ./core
     ./core/boot.nix
 
+    ./hardware/brightness.nix
     ./hardware/fwupd.nix
     ./hardware/graphics.nix
 

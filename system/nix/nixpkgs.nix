@@ -2,9 +2,6 @@
 {
   nixpkgs = {
     config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
 
     overlays = [
       (final: prev: {
@@ -26,7 +23,7 @@
           }
         );
 
-        linuxPackages = prev.linuxPackages.extend (
+        linuxPackages_latest = prev.linuxPackages_latest.extend (
           _: lpprev: {
             ddcci-driver = lpprev.ddcci-driver.overrideAttrs (old: {
               # allows detection even if monitor does not report itself as such

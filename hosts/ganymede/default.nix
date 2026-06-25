@@ -20,15 +20,8 @@
 
   security.tpm2.enable = true;
 
-  services = {
-    # for SSD/NVME
-    fstrim.enable = true;
-
-    ddccontrol = {
-      enable = true;
-      package = pkgs.ddcutil-service;
-    };
-  };
+  # for SSD/NVME
+  services.fstrim.enable = true;
 
   users.users.root.openssh.authorizedKeys.keys =
     let
