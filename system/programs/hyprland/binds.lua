@@ -104,5 +104,6 @@ hl.bind(
 )
 
 -- backlight (locked + repeating)
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brillo -q -u 300000 -A 5"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brillo -q -u 300000 -U 5"), { locked = true, repeating = true })
+-- bright script found in system/hardware/brightness.nix
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("bright -q -A 5"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("bright -q -U 5"), { locked = true, repeating = true })
