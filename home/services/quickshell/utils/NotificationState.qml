@@ -2,6 +2,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Notifications
 
 Singleton {
@@ -88,6 +89,20 @@ Singleton {
             notif.closed.connect(() => {
                 root.notifDismissByNotif(notif);
             });
+        }
+    }
+
+    IpcHandler {
+        target: "notifications"
+
+        function toggle(): void {
+            Config.doNotDisturb = !Config.doNotDisturb;
+        }
+        function enable(): void {
+            Config.doNotDisturb = true;
+        }
+        function disable(): void {
+            Config.doNotDisturb = false;
         }
     }
 }
