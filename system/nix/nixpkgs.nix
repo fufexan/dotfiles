@@ -33,6 +33,32 @@
           }
         );
 
+        kdePackages = prev.kdePackages.overrideScope (
+          kdeFinal: kdePrev: {
+            qt6ct = kdePrev.qt6ct.overrideAttrs (old: {
+              version = "git";
+
+              src = final.fetchFromGitLab {
+                domain = "www.opencode.net";
+                owner = "trialuser";
+                repo = "qt6ct"; # "https://www.opencode.net/trialuser/qt6ct.git";
+                rev = "00823e41aa60e8fe266d5aee328e82ad1ad94348";
+                hash = "";
+              };
+
+              buildInputs =
+                (old.buildInputs or [ ])
+                ++ (with kdeFinal; [
+                  kconfig
+                  kcolorscheme
+                  kiconthemes
+                ]);
+
+              patches = (old.patches or [ ]) ++ [ "${self}/pkgs/qt6ct.patch" ];
+            });
+          }
+        );
+
         lib = prev.lib // {
           colors = import "${self}/lib/colors" prev.lib;
         };
