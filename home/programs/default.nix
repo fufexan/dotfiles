@@ -15,6 +15,7 @@
     halloy
     signal-desktop
     # telegram-desktop
+    nheko
 
     gnome-calculator
     gnome-control-center
