@@ -67,11 +67,11 @@ hl.config({
 			gradients = false,
 			height = 20,
 			indicator_height = 20,
-			indicator_gap = -20,
 			rounding = rounding,
 			rounding_power = rounding_power,
 			text_color = text_color,
 			text_color_inactive = text_color_inactive,
+			text_offset = -20,
 			col = {
 				active = group_active_color,
 				inactive = group_inactive_color,
