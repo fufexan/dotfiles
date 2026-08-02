@@ -27,7 +27,7 @@ Singleton {
         return PipeWireState.defaultSource?.audio.muted ?? false;
     }
 
-    readonly property bool cameraActive: {
+    readonly property list<string> cameraAccessors: {
         const nodes = Pipewire.ready ? (Pipewire.nodes?.values || []) : [];
         if (nodes.length === 0)
             return false;
@@ -57,10 +57,13 @@ Singleton {
             return live === "true" || live === "1" || state === "running" || n?.ready === true || hasVideoPort(n) || hasActiveVideoLink(n);
         };
 
-        const pwCamera = nodes.some(n => n && (n.type & PwNodeType.VideoSource) === PwNodeType.VideoSource && !isScreencast(n) && activeState(n));
+        const pwCamera = nodes.filter(n => n && (n.type & PwNodeType.VideoSource) === PwNodeType.VideoSource && !isScreencast(n) && activeState(n));
+        const pwCameraNames = pwCamera.map(n => n.name);
 
-        return pwCamera || root.cameraActiveRaw;
+        return pwCameraNames;
     }
+
+    readonly property bool cameraActive: cameraAccessors?.length > 0 || cameraActiveRaw
 
     readonly property bool screensharingActive: {
         const nodes = Pipewire.ready ? (Pipewire.nodes?.values || []) : [];

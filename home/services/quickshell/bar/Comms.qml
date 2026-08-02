@@ -20,13 +20,13 @@ WrapperItem {
 
     property var comms: [
         {
-            text: "Camera",
+            text: `Camera in use${CommsState.cameraActiveRaw ? "" : `by\n${CommsState.cameraAccessors.join("\n")}`}`,
             visible: CommsState.cameraActive,
             icon: "camera-photo-symbolic",
             color: Colors.monitorColors[3]
         },
         {
-            text: `Microphone in use by\n${CommsState.microphoneAccessors.toString()}`,
+            text: `Microphone in use by\n${CommsState.microphoneAccessors.join("\n")}`,
             visible: CommsState.microphoneActive,
             icon: CommsState.microphoneMuted ? "microphone-disabled-symbolic" : "audio-input-microphone-symbolic",
             color: Colors.monitorColors[2]
