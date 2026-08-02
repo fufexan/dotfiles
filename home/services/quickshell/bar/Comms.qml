@@ -20,19 +20,19 @@ WrapperItem {
 
     property var comms: [
         {
-            name: "Camera",
+            text: "Camera",
             visible: CommsState.cameraActive,
             icon: "camera-photo-symbolic",
             color: Colors.monitorColors[3]
         },
         {
-            name: "Microphone",
+            text: `Microphone in use by\n${CommsState.microphoneAccessors.toString()}`,
             visible: CommsState.microphoneActive,
             icon: CommsState.microphoneMuted ? "microphone-disabled-symbolic" : "audio-input-microphone-symbolic",
             color: Colors.monitorColors[2]
         },
         {
-            name: "Screenshare",
+            text: "Screenshare active",
             visible: CommsState.screensharingActive,
             icon: "screen-shared-symbolic",
             color: Colors.monitorColors[0]
@@ -44,7 +44,7 @@ WrapperItem {
 
         visible: modelData.visible
         required property var modelData
-        text: modelData.name + " active"
+        text: modelData.text
 
         WrapperRectangle {
             radius: Config.radius

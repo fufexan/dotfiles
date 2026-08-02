@@ -13,9 +13,14 @@ Singleton {
 
     property bool cameraActiveRaw: false
 
-    readonly property bool microphoneActive: {
+    readonly property list<string> microphoneAccessors: {
         const nodes = Pipewire.ready ? (Pipewire.nodes?.values || []) : [];
-        return nodes.some(n => n && (n.type & PwNodeType.AudioInStream) === PwNodeType.AudioInStream && !isSystemVirtualMic(n) && !(n.audio && n.audio.muted));
+        const result = nodes.filter(n => n && (n.type & PwNodeType.AudioInStream) === PwNodeType.AudioInStream && !isSystemVirtualMic(n) && !(n.audio && n.audio.muted));
+        return result.map(e => e.name);
+    }
+
+    readonly property bool microphoneActive: {
+        return microphoneAccessors?.length > 0;
     }
 
     readonly property bool microphoneMuted: {
