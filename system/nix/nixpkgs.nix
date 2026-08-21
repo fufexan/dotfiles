@@ -28,8 +28,17 @@
         linuxPackages_latest = prev.linuxPackages_latest.extend (
           _: lpprev: {
             ddcci-driver = lpprev.ddcci-driver.overrideAttrs (old: {
-              # allows detection even if monitor does not report itself as such
-              patches = (old.patches or [ ]) ++ [ "${self}/pkgs/ddcci-fix-missing-tags.patch" ];
+              patches = (old.patches or [ ]) ++ [
+                # allows detection even if monitor does not report itself as such
+                "${self}/pkgs/ddcci-fix-missing-tags.patch"
+                # retry core device detection so brightness works from boot
+                # instead of only after a manual module reload (DDC/CI isn't
+                # responsive yet when the udev rule instantiates the device)
+                "${self}/pkgs/ddcci-probe-retry.patch"
+                # strncpy was removed in Linux 7.2; switch sysfs show helpers
+                # to strscpy so the module builds
+                "${self}/pkgs/ddcci-strscpy.patch"
+              ];
             });
           }
         );

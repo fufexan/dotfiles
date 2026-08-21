@@ -1,0 +1,59 @@
+ddcci: use strscpy instead of strncpy in sysfs show functions
+
+The kernel removed the long-deprecated strncpy(), so the driver fails to
+build on Linux 7.2 with "implicit declaration of function 'strncpy'".
+Switch the sysfs *_show helpers to strscpy() (already used elsewhere in
+the driver), bounded by the size of the fixed-size source field. The
+fields are NUL-terminated in the normal case, so the copied string and
+the returned length are unchanged; the removed PAGE_SIZE zero-padding was
+never used, as the functions return the string length.
+
+diff --git a/ddcci/ddcci.c b/ddcci/ddcci.c
+index 6b41eab..69622c4 100644
+--- a/ddcci/ddcci.c
++++ b/ddcci/ddcci.c
+@@ -765,7 +765,7 @@ static ssize_t ddcci_attr_prot_show(struct device *dev,
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->prot, sizeof(device->prot));
+-		strncpy(buf, device->prot, PAGE_SIZE);
++		strscpy(buf, device->prot, sizeof(device->prot));
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -787,7 +787,7 @@ static ssize_t ddcci_attr_type_show(struct device *dev,
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->type, sizeof(device->type));
+-		strncpy(buf, device->type, PAGE_SIZE);
++		strscpy(buf, device->type, sizeof(device->type));
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -809,7 +809,7 @@ static ssize_t ddcci_attr_model_show(struct device *dev,
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->model, sizeof(device->model));
+-		strncpy(buf, device->model, PAGE_SIZE);
++		strscpy(buf, device->model, sizeof(device->model));
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -831,7 +831,7 @@ static ssize_t ddcci_attr_vendor_show(struct device *dev,
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->vendor, sizeof(device->vendor));
+-		strncpy(buf, device->vendor, PAGE_SIZE);
++		strscpy(buf, device->vendor, sizeof(device->vendor));
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -853,7 +853,7 @@ static ssize_t ddcci_attr_module_show(struct device *dev,
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->module, sizeof(device->module));
+-		strncpy(buf, device->module, PAGE_SIZE);
++		strscpy(buf, device->module, sizeof(device->module));
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {

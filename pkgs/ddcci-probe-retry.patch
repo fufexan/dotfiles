@@ -1,0 +1,94 @@
+Add configurable retry to core device detection
+
+When the ddcci i2c client is instantiated at boot (e.g. by a udev rule on
+the i2c adapter's "add" event on kernel 6.8+, where auto-probing is gone),
+detection can run before the display link is up and the monitor's DDC/CI
+channel is responsive, so the probe fails with -ENODEV and no backlight is
+registered until the module is manually reloaded. Retry detection a few
+times (probe_retries / probe_retry_delay module params) on transient
+communication errors so the monitor has time to answer.
+
+diff --git a/ddcci/ddcci.c b/ddcci/ddcci.c
+--- a/ddcci/ddcci.c
++++ b/ddcci/ddcci.c
+@@ -34,6 +34,8 @@
+ static unsigned int delay = 60;
+ static unsigned short autoprobe_addrs[127] = {0xF0, 0xF2, 0xF4, 0xF6, 0xF8};
+ static int autoprobe_addr_count = 5;
++static unsigned int probe_retries = 4;
++static unsigned int probe_retry_delay = 1000;
+ 
+ static bool module_initialized = false;
+ static dev_t ddcci_cdev_first;
+@@ -1676,6 +1678,29 @@ static int ddcci_detect(struct i2c_client *client, struct i2c_board_info *info)
+ 	return 0;
+ }
+ 
++/*
++ * Whether a failed core device detection is worth retrying.
++ *
++ * A monitor whose DDC/CI channel is not yet responsive (e.g. the display link
++ * is still coming up at boot) fails detection with a transient communication
++ * error. A genuine parse/allocation failure (e.g. -EINVAL from a malformed
++ * capability string, -ENOMEM) is not transient, so don't spin on it.
++ */
++static bool ddcci_detect_should_retry(int ret)
++{
++	switch (ret) {
++	case -ENODEV:
++	case -ENXIO:
++	case -EIO:
++	case -ETIMEDOUT:
++	case -EREMOTEIO:
++	case -EAGAIN:
++		return true;
++	default:
++		return false;
++	}
++}
++
+ /* I2C probe function */
+ #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
+ static int ddcci_probe(struct i2c_client *client)
+@@ -1700,11 +1725,29 @@ static int ddcci_probe(struct i2c_client *client, const struct i2c_device_id *id
+ 	i2c_set_clientdata(client, drv_data);
+ 
+ 	if (id->driver_data == 0) {
++		unsigned int attempt;
+ 		/* Core device, probe at 0x6E */
+ 		main_addr = DDCCI_DEFAULT_DEVICE_ADDR;
+ 		dev_dbg(&client->dev, "probing core device [%02x]\n",
+ 			client->addr << 1);
+-		ret = ddcci_detect_device(client, main_addr, 0);
++		/*
++		 * When the device is instantiated at boot (e.g. by a udev rule
++		 * on the i2c adapter's "add" event) detection can run before the
++		 * display link is up and the monitor's DDC/CI channel answers,
++		 * failing with a transient error. Retry a few times to give the
++		 * monitor time to come up before giving up on the probe.
++		 */
++		for (attempt = 0; ; ++attempt) {
++			ret = ddcci_detect_device(client, main_addr, 0);
++			if (ret == 0 || attempt >= probe_retries ||
++			    !ddcci_detect_should_retry(ret))
++				break;
++			dev_dbg(&client->dev,
++				"core device [%02x] not ready (%d), retry %u/%u in %u ms\n",
++				client->addr << 1, ret, attempt + 1,
++				probe_retries, probe_retry_delay);
++			msleep(probe_retry_delay);
++		}
+ 		if (ret) {
+ 			dev_info(&client->dev, "core device [%02x] probe failed: %d\n",
+ 				 client->addr << 1, ret);
+@@ -1916,6 +1959,10 @@ module_exit(ddcci_module_exit);
+ /* Module parameter description */
+ module_param(delay, uint, S_IRUGO|S_IWUSR);
+ MODULE_PARM_DESC(delay, "default delay after bus writes (in ms, default 60)");
++module_param(probe_retries, uint, S_IRUGO|S_IWUSR);
++MODULE_PARM_DESC(probe_retries, "extra core device detection attempts if the monitor is not yet responsive (default 4)");
++module_param(probe_retry_delay, uint, S_IRUGO|S_IWUSR);
++MODULE_PARM_DESC(probe_retry_delay, "delay between core device detection retries (in ms, default 1000)");
+ module_param_array(autoprobe_addrs, ushort, &autoprobe_addr_count, S_IRUGO|S_IWUSR);
+ MODULE_PARM_DESC(autoprobe_addrs, "internal dependent device addresses to autoprobe");
+ 
