@@ -18,9 +18,6 @@ LazyLoader {
             top: true
             bottom: true
         }
-        margins {
-            top: Config.barHeight
-        }
 
         WlrLayershell.exclusionMode: ExclusionMode.Ignore
         WlrLayershell.namespace: "quickshell:sidebar"
@@ -36,7 +33,7 @@ LazyLoader {
                 right: parent.right
                 left: parent.left
                 leftMargin: Config.padding * 5
-                topMargin: Config.padding
+                topMargin: Config.barHeight
                 rightMargin: Config.padding
                 bottomMargin: Config.padding * 5
             }

@@ -201,9 +201,9 @@ WrapperMouseArea {
 
                         Layout.fillWidth: true
 
-                        buttonText: root.n.actions[index + 1].text
+                        buttonText: root.n?.actions?.[index + 1]?.text ?? ""
                         text: ""
-                        onPressed: root.n.actions[index + 1].invoke()
+                        onPressed: root.n?.actions?.[index + 1]?.invoke()
                     }
                 }
             }
@@ -221,7 +221,10 @@ WrapperMouseArea {
                 horizontalCenter: mainRect.left
                 verticalCenter: mainRect.top
                 horizontalCenterOffset: 1.5 * Config.padding
-                verticalCenterOffset: 1.5 * Config.padding
+                // Align the top of the badge with the card's top edge so it only
+                // overhangs to the left, never above. This lets the notification
+                // list clip cleanly at the top without cutting off the button.
+                verticalCenterOffset: closeButton.height / 2
             }
 
             icon: "process-stop-symbolic"
