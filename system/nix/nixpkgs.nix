@@ -35,9 +35,6 @@
                 # instead of only after a manual module reload (DDC/CI isn't
                 # responsive yet when the udev rule instantiates the device)
                 "${self}/pkgs/ddcci-probe-retry.patch"
-                # strncpy was removed in Linux 7.2; switch sysfs show helpers
-                # to strscpy so the module builds
-                "${self}/pkgs/ddcci-strscpy.patch"
               ];
             });
           }
