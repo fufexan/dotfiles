@@ -87,7 +87,12 @@ Singleton {
             // console.log("notif: appName", notif.appName || "null", ", appIcon", notif.appIcon || "null", ", image", notif.image || "null", ", expireTimeout", notif.expireTimeout)
 
             notif.closed.connect(() => {
-                root.notifDismissByNotif(notif);
+                // The Notification object is destroyed after this fires, so drop it
+                // from both lists to avoid keeping a dangling ref (renders as an empty card).
+                popupNotifs = popupNotifs.filter(n => n != notif);
+                allNotifs = allNotifs.filter(n => n != notif);
+                if (popupNotifs.length == 0)
+                    notifOverlayOpen = false;
             });
         }
     }
