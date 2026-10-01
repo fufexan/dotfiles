@@ -27,6 +27,8 @@
       buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
         {
           hostName = "ganymede";
+          sshUser = "root";
+          sshKey = "/etc/ssh/ssh_host_ed25519_key";
           systems = [ "x86_64-linux" ];
           maxJobs = 16;
           protocol = "ssh-ng";
