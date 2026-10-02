@@ -1,13 +1,13 @@
-{
+{ lib, ... }: {
   theme = {
     wallpaper =
       let
-        url = "https://images.unsplash.com/photo-1529528744093-6f8abeee511d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=fit&cs=srgb&w=2560";
-        sha256 = "sha256-JD4cHpKJS8gIee+APcFp54+o6IdwPZXOU6RHTf1hkY8=";
+        url = "https://images.unsplash.com/photo-1673368777914-a3bdac42c5e0?ixlib=rb-4.1.0&q=100&fm=jpg&cs=srgb&dl=rafael-garcin-L7sDY9KL9G8-unsplash.jpg";
+        sha256 = "sha256-K6ksD7ylUzuHGk7MxdcLUSkM5PAx0Qm/R8yLWyDs8c8=";
         ext = "jpg";
       in
       builtins.fetchurl {
-        name = "wallpaper-${sha256}.${ext}";
+        name = "wallpaper-${lib.strings.sanitizeDerivationName sha256}.${ext}";
         inherit url sha256;
       };
   };
