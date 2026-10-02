@@ -1,0 +1,151 @@
+# tack pins
+# edit by hand or with tack add / rm / alias
+# nix reads pins.lock.json
+# this file drives tack update
+
+[tack]
+recomposable = true
+
+# shorturl schemes
+# scheme rest expands rest into {path}
+[shorturls]
+hypr = "github:hyprwm/{path}"
+
+# all_follow maps input names to the top-level pin they follow
+# opt out per-input with exclude_follow
+# [all_follow]
+# nixpkgs = "nixpkgs"
+# nixpkgs = ["nixpkgs-stable", "nixpkgs-unstable"]
+
+# signers name the public keys pins can require, as an ssh key line, an
+# armored pgp key, a file under .tack holding either, or an array of those.
+# `tack signer add <name> --github <user>` fills one in from GitHub
+# [signers]
+# alice = "ssh-ed25519 AAAA..."
+
+# inputs.<name> fields
+#   url             required, shorturl ok, ?rev=<sha> pins an exact commit
+#   type            flake (default), fetch, or fixed
+#   flake           legacy false means type = "fetch"
+#   follows         { child = "pin" } override map
+#   exclude_follow  all_follow names to skip
+#   dir             subdir holding flake.nix
+#   submodules      fetch git submodules
+#   unpack          fixed-only tarball or file
+#   signers         names from [signers], one of whom must have signed the locked commit
+#   patches         patch urls or files relative to this dir, applied in order
+
+[inputs.systems]
+url = "github:nix-systems/default-linux"
+
+[inputs.nixpkgs]
+url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst"
+
+[inputs.flake-compat]
+url = "github:edolstra/flake-compat"
+
+[inputs.flake-utils]
+url = "github:numtide/flake-utils"
+follows = { systems = "systems" }
+
+[inputs.flake-parts]
+url = "github:hercules-ci/flake-parts"
+follows = { nixpkgs-lib = "nixpkgs" }
+
+[inputs.agenix]
+url = "github:ryantm/agenix"
+follows = { nixpkgs = "nixpkgs", home-manager = "hm", systems = "systems" }
+
+[inputs.helix]
+url = "github:helix-editor/helix"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.hm]
+url = "github:nix-community/home-manager"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.lanzaboote]
+url = "github:nix-community/lanzaboote"
+
+[inputs.nix-index-db]
+url = "github:nix-community/nix-index-database"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.nix-gaming]
+url = "github:fufexan/nix-gaming"
+follows = { nixpkgs = "nixpkgs", flake-parts = "flake-parts" }
+
+[inputs.nix-matlab]
+url = "gitlab:fufexan/nix-matlab"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.git-hooks]
+url = "github:cachix/git-hooks.nix"
+follows = { nixpkgs = "nixpkgs", flake-compat = "flake-compat" }
+
+[inputs.yazi]
+url = "github:sxyazi/yazi"
+
+# HyprWM
+[inputs.hyprland]
+url = "hypr:hyprland"
+group = "hypr"
+
+[inputs.hypridle]
+url = "hypr:hypridle"
+group = "hypr"
+follows = { nixpkgs = "nixpkgs", systems = "systems", hyprlang = "hyprland/hyprlang", hyprutils = "hyprland/hyprutils" }
+
+[inputs.hyprland-contrib]
+url = "hypr:contrib"
+group = "hypr"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.hyprland-plugins]
+url = "hypr:hyprland-plugins"
+group = "hypr"
+follows = { hyprland = "hyprland" }
+
+[inputs.hyprlock]
+url = "hypr:hyprlock"
+group = "hypr"
+follows = { nixpkgs = "nixpkgs", systems = "systems", hyprlang = "hyprland/hyprlang", hyprutils = "hyprland/hyprutils", hyprgraphics = "hyprland/hyprgraphics" }
+
+[inputs.hyprpaper]
+url = "hypr:hyprpaper"
+group = "hypr"
+follows = { nixpkgs = "nixpkgs", systems = "systems", aquamarine = "hyprland/aquamarine", hyprlang = "hyprland/hyprlang", hyprutils = "hyprland/hyprutils", hyprgraphics = "hyprland/hyprgraphics", hyprwire = "hyprland/hyprwire" }
+
+[inputs.quickshell]
+url = "git+https://git.outfoxxed.me/outfoxxed/quickshell"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.tailray]
+url = "github:NotAShelf/tailray"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.treefmt-nix]
+url = "github:numtide/treefmt-nix"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.nixos-wsl]
+url = "github:nix-community/NixOS-WSL"
+follows = { nixpkgs = "nixpkgs", flake-compat = "flake-compat" }
+
+[inputs.tack]
+url = "github:manic-systems/tack"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.uwu-colors]
+url = "github:q60/uwu_colors"
+follows = { nixpkgs = "nixpkgs" }
+
+[inputs.vicinae]
+url = "github:vicinaehq/vicinae"
+
+[inputs.vicinae-extensions]
+url = "github:vicinaehq/extensions"
+
+[inputs.zen-browser]
+url = "github:youwen5/zen-browser-flake"
+follows = { nixpkgs = "nixpkgs" }
