@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   ...
@@ -32,7 +33,6 @@ in
     };
 
     settings = {
-
       alias =
         let
           log = "log --show-notes='*' --abbrev-commit --pretty=format:'%Cred%h %Cgreen(%aD)%Creset -%C(bold red)%d%Creset %s %C(bold blue)<%an>% %Creset' --graph";
@@ -107,14 +107,20 @@ in
       pull.rebase = true;
 
       diff.colorMoved = "default";
-      merge.conflictstyle = "diff3";
+      merge.conflictstyle = "zdiff3";
     };
   };
 
   programs.delta = {
     enable = true;
     enableGitIntegration = true;
-    options.dark = true;
+    options = {
+      dark = true;
+      line-numbers = true;
+      map-styles = "bold purple => syntax magenta, bold cyan => syntax blue";
+      navigate = true;
+      side-by-side = true;
+    };
   };
 
   xdg.configFile."git/allowed_signers".text = ''
