@@ -11,6 +11,14 @@
 
       homeImports = import "${self}/home/profiles";
 
+      hm = profile: {
+        home-manager = {
+          users.mihai.imports = profile;
+          extraSpecialArgs = specialArgs;
+          backupFileExtension = ".hm-backup";
+        };
+      };
+
       mod = "${self}/system";
 
       defaults = import mod;
@@ -25,15 +33,7 @@
           ./io
           "${mod}/core/lanzaboote.nix"
 
-          {
-            home-manager = {
-              users.mihai.imports = homeImports."mihai@io";
-              extraSpecialArgs = specialArgs;
-              backupFileExtension = ".hm-backup";
-            };
-          }
-
-          inputs.agenix.nixosModules.default
+          (hm homeImports.main)
         ];
       };
 
@@ -43,13 +43,7 @@
           ./ganymede
           "${mod}/hardware/ddcci.nix"
 
-          {
-            home-manager = {
-              users.mihai.imports = homeImports."mihai@io";
-              extraSpecialArgs = specialArgs;
-              backupFileExtension = ".hm-backup";
-            };
-          }
+          (hm homeImports.main)
         ];
       };
 
@@ -61,13 +55,7 @@
           "${mod}/nix"
           "${mod}/programs/zsh.nix"
           "${mod}/programs/home-manager.nix"
-          {
-            home-manager = {
-              users.mihai.imports = homeImports.server;
-              extraSpecialArgs = specialArgs;
-              backupFileExtension = ".hm-backup";
-            };
-          }
+          (hm homeImports.server)
         ];
       };
     };

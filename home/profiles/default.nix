@@ -1,7 +1,7 @@
 {
-  "mihai@io" = [
+  main = [
     ../.
-    ./io
+    ./main
   ];
 
   server = [
