@@ -9,10 +9,8 @@
   imports = [
     ./hardware-configuration.nix
     ./hyprland.nix
-    ./powersave.nix
   ];
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
   boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 

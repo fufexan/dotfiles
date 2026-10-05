@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
@@ -10,8 +11,8 @@
       supportedFilesystems = [ "ext4" ];
     };
 
-    # use latest kernel
-    kernelPackages = pkgs.linuxPackages_latest;
+    # use latest kernel (mkDefault so hosts can override without mkForce)
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     consoleLogLevel = 3;
     kernelParams = [

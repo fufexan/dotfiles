@@ -1,17 +1,14 @@
 {
-  pkgs,
-  lib,
+  self,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
     ./hyprland.nix
-    ./powersave.nix
   ];
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
     kernelParams = [
       "amd_pstate=active"
       "ideapad_laptop.allow_v4_dytc=Y"
@@ -48,4 +45,13 @@
 
     linux-enable-ir-emitter.enable = true;
   };
+
+  users.users =
+    let
+      ids = import "${self}/secrets/identities.nix";
+    in
+    {
+      root.openssh.authorizedKeys.keys = [ ids.ganymede ];
+      mihai.openssh.authorizedKeys.keys = [ ids.mihai-ganymede ];
+    };
 }

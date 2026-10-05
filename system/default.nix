@@ -23,6 +23,7 @@ let
 
     ./services/backlight.nix
     ./services/power.nix
+    ./services/powersave.nix
   ];
 in
 {
