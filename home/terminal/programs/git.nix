@@ -6,7 +6,13 @@
 }:
 let
   cfg = config.programs.git;
-  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOq9Gew1rgfdIyuriJ/Ne0B8FE1s8O/U2ajErVQLUDu9 mihai@io";
+  identities = import ../../../secrets/identities.nix;
+  # every machine's user key must be allowed, else commits signed on one host
+  # show as "No principal matched" when verified on another
+  signerKeys = [
+    identities.mihai-io
+    identities.mihai-ganymede
+  ];
 in
 {
   home.packages = [ pkgs.gh ];
@@ -123,7 +129,7 @@ in
     };
   };
 
-  xdg.configFile."git/allowed_signers".text = ''
+  xdg.configFile."git/allowed_signers".text = lib.concatMapStrings (key: ''
     ${cfg.settings.user.email} namespaces="git" ${key}
-  '';
+  '') signerKeys;
 }
