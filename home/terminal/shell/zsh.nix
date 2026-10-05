@@ -53,6 +53,33 @@
       zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
       _comp_options+=(globdots)
 
+      # Override nixpkgs' _nix completion so flakerefs like `nixpkgs#hello`
+      # don't get the `#` backslash-escaped. Same as the shipped _nix, but
+      # adds `-Q` to the `attrs` branch so compadd leaves the `#` literal.
+      _nix() {
+        local input=("''${(Q)words[@]}")
+        local -a suggestions suggestions_display
+        local tpe suggestion description
+        local ifs_bk="$IFS"
+        IFS=$'\t'
+        NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]" 2>/dev/null | {read tpe; while IFS=$'\t' read -r suggestion description; do
+          suggestions+=("$suggestion")
+          if [ -n "$description" ]; then
+            suggestions_display+=("$suggestion -- $description")
+          else
+            suggestions_display+=("$suggestion")
+          fi
+        done}
+        IFS="$ifs_bk"
+        local -a args
+        if [[ "$tpe" == filenames ]]; then
+          args+=('-f')
+        elif [[ "$tpe" == attrs ]]; then
+          args+=('-S' "" '-Q')
+        fi
+        compadd -J nix "''${args[@]}" -d suggestions_display -a suggestions
+      }
+
       # Allow foot to pipe command output
       function precmd {
           if ! builtin zle; then
