@@ -3,7 +3,6 @@
     "agenix": "github:ryantm/agenix",
     "flake-compat": "github:edolstra/flake-compat",
     "flake-parts": "github:hercules-ci/flake-parts",
-    "flake-utils": "github:numtide/flake-utils",
     "git-hooks": "github:cachix/git-hooks.nix",
     "helix": "github:helix-editor/helix",
     "hm": "github:nix-community/home-manager",
@@ -53,14 +52,6 @@
     "rev": "31729ca8cbdb4fa927b34e5f4353e6a83f39e993",
     "narHash": "sha256-glZLQlzIn1fXH6PazR2iUmTo7kzzyYSshrWhLS9TqCU=",
     "lastModified": 1788450739
-  },
-  "flake-utils": {
-    "type": "github",
-    "owner": "numtide",
-    "repo": "flake-utils",
-    "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-    "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-    "lastModified": 1731533236
   },
   "git-hooks": {
     "type": "github",

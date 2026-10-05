@@ -44,10 +44,6 @@ url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst"
 [inputs.flake-compat]
 url = "github:edolstra/flake-compat"
 
-[inputs.flake-utils]
-url = "github:numtide/flake-utils"
-follows = { systems = "systems" }
-
 [inputs.flake-parts]
 url = "github:hercules-ci/flake-parts"
 follows = { nixpkgs-lib = "nixpkgs" }
