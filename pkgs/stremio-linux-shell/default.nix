@@ -1,10 +1,12 @@
 # https://gitlab.com/fazzi/azzipkgs/-/blob/d872f61e8de48446f1bb8d5e21c9becebe1fb8b4/pkgs/stremio-linux-shell.nix
 {
+
   lib,
   rustPlatform,
-  fetchFromGitHub,
   openssl,
   pkg-config,
+  glib,
+  gettext,
   glib-networking,
   mpv,
   makeWrapper,
@@ -14,21 +16,18 @@
   wrapGAppsHook4,
   webkitgtk_6_0,
   windowDecor ? false,
-  ...
+  src,
+  version,
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "stremio-linux-shell";
-  version = "1.0.0-beta.14";
-
-  src = fetchFromGitHub {
-    owner = "Stremio";
-    repo = "stremio-linux-shell";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-g7QZ+kYhT7NJ1HKSnV+VBDI/CGeLfJtXn0v9xWCCP/4=";
-  };
+  inherit src version;
 
   cargoLock = {
     lockFile = "${finalAttrs.src}/Cargo.lock";
+    outputHashes = {
+      "libmpv2-5.0.3" = "sha256-EhADLuOxJe2xYEXfwYRNSlFVuuV10TxqmwsG9oZPG3c=";
+    };
   };
 
   buildInputs = [
@@ -44,7 +43,14 @@ rustPlatform.buildRustPackage (finalAttrs: {
     wrapGAppsHook4
     makeWrapper
     pkg-config
+    glib
+    gettext
   ];
+
+  # build.rs compiles gschemas/translations into $HOME-derived data dir
+  preBuild = ''
+    export HOME=$TMPDIR
+  '';
 
   postInstall = ''
     mkdir -p $out/share/applications
@@ -55,6 +61,14 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
     mkdir -p $out/share/stremio-linux-shell
     cp $src/data/server.js $out/share/stremio-linux-shell/server.js
+
+    # install + compile the GSettings schema so it's found at runtime (build.rs
+    # only compiles it into a throwaway dir). glib's postInstall hook then
+    # relocates share/glib-2.0/schemas into share/gsettings-schemas/$name and
+    # wrapGAppsHook4 adds it to the wrapper's XDG_DATA_DIRS
+    install -Dm644 data/com.stremio.Stremio.gschema.xml \
+      $out/share/glib-2.0/schemas/com.stremio.Stremio.gschema.xml
+    glib-compile-schemas $out/share/glib-2.0/schemas
 
     mv $out/bin/stremio-linux-shell $out/bin/stremio
   '';
@@ -78,7 +92,10 @@ rustPlatform.buildRustPackage (finalAttrs: {
       # server.js is unfree
       unfree
     ];
-    maintainers = lib.maintainers.fazzi;
+    maintainers = with lib.maintainers; [
+      fazzi
+      fufexan
+    ];
     platforms = lib.platforms.linux;
   };
 })

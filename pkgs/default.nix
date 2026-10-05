@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   systems = [ "x86_64-linux" ];
 
@@ -16,7 +16,11 @@
 
         bibata-hyprcursor = pkgs.callPackage ./bibata-hyprcursor { };
 
-        stremio-linux-shell = pkgs.callPackage ./stremio-linux-shell { };
+        stremio-linux-shell = pkgs.callPackage ./stremio-linux-shell {
+          src = inputs.stremio;
+          version = pkgs.lib.removePrefix "v" (pkgs.lib.importJSON "${self}/.tack/pins.lock.json")
+          .stremio.tag;
+        };
         wl-ocr = pkgs.callPackage ./wl-ocr { };
       };
     };

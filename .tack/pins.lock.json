@@ -19,6 +19,7 @@
     "nixos-wsl": "github:nix-community/NixOS-WSL",
     "nixpkgs": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst",
     "quickshell": "git+https://git.outfoxxed.me/outfoxxed/quickshell",
+    "stremio": "github:Stremio/stremio-linux-shell",
     "systems": "github:nix-systems/default-linux",
     "tack": "github:manic-systems/tack",
     "tailray": "github:NotAShelf/tailray",
@@ -178,6 +179,15 @@
     "rev": "41651d7dcd62a9400eb6f4f8a8580efe00901efb",
     "narHash": "sha256-dLtjYGr1sTihGhsISR71LB17E6m0r18JhF+6BNAHy0M=",
     "lastModified": 1790343625
+  },
+  "stremio": {
+    "type": "github",
+    "owner": "Stremio",
+    "repo": "stremio-linux-shell",
+    "rev": "afe1421332e2f0248e41835e669537cd56dffcd0",
+    "narHash": "sha256-lViVembyM9W/GY4v4RwBVBg5AKTG98K25L8FVjouWYs=",
+    "lastModified": 1790670158,
+    "tag": "v1.2.1"
   },
   "systems": {
     "type": "github",

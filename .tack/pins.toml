@@ -145,3 +145,8 @@ url = "github:vicinaehq/extensions"
 [inputs.zen-browser]
 url = "github:youwen5/zen-browser-flake"
 follows = { nixpkgs = "nixpkgs" }
+
+[inputs.stremio]
+url = "github:Stremio/stremio-linux-shell"
+type = "fetch"
+tag = "v{version}"
