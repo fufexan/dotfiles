@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./zathura.nix
+    ./zathura
   ];
 
   home.packages = with pkgs; [
