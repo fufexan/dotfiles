@@ -18,13 +18,8 @@
         pkgs.proton-ge-bin
       ];
 
-      gamescopeSession = {
-        enable = true;
-        args = [
-          "--rt"
-          "--expose-wayland"
-        ];
-      };
+      # configured above
+      gamescopeSession.enable = true;
     };
   };
 }
