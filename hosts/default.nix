@@ -12,8 +12,8 @@
       homeImports = import "${self}/home/profiles";
 
       mod = "${self}/system";
-      # get the basic config to build on top of
-      inherit (import mod) laptop;
+
+      defaults = import mod;
 
       # get these into the module system
       specialArgs = { inherit inputs self; };
@@ -21,19 +21,9 @@
     {
       io = nixosSystem {
         inherit specialArgs;
-        modules = laptop ++ [
+        modules = defaults ++ [
           ./io
           "${mod}/core/lanzaboote.nix"
-
-          "${mod}/programs/gamemode.nix"
-          "${mod}/programs/hyprland"
-          "${mod}/programs/games.nix"
-
-          "${mod}/network/syncthing.nix"
-
-          "${mod}/services/kanata"
-          "${mod}/services/gnome-services.nix"
-          "${mod}/services/location.nix"
 
           {
             home-manager = {
@@ -49,19 +39,9 @@
 
       ganymede = nixosSystem {
         inherit specialArgs;
-        modules = laptop ++ [
+        modules = defaults ++ [
           ./ganymede
           "${mod}/hardware/ddcci.nix"
-
-          "${mod}/programs/gamemode.nix"
-          "${mod}/programs/hyprland"
-          "${mod}/programs/games.nix"
-
-          "${mod}/network/syncthing.nix"
-
-          "${mod}/services/kanata"
-          "${mod}/services/gnome-services.nix"
-          "${mod}/services/location.nix"
 
           {
             home-manager = {

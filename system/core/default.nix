@@ -2,6 +2,7 @@
 # default configuration shared by all hosts
 {
   imports = [
+    ./boot.nix
     ./security.nix
     ./users.nix
     ../nix

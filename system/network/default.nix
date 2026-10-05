@@ -1,6 +1,12 @@
 # networking configuration
 { self, pkgs, ... }:
 {
+  imports = [
+    ./avahi.nix
+    ./tailscale.nix
+    ./syncthing.nix
+  ];
+
   networking = {
     # use quad9 with DNS over TLS
     nameservers = [ "9.9.9.9#dns.quad9.net" ];
@@ -32,9 +38,7 @@
     # DNS resolver
     resolved = {
       enable = true;
-      # Disable until https://github.com/NixOS/nixpkgs/issues/440073 is fixed
-      # Waiting for https://github.com/NixOS/nixpkgs/pull/440130 to land in nixos-unstable
-      # dnsovertls = "opportunistic";
+      dnsovertls = "opportunistic";
     };
   };
 

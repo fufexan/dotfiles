@@ -2,9 +2,12 @@
 {
   imports = [
     ./fonts.nix
+    ./gamemode.nix
+    ./games.nix
     ./home-manager.nix
-    ./xdg.nix
+    ./hyprland
     ./school.nix
+    ./xdg.nix
   ];
 
   programs = {
