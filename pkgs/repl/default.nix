@@ -19,7 +19,7 @@ writeShellScriptBin "repl" ''
       if [ -z "$1" ]; then
         nix repl --expr 'import ${repl} { }'
       else
-        FLAKE_PATH=$($(${coreutils}/bin/readlink -f $1 | ${gnused}/bin/sed 's|/flake.nix||'))
+        FLAKE_PATH=$(${coreutils}/bin/readlink -f $1 | ${gnused}/bin/sed 's|/flake.nix||')
         nix repl --expr "import ${repl} { flakePath = \"$FLAKE_PATH\"; }"
       fi
     ;;
