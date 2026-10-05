@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    ./specialisations.nix
+    ./wallpaper.nix
     ./terminal
     inputs.nix-index-db.homeModules.nix-index
     inputs.tailray.homeManagerModules.default
