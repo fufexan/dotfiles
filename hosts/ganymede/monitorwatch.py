@@ -61,6 +61,10 @@ def hyprland_monitor(enable: bool):
 
 def poll_input():
     global last_state, consecutive_errors
+    # don't poll (or trigger the error-recovery re-enable) while the display
+    # is in DPMS standby — it won't answer DDC, and waking it defeats DPMS
+    if not display_awake:
+        return True
     try:
         result = iface.GetVcp(DISPLAY_NUM, "", dbus.Byte(0x60), dbus.UInt32(0))
         current_value = prog.search(result[2]).group(0)
