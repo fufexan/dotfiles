@@ -9,10 +9,13 @@
   langs ? "eng+hun+fra+jpn+jpn_vert+kor+kor_vert+pol+ron+spa",
 }:
 let
-  _ = lib.getExe;
+  inherit (lib) getExe getExe';
+  # wl-clipboard ships two binaries, so getExe' (not getExe) for each
+  wl-copy = getExe' wl-clipboard "wl-copy";
+  wl-paste = getExe' wl-clipboard "wl-paste";
 in
 writeShellScriptBin "wl-ocr" ''
-  ${_ grim} -g "$(${_ slurp})" -t ppm - | ${_ tesseract5} -l ${langs} - - | ${wl-clipboard}/bin/wl-copy
-  echo "$(${wl-clipboard}/bin/wl-paste)"
-  ${_ libnotify} -- "$(${wl-clipboard}/bin/wl-paste)"
+  ${getExe grim} -g "$(${getExe slurp})" -t ppm - | ${getExe tesseract5} -l ${langs} - - | ${wl-copy}
+  echo "$(${wl-paste})"
+  ${getExe libnotify} -- "$(${wl-paste})"
 ''

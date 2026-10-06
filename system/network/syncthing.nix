@@ -8,7 +8,6 @@
     ];
 
     allowedTCPPorts = [
-      42355
       # syncthing
       22000
     ];

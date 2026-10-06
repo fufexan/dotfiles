@@ -102,4 +102,11 @@ stdenvNoCC.mkDerivation (final: {
 
     runHook postInstall
   '';
+
+  meta = {
+    description = "Bibata cursor theme packaged for hyprcursor";
+    homepage = "https://github.com/ful1e5/Bibata_Cursor";
+    license = lib.licenses.gpl3Only;
+    platforms = lib.platforms.linux;
+  };
 })

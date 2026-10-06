@@ -28,7 +28,7 @@
       {
         Appearance = {
           custom_palette = true;
-          color_scheme_path = "/home/mihai/.config/qt6ct/style-colors.conf";
+          color_scheme_path = "${config.xdg.configHome}/qt6ct/style-colors.conf";
           icon_theme = config.gtk.iconTheme.name;
           standard_dialogs = "xdgdesktopportal";
           style = "kvantum";
