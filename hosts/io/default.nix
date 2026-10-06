@@ -17,9 +17,6 @@
     ];
   };
 
-  # nh default flake
-  environment.variables.NH_FLAKE = "/home/mihai/Projects/dotfiles";
-
   networking.hostName = "io";
 
   security = {

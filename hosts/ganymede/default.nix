@@ -14,9 +14,6 @@
   boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
-  # nh default flake
-  environment.variables.NH_FLAKE = "/home/mihai/Projects/dotfiles";
-
   networking.hostName = "ganymede";
 
   security.tpm2.enable = true;

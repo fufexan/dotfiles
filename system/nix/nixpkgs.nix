@@ -31,7 +31,7 @@
                 owner = "trialuser";
                 repo = "qt6ct"; # "https://www.opencode.net/trialuser/qt6ct.git";
                 rev = "00823e41aa60e8fe266d5aee328e82ad1ad94348";
-                hash = "";
+                hash = "sha256-aQmqLpM0vogMsYaDS9OeKVI3N53uY4NBC4FF10hK8Uw=";
               };
 
               buildInputs =
