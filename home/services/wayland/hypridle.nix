@@ -21,7 +21,7 @@ in
 
     settings = {
       general = {
-        before_sleep_cmd = "loginctl lock-session";
+        before_sleep_cmd = lock;
         after_sleep_cmd = dpms "enable";
         lock_cmd = "pgrep hyprlock || ${lib.getExe config.programs.hyprlock.package}";
       };
