@@ -155,7 +155,6 @@ WrapperMouseArea {
                             elide: Text.ElideRight
                             maximumLineCount: 1
                             font.weight: Font.Bold
-                            color: Qt.rgba(1, 1, 1, .9)
                         }
 
                         Text {
@@ -164,9 +163,7 @@ WrapperMouseArea {
                             Layout.alignment: Qt.AlignRight
 
                             visible: root?.showTime
-                            // visible: false
                             text: Utils.humanTime(root.elapsed)
-                            color: Qt.rgba(1, 1, 1, .6)
                             font.weight: Font.Bold
                         }
                     }

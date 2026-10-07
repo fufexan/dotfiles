@@ -10,6 +10,7 @@ let
   dependencies = with pkgs; [
     bash
     coreutils
+    dconf # Colors.qml reads/watches the darkman color-scheme key
     gawk
     lsof
     ripgrep

@@ -1,28 +1,37 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import Quickshell.Io
 
 Singleton {
     id: root
 
-    property var currentColorScheme: Application.styleHints.colorScheme
+    property bool darkMode: true
 
-    Connections {
-        target: Application.styleHints
+    function apply(value: string): void {
+        if (value.includes("prefer-light"))
+            root.darkMode = false;
+        else if (value.includes("prefer-dark"))
+            root.darkMode = true;
+    }
 
-        // function onColorSchemeChanged(scheme) {
-        //     console.log("Color scheme changed to", scheme);
-        //     root.currentColorScheme = scheme;
-        // }
-
-        function colorSchemeChange() {
-            let scheme = Application.styleHints.colorScheme;
-            console.log("Color scheme changed to", scheme);
-            root.currentColorScheme = scheme;
+    // initial value on (re)load
+    Process {
+        running: true
+        command: ["dconf", "read", "/org/gnome/desktop/interface/color-scheme"]
+        stdout: StdioCollector {
+            onStreamFinished: root.apply(text)
         }
     }
 
-    property bool darkMode: currentColorScheme !== Qt.ColorScheme.Light
+    // live updates when the preference changes
+    Process {
+        running: true
+        command: ["dconf", "watch", "/org/gnome/desktop/interface/color-scheme"]
+        stdout: SplitParser {
+            onRead: data => root.apply(data)
+        }
+    }
 
     readonly property color bgBar: darkMode ? Qt.rgba(0, 0, 0, 0.21) : Qt.hsla(0, 0, 0.95, 0.11)
     readonly property color bgBlur: darkMode ? Qt.rgba(0, 0, 0, 0.5) : Qt.hsla(0, 0, 0.95, 0.5)

@@ -145,7 +145,7 @@ WrapperMouseArea {
                             anchors.centerIn: parent
                             margin: 5
 
-                            color: cellContainer.today ? Qt.hsla(0, 0, 1, 0.6) : "transparent"
+                            color: cellContainer.today ? Colors.foreground : "transparent"
 
                             Text {
                                 text: cellContainer.model.day
