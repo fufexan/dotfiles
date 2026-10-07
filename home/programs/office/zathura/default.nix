@@ -1,4 +1,9 @@
 {
+  config,
+  lib,
+  ...
+}:
+{
   programs.zathura = {
     enable = true;
     options = {
@@ -17,11 +22,24 @@
       zoom-min = "10";
     };
 
-    extraConfig = "include onedark";
+    # includes a mutable "theme" file that darkman points at onedark/onelight
+    extraConfig = "include theme";
   };
 
   xdg.configFile = {
     "zathura/onedark".source = ./onedark;
     "zathura/onelight".source = ./onelight;
   };
+
+  # seed the mutable theme pointer so `include theme` resolves on first launch;
+  # darkman re-points it on switch (zathura only reads its config at launch)
+  home.activation.zathuraTheme = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    tgt="${config.xdg.configHome}/zathura/theme"
+    [ -e "$tgt" ] || run ln -sf onedark "$tgt"
+  '';
+
+  services.darkman.scripts.zathura = ''
+    if [ "$1" = "light" ]; then variant=onelight; else variant=onedark; fi
+    ln -sf "$variant" "${config.xdg.configHome}/zathura/theme"
+  '';
 }

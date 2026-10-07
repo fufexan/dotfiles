@@ -121,7 +121,7 @@ in
     enable = true;
     enableGitIntegration = true;
     options = {
-      dark = true;
+      detect-dark-light = "auto";
       line-numbers = true;
       map-styles = "bold purple => syntax magenta, bold cyan => syntax blue";
       navigate = true;

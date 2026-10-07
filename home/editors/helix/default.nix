@@ -16,7 +16,10 @@
     ];
 
     settings = {
-      theme = "onedark";
+      theme = {
+        dark = "onedark";
+        light = "onelight";
+      };
       editor = {
         color-modes = true;
         completion-trigger-len = 1;

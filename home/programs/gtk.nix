@@ -1,9 +1,18 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
+  # darkman -> GTK3 legacy apps: flip the gtk-theme name live. libadwaita/GTK4
+  # apps instead follow the color-scheme set by theme.nix's dconf script.
+  services.darkman.scripts.gtk3 = ''
+    variant=""
+    [ "$1" = "dark" ] && variant="-dark"
+    ${lib.getExe' pkgs.glib "gsettings"} set org.gnome.desktop.interface gtk-theme "adw-gtk3$variant" || true
+  '';
+
   home.pointerCursor = {
     enable = true;
     package = pkgs.bibata-cursors;

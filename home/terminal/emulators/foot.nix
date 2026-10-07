@@ -90,4 +90,9 @@
         };
       };
   };
+
+  services.darkman.scripts.foot = ''
+    if [ "$1" = "light" ]; then sig=USR2; else sig=USR1; fi
+    ${pkgs.procps}/bin/pkill -"$sig" foot || true
+  '';
 }
