@@ -24,7 +24,7 @@
       background = [
         {
           monitor = "";
-          path = config.theme.wallpaper;
+          path = "${config.theme.wallpaper.dark}";
           blur_passes = 2;
           blur_size = 4;
         }

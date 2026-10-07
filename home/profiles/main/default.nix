@@ -28,6 +28,7 @@
     ../../services/wayland/gammastep.nix
     ../../services/wayland/hyprpaper.nix
     ../../services/wayland/hypridle.nix
+    ../../services/wayland/hyprland-theme.nix
 
     # terminal emulators
     ../../terminal/emulators/foot.nix

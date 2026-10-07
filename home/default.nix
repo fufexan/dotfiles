@@ -9,7 +9,6 @@
     ./terminal
     inputs.nix-index-db.homeModules.nix-index
     inputs.tailray.homeManagerModules.default
-    self.modules.theme
   ];
 
   home = {

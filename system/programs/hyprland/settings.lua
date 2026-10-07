@@ -24,8 +24,8 @@ hl.config({
 		gaps_out = gaps_out,
 		border_size = 1,
 		col = {
-			active_border = active_border,
-			inactive_border = inactive_border,
+			active_border = dark_active_border,
+			inactive_border = dark_inactive_border,
 		},
 		allow_tearing = true,
 		resize_on_border = true,
@@ -34,6 +34,8 @@ hl.config({
 	decoration = {
 		rounding = rounding,
 		rounding_power = rounding_power,
+		dim_inactive = true,
+		dim_strength = 0.1,
 		blur = {
 			enabled = true,
 			brightness = 1.0,
@@ -69,17 +71,17 @@ hl.config({
 			indicator_height = 20,
 			rounding = rounding,
 			rounding_power = rounding_power,
-			text_color = text_color,
-			text_color_inactive = text_color_inactive,
+			text_color = dark_text_color,
+			text_color_inactive = dark_text_color_inactive,
 			text_offset = -20,
 			col = {
-				active = group_active_color,
-				inactive = group_inactive_color,
+				active = dark_group_active_color,
+				inactive = dark_group_inactive_color,
 			},
 		},
 		col = {
-			border_active = active_border,
-			border_inactive = inactive_border,
+			border_active = dark_active_border,
+			border_inactive = dark_inactive_border,
 		},
 	},
 

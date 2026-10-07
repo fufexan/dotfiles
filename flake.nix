@@ -23,7 +23,6 @@
         imports = [
           ./hosts
           ./lib
-          ./modules
           ./pkgs
           ./fmt-hooks.nix
         ];
