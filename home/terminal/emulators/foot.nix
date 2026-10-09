@@ -7,6 +7,9 @@
   programs.foot = {
     enable = true;
 
+    # persist theme across terminal opens
+    server.enable = true;
+
     settings =
       let
         alpha = 0.9;

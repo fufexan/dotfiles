@@ -28,7 +28,7 @@ hl.bind(mod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 
 -- utility
-hl.bind(mod .. " + Return", hl.dsp.exec_cmd("uwsm app -- foot"))
+hl.bind(mod .. " + Return", hl.dsp.exec_cmd("uwsm app -- footclient"))
 hl.bind(mod .. " + Escape", hl.dsp.exec_cmd(toggle("wlogout") .. " -p layer-shell"))
 hl.bind(mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mod .. " + I", hl.dsp.exec_cmd("loginctl lock-session"))
