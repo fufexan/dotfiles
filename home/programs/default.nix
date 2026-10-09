@@ -28,7 +28,16 @@
 
     inputs.nix-matlab.packages.${pkgs.stdenv.hostPlatform.system}.matlab
 
-    claude-code
+    # cursed but avoids re-declaring installPhase
+    (claude-code.override {
+      procps = symlinkJoin {
+        name = "procps-with-nodejs";
+        paths = [
+          procps
+          nodejs
+        ];
+      };
+    })
   ];
 
   xdg.configFile."matlab/nix.sh".text = "INSTALL_DIR=$XDG_DATA_HOME/matlab/installation_2025b";
