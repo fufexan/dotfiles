@@ -52,10 +52,6 @@ follows = { nixpkgs-lib = "nixpkgs" }
 url = "github:ryantm/agenix"
 follows = { nixpkgs = "nixpkgs", home-manager = "hm", systems = "systems" }
 
-[inputs.helix]
-url = "github:helix-editor/helix"
-follows = { nixpkgs = "nixpkgs" }
-
 [inputs.hm]
 url = "github:nix-community/home-manager"
 follows = { nixpkgs = "nixpkgs" }
@@ -78,9 +74,6 @@ follows = { nixpkgs = "nixpkgs" }
 [inputs.git-hooks]
 url = "github:cachix/git-hooks.nix"
 follows = { nixpkgs = "nixpkgs", flake-compat = "flake-compat" }
-
-[inputs.yazi]
-url = "github:sxyazi/yazi"
 
 # HyprWM
 [inputs.hyprland]
@@ -136,9 +129,6 @@ follows = { nixpkgs = "nixpkgs" }
 url = "github:q60/uwu_colors"
 follows = { nixpkgs = "nixpkgs" }
 
-[inputs.vicinae]
-url = "github:vicinaehq/vicinae"
-
 [inputs.vicinae-extensions]
 url = "github:vicinaehq/extensions"
 
@@ -159,3 +149,6 @@ patches = ["patches/hyprqt6engine/hyprqt6engine-portal-follow.patch"]
 nixpkgs = "nixpkgs"
 hyprlang = "hyprland/hyprlang"
 hyprutils = "hyprland/hyprutils"
+
+[inputs.helix]
+url = "github:helix-editor/helix"

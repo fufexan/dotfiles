@@ -26,9 +26,7 @@
     "tailray": "github:NotAShelf/tailray",
     "treefmt-nix": "github:numtide/treefmt-nix",
     "uwu-colors": "github:q60/uwu_colors",
-    "vicinae": "github:vicinaehq/vicinae",
     "vicinae-extensions": "github:vicinaehq/extensions",
-    "yazi": "github:sxyazi/yazi",
     "zen-browser": "github:youwen5/zen-browser-flake"
   },
   "agenix": {
@@ -250,14 +248,6 @@
     "narHash": "sha256-gRoDt12wBOfkZOEdAZJaqfZPrCnC+qjal6LcuacE81M=",
     "lastModified": 1774287463
   },
-  "vicinae": {
-    "type": "github",
-    "owner": "vicinaehq",
-    "repo": "vicinae",
-    "rev": "7f1d1d96ea7ca9b08130962c91d0469df24a1362",
-    "narHash": "sha256-HuBu9NU+L2H/BW07H85E9A5/sT2ctOpGSBtB4IfteTk=",
-    "lastModified": 1790771562
-  },
   "vicinae-extensions": {
     "type": "github",
     "owner": "vicinaehq",
@@ -265,14 +255,6 @@
     "rev": "def646b3655e13759d2b0a7b9d605f55fe83a5f7",
     "narHash": "sha256-xG2Nvdhl+lcguYzkAHf6RkHQpM8c3rbN0NDHUiwT4CA=",
     "lastModified": 1790242820
-  },
-  "yazi": {
-    "type": "github",
-    "owner": "sxyazi",
-    "repo": "yazi",
-    "rev": "4e493b835296a9c3fb47b845ee87de4c36bb9fad",
-    "narHash": "sha256-BXKwamRWrKJNHxhn94qIi31X7+qYj0WOzFb7c2IWydE=",
-    "lastModified": 1790868438
   },
   "zen-browser": {
     "type": "github",
