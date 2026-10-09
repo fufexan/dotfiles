@@ -150,3 +150,12 @@ follows = { nixpkgs = "nixpkgs" }
 url = "github:Stremio/stremio-linux-shell"
 type = "fetch"
 tag = "v{version}"
+
+[inputs.hyprqt6engine]
+url = "github:hyprwm/hyprqt6engine"
+patches = ["patches/hyprqt6engine/hyprqt6engine-portal-follow.patch"]
+
+[inputs.hyprqt6engine.follows]
+nixpkgs = "nixpkgs"
+hyprlang = "hyprland/hyprlang"
+hyprutils = "hyprland/hyprutils"

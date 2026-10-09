@@ -12,6 +12,7 @@
     "hyprland-plugins": "github:hyprwm/hyprland-plugins",
     "hyprlock": "github:hyprwm/hyprlock",
     "hyprpaper": "github:hyprwm/hyprpaper",
+    "hyprqt6engine": "github:hyprwm/hyprqt6engine",
     "lanzaboote": "github:nix-community/lanzaboote",
     "nix-gaming": "github:fufexan/nix-gaming",
     "nix-index-db": "github:nix-community/nix-index-database",
@@ -125,6 +126,26 @@
     "rev": "39029bdfda857a5ea60340a427681893d12d4892",
     "narHash": "sha256-31/Mc3h5BtNi1Vh0+/W13RMjHCOhQlSOXqdseMAlV2Y=",
     "lastModified": 1786644848
+  },
+  "hyprqt6engine": {
+    "type": "github",
+    "owner": "hyprwm",
+    "repo": "hyprqt6engine",
+    "rev": "d0ce29ca5471f406c71558cd9453573686b8c976",
+    "narHash": "sha256-UQQue60zRgkz4KqqAyVZlVqGvdGZcj5BuWV9SlbURis=",
+    "lastModified": 1786465893,
+    "patched": {
+      "path": "/nix/store/9f6svg7lycqfl14dh9bc9xzjbl8jqk66-source",
+      "narHash": "sha256-lPWoUouI3D1cOIE11EqrvJ7AbXA03Shf0huXnOW96CA=",
+      "lastModified": 1786465893,
+      "patches": [
+        {
+          "source": "patches/hyprqt6engine/hyprqt6engine-portal-follow.patch",
+          "file": "patches/hyprqt6engine/hyprqt6engine-portal-follow.patch",
+          "sha256": "286568a0929f67d589caf8f77dcca19bf66f74d07c7ea96cacddadbec3ef13b1"
+        }
+      ]
+    }
   },
   "lanzaboote": {
     "type": "github",

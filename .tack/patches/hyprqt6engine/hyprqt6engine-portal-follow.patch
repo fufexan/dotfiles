@@ -1,0 +1,190 @@
+diff --git a/common/config/ConfigManager.cpp b/common/config/ConfigManager.cpp
+index 553c70c..59765e4 100644
+--- a/common/config/ConfigManager.cpp
++++ b/common/config/ConfigManager.cpp
+@@ -17,6 +17,10 @@ CConfigManager::CConfigManager() : m_config(getMainConfigPath().c_str(), Hyprlan
+ 
+ void CConfigManager::init() {
+     m_config.addConfigValue("theme:color_scheme", Hyprlang::STRING{""});
++    // followed live from the freedesktop color-scheme preference (portal) when
++    // theme:color_scheme is left empty
++    m_config.addConfigValue("theme:color_scheme_light", Hyprlang::STRING{""});
++    m_config.addConfigValue("theme:color_scheme_dark", Hyprlang::STRING{""});
+     m_config.addConfigValue("theme:icon_theme", Hyprlang::STRING{""});
+     m_config.addConfigValue("theme:style", Hyprlang::STRING{""});
+     m_config.addConfigValue("theme:font_fixed", Hyprlang::STRING{"monospace"});
+diff --git a/hyprqtplugin/CMakeLists.txt b/hyprqtplugin/CMakeLists.txt
+index c427670..d4a8a50 100644
+--- a/hyprqtplugin/CMakeLists.txt
++++ b/hyprqtplugin/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ project(hyprqtplugin)
+ 
+-find_package(Qt6 REQUIRED COMPONENTS Gui GuiPrivate)
++find_package(Qt6 REQUIRED COMPONENTS Gui GuiPrivate DBus)
+ 
+ set(app_SRCS
+   main.cpp
+@@ -10,6 +10,6 @@ set(app_SRCS
+ 
+ add_library(hyprqtplugin MODULE ${app_SRCS})
+ set_target_properties(hyprqtplugin PROPERTIES OUTPUT_NAME hyprqt6engine)
+-target_link_libraries(hyprqtplugin PRIVATE $<TARGET_NAME_IF_EXISTS:Qt6::WidgetsPrivate> Qt6::GuiPrivate $<TARGET_NAME_IF_EXISTS:Qt6::QuickControls2> $<TARGET_NAME_IF_EXISTS:KF6::IconThemes> hyprutils hyprlang hyprqt6engine-common)
++target_link_libraries(hyprqtplugin PRIVATE $<TARGET_NAME_IF_EXISTS:Qt6::WidgetsPrivate> Qt6::GuiPrivate Qt6::DBus $<TARGET_NAME_IF_EXISTS:Qt6::QuickControls2> $<TARGET_NAME_IF_EXISTS:KF6::IconThemes> hyprutils hyprlang hyprqt6engine-common)
+ target_compile_definitions(hyprqtplugin PRIVATE $<$<TARGET_EXISTS:KF6::IconThemes>:KF_ICONTHEMES_LIB>)
+ install(TARGETS hyprqtplugin DESTINATION ${PLUGINDIR}/platformthemes)
+diff --git a/hyprqtplugin/PlatformTheme.cpp b/hyprqtplugin/PlatformTheme.cpp
+index 36a9cf1..d2b7a4b 100644
+--- a/hyprqtplugin/PlatformTheme.cpp
++++ b/hyprqtplugin/PlatformTheme.cpp
+@@ -55,6 +55,10 @@
+ #endif
+ 
+ #include <QStringList>
++#include <QDBusConnection>
++#include <QDBusInterface>
++#include <QDBusReply>
++#include <QDBusVariant>
+ #include <qpa/qplatformthemefactory_p.h>
+ #include <qpa/qwindowsysteminterface.h>
+ 
+@@ -77,14 +81,16 @@ CHyprPlatformTheme::CHyprPlatformTheme() : m_fixedFont(*QGenericUnixTheme::font(
+     g_pConfigManager = makeUnique<CConfigManager>();
+     g_pConfigManager->init();
+ 
+-    static auto PCOLORSCHEME = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme");
++    // resolve the initial scheme from the portal preference and subscribe to changes
++    watchColorScheme();
+ 
+     if (QGuiApplication::desktopSettingsAware()) {
+         applySettings();
+         QMetaObject::invokeMethod(this, &CHyprPlatformTheme::applySettings, Qt::QueuedConnection);
+         //must be applied before Q_COREAPP_STARTUP_FUNCTION execution
+-        if (isKColorScheme(*PCOLORSCHEME))
+-            qApp->setProperty("KDE_COLOR_SCHEME_PATH", *PCOLORSCHEME);
++        const QString initialScheme = effectiveColorScheme();
++        if (isKColorScheme(initialScheme))
++            qApp->setProperty("KDE_COLOR_SCHEME_PATH", initialScheme);
+ #if defined QT_WIDGETS_LIB && defined QT_QUICKCONTROLS2_LIB
+         if (hasWidgets())
+             //don't override the value explicitly set by the user
+@@ -179,18 +185,19 @@ void CHyprPlatformTheme::applySettings() {
+         return;
+     }
+ 
+-    static auto PCOLORSCHEME   = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme");
+     static auto PFONTFIXED     = g_pConfigManager->getValue<Hyprlang::STRING>("theme:font_fixed");
+     static auto PFONTFIXEDSIZE = g_pConfigManager->getValue<Hyprlang::INT>("theme:font_fixed_size");
+     static auto PFONT          = g_pConfigManager->getValue<Hyprlang::STRING>("theme:font");
+     static auto PFONTSIZE      = g_pConfigManager->getValue<Hyprlang::INT>("theme:font_size");
+ 
++    const QString scheme = effectiveColorScheme();
++
+     m_font      = QFont(QString{*PFONT}, *PFONTSIZE);
+     m_fixedFont = QFont(QString{*PFONTFIXED}, *PFONTFIXEDSIZE);
+-    m_palette   = CHyprStyle::loadColorScheme(std::string_view(*PCOLORSCHEME).empty() ? QString() : *PCOLORSCHEME);
++    m_palette   = CHyprStyle::loadColorScheme(scheme.isEmpty() ? QString() : scheme);
+ 
+-    if (isKColorScheme(*PCOLORSCHEME))
+-        qApp->setProperty("KDE_COLOR_SCHEME_PATH", *PCOLORSCHEME);
++    if (isKColorScheme(scheme))
++        qApp->setProperty("KDE_COLOR_SCHEME_PATH", scheme);
+     else if (m_update)
+         qApp->setProperty("KDE_COLOR_SCHEME_PATH", QVariant());
+ 
+@@ -242,10 +249,60 @@ QString CHyprPlatformTheme::loadStyleSheets(const QStringList& paths) {
+ //application-wide and we should re-apply the color scheme if KCSM resets it to the default
+ //which leads KColorScheme to get the color scheme from kdeglobals which won't help us.
+ bool CHyprPlatformTheme::eventFilter(QObject* obj, QEvent* e) {
+-    static auto PCOLORSCHEME = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme");
+-
+     if (obj == qApp && e->type() == QEvent::DynamicPropertyChange && static_cast<QDynamicPropertyChangeEvent*>(e)->propertyName() == "KDE_COLOR_SCHEME_PATH" &&
+-        qApp->property("KDE_COLOR_SCHEME_PATH").toString().isEmpty() && isKColorScheme(*PCOLORSCHEME))
++        qApp->property("KDE_COLOR_SCHEME_PATH").toString().isEmpty() && isKColorScheme(effectiveColorScheme()))
+         applySettings();
+     return QObject::eventFilter(obj, e);
+ }
++
++//An explicit theme:color_scheme pins the scheme; otherwise follow the portal's
++//light/dark preference (theme:color_scheme_light / theme:color_scheme_dark).
++QString CHyprPlatformTheme::effectiveColorScheme() const {
++    static auto PCOLORSCHEME = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme");
++    if (!std::string_view(*PCOLORSCHEME).empty())
++        return QString::fromUtf8(*PCOLORSCHEME);
++    return m_colorSchemePath;
++}
++
++//color-scheme preference: 1 = prefer dark, 2 = prefer light, 0 = no preference
++QString CHyprPlatformTheme::resolveScheme(uint preference) const {
++    static auto PLIGHT = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme_light");
++    static auto PDARK  = g_pConfigManager->getValue<Hyprlang::STRING>("theme:color_scheme_dark");
++
++    const QString light = QString::fromUtf8(*PLIGHT);
++    const QString dark  = QString::fromUtf8(*PDARK);
++
++    QString path = (preference == 2) ? light : dark;
++    if (path.isEmpty()) //fall back to whichever scheme is configured
++        path = (preference == 2) ? dark : light;
++    return path;
++}
++
++void CHyprPlatformTheme::updateColorScheme(uint preference) {
++    const QString path = resolveScheme(preference);
++    if (path == m_colorSchemePath)
++        return;
++
++    m_colorSchemePath = path;
++    applySettings();
++}
++
++void CHyprPlatformTheme::onColorSchemeChanged(const QString& ns, const QString& key, const QDBusVariant& value) {
++    if (ns == u"org.freedesktop.appearance"_s && key == u"color-scheme"_s)
++        updateColorScheme(value.variant().toUInt());
++}
++
++void CHyprPlatformTheme::watchColorScheme() {
++    auto bus = QDBusConnection::sessionBus();
++
++    bus.connect(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, u"org.freedesktop.portal.Settings"_s, u"SettingChanged"_s, this,
++                SLOT(onColorSchemeChanged(QString, QString, QDBusVariant)));
++
++    uint             preference = 0;
++    QDBusInterface   iface(u"org.freedesktop.portal.Desktop"_s, u"/org/freedesktop/portal/desktop"_s, u"org.freedesktop.portal.Settings"_s, bus);
++    QDBusReply<QDBusVariant> reply = iface.call(u"ReadOne"_s, u"org.freedesktop.appearance"_s, u"color-scheme"_s);
++    if (reply.isValid())
++        preference = reply.value().variant().toUInt();
++
++    m_colorSchemePath = resolveScheme(preference);
++}
+diff --git a/hyprqtplugin/PlatformTheme.hpp b/hyprqtplugin/PlatformTheme.hpp
+index 996e7be..3319139 100644
+--- a/hyprqtplugin/PlatformTheme.hpp
++++ b/hyprqtplugin/PlatformTheme.hpp
+@@ -12,6 +12,7 @@
+ #include <QLoggingCategory>
+ #include <QIcon>
+ #include <QFileInfo>
++#include <QDBusVariant>
+ 
+ class CHyprPlatformTheme : public QObject, public QGenericUnixTheme {
+     Q_OBJECT
+@@ -44,11 +45,19 @@ class CHyprPlatformTheme : public QObject, public QGenericUnixTheme {
+ 
+   private slots:
+     void applySettings();
++    // freedesktop color-scheme preference changed (xdg-desktop-portal)
++    void onColorSchemeChanged(const QString& ns, const QString& key, const QDBusVariant& value);
+ 
+   private:
+ #ifdef QT_WIDGETS_LIB
+     bool hasWidgets();
+ #endif
++    // live light/dark following via the portal's org.freedesktop.appearance color-scheme
++    void                            watchColorScheme();
++    void                            updateColorScheme(uint preference);
++    QString                         resolveScheme(uint preference) const;
++    QString                         effectiveColorScheme() const;
++    QString                         m_colorSchemePath; // scheme chosen from the current preference
+     QString                         loadStyleSheets(const QStringList& paths);
+     QString                         m_prevStyleSheet;
+     QFont                           m_fixedFont, m_font;
