@@ -30,5 +30,14 @@
       ])
     }/bin/python3 ${./monitorwatch.py}";
     path = [ config.programs.hyprland.package ];
+
+    # ddcutil-service is D-Bus activated, so at session start the name is not
+    # claimable until the user bus has the session XDG_DATA_DIRS. Connecting
+    # then throws ServiceUnknown and the unit stays dead for the whole
+    # session, so retry instead.
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
   };
 }

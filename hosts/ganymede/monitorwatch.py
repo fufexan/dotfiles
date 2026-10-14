@@ -5,6 +5,7 @@ import dbus.mainloop.glib
 import json
 import re
 import subprocess
+import time
 from gi.repository import GLib
 
 dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
@@ -18,14 +19,23 @@ CONNECTOR = "HDMI-A-1"
 OTHER_INPUT = "0x12"
 POLL_INTERVAL_MS = 300
 ERROR_THRESHOLD = 3
+REDETECT_COOLDOWN_S = 30
 
 last_state = None
 consecutive_errors = 0
 display_awake = True
-prog = re.compile("0x[0-9]{2}")
+last_redetect = 0.0
+prog = re.compile("0x[0-9a-fA-F]{2}")
 
 
 def redetect():
+    # re-probing drives I2C traffic that can wake a sleeping monitor, so only
+    # call this once the display is known to be powered, and rate-limit it
+    global last_redetect
+    now = time.monotonic()
+    if now - last_redetect < REDETECT_COOLDOWN_S:
+        return
+    last_redetect = now
     print("Re-running display detection...")
     try:
         iface.Detect(0)
@@ -33,12 +43,17 @@ def redetect():
         print(f"Detect error: {e}")
 
 
-def hyprland_check_connected(connector):
+def hyprland_monitor_state(connector):
+    # `monitors all` lists disabled outputs too, so present only means the
+    # cable is plugged in; it says nothing about which input the monitor shows
     completed_process = subprocess.run(
         ["hyprctl", "monitors", "all", "-j"], capture_output=True
     )
     monitors = json.loads(completed_process.stdout)
-    return any(x["name"] == connector for x in monitors)
+    for monitor in monitors:
+        if monitor["name"] == connector:
+            return (True, not monitor["disabled"], monitor["dpmsStatus"])
+    return (False, False, False)
 
 
 def hyprland_monitor(enable: bool):
@@ -65,13 +80,30 @@ def poll_input():
     # is in DPMS standby — it won't answer DDC, and waking it defeats DPMS
     if not display_awake:
         return True
+
+    try:
+        present, enabled, powered = hyprland_monitor_state(CONNECTOR)
+    except Exception as e:
+        # hyprctl is unusable, e.g. the session is still coming up
+        print(f"Hyprland query error: {e}")
+        return True
+
+    if not present:
+        return True
+    # Hyprland powered the output down. The ddcutil standby signal lags that by
+    # seconds, so check it here too or the error path below wakes the monitor.
+    if enabled and not powered:
+        return True
+
     try:
         result = iface.GetVcp(DISPLAY_NUM, "", dbus.Byte(0x60), dbus.UInt32(0))
-        current_value = prog.search(result[2]).group(0)
-        is_ours = str(current_value) != OTHER_INPUT
+        match = prog.search(result[2])
+        if match is None:
+            raise ValueError(f"no input source code in {result[2]!r}")
+        is_ours = match.group(0) != OTHER_INPUT
         consecutive_errors = 0
 
-        if is_ours != last_state and hyprland_check_connected(CONNECTOR):
+        if is_ours != last_state:
             last_state = is_ours
             hyprland_monitor(is_ours)
 
@@ -79,12 +111,12 @@ def poll_input():
         print(f"Poll error: {e}")
         consecutive_errors += 1
         if consecutive_errors >= ERROR_THRESHOLD:
-            redetect()
             consecutive_errors = 0
-            # if still in hyprland, it's connected to us — enable it
-            if hyprland_check_connected(CONNECTOR) and last_state != True:
-                last_state = True
-                hyprland_monitor(True)
+            # the monitor stopped answering: it is asleep, or the ddcci i2c
+            # device went away. Re-probe, but leave the output alone. The next
+            # successful read decides. Forcing it on here turned the display
+            # back on every time DPMS or an input switch silenced DDC.
+            redetect()
 
     return True
 
