@@ -33,7 +33,12 @@
           ./io
           "${mod}/core/lanzaboote.nix"
 
-          (hm homeImports.main)
+          (hm (
+            homeImports.main
+            ++ [
+              "${self}/home/services/system/power-monitor.nix"
+            ]
+          ))
         ];
       };
 
