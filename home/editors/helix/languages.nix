@@ -229,26 +229,27 @@
         };
       };
 
-      typescript-language-server = {
-        command = lib.getExe pkgs.typescript-language-server;
-        args = [ "--stdio" ];
-        config = {
-          typescript-language-server.source = {
-            addMissingImports.ts = true;
-            fixAll.ts = true;
-            organizeImports.ts = true;
-            removeUnusedImports.ts = true;
-            sortImports.ts = true;
-          };
-          plugins = [
-            {
-              name = "@vue/typescript-plugin";
-              location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
-              languages = [ "vue" ];
-            }
-          ];
-        };
-      };
+      # TODO: re-enable when it's no longer broken
+      # typescript-language-server = {
+      #   command = lib.getExe pkgs.typescript-language-server;
+      #   args = [ "--stdio" ];
+      #   config = {
+      #     typescript-language-server.source = {
+      #       addMissingImports.ts = true;
+      #       fixAll.ts = true;
+      #       organizeImports.ts = true;
+      #       removeUnusedImports.ts = true;
+      #       sortImports.ts = true;
+      #     };
+      #     plugins = [
+      #       {
+      #         name = "@vue/typescript-plugin";
+      #         location = "${pkgs.vue-language-server}/lib/node_modules/@vue/language-server";
+      #         languages = [ "vue" ];
+      #       }
+      #     ];
+      #   };
+      # };
 
       uwu-colors = {
         command = "${inputs.uwu-colors.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/uwu_colors";

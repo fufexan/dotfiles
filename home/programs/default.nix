@@ -24,7 +24,8 @@
     resources
     wineWow64Packages.wayland
 
-    zotero
+    # TODO: add back once it builds
+    # zotero
 
     inputs.nix-matlab.packages.${pkgs.stdenv.hostPlatform.system}.matlab
 
