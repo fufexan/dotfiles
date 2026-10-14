@@ -12,11 +12,11 @@
   # general file info
   home.packages = [ pkgs.exiftool ];
 
-  xdg.configFile."yazi/flavors/base16.yazi".source = pkgs.fetchFromGitHub {
-    owner = "matt-dong-123";
+  xdg.configFile."yazi/flavors".source = pkgs.fetchFromGitHub {
+    owner = "fufexan";
     repo = "base16.yazi";
-    rev = "ed793528890e2b37595c76b70c212ccfdc81d9ae";
-    hash = "sha256-1WhixzYE1zsXg9o6T/YKWJgzfRZnzsmpiUIfi+j4H9Q=";
+    rev = "c9929919b8c02b7a53d10470d45b847ff565dc7a";
+    hash = "sha256-GspH8eiAdPkpaL1HeDMTZPCDN23X96tuKD7Hf6AZukI=";
   };
 
   # yazi file manager
@@ -38,8 +38,8 @@
     };
 
     theme = {
-      flavor.dark = "base16";
-      flavor.light = "base16";
+      flavor.dark = "base16-dark";
+      flavor.light = "base16-light";
     };
 
     # Run ripdrag when pressing C-n
