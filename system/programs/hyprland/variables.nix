@@ -32,6 +32,8 @@
     light_group_active="rgba(00000066)"
     light_group_inactive="rgba(ffffff66)"
 
+    bell_sound = "${pkgs.kdePackages.ocean-sound-theme}/share/sounds/ocean/stereo/bell.oga"
+
     screencopy_perms = {"${config.programs.hyprland.portalPackage}/libexec/.xdg-desktop-portal-hyprland-wrapped", "${lib.getExe pkgs.grim}", "${lib.getExe pkgs.wl-screenrec}"}
   '';
 }

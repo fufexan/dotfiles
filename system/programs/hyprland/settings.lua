@@ -100,6 +100,7 @@ hl.config({
 	},
 
 	misc = {
+		bell_sound = bell_sound,
 		force_default_wallpaper = 0,
 		animate_mouse_windowdragging = false,
 		vrr = 1,
