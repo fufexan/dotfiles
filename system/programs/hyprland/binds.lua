@@ -44,7 +44,7 @@ hl.bind(mod .. " + up", hl.dsp.focus({ direction = "u" }))
 hl.bind(mod .. " + down", hl.dsp.focus({ direction = "d" }))
 
 -- screenshot & screen record
-local area_screenshot = runOnce("grimblast") .. " --notify copysave area"
+local area_screenshot = runOnce("grimblast") .. " --freeze --notify copysave area"
 local output_screenshot = runOnce("grimblast") .. " --notify copysave output"
 local record = runOnce("gpu-screen-recorder-gtk")
 
