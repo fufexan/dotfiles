@@ -103,7 +103,7 @@ hl.config({
 		bell_sound = bell_sound,
 		force_default_wallpaper = 0,
 		animate_mouse_windowdragging = false,
-		vrr = 1,
+		vrr = 2,
 		mouse_move_enables_dpms = true,
 		key_press_enables_dpms = true,
 		focus_on_activate = true,
