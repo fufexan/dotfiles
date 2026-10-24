@@ -1,5 +1,6 @@
 {
   self,
+  pkgs,
   ...
 }:
 {
@@ -16,6 +17,13 @@
       "amdgpu.dcfeaturemask=0x8"
     ];
   };
+
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "wol-ganymede" ''
+      ssh toshiba "wol -v 50:eb:f6:bd:df:ce"
+      tailscale ping -c 3 --until-direct=false ganymede
+    '')
+  ];
 
   networking.hostName = "io";
 
