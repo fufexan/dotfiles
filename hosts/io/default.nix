@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./hyprland.nix
+    ./power.nix
   ];
 
   boot = {

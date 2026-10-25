@@ -107,8 +107,6 @@
       l = "eza -l";
       la = "eza -la";
       md = "mkdir -p";
-      ppc = "powerprofilesctl";
-      pf = "powerprofilesctl launch -p performance";
 
       us = "systemctl --user"; # mnemonic for user systemctl
       rs = "sudo systemctl"; # mnemonic for root systemctl
