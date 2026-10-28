@@ -27,6 +27,7 @@ in
       "*~"
       "*.swp"
       "*result*"
+      ".claude/"
       ".direnv"
       ".worktree"
       "node_modules"
@@ -111,10 +112,30 @@ in
         config.home.homeDirectory + "/" + config.xdg.configFile."git/allowed_signers".target;
 
       pull.rebase = true;
+      push.autoSetupRemote = true;
+
+      rebase = {
+        autoSquash = true;
+        autoStash = true;
+        updateRefs = true;
+      };
+
+      # remember conflict resolutions and replay them on the next identical conflict
+      rerere.enabled = true;
+
+      fetch.prune = true;
+      fetch.fsckObjects = true;
+      receive.fsckObjects = true;
+      transfer.fsckObjects = true;
 
       diff.colorMoved = "default";
-      merge.conflictstyle = "zdiff3";
     };
+  };
+
+  # syntax-aware merge driver, falls back to regular conflict markers
+  programs.mergiraf = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   programs.delta = {
@@ -122,6 +143,7 @@ in
     enableGitIntegration = true;
     options = {
       detect-dark-light = "auto";
+      hyperlinks = true;
       line-numbers = true;
       map-styles = "bold purple => syntax magenta, bold cyan => syntax blue";
       navigate = true;
