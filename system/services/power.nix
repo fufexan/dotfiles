@@ -6,5 +6,10 @@
 
     # battery info
     upower.enable = true;
+
+    udev.extraRules = /* udev */ ''
+      # Enable PCI runtime power management on all devices.
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{power/control}="auto"
+    '';
   };
 }

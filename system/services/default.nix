@@ -7,7 +7,6 @@
     ./location.nix
     ./pipewire.nix
     ./power.nix
-    ./powersave.nix
   ];
 
   services = {
