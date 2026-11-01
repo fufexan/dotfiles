@@ -41,7 +41,10 @@
                 inputs.tack.packages.${pkgs.stdenv.hostPlatform.system}.default
               ];
               name = "dots";
-              env.DIRENV_LOG_FORMAT = "";
+              env = {
+                DIRENV_LOG_FORMAT = "";
+                TACK_NIX_CONF_TOKENS = 1;
+              };
               shellHook = ''
                 ${config.pre-commit.installationScript}
               '';

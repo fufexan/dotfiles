@@ -6,10 +6,7 @@
 }:
 {
   boot = {
-    initrd = {
-      systemd.enable = true;
-      supportedFilesystems = [ "ext4" ];
-    };
+    initrd.supportedFilesystems = [ "ext4" ];
 
     # use latest kernel (mkDefault so hosts can override without mkForce)
     kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
