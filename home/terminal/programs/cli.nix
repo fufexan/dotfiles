@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  inputs,
   ...
 }:
 {
@@ -23,7 +23,12 @@
     jaq
     ripgrep
     ripdrag
+
+    # nix
+    inputs.tack.packages.${pkgs.stdenv.hostPlatform.system}.tack
   ];
+
+  home.sessionVariables."TACK_NIX_CONF_TOKENS" = "1";
 
   programs = {
     eza.enable = true;
