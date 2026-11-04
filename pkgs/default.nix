@@ -35,8 +35,7 @@
 
         stremio-linux-shell = pkgs.callPackage ./stremio-linux-shell {
           src = inputs.stremio;
-          version = pkgs.lib.removePrefix "v" (pkgs.lib.importJSON "${self}/.tack/pins.lock.json")
-          .stremio.tag;
+          version = pkgs.lib.removePrefix "v" inputs._meta.stremio.tag;
         };
         wl-ocr = pkgs.callPackage ./wl-ocr { };
       };
