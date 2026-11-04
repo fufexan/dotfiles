@@ -25,9 +25,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   cargoLock = {
     lockFile = "${finalAttrs.src}/Cargo.lock";
-    outputHashes = {
-      "libmpv2-5.0.3" = "sha256-EhADLuOxJe2xYEXfwYRNSlFVuuV10TxqmwsG9oZPG3c=";
-    };
+    allowBuiltinFetchGit = true;
   };
 
   buildInputs = [
