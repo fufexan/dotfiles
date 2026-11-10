@@ -35,7 +35,6 @@
       else
         wp="${config.theme.wallpaper.dark}"
       fi
-      ${hyprctl} hyprpaper preload "$wp" || true
       ${hyprctl} hyprpaper wallpaper ", $wp" || true
     '';
 }
