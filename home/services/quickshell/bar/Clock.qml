@@ -6,8 +6,7 @@ import qs.utils
 
 WrapperMouseArea {
     onClicked: () => {
-        NotificationState.notifOverlayOpen = false;
-        Config.showSidebar = !Config.showSidebar;
+        NotifClient.toggleSidebar();
     }
 
     RowLayout {
@@ -18,7 +17,7 @@ WrapperMouseArea {
         }
 
         MaterialIcon {
-            text: Config.doNotDisturb ? "do_not_disturb_on_total_silence" : "notifications" + (NotificationState.allNotifs.length > 0 ? "_unread" : "")
+            text: !NotifClient.connected ? "notifications_off" : NotifClient.doNotDisturb ? "do_not_disturb_on_total_silence" : "notifications" + (NotifClient.count > 0 ? "_unread" : "")
             font.pointSize: Config.iconSize
         }
     }

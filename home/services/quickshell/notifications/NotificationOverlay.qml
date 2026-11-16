@@ -11,7 +11,7 @@ PanelWindow {
     id: root
 
     screen: Config.preferredMonitor
-    visible: NotificationState.notifOverlayOpen && !Config.showSidebar && !Config.doNotDisturb
+    visible: NotificationState.notifOverlayOpen && !NotificationState.showSidebar && !NotificationState.doNotDisturb
 
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.namespace: "quickshell:notifications:overlay"
@@ -46,12 +46,20 @@ PanelWindow {
         }
 
         Repeater {
-            model: NotificationState.popupNotifs.length
+            // Render only the newest few cards. Older ones stay queued in popupNotifs
+            // and appear as visible ones expire, so none are lost during a burst.
+            model: Math.min(NotificationState.popupNotifs.length, 5)
 
             NotificationBox {
                 id: notifBox
                 required property int index
                 n: NotificationState.popupNotifs[index]
+
+                onActionInvoked: i => notifBox.n?.actions[i]?.invoke()
+                onDismissRequested: NotificationState.notifDismissByNotif(notifBox.n)
+                onCloseRequested: NotificationState.notifCloseByNotif(notifBox.n)
+                onDismissAllRequested: NotificationState.dismissAll()
+                onCloseAllRequested: NotificationState.closeAll()
 
                 Timer {
                     running: root.visible && !!notifBox.n

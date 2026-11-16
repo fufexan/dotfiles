@@ -45,7 +45,7 @@ ColumnLayout {
                 anchors.rightMargin: Config.spacing / 2
 
                 Text {
-                    text: (NotificationState.allNotifs.length || "No") + " notification" + (NotificationState.allNotifs.length != 1 ? "s" : "")
+                    text: (NotifClient.count || "No") + " notification" + (NotifClient.count != 1 ? "s" : "")
                 }
 
                 RowLayout {
@@ -56,15 +56,15 @@ ColumnLayout {
                     MaterialIconButton {
                         id: dndButton
 
-                        onPressed: Config.doNotDisturb = !Config.doNotDisturb
-                        icon: "do_not_disturb_" + (Config.doNotDisturb ? "on" : "off")
-                        text: "Do not disturb " + (Config.doNotDisturb ? "on" : "off")
+                        onPressed: NotifClient.toggleDnd()
+                        icon: "do_not_disturb_" + (NotifClient.doNotDisturb ? "on" : "off")
+                        text: "Do not disturb " + (NotifClient.doNotDisturb ? "on" : "off")
                     }
 
                     IconButton {
                         id: closeButton
 
-                        onPressed: NotificationState.closeAll()
+                        onPressed: NotifClient.closeAll()
                         icon: "process-stop-symbolic"
                         text: "Close all notifications"
                     }
@@ -102,19 +102,41 @@ ColumnLayout {
             spacing: Config.padding
             boundsBehavior: Flickable.StopAtBounds
 
-            model: NotificationState.allNotifs.length
+            model: NotifClient.model
 
             delegate: Item {
-                required property int index
+                id: del
+
+                required property int nid
+                required property string summary
+                required property string body
+                required property string appIcon
+                required property string image
+                required property string timeStr
+                required property string actionsJson
+
                 width: notifList.width
                 implicitHeight: box.implicitHeight
 
                 NotificationBox {
                     id: box
                     x: Config.padding * 5
-                    n: NotificationState.allNotifs[index]
+                    // The box has its own "image" property, so read roles through del.
+                    n: ({
+                            id: del.nid,
+                            summary: del.summary,
+                            body: del.body,
+                            appIcon: del.appIcon,
+                            image: del.image,
+                            time: Number(del.timeStr),
+                            actions: JSON.parse(del.actionsJson)
+                        })
                     showTime: true
                     dismissOnClose: false
+
+                    onActionInvoked: i => NotifClient.invokeAction(del.nid, i)
+                    onCloseRequested: NotifClient.close(del.nid)
+                    onCloseAllRequested: NotifClient.closeAll()
                 }
             }
         }

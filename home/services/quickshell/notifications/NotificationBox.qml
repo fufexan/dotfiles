@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
-import Quickshell.Services.Notifications
+
 import Quickshell.Widgets
 import qs.utils
 import qs.components
@@ -14,7 +14,14 @@ WrapperMouseArea {
     acceptedButtons: Qt.AllButtons
     hoverEnabled: true
 
-    property Notification n
+    // Plain data or a live Notification: id, summary, body, image, appIcon, time, actions[].text
+    property var n
+
+    signal actionInvoked(int index)
+    signal closeRequested
+    signal closeAllRequested
+    signal dismissRequested
+    signal dismissAllRequested
     property int elapsed: n ? getElapsed() : 0
     property string image: !n?.image && !!n?.appIcon ? n.appIcon : n?.image ?? ""
     property bool hasAppIcon: !!n?.image && !!n?.appIcon
@@ -32,18 +39,17 @@ WrapperMouseArea {
 
     onClicked: mouse => {
         if (!root.n) return;
-        if (mouse.button == Qt.LeftButton && root.n?.actions != []) {
-            root.n?.actions[0].invoke();
+        if (mouse.button == Qt.LeftButton && root.n.actions.length > 0) {
+            root.actionInvoked(0);
         } else if (mouse.button == Qt.RightButton) {
-            if (dismissOnClose) {
-                NotificationState.notifDismissByNotif(n);
-            } else {
-                NotificationState.notifCloseByNotif(n);
-            }
+            if (dismissOnClose)
+                root.dismissRequested();
+            else
+                root.closeRequested();
         } else if (mouse.button == Qt.MiddleButton && dismissOnClose) {
-            NotificationState.dismissAll();
+            root.dismissAllRequested();
         } else if (mouse.button == Qt.MiddleButton) {
-            NotificationState.closeAll();
+            root.closeAllRequested();
         }
     }
 
@@ -190,7 +196,7 @@ WrapperMouseArea {
 
                 Repeater {
                     id: actionRepeater
-                    model: root.n ? root.n.actions.length - 1 : 0
+                    model: root.n ? Math.max(0, root.n.actions.length - 1) : 0
 
                     Button {
                         id: actionButtonMA
@@ -200,7 +206,7 @@ WrapperMouseArea {
 
                         buttonText: root.n?.actions?.[index + 1]?.text ?? ""
                         text: ""
-                        onPressed: root.n?.actions?.[index + 1]?.invoke()
+                        onPressed: root.actionInvoked(index + 1)
                     }
                 }
             }
@@ -227,7 +233,7 @@ WrapperMouseArea {
             icon: "process-stop-symbolic"
             text: ""
 
-            onPressed: NotificationState.notifCloseByNotif(root.n)
+            onPressed: root.closeRequested()
         }
     }
 }

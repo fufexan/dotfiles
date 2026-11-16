@@ -11,8 +11,8 @@
           qs = "${pkgs.quickshell}/bin/qs";
         in
         {
-          start = "${qs} ipc call notifications disable";
-          end = "${qs} ipc call notifications disable";
+          start = "${qs} ipc -p $HOME/.config/quickshell/notifd.qml call notifications disable";
+          end = "${qs} ipc -p $HOME/.config/quickshell/notifd.qml call notifications disable";
         };
     };
   };
