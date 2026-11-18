@@ -12,8 +12,12 @@ hl.layer_rule({
   ignore_alpha = 0.2,
 })
 hl.layer_rule({
-  match = { namespace = "^(vicinae|logout_dialog|quickshell:sidebar|quickshell:popup)$" },
+  match = { namespace = "^(vicinae|logout_dialog|quickshell:popup)$" },
   ignore_alpha = 0.5,
+})
+hl.layer_rule({
+  match = { namespace = "^(quickshell:sidebar)$" },
+  ignore_alpha = 0.4,
 })
 hl.layer_rule({
   match = { namespace = "^quickshell.*$" },

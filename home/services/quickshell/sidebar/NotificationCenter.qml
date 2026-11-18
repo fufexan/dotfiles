@@ -97,6 +97,14 @@ ColumnLayout {
                 return win.height - top - Config.padding * 5;
             }
 
+            // The clip edge has to stay just below the translucent header, or scrolled
+            // cards show through it. This spacer leaves the first card's top shadow
+            // room inside the clip instead.
+            header: Item {
+                width: notifList.width
+                height: Config.padding * 2
+            }
+
             clip: true
             reuseItems: true
             spacing: Config.padding
@@ -132,6 +140,8 @@ ColumnLayout {
                             actions: JSON.parse(del.actionsJson)
                         })
                     showTime: true
+                    shadowBlur: Config.blurMax / 2
+                    shadowSpread: Config.padding / 2
                     dismissOnClose: false
 
                     onActionInvoked: i => NotifClient.invokeAction(del.nid, i)

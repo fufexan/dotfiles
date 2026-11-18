@@ -27,6 +27,11 @@ WrapperMouseArea {
     property bool hasAppIcon: !!n?.image && !!n?.appIcon
     property real iconSize: Config.notificationIconSize
 
+    // Spread must stay above 0 so the shadow fill still lifts the card past
+    // Hyprland's blur ignore_alpha. Stacked lists shrink both to avoid overlap.
+    property real shadowBlur: Config.blurMax
+    property real shadowSpread: Config.padding * 2
+
     property bool showTime: false
     property bool expanded: true
 
@@ -67,8 +72,8 @@ WrapperMouseArea {
         RectangularShadow {
             anchors.fill: mainRect
             radius: mainRect.radius
-            blur: Config.blurMax
-            spread: Config.padding * 2
+            blur: root.shadowBlur
+            spread: root.shadowSpread
             color: Colors.windowShadow
         }
 
