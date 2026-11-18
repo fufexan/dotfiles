@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import Quickshell.Services.Notifications
 
 // Only the notifd process may reference this singleton. It owns the D-Bus
@@ -20,6 +21,11 @@ Singleton {
 
     // Connected socket clients (bar, sidebar).
     property var clients: []
+
+    // image:// URLs only load inside this process, so each one is rendered to a PNG
+    // here and clients get the file path (id -> path) once it exists.
+    readonly property string imageDir: Quickshell.env("XDG_RUNTIME_DIR") + "/qs-notif-images"
+    property var imagePaths: ({})
 
     onShowSidebarChanged: broadcast({
         t: "sidebar",
@@ -43,9 +49,8 @@ Singleton {
             body: n.body,
             time: n.time,
             appIcon: n.appIcon ?? "",
-            // image:// URLs come from a provider inside this process, so other
-            // processes cannot load them. They fall back to appIcon.
-            image: image.startsWith("image://") ? "" : image,
+            // Until the PNG is rendered, other processes fall back to appIcon.
+            image: image.startsWith("image://") ? (imagePaths[n.id] ?? "") : image,
             actions
         };
     }
@@ -113,13 +118,31 @@ Singleton {
         const wasListed = allNotifs.includes(notif);
         popupNotifs = popupNotifs.filter(n => n != notif);
         allNotifs = allNotifs.filter(n => n != notif);
-        if (wasListed)
+        if (wasListed) {
             broadcast({
                 t: "remove",
                 id: notif.id
             });
+            if (imagePaths[notif.id]) {
+                Quickshell.execDetached(["rm", "-f", imagePaths[notif.id]]);
+                delete imagePaths[notif.id];
+            }
+        }
         if (popupNotifs.length == 0)
             notifOverlayOpen = false;
+    }
+
+    // Renders a notification's image:// source to a PNG and tells clients where it is.
+    function captureImage(notif) {
+        imageGrabber.createObject(grabHost, {
+            nid: notif.id,
+            source: notif.image
+        });
+    }
+
+    function resetImages() {
+        imagePaths = {};
+        Quickshell.execDetached(["sh", "-c", "rm -rf \"$1\" && mkdir -p \"$1\"", "sh", imageDir]);
     }
 
     function onNewNotif(notif) {
@@ -128,6 +151,8 @@ Singleton {
             t: "add",
             n: serialize(notif)
         });
+        if ((notif.image ?? "").startsWith("image://"))
+            captureImage(notif);
 
         if (notif.lastGeneration)
             return;
@@ -158,9 +183,64 @@ Singleton {
         allNotifs = [];
         popupNotifs = [];
         notifOverlayOpen = false;
+        resetImages();
         broadcast({
             t: "clear"
         });
+    }
+
+    Component.onCompleted: resetImages()
+
+    // A 1px transparent window gives the Image items a scene to render in, which
+    // grabToImage needs. It takes no input and sits on the background layer.
+    PanelWindow {
+        implicitWidth: 1
+        implicitHeight: 1
+        color: "transparent"
+        mask: Region {}
+
+        WlrLayershell.layer: WlrLayer.Background
+        WlrLayershell.exclusionMode: ExclusionMode.Ignore
+        WlrLayershell.namespace: "quickshell:imagegrab"
+
+        Item {
+            id: grabHost
+        }
+    }
+
+    Component {
+        id: imageGrabber
+
+        Image {
+            id: img
+
+            required property int nid
+
+            asynchronous: true
+            sourceSize.width: 128
+            sourceSize.height: 128
+
+            onStatusChanged: {
+                if (status === Image.Error) {
+                    destroy();
+                } else if (status === Image.Ready) {
+                    const path = root.imageDir + "/" + nid + ".png";
+                    const queued = grabToImage(result => {
+                        if (result.saveToFile(path)) {
+                            root.imagePaths[nid] = path;
+                            root.broadcast({
+                                t: "image",
+                                id: nid,
+                                path
+                            });
+                        }
+                        img.destroy();
+                    });
+                    if (!queued)
+                        destroy();
+                }
+            }
+        }
     }
 
     SocketServer {
@@ -194,7 +274,8 @@ Singleton {
 
         onNotification: notif => {
             notif.tracked = true;
-            notif.time = Date.now();
+            // Notifications handed back after a config reload keep their arrival time.
+            notif.time = notif.lastGeneration ? (notif.time ?? Date.now()) : Date.now();
             root.onNewNotif(notif);
 
             notif.closed.connect(() => {

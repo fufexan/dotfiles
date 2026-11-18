@@ -58,7 +58,8 @@ Singleton {
             summary: n.summary ?? "",
             body: n.body ?? "",
             appIcon: n.appIcon ?? "",
-            image: n.image ?? "",
+            // notifd sends rendered images as plain file paths.
+            image: (n.image ?? "").startsWith("/") ? "file://" + n.image : (n.image ?? ""),
             // Milliseconds overflow ListModel's int roles, so keep them as text.
             timeStr: String(n.time),
             actionsJson: JSON.stringify(n.actions)
@@ -102,6 +103,13 @@ Singleton {
                 const i = indexOfId(msg.id);
                 if (i >= 0)
                     list.remove(i);
+            }
+            break;
+        case "image":
+            {
+                const i = indexOfId(msg.id);
+                if (i >= 0)
+                    list.setProperty(i, "image", "file://" + msg.path);
             }
             break;
         case "clear":
