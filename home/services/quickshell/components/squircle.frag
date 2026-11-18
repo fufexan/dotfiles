@@ -22,19 +22,35 @@ layout(std140, binding = 0) uniform buf {
 
 layout(binding = 1) uniform sampler2D sourceTexture;
 
-// Signed Distance Function for a rounded superellipse / squircle-like rect.
+// Approximate signed distance (in physical pixels) to a rounded superellipse
+// rect. Same shape as before, but the corner field is divided by its gradient
+// length (f / |grad f|), so one unit of distance is ~one pixel everywhere.
+// That keeps stroke widths and AA uniform around the corner.
 // p: point in local pixel space, centered at 0
 // b: half-size in pixels
 // r: radius in pixels
 // n: exponent (higher = squarer corners, lower = rounder)
 float sdSquircleRect(vec2 p, vec2 b, float r, float n) {
+    r = min(r, min(b.x, b.y));
     vec2 q = abs(p) - (b - vec2(r));
 
     if (q.x > 0.0 && q.y > 0.0) {
-        return pow(pow(q.x, n) + pow(q.y, n), 1.0 / n) - r;
+        // Normalise before pow() so large exponents cannot overflow.
+        float m = max(q.x, q.y);
+        vec2 u = q / m;
+        float s = pow(pow(u.x, n) + pow(u.y, n), 1.0 / n);
+        float f = m * s - r;                                // Lp-norm field
+        vec2 g = pow(u, vec2(n - 1.0)) / pow(s, n - 1.0);   // its gradient
+        return f / max(length(g), 1e-4);
     }
 
     return max(q.x, q.y) - r;
+}
+
+// Coverage of "dist < t": one-pixel linear ramp centered on the edge.
+// dist is in physical pixels, so the ramp width is a constant 1.0.
+float edgeCoverage(float dist, float t) {
+    return clamp(0.5 - (dist - t), 0.0, 1.0);
 }
 
 // Straight-alpha "src over dst" compositing.
@@ -55,21 +71,17 @@ void main() {
     vec2 p = (qt_TexCoord0 - 0.5) * resolution;
     vec2 halfSize = resolution * 0.5;
 
-    // Signed distance to the outer shape edge.
+    // Signed distance to the outer shape edge, in physical pixels.
     float dist = sdSquircleRect(p, halfSize, radius, power);
 
-    // Derivative-based AA width in physical pixels.
-    float aa = max(fwidth(dist), 1e-4);
-
     // Main shape coverage: 1 inside, 0 outside.
-    float shapeMask = 1.0 - smoothstep(0.0, aa, dist);
+    float shapeMask = edgeCoverage(dist, 0.0);
 
     // "Inside after outer stroke" coverage.
     // This is 0 in the outer border band, 1 deeper inside.
     float insideAfterOuterStroke = 1.0;
     if (strokeWidth > 0.0) {
-        float tOuter = -strokeWidth;
-        insideAfterOuterStroke = 1.0 - smoothstep(tOuter, tOuter + aa, dist);
+        insideAfterOuterStroke = edgeCoverage(dist, -strokeWidth);
     }
 
     // "Inside after inner stroke" coverage.
@@ -77,7 +89,7 @@ void main() {
     float innerWidth = (useInnerStroke > 0.5) ? innerStrokeWidth : 0.0;
     if (innerWidth > 0.0) {
         float tInner = -(strokeWidth + innerWidth);
-        insideAfterInnerStroke = 1.0 - smoothstep(tInner, tInner + aa, dist);
+        insideAfterInnerStroke = edgeCoverage(dist, tInner);
     }
 
     // Base content: texture or fill/progress.
